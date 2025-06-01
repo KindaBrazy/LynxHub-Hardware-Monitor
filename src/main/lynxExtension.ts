@@ -6,7 +6,7 @@ import {
 } from '../../../src/main/Managements/Plugin/Extensions/ExtensionTypes_Main';
 import StorageManager from '../../../src/main/Managements/Storage/StorageManager';
 import {HMONITOR_IPC_STOP_ID, HMONITOR_STORAGE_ID} from '../cross/CrossConst';
-import {HMonitorStorageType} from '../cross/CrossTypes';
+import {MonitoringSettings} from '../cross/CrossTypes';
 import HardwareDataService from './HardwareMonitor';
 
 let storeManager: StorageManager | undefined = undefined;
@@ -17,7 +17,7 @@ export async function initialExtension(lynxApi: ExtensionMainApi, utils: MainExt
     utils.getStorageManager().then(manager => {
       storeManager = manager;
 
-      let data: HMonitorStorageType = storeManager.getCustomData(HMONITOR_STORAGE_ID);
+      let data: MonitoringSettings = storeManager.getCustomData(HMONITOR_STORAGE_ID);
 
       if (!data) {
         data = {

@@ -2,15 +2,15 @@ import {Monitor, Thermometer, Zap} from 'lucide-react';
 import {useMemo} from 'react';
 
 import {HardwareData} from '../../../cross/CrossTypes';
-import {useHMonitorState} from '../../reducer';
+import {useSystemMonitorState} from '../../reducer';
+import MetricItem from '../MetricItem';
+import Section from '../Section';
 import {getTemperatureColor, getUsageColor} from '../Utils';
-import MetricItem from './MetricItem';
-import Section from './Section';
 
 type Props = {data: HardwareData};
 
 export default function GpuSection({data}: Props) {
-  const enableMonitor = useHMonitorState('enableMonitor');
+  const enableMonitor = useSystemMonitorState('enableMonitor');
 
   const {hasTemp, hasUsage} = useMemo(() => {
     const hasTemp = enableMonitor.includes('gpuTemp');

@@ -2,9 +2,9 @@ import {Activity, Clock} from 'lucide-react';
 import {useMemo} from 'react';
 
 import {HardwareData} from '../../../cross/CrossTypes';
-import {useHMonitorState} from '../../reducer';
-import MetricItem from './MetricItem';
-import Section from './Section';
+import {useSystemMonitorState} from '../../reducer';
+import MetricItem from '../MetricItem';
+import Section from '../Section';
 
 const formatUptime = (seconds: number) => {
   const days = Math.floor(seconds / 86400);
@@ -19,7 +19,7 @@ const formatUptime = (seconds: number) => {
 type Props = {data: HardwareData};
 
 export default function UpTimeSection({data}: Props) {
-  const enableMonitor = useHMonitorState('enableMonitor');
+  const enableMonitor = useSystemMonitorState('enableMonitor');
 
   const {upApp, upSystem} = useMemo(() => {
     const upApp = enableMonitor.includes('uptimeSeconds');

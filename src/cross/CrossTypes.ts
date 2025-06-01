@@ -9,14 +9,14 @@ export type HardwareData = {
   uptimeSeconds: number;
 };
 
-export type HMonitorStorageType = {
+export type MonitoringSettings = {
   enabled: boolean;
   compactMode: boolean;
   showSectionLabel: boolean;
-  enableMonitor: InfoType[];
+  enableMonitor: SystemMetrics[];
 };
 
-export type InfoType =
+export type SystemMetrics =
   | 'cpuTemp'
   | 'cpuUsage'
   | 'gpuTemp'

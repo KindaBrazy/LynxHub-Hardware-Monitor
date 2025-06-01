@@ -2,9 +2,9 @@ import {HardDrive, MemoryStick} from 'lucide-react';
 import {useMemo} from 'react';
 
 import {HardwareData} from '../../../cross/CrossTypes';
+import MetricItem from '../MetricItem';
+import Section from '../Section';
 import {getUsageColor} from '../Utils';
-import MetricItem from './MetricItem';
-import Section from './Section';
 
 type Props = {data: HardwareData};
 

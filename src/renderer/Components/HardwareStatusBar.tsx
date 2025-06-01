@@ -4,7 +4,7 @@ import {RefObject, useEffect, useMemo, useState} from 'react';
 
 import {HMONITOR_IPC_DATA_ID} from '../../cross/CrossConst';
 import {HardwareData} from '../../cross/CrossTypes';
-import {useHMonitorState} from '../reducer';
+import {useSystemMonitorState} from '../reducer';
 import CpuSection from './Sections/CpuSection';
 import GpuSection from './Sections/GpuSection';
 import MemorySection from './Sections/MemorySection';
@@ -13,8 +13,8 @@ import UpTimeSection from './Sections/UpTimeSection';
 type Props = {ref: RefObject<HTMLDivElement | null>};
 
 const HardwareStatusBar = ({ref}: Props) => {
-  const compactMode = useHMonitorState('compactMode');
-  const enableMonitor = useHMonitorState('enableMonitor');
+  const compactMode = useSystemMonitorState('compactMode');
+  const enableMonitor = useSystemMonitorState('enableMonitor');
   const [hardwareData, setHardwareData] = useState<HardwareData>({
     cpuTemp: 0,
     cpuUsage: 0,

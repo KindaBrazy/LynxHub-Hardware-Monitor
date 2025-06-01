@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {useHMonitorState} from '../../reducer';
+import {useSystemMonitorState} from '../reducer';
 
 export default function Section({
   title,
@@ -11,8 +11,8 @@ export default function Section({
   icon: React.ElementType;
   children: React.ReactNode;
 }) {
-  const compactMode = useHMonitorState('compactMode');
-  const showSectionLabel = useHMonitorState('showSectionLabel');
+  const compactMode = useSystemMonitorState('compactMode');
+  const showSectionLabel = useSystemMonitorState('showSectionLabel');
   return (
     <div className={`flex items-center ${compactMode ? 'gap-x-2' : 'gap-x-3'}`}>
       {showSectionLabel && (

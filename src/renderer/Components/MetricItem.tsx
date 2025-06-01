@@ -1,10 +1,10 @@
 import React from 'react';
 
-import {useHMonitorState} from '../../reducer';
-import {getProgressColor} from '../Utils';
+import {useSystemMonitorState} from '../reducer';
+import {getProgressColor} from './Utils';
 
 const ProgressBar = ({value, max = 100, isTemp = false}: {value: number; max?: number; isTemp?: boolean}) => {
-  const compactMode = useHMonitorState('compactMode');
+  const compactMode = useSystemMonitorState('compactMode');
   const percentage = Math.min((value / max) * 100, 100);
   return (
     <div className={`${compactMode ? 'w-8 h-1' : 'w-12 h-1.5'} bg-white/10 rounded-full overflow-hidden`}>
@@ -33,7 +33,7 @@ export default function MetricItem({
   progress?: {value: number; max?: number; isTemp?: boolean};
   colorClass?: string;
 }) {
-  const compactMode = useHMonitorState('compactMode');
+  const compactMode = useSystemMonitorState('compactMode');
   return (
     <div
       className={
