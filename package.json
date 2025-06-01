@@ -1,0 +1,13 @@
+{
+  "name": "extension",
+  "version": "0.1.0",
+  "type": "module",
+  "dependencies": {
+    "systeminformation": "^5.27.1",
+    "which": "^5.0.0"
+  },
+  "devDependencies": {
+    "@types/which": "^3.0.4",
+    "lucide-react": "^0.511.0"
+  }
+}
