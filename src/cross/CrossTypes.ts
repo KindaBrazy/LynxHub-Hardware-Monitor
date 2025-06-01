@@ -9,6 +9,13 @@ export type HardwareData = {
   uptimeSeconds: number;
 };
 
+export type HMonitorStorageType = {
+  enabled: boolean;
+  compactMode: boolean;
+  showSectionLabel: boolean;
+  enableMonitor: InfoType[];
+};
+
 export type InfoType =
   | 'cpuTemp'
   | 'cpuUsage'

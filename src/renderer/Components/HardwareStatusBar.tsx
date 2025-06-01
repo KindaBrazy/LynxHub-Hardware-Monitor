@@ -2,6 +2,7 @@ import {Divider} from 'antd';
 import {ChevronLeft, ChevronRight} from 'lucide-react';
 import {RefObject, useEffect, useMemo, useState} from 'react';
 
+import {HMONITOR_IPC_DATA_ID} from '../../cross/CrossConst';
 import {HardwareData} from '../../cross/CrossTypes';
 import {useHMonitorState} from '../reducer';
 import CpuSection from './Items/CpuSection';
@@ -52,10 +53,10 @@ const HardwareStatusBar = ({ref}: Props) => {
       setDataConnected(true);
     };
 
-    window.electron.ipcRenderer.on('hardware-data-update', handleHardwareUpdate);
+    window.electron.ipcRenderer.on(HMONITOR_IPC_DATA_ID, handleHardwareUpdate);
 
     return () => {
-      window.electron.ipcRenderer.removeAllListeners('hardware-data-update');
+      window.electron.ipcRenderer.removeAllListeners(HMONITOR_IPC_DATA_ID);
     };
   }, []);
 

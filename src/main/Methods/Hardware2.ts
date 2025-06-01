@@ -5,6 +5,7 @@ import {BrowserWindow} from 'electron';
 import fs from 'graceful-fs';
 import {promisify} from 'util';
 
+import {HMONITOR_IPC_DATA_ID} from '../../cross/CrossConst';
 import {HardwareData} from '../../cross/CrossTypes';
 
 const execAsync = promisify(exec);
@@ -43,7 +44,7 @@ class HardwareDataService {
   private async collectAndSendData() {
     try {
       const hardwareData = await this.collectHardwareData();
-      this.window.webContents.send('hardware-data-update', hardwareData);
+      this.window.webContents.send(HMONITOR_IPC_DATA_ID, hardwareData);
     } catch (error) {
       console.error('Error collecting hardware data:', error);
     }
