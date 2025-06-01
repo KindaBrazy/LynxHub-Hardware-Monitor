@@ -1,7 +1,10 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 import {useSelector} from 'react-redux';
 
-type HMonitor = {compactMode: boolean};
+type HMonitor = {
+  compactMode: boolean;
+  showSectionLabel: boolean;
+} & {[key: string]: any};
 
 type HMonitorStateTypes = {
   [K in keyof HMonitor]: HMonitor[K];
@@ -9,6 +12,7 @@ type HMonitorStateTypes = {
 
 const initialState: HMonitor = {
   compactMode: false,
+  showSectionLabel: true,
 };
 
 const hMonitorReducer = createSlice({
