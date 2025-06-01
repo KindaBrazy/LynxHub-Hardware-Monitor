@@ -5,10 +5,10 @@ import {RefObject, useEffect, useMemo, useState} from 'react';
 import {HMONITOR_IPC_DATA_ID} from '../../cross/CrossConst';
 import {HardwareData} from '../../cross/CrossTypes';
 import {useHMonitorState} from '../reducer';
-import CpuSection from './Items/CpuSection';
-import GpuSection from './Items/GpuSection';
-import MemorySection from './Items/MemorySection';
-import UpTimeSection from './Items/UpTimeSection';
+import CpuSection from './Sections/CpuSection';
+import GpuSection from './Sections/GpuSection';
+import MemorySection from './Sections/MemorySection';
+import UpTimeSection from './Sections/UpTimeSection';
 
 type Props = {ref: RefObject<HTMLDivElement | null>};
 

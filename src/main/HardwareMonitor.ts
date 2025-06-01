@@ -5,8 +5,8 @@ import {BrowserWindow} from 'electron';
 import fs from 'graceful-fs';
 import {promisify} from 'util';
 
-import {HMONITOR_IPC_DATA_ID} from '../../cross/CrossConst';
-import {HardwareData} from '../../cross/CrossTypes';
+import {HMONITOR_IPC_DATA_ID} from '../cross/CrossConst';
+import {HardwareData} from '../cross/CrossTypes';
 
 const execAsync = promisify(exec);
 
