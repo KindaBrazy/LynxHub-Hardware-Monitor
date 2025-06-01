@@ -15,14 +15,14 @@ const HardwareStatusBar = ({ref}: Props) => {
   const compactMode = useHMonitorState('compactMode');
   const enableMonitor = useHMonitorState('enableMonitor');
   const [hardwareData, setHardwareData] = useState<HardwareData>({
-    cpuTemp: 65,
-    cpuUsage: 45,
-    gpuTemp: 72,
-    gpuUsage: 38,
-    memUsed: 12.4,
-    memTotal: 32,
-    uptimeSystemSeconds: 345600,
-    uptimeSeconds: 28800,
+    cpuTemp: 0,
+    cpuUsage: 0,
+    gpuTemp: 0,
+    gpuUsage: 0,
+    memUsed: 0,
+    memTotal: 16,
+    uptimeSystemSeconds: 0,
+    uptimeSeconds: 0,
   });
 
   const [canScrollLeft, setCanScrollLeft] = useState(false);
