@@ -1,6 +1,6 @@
 import {Divider} from 'antd';
 import {ChevronLeft, ChevronRight} from 'lucide-react';
-import {RefObject, useEffect, useState} from 'react';
+import {RefObject, useEffect, useMemo, useState} from 'react';
 
 import {HardwareData} from '../../cross/CrossTypes';
 import {useHMonitorState} from '../reducer';
@@ -13,6 +13,7 @@ type Props = {ref: RefObject<HTMLDivElement | null>};
 
 const HardwareStatusBar = ({ref}: Props) => {
   const compactMode = useHMonitorState('compactMode');
+  const enableMonitor = useHMonitorState('enableMonitor');
   const [hardwareData, setHardwareData] = useState<HardwareData>({
     cpuTemp: 65,
     cpuUsage: 45,
@@ -67,6 +68,17 @@ const HardwareStatusBar = ({ref}: Props) => {
     return () => window.removeEventListener('resize', handleResize);
   }, [hardwareData]);
 
+  const {hasCpuSection, hasMemory, hasUptime, hasGpuSection} = useMemo(() => {
+    const hasCpuSection = enableMonitor.includes('cpuTemp') || enableMonitor.includes('cpuUsage');
+    const hasGpuSection = enableMonitor.includes('gpuTemp') || enableMonitor.includes('gpuUsage');
+
+    const hasMemory = enableMonitor.includes('memory');
+
+    const hasUptime = enableMonitor.includes('uptimeSeconds') || enableMonitor.includes('uptimeSystemSeconds');
+
+    return {hasCpuSection, hasGpuSection, hasMemory, hasUptime};
+  }, [enableMonitor]);
+
   return (
     <div
       className={
@@ -115,16 +127,16 @@ const HardwareStatusBar = ({ref}: Props) => {
         onScroll={updateScrollArrows}
         style={{scrollbarWidth: 'none', msOverflowStyle: 'none'}}
         className={`h-full flex items-center ${compactMode ? 'px-2' : 'px-3'} gap-x-4 overflow-x-auto scrollbar-hide`}>
-        <CpuSection data={hardwareData} />
-        <Divider type="vertical" className="mx-0" />
+        {hasCpuSection && <CpuSection data={hardwareData} />}
+        {(hasGpuSection || hasMemory || hasUptime) && <Divider type="vertical" className="mx-0" />}
 
-        <GpuSection data={hardwareData} />
-        <Divider type="vertical" className="mx-0" />
+        {hasGpuSection && <GpuSection data={hardwareData} />}
+        {(hasMemory || hasUptime) && <Divider type="vertical" className="mx-0" />}
 
-        <MemorySection data={hardwareData} />
-        <Divider type="vertical" className="mx-0" />
+        {hasMemory && <MemorySection data={hardwareData} />}
+        {hasUptime && <Divider type="vertical" className="mx-0" />}
 
-        <UpTimeSection data={hardwareData} />
+        {hasUptime && <UpTimeSection data={hardwareData} />}
       </div>
     </div>
   );

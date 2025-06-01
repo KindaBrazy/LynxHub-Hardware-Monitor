@@ -1,6 +1,8 @@
 import {Activity, Clock} from 'lucide-react';
+import {useMemo} from 'react';
 
 import {HardwareData} from '../../../cross/CrossTypes';
+import {useHMonitorState} from '../../reducer';
 import MetricItem from './MetricItem';
 import Section from './Section';
 
@@ -17,10 +19,18 @@ const formatUptime = (seconds: number) => {
 type Props = {data: HardwareData};
 
 export default function UpTimeSection({data}: Props) {
+  const enableMonitor = useHMonitorState('enableMonitor');
+
+  const {upApp, upSystem} = useMemo(() => {
+    const upApp = enableMonitor.includes('uptimeSeconds');
+    const upSystem = enableMonitor.includes('uptimeSystemSeconds');
+    return {upApp, upSystem};
+  }, [enableMonitor]);
+
   return (
     <Section icon={Clock} title="Uptime">
-      <MetricItem icon={Clock} label="System" value={formatUptime(data.uptimeSystemSeconds)} />
-      <MetricItem label="App" icon={Activity} value={formatUptime(data.uptimeSeconds)} />
+      {upSystem && <MetricItem icon={Clock} label="System" value={formatUptime(data.uptimeSystemSeconds)} />}
+      {upApp && <MetricItem label="App" icon={Activity} value={formatUptime(data.uptimeSeconds)} />}
     </Section>
   );
 }

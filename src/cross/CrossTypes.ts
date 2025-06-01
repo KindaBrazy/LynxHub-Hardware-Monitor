@@ -8,3 +8,12 @@ export type HardwareData = {
   uptimeSystemSeconds: number;
   uptimeSeconds: number;
 };
+
+export type InfoType =
+  | 'cpuTemp'
+  | 'cpuUsage'
+  | 'gpuTemp'
+  | 'gpuUsage'
+  | 'memory'
+  | 'uptimeSystemSeconds'
+  | 'uptimeSeconds';

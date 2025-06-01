@@ -1,9 +1,12 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 import {useSelector} from 'react-redux';
 
+import {InfoType} from '../cross/CrossTypes';
+
 type HMonitor = {
   compactMode: boolean;
   showSectionLabel: boolean;
+  enableMonitor: InfoType[];
 } & {[key: string]: any};
 
 type HMonitorStateTypes = {
@@ -13,6 +16,7 @@ type HMonitorStateTypes = {
 const initialState: HMonitor = {
   compactMode: false,
   showSectionLabel: true,
+  enableMonitor: ['cpuTemp', 'cpuUsage', 'gpuTemp', 'gpuUsage', 'memory', 'uptimeSystemSeconds', 'uptimeSeconds'],
 };
 
 const hMonitorReducer = createSlice({
@@ -27,6 +31,14 @@ const hMonitorReducer = createSlice({
       }>,
     ) => {
       state[action.payload.key] = action.payload.value;
+    },
+    toggleMonitor: (state: HMonitor, action: PayloadAction<InfoType>) => {
+      const index = state.enableMonitor.indexOf(action.payload);
+      if (index > -1) {
+        state.enableMonitor.splice(index, 1);
+      } else {
+        state.enableMonitor.push(action.payload);
+      }
     },
   },
 });
