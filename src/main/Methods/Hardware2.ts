@@ -53,7 +53,7 @@ class HardwareDataService {
     const [cpuUsage, memoryInfo, temperatures] = await Promise.all([
       this.getCpuUsage(),
       this.getMemoryInfo(),
-      this.getTemperatures()
+      this.getTemperatures(),
     ]);
 
     return {
@@ -64,7 +64,7 @@ class HardwareDataService {
       memUsed: memoryInfo.used,
       memTotal: memoryInfo.total,
       uptimeSystemSeconds: os.uptime(),
-      uptimeSeconds: Math.floor((Date.now() - this.startTime) / 1000)
+      uptimeSeconds: Math.floor((Date.now() - this.startTime) / 1000),
     };
   }
 
@@ -104,7 +104,7 @@ class HardwareDataService {
 
     return {
       total: Math.round((totalMem / (1024 * 1024 * 1024)) * 10) / 10,
-      used: Math.round((usedMem / (1024 * 1024 * 1024)) * 10) / 10
+      used: Math.round((usedMem / (1024 * 1024 * 1024)) * 10) / 10,
     };
   }
 
@@ -117,7 +117,7 @@ class HardwareDataService {
         try {
           const {stdout} = await execAsync(
             'sudo powermetrics -n 1 -i 1000 --samplers smc -a --hide-cpu-duty-cycle' +
-            ' 2>/dev/null | grep -i "CPU die temperature"'
+              ' 2>/dev/null | grep -i "CPU die temperature"',
           );
           const tempMatch = stdout.match(/(\d+\.\d+)/);
           if (tempMatch) {
@@ -143,7 +143,7 @@ class HardwareDataService {
         // Windows - try WMI
         try {
           const {stdout} = await execAsync(
-            'wmic /namespace:\\\\root\\wmi PATH MSAcpi_ThermalZoneTemperature get CurrentTemperature /value'
+            'wmic /namespace:\\\\root\\wmi PATH MSAcpi_ThermalZoneTemperature get CurrentTemperature /value',
           );
           const tempMatch = stdout.match(/CurrentTemperature=(\d+)/);
           if (tempMatch) {
@@ -178,7 +178,7 @@ class HardwareDataService {
           // Try Intel GPU
           try {
             const {stdout} = await execAsync(
-              'wmic path Win32_PerfRawData_GPUPerformanceCounters_GPUEngine get UtilizationPercentage /value'
+              'wmic path Win32_PerfRawData_GPUPerformanceCounters_GPUEngine get UtilizationPercentage /value',
             );
             const match = stdout.match(/UtilizationPercentage=(\d+)/);
             if (match) {

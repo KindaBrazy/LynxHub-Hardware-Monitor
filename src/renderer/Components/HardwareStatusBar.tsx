@@ -3,6 +3,7 @@ import {ChevronLeft, ChevronRight} from 'lucide-react';
 import {RefObject, useEffect, useState} from 'react';
 
 import {HardwareData} from '../../cross/CrossTypes';
+import {useHMonitorState} from '../reducer';
 import CpuSection from './Items/CpuSection';
 import GpuSection from './Items/GpuSection';
 import MemorySection from './Items/MemorySection';
@@ -11,6 +12,7 @@ import UpTimeSection from './Items/UpTimeSection';
 type Props = {ref: RefObject<HTMLDivElement | null>};
 
 const HardwareStatusBar = ({ref}: Props) => {
+  const compactMode = useHMonitorState('compactMode');
   const [hardwareData, setHardwareData] = useState<HardwareData>({
     cpuTemp: 65,
     cpuUsage: 45,
@@ -68,7 +70,7 @@ const HardwareStatusBar = ({ref}: Props) => {
   return (
     <div
       className={
-        'relative h-12 w-full bg-gradient-to-r from-slate-900/95 ' +
+        `relative ${compactMode ? 'h-7' : 'h-12'} w-full bg-gradient-to-r from-slate-900/95 ` +
         'to-slate-800/95 border-t border-slate-700/50 backdrop-blur-sm'
       }>
       {/* Connection Status */}
@@ -87,7 +89,7 @@ const HardwareStatusBar = ({ref}: Props) => {
       {canScrollLeft && (
         <button
           className={
-            'absolute left-2 top-1/2 -translate-y-1/2 z-10 size-8 rounded-full' +
+            `absolute left-2 top-1/2 -translate-y-1/2 z-10 ${compactMode ? 'size-5' : 'size-8'} rounded-full` +
             ' bg-slate-800/80 border border-slate-600/50 flex items-center' +
             ' justify-center hover:bg-slate-700/80 transition-all duration-200 backdrop-blur-sm'
           }
@@ -99,7 +101,7 @@ const HardwareStatusBar = ({ref}: Props) => {
       {canScrollRight && (
         <button
           className={
-            'absolute right-2 top-1/2 -translate-y-1/2 z-10 size-8 rounded-full' +
+            `absolute right-2 top-1/2 -translate-y-1/2 z-10 ${compactMode ? 'size-5' : 'size-8'} rounded-full` +
             ' bg-slate-800/80 border border-slate-600/50 flex items-center' +
             ' justify-center hover:bg-slate-700/80 transition-all duration-200 backdrop-blur-sm'
           }
@@ -112,7 +114,7 @@ const HardwareStatusBar = ({ref}: Props) => {
         ref={ref}
         onScroll={updateScrollArrows}
         style={{scrollbarWidth: 'none', msOverflowStyle: 'none'}}
-        className="h-full flex items-center px-3 gap-x-4 overflow-x-auto scrollbar-hide">
+        className={`h-full flex items-center ${compactMode ? 'px-2' : 'px-3'} gap-x-4 overflow-x-auto scrollbar-hide`}>
         <CpuSection data={hardwareData} />
         <Divider type="vertical" className="mx-0" />
 

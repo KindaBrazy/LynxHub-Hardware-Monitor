@@ -1,32 +1,35 @@
-import {createSlice} from '@reduxjs/toolkit';
+import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 import {useSelector} from 'react-redux';
 
-type ExtensionsState = {someString: string; someBoolean: boolean; someNumber: number; someArray: []};
+type HMonitor = {compactMode: boolean};
 
-type ExtensionsStateTypes = {
-  [K in keyof ExtensionsState]: ExtensionsState[K];
+type HMonitorStateTypes = {
+  [K in keyof HMonitor]: HMonitor[K];
 };
 
-const initialState: ExtensionsState = {
-  someString: 'WoW',
-  someBoolean: true,
-  someNumber: 77,
-  someArray: [],
+const initialState: HMonitor = {
+  compactMode: false,
 };
 
-const extensionReducer = createSlice({
+const hMonitorReducer = createSlice({
   initialState,
-  name: 'extension',
+  name: 'hMonitor',
   reducers: {
-    increaseNumber: (state: ExtensionsState) => {
-      state.someNumber = state.someNumber + 1;
+    setState: <K extends keyof HMonitor>(
+      state: HMonitor,
+      action: PayloadAction<{
+        key: K;
+        value: HMonitor[K];
+      }>,
+    ) => {
+      state[action.payload.key] = action.payload.value;
     },
   },
 });
 
-export const useExtensionState = <T extends keyof ExtensionsState>(name: T): ExtensionsStateTypes[T] =>
+export const useHMonitorState = <T extends keyof HMonitor>(name: T): HMonitorStateTypes[T] =>
   useSelector((state: any) => state.extension[name]);
 
-export const extensionActions = extensionReducer.actions;
+export const hMonitorActions = hMonitorReducer.actions;
 
-export default extensionReducer.reducer;
+export default hMonitorReducer.reducer;
