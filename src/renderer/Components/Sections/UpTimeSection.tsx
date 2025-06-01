@@ -19,13 +19,13 @@ const formatUptime = (seconds: number) => {
 type Props = {data: HardwareData};
 
 export default function UpTimeSection({data}: Props) {
-  const enableMonitor = useSystemMonitorState('enableMonitor');
+  const enabledMetrics = useSystemMonitorState('enabledMetrics');
 
   const {upApp, upSystem} = useMemo(() => {
-    const upApp = enableMonitor.includes('uptimeSeconds');
-    const upSystem = enableMonitor.includes('uptimeSystemSeconds');
+    const upApp = enabledMetrics.includes('uptimeSeconds');
+    const upSystem = enabledMetrics.includes('uptimeSystemSeconds');
     return {upApp, upSystem};
-  }, [enableMonitor]);
+  }, [enabledMetrics]);
 
   return (
     <Section icon={Clock} title="Uptime">

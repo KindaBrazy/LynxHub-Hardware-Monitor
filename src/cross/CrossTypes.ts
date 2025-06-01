@@ -13,7 +13,7 @@ export type MonitoringSettings = {
   enabled: boolean;
   compactMode: boolean;
   showSectionLabel: boolean;
-  enableMonitor: SystemMetrics[];
+  enabledMetrics: SystemMetrics[];
 };
 
 export type SystemMetrics =

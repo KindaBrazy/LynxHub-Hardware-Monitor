@@ -5,7 +5,7 @@ import {
   MainExtensionUtils,
 } from '../../../src/main/Managements/Plugin/Extensions/ExtensionTypes_Main';
 import StorageManager from '../../../src/main/Managements/Storage/StorageManager';
-import {HMONITOR_IPC_STOP_ID, HMONITOR_STORAGE_ID} from '../cross/CrossConst';
+import {HMONITOR_IPC_STOP_ID, HMONITOR_STORAGE_ID, initialSystemMetrics} from '../cross/CrossConst';
 import {MonitoringSettings} from '../cross/CrossTypes';
 import HardwareDataService from './HardwareMonitor';
 
@@ -24,15 +24,7 @@ export async function initialExtension(lynxApi: ExtensionMainApi, utils: MainExt
           enabled: true,
           compactMode: false,
           showSectionLabel: true,
-          enableMonitor: [
-            'cpuTemp',
-            'cpuUsage',
-            'gpuTemp',
-            'gpuUsage',
-            'memory',
-            'uptimeSystemSeconds',
-            'uptimeSeconds',
-          ],
+          enabledMetrics: initialSystemMetrics,
         };
         storeManager.setCustomData(HMONITOR_STORAGE_ID, data);
       }

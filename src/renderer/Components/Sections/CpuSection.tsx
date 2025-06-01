@@ -10,13 +10,13 @@ import {getTemperatureColor, getUsageColor} from '../Utils';
 type Props = {data: HardwareData};
 
 export default function CpuSection({data}: Props) {
-  const enableMonitor = useSystemMonitorState('enableMonitor');
+  const enabledMetrics = useSystemMonitorState('enabledMetrics');
 
   const {hasTemp, hasUsage} = useMemo(() => {
-    const hasTemp = enableMonitor.includes('cpuTemp');
-    const hasUsage = enableMonitor.includes('cpuUsage');
+    const hasTemp = enabledMetrics.includes('cpuTemp');
+    const hasUsage = enabledMetrics.includes('cpuUsage');
     return {hasTemp, hasUsage};
-  }, [enableMonitor]);
+  }, [enabledMetrics]);
 
   return (
     <Section icon={Cpu} title="CPU">

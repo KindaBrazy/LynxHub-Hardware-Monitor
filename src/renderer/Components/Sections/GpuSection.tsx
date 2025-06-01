@@ -10,13 +10,13 @@ import {getTemperatureColor, getUsageColor} from '../Utils';
 type Props = {data: HardwareData};
 
 export default function GpuSection({data}: Props) {
-  const enableMonitor = useSystemMonitorState('enableMonitor');
+  const enabledMetrics = useSystemMonitorState('enabledMetrics');
 
   const {hasTemp, hasUsage} = useMemo(() => {
-    const hasTemp = enableMonitor.includes('gpuTemp');
-    const hasUsage = enableMonitor.includes('gpuUsage');
+    const hasTemp = enabledMetrics.includes('gpuTemp');
+    const hasUsage = enabledMetrics.includes('gpuUsage');
     return {hasTemp, hasUsage};
-  }, [enableMonitor]);
+  }, [enabledMetrics]);
 
   return (
     <Section title="GPU" icon={Monitor}>

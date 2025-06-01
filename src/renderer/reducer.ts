@@ -1,13 +1,10 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 import {useSelector} from 'react-redux';
 
-import {SystemMetrics} from '../cross/CrossTypes';
+import {initialSystemMetrics} from '../cross/CrossConst';
+import {MonitoringSettings, SystemMetrics} from '../cross/CrossTypes';
 
-type SystemMonitorState = {
-  compactMode: boolean;
-  showSectionLabel: boolean;
-  enabledMetrics: SystemMetrics[];
-} & {[key: string]: any};
+type SystemMonitorState = Omit<MonitoringSettings, 'enabled'> & {[key: string]: any};
 
 type SystemMonitorStateTypes = {
   [K in keyof SystemMonitorState]: SystemMonitorState[K];
@@ -16,7 +13,7 @@ type SystemMonitorStateTypes = {
 const initialState: SystemMonitorState = {
   compactMode: false,
   showSectionLabel: true,
-  enabledMetrics: ['cpuTemp', 'cpuUsage', 'gpuTemp', 'gpuUsage', 'memory', 'uptimeSystemSeconds', 'uptimeSeconds'],
+  enabledMetrics: initialSystemMetrics,
 };
 
 const systemMonitorSlice = createSlice({

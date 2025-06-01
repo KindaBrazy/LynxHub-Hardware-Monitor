@@ -14,7 +14,7 @@ type Props = {ref: RefObject<HTMLDivElement | null>};
 
 const HardwareStatusBar = ({ref}: Props) => {
   const compactMode = useSystemMonitorState('compactMode');
-  const enableMonitor = useSystemMonitorState('enableMonitor');
+  const enabledMetrics = useSystemMonitorState('enabledMetrics');
   const [hardwareData, setHardwareData] = useState<HardwareData>({
     cpuTemp: 0,
     cpuUsage: 0,
@@ -70,15 +70,15 @@ const HardwareStatusBar = ({ref}: Props) => {
   }, [hardwareData]);
 
   const {hasCpuSection, hasMemory, hasUptime, hasGpuSection} = useMemo(() => {
-    const hasCpuSection = enableMonitor.includes('cpuTemp') || enableMonitor.includes('cpuUsage');
-    const hasGpuSection = enableMonitor.includes('gpuTemp') || enableMonitor.includes('gpuUsage');
+    const hasCpuSection = enabledMetrics.includes('cpuTemp') || enabledMetrics.includes('cpuUsage');
+    const hasGpuSection = enabledMetrics.includes('gpuTemp') || enabledMetrics.includes('gpuUsage');
 
-    const hasMemory = enableMonitor.includes('memory');
+    const hasMemory = enabledMetrics.includes('memory');
 
-    const hasUptime = enableMonitor.includes('uptimeSeconds') || enableMonitor.includes('uptimeSystemSeconds');
+    const hasUptime = enabledMetrics.includes('uptimeSeconds') || enabledMetrics.includes('uptimeSystemSeconds');
 
     return {hasCpuSection, hasGpuSection, hasMemory, hasUptime};
-  }, [enableMonitor]);
+  }, [enabledMetrics]);
 
   return (
     <div
