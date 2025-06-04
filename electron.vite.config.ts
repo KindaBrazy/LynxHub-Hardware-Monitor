@@ -8,7 +8,7 @@ import {resolve} from 'path';
 export default defineConfig({
   main: {
     root: resolve('extension/src/main'),
-    plugins: [externalizeDepsPlugin()],
+    plugins: [externalizeDepsPlugin({exclude: ['graceful-fs']})],
     build: {
       outDir: resolve('extension_out/main'),
       rollupOptions: {

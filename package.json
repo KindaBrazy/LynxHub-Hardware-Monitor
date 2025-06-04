@@ -3,11 +3,12 @@
   "version": "0.1.0",
   "type": "module",
   "dependencies": {
+    "@lynxhub/hwmonitor": "^0.9.2",
     "systeminformation": "^5.27.1",
     "which": "^5.0.0"
   },
   "devDependencies": {
     "@types/which": "^3.0.4",
-    "lucide-react": "^0.511.0"
+    "lucide-react": "^0.512.0"
   }
 }

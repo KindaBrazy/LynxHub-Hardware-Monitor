@@ -7,10 +7,9 @@ import {
 import StorageManager from '../../../src/main/Managements/Storage/StorageManager';
 import {HMONITOR_IPC_STOP_ID, HMONITOR_STORAGE_ID, initialSystemMetrics} from '../cross/CrossConst';
 import {MonitoringSettings} from '../cross/CrossTypes';
-import HardwareDataService from './HardwareMonitor';
+import {startMonitoring, stopMonitoring} from './HardwareMonitor';
 
 let storeManager: StorageManager | undefined = undefined;
-let dataService: HardwareDataService | undefined = undefined;
 
 export async function initialExtension(lynxApi: ExtensionMainApi, utils: MainExtensionUtils) {
   lynxApi.onReadyToShow(() => {
@@ -31,17 +30,12 @@ export async function initialExtension(lynxApi: ExtensionMainApi, utils: MainExt
 
       if (data.enabled) {
         utils.getAppManager().then(appManager => {
-          const window = appManager.getMainWindow();
+          const webContent = appManager.getWebContent();
 
-          if (window) {
-            dataService = new HardwareDataService(window);
-            dataService.startCollecting(1000);
-          }
+          if (webContent) startMonitoring(webContent, data.enabledMetrics);
         });
 
-        ipcMain.on(HMONITOR_IPC_STOP_ID, () => {
-          if (dataService) dataService.stopCollecting();
-        });
+        ipcMain.on(HMONITOR_IPC_STOP_ID, () => stopMonitoring());
       }
     });
   });

@@ -1,3 +1,4 @@
+import {HardwareReport} from '@lynxhub/hwmonitor';
 import {Divider} from 'antd';
 import {ChevronLeft, ChevronRight} from 'lucide-react';
 import {RefObject, useEffect, useMemo, useState} from 'react';
@@ -48,9 +49,52 @@ const HardwareStatusBar = ({ref}: Props) => {
   };
 
   useEffect(() => {
-    const handleHardwareUpdate = (_event: any, data: typeof hardwareData) => {
-      setHardwareData(data);
-      setDataConnected(true);
+    const handleHardwareUpdate = (_event: any, data: HardwareReport) => {
+      if (data) {
+        const uptimeSeconds = data.ElapsedTime?.rawSeconds || 0;
+        const uptimeSystemSeconds = data.Uptime?.rawSeconds || 0;
+
+        const cpuTemp =
+          data.CPU[0].Sensors.find(sensor => sensor.Name === 'CPU Package' && sensor.Type === 'Temperature')?.Value ||
+          0;
+        const cpuUsage = Math.round(
+          data.CPU[0].Sensors.find(sensor => sensor.Name === 'CPU Total' && sensor.Type === 'Load')?.Value || 0,
+        );
+
+        const gpuTemp =
+          data.GPU[0].Sensors.find(sensor => sensor.Name === 'GPU Core' && sensor.Type === 'Temperature')?.Value || 0;
+        const gpuUsage = Math.round(
+          data.GPU[0].Sensors.find(sensor => sensor.Name === 'D3D 3D' && sensor.Type === 'Load')?.Value || 0,
+        );
+
+        const memUsed = Math.round(
+          data.Memory[0].Sensors.find(sensor => sensor.Name === 'Memory Used' && sensor.Type === 'Data')?.Value || 0,
+        );
+        const memAvailable = Math.round(
+          data.Memory[0].Sensors.find(sensor => sensor.Name === 'Memory Available' && sensor.Type === 'Data')?.Value ||
+            0,
+        );
+        const memTotal = Math.round(memUsed + memAvailable);
+
+        const result: HardwareData = {
+          uptimeSeconds,
+          uptimeSystemSeconds,
+          cpuTemp,
+          cpuUsage,
+          gpuTemp,
+          gpuUsage,
+          memTotal,
+          memUsed,
+        };
+
+        console.log(result);
+
+        setHardwareData(result);
+        setDataConnected(true);
+      }
+
+      /*setHardwareData(data);
+      setDataConnected(true);*/
     };
 
     window.electron.ipcRenderer.on(HMONITOR_IPC_DATA_ID, handleHardwareUpdate);
