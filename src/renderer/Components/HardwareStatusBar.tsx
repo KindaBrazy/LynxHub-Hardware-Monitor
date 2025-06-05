@@ -3,6 +3,7 @@ import {Divider} from 'antd';
 import {ChevronLeft, ChevronRight} from 'lucide-react';
 import {RefObject, useEffect, useMemo, useState} from 'react';
 
+import ShinyText from '../../../../src/renderer/src/App/Components/Reusable/ShinyText';
 import {HMONITOR_IPC_DATA_ID} from '../../cross/CrossConst';
 import {HardwareData} from '../../cross/CrossTypes';
 import {useSystemMonitorState} from '../reducer';
@@ -29,7 +30,7 @@ const HardwareStatusBar = ({ref}: Props) => {
 
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(false);
-  const [dataConnected, setDataConnected] = useState(true);
+  const [dataConnected, setDataConnected] = useState(false);
 
   const updateScrollArrows = () => {
     if (!ref.current) return;
@@ -90,9 +91,6 @@ const HardwareStatusBar = ({ref}: Props) => {
         setHardwareData(result);
         setDataConnected(true);
       }
-
-      /*setHardwareData(data);
-      setDataConnected(true);*/
     };
 
     window.electron.ipcRenderer.on(HMONITOR_IPC_DATA_ID, handleHardwareUpdate);
@@ -129,6 +127,7 @@ const HardwareStatusBar = ({ref}: Props) => {
       const handleWheel = event => {
         if (!event.ctrlKey) {
           event.preventDefault();
+          // noinspection JSSuspiciousNameCombination
           scrollContainer.scrollLeft += event.deltaY;
         }
       };
@@ -149,18 +148,6 @@ const HardwareStatusBar = ({ref}: Props) => {
         `relative ${compactMode ? 'h-7' : 'h-12'} w-full bg-gradient-to-r from-slate-900/95 ` +
         'to-slate-800/95 border-t border-slate-700/50 backdrop-blur-sm'
       }>
-      {/* Connection Status */}
-      {!dataConnected && (
-        <div
-          className={
-            'absolute top-2 right-4 z-20 flex items-center gap-x-1 px-2 py-1' +
-            ' rounded-md bg-amber-900/30 border border-amber-600/30'
-          }>
-          <div className="w-2 h-2 bg-amber-400 rounded-full animate-pulse" />
-          <span className="text-xs text-amber-400 font-medium">No Data</span>
-        </div>
-      )}
-
       {/* Scroll Arrows */}
       {canScrollLeft && (
         <button
@@ -191,16 +178,24 @@ const HardwareStatusBar = ({ref}: Props) => {
         onScroll={updateScrollArrows}
         style={{scrollbarWidth: 'none', msOverflowStyle: 'none'}}
         className={`h-full flex items-center ${compactMode ? 'px-2' : 'px-3'} gap-x-4 overflow-x-auto scrollbar-hide`}>
-        {hasCpuSection && <CpuSection data={hardwareData} />}
-        {(hasGpuSection || hasMemory || hasUptime) && hasCpuSection && <Divider type="vertical" className="mx-0" />}
+        {dataConnected ? (
+          <>
+            {hasCpuSection && <CpuSection data={hardwareData} />}
+            {(hasGpuSection || hasMemory || hasUptime) && hasCpuSection && <Divider type="vertical" className="mx-0" />}
 
-        {hasGpuSection && <GpuSection data={hardwareData} />}
-        {(hasGpuSection || hasUptime) && hasMemory && <Divider type="vertical" className="mx-0" />}
+            {hasGpuSection && <GpuSection data={hardwareData} />}
+            {(hasGpuSection || hasUptime) && hasMemory && <Divider type="vertical" className="mx-0" />}
 
-        {hasMemory && <MemorySection data={hardwareData} />}
-        {(hasGpuSection || hasMemory) && hasUptime && <Divider type="vertical" className="mx-0" />}
+            {hasMemory && <MemorySection data={hardwareData} />}
+            {(hasGpuSection || hasMemory) && hasUptime && <Divider type="vertical" className="mx-0" />}
 
-        {hasUptime && <UpTimeSection data={hardwareData} />}
+            {hasUptime && <UpTimeSection data={hardwareData} />}
+          </>
+        ) : (
+          <div className="w-full text-center">
+            <ShinyText speed={2} className="font-semibold" text="Waiting for hardware information..." />
+          </div>
+        )}
       </div>
     </div>
   );

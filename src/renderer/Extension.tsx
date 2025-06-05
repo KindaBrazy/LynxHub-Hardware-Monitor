@@ -6,6 +6,10 @@ import ModalManager from './Components/ModalManager';
 import ToolsPage from './Components/ToolsPage';
 import extensionReducer from './reducer';
 
+/* TODO:
+    Take care of errors
+*/
+
 export function InitialExtensions(lynxAPI: ExtensionRendererApi) {
   lynxAPI.statusBar.replaceContainer(HardwareStatusBar);
   lynxAPI.addReducer([{name: 'extension', reducer: extensionReducer}]);

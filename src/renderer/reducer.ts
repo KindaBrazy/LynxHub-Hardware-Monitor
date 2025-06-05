@@ -1,10 +1,11 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
+import {omit} from 'lodash';
 import {useSelector} from 'react-redux';
 
-import {initialSystemMetrics} from '../cross/CrossConst';
-import {MonitoringSettings, SystemMetrics} from '../cross/CrossTypes';
+import {HMONITOR_IPC_UPDATE_CONFIG, initialSystemMetrics} from '../cross/CrossConst';
+import {MonitoringSettings} from '../cross/CrossTypes';
 
-type SystemMonitorState = MonitoringSettings & {
+export type SystemMonitorState = MonitoringSettings & {
   modals: {isOpen: boolean; tabID: string}[];
 };
 
@@ -33,9 +34,7 @@ const systemMonitorSlice = createSlice({
       }>,
     ) => {
       state[action.payload.key] = action.payload.value;
-    },
-    setMetric: (state: SystemMonitorState, action: PayloadAction<SystemMetrics[]>) => {
-      state.enabledMetrics = action.payload;
+      window.electron.ipcRenderer.send(HMONITOR_IPC_UPDATE_CONFIG, JSON.stringify(omit(state, 'modals')));
     },
     openModal: (state: SystemMonitorState, action: PayloadAction<{tabID: string}>) => {
       state.modals.push({isOpen: true, tabID: action.payload.tabID});

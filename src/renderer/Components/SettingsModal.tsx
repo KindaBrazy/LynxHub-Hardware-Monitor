@@ -11,13 +11,13 @@ import {
   Switch,
 } from '@heroui/react';
 import {Clock, Cpu, Database, Layers, LucideProps, Thermometer, Timer} from 'lucide-react';
-import {ForwardRefExoticComponent, RefAttributes, useState} from 'react';
+import {ForwardRefExoticComponent, RefAttributes} from 'react';
 import {useDispatch} from 'react-redux';
 
 import LynxScroll from '../../../../src/renderer/src/App/Components/Reusable/LynxScroll';
 import {AppDispatch} from '../../../../src/renderer/src/App/Redux/Store';
 import {Clock_Icon} from '../../../../src/renderer/src/assets/icons/SvgIcons/SvgIcons';
-import {systemMonitorActions} from '../reducer';
+import {systemMonitorActions, SystemMonitorState, useSystemMonitorState} from '../reducer';
 import {Settings_Icon} from '../SvgIcons';
 
 // Define types
@@ -37,36 +37,44 @@ interface MetricConfig {
   Icon: ForwardRefExoticComponent<Omit<LucideProps, 'ref'> & RefAttributes<SVGSVGElement>>;
 }
 
+// Metrics configuration
+const metrics: MetricConfig[] = [
+  {
+    id: 'cpuTemp',
+    label: 'CPU Temperature',
+    description: 'Monitor CPU temperature in real-time',
+    Icon: Thermometer,
+  },
+  {id: 'cpuUsage', label: 'CPU Usage', description: 'Track CPU utilization percentage', Icon: Cpu},
+  {
+    id: 'gpuTemp',
+    label: 'GPU Temperature',
+    description: 'Monitor GPU temperature in real-time',
+    Icon: Thermometer,
+  },
+  {id: 'gpuUsage', label: 'GPU Usage', description: 'Track GPU utilization percentage', Icon: Layers},
+  {id: 'memory', label: 'Memory Usage', description: 'Monitor RAM usage and availability', Icon: Database},
+  {id: 'uptimeSystemSeconds', label: 'System Uptime', description: 'Track total system uptime', Icon: Clock},
+  {id: 'uptimeSeconds', label: 'Application Uptime', description: 'Track application runtime', Icon: Timer},
+];
+
 type Props = {isOpen: boolean; show: string; tabID: string};
 
 export default function SettingsModal({show, isOpen, tabID}: Props) {
-  // Metrics configuration
-  const metrics: MetricConfig[] = [
-    {
-      id: 'cpuTemp',
-      label: 'CPU Temperature',
-      description: 'Monitor CPU temperature in real-time',
-      Icon: Thermometer,
-    },
-    {id: 'cpuUsage', label: 'CPU Usage', description: 'Track CPU utilization percentage', Icon: Cpu},
-    {
-      id: 'gpuTemp',
-      label: 'GPU Temperature',
-      description: 'Monitor GPU temperature in real-time',
-      Icon: Thermometer,
-    },
-    {id: 'gpuUsage', label: 'GPU Usage', description: 'Track GPU utilization percentage', Icon: Layers},
-    {id: 'memory', label: 'Memory Usage', description: 'Monitor RAM usage and availability', Icon: Database},
-    {id: 'uptimeSystemSeconds', label: 'System Uptime', description: 'Track total system uptime', Icon: Clock},
-    {id: 'uptimeSeconds', label: 'Application Uptime', description: 'Track application runtime', Icon: Timer},
-  ];
+  const dispatch = useDispatch<AppDispatch>();
+  const appEnabled = useSystemMonitorState('enabled');
+  const enabledMetrics = useSystemMonitorState('enabledMetrics');
+  const compactMode = useSystemMonitorState('compactMode');
+  const refreshInterval = useSystemMonitorState('refreshInterval');
+  const showSectionLabel = useSystemMonitorState('showSectionLabel');
 
-  // State for settings
-  const [enabledMetrics, setEnabledMetrics] = useState<Set<SystemMetrics>>(new Set(['cpuUsage', 'memory', 'gpuUsage']));
-  const [appEnabled, setAppEnabled] = useState(true);
-  const [refreshInterval, setRefreshInterval] = useState<number>(1);
-  const [compactMode, setCompactMode] = useState(false);
-  const [showSectionLabels, setShowSectionLabels] = useState(true);
+  const updateState = <K extends keyof SystemMonitorState>(key: K, value: SystemMonitorState[K]) =>
+    dispatch(
+      systemMonitorActions.updateState({
+        key,
+        value,
+      }),
+    );
 
   // Toggle individual metric
   const toggleMetric = (metric: SystemMetrics) => {
@@ -76,22 +84,9 @@ export default function SettingsModal({show, isOpen, tabID}: Props) {
     } else {
       newEnabledMetrics.add(metric);
     }
-    setEnabledMetrics(newEnabledMetrics);
+    updateState('enabledMetrics', Array.from(newEnabledMetrics));
   };
 
-  // Save settings
-  const saveSettings = () => {
-    // Here you would typically save settings to localStorage or send to a backend
-    console.log({
-      appEnabled,
-      enabledMetrics: Array.from(enabledMetrics),
-      refreshInterval,
-      compactMode,
-      showSectionLabels,
-    });
-  };
-
-  const dispatch = useDispatch<AppDispatch>();
   const onOpenChange = (value: boolean) => {
     if (!value) {
       dispatch(systemMonitorActions.closeModal({tabID: tabID}));
@@ -103,12 +98,15 @@ export default function SettingsModal({show, isOpen, tabID}: Props) {
 
   return (
     <Modal
+      classNames={{
+        backdrop: `!top-10 ${show}`,
+        wrapper: `!top-10 pb-8 ${show}`,
+      }}
       size="2xl"
       isOpen={isOpen}
       isDismissable={false}
       scrollBehavior="inside"
       onOpenChange={onOpenChange}
-      classNames={{backdrop: `!top-10 ${show}`, wrapper: `!top-10 pb-8 ${show}`}}
       hideCloseButton>
       <ModalContent>
         {onClose => (
@@ -128,7 +126,12 @@ export default function SettingsModal({show, isOpen, tabID}: Props) {
                     <h3 className="text-lg font-medium">Enable System Monitoring</h3>
                     <p className="text-sm text-default-500">When disabled, all metrics collection will be paused</p>
                   </div>
-                  <Switch size="lg" color="primary" isSelected={appEnabled} onValueChange={setAppEnabled} />
+                  <Switch
+                    size="lg"
+                    color="primary"
+                    isSelected={appEnabled}
+                    onValueChange={value => updateState('enabled', value)}
+                  />
                 </div>
               </div>
 
@@ -146,8 +149,8 @@ export default function SettingsModal({show, isOpen, tabID}: Props) {
                       className="max-w-xs"
                       value={refreshInterval}
                       label="Seconds between updates"
-                      onValueChange={setRefreshInterval}
                       startContent={<Clock_Icon className="size-6" />}
+                      onValueChange={value => updateState('refreshInterval', value)}
                       description="How frequently metrics should update (0.5-60 seconds)"
                     />
                   </div>
@@ -158,7 +161,7 @@ export default function SettingsModal({show, isOpen, tabID}: Props) {
 
                     <div
                       onClick={() => {
-                        setCompactMode(prevState => !prevState);
+                        updateState('compactMode', !compactMode);
                       }}
                       className={
                         'flex items-center justify-between rounded-lg px-2 ' +
@@ -168,12 +171,18 @@ export default function SettingsModal({show, isOpen, tabID}: Props) {
                         <p className="font-medium">Compact Mode</p>
                         <p className="text-sm text-default-500">Use condensed layout to save space</p>
                       </div>
-                      <Switch size="md" isSelected={compactMode} onValueChange={setCompactMode} />
+                      <Switch
+                        onValueChange={value => {
+                          updateState('compactMode', value);
+                        }}
+                        size="md"
+                        isSelected={compactMode}
+                      />
                     </div>
 
                     <div
                       onClick={() => {
-                        setShowSectionLabels(prevState => !prevState);
+                        updateState('showSectionLabel', !showSectionLabel);
                       }}
                       className={
                         'flex items-center justify-between rounded-lg px-2 py-2 ' +
@@ -183,7 +192,13 @@ export default function SettingsModal({show, isOpen, tabID}: Props) {
                         <p className="font-medium">Show Section Labels</p>
                         <p className="text-sm text-default-500">Display headers for metric groups</p>
                       </div>
-                      <Switch size="md" isSelected={showSectionLabels} onValueChange={setShowSectionLabels} />
+                      <Switch
+                        onValueChange={value => {
+                          updateState('showSectionLabel', value);
+                        }}
+                        size="md"
+                        isSelected={showSectionLabel}
+                      />
                     </div>
                   </div>
 
@@ -217,8 +232,8 @@ export default function SettingsModal({show, isOpen, tabID}: Props) {
                             </div>
                             <Checkbox
                               color="primary"
-                              isSelected={enabledMetrics.has(metric.id)}
                               onValueChange={() => toggleMetric(metric.id)}
+                              isSelected={enabledMetrics.includes(metric.id)}
                             />
                           </div>
                         );
@@ -229,18 +244,9 @@ export default function SettingsModal({show, isOpen, tabID}: Props) {
               )}
             </ModalBody>
 
-            <ModalFooter className="justify-between">
+            <ModalFooter>
               <Button color="warning" variant="light" onPress={onClose} className="cursor-default">
-                Cancel
-              </Button>
-              <Button
-                onPress={() => {
-                  saveSettings();
-                  onClose();
-                }}
-                variant="light"
-                color="success">
-                Save Changes
+                Close
               </Button>
             </ModalFooter>
           </>
