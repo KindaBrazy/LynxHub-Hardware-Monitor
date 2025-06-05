@@ -122,6 +122,27 @@ const HardwareStatusBar = ({ref}: Props) => {
     return {hasCpuSection, hasGpuSection, hasMemory, hasUptime};
   }, [enabledMetrics]);
 
+  useEffect(() => {
+    const scrollContainer = ref.current;
+
+    if (scrollContainer) {
+      const handleWheel = event => {
+        if (!event.ctrlKey) {
+          event.preventDefault();
+          scrollContainer.scrollLeft += event.deltaY;
+        }
+      };
+
+      scrollContainer.addEventListener('wheel', handleWheel);
+
+      return () => {
+        scrollContainer.removeEventListener('wheel', handleWheel);
+      };
+    }
+
+    return () => {};
+  }, [ref]);
+
   return (
     <div
       className={
