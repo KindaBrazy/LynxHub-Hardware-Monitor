@@ -87,8 +87,6 @@ const HardwareStatusBar = ({ref}: Props) => {
           memUsed,
         };
 
-        console.log(result);
-
         setHardwareData(result);
         setDataConnected(true);
       }
