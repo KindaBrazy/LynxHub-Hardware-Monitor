@@ -4,7 +4,7 @@ import {useSelector} from 'react-redux';
 import {initialSystemMetrics} from '../cross/CrossConst';
 import {MonitoringSettings, SystemMetrics} from '../cross/CrossTypes';
 
-type SystemMonitorState = Omit<MonitoringSettings, 'enabled'> & {[key: string]: any} & {
+type SystemMonitorState = MonitoringSettings & {
   modals: {isOpen: boolean; tabID: string}[];
 };
 
@@ -13,6 +13,8 @@ type SystemMonitorStateTypes = {
 };
 
 const initialState: SystemMonitorState = {
+  refreshInterval: 1,
+  enabled: true,
   compactMode: false,
   showSectionLabel: true,
   enabledMetrics: initialSystemMetrics,
@@ -32,13 +34,8 @@ const systemMonitorSlice = createSlice({
     ) => {
       state[action.payload.key] = action.payload.value;
     },
-    toggleMetric: (state: SystemMonitorState, action: PayloadAction<SystemMetrics>) => {
-      const metricIndex = state.enabledMetrics.indexOf(action.payload);
-      if (metricIndex > -1) {
-        state.enabledMetrics.splice(metricIndex, 1);
-      } else {
-        state.enabledMetrics.push(action.payload);
-      }
+    setMetric: (state: SystemMonitorState, action: PayloadAction<SystemMetrics[]>) => {
+      state.enabledMetrics = action.payload;
     },
     openModal: (state: SystemMonitorState, action: PayloadAction<{tabID: string}>) => {
       state.modals.push({isOpen: true, tabID: action.payload.tabID});

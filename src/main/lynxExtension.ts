@@ -20,6 +20,7 @@ export async function initialExtension(lynxApi: ExtensionMainApi, utils: MainExt
 
       if (!data) {
         data = {
+          refreshInterval: 1,
           enabled: true,
           compactMode: false,
           showSectionLabel: true,
