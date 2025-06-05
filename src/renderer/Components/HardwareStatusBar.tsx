@@ -171,13 +171,13 @@ const HardwareStatusBar = ({ref}: Props) => {
         style={{scrollbarWidth: 'none', msOverflowStyle: 'none'}}
         className={`h-full flex items-center ${compactMode ? 'px-2' : 'px-3'} gap-x-4 overflow-x-auto scrollbar-hide`}>
         {hasCpuSection && <CpuSection data={hardwareData} />}
-        {(hasGpuSection || hasMemory || hasUptime) && <Divider type="vertical" className="mx-0" />}
+        {(hasGpuSection || hasMemory || hasUptime) && hasCpuSection && <Divider type="vertical" className="mx-0" />}
 
         {hasGpuSection && <GpuSection data={hardwareData} />}
-        {(hasMemory || hasUptime) && <Divider type="vertical" className="mx-0" />}
+        {(hasGpuSection || hasUptime) && hasMemory && <Divider type="vertical" className="mx-0" />}
 
         {hasMemory && <MemorySection data={hardwareData} />}
-        {hasUptime && <Divider type="vertical" className="mx-0" />}
+        {(hasGpuSection || hasMemory) && hasUptime && <Divider type="vertical" className="mx-0" />}
 
         {hasUptime && <UpTimeSection data={hardwareData} />}
       </div>
