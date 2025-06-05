@@ -11,7 +11,7 @@ const iconUrl: string =
   'https://raw.githubusercontent.com/KindaBrazy/LynxHub-Hardware-Monitor/refs/heads/source_ea/Icon.png';
 
 export default function ToolsPage() {
-  const iconSrc = useCachedImageUrl(`hwmonitor-card-dev-img`, iconUrl);
+  const iconSrc = useCachedImageUrl(`hwmonitor_card_icon`, iconUrl);
 
   const activeTab = useTabsState('activeTab');
   const dispatch = useDispatch();
