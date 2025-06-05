@@ -7,11 +7,11 @@ import {useCachedImageUrl} from '../../../../src/renderer/src/App/Utils/LocalSto
 import {systemMonitorActions} from '../reducer';
 import {Settings_Icon} from '../SvgIcons';
 
-const picUrl: string =
+const iconUrl: string =
   'https://raw.githubusercontent.com/KindaBrazy/LynxHub-Hardware-Monitor/refs/heads/source_ea/Icon.png';
 
 export default function ToolsPage() {
-  const devSrc = useCachedImageUrl(`hwmonitor-card-dev-img`, picUrl);
+  const iconSrc = useCachedImageUrl(`hwmonitor-card-dev-img`, iconUrl);
 
   const activeTab = useTabsState('activeTab');
   const dispatch = useDispatch();
@@ -36,9 +36,7 @@ export default function ToolsPage() {
         <div className="relative h-full flex flex-col justify-between p-6">
           {/* Icon section */}
           <div className="mt-2 flex justify-center">
-            <div className="p-3 bg-white/20 backdrop-blur-sm rounded-full border border-white/30 shadow-lg">
-              {devSrc && <Image src={devSrc} radius="none" className="size-14" />}
-            </div>
+            {iconSrc && <Image src={iconSrc} radius="none" className="size-20" />}
           </div>
 
           {/* Title and Description */}
