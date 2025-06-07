@@ -17,6 +17,19 @@ keep an eye on your system's performance without leaving your workspace.
 
 -----
 
+## ❗ Requirements
+
+Before using this extension:
+
+- **.NET 8.0 Runtime**: This extension relies on the .NET 8.0 framework to gather hardware information. You can download
+  it from the official Microsoft website:
+    - [Download .NET 8.0 Runtime](https://dotnet.microsoft.com/en-us/download/dotnet/8.0)
+- **Missing Data? Run as Administrator**: Some hardware sensors require elevated permissions to be read correctly. If
+  you notice that certain metrics (like CPU/GPU temperature) are not appearing, please try running LynxHub as an
+  administrator.
+
+-----
+
 ## ✨ Features
 
 - **Real-Time Metrics**: Track essential hardware statistics, updated at your chosen interval.
