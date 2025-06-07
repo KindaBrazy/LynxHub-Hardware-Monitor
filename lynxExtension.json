@@ -1,57 +1,50 @@
 {
   "$schema": "./lynxExtension.schema.json",
-  "id": "git_flow_helper",
-  "title": "Git Flow Helper",
-  "description": "Simplifies Git workflow with visual branch management and common Git operations automation.",
-  "publishDate": "2024-11-27",
-  "repoUrl": "https://github.com/KindaBrazy/LynxHub",
-  "version": "1.2.0",
-  "updateDate": "2024-11-27 14:05",
-  "requireAppBuild": 15,
+  "id": "lynxhub_hardware_monitor",
+  "title": "LynxHub Hardware Monitor",
+  "description": "A configurable LynxHub extension for real-time monitoring of CPU, GPU, and Memory usage, displayed conveniently in the status bar.",
+  "publishDate": "2025-06-07",
+  "requireAppBuild": 19,
+  "version": "0.9.0",
+  "updateDate": "2025-06-07 14:05",
+  "repoUrl": "https://github.com/KindaBrazy/LynxHub-Hardware-Monitor",
+  "avatarUrl": "https://raw.githubusercontent.com/KindaBrazy/LynxHub-Hardware-Monitor/refs/heads/source_ea/resources/icon.png",
   "platforms": [
-    "linux",
-    "win32",
-    "darwin"
+    "win32"
   ],
   "changeLog": [
     {
-      "title": "Version 1.2.0 Release Notes",
+      "title": "Version 1.0.0 - Initial Release",
       "items": [
         {
-          "label": "New Features",
+          "label": "🚀 Features",
           "subitems": [
             {
-              "label": "Interactive rebase helper"
+              "label": "Real-time monitoring for CPU, GPU, Memory, and System/Application Uptime."
             },
             {
-              "label": "Branch visualization improvements"
-            },
-            {
-              "label": "Commit message templates"
+              "label": "Dynamic status bar with color-coded indicators and progress bars for intuitive feedback on system load."
             }
           ]
         },
         {
-          "label": "Performance Improvements",
+          "label": "⚙️ Customization",
           "subitems": [
             {
-              "label": "Faster branch switching"
+              "label": "Enable 'Compact Mode' for a sleeker, space-saving layout."
             },
             {
-              "label": "Optimized large repository handling"
+              "label": "Individually select which metrics to display or hide in the status bar."
+            },
+            {
+              "label": "Toggle section labels (CPU, GPU, etc.) for a cleaner look."
+            },
+            {
+              "label": "Adjust the data refresh interval to your preference."
             }
           ]
         }
       ]
-    },
-    {
-      "title": "Version 1.0.0",
-      "items": [
-        {
-          "label": "Releasing V1"
-        }
-      ]
     }
-  ],
-  "avatarUrl": "https://avatars.githubusercontent.com/u/143181745?v=4"
+  ]
 }
