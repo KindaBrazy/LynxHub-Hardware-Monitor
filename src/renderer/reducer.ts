@@ -36,6 +36,9 @@ const systemMonitorSlice = createSlice({
       state[action.payload.key] = action.payload.value;
       window.electron.ipcRenderer.send(HMONITOR_IPC_UPDATE_CONFIG, JSON.stringify(omit(state, 'modals')));
     },
+    setConfig: (_, action: PayloadAction<MonitoringSettings>) => {
+      return {...action.payload, modals: []};
+    },
     openModal: (state: SystemMonitorState, action: PayloadAction<{tabID: string}>) => {
       state.modals.push({isOpen: true, tabID: action.payload.tabID});
     },
