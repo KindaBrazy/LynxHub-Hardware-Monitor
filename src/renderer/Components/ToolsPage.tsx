@@ -8,7 +8,7 @@ import {systemMonitorActions} from '../reducer';
 import {Settings_Icon} from '../SvgIcons';
 
 const iconUrl: string =
-  'https://raw.githubusercontent.com/KindaBrazy/LynxHub-Hardware-Monitor/refs/heads/source_ea/Icon.png';
+  'https://raw.githubusercontent.com/KindaBrazy/LynxHub-Hardware-Monitor/refs/heads/source_ea/resources/icon.png';
 
 export default function ToolsPage() {
   const iconSrc = useCachedImageUrl(`hwmonitor_card_icon`, iconUrl);
@@ -43,7 +43,8 @@ export default function ToolsPage() {
           <div className="text-center space-y-3">
             <h3 className="text-2xl font-bold tracking-tight">Hardware Monitor</h3>
             <p className="text-foreground/70 text-sm leading-relaxed">
-              Monitor system hardware resources and performance.
+              A configurable LynxHub extension for real-time monitoring of CPU, GPU, and Memory usage, displayed
+              conveniently in the status bar.
             </p>
           </div>
 
