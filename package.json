@@ -4,12 +4,12 @@
   "repository": "https://github.com/KindaBrazy/LynxHub-Hardware-Monitor",
   "type": "module",
   "dependencies": {
-    "@lynxhub/hwmonitor": "^0.9.2",
+    "@lynxhub/hwmonitor": "^0.10.1",
     "systeminformation": "^5.27.1",
     "which": "^5.0.0"
   },
   "devDependencies": {
     "@types/which": "^3.0.4",
-    "lucide-react": "^0.512.0"
+    "lucide-react": "^0.513.0"
   }
 }
