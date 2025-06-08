@@ -11,12 +11,16 @@ import {
   Switch,
 } from '@heroui/react';
 import {Clock, Cpu, Database, Layers, LucideProps, Thermometer, Timer} from 'lucide-react';
-import {ForwardRefExoticComponent, RefAttributes} from 'react';
+import {ForwardRefExoticComponent, RefAttributes, useState} from 'react';
 import {useDispatch} from 'react-redux';
 
 import LynxScroll from '../../../../src/renderer/src/App/Components/Reusable/LynxScroll';
 import {AppDispatch} from '../../../../src/renderer/src/App/Redux/Store';
+import rendererIpc from '../../../../src/renderer/src/App/RendererIpc';
+import {lynxTopToast} from '../../../../src/renderer/src/App/Utils/UtilHooks';
 import {Clock_Icon} from '../../../../src/renderer/src/assets/icons/SvgIcons/SvgIcons';
+import {HMONITOR_STORAGE_ID} from '../../cross/CrossConst';
+import {MonitoringSettings} from '../../cross/CrossTypes';
 import {systemMonitorActions, SystemMonitorState, useSystemMonitorState} from '../reducer';
 import {Settings_Icon} from '../SvgIcons';
 
@@ -68,6 +72,8 @@ export default function SettingsModal({show, isOpen, tabID}: Props) {
   const refreshInterval = useSystemMonitorState('refreshInterval');
   const showSectionLabel = useSystemMonitorState('showSectionLabel');
 
+  const [isSaving, setIsSaving] = useState<boolean>(false);
+
   const updateState = <K extends keyof SystemMonitorState>(key: K, value: SystemMonitorState[K]) =>
     dispatch(
       systemMonitorActions.updateState({
@@ -89,11 +95,23 @@ export default function SettingsModal({show, isOpen, tabID}: Props) {
 
   const onOpenChange = (value: boolean) => {
     if (!value) {
+      rendererIpc.storage.getCustom(HMONITOR_STORAGE_ID).then((result: MonitoringSettings) => {
+        dispatch(systemMonitorActions.setConfig(result));
+      });
       dispatch(systemMonitorActions.closeModal({tabID: tabID}));
       setTimeout(() => {
         dispatch(systemMonitorActions.removeModal({tabID: tabID}));
       }, 500);
     }
+  };
+
+  const saveSettings = () => {
+    setIsSaving(true);
+    setTimeout(() => {
+      setIsSaving(false);
+      lynxTopToast.success('Settings saved successfully!');
+    }, 700);
+    dispatch(systemMonitorActions.saveSettings());
   };
 
   return (
@@ -245,9 +263,12 @@ export default function SettingsModal({show, isOpen, tabID}: Props) {
               )}
             </ModalBody>
 
-            <ModalFooter>
+            <ModalFooter className="justify-between">
               <Button color="warning" variant="light" onPress={onClose} className="cursor-default">
                 Close
+              </Button>
+              <Button color="success" variant="light" isLoading={isSaving} onPress={saveSettings}>
+                {!isSaving && 'Save Settings'}
               </Button>
             </ModalFooter>
           </>
