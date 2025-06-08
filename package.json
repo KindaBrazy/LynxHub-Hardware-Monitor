@@ -1,6 +1,6 @@
 {
   "name": "lynxhub_hardware_monitor",
-  "version": "0.9.0",
+  "version": "0.10.0",
   "repository": "https://github.com/KindaBrazy/LynxHub-Hardware-Monitor",
   "type": "module",
   "dependencies": {
