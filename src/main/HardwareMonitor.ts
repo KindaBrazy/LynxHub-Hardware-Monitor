@@ -25,7 +25,7 @@ async function startMonitoring() {
   if (!webContent) return;
 
   try {
-    hwMonitor = new HardwareMonitor();
+    hwMonitor = new HardwareMonitor('info');
 
     const targetDir = join(app.getPath('downloads'), 'LynxHub');
     await hwMonitor.checkRequirements(targetDir);
