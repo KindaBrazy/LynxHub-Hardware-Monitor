@@ -15,6 +15,7 @@ import UpTimeSection from './Sections/UpTimeSection';
 type Props = {ref: RefObject<HTMLDivElement | null>};
 
 const HardwareStatusBar = ({ref}: Props) => {
+  const enabled = useSystemMonitorState('enabled');
   const compactMode = useSystemMonitorState('compactMode');
   const enabledMetrics = useSystemMonitorState('enabledMetrics');
   const [hardwareData, setHardwareData] = useState<HardwareData>({
@@ -141,6 +142,8 @@ const HardwareStatusBar = ({ref}: Props) => {
 
     return () => {};
   }, [ref]);
+
+  if (!enabled) return null;
 
   return (
     <div
