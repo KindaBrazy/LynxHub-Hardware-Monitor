@@ -104,6 +104,7 @@ export default function SettingsModal({show, isOpen, tabID}: Props) {
       }}
       size="2xl"
       isOpen={isOpen}
+      placement="center"
       isDismissable={false}
       scrollBehavior="inside"
       onOpenChange={onOpenChange}
