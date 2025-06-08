@@ -3,7 +3,7 @@ import { j as jsxRuntimeExports } from './jsx-runtime-BA-u0cS_.js';
 import { c as commonjsGlobal, g as getDefaultExportFromCjs } from './_commonjsHelpers-BFTU3MAI.js';
 
 /**
- * @license lucide-react v0.512.0 - ISC
+ * @license lucide-react v0.513.0 - ISC
  *
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
@@ -30,7 +30,7 @@ const hasA11yProp = (props) => {
 };
 
 /**
- * @license lucide-react v0.512.0 - ISC
+ * @license lucide-react v0.513.0 - ISC
  *
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
@@ -49,7 +49,7 @@ var defaultAttributes = {
 };
 
 /**
- * @license lucide-react v0.512.0 - ISC
+ * @license lucide-react v0.513.0 - ISC
  *
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
@@ -88,7 +88,7 @@ const Icon = forwardRef$1(
 );
 
 /**
- * @license lucide-react v0.512.0 - ISC
+ * @license lucide-react v0.513.0 - ISC
  *
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
@@ -114,7 +114,7 @@ const createLucideIcon = (iconName, iconNode) => {
 };
 
 /**
- * @license lucide-react v0.512.0 - ISC
+ * @license lucide-react v0.513.0 - ISC
  *
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
@@ -133,7 +133,7 @@ const __iconNode$c = [
 const Activity = createLucideIcon("activity", __iconNode$c);
 
 /**
- * @license lucide-react v0.512.0 - ISC
+ * @license lucide-react v0.513.0 - ISC
  *
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
@@ -144,7 +144,7 @@ const __iconNode$b = [["path", { d: "m15 18-6-6 6-6", key: "1wnfg3" }]];
 const ChevronLeft = createLucideIcon("chevron-left", __iconNode$b);
 
 /**
- * @license lucide-react v0.512.0 - ISC
+ * @license lucide-react v0.513.0 - ISC
  *
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
@@ -155,7 +155,7 @@ const __iconNode$a = [["path", { d: "m9 18 6-6-6-6", key: "mthhwq" }]];
 const ChevronRight = createLucideIcon("chevron-right", __iconNode$a);
 
 /**
- * @license lucide-react v0.512.0 - ISC
+ * @license lucide-react v0.513.0 - ISC
  *
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
@@ -169,7 +169,7 @@ const __iconNode$9 = [
 const Clock = createLucideIcon("clock", __iconNode$9);
 
 /**
- * @license lucide-react v0.512.0 - ISC
+ * @license lucide-react v0.513.0 - ISC
  *
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
@@ -195,7 +195,7 @@ const __iconNode$8 = [
 const Cpu = createLucideIcon("cpu", __iconNode$8);
 
 /**
- * @license lucide-react v0.512.0 - ISC
+ * @license lucide-react v0.513.0 - ISC
  *
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
@@ -210,7 +210,7 @@ const __iconNode$7 = [
 const Database = createLucideIcon("database", __iconNode$7);
 
 /**
- * @license lucide-react v0.512.0 - ISC
+ * @license lucide-react v0.513.0 - ISC
  *
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
@@ -232,7 +232,7 @@ const __iconNode$6 = [
 const HardDrive = createLucideIcon("hard-drive", __iconNode$6);
 
 /**
- * @license lucide-react v0.512.0 - ISC
+ * @license lucide-react v0.513.0 - ISC
  *
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
@@ -265,7 +265,7 @@ const __iconNode$5 = [
 const Layers = createLucideIcon("layers", __iconNode$5);
 
 /**
- * @license lucide-react v0.512.0 - ISC
+ * @license lucide-react v0.513.0 - ISC
  *
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
@@ -292,7 +292,7 @@ const __iconNode$4 = [
 const MemoryStick = createLucideIcon("memory-stick", __iconNode$4);
 
 /**
- * @license lucide-react v0.512.0 - ISC
+ * @license lucide-react v0.513.0 - ISC
  *
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
@@ -307,7 +307,7 @@ const __iconNode$3 = [
 const Monitor = createLucideIcon("monitor", __iconNode$3);
 
 /**
- * @license lucide-react v0.512.0 - ISC
+ * @license lucide-react v0.513.0 - ISC
  *
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
@@ -320,7 +320,7 @@ const __iconNode$2 = [
 const Thermometer = createLucideIcon("thermometer", __iconNode$2);
 
 /**
- * @license lucide-react v0.512.0 - ISC
+ * @license lucide-react v0.513.0 - ISC
  *
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
@@ -335,7 +335,7 @@ const __iconNode$1 = [
 const Timer = createLucideIcon("timer", __iconNode$1);
 
 /**
- * @license lucide-react v0.512.0 - ISC
+ * @license lucide-react v0.513.0 - ISC
  *
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
@@ -1421,10 +1421,12 @@ const systemMonitorSlice = createSlice({
   reducers: {
     updateState: (state, action) => {
       state[action.payload.key] = action.payload.value;
-      window.electron.ipcRenderer.send(HMONITOR_IPC_UPDATE_CONFIG, JSON.stringify(omit(state, "modals")));
     },
     setConfig: (_, action) => {
       return { ...action.payload, modals: [] };
+    },
+    saveSettings: (state) => {
+      window.electron.ipcRenderer.send(HMONITOR_IPC_UPDATE_CONFIG, JSON.stringify(omit(state, "modals")));
     },
     openModal: (state, action) => {
       state.modals.push({ isOpen: true, tabID: action.payload.tabID });
@@ -1528,10 +1530,10 @@ function Section({
   ] });
 }
 
-const {useMemo: useMemo$4} = await importShared('react');
+const {useMemo: useMemo$5} = await importShared('react');
 function CpuSection({ data }) {
   const enabledMetrics = useSystemMonitorState("enabledMetrics");
-  const { hasTemp, hasUsage } = useMemo$4(() => {
+  const { hasTemp, hasUsage } = useMemo$5(() => {
     const hasTemp2 = enabledMetrics.includes("cpuTemp");
     const hasUsage2 = enabledMetrics.includes("cpuUsage");
     return { hasTemp: hasTemp2, hasUsage: hasUsage2 };
@@ -1562,10 +1564,10 @@ function CpuSection({ data }) {
   ] });
 }
 
-const {useMemo: useMemo$3} = await importShared('react');
+const {useMemo: useMemo$4} = await importShared('react');
 function GpuSection({ data }) {
   const enabledMetrics = useSystemMonitorState("enabledMetrics");
-  const { hasTemp, hasUsage } = useMemo$3(() => {
+  const { hasTemp, hasUsage } = useMemo$4(() => {
     const hasTemp2 = enabledMetrics.includes("gpuTemp");
     const hasUsage2 = enabledMetrics.includes("gpuUsage");
     return { hasTemp: hasTemp2, hasUsage: hasUsage2 };
@@ -1596,9 +1598,9 @@ function GpuSection({ data }) {
   ] });
 }
 
-const {useMemo: useMemo$2} = await importShared('react');
+const {useMemo: useMemo$3} = await importShared('react');
 function MemorySection({ data }) {
-  const memPercentage = useMemo$2(() => {
+  const memPercentage = useMemo$3(() => {
     return data.memTotal > 0 ? data.memUsed / data.memTotal * 100 : 0;
   }, [data]);
   return /* @__PURE__ */ jsxRuntimeExports.jsx(Section, { title: "Memory", icon: MemoryStick, children: /* @__PURE__ */ jsxRuntimeExports.jsx(
@@ -1613,7 +1615,7 @@ function MemorySection({ data }) {
   ) });
 }
 
-const {useMemo: useMemo$1} = await importShared('react');
+const {useMemo: useMemo$2} = await importShared('react');
 const formatUptime = (seconds) => {
   const days = Math.floor(seconds / 86400);
   const hours = Math.floor(seconds % 86400 / 3600);
@@ -1624,7 +1626,7 @@ const formatUptime = (seconds) => {
 };
 function UpTimeSection({ data }) {
   const enabledMetrics = useSystemMonitorState("enabledMetrics");
-  const { upApp, upSystem } = useMemo$1(() => {
+  const { upApp, upSystem } = useMemo$2(() => {
     const upApp2 = enabledMetrics.includes("uptimeSeconds");
     const upSystem2 = enabledMetrics.includes("uptimeSystemSeconds");
     return { upApp: upApp2, upSystem: upSystem2 };
@@ -1636,11 +1638,12 @@ function UpTimeSection({ data }) {
 }
 
 const {Divider: Divider$1} = await importShared('antd');
-const {useEffect: useEffect$2,useMemo,useState: useState$1} = await importShared('react');
+const {useEffect: useEffect$3,useMemo: useMemo$1,useState: useState$2} = await importShared('react');
 const HardwareStatusBar = ({ ref }) => {
+  const enabled = useSystemMonitorState("enabled");
   const compactMode = useSystemMonitorState("compactMode");
   const enabledMetrics = useSystemMonitorState("enabledMetrics");
-  const [hardwareData, setHardwareData] = useState$1({
+  const [hardwareData, setHardwareData] = useState$2({
     cpuTemp: 0,
     cpuUsage: 0,
     gpuTemp: 0,
@@ -1650,9 +1653,9 @@ const HardwareStatusBar = ({ ref }) => {
     uptimeSystemSeconds: 0,
     uptimeSeconds: 0
   });
-  const [canScrollLeft, setCanScrollLeft] = useState$1(false);
-  const [canScrollRight, setCanScrollRight] = useState$1(false);
-  const [dataConnected, setDataConnected] = useState$1(false);
+  const [canScrollLeft, setCanScrollLeft] = useState$2(false);
+  const [canScrollRight, setCanScrollRight] = useState$2(false);
+  const [dataConnected, setDataConnected] = useState$2(false);
   const updateScrollArrows = () => {
     if (!ref.current) return;
     const container = ref.current;
@@ -1668,7 +1671,7 @@ const HardwareStatusBar = ({ ref }) => {
       });
     }
   };
-  useEffect$2(() => {
+  useEffect$3(() => {
     const handleHardwareUpdate = (_event, data) => {
       if (data) {
         const uptimeSeconds = data.ElapsedTime?.rawSeconds || 0;
@@ -1707,21 +1710,21 @@ const HardwareStatusBar = ({ ref }) => {
       window.electron.ipcRenderer.removeAllListeners(HMONITOR_IPC_DATA_ID);
     };
   }, []);
-  useEffect$2(() => {
+  useEffect$3(() => {
     updateScrollArrows();
     const handleResize = () => updateScrollArrows();
     window.removeEventListener("resize", handleResize);
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, [hardwareData]);
-  const { hasCpuSection, hasMemory, hasUptime, hasGpuSection } = useMemo(() => {
+  const { hasCpuSection, hasMemory, hasUptime, hasGpuSection } = useMemo$1(() => {
     const hasCpuSection2 = enabledMetrics.includes("cpuTemp") || enabledMetrics.includes("cpuUsage");
     const hasGpuSection2 = enabledMetrics.includes("gpuTemp") || enabledMetrics.includes("gpuUsage");
     const hasMemory2 = enabledMetrics.includes("memory");
     const hasUptime2 = enabledMetrics.includes("uptimeSeconds") || enabledMetrics.includes("uptimeSystemSeconds");
     return { hasCpuSection: hasCpuSection2, hasGpuSection: hasGpuSection2, hasMemory: hasMemory2, hasUptime: hasUptime2 };
   }, [enabledMetrics]);
-  useEffect$2(() => {
+  useEffect$3(() => {
     const scrollContainer = ref.current;
     if (scrollContainer) {
       const handleWheel = (event) => {
@@ -1738,6 +1741,7 @@ const HardwareStatusBar = ({ ref }) => {
     return () => {
     };
   }, [ref]);
+  if (!enabled) return null;
   return /* @__PURE__ */ jsxRuntimeExports.jsxs(
     "div",
     {
@@ -1824,6 +1828,30 @@ const rendererIpc = {
     update: (key, updateData) => ipc.invoke(storageChannels.update, key, updateData),
     clear: () => ipc.invoke(storageChannels.clear)
   }};
+
+const {addToast} = await importShared('@heroui/react');
+
+const {isEmpty: isEmpty$2,isNil} = await importShared('lodash');
+
+const {Fragment: Fragment$1,useMemo} = await importShared('react');
+function topToast(options) {
+  const { title, color = "success", timeout = 2e3, promise } = options;
+  addToast({
+    title,
+    color,
+    variant: "flat",
+    size: "sm",
+    timeout,
+    promise
+  });
+}
+const lynxTopToast = {
+  success: (title, timeout) => topToast({ title, color: "success", timeout }),
+  error: (title, timeout) => topToast({ title, color: "danger", timeout }),
+  warning: (title, timeout) => topToast({ title, color: "warning", timeout }),
+  info: (title, timeout) => topToast({ title, color: "default", timeout }),
+  loading: (title, promise) => topToast({ title, color: "default", promise, timeout: 1 })
+};
 
 /** Detect free variable `global` from Node.js. */
 
@@ -2121,11 +2149,11 @@ const {Image: Image$1} = await importShared('@heroui/react');
 
 const {isEmpty} = await importShared('lodash');
 
-const {useEffect: useEffect$1,useState} = await importShared('react');
+const {useEffect: useEffect$2,useState: useState$1} = await importShared('react');
 function useCachedImageUrl(id, url) {
   const isOnline = useAppState("isOnline");
-  const [imageSrc, setImageSrc] = useState("");
-  useEffect$1(() => {
+  const [imageSrc, setImageSrc] = useState$1("");
+  useEffect$2(() => {
     const fetchAndStoreImage = async () => {
       try {
         const response = await fetch(url);
@@ -5127,6 +5155,8 @@ function Settings_Icon(props) {
 }
 
 const {Button: Button$1,Checkbox,Divider,Modal,ModalBody,ModalContent,ModalFooter,ModalHeader,NumberInput,Switch} = await importShared('@heroui/react');
+const {useState} = await importShared('react');
+
 const {useDispatch: useDispatch$3} = await importShared('react-redux');
 const metrics = [
   {
@@ -5154,6 +5184,7 @@ function SettingsModal({ show, isOpen, tabID }) {
   const compactMode = useSystemMonitorState("compactMode");
   const refreshInterval = useSystemMonitorState("refreshInterval");
   const showSectionLabel = useSystemMonitorState("showSectionLabel");
+  const [isSaving, setIsSaving] = useState(false);
   const updateState = (key, value) => dispatch(
     systemMonitorActions.updateState({
       key,
@@ -5171,11 +5202,22 @@ function SettingsModal({ show, isOpen, tabID }) {
   };
   const onOpenChange = (value) => {
     if (!value) {
+      rendererIpc.storage.getCustom(HMONITOR_STORAGE_ID).then((result) => {
+        dispatch(systemMonitorActions.setConfig(result));
+      });
       dispatch(systemMonitorActions.closeModal({ tabID }));
       setTimeout(() => {
         dispatch(systemMonitorActions.removeModal({ tabID }));
       }, 500);
     }
+  };
+  const saveSettings = () => {
+    setIsSaving(true);
+    setTimeout(() => {
+      setIsSaving(false);
+      lynxTopToast.success("Settings saved successfully!");
+    }, 700);
+    dispatch(systemMonitorActions.saveSettings());
   };
   return /* @__PURE__ */ jsxRuntimeExports.jsx(
     Modal,
@@ -5186,6 +5228,7 @@ function SettingsModal({ show, isOpen, tabID }) {
       },
       size: "2xl",
       isOpen,
+      placement: "center",
       isDismissable: false,
       scrollBehavior: "inside",
       onOpenChange,
@@ -5323,13 +5366,16 @@ function SettingsModal({ show, isOpen, tabID }) {
             ] })
           ] })
         ] }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx(ModalFooter, { children: /* @__PURE__ */ jsxRuntimeExports.jsx(Button$1, { color: "warning", variant: "light", onPress: onClose, className: "cursor-default", children: "Close" }) })
+        /* @__PURE__ */ jsxRuntimeExports.jsxs(ModalFooter, { className: "justify-between", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx(Button$1, { color: "warning", variant: "light", onPress: onClose, className: "cursor-default", children: "Close" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx(Button$1, { color: "success", variant: "light", isLoading: isSaving, onPress: saveSettings, children: !isSaving && "Save Settings" })
+        ] })
       ] }) })
     }
   );
 }
 
-const {useEffect} = await importShared('react');
+const {useEffect: useEffect$1} = await importShared('react');
 
 const {useDispatch: useDispatch$2} = await importShared('react-redux');
 function ModalManager() {
@@ -5337,7 +5383,7 @@ function ModalManager() {
   const activeTab = useTabsState("activeTab");
   const tabs = useTabsState("tabs");
   const modals = useSystemMonitorState("modals");
-  useEffect(() => {
+  useEffect$1(() => {
     modals.forEach((card) => {
       const exist = tabs.some((tab) => tab.id === card.tabID);
       if (!exist) dispatch(systemMonitorActions.closeModal({ tabID: card.tabID }));
@@ -5405,13 +5451,17 @@ function ToolsPage() {
   ) });
 }
 
+const {Fragment,useEffect} = await importShared('react');
+
 const {useDispatch} = await importShared('react-redux');
 function UpdateConfig() {
   const dispatch = useDispatch();
-  rendererIpc.storage.getCustom(HMONITOR_STORAGE_ID).then((result) => {
-    dispatch(systemMonitorActions.setConfig(result));
-  });
-  return /* @__PURE__ */ jsxRuntimeExports.jsx(jsxRuntimeExports.Fragment, {});
+  useEffect(() => {
+    rendererIpc.storage.getCustom(HMONITOR_STORAGE_ID).then((result) => {
+      dispatch(systemMonitorActions.setConfig(result));
+    });
+  }, []);
+  return /* @__PURE__ */ jsxRuntimeExports.jsx(Fragment, {});
 }
 
 function InitialExtensions(lynxAPI) {

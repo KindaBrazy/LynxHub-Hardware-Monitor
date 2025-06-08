@@ -27,15 +27,15 @@ const DOTNET_8_RUNTIME_IDENTIFIER = "microsoft.netcore.app 8.0";
 function isDotNet8RuntimeInstalled(output) {
   return output.toLowerCase().includes(DOTNET_8_RUNTIME_IDENTIFIER);
 }
-async function checkDotNetRuntime8() {
+async function checkDotNetRuntime8(logger = console) {
   try {
     const { stdout, stderr } = await execAsync(DOTNET_LIST_RUNTIMES_COMMAND);
     if (stderr) {
-      console.warn(`Stderr: ${stderr}`);
+      logger.warn(`Stderr from 'dotnet --list-runtimes': ${stderr}`);
     }
     return isDotNet8RuntimeInstalled(stdout);
   } catch (error) {
-    console.error(`Error executing command: ${error.message}`);
+    logger.error(`Error executing 'dotnet --list-runtimes': ${error.message}`);
     return false;
   }
 }
@@ -9238,7 +9238,18 @@ function requireDecompress() {
 }
 var decompressExports = requireDecompress();
 const decompress = /* @__PURE__ */ getDefaultExportFromCjs(decompressExports);
-function downloadFile(url, outputPath, redirectCount = 0) {
+const logLevels = ["silent", "error", "warn", "info", "debug"];
+const createLogger = (logLevel) => (level, ...messages) => {
+  if (logLevels.indexOf(logLevel) >= logLevels.indexOf(level)) {
+    if (level === "error")
+      console.error(...messages);
+    else if (level === "warn")
+      console.warn(...messages);
+    else if (level !== "silent")
+      console.log(...messages);
+  }
+};
+function downloadFile(url, outputPath, log, redirectCount = 0) {
   return new Promise((resolve, reject) => {
     if (redirectCount > 5) {
       reject(new Error("Too many redirects"));
@@ -9250,9 +9261,9 @@ function downloadFile(url, outputPath, redirectCount = 0) {
           reject(new Error(`Redirect with no location header from ${url}`));
           return;
         }
-        console.log(`Redirecting to ${response.headers.location}`);
+        log("debug", `Redirecting to ${response.headers.location}`);
         response.resume();
-        downloadFile(response.headers.location, outputPath, redirectCount + 1).then(resolve).catch(reject);
+        downloadFile(response.headers.location, outputPath, log, redirectCount + 1).then(resolve).catch(reject);
         return;
       }
       if (response.statusCode !== 200) {
@@ -9314,137 +9325,120 @@ function fetchJson(url) {
     });
   });
 }
-async function cleanupOldVersions(baseDir, currentVersion, cliName) {
+async function cleanupOldVersions(baseDir, currentVersion, cliName, log) {
   try {
     const entries = await fsPromises.readdir(baseDir, { withFileTypes: true });
-    const oldVersionDirs = entries.filter((dirent) => dirent.isDirectory() && dirent.name.startsWith(`${cliName}-`) && // Assuming version folders start with cliName-
-    dirent.name !== currentVersion);
+    const oldVersionDirs = entries.filter((dirent) => dirent.isDirectory() && dirent.name.startsWith(`${cliName}-`) && dirent.name !== currentVersion);
     for (const dirent of oldVersionDirs) {
       const oldVersionPath = path.join(baseDir, dirent.name);
-      console.log(`Removing old version directory: ${oldVersionPath}`);
+      log("debug", `Removing old version directory: ${oldVersionPath}`);
       await fsPromises.rm(oldVersionPath, { recursive: true, force: true });
     }
   } catch (error) {
-    console.warn(`Warning: Could not clean up old versions in ${baseDir}:`, error.message);
+    log("warn", `Could not clean up old versions in ${baseDir}:`, error.message);
   }
 }
-async function downloadAndExtractLatestCli(repoOwner, repoName, cliName, baseDestinationDir) {
-  console.log(`Starting download process for ${cliName} from ${repoOwner}/${repoName}`);
+async function downloadAndExtractLatestCli(repoOwner, repoName, cliName, baseDestinationDir, log) {
+  log("info", `Starting setup for ${cliName} from ${repoOwner}/${repoName}...`);
   const platform = os.platform();
   const arch = os.arch();
-  let osIdentifier;
-  switch (platform) {
-    case "win32":
-      osIdentifier = "win";
-      break;
-    case "darwin":
-      osIdentifier = "osx";
-      break;
-    case "linux":
-      osIdentifier = "linux";
-      break;
-    default:
-      console.error(`Unsupported platform: ${platform}`);
-      throw new Error(`Unsupported platform: ${platform}`);
+  const osIdentifier = platform === "win32" ? "win" : platform === "darwin" ? "osx" : "linux";
+  const archIdentifier = arch === "x64" ? "x64" : "arm64";
+  log("debug", `Detected system: ${osIdentifier}-${archIdentifier}`);
+  if (!["win", "osx", "linux"].includes(osIdentifier)) {
+    throw new Error(`Unsupported platform: ${platform}`);
   }
-  let archIdentifier;
-  switch (arch) {
-    case "x64":
-      archIdentifier = "x64";
-      break;
-    case "arm64":
-      archIdentifier = "arm64";
-      break;
-    default:
-      console.error(`Unsupported architecture: ${arch}`);
-      throw new Error(`Unsupported architecture: ${arch}`);
+  if (!["x64", "arm64"].includes(archIdentifier)) {
+    throw new Error(`Unsupported architecture: ${arch}`);
   }
-  console.log(`Detected system: ${osIdentifier}-${archIdentifier}`);
   const releaseUrl = `https://api.github.com/repos/${repoOwner}/${repoName}/releases/latest`;
   let releaseData;
   try {
-    console.log(`Fetching latest release info from: ${releaseUrl}`);
+    log("debug", `Fetching latest release info from: ${releaseUrl}`);
     releaseData = await fetchJson(releaseUrl);
-    console.log(`Successfully fetched release: ${releaseData.tag_name}`);
+    log("debug", `Successfully fetched release: ${releaseData.tag_name}`);
   } catch (error) {
-    console.error(`Error fetching latest release from ${releaseUrl}:`, error.message);
+    const errorMessage = error.message;
+    log("error", `Error fetching latest release from ${releaseUrl}:`, errorMessage);
+    if (errorMessage.toLowerCase().includes("403")) {
+      log("warn", "GitHub API rate limit may be exceeded. Checking for existing local versions as a fallback.");
+      try {
+        const dirents = await fsPromises.readdir(baseDestinationDir, { withFileTypes: true });
+        const versionDirs = dirents.filter((dirent) => dirent.isDirectory()).map((dirent) => dirent.name).sort((a, b) => b.localeCompare(a, void 0, { numeric: true, sensitivity: "base" }));
+        if (versionDirs.length > 0) {
+          const latestLocalVersion = versionDirs[0];
+          const fallbackPath = path.join(baseDestinationDir, latestLocalVersion);
+          log("info", `Found existing local version. Using latest available '${latestLocalVersion}' as a fallback.`);
+          return fallbackPath;
+        }
+        log("error", `API rate limit exceeded and no local versions of ${cliName} found in ${baseDestinationDir}.`);
+        throw new Error(`API rate limit exceeded and no local versions of ${cliName} are available.`);
+      } catch (fsError) {
+        if (fsError.code === "ENOENT") {
+          log("error", `API rate limit exceeded and the destination directory ${baseDestinationDir} does not exist.`);
+        } else {
+          log("error", "An unexpected error occurred while finding a local fallback:", fsError.message);
+        }
+        throw new Error(`API rate limit exceeded and no local versions of ${cliName} are available.`);
+      }
+    }
     throw new Error(`Failed to fetch latest release info for ${repoOwner}/${repoName}.`);
   }
-  if (!releaseData || !releaseData.assets || releaseData.assets.length === 0) {
-    console.error("No assets found in the latest release.");
+  if (!releaseData?.assets?.length) {
     throw new Error(`No assets found in the latest release for ${repoOwner}/${repoName}.`);
   }
   const versionString = releaseData.tag_name;
   const finalExtractionPath = path.resolve(baseDestinationDir, versionString);
   try {
-    const stats = await fsPromises.stat(finalExtractionPath);
-    if (stats.isDirectory()) {
-      console.log(`Latest CLI tool '${cliName}' version '${versionString}' already extracted in '${finalExtractionPath}'. Skipping download.`);
-      await cleanupOldVersions(baseDestinationDir, versionString, cliName);
-      return finalExtractionPath;
-    }
-  } catch (error) {
-    if (error.code === "ENOENT") {
-      console.log(`Latest CLI tool '${cliName}' version '${versionString}' not found in '${finalExtractionPath}'. Proceeding with download.`);
-    } else {
-      console.error(`Error checking existence of ${finalExtractionPath}:`, error.message);
-      throw error;
-    }
+    await fsPromises.access(finalExtractionPath);
+    log("info", `Latest version '${versionString}' already exists. Skipping download.`);
+    await cleanupOldVersions(baseDestinationDir, versionString, cliName, log);
+    return finalExtractionPath;
+  } catch {
+    log("info", `New version '${versionString}' not found locally. Proceeding with download.`);
   }
-  console.log(`New version '${versionString}' available or not found. Proceeding with download.`);
   const expectedAssetName = `${cliName}-${osIdentifier}-${archIdentifier}-${versionString}.zip`;
-  console.log(`Looking for asset: ${expectedAssetName}`);
   const targetAsset = releaseData.assets.find((asset) => asset.name.toLowerCase() === expectedAssetName.toLowerCase());
   if (!targetAsset) {
-    console.error(`Could not find asset "${expectedAssetName}". Available assets:`, releaseData.assets.map((a) => a.name));
     throw new Error(`Could not find asset "${expectedAssetName}" in release ${versionString}.`);
   }
-  console.log(`Found asset: ${targetAsset.name}`);
-  const downloadUrl = targetAsset.browser_download_url;
+  log("debug", `Found asset: ${targetAsset.name}`);
   const tempDownloadDir = await fsPromises.mkdtemp(path.join(os.tmpdir(), `${cliName}-download-`));
   const zipFilePath = path.join(tempDownloadDir, targetAsset.name);
   try {
-    console.log(`Downloading ${targetAsset.name} from ${downloadUrl} to ${zipFilePath}...`);
-    await downloadFile(downloadUrl, zipFilePath);
-    console.log(`Download complete: ${zipFilePath}`);
-  } catch (error) {
-    console.error(`Error downloading asset "${targetAsset.name}":`, error.message);
-    await fsPromises.rm(tempDownloadDir, { recursive: true, force: true }).catch((e) => console.error("Error cleaning temp dir:", e));
-    throw new Error(`Failed to download ${targetAsset.name}.`);
-  }
-  console.log(`Ensuring extraction directory exists: ${finalExtractionPath}`);
-  await fsPromises.mkdir(finalExtractionPath, { recursive: true });
-  try {
-    console.log(`Extracting ${zipFilePath} to ${finalExtractionPath}...`);
+    log("debug", `Downloading ${targetAsset.name} to ${zipFilePath}...`);
+    await downloadFile(targetAsset.browser_download_url, zipFilePath, log);
+    log("debug", `Extracting ${zipFilePath} to ${finalExtractionPath}...`);
+    await fsPromises.mkdir(finalExtractionPath, { recursive: true });
     await decompress(zipFilePath, finalExtractionPath);
-    console.log("Extraction complete.");
-    await cleanupOldVersions(baseDestinationDir, versionString, cliName);
+    log("debug", "Extraction complete.");
+    await cleanupOldVersions(baseDestinationDir, versionString, cliName, log);
   } catch (error) {
-    console.error(`Error extracting ZIP file "${zipFilePath}" to "${finalExtractionPath}":`, error.message);
-    throw new Error(`Failed to extract ${targetAsset.name} to ${finalExtractionPath}.`);
+    log("error", "An error occurred during download or extraction:", error.message);
+    throw new Error(`Failed to download and extract ${targetAsset.name}.`);
   } finally {
-    console.log(`Cleaning up temporary download directory: ${tempDownloadDir}`);
-    await fsPromises.rm(tempDownloadDir, { recursive: true, force: true }).catch((e) => console.error("Error cleaning temp dir:", e));
+    await fsPromises.rm(tempDownloadDir, { recursive: true, force: true });
   }
-  console.log(`${cliName} has been successfully downloaded and extracted to ${finalExtractionPath}`);
+  log("info", `${cliName} is ready at ${finalExtractionPath}`);
   return finalExtractionPath;
 }
-async function DownloadCli(targetDir) {
+async function DownloadCli(targetDir, logLevel = "info") {
+  const log = createLogger(logLevel);
   const repoOwner = "KindaBrazy";
   const repoName = "LynxHardwareCLI";
   const cliName = "LynxHardwareCLI";
   const cliBaseDir = path.join(targetDir, cliName);
   try {
-    const extractedPath = await downloadAndExtractLatestCli(repoOwner, repoName, cliName, cliBaseDir);
-    console.log(`CLI tool is ready at: ${extractedPath}`);
+    const extractedPath = await downloadAndExtractLatestCli(repoOwner, repoName, cliName, cliBaseDir, log);
+    log("debug", `CLI tool is ready at: ${extractedPath}`);
     const executableName = os.platform() === "win32" ? `${cliName}.exe` : cliName;
     const executablePath = path.join(extractedPath, executableName);
-    console.log(`Executable should be at: ${executablePath}`);
+    log("debug", `Executable should be at: ${executablePath}`);
     await fsPromises.access(executablePath, originalFs.constants.F_OK);
-    console.log(`Executable ${executablePath} exists.`);
+    log("debug", `Executable ${executablePath} verified.`);
     return executablePath;
   } catch (error) {
-    console.error("An error occurred during CLI download and setup:", error.message);
+    log("error", "An error occurred during CLI download and setup:", error.message);
     throw error;
   }
 }
@@ -9454,9 +9448,25 @@ class HardwareMonitor extends EventEmitter {
   buffer = "";
   initialMessageSkipped = false;
   creationTimestamp;
-  constructor() {
+  logLevel;
+  constructor(logLevel = "info") {
     super();
     this.creationTimestamp = Date.now();
+    this.logLevel = logLevel;
+  }
+  log(level, ...args) {
+    const levels = ["silent", "error", "warn", "info", "debug"];
+    const currentLevelIndex = levels.indexOf(this.logLevel);
+    const messageLevelIndex = levels.indexOf(level);
+    if (currentLevelIndex >= messageLevelIndex && level !== "silent") {
+      if (level === "error") {
+        console.error(...args);
+      } else if (level === "warn") {
+        console.warn(...args);
+      } else {
+        console.log(...args);
+      }
+    }
   }
   /**
    * Formats seconds into a human-readable string (e.g., "1d, 2h, 3m, 4s").
@@ -9505,11 +9515,16 @@ class HardwareMonitor extends EventEmitter {
    * @throws Error if .NET 8 is not found or download fails.
    */
   async checkRequirements(targetDir) {
-    const isDotNetInstalled = await checkDotNetRuntime8();
+    const logger = {
+      warn: (...args) => this.log("warn", ...args),
+      error: (...args) => this.log("error", ...args)
+    };
+    const isDotNetInstalled = await checkDotNetRuntime8(logger);
     if (!isDotNetInstalled) {
       throw new Error(".NET 8 runtime not found. Please install it from https://dotnet.microsoft.com/download/dotnet/8.0");
     }
-    this.executablePath = await DownloadCli(targetDir);
+    this.executablePath = await DownloadCli(targetDir, this.logLevel);
+    this.log("info", "✅ Lynx Hardware Monitor is ready to use.");
   }
   addUptimeDataIfNeeded(report, requestedComponents) {
     if (!requestedComponents || requestedComponents.length === 0 || requestedComponents.includes("uptime")) {
@@ -9582,7 +9597,6 @@ class HardwareMonitor extends EventEmitter {
           if (!cliComponentsRequested || cliComponentsRequested.length === 0) {
             finalReport = {
               Timestamp: parsedReport.Timestamp || (/* @__PURE__ */ new Date()).toISOString(),
-              // Use CLI timestamp or current
               CPU: parsedReport.CPU || [],
               GPU: parsedReport.GPU || [],
               Memory: parsedReport.Memory || [],
@@ -9776,7 +9790,9 @@ class HardwareMonitor extends EventEmitter {
   stopTimed() {
     if (this.activeProcess) {
       this.activeProcess.kill();
-      console.log("HardwareMonitor: Timed monitoring stop signal sent.");
+      this.log("debug", "HardwareMonitor: Timed monitoring stop signal sent.");
+    } else {
+      this.log("debug", "HardwareMonitor: No active timed monitoring process to stop.");
     }
   }
 }
@@ -9830,7 +9846,7 @@ let webContent = void 0;
 async function startMonitoring() {
   if (!webContent) return;
   try {
-    hwMonitor = new HardwareMonitor();
+    hwMonitor = new HardwareMonitor("info");
     const targetDir = join(app.getPath("downloads"), "LynxHub");
     await hwMonitor.checkRequirements(targetDir);
     hwMonitor.on("data", (data) => {
