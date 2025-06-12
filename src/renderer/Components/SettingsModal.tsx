@@ -20,19 +20,9 @@ import rendererIpc from '../../../../src/renderer/src/App/RendererIpc';
 import {lynxTopToast} from '../../../../src/renderer/src/App/Utils/UtilHooks';
 import {Clock_Icon} from '../../../../src/renderer/src/assets/icons/SvgIcons/SvgIcons';
 import {HMONITOR_STORAGE_ID} from '../../cross/CrossConst';
-import {MonitoringSettings} from '../../cross/CrossTypes';
+import {MonitoringSettings, SystemMetrics} from '../../cross/CrossTypes';
 import {systemMonitorActions, SystemMonitorState, useSystemMonitorState} from '../reducer';
 import {Settings_Icon} from '../SvgIcons';
-
-// Define types
-export type SystemMetrics =
-  | 'cpuTemp'
-  | 'cpuUsage'
-  | 'gpuTemp'
-  | 'gpuUsage'
-  | 'memory'
-  | 'uptimeSystemSeconds'
-  | 'uptimeSeconds';
 
 interface MetricConfig {
   id: SystemMetrics;
@@ -57,6 +47,7 @@ const metrics: MetricConfig[] = [
     Icon: Thermometer,
   },
   {id: 'gpuUsage', label: 'GPU Usage', description: 'Track GPU utilization percentage', Icon: Layers},
+  {id: 'vram', label: 'GPU VRAM', description: 'Monitor GPU memory usage', Icon: Database},
   {id: 'memory', label: 'Memory Usage', description: 'Monitor RAM usage and availability', Icon: Database},
   {id: 'uptimeSystemSeconds', label: 'System Uptime', description: 'Track total system uptime', Icon: Clock},
   {id: 'uptimeSeconds', label: 'Application Uptime', description: 'Track application runtime', Icon: Timer},

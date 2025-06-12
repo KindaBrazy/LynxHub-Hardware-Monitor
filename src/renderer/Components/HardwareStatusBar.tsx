@@ -14,6 +14,10 @@ import UpTimeSection from './Sections/UpTimeSection';
 
 type Props = {ref: RefObject<HTMLDivElement | null>};
 
+const convertMBtoGB = (mb: number): number => {
+  return Number((mb / 1024).toFixed(2));
+};
+
 const HardwareStatusBar = ({ref}: Props) => {
   const enabled = useSystemMonitorState('enabled');
   const compactMode = useSystemMonitorState('compactMode');
@@ -24,7 +28,9 @@ const HardwareStatusBar = ({ref}: Props) => {
     gpuTemp: 0,
     gpuUsage: 0,
     memUsed: 0,
-    memTotal: 16,
+    memTotal: 0,
+    vramUsed: 0,
+    vramTotal: 0,
     uptimeSystemSeconds: 0,
     uptimeSeconds: 0,
   });
@@ -69,6 +75,15 @@ const HardwareStatusBar = ({ref}: Props) => {
           data.GPU[0].Sensors.find(sensor => sensor.Name === 'D3D 3D' && sensor.Type === 'Load')?.Value || 0,
         );
 
+        const vramTotal = convertMBtoGB(
+          data.GPU[0].Sensors.find(sensor => sensor.Name === 'GPU Memory Total' && sensor.Type === 'SmallData')
+            ?.Value || 0,
+        );
+        const vramUsed = convertMBtoGB(
+          data.GPU[0].Sensors.find(sensor => sensor.Name === 'GPU Memory Used' && sensor.Type === 'SmallData')?.Value ||
+            0,
+        );
+
         const memUsed = Math.round(
           data.Memory[0].Sensors.find(sensor => sensor.Name === 'Memory Used' && sensor.Type === 'Data')?.Value || 0,
         );
@@ -85,6 +100,8 @@ const HardwareStatusBar = ({ref}: Props) => {
           cpuUsage,
           gpuTemp,
           gpuUsage,
+          vramTotal,
+          vramUsed,
           memTotal,
           memUsed,
         };

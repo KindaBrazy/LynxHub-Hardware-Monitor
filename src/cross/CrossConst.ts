@@ -12,6 +12,7 @@ export const initialSystemMetrics: SystemMetrics[] = [
   'gpuTemp',
   'gpuUsage',
   'memory',
+  'vram',
   'uptimeSystemSeconds',
   'uptimeSeconds',
 ];

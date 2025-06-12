@@ -1,4 +1,4 @@
-import {Monitor, Thermometer, Zap} from 'lucide-react';
+import {Database, Monitor, Thermometer, Zap} from 'lucide-react';
 import {useMemo} from 'react';
 
 import {HardwareData} from '../../../cross/CrossTypes';
@@ -12,11 +12,16 @@ type Props = {data: HardwareData};
 export default function GpuSection({data}: Props) {
   const enabledMetrics = useSystemMonitorState('enabledMetrics');
 
-  const {hasTemp, hasUsage} = useMemo(() => {
+  const {hasTemp, hasVram, hasUsage} = useMemo(() => {
     const hasTemp = enabledMetrics.includes('gpuTemp');
+    const hasVram = enabledMetrics.includes('vram');
     const hasUsage = enabledMetrics.includes('gpuUsage');
-    return {hasTemp, hasUsage};
+    return {hasTemp, hasVram, hasUsage};
   }, [enabledMetrics]);
+
+  const vramPercentage = useMemo(() => {
+    return data.vramTotal > 0 ? (data.vramUsed / data.vramTotal) * 100 : 0;
+  }, [data]);
 
   return (
     <Section title="GPU" icon={Monitor}>
@@ -30,6 +35,17 @@ export default function GpuSection({data}: Props) {
           progress={{value: data.gpuTemp, max: 100, isTemp: true}}
         />
       )}
+
+      {hasVram && (
+        <MetricItem
+          label="VRAM"
+          icon={Database}
+          progress={{value: vramPercentage}}
+          colorClass={getUsageColor(vramPercentage)}
+          value={`${data.vramUsed.toFixed(1)}/${Math.round(data.vramTotal)}GB`}
+        />
+      )}
+
       {hasUsage && (
         <MetricItem
           unit="%"

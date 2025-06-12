@@ -3,6 +3,8 @@ export type HardwareData = {
   cpuUsage: number;
   gpuTemp: number;
   gpuUsage: number;
+  vramTotal: number;
+  vramUsed: number;
   memUsed: number;
   memTotal: number;
   uptimeSystemSeconds: number;
@@ -22,6 +24,7 @@ export type SystemMetrics =
   | 'cpuUsage'
   | 'gpuTemp'
   | 'gpuUsage'
+  | 'vram'
   | 'memory'
   | 'uptimeSystemSeconds'
   | 'uptimeSeconds';
