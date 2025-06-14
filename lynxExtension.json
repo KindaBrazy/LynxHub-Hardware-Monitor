@@ -14,6 +14,19 @@
   ],
   "changeLog": [
     {
+      "title": "Version 0.10.1",
+      "items": [
+        {
+          "label": "🚀 New Features",
+          "subitems": [
+            {
+              "label": "Add VRAM monitoring."
+            }
+          ]
+        }
+      ]
+    },
+    {
       "title": "Version 0.10.0",
       "items": [
         {
