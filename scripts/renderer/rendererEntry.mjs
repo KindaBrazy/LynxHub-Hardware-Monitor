@@ -13,7 +13,7 @@ const currentImports = {};
         }
 
         const curUrl = metaUrl.substring(0, metaUrl.lastIndexOf('rendererEntry.mjs'));
-        const base = './';
+        const base = '/';
         '';
 
         cssFilePaths.forEach(cssPath => {
