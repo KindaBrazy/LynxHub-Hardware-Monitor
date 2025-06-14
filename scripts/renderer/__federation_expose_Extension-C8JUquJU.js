@@ -379,6 +379,7 @@ const initialSystemMetrics = [
   "gpuTemp",
   "gpuUsage",
   "memory",
+  "vram",
   "uptimeSystemSeconds",
   "uptimeSeconds"
 ];
@@ -1567,11 +1568,15 @@ function CpuSection({ data }) {
 const {useMemo: useMemo$4} = await importShared('react');
 function GpuSection({ data }) {
   const enabledMetrics = useSystemMonitorState("enabledMetrics");
-  const { hasTemp, hasUsage } = useMemo$4(() => {
+  const { hasTemp, hasVram, hasUsage } = useMemo$4(() => {
     const hasTemp2 = enabledMetrics.includes("gpuTemp");
+    const hasVram2 = enabledMetrics.includes("vram");
     const hasUsage2 = enabledMetrics.includes("gpuUsage");
-    return { hasTemp: hasTemp2, hasUsage: hasUsage2 };
+    return { hasTemp: hasTemp2, hasVram: hasVram2, hasUsage: hasUsage2 };
   }, [enabledMetrics]);
+  const vramPercentage = useMemo$4(() => {
+    return data.vramTotal > 0 ? data.vramUsed / data.vramTotal * 100 : 0;
+  }, [data]);
   return /* @__PURE__ */ jsxRuntimeExports.jsxs(Section, { title: "GPU", icon: Monitor, children: [
     hasTemp && /* @__PURE__ */ jsxRuntimeExports.jsx(
       MetricItem,
@@ -1582,6 +1587,16 @@ function GpuSection({ data }) {
         value: data.gpuTemp,
         colorClass: getTemperatureColor(data.gpuTemp),
         progress: { value: data.gpuTemp, max: 100, isTemp: true }
+      }
+    ),
+    hasVram && /* @__PURE__ */ jsxRuntimeExports.jsx(
+      MetricItem,
+      {
+        label: "VRAM",
+        icon: Database,
+        progress: { value: vramPercentage },
+        colorClass: getUsageColor(vramPercentage),
+        value: `${data.vramUsed.toFixed(1)}/${Math.round(data.vramTotal)}GB`
       }
     ),
     hasUsage && /* @__PURE__ */ jsxRuntimeExports.jsx(
@@ -1639,6 +1654,9 @@ function UpTimeSection({ data }) {
 
 const {Divider: Divider$1} = await importShared('antd');
 const {useEffect: useEffect$3,useMemo: useMemo$1,useState: useState$2} = await importShared('react');
+const convertMBtoGB = (mb) => {
+  return Number((mb / 1024).toFixed(2));
+};
 const HardwareStatusBar = ({ ref }) => {
   const enabled = useSystemMonitorState("enabled");
   const compactMode = useSystemMonitorState("compactMode");
@@ -1649,7 +1667,9 @@ const HardwareStatusBar = ({ ref }) => {
     gpuTemp: 0,
     gpuUsage: 0,
     memUsed: 0,
-    memTotal: 16,
+    memTotal: 0,
+    vramUsed: 0,
+    vramTotal: 0,
     uptimeSystemSeconds: 0,
     uptimeSeconds: 0
   });
@@ -1684,6 +1704,12 @@ const HardwareStatusBar = ({ ref }) => {
         const gpuUsage = Math.round(
           data.GPU[0].Sensors.find((sensor) => sensor.Name === "D3D 3D" && sensor.Type === "Load")?.Value || 0
         );
+        const vramTotal = convertMBtoGB(
+          data.GPU[0].Sensors.find((sensor) => sensor.Name === "GPU Memory Total" && sensor.Type === "SmallData")?.Value || 0
+        );
+        const vramUsed = convertMBtoGB(
+          data.GPU[0].Sensors.find((sensor) => sensor.Name === "GPU Memory Used" && sensor.Type === "SmallData")?.Value || 0
+        );
         const memUsed = Math.round(
           data.Memory[0].Sensors.find((sensor) => sensor.Name === "Memory Used" && sensor.Type === "Data")?.Value || 0
         );
@@ -1698,6 +1724,8 @@ const HardwareStatusBar = ({ ref }) => {
           cpuUsage,
           gpuTemp,
           gpuUsage,
+          vramTotal,
+          vramUsed,
           memTotal,
           memUsed
         };
@@ -5173,6 +5201,7 @@ const metrics = [
     Icon: Thermometer
   },
   { id: "gpuUsage", label: "GPU Usage", description: "Track GPU utilization percentage", Icon: Layers },
+  { id: "vram", label: "GPU VRAM", description: "Monitor GPU memory usage", Icon: Database },
   { id: "memory", label: "Memory Usage", description: "Monitor RAM usage and availability", Icon: Database },
   { id: "uptimeSystemSeconds", label: "System Uptime", description: "Track total system uptime", Icon: Clock },
   { id: "uptimeSeconds", label: "Application Uptime", description: "Track application runtime", Icon: Timer }

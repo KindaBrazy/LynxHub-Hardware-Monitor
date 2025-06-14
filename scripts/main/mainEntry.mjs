@@ -9807,6 +9807,7 @@ const initialSystemMetrics = [
   "gpuTemp",
   "gpuUsage",
   "memory",
+  "vram",
   "uptimeSystemSeconds",
   "uptimeSeconds"
 ];

@@ -3,7 +3,7 @@ const currentImports = {};
       let moduleMap = {
 "Extension":()=>{
       dynamicLoadingCss(["style-C2mev8J7.css"], false, 'Extension');
-      return __federation_import('./__federation_expose_Extension-C3qW6QxX.js').then(module =>Object.keys(module).every(item => exportSet.has(item)) ? () => module.default : () => module)},};
+      return __federation_import('./__federation_expose_Extension-C8JUquJU.js').then(module =>Object.keys(module).every(item => exportSet.has(item)) ? () => module.default : () => module)},};
       const seen = {};
       const dynamicLoadingCss = (cssFilePaths, dontAppendStylesToHead, exposeItemName) => {
         const metaUrl = import.meta.url;
@@ -13,7 +13,7 @@ const currentImports = {};
         }
 
         const curUrl = metaUrl.substring(0, metaUrl.lastIndexOf('rendererEntry.mjs'));
-        const base = '/';
+        const base = './';
         '';
 
         cssFilePaths.forEach(cssPath => {
