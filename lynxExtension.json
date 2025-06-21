@@ -1,12 +1,12 @@
 {
   "$schema": "./lynxExtension.schema.json",
   "id": "lynxhub_hardware_monitor",
-  "title": "LynxHub Hardware Monitor",
+  "title": "Hardware Monitor",
   "description": "A configurable LynxHub extension for real-time monitoring of CPU, GPU, and Memory usage, displayed conveniently in the status bar.",
   "publishDate": "2025-06-07",
-  "requireAppBuild": 19,
-  "version": "0.9.0",
-  "updateDate": "2025-06-07 14:05",
+  "requireAppBuild": 21,
+  "version": "0.10.0",
+  "updateDate": "2025-06-08 10:15",
   "repoUrl": "https://github.com/KindaBrazy/LynxHub-Hardware-Monitor",
   "avatarUrl": "https://raw.githubusercontent.com/KindaBrazy/LynxHub-Hardware-Monitor/refs/heads/source_ea/resources/icon.png",
   "platforms": [
@@ -14,7 +14,50 @@
   ],
   "changeLog": [
     {
-      "title": "Version 1.0.0 - Initial Release",
+      "title": "Version 0.10.1",
+      "items": [
+        {
+          "label": "🚀 New Features",
+          "subitems": [
+            {
+              "label": "Add VRAM monitoring."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Version 0.10.0",
+      "items": [
+        {
+          "label": "🚀 New Features",
+          "subitems": [
+            {
+              "label": "Added a Save Settings button to the Tools page modal, with changes now reverting on modal close."
+            }
+          ]
+        },
+        {
+          "label": "🪲 Bug Fixes",
+          "subitems": [
+            {
+              "label": "Fixed Tools page modal placement to ensure it's centered."
+            },
+            {
+              "label": "Resolved GitHub API rate limit issues by utilizing locally downloaded versions when available."
+            },
+            {
+              "label": "Addressed UI performance issues and problems with modal closing."
+            },
+            {
+              "label": "Removed the status bar when hardware monitoring is disabled."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Version 0.9.0 - Initial Release",
       "items": [
         {
           "label": "🚀 Features",
