@@ -4,7 +4,7 @@ import {ExtensionRendererApi} from '../../../src/renderer/src/App/Extensions/Ext
 import HardwareStatusBar from './Components/HardwareStatusBar';
 import ModalManager from './Components/ModalManager';
 import ToolsPage from './Components/ToolsPage';
-import UpdateConfig from './Components/UpdateConfig';
+import AddCustomHook from './Components/UpdateConfig';
 import extensionReducer from './reducer';
 
 /* TODO:
@@ -12,10 +12,11 @@ import extensionReducer from './reducer';
 */
 
 export function InitialExtensions(lynxAPI: ExtensionRendererApi) {
+  // @ts-ignore-next-line
   lynxAPI.statusBar.replaceContainer(HardwareStatusBar);
   lynxAPI.addReducer([{name: 'extension', reducer: extensionReducer}]);
 
-  lynxAPI.addCustomHook(UpdateConfig);
+  AddCustomHook(lynxAPI);
 
   lynxAPI.customizePages.tools.addComponent(ToolsPage);
   lynxAPI.addModal(ModalManager);
