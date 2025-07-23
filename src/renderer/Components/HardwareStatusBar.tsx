@@ -1,7 +1,7 @@
 import {HardwareReport} from '@lynxhub/hwmonitor';
 import {Divider} from 'antd';
 import {ChevronLeft, ChevronRight} from 'lucide-react';
-import {RefObject, useEffect, useMemo, useState} from 'react';
+import {useEffect, useMemo, useState} from 'react';
 
 import ShinyText from '../../../../src/renderer/src/App/Components/Reusable/ShinyText';
 import {HMONITOR_IPC_DATA_ID} from '../../cross/CrossConst';
@@ -12,7 +12,7 @@ import GpuSection from './Sections/GpuSection';
 import MemorySection from './Sections/MemorySection';
 import UpTimeSection from './Sections/UpTimeSection';
 
-type Props = {ref: RefObject<HTMLDivElement | null>};
+type Props = {ref: (node: HTMLDivElement) => void};
 
 const convertMBtoGB = (mb: number): number => {
   return Number((mb / 1024).toFixed(2));
@@ -35,21 +35,29 @@ const HardwareStatusBar = ({ref}: Props) => {
     uptimeSeconds: 0,
   });
 
+  const [containerRef, setContainerRef] = useState<HTMLDivElement | null>(null);
+
+  const initRef = (node: HTMLDivElement) => {
+    if (node) {
+      ref(node);
+      setContainerRef(node);
+    }
+  };
+
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(false);
   const [dataConnected, setDataConnected] = useState(false);
 
   const updateScrollArrows = () => {
-    if (!ref.current) return;
-    const container = ref.current;
-    const {scrollLeft, scrollWidth, clientWidth} = container;
+    if (!containerRef) return;
+    const {scrollLeft, scrollWidth, clientWidth} = containerRef;
     setCanScrollLeft(scrollLeft > 0);
     setCanScrollRight(scrollLeft < scrollWidth - clientWidth - 1);
   };
 
   const scroll = (direction: 'left' | 'right') => {
-    if (ref.current) {
-      ref.current.scrollBy({
+    if (containerRef) {
+      containerRef.scrollBy({
         left: direction === 'left' ? -250 : 250,
         behavior: 'smooth',
       });
@@ -139,26 +147,24 @@ const HardwareStatusBar = ({ref}: Props) => {
   }, [enabledMetrics]);
 
   useEffect(() => {
-    const scrollContainer = ref.current;
-
-    if (scrollContainer) {
+    if (containerRef) {
       const handleWheel = event => {
         if (!event.ctrlKey) {
           event.preventDefault();
           // noinspection JSSuspiciousNameCombination
-          scrollContainer.scrollLeft += event.deltaY;
+          containerRef.scrollLeft += event.deltaY;
         }
       };
 
-      scrollContainer.addEventListener('wheel', handleWheel);
+      containerRef.addEventListener('wheel', handleWheel);
 
       return () => {
-        scrollContainer.removeEventListener('wheel', handleWheel);
+        containerRef.removeEventListener('wheel', handleWheel);
       };
     }
 
     return () => {};
-  }, [ref]);
+  }, [containerRef]);
 
   if (!enabled) return null;
 
@@ -194,7 +200,7 @@ const HardwareStatusBar = ({ref}: Props) => {
       )}
 
       <div
-        ref={ref}
+        ref={initRef}
         onScroll={updateScrollArrows}
         style={{scrollbarWidth: 'none', msOverflowStyle: 'none'}}
         className={`h-full flex items-center ${compactMode ? 'px-2' : 'px-3'} gap-x-4 overflow-x-auto scrollbar-hide`}>
