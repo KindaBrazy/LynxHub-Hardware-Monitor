@@ -100,7 +100,7 @@ export default function SettingsModal({show, isOpen, tabID}: Props) {
     setIsSaving(true);
     setTimeout(() => {
       setIsSaving(false);
-      lynxTopToast.success('Settings saved successfully!');
+      lynxTopToast(dispatch).success('Settings saved successfully!');
     }, 700);
     dispatch(systemMonitorActions.saveSettings());
   };
