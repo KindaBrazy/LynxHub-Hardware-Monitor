@@ -56,27 +56,33 @@ function stopMonitoring() {
   hwMonitor = undefined;
 }
 
+let started: boolean = false;
+
 export function onAppStart(utils: MainExtensionUtils) {
-  utils.getStorageManager().then(manager => {
-    storeManager = manager;
-    currentConfig = storeManager.getCustomData(HMONITOR_STORAGE_ID);
+  if (!started) {
+    utils.getStorageManager().then(manager => {
+      storeManager = manager;
+      currentConfig = storeManager.getCustomData(HMONITOR_STORAGE_ID);
 
-    if (!currentConfig) {
-      currentConfig = {
-        enabled: true,
-        compactMode: false,
-        showSectionLabel: true,
-        refreshInterval: 1,
-        enabledMetrics: initialSystemMetrics,
-      };
-      storeManager.setCustomData(HMONITOR_STORAGE_ID, currentConfig);
-    }
+      if (!currentConfig) {
+        currentConfig = {
+          enabled: true,
+          compactMode: false,
+          showSectionLabel: true,
+          refreshInterval: 1,
+          enabledMetrics: initialSystemMetrics,
+        };
+        storeManager.setCustomData(HMONITOR_STORAGE_ID, currentConfig);
+      }
 
-    utils.getAppManager().then(appManager => {
-      webContent = appManager.getWebContent();
-      if (currentConfig?.enabled) startMonitoring();
+      utils.getAppManager().then(appManager => {
+        webContent = appManager.getWebContent();
+        if (currentConfig?.enabled) startMonitoring();
+      });
     });
-  });
+
+    started = true;
+  }
 }
 
 function updateConfig(config: MonitoringSettings) {
