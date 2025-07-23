@@ -31,14 +31,14 @@ async function startMonitoring() {
     await hwMonitor.checkRequirements(targetDir);
 
     hwMonitor.on('data', (data: HardwareReport) => {
-      webContent?.send(HMONITOR_IPC_DATA_ID, data);
+      if (webContent) webContent.send(HMONITOR_IPC_DATA_ID, data);
     });
 
     hwMonitor.on('error', (error: MonitorError) => {
       console.error('Timed Monitoring Error:', error.message);
       if (error.stderrData) console.error('Stderr:', error.stderrData);
       if (error.rawError) console.error('Raw Error:', error.rawError);
-      webContent?.send(HMONITOR_IPC_ERROR_MONITORING, error);
+      if (webContent) webContent.send(HMONITOR_IPC_ERROR_MONITORING, error);
     });
 
     hwMonitor.startTimed(
@@ -47,7 +47,7 @@ async function startMonitoring() {
     );
   } catch (e) {
     console.error(e);
-    webContent?.send(HMONITOR_IPC_ERROR_MONITORING, e);
+    if (webContent) webContent.send(HMONITOR_IPC_ERROR_MONITORING, e);
   }
 }
 
