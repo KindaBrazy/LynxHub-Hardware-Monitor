@@ -1,7 +1,7 @@
 import {HardwareReport} from '@lynxhub/hwmonitor';
 import {Divider} from 'antd';
 import {ChevronLeft, ChevronRight} from 'lucide-react';
-import {useEffect, useMemo, useState} from 'react';
+import {ReactNode, useEffect, useMemo, useState} from 'react';
 
 import ShinyText from '../../../../src/renderer/src/App/Components/Reusable/ShinyText';
 import {HMONITOR_IPC_DATA_ID} from '../../cross/CrossConst';
@@ -47,6 +47,9 @@ const HardwareStatusBar = ({ref}: Props) => {
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(false);
   const [dataConnected, setDataConnected] = useState(false);
+  const [errorElement, setErrorElement] = useState<ReactNode>(
+    <ShinyText speed={2} className="font-semibold" text="Waiting for hardware information..." />,
+  );
 
   const updateScrollArrows = () => {
     if (!containerRef) return;
@@ -136,6 +139,15 @@ const HardwareStatusBar = ({ref}: Props) => {
   }, [hardwareData]);
 
   const {hasCpuSection, hasMemory, hasUptime, hasGpuSection} = useMemo(() => {
+    if (!enabledMetrics) {
+      setErrorElement(
+        <span className="">
+          {"Couldn't load metrics settings. Please try toggling metrics off and on again, or simply restart LynxHub."}
+        </span>,
+      );
+      return {hasCpuSection: false, hasGpuSection: false, hasMemory: false, hasUptime: false};
+    }
+
     const hasCpuSection = enabledMetrics.includes('cpuTemp') || enabledMetrics.includes('cpuUsage');
     const hasGpuSection = enabledMetrics.includes('gpuTemp') || enabledMetrics.includes('gpuUsage');
 
@@ -218,9 +230,7 @@ const HardwareStatusBar = ({ref}: Props) => {
             {hasUptime && <UpTimeSection data={hardwareData} />}
           </>
         ) : (
-          <div className="w-full text-center">
-            <ShinyText speed={2} className="font-semibold" text="Waiting for hardware information..." />
-          </div>
+          <div className="w-full text-center">{errorElement}</div>
         )}
       </div>
     </div>
