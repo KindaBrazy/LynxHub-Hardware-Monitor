@@ -64,7 +64,6 @@ function stopMonitoring() {
 }
 
 export async function onAppReady(utils: MainExtensionUtils) {
-  console.log('App Ready');
   utils.getStorageManager().then(manager => {
     storeManager = manager;
     currentConfig = storeManager.getCustomData(HMONITOR_STORAGE_ID);
@@ -104,7 +103,6 @@ async function getHardwareNames(): Promise<AvailableHardware> {
 let started: boolean = false;
 
 export function onAppReadyToShow(utils: MainExtensionUtils) {
-  console.log('App Ready To Show');
   if (!started) {
     utils.getAppManager().then(appManager => {
       webContent = appManager.getWebContent();

@@ -40,7 +40,7 @@ export type MonitoringSettings = {
 
 export type SystemMetrics = 'temp' | 'usage' | 'vram' | 'memory' | 'uptimeSystemSeconds' | 'uptimeSeconds';
 
-export type MetricItem = {name: string; enabled: string[]}[];
+export type MetricItem = {name: string; active: boolean; enabled: string[]}[];
 
 export type NewSystemMetrics = {
   cpu: MetricItem;

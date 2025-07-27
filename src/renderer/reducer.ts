@@ -55,13 +55,17 @@ const systemMonitorSlice = createSlice({
       state.availableHardware = action.payload;
 
       if (isEmpty(state.enabledMetrics.gpu)) {
-        state.enabledMetrics.gpu = action.payload.gpu.map(name => ({name, enabled: []}));
+        state.enabledMetrics.gpu = action.payload.gpu.map(name => ({
+          name,
+          active: true,
+          enabled: ['temp', 'usage', 'vram'],
+        }));
       }
       if (isEmpty(state.enabledMetrics.cpu)) {
-        state.enabledMetrics.cpu = action.payload.cpu.map(name => ({name, enabled: []}));
+        state.enabledMetrics.cpu = action.payload.cpu.map(name => ({name, active: true, enabled: ['temp', 'usage']}));
       }
       if (isEmpty(state.enabledMetrics.memory)) {
-        state.enabledMetrics.memory = action.payload.memory.map(name => ({name, enabled: []}));
+        state.enabledMetrics.memory = action.payload.memory.map(name => ({name, active: true, enabled: ['memory']}));
       }
     },
     updateMetrics: (state: SystemMonitorState, action: PayloadAction<Partial<Omit<NewSystemMetrics, 'uptime'>>>) => {

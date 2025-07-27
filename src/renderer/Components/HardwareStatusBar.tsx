@@ -150,12 +150,14 @@ const HardwareStatusBar = ({ref}: Props) => {
     }
 
     const hasGpuSection = enabledMetrics.gpu.some(
-      item => item.enabled.includes('temp') || item.enabled.includes('usage') || item.enabled.includes('vram'),
+      item =>
+        item.active &&
+        (item.enabled.includes('temp') || item.enabled.includes('usage') || item.enabled.includes('vram')),
     );
-    const hasCpuSection = enabledMetrics.gpu.some(
-      item => item.enabled.includes('temp') || item.enabled.includes('usage'),
+    const hasCpuSection = enabledMetrics.cpu.some(
+      item => item.active && (item.enabled.includes('temp') || item.enabled.includes('usage')),
     );
-    const hasMemory = enabledMetrics.memory.some(item => item.enabled.includes('memory'));
+    const hasMemory = enabledMetrics.memory.some(item => item.active && item.enabled.includes('memory'));
 
     const hasUptime = enabledMetrics.uptime.system || enabledMetrics.uptime.app;
 

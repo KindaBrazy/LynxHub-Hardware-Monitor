@@ -1,5 +1,8 @@
 import {
   Button,
+  Card,
+  CardBody,
+  CardHeader,
   Checkbox,
   Divider,
   Modal,
@@ -20,7 +23,7 @@ import rendererIpc from '../../../../src/renderer/src/App/RendererIpc';
 import {lynxTopToast} from '../../../../src/renderer/src/App/Utils/UtilHooks';
 import {Clock_Icon} from '../../../../src/renderer/src/assets/icons/SvgIcons/SvgIcons';
 import {HMONITOR_STORAGE_ID} from '../../cross/CrossConst';
-import {MetricItem, MetricType, MonitoringSettings, SystemMetrics} from '../../cross/CrossTypes';
+import {AvailableHardware, MetricItem, MetricType, MonitoringSettings, SystemMetrics} from '../../cross/CrossTypes';
 import {systemMonitorActions, SystemMonitorState, useSystemMonitorState} from '../reducer';
 import {Settings_Icon} from '../SvgIcons';
 import SettingsModal_Card from './Sections/SettingsModal_Card';
@@ -163,6 +166,34 @@ export default function SettingsModal({show, isOpen, tabID}: Props) {
     [enabledMetrics],
   );
 
+  const toggleHardware = useCallback(
+    (name: string, type: keyof AvailableHardware, value?: boolean) => {
+      const isActive = enabledMetrics[type].find(metric => metric.name === name)?.active;
+
+      if (isActive || value !== true) {
+        const result = {
+          ...enabledMetrics,
+          [type]: enabledMetrics[type].map(metric => (metric.name === name ? {...metric, active: false} : metric)),
+        };
+        dispatch(systemMonitorActions.updateMetrics(result));
+      } else {
+        const result = {
+          ...enabledMetrics,
+          [type]: enabledMetrics[type].map(metric => (metric.name === name ? {...metric, active: true} : metric)),
+        };
+        dispatch(systemMonitorActions.updateMetrics(result));
+      }
+    },
+    [enabledMetrics],
+  );
+
+  const isActive = useCallback(
+    (name: string, type: keyof AvailableHardware) => {
+      return enabledMetrics[type].find(metric => metric.name === name)?.active || false;
+    },
+    [enabledMetrics],
+  );
+
   return (
     <Modal
       classNames={{
@@ -296,15 +327,15 @@ export default function SettingsModal({show, isOpen, tabID}: Props) {
 
                   {availableHardware.gpu.map(item => (
                     <SettingsModal_Card
-                      onValueChange={value => {
-                        updateState('showSectionLabel', value);
-                      }}
                       onPress={() => {
-                        updateState('showSectionLabel', !showSectionLabel);
+                        toggleHardware(item, 'gpu');
+                      }}
+                      onValueChange={value => {
+                        toggleHardware(item, 'gpu', value);
                       }}
                       title={item}
-                      isSelected={showSectionLabel}
-                      key={`hardware_${item}_item`}>
+                      key={`hardware_${item}_item`}
+                      isSelected={isActive(item, 'gpu')}>
                       {getMetricItem('temp', 'gpu', item)}
                       {getMetricItem('usage', 'gpu', item)}
                       {getMetricItem('vram', 'gpu', item)}
@@ -313,15 +344,15 @@ export default function SettingsModal({show, isOpen, tabID}: Props) {
 
                   {availableHardware.cpu.map(item => (
                     <SettingsModal_Card
-                      onValueChange={value => {
-                        updateState('showSectionLabel', value);
-                      }}
                       onPress={() => {
-                        updateState('showSectionLabel', !showSectionLabel);
+                        toggleHardware(item, 'cpu');
+                      }}
+                      onValueChange={value => {
+                        toggleHardware(item, 'cpu', value);
                       }}
                       title={item}
-                      isSelected={showSectionLabel}
-                      key={`hardware_${item}_item`}>
+                      key={`hardware_${item}_item`}
+                      isSelected={isActive(item, 'cpu')}>
                       {getMetricItem('temp', 'cpu', item)}
                       {getMetricItem('usage', 'cpu', item)}
                     </SettingsModal_Card>
@@ -329,32 +360,30 @@ export default function SettingsModal({show, isOpen, tabID}: Props) {
 
                   {availableHardware.memory.map(item => (
                     <SettingsModal_Card
-                      onValueChange={value => {
-                        updateState('showSectionLabel', value);
-                      }}
                       onPress={() => {
-                        updateState('showSectionLabel', !showSectionLabel);
+                        toggleHardware(item, 'memory');
+                      }}
+                      onValueChange={value => {
+                        toggleHardware(item, 'memory', value);
                       }}
                       title={item}
-                      isSelected={showSectionLabel}
-                      key={`hardware_${item}_item`}>
+                      key={`hardware_${item}_item`}
+                      isSelected={isActive(item, 'memory')}>
                       {getMetricItem('memory', 'memory', item)}
                     </SettingsModal_Card>
                   ))}
 
-                  <SettingsModal_Card
-                    onValueChange={value => {
-                      updateState('showSectionLabel', value);
-                    }}
-                    onPress={() => {
-                      updateState('showSectionLabel', !showSectionLabel);
-                    }}
-                    title={'Uptime'}
-                    key={`hardware_uptime_item`}
-                    isSelected={showSectionLabel}>
-                    {getMetricItem('uptimeSystemSeconds', 'uptime', 'uptime')}
-                    {getMetricItem('uptimeSeconds', 'uptime', 'uptime')}
-                  </SettingsModal_Card>
+                  <Card
+                    className="border-1 border-foreground-100 pt-2 px-2
+                    hover:border-foreground-200 transition-all duration-200 mt-4"
+                    as="div"
+                    fullWidth>
+                    <CardHeader className="font-medium">Uptime</CardHeader>
+                    <CardBody>
+                      {getMetricItem('uptimeSystemSeconds', 'uptime', 'uptime')}
+                      {getMetricItem('uptimeSeconds', 'uptime', 'uptime')}
+                    </CardBody>
+                  </Card>
                 </>
               )}
             </ModalBody>
