@@ -56,7 +56,7 @@ export default function GpuSection({data, metrics}: Props) {
           icon={Database}
           progress={{value: vramPercentage}}
           colorClass={getUsageColor(vramPercentage)}
-          value={`${usedVram.toFixed(1)}/${Math.round(usedVram)}GB`}
+          value={`${usedVram.toFixed(1)}/${Math.round(totalVram)}GB`}
         />
       )}
 
