@@ -1,10 +1,11 @@
+import {Link} from '@heroui/react';
 import {HardwareReport} from '@lynxhub/hwmonitor';
 import {Divider} from 'antd';
 import {ChevronLeft, ChevronRight} from 'lucide-react';
 import {ReactNode, useEffect, useMemo, useState} from 'react';
 
 import ShinyText from '../../../../src/renderer/src/App/Components/Reusable/ShinyText';
-import {HMONITOR_IPC_DATA_ID} from '../../cross/CrossConst';
+import {HMONITOR_IPC_DATA_ID, HMONITOR_IPC_ERROR_MONITORING} from '../../cross/CrossConst';
 import {HardwareData} from '../../cross/CrossTypes';
 import {useSystemMonitorState} from '../reducer';
 import CpuSection from './Sections/CpuSection';
@@ -128,9 +129,24 @@ const HardwareStatusBar = ({ref}: Props) => {
     };
 
     window.electron.ipcRenderer.on(HMONITOR_IPC_DATA_ID, handleHardwareUpdate);
+    window.electron.ipcRenderer.on(HMONITOR_IPC_ERROR_MONITORING, (_, error: any) => {
+      if (error.message.includes('dotnet')) {
+        setErrorElement(
+          <div>
+            <span>.NET 8 runtime not found. Please install it </span>
+            <Link
+              className="cursor-pointer"
+              onPress={() => window.open('https://dotnet.microsoft.com/download/dotnet/8.0')}>
+              Here
+            </Link>
+          </div>,
+        );
+      }
+    });
 
     return () => {
       window.electron.ipcRenderer.removeAllListeners(HMONITOR_IPC_DATA_ID);
+      window.electron.ipcRenderer.removeAllListeners(HMONITOR_IPC_ERROR_MONITORING);
     };
   }, []);
 
