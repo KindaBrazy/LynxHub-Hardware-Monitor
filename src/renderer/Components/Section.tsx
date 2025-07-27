@@ -1,3 +1,5 @@
+import {Spinner} from '@heroui/react';
+import {isEmpty} from 'lodash';
 import React from 'react';
 
 import {useSystemMonitorState} from '../reducer';
@@ -13,6 +15,8 @@ export default function Section({
 }) {
   const compactMode = useSystemMonitorState('compactMode');
   const showSectionLabel = useSystemMonitorState('showSectionLabel');
+
+  // Show loading instead of N/A for title
   return (
     <div className={`flex items-center ${compactMode ? 'gap-x-2' : 'gap-x-3'}`}>
       {showSectionLabel && (
@@ -22,7 +26,11 @@ export default function Section({
             ` rounded-md bg-slate-700/50 border border-slate-600/30`
           }>
           <Icon className={`${compactMode ? 'size-3' : 'size-3.5'} text-slate-400`} />
-          <span className="text-xs font-semibold text-slate-300 uppercase tracking-wide text-nowrap">{title}</span>
+          {isEmpty(title) ? (
+            <Spinner size="sm" variant={'dots'} />
+          ) : (
+            <span className="text-xs font-semibold text-slate-300 uppercase tracking-wide text-nowrap">{title}</span>
+          )}
         </div>
       )}
       <div className="flex items-center gap-x-2">{children}</div>

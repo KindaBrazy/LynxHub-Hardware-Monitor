@@ -15,7 +15,7 @@ export default function MemorySection({data}: Props) {
     () => ({
       total: data?.total || 0,
       used: data?.used || 0,
-      name: data?.name || 'N/A',
+      name: data?.name || '',
     }),
     [data],
   );

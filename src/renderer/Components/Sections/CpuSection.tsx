@@ -22,7 +22,7 @@ export default function CpuSection({data, metrics}: Props) {
   }, [metrics]);
 
   const {temp, usage, name} = useMemo(
-    () => ({temp: data?.temp || 0, usage: data?.usage || 0, name: data?.name || 'N/A'}),
+    () => ({temp: data?.temp || 0, usage: data?.usage || 0, name: data?.name || ''}),
     [data],
   );
 

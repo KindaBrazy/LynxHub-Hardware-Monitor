@@ -26,7 +26,7 @@ export default function GpuSection({data, metrics}: Props) {
     () => ({
       temp: data?.temp || 0,
       usage: data?.usage || 0,
-      name: data?.name || 'N/A',
+      name: data?.name || '',
       totalVram: data?.totalVram || 0,
       usedVram: data?.usedVram || 0,
     }),
