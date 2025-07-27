@@ -145,7 +145,9 @@ const HardwareStatusBar = ({ref}: Props) => {
 
   const {hasCpuSection, hasMemory, hasUptime, hasGpuSection} = useMemo(() => {
     if (!enabledMetrics) {
-      setErrorElement(<span className="">{"Couldn't load metrics settings. Please restart LynxHub."}</span>);
+      setErrorElement(
+        <span className="text-warning">{"Couldn't load metrics settings. Please restart LynxHub."}</span>,
+      );
       return {hasCpuSection: false, hasGpuSection: false, hasMemory: false, hasUptime: false};
     }
 
