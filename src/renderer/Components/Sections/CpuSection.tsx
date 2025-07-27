@@ -28,16 +28,29 @@ export default function CpuSection({data, metrics}: Props) {
 
   return (
     <Section icon={Cpu} title={name}>
-      {hasTemp && (
-        <MetricItem
-          unit="°C"
-          label="Temp"
-          value={temp}
-          icon={Thermometer}
-          colorClass={getTemperatureColor(temp)}
-          progress={{value: temp, max: 100, isTemp: true}}
-        />
-      )}
+      {hasTemp &&
+        (temp === 0 ? (
+          <div
+            className={
+              `flex items-center px-3 py-2 gap-x-2 rounded-lg border` +
+              ` backdrop-blur-sm transition-all duration-300 hover:scale-105 hover:shadow-lg` +
+              ` text-slate-300 border-slate-600/30 bg-slate-800/40`
+            }>
+            <Thermometer className={`size-4 flex-shrink-0 text-danger`} />
+            <div className="flex items-center gap-2 text-xs font-medium whitespace-nowrap">
+              <span className="text-danger">Admin Require</span>
+            </div>
+          </div>
+        ) : (
+          <MetricItem
+            unit="°C"
+            label="Temp"
+            value={temp}
+            icon={Thermometer}
+            colorClass={getTemperatureColor(temp)}
+            progress={{value: temp, max: 100, isTemp: true}}
+          />
+        ))}
 
       {hasUsage && (
         <MetricItem
