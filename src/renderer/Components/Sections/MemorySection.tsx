@@ -1,26 +1,37 @@
 import {HardDrive, MemoryStick} from 'lucide-react';
 import {useMemo} from 'react';
 
-import {HardwareData} from '../../../cross/CrossTypes';
+import {MemoryData} from '../../../cross/CrossTypes';
 import MetricItem from '../MetricItem';
 import Section from '../Section';
 import {getUsageColor} from '../Utils';
 
-type Props = {data: HardwareData};
+type Props = {
+  data: MemoryData | undefined;
+};
 
 export default function MemorySection({data}: Props) {
+  const {name, used, total} = useMemo(
+    () => ({
+      total: data?.total || 0,
+      used: data?.used || 0,
+      name: data?.name || 'N/A',
+    }),
+    [data],
+  );
+
   const memPercentage = useMemo(() => {
-    return data.memTotal > 0 ? (data.memUsed / data.memTotal) * 100 : 0;
-  }, [data]);
+    return total > 0 ? (used / total) * 100 : 0;
+  }, [total, used]);
 
   return (
-    <Section title="Memory" icon={MemoryStick}>
+    <Section title={name} icon={MemoryStick}>
       <MetricItem
         label="RAM"
         icon={HardDrive}
         progress={{value: memPercentage}}
+        value={`${used.toFixed(1)}/${total}GB`}
         colorClass={getUsageColor(memPercentage)}
-        value={`${data.memUsed.toFixed(1)}/${data.memTotal}GB`}
       />
     </Section>
   );

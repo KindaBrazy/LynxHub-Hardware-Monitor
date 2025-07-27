@@ -10,8 +10,8 @@ import {
   NumberInput,
   Switch,
 } from '@heroui/react';
-import {Clock, Cpu, Database, Layers, LucideProps, Thermometer, Timer} from 'lucide-react';
-import {ForwardRefExoticComponent, RefAttributes, useState} from 'react';
+import {Clock, Cpu, Database, LucideProps, Thermometer, Timer} from 'lucide-react';
+import {ForwardRefExoticComponent, RefAttributes, useCallback, useState} from 'react';
 import {useDispatch} from 'react-redux';
 
 import LynxScroll from '../../../../src/renderer/src/App/Components/Reusable/LynxScroll';
@@ -20,34 +20,28 @@ import rendererIpc from '../../../../src/renderer/src/App/RendererIpc';
 import {lynxTopToast} from '../../../../src/renderer/src/App/Utils/UtilHooks';
 import {Clock_Icon} from '../../../../src/renderer/src/assets/icons/SvgIcons/SvgIcons';
 import {HMONITOR_STORAGE_ID} from '../../cross/CrossConst';
-import {MonitoringSettings, SystemMetrics} from '../../cross/CrossTypes';
+import {MetricItem, MetricType, MonitoringSettings, SystemMetrics} from '../../cross/CrossTypes';
 import {systemMonitorActions, SystemMonitorState, useSystemMonitorState} from '../reducer';
 import {Settings_Icon} from '../SvgIcons';
+import SettingsModal_Card from './Sections/SettingsModal_Card';
 
-interface MetricConfig {
+type MetricConfig = {
   id: SystemMetrics;
   label: string;
   description: string;
   Icon: ForwardRefExoticComponent<Omit<LucideProps, 'ref'> & RefAttributes<SVGSVGElement>>;
-}
+};
 
 // Metrics configuration
 const metrics: MetricConfig[] = [
   {
-    id: 'cpuTemp',
-    label: 'CPU Temperature',
-    description: 'Monitor CPU temperature in real-time',
+    id: 'temp',
+    label: 'Temperature',
+    description: 'Monitor temperature in real-time',
     Icon: Thermometer,
   },
-  {id: 'cpuUsage', label: 'CPU Usage', description: 'Track CPU utilization percentage', Icon: Cpu},
-  {
-    id: 'gpuTemp',
-    label: 'GPU Temperature',
-    description: 'Monitor GPU temperature in real-time',
-    Icon: Thermometer,
-  },
-  {id: 'gpuUsage', label: 'GPU Usage', description: 'Track GPU utilization percentage', Icon: Layers},
-  {id: 'vram', label: 'GPU VRAM', description: 'Monitor GPU memory usage', Icon: Database},
+  {id: 'usage', label: 'Usage', description: 'Track utilization percentage', Icon: Cpu},
+  {id: 'vram', label: 'VRAM', description: 'Monitor GPU memory usage', Icon: Database},
   {id: 'memory', label: 'Memory Usage', description: 'Monitor RAM usage and availability', Icon: Database},
   {id: 'uptimeSystemSeconds', label: 'System Uptime', description: 'Track total system uptime', Icon: Clock},
   {id: 'uptimeSeconds', label: 'Application Uptime', description: 'Track application runtime', Icon: Timer},
@@ -62,6 +56,7 @@ export default function SettingsModal({show, isOpen, tabID}: Props) {
   const compactMode = useSystemMonitorState('compactMode');
   const refreshInterval = useSystemMonitorState('refreshInterval');
   const showSectionLabel = useSystemMonitorState('showSectionLabel');
+  const availableHardware = useSystemMonitorState('availableHardware');
 
   const [isSaving, setIsSaving] = useState<boolean>(false);
 
@@ -72,17 +67,6 @@ export default function SettingsModal({show, isOpen, tabID}: Props) {
         value,
       }),
     );
-
-  // Toggle individual metric
-  const toggleMetric = (metric: SystemMetrics) => {
-    const newEnabledMetrics = new Set(enabledMetrics);
-    if (newEnabledMetrics.has(metric)) {
-      newEnabledMetrics.delete(metric);
-    } else {
-      newEnabledMetrics.add(metric);
-    }
-    updateState('enabledMetrics', Array.from(newEnabledMetrics));
-  };
 
   const onOpenChange = (value: boolean) => {
     if (!value) {
@@ -104,6 +88,79 @@ export default function SettingsModal({show, isOpen, tabID}: Props) {
     }, 700);
     dispatch(systemMonitorActions.saveSettings());
   };
+
+  const getMetricItem = useCallback(
+    (item: SystemMetrics, type: MetricType, name: string) => {
+      const result = metrics.find(metric => metric.id === item);
+      if (!result) return null;
+
+      let isSelected: boolean;
+      let toggle: () => void;
+
+      if (type === 'uptime') {
+        const upType = item === 'uptimeSeconds' ? 'app' : 'system';
+        isSelected = enabledMetrics.uptime[upType];
+        const result = {
+          ...enabledMetrics.uptime,
+          [upType]: !isSelected,
+        };
+        toggle = () => dispatch(systemMonitorActions.updateUptime(result));
+      } else {
+        isSelected = !!(enabledMetrics[type] as MetricItem)
+          .find(metric => metric.name === name)
+          ?.enabled.includes(item);
+
+        toggle = () => {
+          const targetMetric = enabledMetrics[type].find(metric => metric.name === name);
+
+          if (!targetMetric) return;
+
+          const currentEnabled = new Set(targetMetric.enabled);
+          if (currentEnabled.has(item)) {
+            currentEnabled.delete(item);
+          } else {
+            currentEnabled.add(item);
+          }
+
+          const newEnabledMetrics = {
+            ...enabledMetrics,
+            [type]: enabledMetrics[type].map(metric => {
+              if (metric.name !== name) return metric;
+              return {
+                ...metric,
+                enabled: Array.from(currentEnabled),
+              };
+            }),
+          };
+
+          dispatch(systemMonitorActions.updateMetrics(newEnabledMetrics));
+        };
+      }
+
+      const {Icon} = result;
+      return (
+        <div
+          className={
+            'flex items-center justify-between rounded-lg px-2' +
+            ' py-2 hover:bg-content2 transition-all duration-300 cursor-pointer'
+          }
+          key={result.id}
+          onClick={toggle}>
+          <div className="flex items-center gap-3">
+            <div className={'flex h-9 w-9 items-center justify-center ' + 'rounded-md bg-primary/10 text-primary'}>
+              <Icon className="text-xl" />
+            </div>
+            <div>
+              <p className="font-medium">{result.label}</p>
+              <p className="text-sm text-default-500">{result.description}</p>
+            </div>
+          </div>
+          <Checkbox color="primary" onValueChange={toggle} isSelected={isSelected} />
+        </div>
+      );
+    },
+    [enabledMetrics],
+  );
 
   return (
     <Modal
@@ -214,8 +271,70 @@ export default function SettingsModal({show, isOpen, tabID}: Props) {
 
                   <Divider className="my-4" />
 
+                  {availableHardware.gpu.map(item => (
+                    <SettingsModal_Card
+                      onValueChange={value => {
+                        updateState('showSectionLabel', value);
+                      }}
+                      onPress={() => {
+                        updateState('showSectionLabel', !showSectionLabel);
+                      }}
+                      title={item}
+                      isSelected={showSectionLabel}
+                      key={`hardware_${item}_item`}>
+                      {getMetricItem('temp', 'gpu', item)}
+                      {getMetricItem('usage', 'gpu', item)}
+                      {getMetricItem('vram', 'gpu', item)}
+                    </SettingsModal_Card>
+                  ))}
+
+                  {availableHardware.cpu.map(item => (
+                    <SettingsModal_Card
+                      onValueChange={value => {
+                        updateState('showSectionLabel', value);
+                      }}
+                      onPress={() => {
+                        updateState('showSectionLabel', !showSectionLabel);
+                      }}
+                      title={item}
+                      isSelected={showSectionLabel}
+                      key={`hardware_${item}_item`}>
+                      {getMetricItem('temp', 'cpu', item)}
+                      {getMetricItem('usage', 'cpu', item)}
+                    </SettingsModal_Card>
+                  ))}
+
+                  {availableHardware.memory.map(item => (
+                    <SettingsModal_Card
+                      onValueChange={value => {
+                        updateState('showSectionLabel', value);
+                      }}
+                      onPress={() => {
+                        updateState('showSectionLabel', !showSectionLabel);
+                      }}
+                      title={item}
+                      isSelected={showSectionLabel}
+                      key={`hardware_${item}_item`}>
+                      {getMetricItem('memory', 'memory', item)}
+                    </SettingsModal_Card>
+                  ))}
+
+                  <SettingsModal_Card
+                    onValueChange={value => {
+                      updateState('showSectionLabel', value);
+                    }}
+                    onPress={() => {
+                      updateState('showSectionLabel', !showSectionLabel);
+                    }}
+                    title={'Uptime'}
+                    key={`hardware_uptime_item`}
+                    isSelected={showSectionLabel}>
+                    {getMetricItem('uptimeSystemSeconds', 'uptime', 'uptime')}
+                    {getMetricItem('uptimeSeconds', 'uptime', 'uptime')}
+                  </SettingsModal_Card>
+
                   {/* Metrics selection */}
-                  <div>
+                  {/*<div>
                     <h3 className="mb-3 text-medium font-medium">Active Metrics</h3>
                     <div className="space-y-3">
                       {metrics.map(metric => {
@@ -249,7 +368,7 @@ export default function SettingsModal({show, isOpen, tabID}: Props) {
                         );
                       })}
                     </div>
-                  </div>
+                  </div>*/}
                 </>
               )}
             </ModalBody>

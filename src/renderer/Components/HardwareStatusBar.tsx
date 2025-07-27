@@ -18,23 +18,21 @@ const convertMBtoGB = (mb: number): number => {
   return Number((mb / 1024).toFixed(2));
 };
 
+const initialData: HardwareData = {
+  gpu: [],
+  cpu: [],
+  memory: [],
+  uptime: {
+    system: 0,
+    app: 0,
+  },
+};
+
 const HardwareStatusBar = ({ref}: Props) => {
   const enabled = useSystemMonitorState('enabled');
   const compactMode = useSystemMonitorState('compactMode');
   const enabledMetrics = useSystemMonitorState('enabledMetrics');
-  const [hardwareData, setHardwareData] = useState<HardwareData>({
-    cpuTemp: 0,
-    cpuUsage: 0,
-    gpuTemp: 0,
-    gpuUsage: 0,
-    memUsed: 0,
-    memTotal: 0,
-    vramUsed: 0,
-    vramTotal: 0,
-    uptimeSystemSeconds: 0,
-    uptimeSeconds: 0,
-  });
-
+  const [hardwareData, setHardwareData] = useState<HardwareData>(initialData);
   const [containerRef, setContainerRef] = useState<HTMLDivElement | null>(null);
 
   const initRef = (node: HTMLDivElement) => {
@@ -70,51 +68,58 @@ const HardwareStatusBar = ({ref}: Props) => {
   useEffect(() => {
     const handleHardwareUpdate = (_event: any, data: HardwareReport) => {
       if (data) {
+        const cpu = data.CPU.map(item => {
+          return {
+            name: item.Name,
+            temp:
+              item.Sensors.find(sensor => sensor.Name === 'CPU Package' && sensor.Type === 'Temperature')?.Value || 0,
+            usage: Math.round(
+              item.Sensors.find(sensor => sensor.Name === 'CPU Total' && sensor.Type === 'Load')?.Value || 0,
+            ),
+          };
+        });
+
+        const gpu = data.GPU.map(item => {
+          return {
+            name: item.Name,
+            temp: item.Sensors.find(sensor => sensor.Name === 'GPU Core' && sensor.Type === 'Temperature')?.Value || 0,
+            usage: Math.round(
+              item.Sensors.find(sensor => sensor.Name === 'D3D 3D' && sensor.Type === 'Load')?.Value || 0,
+            ),
+            totalVram: convertMBtoGB(
+              item.Sensors.find(sensor => sensor.Name === 'GPU Memory Total' && sensor.Type === 'SmallData')?.Value ||
+                0,
+            ),
+            usedVram: convertMBtoGB(
+              item.Sensors.find(sensor => sensor.Name === 'GPU Memory Used' && sensor.Type === 'SmallData')?.Value || 0,
+            ),
+          };
+        });
+
+        const memory = data.Memory.map(item => {
+          const used = Math.round(
+            item.Sensors.find(sensor => sensor.Name === 'Memory Used' && sensor.Type === 'Data')?.Value || 0,
+          );
+          const available = Math.round(
+            item.Sensors.find(sensor => sensor.Name === 'Memory Available' && sensor.Type === 'Data')?.Value || 0,
+          );
+          return {
+            name: item.Name,
+            used,
+            available,
+            total: Math.round(used + available),
+          };
+        });
+
         const uptimeSeconds = data.ElapsedTime?.rawSeconds || 0;
         const uptimeSystemSeconds = data.Uptime?.rawSeconds || 0;
-
-        const cpuTemp =
-          data.CPU[0].Sensors.find(sensor => sensor.Name === 'CPU Package' && sensor.Type === 'Temperature')?.Value ||
-          0;
-        const cpuUsage = Math.round(
-          data.CPU[0].Sensors.find(sensor => sensor.Name === 'CPU Total' && sensor.Type === 'Load')?.Value || 0,
-        );
-
-        const gpuTemp =
-          data.GPU[0].Sensors.find(sensor => sensor.Name === 'GPU Core' && sensor.Type === 'Temperature')?.Value || 0;
-        const gpuUsage = Math.round(
-          data.GPU[0].Sensors.find(sensor => sensor.Name === 'D3D 3D' && sensor.Type === 'Load')?.Value || 0,
-        );
-
-        const vramTotal = convertMBtoGB(
-          data.GPU[0].Sensors.find(sensor => sensor.Name === 'GPU Memory Total' && sensor.Type === 'SmallData')
-            ?.Value || 0,
-        );
-        const vramUsed = convertMBtoGB(
-          data.GPU[0].Sensors.find(sensor => sensor.Name === 'GPU Memory Used' && sensor.Type === 'SmallData')?.Value ||
-            0,
-        );
-
-        const memUsed = Math.round(
-          data.Memory[0].Sensors.find(sensor => sensor.Name === 'Memory Used' && sensor.Type === 'Data')?.Value || 0,
-        );
-        const memAvailable = Math.round(
-          data.Memory[0].Sensors.find(sensor => sensor.Name === 'Memory Available' && sensor.Type === 'Data')?.Value ||
-            0,
-        );
-        const memTotal = Math.round(memUsed + memAvailable);
+        const uptime = {system: uptimeSystemSeconds, app: uptimeSeconds};
 
         const result: HardwareData = {
-          uptimeSeconds,
-          uptimeSystemSeconds,
-          cpuTemp,
-          cpuUsage,
-          gpuTemp,
-          gpuUsage,
-          vramTotal,
-          vramUsed,
-          memTotal,
-          memUsed,
+          gpu,
+          cpu,
+          memory,
+          uptime,
         };
 
         setHardwareData(result);
@@ -140,20 +145,19 @@ const HardwareStatusBar = ({ref}: Props) => {
 
   const {hasCpuSection, hasMemory, hasUptime, hasGpuSection} = useMemo(() => {
     if (!enabledMetrics) {
-      setErrorElement(
-        <span className="">
-          {"Couldn't load metrics settings. Please try toggling metrics off and on again, or simply restart LynxHub."}
-        </span>,
-      );
+      setErrorElement(<span className="">{"Couldn't load metrics settings. Please restart LynxHub."}</span>);
       return {hasCpuSection: false, hasGpuSection: false, hasMemory: false, hasUptime: false};
     }
 
-    const hasCpuSection = enabledMetrics.includes('cpuTemp') || enabledMetrics.includes('cpuUsage');
-    const hasGpuSection = enabledMetrics.includes('gpuTemp') || enabledMetrics.includes('gpuUsage');
+    const hasGpuSection = enabledMetrics.gpu.some(
+      item => item.enabled.includes('temp') || item.enabled.includes('usage') || item.enabled.includes('vram'),
+    );
+    const hasCpuSection = enabledMetrics.gpu.some(
+      item => item.enabled.includes('temp') || item.enabled.includes('usage'),
+    );
+    const hasMemory = enabledMetrics.memory.some(item => item.enabled.includes('memory'));
 
-    const hasMemory = enabledMetrics.includes('memory');
-
-    const hasUptime = enabledMetrics.includes('uptimeSeconds') || enabledMetrics.includes('uptimeSystemSeconds');
+    const hasUptime = enabledMetrics.uptime.system || enabledMetrics.uptime.app;
 
     return {hasCpuSection, hasGpuSection, hasMemory, hasUptime};
   }, [enabledMetrics]);
@@ -218,16 +222,36 @@ const HardwareStatusBar = ({ref}: Props) => {
         className={`h-full flex items-center ${compactMode ? 'px-2' : 'px-3'} gap-x-4 overflow-x-auto scrollbar-hide`}>
         {dataConnected ? (
           <>
-            {hasCpuSection && <CpuSection data={hardwareData} />}
+            {hasCpuSection &&
+              enabledMetrics.cpu.map((cpu, index) => (
+                <CpuSection
+                  metrics={cpu}
+                  key={`hardware_${cpu.name}_${index}`}
+                  data={hardwareData.cpu.find(item => item.name === cpu.name)}
+                />
+              ))}
             {(hasGpuSection || hasMemory || hasUptime) && hasCpuSection && <Divider type="vertical" className="mx-0" />}
 
-            {hasGpuSection && <GpuSection data={hardwareData} />}
+            {hasGpuSection &&
+              enabledMetrics.gpu.map((gpu, index) => (
+                <GpuSection
+                  metrics={gpu}
+                  key={`hardware_${gpu.name}_${index}`}
+                  data={hardwareData.gpu.find(item => item.name === gpu.name)}
+                />
+              ))}
             {(hasGpuSection || hasUptime) && hasMemory && <Divider type="vertical" className="mx-0" />}
 
-            {hasMemory && <MemorySection data={hardwareData} />}
+            {hasMemory &&
+              enabledMetrics.memory.map((memory, index) => (
+                <MemorySection
+                  key={`hardware_${memory.name}_${index}`}
+                  data={hardwareData.memory.find(item => item.name === memory.name)}
+                />
+              ))}
             {(hasGpuSection || hasMemory) && hasUptime && <Divider type="vertical" className="mx-0" />}
 
-            {hasUptime && <UpTimeSection data={hardwareData} />}
+            {hasUptime && <UpTimeSection data={hardwareData.uptime} metrics={enabledMetrics.uptime} />}
           </>
         ) : (
           <div className="w-full text-center">{errorElement}</div>

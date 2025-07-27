@@ -1,33 +1,41 @@
 import {Activity, Cpu, Thermometer} from 'lucide-react';
 import {useMemo} from 'react';
 
-import {HardwareData} from '../../../cross/CrossTypes';
-import {useSystemMonitorState} from '../../reducer';
+import {CpuData} from '../../../cross/CrossTypes';
 import MetricItem from '../MetricItem';
 import Section from '../Section';
 import {getTemperatureColor, getUsageColor} from '../Utils';
 
-type Props = {data: HardwareData};
+type Props = {
+  data: CpuData | undefined;
+  metrics: {
+    name: string;
+    enabled: string[];
+  };
+};
 
-export default function CpuSection({data}: Props) {
-  const enabledMetrics = useSystemMonitorState('enabledMetrics');
-
+export default function CpuSection({data, metrics}: Props) {
   const {hasTemp, hasUsage} = useMemo(() => {
-    const hasTemp = enabledMetrics.includes('cpuTemp');
-    const hasUsage = enabledMetrics.includes('cpuUsage');
+    const hasTemp = metrics.enabled.includes('temp');
+    const hasUsage = metrics.enabled.includes('usage');
     return {hasTemp, hasUsage};
-  }, [enabledMetrics]);
+  }, [metrics]);
+
+  const {temp, usage, name} = useMemo(
+    () => ({temp: data?.temp || 0, usage: data?.usage || 0, name: data?.name || 'N/A'}),
+    [data],
+  );
 
   return (
-    <Section icon={Cpu} title="CPU">
+    <Section icon={Cpu} title={name}>
       {hasTemp && (
         <MetricItem
           unit="°C"
           label="Temp"
+          value={temp}
           icon={Thermometer}
-          value={data.cpuTemp}
-          colorClass={getTemperatureColor(data.cpuTemp)}
-          progress={{value: data.cpuTemp, max: 100, isTemp: true}}
+          colorClass={getTemperatureColor(temp)}
+          progress={{value: temp, max: 100, isTemp: true}}
         />
       )}
 
@@ -35,10 +43,10 @@ export default function CpuSection({data}: Props) {
         <MetricItem
           unit="%"
           label="Usage"
+          value={usage}
           icon={Activity}
-          value={data.cpuUsage}
-          progress={{value: data.cpuUsage}}
-          colorClass={getUsageColor(data.cpuUsage)}
+          progress={{value: usage}}
+          colorClass={getUsageColor(usage)}
         />
       )}
     </Section>

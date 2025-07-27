@@ -1,14 +1,32 @@
+export type AvailableHardware = {cpu: string[]; gpu: string[]; memory: string[]};
+
+export type GpuData = {
+  name: string;
+  temp: number;
+  usage: number;
+  totalVram: number;
+  usedVram: number;
+};
+export type CpuData = {
+  name: string;
+  temp: number;
+  usage: number;
+};
+export type MemoryData = {
+  name: string;
+  used: number;
+  available: number;
+  total: number;
+};
+export type UptimeData = {
+  system: number;
+  app: number;
+};
 export type HardwareData = {
-  cpuTemp: number;
-  cpuUsage: number;
-  gpuTemp: number;
-  gpuUsage: number;
-  vramTotal: number;
-  vramUsed: number;
-  memUsed: number;
-  memTotal: number;
-  uptimeSystemSeconds: number;
-  uptimeSeconds: number;
+  gpu: GpuData[];
+  cpu: CpuData[];
+  memory: MemoryData[];
+  uptime: UptimeData;
 };
 
 export type MonitoringSettings = {
@@ -16,15 +34,18 @@ export type MonitoringSettings = {
   compactMode: boolean;
   showSectionLabel: boolean;
   refreshInterval: number;
-  enabledMetrics: SystemMetrics[];
+  enabledMetrics: NewSystemMetrics;
 };
 
-export type SystemMetrics =
-  | 'cpuTemp'
-  | 'cpuUsage'
-  | 'gpuTemp'
-  | 'gpuUsage'
-  | 'vram'
-  | 'memory'
-  | 'uptimeSystemSeconds'
-  | 'uptimeSeconds';
+export type SystemMetrics = 'temp' | 'usage' | 'vram' | 'memory' | 'uptimeSystemSeconds' | 'uptimeSeconds';
+
+export type MetricItem = {name: string; enabled: string[]}[];
+
+export type NewSystemMetrics = {
+  cpu: MetricItem;
+  gpu: MetricItem;
+  memory: MetricItem;
+  uptime: {system: boolean; app: boolean};
+};
+
+export type MetricType = keyof NewSystemMetrics;

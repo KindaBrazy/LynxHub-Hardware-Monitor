@@ -1,38 +1,52 @@
 import {Database, Monitor, Thermometer, Zap} from 'lucide-react';
 import {useMemo} from 'react';
 
-import {HardwareData} from '../../../cross/CrossTypes';
-import {useSystemMonitorState} from '../../reducer';
+import {GpuData} from '../../../cross/CrossTypes';
 import MetricItem from '../MetricItem';
 import Section from '../Section';
 import {getTemperatureColor, getUsageColor} from '../Utils';
 
-type Props = {data: HardwareData};
+type Props = {
+  data: GpuData | undefined;
+  metrics: {
+    name: string;
+    enabled: string[];
+  };
+};
 
-export default function GpuSection({data}: Props) {
-  const enabledMetrics = useSystemMonitorState('enabledMetrics');
+export default function GpuSection({data, metrics}: Props) {
+  const {hasTemp, hasUsage, hasVram} = useMemo(() => {
+    const hasTemp = metrics.enabled.includes('temp');
+    const hasUsage = metrics.enabled.includes('usage');
+    const hasVram = metrics.enabled.includes('vram');
+    return {hasTemp, hasUsage, hasVram};
+  }, [metrics]);
 
-  const {hasTemp, hasVram, hasUsage} = useMemo(() => {
-    const hasTemp = enabledMetrics.includes('gpuTemp');
-    const hasVram = enabledMetrics.includes('vram');
-    const hasUsage = enabledMetrics.includes('gpuUsage');
-    return {hasTemp, hasVram, hasUsage};
-  }, [enabledMetrics]);
+  const {temp, usage, name, totalVram, usedVram} = useMemo(
+    () => ({
+      temp: data?.temp || 0,
+      usage: data?.usage || 0,
+      name: data?.name || 'N/A',
+      totalVram: data?.totalVram || 0,
+      usedVram: data?.usedVram || 0,
+    }),
+    [data],
+  );
 
   const vramPercentage = useMemo(() => {
-    return data.vramTotal > 0 ? (data.vramUsed / data.vramTotal) * 100 : 0;
-  }, [data]);
+    return totalVram > 0 ? (usedVram / totalVram) * 100 : 0;
+  }, [totalVram, usedVram]);
 
   return (
-    <Section title="GPU" icon={Monitor}>
+    <Section title={name} icon={Monitor}>
       {hasTemp && (
         <MetricItem
           unit="°C"
           label="Temp"
+          value={temp}
           icon={Thermometer}
-          value={data.gpuTemp}
-          colorClass={getTemperatureColor(data.gpuTemp)}
-          progress={{value: data.gpuTemp, max: 100, isTemp: true}}
+          colorClass={getTemperatureColor(temp)}
+          progress={{value: temp, max: 100, isTemp: true}}
         />
       )}
 
@@ -42,7 +56,7 @@ export default function GpuSection({data}: Props) {
           icon={Database}
           progress={{value: vramPercentage}}
           colorClass={getUsageColor(vramPercentage)}
-          value={`${data.vramUsed.toFixed(1)}/${Math.round(data.vramTotal)}GB`}
+          value={`${usedVram.toFixed(1)}/${Math.round(usedVram)}GB`}
         />
       )}
 
@@ -51,9 +65,9 @@ export default function GpuSection({data}: Props) {
           unit="%"
           icon={Zap}
           label="Usage"
-          value={data.gpuUsage}
-          progress={{value: data.gpuUsage}}
-          colorClass={getUsageColor(data.gpuUsage)}
+          value={usage}
+          progress={{value: usage}}
+          colorClass={getUsageColor(usage)}
         />
       )}
     </Section>

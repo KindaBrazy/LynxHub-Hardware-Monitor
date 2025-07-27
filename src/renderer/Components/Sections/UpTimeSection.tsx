@@ -1,8 +1,7 @@
 import {Activity, Clock} from 'lucide-react';
 import {useMemo} from 'react';
 
-import {HardwareData} from '../../../cross/CrossTypes';
-import {useSystemMonitorState} from '../../reducer';
+import {UptimeData} from '../../../cross/CrossTypes';
 import MetricItem from '../MetricItem';
 import Section from '../Section';
 
@@ -16,21 +15,26 @@ const formatUptime = (seconds: number) => {
   return `${minutes}m`;
 };
 
-type Props = {data: HardwareData};
+type Props = {
+  data: UptimeData;
+  metrics: {system: boolean; app: boolean};
+};
 
-export default function UpTimeSection({data}: Props) {
-  const enabledMetrics = useSystemMonitorState('enabledMetrics');
+export default function UpTimeSection({data, metrics}: Props) {
+  const {hasApp, hasSystem} = useMemo(() => ({hasApp: metrics.app, hasSystem: metrics.system}), [metrics]);
 
-  const {upApp, upSystem} = useMemo(() => {
-    const upApp = enabledMetrics.includes('uptimeSeconds');
-    const upSystem = enabledMetrics.includes('uptimeSystemSeconds');
-    return {upApp, upSystem};
-  }, [enabledMetrics]);
+  const {app, system} = useMemo(
+    () => ({
+      app: data?.app || 0,
+      system: data?.system || 0,
+    }),
+    [data],
+  );
 
   return (
     <Section icon={Clock} title="Uptime">
-      {upSystem && <MetricItem icon={Clock} label="System" value={formatUptime(data.uptimeSystemSeconds)} />}
-      {upApp && <MetricItem label="App" icon={Activity} value={formatUptime(data.uptimeSeconds)} />}
+      {hasSystem && <MetricItem icon={Clock} label="System" value={formatUptime(system)} />}
+      {hasApp && <MetricItem label="App" icon={Activity} value={formatUptime(app)} />}
     </Section>
   );
 }

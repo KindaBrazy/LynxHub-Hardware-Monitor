@@ -1,36 +1,35 @@
 import {ComponentType} from '@lynxhub/hwmonitor';
 
-import {SystemMetrics} from '../cross/CrossTypes';
+import {NewSystemMetrics} from '../cross/CrossTypes';
 
-export function getComponentTypesFromSystemMetrics(metrics: SystemMetrics[]): ComponentType[] {
+// Extracts component types that have enabled metrics from system metrics configuration
+export function getActiveComponentTypes(metrics: NewSystemMetrics): ComponentType[] {
   const componentTypes: ComponentType[] = [];
   const processedComponents = new Set<ComponentType>();
 
-  metrics.forEach(metric => {
-    let component: ComponentType | null = null;
-    switch (metric) {
-      case 'cpuTemp':
-      case 'cpuUsage':
-        component = 'cpu';
-        break;
-      case 'gpuTemp':
-      case 'gpuUsage':
-        component = 'gpu';
-        break;
-      case 'memory':
-        component = 'memory';
-        break;
-      case 'uptimeSystemSeconds':
-      case 'uptimeSeconds':
-        component = 'uptime';
-        break;
-    }
+  // Check CPU metrics
+  if (metrics.cpu.some(item => item.enabled.length > 0) && !processedComponents.has('cpu')) {
+    componentTypes.push('cpu');
+    processedComponents.add('cpu');
+  }
 
-    if (component && !processedComponents.has(component)) {
-      componentTypes.push(component);
-      processedComponents.add(component);
-    }
-  });
+  // Check GPU metrics
+  if (metrics.gpu.some(item => item.enabled.length > 0) && !processedComponents.has('gpu')) {
+    componentTypes.push('gpu');
+    processedComponents.add('gpu');
+  }
+
+  // Check Memory metrics
+  if (metrics.memory.some(item => item.enabled.length > 0) && !processedComponents.has('memory')) {
+    componentTypes.push('memory');
+    processedComponents.add('memory');
+  }
+
+  // Check Uptime metrics
+  if ((metrics.uptime.system || metrics.uptime.app) && !processedComponents.has('uptime')) {
+    componentTypes.push('uptime');
+    processedComponents.add('uptime');
+  }
 
   return componentTypes;
 }

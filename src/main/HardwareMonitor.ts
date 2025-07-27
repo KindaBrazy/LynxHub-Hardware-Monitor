@@ -2,19 +2,21 @@ import {join} from 'node:path';
 
 import HardwareMonitor, {HardwareReport, MonitorError} from '@lynxhub/hwmonitor';
 import {app, ipcMain, WebContents} from 'electron';
+import {isArray, isEqual} from 'lodash';
 
 import {MainExtensionUtils} from '../../../src/main/Managements/Plugin/Extensions/ExtensionTypes_Main';
 import StorageManager from '../../../src/main/Managements/Storage/StorageManager';
 import {
   HMONITOR_IPC_DATA_ID,
   HMONITOR_IPC_ERROR_MONITORING,
+  HMONITOR_IPC_GET_HARDWARE,
   HMONITOR_IPC_STOP_ID,
   HMONITOR_IPC_UPDATE_CONFIG,
   HMONITOR_STORAGE_ID,
   initialSystemMetrics,
 } from '../cross/CrossConst';
-import {MonitoringSettings} from '../cross/CrossTypes';
-import {getComponentTypesFromSystemMetrics} from './Utils';
+import {AvailableHardware, MonitoringSettings} from '../cross/CrossTypes';
+import {getActiveComponentTypes} from './Utils';
 
 let storeManager: StorageManager | undefined = undefined;
 let hwMonitor: HardwareMonitor | undefined = undefined;
@@ -22,7 +24,12 @@ let currentConfig: MonitoringSettings | undefined = undefined;
 let webContent: WebContents | undefined = undefined;
 
 async function startMonitoring() {
-  if (!webContent) return;
+  if (!webContent || !currentConfig) {
+    console.warn(
+      `Cannot start monitoring. Web content or config not found., webContent: ${webContent}, config:${currentConfig}`,
+    );
+    return;
+  }
 
   try {
     hwMonitor = new HardwareMonitor('info');
@@ -41,10 +48,10 @@ async function startMonitoring() {
       if (webContent) webContent.send(HMONITOR_IPC_ERROR_MONITORING, error);
     });
 
-    hwMonitor.startTimed(
-      (currentConfig?.refreshInterval || 1) * 1000,
-      getComponentTypesFromSystemMetrics(currentConfig?.enabledMetrics || []),
-    );
+    const targetInterval = (currentConfig.refreshInterval || 1) * 1000;
+    const targetComponents = getActiveComponentTypes(currentConfig.enabledMetrics);
+
+    hwMonitor.startTimed(targetInterval, targetComponents);
   } catch (e) {
     console.error(e);
     if (webContent) webContent.send(HMONITOR_IPC_ERROR_MONITORING, e);
@@ -56,31 +63,49 @@ function stopMonitoring() {
   hwMonitor = undefined;
 }
 
+export async function onAppReady(utils: MainExtensionUtils) {
+  console.log('App Ready');
+  utils.getStorageManager().then(manager => {
+    storeManager = manager;
+    currentConfig = storeManager.getCustomData(HMONITOR_STORAGE_ID);
+
+    // noinspection SuspiciousTypeOfGuard
+    if (!currentConfig || isArray(currentConfig.enabledMetrics)) {
+      currentConfig = {
+        enabled: true,
+        compactMode: false,
+        showSectionLabel: true,
+        refreshInterval: 1,
+        enabledMetrics: initialSystemMetrics,
+      };
+      storeManager.setCustomData(HMONITOR_STORAGE_ID, currentConfig);
+    }
+  });
+}
+
+async function getHardwareNames(): Promise<AvailableHardware> {
+  const hm = new HardwareMonitor('error');
+
+  const targetDir = join(app.getPath('downloads'), 'LynxHub');
+  await hm.checkRequirements(targetDir);
+
+  const result = await hm.getDataOnce(['cpu', 'gpu', 'memory']);
+  const gpu = result.GPU.map(item => item.Name);
+  const cpu = result.CPU.map(item => item.Name);
+  const memory = result.Memory.map(item => item.Name);
+
+  return {cpu, gpu, memory};
+}
+
 let started: boolean = false;
 
-export function onAppStart(utils: MainExtensionUtils) {
+export function onAppReadyToShow(utils: MainExtensionUtils) {
+  console.log('App Ready To Show');
   if (!started) {
-    utils.getStorageManager().then(manager => {
-      storeManager = manager;
-      currentConfig = storeManager.getCustomData(HMONITOR_STORAGE_ID);
-
-      if (!currentConfig) {
-        currentConfig = {
-          enabled: true,
-          compactMode: false,
-          showSectionLabel: true,
-          refreshInterval: 1,
-          enabledMetrics: initialSystemMetrics,
-        };
-        storeManager.setCustomData(HMONITOR_STORAGE_ID, currentConfig);
-      }
-
-      utils.getAppManager().then(appManager => {
-        webContent = appManager.getWebContent();
-        if (currentConfig?.enabled) startMonitoring();
-      });
+    utils.getAppManager().then(appManager => {
+      webContent = appManager.getWebContent();
+      if (currentConfig?.enabled) startMonitoring();
     });
-
     started = true;
   }
 }
@@ -95,8 +120,8 @@ function updateConfig(config: MonitoringSettings) {
   }
 
   if (
-    config.enabledMetrics !== currentConfig?.enabledMetrics ||
-    config.refreshInterval !== currentConfig?.refreshInterval
+    !isEqual(config.enabledMetrics, currentConfig?.enabledMetrics) ||
+    !isEqual(config.refreshInterval, currentConfig?.refreshInterval)
   ) {
     stopMonitoring();
     startMonitoring();
@@ -109,4 +134,5 @@ function updateConfig(config: MonitoringSettings) {
 export function listenForHWChannels() {
   ipcMain.on(HMONITOR_IPC_STOP_ID, () => stopMonitoring());
   ipcMain.on(HMONITOR_IPC_UPDATE_CONFIG, (_, config: string) => updateConfig(JSON.parse(config)));
+  ipcMain.handle(HMONITOR_IPC_GET_HARDWARE, () => getHardwareNames());
 }
