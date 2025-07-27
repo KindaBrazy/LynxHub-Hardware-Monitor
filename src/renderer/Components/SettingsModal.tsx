@@ -56,6 +56,7 @@ export default function SettingsModal({show, isOpen, tabID}: Props) {
   const compactMode = useSystemMonitorState('compactMode');
   const refreshInterval = useSystemMonitorState('refreshInterval');
   const showSectionLabel = useSystemMonitorState('showSectionLabel');
+  const showMetricLabel = useSystemMonitorState('showMetricLabel');
   const availableHardware = useSystemMonitorState('availableHardware');
 
   const [isSaving, setIsSaving] = useState<boolean>(false);
@@ -267,8 +268,30 @@ export default function SettingsModal({show, isOpen, tabID}: Props) {
                         isSelected={showSectionLabel}
                       />
                     </div>
+
+                    <div
+                      onClick={() => {
+                        updateState('showMetricLabel', !showMetricLabel);
+                      }}
+                      className={
+                        'flex items-center justify-between rounded-lg px-2 py-2 ' +
+                        'hover:bg-content2 transition-all duration-300 cursor-pointer'
+                      }>
+                      <div>
+                        <p className="font-medium">Show Metric Labels</p>
+                        <p className="text-sm text-default-500">Display headers for metric items</p>
+                      </div>
+                      <Switch
+                        onValueChange={value => {
+                          updateState('showMetricLabel', value);
+                        }}
+                        size="md"
+                        isSelected={showMetricLabel}
+                      />
+                    </div>
                   </div>
 
+                  {/* Metrics selection */}
                   <Divider className="my-4" />
 
                   {availableHardware.gpu.map(item => (
@@ -332,43 +355,6 @@ export default function SettingsModal({show, isOpen, tabID}: Props) {
                     {getMetricItem('uptimeSystemSeconds', 'uptime', 'uptime')}
                     {getMetricItem('uptimeSeconds', 'uptime', 'uptime')}
                   </SettingsModal_Card>
-
-                  {/* Metrics selection */}
-                  {/*<div>
-                    <h3 className="mb-3 text-medium font-medium">Active Metrics</h3>
-                    <div className="space-y-3">
-                      {metrics.map(metric => {
-                        const {Icon} = metric;
-                        return (
-                          <div
-                            className={
-                              'flex items-center justify-between rounded-lg px-2' +
-                              ' py-2 hover:bg-content2 transition-all duration-300 cursor-pointer'
-                            }
-                            key={metric.id}
-                            onClick={() => toggleMetric(metric.id)}>
-                            <div className="flex items-center gap-3">
-                              <div
-                                className={
-                                  'flex h-9 w-9 items-center justify-center ' + 'rounded-md bg-primary/10 text-primary'
-                                }>
-                                <Icon className="text-xl" />
-                              </div>
-                              <div>
-                                <p className="font-medium">{metric.label}</p>
-                                <p className="text-sm text-default-500">{metric.description}</p>
-                              </div>
-                            </div>
-                            <Checkbox
-                              color="primary"
-                              onValueChange={() => toggleMetric(metric.id)}
-                              isSelected={enabledMetrics.includes(metric.id)}
-                            />
-                          </div>
-                        );
-                      })}
-                    </div>
-                  </div>*/}
                 </>
               )}
             </ModalBody>

@@ -33,6 +33,7 @@ export type MonitoringSettings = {
   enabled: boolean;
   compactMode: boolean;
   showSectionLabel: boolean;
+  showMetricLabel: boolean;
   refreshInterval: number;
   enabledMetrics: NewSystemMetrics;
 };

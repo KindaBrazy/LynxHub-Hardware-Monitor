@@ -75,9 +75,13 @@ export async function onAppReady(utils: MainExtensionUtils) {
         enabled: true,
         compactMode: false,
         showSectionLabel: true,
+        showMetricLabel: true,
         refreshInterval: 1,
         enabledMetrics: initialSystemMetrics,
       };
+      storeManager.setCustomData(HMONITOR_STORAGE_ID, currentConfig);
+    } else if (!currentConfig.showMetricLabel) {
+      currentConfig.showMetricLabel = true;
       storeManager.setCustomData(HMONITOR_STORAGE_ID, currentConfig);
     }
   });

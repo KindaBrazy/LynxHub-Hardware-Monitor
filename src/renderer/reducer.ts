@@ -25,6 +25,7 @@ const initialState: SystemMonitorState = {
   enabled: true,
   compactMode: false,
   showSectionLabel: true,
+  showMetricLabel: true,
   enabledMetrics: initialSystemMetrics,
   modals: [],
 

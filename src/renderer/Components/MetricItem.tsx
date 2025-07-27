@@ -34,6 +34,7 @@ export default function MetricItem({
   colorClass?: string;
 }) {
   const compactMode = useSystemMonitorState('compactMode');
+  const showMetricLabel = useSystemMonitorState('showMetricLabel');
   return (
     <div
       className={
@@ -44,7 +45,7 @@ export default function MetricItem({
       key={`${label}`}>
       <Icon className={`${compactMode ? 'size-3' : 'size-4'} flex-shrink-0`} />
       <div className="flex items-center gap-2 text-xs font-medium whitespace-nowrap">
-        <span className="opacity-80">{label}:</span>
+        {showMetricLabel && <span className="opacity-80">{label}:</span>}
         <span>
           {value}
           {unit}
