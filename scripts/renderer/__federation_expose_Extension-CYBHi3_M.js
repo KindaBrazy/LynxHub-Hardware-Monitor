@@ -3,7 +3,7 @@ import { j as jsxRuntimeExports } from './jsx-runtime-BA-u0cS_.js';
 import { c as commonjsGlobal, g as getDefaultExportFromCjs } from './_commonjsHelpers-BFTU3MAI.js';
 
 /**
- * @license lucide-react v0.513.0 - ISC
+ * @license lucide-react v0.526.0 - ISC
  *
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
@@ -30,7 +30,7 @@ const hasA11yProp = (props) => {
 };
 
 /**
- * @license lucide-react v0.513.0 - ISC
+ * @license lucide-react v0.526.0 - ISC
  *
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
@@ -49,7 +49,7 @@ var defaultAttributes = {
 };
 
 /**
- * @license lucide-react v0.513.0 - ISC
+ * @license lucide-react v0.526.0 - ISC
  *
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
@@ -88,7 +88,7 @@ const Icon = forwardRef$1(
 );
 
 /**
- * @license lucide-react v0.513.0 - ISC
+ * @license lucide-react v0.526.0 - ISC
  *
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
@@ -114,14 +114,14 @@ const createLucideIcon = (iconName, iconNode) => {
 };
 
 /**
- * @license lucide-react v0.513.0 - ISC
+ * @license lucide-react v0.526.0 - ISC
  *
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
  */
 
 
-const __iconNode$c = [
+const __iconNode$b = [
   [
     "path",
     {
@@ -130,21 +130,10 @@ const __iconNode$c = [
     }
   ]
 ];
-const Activity = createLucideIcon("activity", __iconNode$c);
+const Activity = createLucideIcon("activity", __iconNode$b);
 
 /**
- * @license lucide-react v0.513.0 - ISC
- *
- * This source code is licensed under the ISC license.
- * See the LICENSE file in the root directory of this source tree.
- */
-
-
-const __iconNode$b = [["path", { d: "m15 18-6-6 6-6", key: "1wnfg3" }]];
-const ChevronLeft = createLucideIcon("chevron-left", __iconNode$b);
-
-/**
- * @license lucide-react v0.513.0 - ISC
+ * @license lucide-react v0.526.0 - ISC
  *
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
@@ -155,21 +144,18 @@ const __iconNode$a = [["path", { d: "m9 18 6-6-6-6", key: "mthhwq" }]];
 const ChevronRight = createLucideIcon("chevron-right", __iconNode$a);
 
 /**
- * @license lucide-react v0.513.0 - ISC
+ * @license lucide-react v0.526.0 - ISC
  *
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
  */
 
 
-const __iconNode$9 = [
-  ["circle", { cx: "12", cy: "12", r: "10", key: "1mglay" }],
-  ["polyline", { points: "12 6 12 12 16 14", key: "68esgv" }]
-];
-const Clock = createLucideIcon("clock", __iconNode$9);
+const __iconNode$9 = [["path", { d: "m15 18-6-6 6-6", key: "1wnfg3" }]];
+const ChevronLeft = createLucideIcon("chevron-left", __iconNode$9);
 
 /**
- * @license lucide-react v0.513.0 - ISC
+ * @license lucide-react v0.526.0 - ISC
  *
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
@@ -177,6 +163,20 @@ const Clock = createLucideIcon("clock", __iconNode$9);
 
 
 const __iconNode$8 = [
+  ["path", { d: "M12 6v6l4 2", key: "mmk7yg" }],
+  ["circle", { cx: "12", cy: "12", r: "10", key: "1mglay" }]
+];
+const Clock = createLucideIcon("clock", __iconNode$8);
+
+/**
+ * @license lucide-react v0.526.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */
+
+
+const __iconNode$7 = [
   ["path", { d: "M12 20v2", key: "1lh1kg" }],
   ["path", { d: "M12 2v2", key: "tus03m" }],
   ["path", { d: "M17 20v2", key: "1rnc9c" }],
@@ -192,25 +192,10 @@ const __iconNode$8 = [
   ["rect", { x: "4", y: "4", width: "16", height: "16", rx: "2", key: "1vbyd7" }],
   ["rect", { x: "8", y: "8", width: "8", height: "8", rx: "1", key: "z9xiuo" }]
 ];
-const Cpu = createLucideIcon("cpu", __iconNode$8);
+const Cpu = createLucideIcon("cpu", __iconNode$7);
 
 /**
- * @license lucide-react v0.513.0 - ISC
- *
- * This source code is licensed under the ISC license.
- * See the LICENSE file in the root directory of this source tree.
- */
-
-
-const __iconNode$7 = [
-  ["ellipse", { cx: "12", cy: "5", rx: "9", ry: "3", key: "msslwz" }],
-  ["path", { d: "M3 5V19A9 3 0 0 0 21 19V5", key: "1wlel7" }],
-  ["path", { d: "M3 12A9 3 0 0 0 21 12", key: "mv7ke4" }]
-];
-const Database = createLucideIcon("database", __iconNode$7);
-
-/**
- * @license lucide-react v0.513.0 - ISC
+ * @license lucide-react v0.526.0 - ISC
  *
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
@@ -218,6 +203,21 @@ const Database = createLucideIcon("database", __iconNode$7);
 
 
 const __iconNode$6 = [
+  ["ellipse", { cx: "12", cy: "5", rx: "9", ry: "3", key: "msslwz" }],
+  ["path", { d: "M3 5V19A9 3 0 0 0 21 19V5", key: "1wlel7" }],
+  ["path", { d: "M3 12A9 3 0 0 0 21 12", key: "mv7ke4" }]
+];
+const Database = createLucideIcon("database", __iconNode$6);
+
+/**
+ * @license lucide-react v0.526.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */
+
+
+const __iconNode$5 = [
   ["line", { x1: "22", x2: "2", y1: "12", y2: "12", key: "1y58io" }],
   [
     "path",
@@ -229,43 +229,10 @@ const __iconNode$6 = [
   ["line", { x1: "6", x2: "6.01", y1: "16", y2: "16", key: "sgf278" }],
   ["line", { x1: "10", x2: "10.01", y1: "16", y2: "16", key: "1l4acy" }]
 ];
-const HardDrive = createLucideIcon("hard-drive", __iconNode$6);
+const HardDrive = createLucideIcon("hard-drive", __iconNode$5);
 
 /**
- * @license lucide-react v0.513.0 - ISC
- *
- * This source code is licensed under the ISC license.
- * See the LICENSE file in the root directory of this source tree.
- */
-
-
-const __iconNode$5 = [
-  [
-    "path",
-    {
-      d: "M12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83z",
-      key: "zw3jo"
-    }
-  ],
-  [
-    "path",
-    {
-      d: "M2 12a1 1 0 0 0 .58.91l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9A1 1 0 0 0 22 12",
-      key: "1wduqc"
-    }
-  ],
-  [
-    "path",
-    {
-      d: "M2 17a1 1 0 0 0 .58.91l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9A1 1 0 0 0 22 17",
-      key: "kqbvx6"
-    }
-  ]
-];
-const Layers = createLucideIcon("layers", __iconNode$5);
-
-/**
- * @license lucide-react v0.513.0 - ISC
+ * @license lucide-react v0.526.0 - ISC
  *
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
@@ -292,7 +259,7 @@ const __iconNode$4 = [
 const MemoryStick = createLucideIcon("memory-stick", __iconNode$4);
 
 /**
- * @license lucide-react v0.513.0 - ISC
+ * @license lucide-react v0.526.0 - ISC
  *
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
@@ -307,7 +274,7 @@ const __iconNode$3 = [
 const Monitor = createLucideIcon("monitor", __iconNode$3);
 
 /**
- * @license lucide-react v0.513.0 - ISC
+ * @license lucide-react v0.526.0 - ISC
  *
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
@@ -320,7 +287,7 @@ const __iconNode$2 = [
 const Thermometer = createLucideIcon("thermometer", __iconNode$2);
 
 /**
- * @license lucide-react v0.513.0 - ISC
+ * @license lucide-react v0.526.0 - ISC
  *
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
@@ -335,7 +302,7 @@ const __iconNode$1 = [
 const Timer = createLucideIcon("timer", __iconNode$1);
 
 /**
- * @license lucide-react v0.513.0 - ISC
+ * @license lucide-react v0.526.0 - ISC
  *
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
@@ -373,16 +340,14 @@ function ShinyText({ text, disabled = false, speed = 5, className = "" }) {
 const HMONITOR_STORAGE_ID = "hmonitor_storage";
 const HMONITOR_IPC_DATA_ID = "hardware-data-update";
 const HMONITOR_IPC_UPDATE_CONFIG = "hmonitor-update-config";
-const initialSystemMetrics = [
-  "cpuTemp",
-  "cpuUsage",
-  "gpuTemp",
-  "gpuUsage",
-  "memory",
-  "vram",
-  "uptimeSystemSeconds",
-  "uptimeSeconds"
-];
+const HMONITOR_IPC_GET_HARDWARE = "hmonitor-ipc-get-hardware";
+const HMONITOR_IPC_ERROR_MONITORING = "hmonitor-error-monitoring";
+const initialSystemMetrics = {
+  cpu: [],
+  gpu: [],
+  memory: [],
+  uptime: { system: true, app: true }
+};
 
 function isPlainObject$2(obj) {
   if (typeof obj !== "object" || obj === null)
@@ -1405,16 +1370,23 @@ function formatProdErrorMessage(code) {
   return `Minified Redux Toolkit error #${code}; visit https://redux-toolkit.js.org/Errors?code=${code} for the full message or use the non-minified dev environment for full errors. `;
 }
 
-const {omit} = await importShared('lodash');
+const {isEmpty: isEmpty$4,omit} = await importShared('lodash');
 
 const {useSelector: useSelector$2} = await importShared('react-redux');
+const initAvailableHardware = {
+  gpu: [],
+  cpu: [],
+  memory: []
+};
 const initialState$2 = {
   refreshInterval: 1,
   enabled: true,
   compactMode: false,
   showSectionLabel: true,
+  showMetricLabel: true,
   enabledMetrics: initialSystemMetrics,
-  modals: []
+  modals: [],
+  availableHardware: initAvailableHardware
 };
 const systemMonitorSlice = createSlice({
   initialState: initialState$2,
@@ -1423,11 +1395,33 @@ const systemMonitorSlice = createSlice({
     updateState: (state, action) => {
       state[action.payload.key] = action.payload.value;
     },
-    setConfig: (_, action) => {
-      return { ...action.payload, modals: [] };
+    setConfig: (state, action) => {
+      return { ...state, ...action.payload };
     },
     saveSettings: (state) => {
       window.electron.ipcRenderer.send(HMONITOR_IPC_UPDATE_CONFIG, JSON.stringify(omit(state, "modals")));
+    },
+    setAvailableHardware: (state, action) => {
+      state.availableHardware = action.payload;
+      if (isEmpty$4(state.enabledMetrics.gpu)) {
+        state.enabledMetrics.gpu = action.payload.gpu.map((name) => ({
+          name,
+          active: true,
+          enabled: ["temp", "usage", "vram"]
+        }));
+      }
+      if (isEmpty$4(state.enabledMetrics.cpu)) {
+        state.enabledMetrics.cpu = action.payload.cpu.map((name) => ({ name, active: true, enabled: ["temp", "usage"] }));
+      }
+      if (isEmpty$4(state.enabledMetrics.memory)) {
+        state.enabledMetrics.memory = action.payload.memory.map((name) => ({ name, active: true, enabled: ["memory"] }));
+      }
+    },
+    updateMetrics: (state, action) => {
+      state.enabledMetrics = { ...state.enabledMetrics, ...action.payload };
+    },
+    updateUptime: (state, action) => {
+      state.enabledMetrics.uptime = { ...state.enabledMetrics.uptime, ...action.payload };
     },
     openModal: (state, action) => {
       state.modals.push({ isOpen: true, tabID: action.payload.tabID });
@@ -1486,6 +1480,7 @@ function MetricItem({
   colorClass
 }) {
   const compactMode = useSystemMonitorState("compactMode");
+  const showMetricLabel = useSystemMonitorState("showMetricLabel");
   return /* @__PURE__ */ jsxRuntimeExports.jsxs(
     "div",
     {
@@ -1493,7 +1488,7 @@ function MetricItem({
       children: [
         /* @__PURE__ */ jsxRuntimeExports.jsx(Icon, { className: `${compactMode ? "size-3" : "size-4"} flex-shrink-0` }),
         /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-2 text-xs font-medium whitespace-nowrap", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { className: "opacity-80", children: [
+          showMetricLabel && /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { className: "opacity-80", children: [
             label,
             ":"
           ] }),
@@ -1509,6 +1504,9 @@ function MetricItem({
   );
 }
 
+const {Spinner} = await importShared('@heroui/react');
+
+const {isEmpty: isEmpty$3} = await importShared('lodash');
 function Section({
   title,
   icon: Icon,
@@ -1523,7 +1521,7 @@ function Section({
         className: `flex items-center ${compactMode ? "gap-x-1.5 px-1.5 py-0.5" : "gap-x-2 px-2 py-1"} rounded-md bg-slate-700/50 border border-slate-600/30`,
         children: [
           /* @__PURE__ */ jsxRuntimeExports.jsx(Icon, { className: `${compactMode ? "size-3" : "size-3.5"} text-slate-400` }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-xs font-semibold text-slate-300 uppercase tracking-wide", children: title })
+          isEmpty$3(title) ? /* @__PURE__ */ jsxRuntimeExports.jsx(Spinner, { size: "sm", variant: "dots" }) : /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-xs font-semibold text-slate-300 uppercase tracking-wide text-nowrap", children: title })
         ]
       }
     ),
@@ -1532,61 +1530,82 @@ function Section({
 }
 
 const {useMemo: useMemo$5} = await importShared('react');
-function CpuSection({ data }) {
-  const enabledMetrics = useSystemMonitorState("enabledMetrics");
+function CpuSection({ data, metrics }) {
   const { hasTemp, hasUsage } = useMemo$5(() => {
-    const hasTemp2 = enabledMetrics.includes("cpuTemp");
-    const hasUsage2 = enabledMetrics.includes("cpuUsage");
+    const hasTemp2 = metrics.enabled.includes("temp");
+    const hasUsage2 = metrics.enabled.includes("usage");
     return { hasTemp: hasTemp2, hasUsage: hasUsage2 };
-  }, [enabledMetrics]);
-  return /* @__PURE__ */ jsxRuntimeExports.jsxs(Section, { icon: Cpu, title: "CPU", children: [
-    hasTemp && /* @__PURE__ */ jsxRuntimeExports.jsx(
+  }, [metrics]);
+  const { temp, usage, name } = useMemo$5(
+    () => ({ temp: data?.temp || 0, usage: data?.usage || 0, name: data?.name || "" }),
+    [data]
+  );
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs(Section, { icon: Cpu, title: name, children: [
+    hasTemp && (temp === 0 ? /* @__PURE__ */ jsxRuntimeExports.jsxs(
+      "div",
+      {
+        className: `flex items-center px-3 py-2 gap-x-2 rounded-lg border backdrop-blur-sm transition-all duration-300 hover:scale-105 hover:shadow-lg text-slate-300 border-slate-600/30 bg-slate-800/40`,
+        children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx(Thermometer, { className: `size-4 flex-shrink-0 text-danger` }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex items-center gap-2 text-xs font-medium whitespace-nowrap", children: /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-danger", children: "Admin Require" }) })
+        ]
+      }
+    ) : /* @__PURE__ */ jsxRuntimeExports.jsx(
       MetricItem,
       {
         unit: "°C",
         label: "Temp",
+        value: temp,
         icon: Thermometer,
-        value: data.cpuTemp,
-        colorClass: getTemperatureColor(data.cpuTemp),
-        progress: { value: data.cpuTemp, max: 100, isTemp: true }
+        colorClass: getTemperatureColor(temp),
+        progress: { value: temp, max: 100, isTemp: true }
       }
-    ),
+    )),
     hasUsage && /* @__PURE__ */ jsxRuntimeExports.jsx(
       MetricItem,
       {
         unit: "%",
         label: "Usage",
+        value: usage,
         icon: Activity,
-        value: data.cpuUsage,
-        progress: { value: data.cpuUsage },
-        colorClass: getUsageColor(data.cpuUsage)
+        progress: { value: usage },
+        colorClass: getUsageColor(usage)
       }
     )
   ] });
 }
 
 const {useMemo: useMemo$4} = await importShared('react');
-function GpuSection({ data }) {
-  const enabledMetrics = useSystemMonitorState("enabledMetrics");
-  const { hasTemp, hasVram, hasUsage } = useMemo$4(() => {
-    const hasTemp2 = enabledMetrics.includes("gpuTemp");
-    const hasVram2 = enabledMetrics.includes("vram");
-    const hasUsage2 = enabledMetrics.includes("gpuUsage");
-    return { hasTemp: hasTemp2, hasVram: hasVram2, hasUsage: hasUsage2 };
-  }, [enabledMetrics]);
+function GpuSection({ data, metrics }) {
+  const { hasTemp, hasUsage, hasVram } = useMemo$4(() => {
+    const hasTemp2 = metrics.enabled.includes("temp");
+    const hasUsage2 = metrics.enabled.includes("usage");
+    const hasVram2 = metrics.enabled.includes("vram");
+    return { hasTemp: hasTemp2, hasUsage: hasUsage2, hasVram: hasVram2 };
+  }, [metrics]);
+  const { temp, usage, name, totalVram, usedVram } = useMemo$4(
+    () => ({
+      temp: data?.temp || 0,
+      usage: data?.usage || 0,
+      name: data?.name || "",
+      totalVram: data?.totalVram || 0,
+      usedVram: data?.usedVram || 0
+    }),
+    [data]
+  );
   const vramPercentage = useMemo$4(() => {
-    return data.vramTotal > 0 ? data.vramUsed / data.vramTotal * 100 : 0;
-  }, [data]);
-  return /* @__PURE__ */ jsxRuntimeExports.jsxs(Section, { title: "GPU", icon: Monitor, children: [
+    return totalVram > 0 ? usedVram / totalVram * 100 : 0;
+  }, [totalVram, usedVram]);
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs(Section, { title: name, icon: Monitor, children: [
     hasTemp && /* @__PURE__ */ jsxRuntimeExports.jsx(
       MetricItem,
       {
         unit: "°C",
         label: "Temp",
+        value: temp,
         icon: Thermometer,
-        value: data.gpuTemp,
-        colorClass: getTemperatureColor(data.gpuTemp),
-        progress: { value: data.gpuTemp, max: 100, isTemp: true }
+        colorClass: getTemperatureColor(temp),
+        progress: { value: temp, max: 100, isTemp: true }
       }
     ),
     hasVram && /* @__PURE__ */ jsxRuntimeExports.jsx(
@@ -1596,7 +1615,7 @@ function GpuSection({ data }) {
         icon: Database,
         progress: { value: vramPercentage },
         colorClass: getUsageColor(vramPercentage),
-        value: `${data.vramUsed.toFixed(1)}/${Math.round(data.vramTotal)}GB`
+        value: `${usedVram.toFixed(1)}/${Math.round(totalVram)}GB`
       }
     ),
     hasUsage && /* @__PURE__ */ jsxRuntimeExports.jsx(
@@ -1605,9 +1624,9 @@ function GpuSection({ data }) {
         unit: "%",
         icon: Zap,
         label: "Usage",
-        value: data.gpuUsage,
-        progress: { value: data.gpuUsage },
-        colorClass: getUsageColor(data.gpuUsage)
+        value: usage,
+        progress: { value: usage },
+        colorClass: getUsageColor(usage)
       }
     )
   ] });
@@ -1615,17 +1634,25 @@ function GpuSection({ data }) {
 
 const {useMemo: useMemo$3} = await importShared('react');
 function MemorySection({ data }) {
+  const { name, used, total } = useMemo$3(
+    () => ({
+      total: data?.total || 0,
+      used: data?.used || 0,
+      name: data?.name || ""
+    }),
+    [data]
+  );
   const memPercentage = useMemo$3(() => {
-    return data.memTotal > 0 ? data.memUsed / data.memTotal * 100 : 0;
-  }, [data]);
-  return /* @__PURE__ */ jsxRuntimeExports.jsx(Section, { title: "Memory", icon: MemoryStick, children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+    return total > 0 ? used / total * 100 : 0;
+  }, [total, used]);
+  return /* @__PURE__ */ jsxRuntimeExports.jsx(Section, { title: name, icon: MemoryStick, children: /* @__PURE__ */ jsxRuntimeExports.jsx(
     MetricItem,
     {
       label: "RAM",
       icon: HardDrive,
       progress: { value: memPercentage },
-      colorClass: getUsageColor(memPercentage),
-      value: `${data.memUsed.toFixed(1)}/${data.memTotal}GB`
+      value: `${used.toFixed(1)}/${total}GB`,
+      colorClass: getUsageColor(memPercentage)
     }
   ) });
 }
@@ -1639,106 +1666,147 @@ const formatUptime = (seconds) => {
   if (hours > 0) return `${hours}h ${minutes}m`;
   return `${minutes}m`;
 };
-function UpTimeSection({ data }) {
-  const enabledMetrics = useSystemMonitorState("enabledMetrics");
-  const { upApp, upSystem } = useMemo$2(() => {
-    const upApp2 = enabledMetrics.includes("uptimeSeconds");
-    const upSystem2 = enabledMetrics.includes("uptimeSystemSeconds");
-    return { upApp: upApp2, upSystem: upSystem2 };
-  }, [enabledMetrics]);
+function UpTimeSection({ data, metrics }) {
+  const { hasApp, hasSystem } = useMemo$2(() => ({ hasApp: metrics.app, hasSystem: metrics.system }), [metrics]);
+  const { app, system } = useMemo$2(
+    () => ({
+      app: data?.app || 0,
+      system: data?.system || 0
+    }),
+    [data]
+  );
   return /* @__PURE__ */ jsxRuntimeExports.jsxs(Section, { icon: Clock, title: "Uptime", children: [
-    upSystem && /* @__PURE__ */ jsxRuntimeExports.jsx(MetricItem, { icon: Clock, label: "System", value: formatUptime(data.uptimeSystemSeconds) }),
-    upApp && /* @__PURE__ */ jsxRuntimeExports.jsx(MetricItem, { label: "App", icon: Activity, value: formatUptime(data.uptimeSeconds) })
+    hasSystem && /* @__PURE__ */ jsxRuntimeExports.jsx(MetricItem, { icon: Clock, label: "System", value: formatUptime(system) }),
+    hasApp && /* @__PURE__ */ jsxRuntimeExports.jsx(MetricItem, { label: "App", icon: Activity, value: formatUptime(app) })
   ] });
 }
 
+const {Link} = await importShared('@heroui/react');
+
 const {Divider: Divider$1} = await importShared('antd');
-const {useEffect: useEffect$3,useMemo: useMemo$1,useState: useState$2} = await importShared('react');
+const {useEffect: useEffect$4,useMemo: useMemo$1,useState: useState$3} = await importShared('react');
 const convertMBtoGB = (mb) => {
   return Number((mb / 1024).toFixed(2));
+};
+const initialData = {
+  gpu: [],
+  cpu: [],
+  memory: [],
+  uptime: {
+    system: 0,
+    app: 0
+  }
 };
 const HardwareStatusBar = ({ ref }) => {
   const enabled = useSystemMonitorState("enabled");
   const compactMode = useSystemMonitorState("compactMode");
   const enabledMetrics = useSystemMonitorState("enabledMetrics");
-  const [hardwareData, setHardwareData] = useState$2({
-    cpuTemp: 0,
-    cpuUsage: 0,
-    gpuTemp: 0,
-    gpuUsage: 0,
-    memUsed: 0,
-    memTotal: 0,
-    vramUsed: 0,
-    vramTotal: 0,
-    uptimeSystemSeconds: 0,
-    uptimeSeconds: 0
-  });
-  const [canScrollLeft, setCanScrollLeft] = useState$2(false);
-  const [canScrollRight, setCanScrollRight] = useState$2(false);
-  const [dataConnected, setDataConnected] = useState$2(false);
+  const [hardwareData, setHardwareData] = useState$3(initialData);
+  const [containerRef, setContainerRef] = useState$3(null);
+  const initRef = (node) => {
+    if (node) {
+      ref(node);
+      setContainerRef(node);
+    }
+  };
+  const [canScrollLeft, setCanScrollLeft] = useState$3(false);
+  const [canScrollRight, setCanScrollRight] = useState$3(false);
+  const [dataConnected, setDataConnected] = useState$3(false);
+  const [errorElement, setErrorElement] = useState$3(
+    /* @__PURE__ */ jsxRuntimeExports.jsx(ShinyText, { speed: 2, className: "font-semibold", text: "Waiting for hardware information..." })
+  );
   const updateScrollArrows = () => {
-    if (!ref.current) return;
-    const container = ref.current;
-    const { scrollLeft, scrollWidth, clientWidth } = container;
+    if (!containerRef) return;
+    const { scrollLeft, scrollWidth, clientWidth } = containerRef;
     setCanScrollLeft(scrollLeft > 0);
     setCanScrollRight(scrollLeft < scrollWidth - clientWidth - 1);
   };
   const scroll = (direction) => {
-    if (ref.current) {
-      ref.current.scrollBy({
+    if (containerRef) {
+      containerRef.scrollBy({
         left: direction === "left" ? -250 : 250,
         behavior: "smooth"
       });
     }
   };
-  useEffect$3(() => {
+  useEffect$4(() => {
     const handleHardwareUpdate = (_event, data) => {
       if (data) {
+        const cpu = data.CPU.map((item) => {
+          return {
+            name: item.Name,
+            temp: item.Sensors.find((sensor) => sensor.Name === "CPU Package" && sensor.Type === "Temperature")?.Value || 0,
+            usage: Math.round(
+              item.Sensors.find((sensor) => sensor.Name === "CPU Total" && sensor.Type === "Load")?.Value || 0
+            )
+          };
+        });
+        const gpu = data.GPU.map((item) => {
+          return {
+            name: item.Name,
+            temp: item.Sensors.find((sensor) => sensor.Name === "GPU Core" && sensor.Type === "Temperature")?.Value || 0,
+            usage: Math.round(
+              item.Sensors.find((sensor) => sensor.Name === "D3D 3D" && sensor.Type === "Load")?.Value || 0
+            ),
+            totalVram: convertMBtoGB(
+              item.Sensors.find((sensor) => sensor.Name === "GPU Memory Total" && sensor.Type === "SmallData")?.Value || 0
+            ),
+            usedVram: convertMBtoGB(
+              item.Sensors.find((sensor) => sensor.Name === "GPU Memory Used" && sensor.Type === "SmallData")?.Value || 0
+            )
+          };
+        });
+        const memory = data.Memory.map((item) => {
+          const used = Math.round(
+            item.Sensors.find((sensor) => sensor.Name === "Memory Used" && sensor.Type === "Data")?.Value || 0
+          );
+          const available = Math.round(
+            item.Sensors.find((sensor) => sensor.Name === "Memory Available" && sensor.Type === "Data")?.Value || 0
+          );
+          return {
+            name: item.Name,
+            used,
+            available,
+            total: Math.round(used + available)
+          };
+        });
         const uptimeSeconds = data.ElapsedTime?.rawSeconds || 0;
         const uptimeSystemSeconds = data.Uptime?.rawSeconds || 0;
-        const cpuTemp = data.CPU[0].Sensors.find((sensor) => sensor.Name === "CPU Package" && sensor.Type === "Temperature")?.Value || 0;
-        const cpuUsage = Math.round(
-          data.CPU[0].Sensors.find((sensor) => sensor.Name === "CPU Total" && sensor.Type === "Load")?.Value || 0
-        );
-        const gpuTemp = data.GPU[0].Sensors.find((sensor) => sensor.Name === "GPU Core" && sensor.Type === "Temperature")?.Value || 0;
-        const gpuUsage = Math.round(
-          data.GPU[0].Sensors.find((sensor) => sensor.Name === "D3D 3D" && sensor.Type === "Load")?.Value || 0
-        );
-        const vramTotal = convertMBtoGB(
-          data.GPU[0].Sensors.find((sensor) => sensor.Name === "GPU Memory Total" && sensor.Type === "SmallData")?.Value || 0
-        );
-        const vramUsed = convertMBtoGB(
-          data.GPU[0].Sensors.find((sensor) => sensor.Name === "GPU Memory Used" && sensor.Type === "SmallData")?.Value || 0
-        );
-        const memUsed = Math.round(
-          data.Memory[0].Sensors.find((sensor) => sensor.Name === "Memory Used" && sensor.Type === "Data")?.Value || 0
-        );
-        const memAvailable = Math.round(
-          data.Memory[0].Sensors.find((sensor) => sensor.Name === "Memory Available" && sensor.Type === "Data")?.Value || 0
-        );
-        const memTotal = Math.round(memUsed + memAvailable);
+        const uptime = { system: uptimeSystemSeconds, app: uptimeSeconds };
         const result = {
-          uptimeSeconds,
-          uptimeSystemSeconds,
-          cpuTemp,
-          cpuUsage,
-          gpuTemp,
-          gpuUsage,
-          vramTotal,
-          vramUsed,
-          memTotal,
-          memUsed
+          gpu,
+          cpu,
+          memory,
+          uptime
         };
         setHardwareData(result);
         setDataConnected(true);
       }
     };
     window.electron.ipcRenderer.on(HMONITOR_IPC_DATA_ID, handleHardwareUpdate);
+    window.electron.ipcRenderer.on(HMONITOR_IPC_ERROR_MONITORING, (_, error) => {
+      if (error.message.includes("dotnet")) {
+        setErrorElement(
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: ".NET 8 runtime not found. Please install it " }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx(
+              Link,
+              {
+                className: "cursor-pointer",
+                onPress: () => window.open("https://dotnet.microsoft.com/download/dotnet/8.0"),
+                children: "Here"
+              }
+            )
+          ] })
+        );
+      }
+    });
     return () => {
       window.electron.ipcRenderer.removeAllListeners(HMONITOR_IPC_DATA_ID);
+      window.electron.ipcRenderer.removeAllListeners(HMONITOR_IPC_ERROR_MONITORING);
     };
   }, []);
-  useEffect$3(() => {
+  useEffect$4(() => {
     updateScrollArrows();
     const handleResize = () => updateScrollArrows();
     window.removeEventListener("resize", handleResize);
@@ -1746,29 +1814,38 @@ const HardwareStatusBar = ({ ref }) => {
     return () => window.removeEventListener("resize", handleResize);
   }, [hardwareData]);
   const { hasCpuSection, hasMemory, hasUptime, hasGpuSection } = useMemo$1(() => {
-    const hasCpuSection2 = enabledMetrics.includes("cpuTemp") || enabledMetrics.includes("cpuUsage");
-    const hasGpuSection2 = enabledMetrics.includes("gpuTemp") || enabledMetrics.includes("gpuUsage");
-    const hasMemory2 = enabledMetrics.includes("memory");
-    const hasUptime2 = enabledMetrics.includes("uptimeSeconds") || enabledMetrics.includes("uptimeSystemSeconds");
+    if (!enabledMetrics) {
+      setErrorElement(
+        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-warning", children: "Couldn't load metrics settings. Please restart LynxHub." })
+      );
+      return { hasCpuSection: false, hasGpuSection: false, hasMemory: false, hasUptime: false };
+    }
+    const hasGpuSection2 = enabledMetrics.gpu.some(
+      (item) => item.active && (item.enabled.includes("temp") || item.enabled.includes("usage") || item.enabled.includes("vram"))
+    );
+    const hasCpuSection2 = enabledMetrics.cpu.some(
+      (item) => item.active && (item.enabled.includes("temp") || item.enabled.includes("usage"))
+    );
+    const hasMemory2 = enabledMetrics.memory.some((item) => item.active && item.enabled.includes("memory"));
+    const hasUptime2 = enabledMetrics.uptime.system || enabledMetrics.uptime.app;
     return { hasCpuSection: hasCpuSection2, hasGpuSection: hasGpuSection2, hasMemory: hasMemory2, hasUptime: hasUptime2 };
   }, [enabledMetrics]);
-  useEffect$3(() => {
-    const scrollContainer = ref.current;
-    if (scrollContainer) {
+  useEffect$4(() => {
+    if (containerRef) {
       const handleWheel = (event) => {
         if (!event.ctrlKey) {
           event.preventDefault();
-          scrollContainer.scrollLeft += event.deltaY;
+          containerRef.scrollLeft += event.deltaY;
         }
       };
-      scrollContainer.addEventListener("wheel", handleWheel);
+      containerRef.addEventListener("wheel", handleWheel);
       return () => {
-        scrollContainer.removeEventListener("wheel", handleWheel);
+        containerRef.removeEventListener("wheel", handleWheel);
       };
     }
     return () => {
     };
-  }, [ref]);
+  }, [containerRef]);
   if (!enabled) return null;
   return /* @__PURE__ */ jsxRuntimeExports.jsxs(
     "div",
@@ -1794,19 +1871,39 @@ const HardwareStatusBar = ({ ref }) => {
         /* @__PURE__ */ jsxRuntimeExports.jsx(
           "div",
           {
-            ref,
+            ref: initRef,
             onScroll: updateScrollArrows,
             style: { scrollbarWidth: "none", msOverflowStyle: "none" },
             className: `h-full flex items-center ${compactMode ? "px-2" : "px-3"} gap-x-4 overflow-x-auto scrollbar-hide`,
             children: dataConnected ? /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
-              hasCpuSection && /* @__PURE__ */ jsxRuntimeExports.jsx(CpuSection, { data: hardwareData }),
+              hasCpuSection && enabledMetrics.cpu.map((cpu, index) => /* @__PURE__ */ jsxRuntimeExports.jsx(
+                CpuSection,
+                {
+                  metrics: cpu,
+                  data: hardwareData.cpu.find((item) => item.name === cpu.name)
+                },
+                `hardware_${cpu.name}_${index}`
+              )),
               (hasGpuSection || hasMemory || hasUptime) && hasCpuSection && /* @__PURE__ */ jsxRuntimeExports.jsx(Divider$1, { type: "vertical", className: "mx-0" }),
-              hasGpuSection && /* @__PURE__ */ jsxRuntimeExports.jsx(GpuSection, { data: hardwareData }),
+              hasGpuSection && enabledMetrics.gpu.map((gpu, index) => /* @__PURE__ */ jsxRuntimeExports.jsx(
+                GpuSection,
+                {
+                  metrics: gpu,
+                  data: hardwareData.gpu.find((item) => item.name === gpu.name)
+                },
+                `hardware_${gpu.name}_${index}`
+              )),
               (hasGpuSection || hasUptime) && hasMemory && /* @__PURE__ */ jsxRuntimeExports.jsx(Divider$1, { type: "vertical", className: "mx-0" }),
-              hasMemory && /* @__PURE__ */ jsxRuntimeExports.jsx(MemorySection, { data: hardwareData }),
+              hasMemory && enabledMetrics.memory.map((memory, index) => /* @__PURE__ */ jsxRuntimeExports.jsx(
+                MemorySection,
+                {
+                  data: hardwareData.memory.find((item) => item.name === memory.name)
+                },
+                `hardware_${memory.name}_${index}`
+              )),
               (hasGpuSection || hasMemory) && hasUptime && /* @__PURE__ */ jsxRuntimeExports.jsx(Divider$1, { type: "vertical", className: "mx-0" }),
-              hasUptime && /* @__PURE__ */ jsxRuntimeExports.jsx(UpTimeSection, { data: hardwareData })
-            ] }) : /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "w-full text-center", children: /* @__PURE__ */ jsxRuntimeExports.jsx(ShinyText, { speed: 2, className: "font-semibold", text: "Waiting for hardware information..." }) })
+              hasUptime && /* @__PURE__ */ jsxRuntimeExports.jsx(UpTimeSection, { data: hardwareData.uptime, metrics: enabledMetrics.uptime })
+            ] }) : /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "w-full text-center", children: errorElement })
           }
         )
       ]
@@ -1836,6 +1933,8 @@ function Clock_Icon(props) {
   ] });
 }
 
+function mitt(n){return {all:n=n||new Map,on:function(t,e){var i=n.get(t);i?i.push(e):n.set(t,[e]);},off:function(t,e){var i=n.get(t);i&&(e?i.splice(i.indexOf(e)>>>0,1):n.set(t,[]));},emit:function(t,e){var i=n.get(t);i&&i.slice().map(function(n){n(e);}),(i=n.get("*"))&&i.slice().map(function(n){n(t,e);});}}}
+
 const storageChannels = {
   get: "storage:getData",
   getCustom: "storage:get-custom",
@@ -1849,37 +1948,44 @@ const ipc = window.electron.ipcRenderer;
 const rendererIpc = {
   /** Managing app storage data */
   storage: {
-    getCustom: (key) => ipc.invoke(storageChannels.getCustom, key),
-    setCustom: (key, data) => ipc.send(storageChannels.setCustom, key, data),
-    get: (key) => ipc.invoke(storageChannels.get, key),
-    getAll: () => ipc.invoke(storageChannels.getAll),
-    update: (key, updateData) => ipc.invoke(storageChannels.update, key, updateData),
-    clear: () => ipc.invoke(storageChannels.clear)
+    getCustom: (key) => {
+      extensionRendererApi.events_ipc.emit("storage_get_custom", { key });
+      return ipc.invoke(storageChannels.getCustom, key);
+    },
+    setCustom: (key, data) => {
+      extensionRendererApi.events_ipc.emit("storage_set_custom", { key, data });
+      ipc.send(storageChannels.setCustom, key, data);
+    },
+    get: (key) => {
+      extensionRendererApi.events_ipc.emit("storage_get", { key });
+      return ipc.invoke(storageChannels.get, key);
+    },
+    getAll: () => {
+      extensionRendererApi.events_ipc.emit("storage_get_all", {});
+      return ipc.invoke(storageChannels.getAll);
+    },
+    update: (key, updateData) => {
+      extensionRendererApi.events_ipc.emit("storage_update", { key, updateData });
+      return ipc.invoke(storageChannels.update, key, updateData);
+    },
+    clear: () => {
+      extensionRendererApi.events_ipc.emit("storage_clear", {});
+      return ipc.invoke(storageChannels.clear);
+    }
   }};
 
-const {addToast} = await importShared('@heroui/react');
-
-const {isEmpty: isEmpty$2,isNil} = await importShared('lodash');
-
-const {Fragment: Fragment$1,useMemo} = await importShared('react');
-function topToast(options) {
-  const { title, color = "success", timeout = 2e3, promise } = options;
-  addToast({
-    title,
-    color,
-    variant: "flat",
-    size: "sm",
-    timeout,
-    promise
-  });
-}
-const lynxTopToast = {
-  success: (title, timeout) => topToast({ title, color: "success", timeout }),
-  error: (title, timeout) => topToast({ title, color: "danger", timeout }),
-  warning: (title, timeout) => topToast({ title, color: "warning", timeout }),
-  info: (title, timeout) => topToast({ title, color: "default", timeout }),
-  loading: (title, promise) => topToast({ title, color: "default", promise, timeout: 1 })
-};
+mitt();
+const emitter_ipc = mitt();
+const extensionRendererApi = {
+  events_ipc: {
+    on: emitter_ipc.on,
+    off: emitter_ipc.off,
+    emit: emitter_ipc.emit,
+    getListenerCount: (eventName) => {
+      const listeners = emitter_ipc.all.get(eventName);
+      return listeners ? listeners.length : 0;
+    }
+  }};
 
 /** Detect free variable `global` from Node.js. */
 
@@ -2141,9 +2247,10 @@ const initialState$1 = {
   maximized: false,
   onFocus: true,
   navBar: true,
-  appTitle: void 0
+  appTitle: void 0,
+  toastPlacement: "top-center"
 };
-createSlice({
+const appSlice = createSlice({
   name: "app",
   initialState: initialState$1,
   reducers: {
@@ -2152,6 +2259,9 @@ createSlice({
     },
     setAppTitle: (state, action) => {
       state.appTitle = action.payload;
+    },
+    setToastPlacement: (state, action) => {
+      state.toastPlacement = action.payload;
     },
     toggleAppState: (state, action) => {
       const key = action.payload;
@@ -2162,6 +2272,38 @@ createSlice({
   }
 });
 const useAppState = (key) => useSelector$1((state) => state.app[key]);
+const appActions = appSlice.actions;
+
+const {addToast,Button: Button$2} = await importShared('@heroui/react');
+
+const {isEmpty: isEmpty$2,isNil} = await importShared('lodash');
+
+const {Fragment: Fragment$1,useEffect: useEffect$3,useMemo,useState: useState$2} = await importShared('react');
+function topToast(options) {
+  const { title, color = "success", timeout = 2e3, promise, placement } = options;
+  addToast({
+    title,
+    color,
+    variant: "flat",
+    size: "sm",
+    timeout,
+    promise,
+    classNames: {
+      base: placement.includes("top") ? "top-10" : `right-6 bottom-8 flex flex-col gap-y-2 cursor-default ${color === "danger" && "pt-6"}`
+    },
+    endContent: placement.includes("bottom") && color === "danger" ? /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "w-full flex flex-row justify-end", children: /* @__PURE__ */ jsxRuntimeExports.jsx(Button$2, { size: "sm", color: "warning", variant: "light", children: "Restart App" }) }) : null
+  });
+}
+const lynxTopToast = (dispatch, placement = "top-center") => {
+  dispatch(appActions.setToastPlacement(placement));
+  return {
+    success: (title, timeout) => topToast({ title, color: "success", timeout, placement }),
+    error: (title, timeout) => topToast({ title, color: "danger", timeout, placement }),
+    warning: (title, timeout) => topToast({ title, color: "warning", timeout, placement }),
+    info: (title, timeout) => topToast({ title, color: "default", timeout, placement }),
+    loading: (title, promise) => topToast({ title, color: "default", promise, timeout: 1, placement })
+  };
+};
 
 const {isEmpty: isEmpty$1} = await importShared('lodash');
 function convertBlobToDataUrl(blob) {
@@ -2207,7 +2349,7 @@ function useCachedImageUrl(id, url) {
 
 /*!
  * OverlayScrollbars
- * Version: 2.11.3
+ * Version: 2.11.4
  *
  * Copyright (c) Rene Haas | KingSora.
  * https://github.com/KingSora
@@ -2710,7 +2852,7 @@ const getTrasformTranslateValue = (t, n) => `translate${isObject(t) ? `(${t.x},$
 
 const elementHasDimensions = t => !!(t.offsetWidth || t.offsetHeight || t.getClientRects().length);
 
-const I = {
+const T = {
   w: 0,
   h: 0
 };
@@ -2718,11 +2860,11 @@ const I = {
 const getElmWidthHeightProperty = (t, n) => n ? {
   w: n[`${t}Width`],
   h: n[`${t}Height`]
-} : I;
+} : T;
 
 const getWindowSize = t => getElmWidthHeightProperty("inner", t || n);
 
-const T = bind(getElmWidthHeightProperty, "offset");
+const I = bind(getElmWidthHeightProperty, "offset");
 
 const A = bind(getElmWidthHeightProperty, "client");
 
@@ -2759,8 +2901,8 @@ const removeEventListener = (t, n, o, s) => {
 
 const addEventListener = (t, n, o, s) => {
   var e;
-  const c = (e = s && s.I) != null ? e : true;
-  const r = s && s.T || false;
+  const c = (e = s && s.T) != null ? e : true;
+  const r = s && s.I || false;
   const i = s && s.A || false;
   const l = {
     passive: c,
@@ -3063,7 +3205,7 @@ const opsStringify = t => JSON.stringify(t, ((t, n) => {
 
 const getPropByPath = (t, n) => t ? `${n}`.split(".").reduce(((t, n) => t && hasOwnProperty(t, n) ? t[n] : void 0), t) : void 0;
 
-const It = {
+const Tt = {
   paddingAbsolute: false,
   showNativeOverlaidScrollbars: false,
   update: {
@@ -3118,12 +3260,12 @@ const getOptionsDiff = (t, n) => {
 
 const createOptionCheck = (t, n, o) => s => [ getPropByPath(t, s), o || getPropByPath(n, s) !== void 0 ];
 
-let Tt;
+let It;
 
-const getNonce = () => Tt;
+const getNonce = () => It;
 
 const setNonce = t => {
-  Tt = t;
+  It = t;
 };
 
 let At;
@@ -3133,7 +3275,7 @@ const createEnvironment = () => {
     appendChildren(document.body, t);
     appendChildren(document.body, t);
     const s = A(t);
-    const e = T(t);
+    const e = I(t);
     const c = getFractionalSize(n);
     if (o) {
       removeElements(t);
@@ -3187,7 +3329,7 @@ const createEnvironment = () => {
       body: null
     }
   };
-  const g = assignDeep({}, It);
+  const g = assignDeep({}, Tt);
   const h = bind(assignDeep, {}, g);
   const b = bind(assignDeep, {}, v);
   const w = {
@@ -3459,7 +3601,7 @@ const createTrinsicObserver = (t, n) => {
       }));
     } else {
       const onSizeChanged = () => {
-        const t = T(s);
+        const t = I(s);
         triggerOnTrinsicChangedCallback(t);
       };
       push(n, createSizeObserver(s, onSizeChanged)());
@@ -3586,8 +3728,8 @@ const createObserversSetup = (t, n, o, s) => {
     }
     return s;
   };
-  const [z, I] = b ? createTrinsicObserver(v, onTrinsicChanged) : [];
-  const T = !w && createSizeObserver(v, onSizeChanged, {
+  const [z, T] = b ? createTrinsicObserver(v, onTrinsicChanged) : [];
+  const I = !w && createSizeObserver(v, onSizeChanged, {
     ft: true
   });
   const [A, M] = createDOMObserver(v, false, onHostMutation, {
@@ -3615,7 +3757,7 @@ const createObserversSetup = (t, n, o, s) => {
     if (k) {
       k.observe(v);
     }
-    const t = T && T();
+    const t = I && I();
     const n = z && z();
     const o = A();
     const s = C.G((t => {
@@ -3643,7 +3785,7 @@ const createObserversSetup = (t, n, o, s) => {
       o();
       s();
     };
-  }, ({zt: t, It: n, Tt: o}) => {
+  }, ({zt: t, Tt: n, It: o}) => {
     const s = {};
     const [l] = t("update.ignoreMutation");
     const [a, d] = t("update.attributes");
@@ -3689,7 +3831,7 @@ const createObserversSetup = (t, n, o, s) => {
     }
     if (m) {
       const t = M();
-      const n = I && I();
+      const n = T && T();
       const o = r && r();
       if (t) {
         assignDeep(s, onHostMutation(t[0], t[1], m));
@@ -3940,7 +4082,7 @@ const createScrollbarsSetupEvents = (t, n, o, s) => (r, i, l) => {
     const u = l ? "x" : "y";
     const createRelativeHandleMove = (t, n) => s => {
       const {Rt: e} = o;
-      const c = T(h)[a] - T(b)[a];
+      const c = I(h)[a] - I(b)[a];
       const r = n * s / c;
       const i = r * e[u];
       scrollElementTo(d, {
@@ -3963,15 +4105,15 @@ const createScrollbarsSetupEvents = (t, n, o, s) => (r, i, l) => {
         const g = bind(getBoundingClientRect, b);
         const y = bind(getBoundingClientRect, h);
         const getHandleOffset = (t, n) => (t || g())[i] - (n || y())[i];
-        const O = e(getBoundingClientRect(d)[r]) / T(d)[a] || 1;
+        const O = e(getBoundingClientRect(d)[r]) / I(d)[a] || 1;
         const $ = createRelativeHandleMove(getElementScroll(d)[u], 1 / O);
         const C = o[s];
         const x = g();
         const H = y();
         const E = x[r];
         const z = getHandleOffset(x, H) + E / 2;
-        const I = C - H[i];
-        const A = l ? 0 : I - z;
+        const T = C - H[i];
+        const A = l ? 0 : T - z;
         const releasePointerCapture = t => {
           runEachAndClear(k);
           _.releasePointerCapture(t.pointerId);
@@ -3979,7 +4121,7 @@ const createScrollbarsSetupEvents = (t, n, o, s) => (r, i, l) => {
         const D = l || t;
         const M = v();
         const k = [ addEventListener(p, n, releasePointerCapture), addEventListener(p, "selectstart", (t => preventDefault(t)), {
-          I: false
+          T: false
         }), addEventListener(h, n, releasePointerCapture), D && addEventListener(h, "pointermove", (t => $(A + (t[s] - C)))), D && (() => {
           const t = getElementScroll(d);
           M();
@@ -4041,13 +4183,26 @@ const createScrollbarsSetupEvents = (t, n, o, s) => (r, i, l) => {
     }));
     preventDefault(t);
   }), {
-    I: false,
-    T: true
-  }), addEventListener(g, "pointerdown", bind(addEventListener, p, "click", stopAndPrevent, {
-    A: true,
-    T: true,
-    I: false
+    T: false,
+    I: true
+  }), addEventListener(g, "pointerdown", (() => {
+    const t = addEventListener(p, "click", (t => {
+      n();
+      stopAndPrevent(t);
+    }), {
+      A: true,
+      I: true,
+      T: false
+    });
+    const n = addEventListener(p, "pointerup pointercancel", (() => {
+      n();
+      setTimeout(t, 150);
+    }), {
+      I: true,
+      T: true
+    });
   }), {
+    I: true,
     T: true
   }), createInteractiveScrollEvents(), y, m ]);
 };
@@ -4068,7 +4223,7 @@ const createScrollbarsSetup = (t, n, o, s, e, c) => {
   const [y, S] = selfClearTimeout((() => _));
   const [m, O] = createScrollbarsSetupElements(t, e, s, createScrollbarsSetupEvents(n, e, s, (t => isHoverablePointerType(t) && manageScrollbarsAutoHideInstantInteraction())));
   const {vt: $, Kt: C, bt: H} = e;
-  const {Ft: z, Pt: I, Nt: T, qt: A, Bt: D} = m;
+  const {Ft: z, Pt: T, Nt: I, qt: A, Bt: D} = m;
   const manageScrollbarsAutoHide = (t, n) => {
     S();
     if (t) {
@@ -4117,13 +4272,13 @@ const createScrollbarsSetup = (t, n, o, s, e, c) => {
     }
   })), addEventListener(C, "scroll", (t => {
     p((() => {
-      T();
+      I();
       manageScrollbarsAutoHideInstantInteraction();
     }));
     c(t);
     D();
   })) ];
-  return [ () => bind(runEachAndClear, push(M, O())), ({zt: t, Tt: n, Qt: e, Zt: c}) => {
+  return [ () => bind(runEachAndClear, push(M, O())), ({zt: t, It: n, Qt: e, Zt: c}) => {
     const {tn: r, nn: d, sn: p, en: v} = c || {};
     const {$t: g, ft: h} = e || {};
     const {B: w} = o;
@@ -4192,8 +4347,8 @@ const createScrollbarsSetup = (t, n, o, s, e, c) => {
       z(gt, !o);
     }
     if (K) {
-      T();
       I();
+      T();
       D();
       if (v) {
         A();
@@ -4225,7 +4380,7 @@ const createStructureSetupElements = t => {
   const $ = bind(w, S, i);
   const C = bind(y, S, l);
   const elementHasOverflow = t => {
-    const n = T(t);
+    const n = I(t);
     const o = D(t);
     const s = getStyles(t, m);
     const e = getStyles(t, O$1);
@@ -4235,11 +4390,11 @@ const createStructureSetupElements = t => {
   const H = x === v;
   const E = H && g;
   const z = !H && C(p);
-  const I = !H && x === z;
+  const T = !H && x === z;
   const A = E ? b : x;
   const M = E ? A : v;
   const k = !H && y(S, r, _);
-  const R = !I && z;
+  const R = !T && z;
   const V = [ R, A, k, M ].map((t => isHTMLElement(t) && !parent(t) && t));
   const elementIsGenerated = t => t && inArray(V, t);
   const L = !elementIsGenerated(A) && elementHasOverflow(A) ? A : v;
@@ -4282,8 +4437,8 @@ const createStructureSetupElements = t => {
       removeElements(t);
     };
     const prepareWrapUnwrapFocus = t => addEventListener(t, "focusin focusout focus blur", stopAndPrevent, {
-      T: true,
-      I: false
+      I: true,
+      T: false
     });
     const o = "tabindex";
     const s = getAttr(Q, o);
@@ -4342,7 +4497,7 @@ const createStructureSetupElements = t => {
   return [ X, appendElements, ct ];
 };
 
-const createTrinsicUpdateSegment = ({ht: t}) => ({Qt: n, un: o, Tt: s}) => {
+const createTrinsicUpdateSegment = ({ht: t}) => ({Qt: n, un: o, It: s}) => {
   const {Ct: e} = n || {};
   const {Ot: c} = o;
   const r = t && (e || s);
@@ -4358,7 +4513,7 @@ const createPaddingUpdateSegment = ({vt: t, rn: n, L: o, V: s}, e) => {
     i: equalTRBL,
     o: topRightBottomLeft()
   }, bind(topRightBottomLeft, t, "padding", ""));
-  return ({zt: t, Qt: i, un: l, Tt: a}) => {
+  return ({zt: t, Qt: i, un: l, It: a}) => {
     let [u, f] = r(a);
     const {U: _} = getEnvironment();
     const {_t: d, xt: p, $t: m} = i || {};
@@ -4455,7 +4610,7 @@ const createOverflowUpdateSegment = (t, s) => {
         stopPropagation(t);
       }
     }), {
-      T: true,
+      I: true,
       A: true
     });
     scrollElementTo(f, {
@@ -4524,8 +4679,8 @@ const createOverflowUpdateSegment = (t, s) => {
   };
   const [m, O] = createCache(y, bind(getFractionalSize, i));
   const [$, C] = createCache(y, bind(D, i));
-  const [z, I] = createCache(y);
-  const [T] = createCache(S);
+  const [z, T] = createCache(y);
+  const [I] = createCache(S);
   const [M, k] = createCache(y);
   const [R] = createCache(S);
   const [V] = createCache({
@@ -4541,7 +4696,7 @@ const createOverflowUpdateSegment = (t, s) => {
     const o = n ? X : Y;
     return `${o}${capitalizeFirstLetter(t)}`;
   };
-  return ({zt: n, Qt: o, un: l, Tt: a}, {_n: u}) => {
+  return ({zt: n, Qt: o, un: l, It: a}, {_n: u}) => {
     const {_t: f, Ht: _, xt: b, $t: w, ft: y, Et: S} = o || {};
     const x = P && P.R(t, s, l, e, n);
     const {X: H, Y: E, W: D} = x || {};
@@ -4552,7 +4707,7 @@ const createOverflowUpdateSegment = (t, s) => {
     const J = f || u || b || w || S || F;
     let G = O(a);
     let Q = C(a);
-    let tt = I(a);
+    let tt = T(a);
     let nt = k(a);
     if (F && v) {
       d(K, !q);
@@ -4584,7 +4739,7 @@ const createOverflowUpdateSegment = (t, s) => {
     const [et, ct] = tt;
     const [rt, it] = Q;
     const [lt, at] = G;
-    const [ut, ft] = T({
+    const [ut, ft] = I({
       x: et.w > 0,
       y: et.h > 0
     });
@@ -4702,20 +4857,20 @@ const createSetups = (t, n, o, s, e) => {
     if (o()) {
       return false;
     }
-    const {pn: r, Tt: i, It: a, vn: u} = t;
+    const {pn: r, It: i, Tt: a, vn: u} = t;
     const f = r || {};
     const _ = !!i || !c;
     const v = {
       zt: createOptionCheck(n, f, _),
       pn: f,
-      Tt: _
+      It: _
     };
     if (u) {
       g(v);
       return false;
     }
     const h = e || d(assignDeep({}, v, {
-      It: a
+      Tt: a
     }));
     const b = l(assignDeep({}, v, {
       un: p,
@@ -4787,7 +4942,7 @@ const OverlayScrollbars = (t, n, o) => {
       v(t, n);
       _(t, n);
     };
-    const [g, h, b, w, y] = createSetups(t, a, (() => r), (({pn: t, Tt: n}, {Qt: o, Zt: s}) => {
+    const [g, h, b, w, y] = createSetups(t, a, (() => r), (({pn: t, It: n}, {Qt: o, Zt: s}) => {
       const {_t: e, $t: c, Ct: r, xt: i, Ht: l, ft: a} = o;
       const {tn: u, nn: f, sn: _, en: d} = s;
       triggerEvent("updated", [ S, {
@@ -4891,8 +5046,8 @@ const OverlayScrollbars = (t, n, o) => {
         });
       },
       update: t => h({
-        Tt: t,
-        It: true
+        It: t,
+        Tt: true
       }),
       destroy: bind(destroy, false),
       plugin: t => l[keys(t)[0]]
@@ -5182,26 +5337,39 @@ function Settings_Icon(props) {
   ) });
 }
 
-const {Button: Button$1,Checkbox,Divider,Modal,ModalBody,ModalContent,ModalFooter,ModalHeader,NumberInput,Switch} = await importShared('@heroui/react');
-const {useState} = await importShared('react');
+const {Card: Card$2,CardBody: CardBody$1,CardHeader: CardHeader$1,Switch: Switch$1} = await importShared('@heroui/react');
+
+function SettingsModal_Card({ onPress, title, onValueChange, isSelected, children }) {
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs(
+    Card$2,
+    {
+      as: "div",
+      className: "border-1 border-foreground-100 pt-2 px-2 hover:border-foreground-200 transition-all duration-200 mt-4",
+      fullWidth: true,
+      children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsxs(CardHeader$1, { onClick: onPress, className: "flex flex-row justify-between cursor-pointer", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-medium", children: title }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx(Switch$1, { size: "md", isSelected, onValueChange })
+        ] }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx(CardBody$1, { children })
+      ]
+    }
+  );
+}
+
+const {Button: Button$1,Card: Card$1,CardBody,CardHeader,Checkbox,Divider,Modal,ModalBody,ModalContent,ModalFooter,ModalHeader,NumberInput,Switch} = await importShared('@heroui/react');
+const {useCallback: useCallback$1,useState} = await importShared('react');
 
 const {useDispatch: useDispatch$3} = await importShared('react-redux');
 const metrics = [
   {
-    id: "cpuTemp",
-    label: "CPU Temperature",
-    description: "Monitor CPU temperature in real-time",
+    id: "temp",
+    label: "Temperature",
+    description: "Monitor temperature in real-time",
     Icon: Thermometer
   },
-  { id: "cpuUsage", label: "CPU Usage", description: "Track CPU utilization percentage", Icon: Cpu },
-  {
-    id: "gpuTemp",
-    label: "GPU Temperature",
-    description: "Monitor GPU temperature in real-time",
-    Icon: Thermometer
-  },
-  { id: "gpuUsage", label: "GPU Usage", description: "Track GPU utilization percentage", Icon: Layers },
-  { id: "vram", label: "GPU VRAM", description: "Monitor GPU memory usage", Icon: Database },
+  { id: "usage", label: "Usage", description: "Track utilization percentage", Icon: Cpu },
+  { id: "vram", label: "VRAM", description: "Monitor GPU memory usage", Icon: Database },
   { id: "memory", label: "Memory Usage", description: "Monitor RAM usage and availability", Icon: Database },
   { id: "uptimeSystemSeconds", label: "System Uptime", description: "Track total system uptime", Icon: Clock },
   { id: "uptimeSeconds", label: "Application Uptime", description: "Track application runtime", Icon: Timer }
@@ -5213,6 +5381,8 @@ function SettingsModal({ show, isOpen, tabID }) {
   const compactMode = useSystemMonitorState("compactMode");
   const refreshInterval = useSystemMonitorState("refreshInterval");
   const showSectionLabel = useSystemMonitorState("showSectionLabel");
+  const showMetricLabel = useSystemMonitorState("showMetricLabel");
+  const availableHardware = useSystemMonitorState("availableHardware");
   const [isSaving, setIsSaving] = useState(false);
   const updateState = (key, value) => dispatch(
     systemMonitorActions.updateState({
@@ -5220,15 +5390,6 @@ function SettingsModal({ show, isOpen, tabID }) {
       value
     })
   );
-  const toggleMetric = (metric) => {
-    const newEnabledMetrics = new Set(enabledMetrics);
-    if (newEnabledMetrics.has(metric)) {
-      newEnabledMetrics.delete(metric);
-    } else {
-      newEnabledMetrics.add(metric);
-    }
-    updateState("enabledMetrics", Array.from(newEnabledMetrics));
-  };
   const onOpenChange = (value) => {
     if (!value) {
       rendererIpc.storage.getCustom(HMONITOR_STORAGE_ID).then((result) => {
@@ -5244,10 +5405,95 @@ function SettingsModal({ show, isOpen, tabID }) {
     setIsSaving(true);
     setTimeout(() => {
       setIsSaving(false);
-      lynxTopToast.success("Settings saved successfully!");
+      lynxTopToast(dispatch).success("Settings saved successfully!");
     }, 700);
     dispatch(systemMonitorActions.saveSettings());
   };
+  const getMetricItem = useCallback$1(
+    (item, type, name) => {
+      const result = metrics.find((metric) => metric.id === item);
+      if (!result) return null;
+      let isSelected;
+      let toggle;
+      if (type === "uptime") {
+        const upType = item === "uptimeSeconds" ? "app" : "system";
+        isSelected = enabledMetrics.uptime[upType];
+        const result2 = {
+          ...enabledMetrics.uptime,
+          [upType]: !isSelected
+        };
+        toggle = () => dispatch(systemMonitorActions.updateUptime(result2));
+      } else {
+        isSelected = !!enabledMetrics[type].find((metric) => metric.name === name)?.enabled.includes(item);
+        toggle = () => {
+          const targetMetric = enabledMetrics[type].find((metric) => metric.name === name);
+          if (!targetMetric) return;
+          const currentEnabled = new Set(targetMetric.enabled);
+          if (currentEnabled.has(item)) {
+            currentEnabled.delete(item);
+          } else {
+            currentEnabled.add(item);
+          }
+          const newEnabledMetrics = {
+            ...enabledMetrics,
+            [type]: enabledMetrics[type].map((metric) => {
+              if (metric.name !== name) return metric;
+              return {
+                ...metric,
+                enabled: Array.from(currentEnabled)
+              };
+            })
+          };
+          dispatch(systemMonitorActions.updateMetrics(newEnabledMetrics));
+        };
+      }
+      const { Icon } = result;
+      return /* @__PURE__ */ jsxRuntimeExports.jsxs(
+        "div",
+        {
+          className: "flex items-center justify-between rounded-lg px-2 py-2 hover:bg-content2 transition-all duration-300 cursor-pointer",
+          onClick: toggle,
+          children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-3", children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex h-9 w-9 items-center justify-center rounded-md bg-primary/10 text-primary", children: /* @__PURE__ */ jsxRuntimeExports.jsx(Icon, { className: "text-xl" }) }),
+              /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-medium", children: result.label }),
+                /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm text-default-500", children: result.description })
+              ] })
+            ] }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx(Checkbox, { color: "primary", onValueChange: toggle, isSelected })
+          ]
+        },
+        result.id
+      );
+    },
+    [enabledMetrics]
+  );
+  const toggleHardware = useCallback$1(
+    (name, type, value) => {
+      const isActive2 = enabledMetrics[type].find((metric) => metric.name === name)?.active;
+      if (isActive2 || value !== true) {
+        const result = {
+          ...enabledMetrics,
+          [type]: enabledMetrics[type].map((metric) => metric.name === name ? { ...metric, active: false } : metric)
+        };
+        dispatch(systemMonitorActions.updateMetrics(result));
+      } else {
+        const result = {
+          ...enabledMetrics,
+          [type]: enabledMetrics[type].map((metric) => metric.name === name ? { ...metric, active: true } : metric)
+        };
+        dispatch(systemMonitorActions.updateMetrics(result));
+      }
+    },
+    [enabledMetrics]
+  );
+  const isActive = useCallback$1(
+    (name, type) => {
+      return enabledMetrics[type].find((metric) => metric.name === name)?.active || false;
+    },
+    [enabledMetrics]
+  );
   return /* @__PURE__ */ jsxRuntimeExports.jsx(
     Modal,
     {
@@ -5353,46 +5599,101 @@ function SettingsModal({ show, isOpen, tabID }) {
                     )
                   ]
                 }
+              ),
+              /* @__PURE__ */ jsxRuntimeExports.jsxs(
+                "div",
+                {
+                  onClick: () => {
+                    updateState("showMetricLabel", !showMetricLabel);
+                  },
+                  className: "flex items-center justify-between rounded-lg px-2 py-2 hover:bg-content2 transition-all duration-300 cursor-pointer",
+                  children: [
+                    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+                      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-medium", children: "Show Metric Labels" }),
+                      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm text-default-500", children: "Display headers for metric items" })
+                    ] }),
+                    /* @__PURE__ */ jsxRuntimeExports.jsx(
+                      Switch,
+                      {
+                        onValueChange: (value) => {
+                          updateState("showMetricLabel", value);
+                        },
+                        size: "md",
+                        isSelected: showMetricLabel
+                      }
+                    )
+                  ]
+                }
               )
             ] }),
             /* @__PURE__ */ jsxRuntimeExports.jsx(Divider, { className: "my-4" }),
-            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "mb-3 text-medium font-medium", children: "Active Metrics" }),
-              /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "space-y-3", children: metrics.map((metric) => {
-                const { Icon } = metric;
-                return /* @__PURE__ */ jsxRuntimeExports.jsxs(
-                  "div",
-                  {
-                    className: "flex items-center justify-between rounded-lg px-2 py-2 hover:bg-content2 transition-all duration-300 cursor-pointer",
-                    onClick: () => toggleMetric(metric.id),
-                    children: [
-                      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-3", children: [
-                        /* @__PURE__ */ jsxRuntimeExports.jsx(
-                          "div",
-                          {
-                            className: "flex h-9 w-9 items-center justify-center rounded-md bg-primary/10 text-primary",
-                            children: /* @__PURE__ */ jsxRuntimeExports.jsx(Icon, { className: "text-xl" })
-                          }
-                        ),
-                        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
-                          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-medium", children: metric.label }),
-                          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm text-default-500", children: metric.description })
-                        ] })
-                      ] }),
-                      /* @__PURE__ */ jsxRuntimeExports.jsx(
-                        Checkbox,
-                        {
-                          color: "primary",
-                          onValueChange: () => toggleMetric(metric.id),
-                          isSelected: enabledMetrics.includes(metric.id)
-                        }
-                      )
-                    ]
-                  },
-                  metric.id
-                );
-              }) })
-            ] })
+            availableHardware.gpu.map((item) => /* @__PURE__ */ jsxRuntimeExports.jsxs(
+              SettingsModal_Card,
+              {
+                onPress: () => {
+                  toggleHardware(item, "gpu");
+                },
+                onValueChange: (value) => {
+                  toggleHardware(item, "gpu", value);
+                },
+                title: item,
+                isSelected: isActive(item, "gpu"),
+                children: [
+                  getMetricItem("temp", "gpu", item),
+                  getMetricItem("usage", "gpu", item),
+                  getMetricItem("vram", "gpu", item)
+                ]
+              },
+              `hardware_${item}_item`
+            )),
+            availableHardware.cpu.map((item) => /* @__PURE__ */ jsxRuntimeExports.jsxs(
+              SettingsModal_Card,
+              {
+                onPress: () => {
+                  toggleHardware(item, "cpu");
+                },
+                onValueChange: (value) => {
+                  toggleHardware(item, "cpu", value);
+                },
+                title: item,
+                isSelected: isActive(item, "cpu"),
+                children: [
+                  getMetricItem("temp", "cpu", item),
+                  getMetricItem("usage", "cpu", item)
+                ]
+              },
+              `hardware_${item}_item`
+            )),
+            availableHardware.memory.map((item) => /* @__PURE__ */ jsxRuntimeExports.jsx(
+              SettingsModal_Card,
+              {
+                onPress: () => {
+                  toggleHardware(item, "memory");
+                },
+                onValueChange: (value) => {
+                  toggleHardware(item, "memory", value);
+                },
+                title: item,
+                isSelected: isActive(item, "memory"),
+                children: getMetricItem("memory", "memory", item)
+              },
+              `hardware_${item}_item`
+            )),
+            /* @__PURE__ */ jsxRuntimeExports.jsxs(
+              Card$1,
+              {
+                className: "border-1 border-foreground-100 pt-2 px-2\r\n                    hover:border-foreground-200 transition-all duration-200 mt-4",
+                as: "div",
+                fullWidth: true,
+                children: [
+                  /* @__PURE__ */ jsxRuntimeExports.jsx(CardHeader, { className: "font-medium", children: "Uptime" }),
+                  /* @__PURE__ */ jsxRuntimeExports.jsxs(CardBody, { children: [
+                    getMetricItem("uptimeSystemSeconds", "uptime", "uptime"),
+                    getMetricItem("uptimeSeconds", "uptime", "uptime")
+                  ] })
+                ]
+              }
+            )
           ] })
         ] }),
         /* @__PURE__ */ jsxRuntimeExports.jsxs(ModalFooter, { className: "justify-between", children: [
@@ -5483,20 +5784,30 @@ function ToolsPage() {
 const {Fragment,useEffect} = await importShared('react');
 
 const {useDispatch} = await importShared('react-redux');
-function UpdateConfig() {
-  const dispatch = useDispatch();
-  useEffect(() => {
-    rendererIpc.storage.getCustom(HMONITOR_STORAGE_ID).then((result) => {
-      dispatch(systemMonitorActions.setConfig(result));
-    });
-  }, []);
-  return /* @__PURE__ */ jsxRuntimeExports.jsx(Fragment, {});
+function AddCustomHook(lynxAPI) {
+  const UpdateConfig = () => {
+    const dispatch = useDispatch();
+    useEffect(() => {
+      if (lynxAPI.rendererIpc) {
+        lynxAPI.rendererIpc.storage.getCustom(HMONITOR_STORAGE_ID).then((result) => {
+          dispatch(systemMonitorActions.setConfig(result));
+        });
+        window.electron.ipcRenderer.invoke(HMONITOR_IPC_GET_HARDWARE).then((data) => {
+          if (data) {
+            dispatch(systemMonitorActions.setAvailableHardware(data));
+          }
+        });
+      }
+    }, []);
+    return /* @__PURE__ */ jsxRuntimeExports.jsx(Fragment, {});
+  };
+  lynxAPI.addCustomHook(UpdateConfig);
 }
 
 function InitialExtensions(lynxAPI) {
   lynxAPI.statusBar.replaceContainer(HardwareStatusBar);
   lynxAPI.addReducer([{ name: "extension", reducer: extensionReducer }]);
-  lynxAPI.addCustomHook(UpdateConfig);
+  AddCustomHook(lynxAPI);
   lynxAPI.customizePages.tools.addComponent(ToolsPage);
   lynxAPI.addModal(ModalManager);
 }

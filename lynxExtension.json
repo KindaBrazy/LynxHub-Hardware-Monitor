@@ -2,17 +2,56 @@
   "$schema": "./lynxExtension.schema.json",
   "id": "lynxhub_hardware_monitor",
   "title": "Hardware Monitor",
-  "description": "A configurable LynxHub extension for real-time monitoring of CPU, GPU, and Memory usage, displayed conveniently in the status bar.",
+  "description": "A configurable and real-time monitoring of CPU, GPU, and Memory usage, displayed conveniently in the status bar.",
   "publishDate": "2025-06-07",
-  "requireAppBuild": 21,
-  "version": "0.10.0",
-  "updateDate": "2025-06-08 10:15",
+  "requireAppBuild": 24,
+  "version": "0.11.0",
+  "updateDate": "2025-07-28",
   "repoUrl": "https://github.com/KindaBrazy/LynxHub-Hardware-Monitor",
   "avatarUrl": "https://raw.githubusercontent.com/KindaBrazy/LynxHub-Hardware-Monitor/refs/heads/source_ea/resources/icon.png",
-  "platforms": [
-    "win32"
-  ],
+  "platforms": ["win32"],
   "changeLog": [
+    {
+      "title": "Version 0.11.0",
+      "items": [
+        {
+          "label": "🚀 New Features",
+          "subitems": [
+            {
+              "label": "Multi-hardware metrics toggle added."
+            },
+            {
+              "label": "Option to toggle metric labels."
+            }
+          ]
+        },
+        {
+          "label": "⚡ Improvements",
+          "subitems": [
+            {
+              "label": "Updated LynxHub API support."
+            },
+            {
+              "label": "Clearer errors for unavailable metrics."
+            },
+            {
+              "label": "Admin privilege required for metrics noted."
+            }
+          ]
+        },
+        {
+          "label": "🪲 Bug Fixes",
+          "subitems": [
+            {
+              "label": "Performance and interval issues fixed."
+            },
+            {
+              "label": "Fixed white screen issue from extensions."
+            }
+          ]
+        }
+      ]
+    },
     {
       "title": "Version 0.10.1",
       "items": [

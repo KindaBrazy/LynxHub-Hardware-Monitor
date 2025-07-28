@@ -1,18 +1,22 @@
-import { c as clamp, i as isEasingArray, N as NativeAnimation, s as supportsLinearEasing, a as supportedWaapiEasing, b as isBezierDefinition, m as memo, r as resolveElements, g as getValueAsType, n as numberValueTypes, f as frame, e as cancelFrame, t as transformPropOrder, h as transformProps, j as isHTMLElement, M as MotionValue, k as isCSSVar, p as px, l as statsBuffer, o as frameData, q as activeAnimations, u as interpolate, v as collectMotionValues, w as motionValue, x as isMotionValue, J as JSAnimation, y as getValueTransition$1, z as secondsToMilliseconds, A as applyGeneratorOptions, B as mapEasingToNativeEasing, C as microtask, D as removeItem, E as noop, F as stepsOrder, G as createMotionComponentFactory, H as animations, I as createDomVisualElement, K as layout, L as drag, O as gestureAnimations, P as createDOMMotionComponentProxy, Q as isSVGElement, R as progress, S as velocityPerSecond, T as defaultOffset$1, U as supportsScrollTimeline, V as useConstant, W as useIsomorphicLayoutEffect, X as warning, Y as MotionConfigContext, Z as hasReducedMotionListener, _ as initPrefersReducedMotion, $ as prefersReducedMotion, a0 as animateVisualElement, a1 as setTarget, a2 as mixNumber, a3 as createGeneratorEasing, a4 as fillOffset, a5 as isGenerator, a6 as VisualElement, a7 as createBox, a8 as isSVGSVGElement, a9 as SVGVisualElement, aa as HTMLVisualElement, ab as visualElementStore, ac as animateSingleValue, ad as animateTarget, ae as spring, af as fillWildcards, ag as PresenceContext, ah as addDomEvent, ai as motionComponentSymbol, aj as rootProjectionNode, ak as MotionGlobalConfig, al as useForceUpdate, am as optimizedAppearDataId, an as startWaapiAnimation, ao as getOptimisedAppearId, ap as makeUseVisualState, aq as LayoutGroup, ar as MotionContext, as as moveItem, at as easingDefinitionToFunction } from './index-C0vUcMw0.js';
-export { au as AnimatePresence, be as AsyncMotionValueAnimation, bq as DOMKeyframesResolver, aR as DeprecatedLayoutGroupContext, aQ as FlatTree, br as KeyframeResolver, aO as LayoutGroupContext, av as LazyMotion, aw as MotionConfig, bg as NativeAnimationExtended, a$ as SubscriptionManager, aP as SwitchLayoutGroupContext, aF as WillChangeMotionValue, bw as acceleratedValues, ay as addPointerEvent, az as addPointerInfo, aL as addScaleCorrector, aV as addUniqueItem, c9 as alpha, c2 as analyseComplexValue, bf as animateValue, b1 as anticipate, b2 as backIn, b3 as backInOut, b4 as backOut, aM as buildTransform, bo as calcGeneratorDuration, aA as calcLength, bz as cancelMicrotask, b5 as circIn, b6 as circInOut, b7 as circOut, bY as color, c3 as complex, bt as convertOffsetToTimes, by as createRenderBatcher, aJ as createRendererMotionComponent, b8 as cubicBezier, bu as cubicBezierAsString, bm as defaultEasing, bI as defaultTransformValue, c6 as defaultValueTypes, cc as degrees, aS as delay, c4 as dimensionValueTypes, aT as distance, aU as distance2D, d as domAnimation, aD as domMax, b9 as easeIn, ba as easeInOut, bb as easeOut, aB as filterProps, c5 as findDimensionValueType, cj as findValueType, bs as flushKeyframeResolvers, ck as frameSteps, bx as generateLinearEasing, ci as getAnimatableNone, c7 as getDefaultValueType, bQ as getMixer, bh as getVariableValue, bZ as hex, bE as hover, b_ as hsla, b$ as hslaToRgba, bl as inertia, aW as invariant, bV as invisibleValues, aC as isBrowser, bj as isCSSVariableName, bk as isCSSVariableToken, bB as isDragActive, bC as isDragging, bG as isNodeOrChild, aX as isNumericalString, aY as isObject, bH as isPrimaryPointer, aK as isValidMotionProp, aZ as isZeroValueString, bn as keyframes, ax as m, bp as maxGeneratorDuration, b0 as millisecondsToSeconds, bc as mirrorEasing, bN as mix, bR as mixArray, bO as mixColor, bS as mixComplex, bU as mixImmediate, bP as mixLinearColor, bT as mixObject, bW as mixVisibility, ca as number, aN as optimizedAppearDataAttribute, bi as parseCSSVariable, bJ as parseValueFromTransform, cd as percent, a_ as pipe, bM as positionalKeys, bF as press, ce as progressPercentage, bK as readTransformValue, aG as resolveMotionValue, bd as reverseEasing, c0 as rgbUnit, c1 as rgba, cb as scale, bD as setDragLock, bL as setStyle, bv as supportsBrowserAnimation, bX as supportsFlags, ch as testValueType, bA as time, c8 as transformValueTypes, aH as useIsPresent, aI as usePresence, aE as useWillChange, cf as vh, cg as vw } from './index-C0vUcMw0.js';
+import { c as clamp, i as isEasingArray, N as NativeAnimation, s as supportsLinearEasing, a as supportedWaapiEasing, b as isBezierDefinition, m as memo, r as resolveElements, g as getValueAsType, n as numberValueTypes, f as frame, e as cancelFrame, t as transformPropOrder, h as transformProps, j as isHTMLElement, M as MotionValue, k as isCSSVar, p as px, l as isSVGElement, o as statsBuffer, q as frameData, u as activeAnimations, v as easingDefinitionToFunction, w as interpolate, x as collectMotionValues, y as motionValue, z as isMotionValue, J as JSAnimation, A as getValueTransition$1, B as secondsToMilliseconds, C as applyGeneratorOptions, D as mapEasingToNativeEasing, E as microtask, F as removeItem, G as noop, H as stepsOrder, I as layout, K as drag, L as gestureAnimations, O as animations, P as createMotionProxy, Q as createDomVisualElement, R as progress, S as velocityPerSecond, T as defaultOffset$1, U as supportsScrollTimeline, V as useConstant, W as useIsomorphicLayoutEffect, X as invariant, Y as MotionConfigContext, Z as hasReducedMotionListener, _ as initPrefersReducedMotion, $ as prefersReducedMotion, a0 as animateVisualElement, a1 as setTarget, a2 as mixNumber, a3 as createGeneratorEasing, a4 as fillOffset, a5 as isGenerator, a6 as VisualElement, a7 as createBox, a8 as isSVGSVGElement, a9 as SVGVisualElement, aa as HTMLVisualElement, ab as visualElementStore, ac as animateSingleValue, ad as animateTarget, ae as spring, af as fillWildcards, ag as PresenceContext, ah as addDomEvent, ai as motionComponentSymbol, aj as rootProjectionNode, ak as MotionGlobalConfig, al as useForceUpdate, am as optimizedAppearDataId, an as startWaapiAnimation, ao as getOptimisedAppearId, ap as makeUseVisualState, aq as LayoutGroup, ar as MotionContext, as as moveItem } from './index-DiboZtIl.js';
+export { at as AnimatePresence, bc as AsyncMotionValueAnimation, bo as DOMKeyframesResolver, aP as DeprecatedLayoutGroupContext, aO as FlatTree, bp as KeyframeResolver, aM as LayoutGroupContext, au as LazyMotion, av as MotionConfig, be as NativeAnimationExtended, aZ as SubscriptionManager, aN as SwitchLayoutGroupContext, aE as WillChangeMotionValue, bu as acceleratedValues, ax as addPointerEvent, ay as addPointerInfo, aJ as addScaleCorrector, aT as addUniqueItem, c7 as alpha, c0 as analyseComplexValue, bd as animateValue, a$ as anticipate, b0 as backIn, b1 as backInOut, b2 as backOut, aK as buildTransform, bm as calcGeneratorDuration, az as calcLength, bx as cancelMicrotask, b3 as circIn, b4 as circInOut, b5 as circOut, bW as color, c1 as complex, br as convertOffsetToTimes, bw as createRenderBatcher, b6 as cubicBezier, bs as cubicBezierAsString, bk as defaultEasing, bG as defaultTransformValue, c4 as defaultValueTypes, ca as degrees, aQ as delay, c2 as dimensionValueTypes, aR as distance, aS as distance2D, d as domAnimation, aC as domMax, b7 as easeIn, b8 as easeInOut, b9 as easeOut, aA as filterProps, c3 as findDimensionValueType, ch as findValueType, bq as flushKeyframeResolvers, ci as frameSteps, bv as generateLinearEasing, cg as getAnimatableNone, c5 as getDefaultValueType, bO as getMixer, bf as getVariableValue, bX as hex, bC as hover, bY as hsla, bZ as hslaToRgba, bj as inertia, bT as invisibleValues, aB as isBrowser, bh as isCSSVariableName, bi as isCSSVariableToken, bz as isDragActive, bA as isDragging, bE as isNodeOrChild, aV as isNumericalString, aW as isObject, bF as isPrimaryPointer, aI as isValidMotionProp, aX as isZeroValueString, bl as keyframes, aw as m, bn as maxGeneratorDuration, a_ as millisecondsToSeconds, ba as mirrorEasing, bL as mix, bP as mixArray, bM as mixColor, bQ as mixComplex, bS as mixImmediate, bN as mixLinearColor, bR as mixObject, bU as mixVisibility, c8 as number, aL as optimizedAppearDataAttribute, bg as parseCSSVariable, bH as parseValueFromTransform, cb as percent, aY as pipe, bK as positionalKeys, bD as press, cc as progressPercentage, bI as readTransformValue, aF as resolveMotionValue, bb as reverseEasing, b_ as rgbUnit, b$ as rgba, c9 as scale, bB as setDragLock, bJ as setStyle, bt as supportsBrowserAnimation, bV as supportsFlags, cf as testValueType, by as time, c6 as transformValueTypes, aG as useIsPresent, aH as usePresence, aD as useWillChange, cd as vh, ce as vw, aU as warning } from './index-DiboZtIl.js';
 import { importShared } from './__federation_fn_import-JrT3xvdd.js';
 import { j as jsxRuntimeExports } from './jsx-runtime-BA-u0cS_.js';
+
+function formatErrorMessage(message, errorCode) {
+    return errorCode
+        ? `${message}. For more information and steps for solving, visit https://motion.dev/troubleshooting/${errorCode}`
+        : message;
+}
 
 const warned = new Set();
 function hasWarned(message) {
     return warned.has(message);
 }
-function warnOnce(condition, message, element) {
+function warnOnce(condition, message, errorCode) {
     if (condition || warned.has(message))
         return;
-    console.warn(message);
-    if (element)
-        console.warn(element);
+    console.warn(formatErrorMessage(message, errorCode));
     warned.add(message);
 }
 
@@ -436,6 +440,99 @@ function getComputedStyle$1(element, name) {
         : computedStyle[name];
 }
 
+const resizeHandlers = new WeakMap();
+let observer;
+const getSize = (borderBoxAxis, svgAxis, htmlAxis) => (target, borderBoxSize) => {
+    if (borderBoxSize && borderBoxSize[0]) {
+        return borderBoxSize[0][(borderBoxAxis + "Size")];
+    }
+    else if (isSVGElement(target) && "getBBox" in target) {
+        return target.getBBox()[svgAxis];
+    }
+    else {
+        return target[htmlAxis];
+    }
+};
+const getWidth = /*@__PURE__*/ getSize("inline", "width", "offsetWidth");
+const getHeight = /*@__PURE__*/ getSize("block", "height", "offsetHeight");
+function notifyTarget({ target, borderBoxSize }) {
+    resizeHandlers.get(target)?.forEach((handler) => {
+        handler(target, {
+            get width() {
+                return getWidth(target, borderBoxSize);
+            },
+            get height() {
+                return getHeight(target, borderBoxSize);
+            },
+        });
+    });
+}
+function notifyAll(entries) {
+    entries.forEach(notifyTarget);
+}
+function createResizeObserver() {
+    if (typeof ResizeObserver === "undefined")
+        return;
+    observer = new ResizeObserver(notifyAll);
+}
+function resizeElement(target, handler) {
+    if (!observer)
+        createResizeObserver();
+    const elements = resolveElements(target);
+    elements.forEach((element) => {
+        let elementHandlers = resizeHandlers.get(element);
+        if (!elementHandlers) {
+            elementHandlers = new Set();
+            resizeHandlers.set(element, elementHandlers);
+        }
+        elementHandlers.add(handler);
+        observer?.observe(element);
+    });
+    return () => {
+        elements.forEach((element) => {
+            const elementHandlers = resizeHandlers.get(element);
+            elementHandlers?.delete(handler);
+            if (!elementHandlers?.size) {
+                observer?.unobserve(element);
+            }
+        });
+    };
+}
+
+const windowCallbacks = new Set();
+let windowResizeHandler;
+function createWindowResizeHandler() {
+    windowResizeHandler = () => {
+        const info = {
+            get width() {
+                return window.innerWidth;
+            },
+            get height() {
+                return window.innerHeight;
+            },
+        };
+        windowCallbacks.forEach((callback) => callback(info));
+    };
+    window.addEventListener("resize", windowResizeHandler);
+}
+function resizeWindow(callback) {
+    windowCallbacks.add(callback);
+    if (!windowResizeHandler)
+        createWindowResizeHandler();
+    return () => {
+        windowCallbacks.delete(callback);
+        if (!windowCallbacks.size &&
+            typeof windowResizeHandler === "function") {
+            window.removeEventListener("resize", windowResizeHandler);
+            windowResizeHandler = undefined;
+        }
+    };
+}
+
+function resize(a, b) {
+    return typeof a === "function" ? resizeWindow(a) : resizeElement(a, b);
+}
+
 function observeTimeline(update, timeline) {
     let prevProgress;
     const onFrame = () => {
@@ -561,6 +658,29 @@ function recordStats() {
     };
     frame.postRender(record, true);
     return reportStats;
+}
+
+function getOriginIndex(from, total) {
+    if (from === "first") {
+        return 0;
+    }
+    else {
+        const lastIndex = total - 1;
+        return from === "last" ? lastIndex : lastIndex / 2;
+    }
+}
+function stagger(duration = 0.1, { startDelay = 0, from = 0, ease } = {}) {
+    return (i, total) => {
+        const fromIndex = typeof from === "number" ? from : getOriginIndex(from, total);
+        const distance = Math.abs(fromIndex - i);
+        let delay = duration * distance;
+        if (ease) {
+            const maxDelay = total * duration;
+            const easingFunction = easingDefinitionToFunction(ease);
+            delay = easingFunction(delay / maxDelay) * maxDelay;
+        }
+        return startDelay + delay;
+    };
 }
 
 function transform(...args) {
@@ -976,7 +1096,7 @@ function addToQueue(builder) {
 
 class ViewTransitionBuilder {
     constructor(update, options = {}) {
-        this.currentTarget = "root";
+        this.currentSubject = "root";
         this.targets = new Map();
         this.notifyReady = noop;
         this.readyPromise = new Promise((resolve) => {
@@ -989,8 +1109,8 @@ class ViewTransitionBuilder {
         };
         addToQueue(this);
     }
-    get(selector) {
-        this.currentTarget = selector;
+    get(subject) {
+        this.currentSubject = subject;
         return this;
     }
     layout(keyframes, options) {
@@ -1019,11 +1139,11 @@ class ViewTransitionBuilder {
         return this;
     }
     updateTarget(target, keyframes, options = {}) {
-        const { currentTarget, targets } = this;
-        if (!targets.has(currentTarget)) {
-            targets.set(currentTarget, {});
+        const { currentSubject, targets } = this;
+        if (!targets.has(currentSubject)) {
+            targets.set(currentSubject, {});
         }
-        const targetData = targets.get(currentTarget);
+        const targetData = targets.get(currentSubject);
         targetData[target] = { keyframes, options };
     }
     then(resolve, reject) {
@@ -1050,20 +1170,20 @@ const cancelSync = stepsOrder.reduce((acc, key) => {
     return acc;
 }, {});
 
-const createMotionComponent = /*@__PURE__*/ createMotionComponentFactory({
+const featureBundle = {
     ...animations,
     ...gestureAnimations,
     ...drag,
     ...layout,
-}, createDomVisualElement);
+};
 
-const motion = /*@__PURE__*/ createDOMMotionComponentProxy(createMotionComponent);
+const motion = /*@__PURE__*/ createMotionProxy(featureBundle, createDomVisualElement);
 
-const {useEffect: useEffect$7} = await importShared('react');
+const {useEffect: useEffect$8} = await importShared('react');
 
 
 function useUnmountEffect(callback) {
-    return useEffect$7(() => () => callback(), []);
+    return useEffect$8(() => () => callback(), []);
 }
 
 /**
@@ -1085,99 +1205,6 @@ function useMotionValueEvent(value, event, callback) {
      * miss changes from lower down the tree.
      */
     useInsertionEffect$1(() => value.on(event, callback), [value, event, callback]);
-}
-
-const resizeHandlers = new WeakMap();
-let observer;
-function getElementSize(target, borderBoxSize) {
-    if (borderBoxSize) {
-        const { inlineSize, blockSize } = borderBoxSize[0];
-        return { width: inlineSize, height: blockSize };
-    }
-    else if (isSVGElement(target) && "getBBox" in target) {
-        return target.getBBox();
-    }
-    else {
-        return {
-            width: target.offsetWidth,
-            height: target.offsetHeight,
-        };
-    }
-}
-function notifyTarget({ target, contentRect, borderBoxSize, }) {
-    resizeHandlers.get(target)?.forEach((handler) => {
-        handler({
-            target,
-            contentSize: contentRect,
-            get size() {
-                return getElementSize(target, borderBoxSize);
-            },
-        });
-    });
-}
-function notifyAll(entries) {
-    entries.forEach(notifyTarget);
-}
-function createResizeObserver() {
-    if (typeof ResizeObserver === "undefined")
-        return;
-    observer = new ResizeObserver(notifyAll);
-}
-function resizeElement(target, handler) {
-    if (!observer)
-        createResizeObserver();
-    const elements = resolveElements(target);
-    elements.forEach((element) => {
-        let elementHandlers = resizeHandlers.get(element);
-        if (!elementHandlers) {
-            elementHandlers = new Set();
-            resizeHandlers.set(element, elementHandlers);
-        }
-        elementHandlers.add(handler);
-        observer?.observe(element);
-    });
-    return () => {
-        elements.forEach((element) => {
-            const elementHandlers = resizeHandlers.get(element);
-            elementHandlers?.delete(handler);
-            if (!elementHandlers?.size) {
-                observer?.unobserve(element);
-            }
-        });
-    };
-}
-
-const windowCallbacks = new Set();
-let windowResizeHandler;
-function createWindowResizeHandler() {
-    windowResizeHandler = () => {
-        const size = {
-            width: window.innerWidth,
-            height: window.innerHeight,
-        };
-        const info = {
-            target: window,
-            size,
-            contentSize: size,
-        };
-        windowCallbacks.forEach((callback) => callback(info));
-    };
-    window.addEventListener("resize", windowResizeHandler);
-}
-function resizeWindow(callback) {
-    windowCallbacks.add(callback);
-    if (!windowResizeHandler)
-        createWindowResizeHandler();
-    return () => {
-        windowCallbacks.delete(callback);
-        if (!windowCallbacks.size && windowResizeHandler) {
-            windowResizeHandler = undefined;
-        }
-    };
-}
-
-function resize(a, b) {
-    return typeof a === "function" ? resizeWindow(a) : resizeElement(a, b);
 }
 
 /**
@@ -1580,26 +1607,25 @@ function scroll(onScroll, { axis = "y", container = document.scrollingElement, .
         : attachToAnimation(onScroll, optionsWithDefaults);
 }
 
-const {useEffect: useEffect$6} = await importShared('react');
+const {useRef: useRef$4,useCallback: useCallback$2,useEffect: useEffect$7} = await importShared('react');
 
-function refWarning(name, ref) {
-    warning(Boolean(!ref || ref.current));
-}
 const createScrollMotionValues = () => ({
     scrollX: motionValue(0),
     scrollY: motionValue(0),
     scrollXProgress: motionValue(0),
     scrollYProgress: motionValue(0),
 });
-function useScroll({ container, target, layoutEffect = true, ...options } = {}) {
+const isRefPending = (ref) => {
+    if (!ref)
+        return false;
+    return !ref.current;
+};
+function useScroll({ container, target, ...options } = {}) {
     const values = useConstant(createScrollMotionValues);
-    const useLifecycleEffect = layoutEffect
-        ? useIsomorphicLayoutEffect
-        : useEffect$6;
-    useLifecycleEffect(() => {
-        refWarning("target", target);
-        refWarning("container", container);
-        return scroll((_progress, { x, y, }) => {
+    const scrollAnimation = useRef$4(null);
+    const needsStart = useRef$4(false);
+    const start = useCallback$2(() => {
+        scrollAnimation.current = scroll((_progress, { x, y, }) => {
             values.scrollX.set(x.current);
             values.scrollXProgress.set(x.progress);
             values.scrollY.set(y.current);
@@ -1609,7 +1635,30 @@ function useScroll({ container, target, layoutEffect = true, ...options } = {}) 
             container: container?.current || undefined,
             target: target?.current || undefined,
         });
+        return () => {
+            scrollAnimation.current?.();
+        };
     }, [container, target, JSON.stringify(options.offset)]);
+    useIsomorphicLayoutEffect(() => {
+        needsStart.current = false;
+        if (isRefPending(container) || isRefPending(target)) {
+            needsStart.current = true;
+            return;
+        }
+        else {
+            return start();
+        }
+    }, [start]);
+    useEffect$7(() => {
+        if (needsStart.current) {
+            invariant(!isRefPending(container));
+            invariant(!isRefPending(target));
+            return start();
+        }
+        else {
+            return;
+        }
+    }, [start]);
     return values;
 }
 
@@ -1621,7 +1670,7 @@ function useViewportScroll() {
   return useScroll();
 }
 
-const {useContext: useContext$6,useState: useState$4,useEffect: useEffect$5} = await importShared('react');
+const {useContext: useContext$6,useState: useState$5,useEffect: useEffect$6} = await importShared('react');
 
 /**
  * Creates a `MotionValue` to track the state and velocity of a value.
@@ -1649,8 +1698,8 @@ function useMotionValue(initial) {
      */
     const { isStatic } = useContext$6(MotionConfigContext);
     if (isStatic) {
-        const [, setLatest] = useState$4(initial);
-        useEffect$5(() => value.on("change", setLatest), []);
+        const [, setLatest] = useState$5(initial);
+        useEffect$6(() => value.on("change", setLatest), []);
     }
     return value;
 }
@@ -1782,12 +1831,12 @@ function useSpring(source, options = {}) {
     return value;
 }
 
-const {useRef: useRef$3,useContext: useContext$4,useEffect: useEffect$4} = await importShared('react');
+const {useRef: useRef$3,useContext: useContext$4,useEffect: useEffect$5} = await importShared('react');
 
 function useAnimationFrame(callback) {
     const initialTimestamp = useRef$3(0);
     const { isStatic } = useContext$4(MotionConfigContext);
-    useEffect$4(() => {
+    useEffect$5(() => {
         if (isStatic)
             return;
         const provideTimeSinceStart = ({ timestamp, delta }) => {
@@ -1836,10 +1885,10 @@ function useVelocity(value) {
     return velocity;
 }
 
-const {useState: useState$3} = await importShared('react');
+const {useState: useState$4} = await importShared('react');
 function useReducedMotion() {
   !hasReducedMotionListener.current && initPrefersReducedMotion();
-  const [shouldReduceMotion] = useState$3(prefersReducedMotion.current);
+  const [shouldReduceMotion] = useState$4(prefersReducedMotion.current);
   return shouldReduceMotion;
 }
 
@@ -1963,6 +2012,9 @@ function calcNextTime(current, next, prev, labels) {
     else if (next === "<") {
         return prev;
     }
+    else if (next.startsWith("<")) {
+        return Math.max(0, prev + parseFloat(next.slice(1)));
+    }
     else {
         return labels.get(next) ?? current;
     }
@@ -2076,7 +2128,7 @@ function createAnimationsFromSequence(sequence, { defaultTransition = {}, ...seq
             const numKeyframes = valueKeyframesAsList.length;
             const createGenerator = isGenerator(type)
                 ? type
-                : generators?.[type];
+                : generators?.[type || "keyframes"];
             if (numKeyframes <= 2 && createGenerator) {
                 /**
                  * As we're creating an easing function from a spring,
@@ -2402,6 +2454,9 @@ function createScopedAnimate(scope) {
         const animation = new GroupAnimationWithThen(animations);
         if (scope) {
             scope.animations.push(animation);
+            animation.finished.then(() => {
+                removeItem(scope.animations, animation);
+            });
         }
         return animation;
     }
@@ -2417,6 +2472,7 @@ function useAnimate() {
     const animate = useConstant(() => createScopedAnimate(scope));
     useUnmountEffect(() => {
         scope.animations.forEach((animation) => animation.stop());
+        scope.animations.length = 0;
     });
     return [scope, animate];
 }
@@ -2542,10 +2598,10 @@ function useAnimateMini() {
 }
 
 /**
- * Creates `AnimationControls`, which can be used to manually start, stop
+ * Creates `LegacyAnimationControls`, which can be used to manually start, stop
  * and sequence animations on one or more components.
  *
- * The returned `AnimationControls` should be passed to the `animate` property
+ * The returned `LegacyAnimationControls` should be passed to the `animate` property
  * of the components you want to animate.
  *
  * These components can then be animated with the `start` method.
@@ -2584,7 +2640,7 @@ function usePresenceData() {
     return context ? context.custom : undefined;
 }
 
-const {useEffect: useEffect$3} = await importShared('react');
+const {useEffect: useEffect$4} = await importShared('react');
 
 /**
  * Attaches an event listener directly to the provided DOM element.
@@ -2608,7 +2664,7 @@ const {useEffect: useEffect$3} = await importShared('react');
  * @public
  */
 function useDomEvent(ref, eventName, handler, options) {
-    useEffect$3(() => {
+    useEffect$4(() => {
         const element = ref.current;
         if (handler && element) {
             return addDomEvent(element, eventName, handler, options);
@@ -2667,6 +2723,34 @@ class DragControls {
     start(event, options) {
         this.componentControls.forEach((controls) => {
             controls.start(event.nativeEvent || event, options);
+        });
+    }
+    /**
+     * Cancels a drag gesture.
+     *
+     * ```jsx
+     * dragControls.cancel()
+     * ```
+     *
+     * @public
+     */
+    cancel() {
+        this.componentControls.forEach((controls) => {
+            controls.cancel();
+        });
+    }
+    /**
+     * Stops a drag gesture.
+     *
+     * ```jsx
+     * dragControls.stop()
+     * ```
+     *
+     * @public
+     */
+    stop() {
+        this.componentControls.forEach((controls) => {
+            controls.stop();
         });
     }
 }
@@ -2746,7 +2830,7 @@ function useResetProjection() {
     return reset;
 }
 
-const {useRef: useRef$2,useState: useState$2,useCallback} = await importShared('react');
+const {useRef: useRef$2,useState: useState$3,useCallback} = await importShared('react');
 
 
 /**
@@ -2777,7 +2861,7 @@ const {useRef: useRef$2,useState: useState$2,useCallback} = await importShared('
  */
 function useCycle(...items) {
     const index = useRef$2(0);
-    const [item, setItem] = useState$2(items[index.current]);
+    const [item, setItem] = useState$3(items[index.current]);
     const runCycle = useCallback((next) => {
         index.current =
             typeof next !== "number"
@@ -2832,11 +2916,11 @@ function inView(elementOrSelector, onStart, { root, margin: rootMargin, amount =
     return () => observer.disconnect();
 }
 
-const {useState: useState$1,useEffect: useEffect$2} = await importShared('react');
+const {useState: useState$2,useEffect: useEffect$3} = await importShared('react');
 
 function useInView(ref, { root, margin, amount, once = false, initial = false, } = {}) {
-    const [isInView, setInView] = useState$1(initial);
-    useEffect$2(() => {
+    const [isInView, setInView] = useState$2(initial);
+    useEffect$3(() => {
         if (!ref.current || (once && isInView))
             return;
         const onEnter = () => {
@@ -2853,13 +2937,13 @@ function useInView(ref, { root, margin, amount, once = false, initial = false, }
     return isInView;
 }
 
-const {useRef: useRef$1,useEffect: useEffect$1} = await importShared('react');
+const {useRef: useRef$1,useEffect: useEffect$2} = await importShared('react');
 
 function useInstantTransition() {
     const [forceUpdate, forcedRenderCount] = useForceUpdate();
     const startInstantLayoutTransition = useInstantLayoutTransition();
     const unlockOnFrameRef = useRef$1(-1);
-    useEffect$1(() => {
+    useEffect$2(() => {
         /**
          * Unblock after two animation frames, otherwise this will unblock too soon.
          */
@@ -2887,6 +2971,24 @@ function useInstantTransition() {
 }
 function disableInstantTransitions() {
     MotionGlobalConfig.instantAnimations = false;
+}
+
+const {useState: useState$1,useEffect: useEffect$1} = await importShared('react');
+
+
+function usePageInView() {
+    const [isInView, setIsInView] = useState$1(true);
+    useEffect$1(() => {
+        const handleVisibilityChange = () => setIsInView(!document.hidden);
+        if (document.hidden) {
+            handleVisibilityChange();
+        }
+        document.addEventListener("visibilitychange", handleVisibilityChange);
+        return () => {
+            document.removeEventListener("visibilitychange", handleVisibilityChange);
+        };
+    }, []);
+    return isInView;
 }
 
 const appearAnimationStore = new Map();
@@ -3301,27 +3403,4 @@ const namespace = /*#__PURE__*/Object.freeze(/*#__PURE__*/Object.defineProperty(
     Item: ReorderItem
 }, Symbol.toStringTag, { value: 'Module' }));
 
-function getOriginIndex(from, total) {
-    if (from === "first") {
-        return 0;
-    }
-    else {
-        const lastIndex = total - 1;
-        return from === "last" ? lastIndex : lastIndex / 2;
-    }
-}
-function stagger(duration = 0.1, { startDelay = 0, from = 0, ease } = {}) {
-    return (i, total) => {
-        const fromIndex = typeof from === "number" ? from : getOriginIndex(from, total);
-        const distance = Math.abs(fromIndex - i);
-        let delay = duration * distance;
-        if (ease) {
-            const maxDelay = total * duration;
-            const easingFunction = easingDefinitionToFunction(ease);
-            delay = easingFunction(delay / maxDelay) * maxDelay;
-        }
-        return startDelay + delay;
-    };
-}
-
-export { AnimateSharedLayout, DragControls, GroupAnimation, GroupAnimationWithThen, JSAnimation, LayoutGroup, MotionConfigContext, MotionContext, MotionGlobalConfig, MotionValue, NativeAnimation, NativeAnimationWrapper, PresenceContext, namespace as Reorder, ViewTransitionBuilder, VisualElement, activeAnimations, addAttrValue, addStyleValue, animate, animateMini, animateView, animateVisualElement, animationControls, animationMapKey, animations, applyPxDefaults, attachSpring, attrEffect, cancelFrame, cancelSync, clamp, collectMotionValues, createBox, createGeneratorEasing, createScopedAnimate, defaultOffset$1 as defaultOffset, disableInstantTransitions, domMin, easingDefinitionToFunction, fillOffset, fillWildcards, frame, frameData, getAnimationMap, getComputedStyle$1 as getComputedStyle, getEasingForSegment, getValueAsType, getValueTransition$1 as getValueTransition, hasWarned, inView, interpolate, isBezierDefinition, isEasingArray, isGenerator, isHTMLElement, isMotionComponent, isMotionValue, isSVGElement, isSVGSVGElement, isWaapiSupportedEasing, makeUseVisualState, mapEasingToNativeEasing, mapValue, memo, microtask, mixNumber, motion, motionValue, moveItem, noop, numberValueTypes, observeTimeline, progress, propEffect, px, recordStats, removeItem, resolveElements, scroll, scrollInfo, secondsToMilliseconds, spring, springValue, stagger, startOptimizedAppearAnimation, startWaapiAnimation, statsBuffer, steps, styleEffect, supportedWaapiEasing, supportsLinearEasing, supportsPartialKeyframes, supportsScrollTimeline, svgEffect, sync, transform, transformPropOrder, transformProps, transformValue, unwrapMotionComponent, useAnimate, useAnimateMini, useAnimation, useAnimationControls, useAnimationFrame, useCycle, useAnimatedState as useDeprecatedAnimatedState, useInvertedScale as useDeprecatedInvertedScale, useDomEvent, useDragControls, useElementScroll, useForceUpdate, useInView, useInstantLayoutTransition, useInstantTransition, useIsomorphicLayoutEffect, useMotionTemplate, useMotionValue, useMotionValueEvent, usePresenceData, useReducedMotion, useReducedMotionConfig, useResetProjection, useScroll, useSpring, useTime, useTransform, useUnmountEffect, useVelocity, useViewportScroll, velocityPerSecond, visualElementStore, warnOnce, warning, wrap };
+export { AnimateSharedLayout, DragControls, GroupAnimation, GroupAnimationWithThen, JSAnimation, LayoutGroup, MotionConfigContext, MotionContext, MotionGlobalConfig, MotionValue, NativeAnimation, NativeAnimationWrapper, PresenceContext, namespace as Reorder, ViewTransitionBuilder, VisualElement, activeAnimations, addAttrValue, addStyleValue, animate, animateMini, animateView, animateVisualElement, animationControls, animationMapKey, animations, applyPxDefaults, attachSpring, attrEffect, cancelFrame, cancelSync, clamp, collectMotionValues, createBox, createGeneratorEasing, createScopedAnimate, defaultOffset$1 as defaultOffset, disableInstantTransitions, domMin, easingDefinitionToFunction, fillOffset, fillWildcards, frame, frameData, getAnimationMap, getComputedStyle$1 as getComputedStyle, getEasingForSegment, getOriginIndex, getValueAsType, getValueTransition$1 as getValueTransition, hasWarned, inView, interpolate, invariant, isBezierDefinition, isEasingArray, isGenerator, isHTMLElement, isMotionComponent, isMotionValue, isSVGElement, isSVGSVGElement, isWaapiSupportedEasing, makeUseVisualState, mapEasingToNativeEasing, mapValue, memo, microtask, mixNumber, motion, motionValue, moveItem, noop, numberValueTypes, observeTimeline, progress, propEffect, px, recordStats, removeItem, resize, resolveElements, scroll, scrollInfo, secondsToMilliseconds, spring, springValue, stagger, startOptimizedAppearAnimation, startWaapiAnimation, statsBuffer, steps, styleEffect, supportedWaapiEasing, supportsLinearEasing, supportsPartialKeyframes, supportsScrollTimeline, svgEffect, sync, transform, transformPropOrder, transformProps, transformValue, unwrapMotionComponent, useAnimate, useAnimateMini, useAnimation, useAnimationControls, useAnimationFrame, useCycle, useAnimatedState as useDeprecatedAnimatedState, useInvertedScale as useDeprecatedInvertedScale, useDomEvent, useDragControls, useElementScroll, useForceUpdate, useInView, useInstantLayoutTransition, useInstantTransition, useIsomorphicLayoutEffect, useMotionTemplate, useMotionValue, useMotionValueEvent, usePageInView, usePresenceData, useReducedMotion, useReducedMotionConfig, useResetProjection, useScroll, useSpring, useTime, useTransform, useUnmountEffect, useVelocity, useViewportScroll, velocityPerSecond, visualElementStore, warnOnce, wrap };
