@@ -1,4 +1,4 @@
-import {MonitoringSettings, NewSystemMetrics} from './CrossTypes';
+import {AvailableHardware, MetricsVisibility, MonitoringSettings, NewSystemMetrics} from './CrossTypes';
 
 export const HMONITOR_STORAGE_ID: string = 'hmonitor_storage';
 export const HMONITOR_IPC_DATA_ID: string = 'hardware-data-update';
@@ -14,18 +14,27 @@ export const initialSystemMetrics: NewSystemMetrics = {
   uptime: {system: true, app: true},
 };
 
-export const initAvailableHardware = {
+export const initAvailableHardware: AvailableHardware = {
   gpu: [],
   cpu: [],
   memory: [],
 };
 
+export const initMetricVisibility: MetricsVisibility = {
+  icon: true,
+  label: true,
+  value: true,
+  progressBar: true,
+};
+
 export const initialSettings: MonitoringSettings = {
+  configVersion: 0.1,
+
   refreshInterval: 1,
   enabled: true,
   compactMode: false,
   showSectionLabel: true,
-  showMetricLabel: true,
+  metricVisibility: initMetricVisibility,
   enabledMetrics: initialSystemMetrics,
   availableHardware: initAvailableHardware,
 };

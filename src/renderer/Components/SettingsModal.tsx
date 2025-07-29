@@ -27,6 +27,7 @@ import {AvailableHardware, MetricItem, MetricType, MonitoringSettings, SystemMet
 import {systemMonitorActions, SystemMonitorState, useSystemMonitorState} from '../reducer';
 import {Settings_Icon} from '../SvgIcons';
 import SettingsModal_Card from './Sections/SettingsModal_Card';
+import Settings_MetricVisibility from './Settings_MetricVisibility';
 
 type MetricConfig = {
   id: SystemMetrics;
@@ -59,7 +60,6 @@ export default function SettingsModal({show, isOpen, tabID}: Props) {
   const compactMode = useSystemMonitorState('compactMode');
   const refreshInterval = useSystemMonitorState('refreshInterval');
   const showSectionLabel = useSystemMonitorState('showSectionLabel');
-  const showMetricLabel = useSystemMonitorState('showMetricLabel');
   const availableHardware = useSystemMonitorState('availableHardware');
 
   const [isSaving, setIsSaving] = useState<boolean>(false);
@@ -300,26 +300,7 @@ export default function SettingsModal({show, isOpen, tabID}: Props) {
                       />
                     </div>
 
-                    <div
-                      onClick={() => {
-                        updateState('showMetricLabel', !showMetricLabel);
-                      }}
-                      className={
-                        'flex items-center justify-between rounded-lg px-2 py-2 ' +
-                        'hover:bg-content2 transition-all duration-300 cursor-pointer'
-                      }>
-                      <div>
-                        <p className="font-medium">Show Metric Labels</p>
-                        <p className="text-sm text-default-500">Display headers for metric items</p>
-                      </div>
-                      <Switch
-                        onValueChange={value => {
-                          updateState('showMetricLabel', value);
-                        }}
-                        size="md"
-                        isSelected={showMetricLabel}
-                      />
-                    </div>
+                    <Settings_MetricVisibility />
                   </div>
 
                   {/* Metrics selection */}

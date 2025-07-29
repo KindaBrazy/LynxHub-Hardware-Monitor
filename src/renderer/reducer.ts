@@ -3,7 +3,7 @@ import {omit} from 'lodash';
 import {useSelector} from 'react-redux';
 
 import {HMONITOR_IPC_UPDATE_CONFIG, initialSettings} from '../cross/CrossConst';
-import {MonitoringSettings, NewSystemMetrics} from '../cross/CrossTypes';
+import {MetricsVisibility, MonitoringSettings, NewSystemMetrics} from '../cross/CrossTypes';
 
 export type SystemMonitorState = MonitoringSettings & {
   modals: {isOpen: boolean; tabID: string}[];
@@ -39,6 +39,9 @@ const systemMonitorSlice = createSlice({
     },
     updateMetrics: (state: SystemMonitorState, action: PayloadAction<Partial<Omit<NewSystemMetrics, 'uptime'>>>) => {
       state.enabledMetrics = {...state.enabledMetrics, ...action.payload};
+    },
+    updateMetricVisibility: (state: SystemMonitorState, action: PayloadAction<MetricsVisibility>) => {
+      state.metricVisibility = action.payload;
     },
     updateUptime: (state: SystemMonitorState, action: PayloadAction<Partial<NewSystemMetrics['uptime']>>) => {
       state.enabledMetrics.uptime = {...state.enabledMetrics.uptime, ...action.payload};

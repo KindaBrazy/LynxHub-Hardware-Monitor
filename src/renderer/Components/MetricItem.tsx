@@ -34,7 +34,8 @@ export default function MetricItem({
   colorClass?: string;
 }) {
   const compactMode = useSystemMonitorState('compactMode');
-  const showMetricLabel = useSystemMonitorState('showMetricLabel');
+  const metricVisibility = useSystemMonitorState('metricVisibility');
+
   return (
     <div
       className={
@@ -43,14 +44,16 @@ export default function MetricItem({
         ` ${colorClass || 'text-slate-300 border-slate-600/30 bg-slate-800/40'}`
       }
       key={`${label}`}>
-      <Icon className={`${compactMode ? 'size-3' : 'size-4'} flex-shrink-0`} />
+      {metricVisibility.icon && <Icon className={`${compactMode ? 'size-3' : 'size-4'} flex-shrink-0`} />}
       <div className="flex items-center gap-2 text-xs font-medium whitespace-nowrap">
-        {showMetricLabel && <span className="opacity-80">{label}:</span>}
-        <span>
-          {value}
-          {unit}
-        </span>
-        {progress && <ProgressBar {...progress} />}
+        {metricVisibility.label && <span className="opacity-80">{label}:</span>}
+        {metricVisibility.value && (
+          <span>
+            {value}
+            {unit}
+          </span>
+        )}
+        {progress && metricVisibility.progressBar && <ProgressBar {...progress} />}
       </div>
     </div>
   );

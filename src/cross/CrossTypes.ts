@@ -29,12 +29,16 @@ export type HardwareData = {
   uptime: UptimeData;
 };
 
+export type MetricsVisibility = {icon: boolean; label: boolean; value: boolean; progressBar: boolean};
+
 export type MonitoringSettings = {
+  configVersion: number;
+
   enabled: boolean;
+  refreshInterval: number;
   compactMode: boolean;
   showSectionLabel: boolean;
-  showMetricLabel: boolean;
-  refreshInterval: number;
+  metricVisibility: MetricsVisibility;
   enabledMetrics: NewSystemMetrics;
   availableHardware: AvailableHardware;
 };

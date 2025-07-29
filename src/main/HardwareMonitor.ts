@@ -15,6 +15,7 @@ import {
   HMONITOR_STORAGE_ID,
   initAvailableHardware,
   initialSettings,
+  initMetricVisibility,
 } from '../cross/CrossConst';
 import {AvailableHardware, MonitoringSettings} from '../cross/CrossTypes';
 import {getActiveComponentTypes} from './Utils';
@@ -112,13 +113,10 @@ export async function onAppReady(utils: MainExtensionUtils) {
       currentConfig = initialSettings;
       storeManager.setCustomData(HMONITOR_STORAGE_ID, currentConfig);
     } else {
-      if (!currentConfig.showMetricLabel) {
-        currentConfig.showMetricLabel = true;
-        storeManager.setCustomData(HMONITOR_STORAGE_ID, currentConfig);
-      }
-
-      if (!currentConfig.availableHardware) {
+      if (!currentConfig.configVersion) {
         currentConfig.availableHardware = initAvailableHardware;
+        currentConfig.metricVisibility = initMetricVisibility;
+        currentConfig.configVersion = 0.1;
         storeManager.setCustomData(HMONITOR_STORAGE_ID, currentConfig);
       }
     }
