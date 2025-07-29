@@ -340,13 +340,34 @@ function ShinyText({ text, disabled = false, speed = 5, className = "" }) {
 const HMONITOR_STORAGE_ID = "hmonitor_storage";
 const HMONITOR_IPC_DATA_ID = "hardware-data-update";
 const HMONITOR_IPC_UPDATE_CONFIG = "hmonitor-update-config";
-const HMONITOR_IPC_GET_HARDWARE = "hmonitor-ipc-get-hardware";
 const HMONITOR_IPC_ERROR_MONITORING = "hmonitor-error-monitoring";
+const HMONITOR_IPC_ON_CONFIG = "hmonitor-on-config";
 const initialSystemMetrics = {
   cpu: [],
   gpu: [],
   memory: [],
   uptime: { system: true, app: true }
+};
+const initAvailableHardware = {
+  gpu: [],
+  cpu: [],
+  memory: []
+};
+const initMetricVisibility = {
+  icon: true,
+  label: true,
+  value: true,
+  progressBar: true
+};
+const initialSettings = {
+  configVersion: 0.1,
+  refreshInterval: 1,
+  enabled: true,
+  compactMode: false,
+  showSectionLabel: true,
+  metricVisibility: initMetricVisibility,
+  enabledMetrics: initialSystemMetrics,
+  availableHardware: initAvailableHardware
 };
 
 function isPlainObject$2(obj) {
@@ -1370,23 +1391,12 @@ function formatProdErrorMessage(code) {
   return `Minified Redux Toolkit error #${code}; visit https://redux-toolkit.js.org/Errors?code=${code} for the full message or use the non-minified dev environment for full errors. `;
 }
 
-const {isEmpty: isEmpty$4,omit} = await importShared('lodash');
+const {omit} = await importShared('lodash');
 
 const {useSelector: useSelector$2} = await importShared('react-redux');
-const initAvailableHardware = {
-  gpu: [],
-  cpu: [],
-  memory: []
-};
 const initialState$2 = {
-  refreshInterval: 1,
-  enabled: true,
-  compactMode: false,
-  showSectionLabel: true,
-  showMetricLabel: true,
-  enabledMetrics: initialSystemMetrics,
-  modals: [],
-  availableHardware: initAvailableHardware
+  ...initialSettings,
+  modals: []
 };
 const systemMonitorSlice = createSlice({
   initialState: initialState$2,
@@ -1401,24 +1411,11 @@ const systemMonitorSlice = createSlice({
     saveSettings: (state) => {
       window.electron.ipcRenderer.send(HMONITOR_IPC_UPDATE_CONFIG, JSON.stringify(omit(state, "modals")));
     },
-    setAvailableHardware: (state, action) => {
-      state.availableHardware = action.payload;
-      if (isEmpty$4(state.enabledMetrics.gpu)) {
-        state.enabledMetrics.gpu = action.payload.gpu.map((name) => ({
-          name,
-          active: true,
-          enabled: ["temp", "usage", "vram"]
-        }));
-      }
-      if (isEmpty$4(state.enabledMetrics.cpu)) {
-        state.enabledMetrics.cpu = action.payload.cpu.map((name) => ({ name, active: true, enabled: ["temp", "usage"] }));
-      }
-      if (isEmpty$4(state.enabledMetrics.memory)) {
-        state.enabledMetrics.memory = action.payload.memory.map((name) => ({ name, active: true, enabled: ["memory"] }));
-      }
-    },
     updateMetrics: (state, action) => {
       state.enabledMetrics = { ...state.enabledMetrics, ...action.payload };
+    },
+    updateMetricVisibility: (state, action) => {
+      state.metricVisibility = action.payload;
     },
     updateUptime: (state, action) => {
       state.enabledMetrics.uptime = { ...state.enabledMetrics.uptime, ...action.payload };
@@ -1480,23 +1477,23 @@ function MetricItem({
   colorClass
 }) {
   const compactMode = useSystemMonitorState("compactMode");
-  const showMetricLabel = useSystemMonitorState("showMetricLabel");
+  const metricVisibility = useSystemMonitorState("metricVisibility");
   return /* @__PURE__ */ jsxRuntimeExports.jsxs(
     "div",
     {
       className: `flex items-center ${compactMode ? "px-2 py-0.5 gap-x-1.5" : "px-3 py-2 gap-x-2"} rounded-lg border backdrop-blur-sm transition-all duration-300 hover:scale-105 hover:shadow-lg ${colorClass || "text-slate-300 border-slate-600/30 bg-slate-800/40"}`,
       children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx(Icon, { className: `${compactMode ? "size-3" : "size-4"} flex-shrink-0` }),
+        metricVisibility.icon && /* @__PURE__ */ jsxRuntimeExports.jsx(Icon, { className: `${compactMode ? "size-3" : "size-4"} flex-shrink-0` }),
         /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-2 text-xs font-medium whitespace-nowrap", children: [
-          showMetricLabel && /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { className: "opacity-80", children: [
+          metricVisibility.label && /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { className: "opacity-80", children: [
             label,
             ":"
           ] }),
-          /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { children: [
+          metricVisibility.value && /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { children: [
             value,
             unit
           ] }),
-          progress && /* @__PURE__ */ jsxRuntimeExports.jsx(ProgressBar, { ...progress })
+          progress && metricVisibility.progressBar && /* @__PURE__ */ jsxRuntimeExports.jsx(ProgressBar, { ...progress })
         ] })
       ]
     },
@@ -1531,6 +1528,7 @@ function Section({
 
 const {useMemo: useMemo$5} = await importShared('react');
 function CpuSection({ data, metrics }) {
+  const compactMode = useSystemMonitorState("compactMode");
   const { hasTemp, hasUsage } = useMemo$5(() => {
     const hasTemp2 = metrics.enabled.includes("temp");
     const hasUsage2 = metrics.enabled.includes("usage");
@@ -1544,9 +1542,9 @@ function CpuSection({ data, metrics }) {
     hasTemp && (temp === 0 ? /* @__PURE__ */ jsxRuntimeExports.jsxs(
       "div",
       {
-        className: `flex items-center px-3 py-2 gap-x-2 rounded-lg border backdrop-blur-sm transition-all duration-300 hover:scale-105 hover:shadow-lg text-slate-300 border-slate-600/30 bg-slate-800/40`,
+        className: `flex items-center ${compactMode ? "px-2 py-0.5 gap-x-1.5" : "px-3 py-2 gap-x-2"} rounded-lg border backdrop-blur-sm transition-all duration-300 hover:scale-105 hover:shadow-lg text-slate-300 border-slate-600/30 bg-slate-800/40`,
         children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx(Thermometer, { className: `size-4 flex-shrink-0 text-danger` }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx(Thermometer, { className: `${compactMode ? "size-3" : "size-4"} flex-shrink-0 text-danger` }),
           /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex items-center gap-2 text-xs font-medium whitespace-nowrap", children: /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-danger", children: "Admin Require" }) })
         ]
       }
@@ -1684,7 +1682,7 @@ function UpTimeSection({ data, metrics }) {
 const {Link} = await importShared('@heroui/react');
 
 const {Divider: Divider$1} = await importShared('antd');
-const {useEffect: useEffect$4,useMemo: useMemo$1,useState: useState$3} = await importShared('react');
+const {useEffect: useEffect$5,useMemo: useMemo$1,useState: useState$4} = await importShared('react');
 const convertMBtoGB = (mb) => {
   return Number((mb / 1024).toFixed(2));
 };
@@ -1701,18 +1699,18 @@ const HardwareStatusBar = ({ ref }) => {
   const enabled = useSystemMonitorState("enabled");
   const compactMode = useSystemMonitorState("compactMode");
   const enabledMetrics = useSystemMonitorState("enabledMetrics");
-  const [hardwareData, setHardwareData] = useState$3(initialData);
-  const [containerRef, setContainerRef] = useState$3(null);
+  const [hardwareData, setHardwareData] = useState$4(initialData);
+  const [containerRef, setContainerRef] = useState$4(null);
   const initRef = (node) => {
     if (node) {
       ref(node);
       setContainerRef(node);
     }
   };
-  const [canScrollLeft, setCanScrollLeft] = useState$3(false);
-  const [canScrollRight, setCanScrollRight] = useState$3(false);
-  const [dataConnected, setDataConnected] = useState$3(false);
-  const [errorElement, setErrorElement] = useState$3(
+  const [canScrollLeft, setCanScrollLeft] = useState$4(false);
+  const [canScrollRight, setCanScrollRight] = useState$4(false);
+  const [dataConnected, setDataConnected] = useState$4(false);
+  const [errorElement, setErrorElement] = useState$4(
     /* @__PURE__ */ jsxRuntimeExports.jsx(ShinyText, { speed: 2, className: "font-semibold", text: "Waiting for hardware information..." })
   );
   const updateScrollArrows = () => {
@@ -1729,7 +1727,7 @@ const HardwareStatusBar = ({ ref }) => {
       });
     }
   };
-  useEffect$4(() => {
+  useEffect$5(() => {
     const handleHardwareUpdate = (_event, data) => {
       if (data) {
         const cpu = data.CPU.map((item) => {
@@ -1806,7 +1804,7 @@ const HardwareStatusBar = ({ ref }) => {
       window.electron.ipcRenderer.removeAllListeners(HMONITOR_IPC_ERROR_MONITORING);
     };
   }, []);
-  useEffect$4(() => {
+  useEffect$5(() => {
     updateScrollArrows();
     const handleResize = () => updateScrollArrows();
     window.removeEventListener("resize", handleResize);
@@ -1830,7 +1828,7 @@ const HardwareStatusBar = ({ ref }) => {
     const hasUptime2 = enabledMetrics.uptime.system || enabledMetrics.uptime.app;
     return { hasCpuSection: hasCpuSection2, hasGpuSection: hasGpuSection2, hasMemory: hasMemory2, hasUptime: hasUptime2 };
   }, [enabledMetrics]);
-  useEffect$4(() => {
+  useEffect$5(() => {
     if (containerRef) {
       const handleWheel = (event) => {
         if (!event.ctrlKey) {
@@ -1876,31 +1874,40 @@ const HardwareStatusBar = ({ ref }) => {
             style: { scrollbarWidth: "none", msOverflowStyle: "none" },
             className: `h-full flex items-center ${compactMode ? "px-2" : "px-3"} gap-x-4 overflow-x-auto scrollbar-hide`,
             children: dataConnected ? /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
-              hasCpuSection && enabledMetrics.cpu.map((cpu, index) => /* @__PURE__ */ jsxRuntimeExports.jsx(
-                CpuSection,
-                {
-                  metrics: cpu,
-                  data: hardwareData.cpu.find((item) => item.name === cpu.name)
-                },
-                `hardware_${cpu.name}_${index}`
-              )),
+              hasCpuSection && enabledMetrics.cpu.map((cpu, index) => {
+                if (!cpu.active) return null;
+                return /* @__PURE__ */ jsxRuntimeExports.jsx(
+                  CpuSection,
+                  {
+                    metrics: cpu,
+                    data: hardwareData.cpu.find((item) => item.name === cpu.name)
+                  },
+                  `hardware_${cpu.name}_${index}`
+                );
+              }),
               (hasGpuSection || hasMemory || hasUptime) && hasCpuSection && /* @__PURE__ */ jsxRuntimeExports.jsx(Divider$1, { type: "vertical", className: "mx-0" }),
-              hasGpuSection && enabledMetrics.gpu.map((gpu, index) => /* @__PURE__ */ jsxRuntimeExports.jsx(
-                GpuSection,
-                {
-                  metrics: gpu,
-                  data: hardwareData.gpu.find((item) => item.name === gpu.name)
-                },
-                `hardware_${gpu.name}_${index}`
-              )),
+              hasGpuSection && enabledMetrics.gpu.map((gpu, index) => {
+                if (!gpu.active) return null;
+                return /* @__PURE__ */ jsxRuntimeExports.jsx(
+                  GpuSection,
+                  {
+                    metrics: gpu,
+                    data: hardwareData.gpu.find((item) => item.name === gpu.name)
+                  },
+                  `hardware_${gpu.name}_${index}`
+                );
+              }),
               (hasGpuSection || hasUptime) && hasMemory && /* @__PURE__ */ jsxRuntimeExports.jsx(Divider$1, { type: "vertical", className: "mx-0" }),
-              hasMemory && enabledMetrics.memory.map((memory, index) => /* @__PURE__ */ jsxRuntimeExports.jsx(
-                MemorySection,
-                {
-                  data: hardwareData.memory.find((item) => item.name === memory.name)
-                },
-                `hardware_${memory.name}_${index}`
-              )),
+              hasMemory && enabledMetrics.memory.map((memory, index) => {
+                if (!memory.active) return null;
+                return /* @__PURE__ */ jsxRuntimeExports.jsx(
+                  MemorySection,
+                  {
+                    data: hardwareData.memory.find((item) => item.name === memory.name)
+                  },
+                  `hardware_${memory.name}_${index}`
+                );
+              }),
               (hasGpuSection || hasMemory) && hasUptime && /* @__PURE__ */ jsxRuntimeExports.jsx(Divider$1, { type: "vertical", className: "mx-0" }),
               hasUptime && /* @__PURE__ */ jsxRuntimeExports.jsx(UpTimeSection, { data: hardwareData.uptime, metrics: enabledMetrics.uptime })
             ] }) : /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "w-full text-center", children: errorElement })
@@ -2278,7 +2285,7 @@ const {addToast,Button: Button$2} = await importShared('@heroui/react');
 
 const {isEmpty: isEmpty$2,isNil} = await importShared('lodash');
 
-const {Fragment: Fragment$1,useEffect: useEffect$3,useMemo,useState: useState$2} = await importShared('react');
+const {Fragment: Fragment$1,useEffect: useEffect$4,useMemo,useState: useState$3} = await importShared('react');
 function topToast(options) {
   const { title, color = "success", timeout = 2e3, promise, placement } = options;
   addToast({
@@ -2319,11 +2326,11 @@ const {Image: Image$1} = await importShared('@heroui/react');
 
 const {isEmpty} = await importShared('lodash');
 
-const {useEffect: useEffect$2,useState: useState$1} = await importShared('react');
+const {useEffect: useEffect$3,useState: useState$2} = await importShared('react');
 function useCachedImageUrl(id, url) {
   const isOnline = useAppState("isOnline");
-  const [imageSrc, setImageSrc] = useState$1("");
-  useEffect$2(() => {
+  const [imageSrc, setImageSrc] = useState$2("");
+  useEffect$3(() => {
     const fetchAndStoreImage = async () => {
       try {
         const response = await fetch(url);
@@ -5357,6 +5364,63 @@ function SettingsModal_Card({ onPress, title, onValueChange, isSelected, childre
   );
 }
 
+const {Checkbox: Checkbox$1,CheckboxGroup} = await importShared('@heroui/react');
+
+const {useCallback: useCallback$2,useEffect: useEffect$2,useState: useState$1} = await importShared('react');
+
+const {useDispatch: useDispatch$4} = await importShared('react-redux');
+function Settings_MetricVisibility() {
+  const [isInvalid, setIsInvalid] = useState$1(false);
+  const [defaultValues, setDefaultValues] = useState$1(["icon", "label", "value", "progress-bar"]);
+  const [selected, setSelected] = useState$1([]);
+  const metricVisibility = useSystemMonitorState("metricVisibility");
+  const dispatch = useDispatch$4();
+  useEffect$2(() => {
+    const selectedResult = [];
+    if (metricVisibility.icon) selectedResult.push("icon");
+    if (metricVisibility.label) selectedResult.push("label");
+    if (metricVisibility.value) selectedResult.push("value");
+    if (metricVisibility.progressBar) selectedResult.push("progress-bar");
+    setSelected(selectedResult);
+    setDefaultValues(selectedResult);
+  }, [metricVisibility]);
+  const onValueChange = useCallback$2((value) => {
+    if (value.length < 1) {
+      setIsInvalid(true);
+    } else {
+      setIsInvalid(false);
+      dispatch(
+        systemMonitorActions.updateMetricVisibility({
+          icon: value.includes("icon"),
+          label: value.includes("label"),
+          value: value.includes("value"),
+          progressBar: value.includes("progress-bar")
+        })
+      );
+    }
+  }, []);
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs(
+    CheckboxGroup,
+    {
+      color: "primary",
+      value: selected,
+      isInvalid,
+      orientation: "horizontal",
+      defaultValue: defaultValues,
+      onValueChange,
+      label: "Choose Metric Visibility",
+      description: "Select which elements to display for metrics in the status bar.",
+      isRequired: true,
+      children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx(Checkbox$1, { value: "icon", children: "Icon" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx(Checkbox$1, { value: "label", children: "Label" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx(Checkbox$1, { value: "value", children: "Value" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx(Checkbox$1, { value: "progress-bar", children: "Process Bar" })
+      ]
+    }
+  );
+}
+
 const {Button: Button$1,Card: Card$1,CardBody,CardHeader,Checkbox,Divider,Modal,ModalBody,ModalContent,ModalFooter,ModalHeader,NumberInput,Switch} = await importShared('@heroui/react');
 const {useCallback: useCallback$1,useState} = await importShared('react');
 
@@ -5381,7 +5445,6 @@ function SettingsModal({ show, isOpen, tabID }) {
   const compactMode = useSystemMonitorState("compactMode");
   const refreshInterval = useSystemMonitorState("refreshInterval");
   const showSectionLabel = useSystemMonitorState("showSectionLabel");
-  const showMetricLabel = useSystemMonitorState("showMetricLabel");
   const availableHardware = useSystemMonitorState("availableHardware");
   const [isSaving, setIsSaving] = useState(false);
   const updateState = (key, value) => dispatch(
@@ -5600,31 +5663,7 @@ function SettingsModal({ show, isOpen, tabID }) {
                   ]
                 }
               ),
-              /* @__PURE__ */ jsxRuntimeExports.jsxs(
-                "div",
-                {
-                  onClick: () => {
-                    updateState("showMetricLabel", !showMetricLabel);
-                  },
-                  className: "flex items-center justify-between rounded-lg px-2 py-2 hover:bg-content2 transition-all duration-300 cursor-pointer",
-                  children: [
-                    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
-                      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-medium", children: "Show Metric Labels" }),
-                      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm text-default-500", children: "Display headers for metric items" })
-                    ] }),
-                    /* @__PURE__ */ jsxRuntimeExports.jsx(
-                      Switch,
-                      {
-                        onValueChange: (value) => {
-                          updateState("showMetricLabel", value);
-                        },
-                        size: "md",
-                        isSelected: showMetricLabel
-                      }
-                    )
-                  ]
-                }
-              )
+              /* @__PURE__ */ jsxRuntimeExports.jsx(Settings_MetricVisibility, {})
             ] }),
             /* @__PURE__ */ jsxRuntimeExports.jsx(Divider, { className: "my-4" }),
             availableHardware.gpu.map((item) => /* @__PURE__ */ jsxRuntimeExports.jsxs(
@@ -5755,7 +5794,7 @@ function ToolsPage() {
           /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mt-2 flex justify-center", children: iconSrc && /* @__PURE__ */ jsxRuntimeExports.jsx(Image, { src: iconSrc, radius: "none", className: "size-20" }) }),
           /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "text-center space-y-3", children: [
             /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "text-2xl font-bold tracking-tight", children: "Hardware Monitor" }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-foreground/70 text-sm leading-relaxed", children: "A configurable LynxHub extension for real-time monitoring of CPU, GPU, and Memory usage, displayed conveniently in the status bar." })
+            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-foreground/70 text-sm leading-relaxed", children: "A configurable and real-time monitoring of CPU, GPU, and Memory usage, displayed conveniently in the status bar." })
           ] }),
           /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex justify-center", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
             Button,
@@ -5788,16 +5827,10 @@ function AddCustomHook(lynxAPI) {
   const UpdateConfig = () => {
     const dispatch = useDispatch();
     useEffect(() => {
-      if (lynxAPI.rendererIpc) {
-        lynxAPI.rendererIpc.storage.getCustom(HMONITOR_STORAGE_ID).then((result) => {
-          dispatch(systemMonitorActions.setConfig(result));
-        });
-        window.electron.ipcRenderer.invoke(HMONITOR_IPC_GET_HARDWARE).then((data) => {
-          if (data) {
-            dispatch(systemMonitorActions.setAvailableHardware(data));
-          }
-        });
-      }
+      window.electron.ipcRenderer.on(HMONITOR_IPC_ON_CONFIG, (_, configs) => {
+        dispatch(systemMonitorActions.setConfig(configs));
+      });
+      return () => window.electron.ipcRenderer.removeAllListeners(HMONITOR_IPC_ON_CONFIG);
     }, []);
     return /* @__PURE__ */ jsxRuntimeExports.jsx(Fragment, {});
   };

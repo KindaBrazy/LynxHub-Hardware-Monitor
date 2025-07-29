@@ -5,12 +5,47 @@
   "description": "A configurable and real-time monitoring of CPU, GPU, and Memory usage, displayed conveniently in the status bar.",
   "publishDate": "2025-06-07",
   "requireAppBuild": 24,
-  "version": "0.11.0",
-  "updateDate": "2025-07-28",
+  "version": "0.12.0",
+  "updateDate": "2025-07-29",
   "repoUrl": "https://github.com/KindaBrazy/LynxHub-Hardware-Monitor",
   "avatarUrl": "https://raw.githubusercontent.com/KindaBrazy/LynxHub-Hardware-Monitor/refs/heads/source_ea/resources/icon.png",
   "platforms": ["win32"],
   "changeLog": [
+    {
+      "title": "Version 0.12.0",
+      "items": [
+        {
+          "label": "🚀 New Features",
+          "subitems": [
+            {
+              "label": "Introduce customizable metric visibility settings."
+            }
+          ]
+        },
+        {
+          "label": "⚡ Improvements",
+          "subitems": [
+            {
+              "label": "Improve 'Admin Require' layout to support compact mode configuration"
+            }
+          ]
+        },
+        {
+          "label": "🪲 Bug Fixes",
+          "subitems": [
+            {
+              "label": "Prevent inactive hardware metrics from displaying in Status Bar."
+            },
+            {
+              "label": "Prevent error when sending messages to closed window."
+            },
+            {
+              "label": "Resolve some hardware detection problems and settings toggle issues causing incorrect behavior"
+            }
+          ]
+        }
+      ]
+    },
     {
       "title": "Version 0.11.0",
       "items": [
