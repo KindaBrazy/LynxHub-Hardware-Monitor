@@ -46,8 +46,8 @@ export default function Settings_MetricVisibility() {
       orientation="horizontal"
       defaultValue={defaultValues}
       onValueChange={onValueChange}
-      label="Select metric visiblity"
-      description="Select what to show in status bar metric items"
+      label="Choose Metric Visibility"
+      description="Select which elements to display for metrics in the status bar."
       isRequired>
       <Checkbox value="icon">Icon</Checkbox>
       <Checkbox value="label">Label</Checkbox>
