@@ -6,6 +6,7 @@ export const HMONITOR_IPC_STOP_ID: string = 'hmonitor-stop';
 export const HMONITOR_IPC_UPDATE_CONFIG: string = 'hmonitor-update-config';
 export const HMONITOR_IPC_GET_HARDWARE: string = 'hmonitor-ipc-get-hardware';
 export const HMONITOR_IPC_ERROR_MONITORING: string = 'hmonitor-error-monitoring';
+export const HMONITOR_IPC_ON_CONFIG: string = 'hmonitor-on-config';
 
 export const initialSystemMetrics: NewSystemMetrics = {
   cpu: [],

@@ -10,6 +10,7 @@ import {
   HMONITOR_IPC_DATA_ID,
   HMONITOR_IPC_ERROR_MONITORING,
   HMONITOR_IPC_GET_HARDWARE,
+  HMONITOR_IPC_ON_CONFIG,
   HMONITOR_IPC_STOP_ID,
   HMONITOR_IPC_UPDATE_CONFIG,
   HMONITOR_STORAGE_ID,
@@ -98,6 +99,7 @@ async function checkHardwareDevices(): Promise<AvailableHardware> {
     }
 
     storeManager.setCustomData(HMONITOR_STORAGE_ID, currentConfig);
+    sendRenderer(HMONITOR_IPC_ON_CONFIG, currentConfig);
   }
 
   return {cpu, gpu, memory};
