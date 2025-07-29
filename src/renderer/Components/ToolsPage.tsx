@@ -43,8 +43,8 @@ export default function ToolsPage() {
           <div className="text-center space-y-3">
             <h3 className="text-2xl font-bold tracking-tight">Hardware Monitor</h3>
             <p className="text-foreground/70 text-sm leading-relaxed">
-              A configurable LynxHub extension for real-time monitoring of CPU, GPU, and Memory usage, displayed
-              conveniently in the status bar.
+              A configurable and real-time monitoring of CPU, GPU, and Memory usage, displayed conveniently in the
+              status bar.
             </p>
           </div>
 
