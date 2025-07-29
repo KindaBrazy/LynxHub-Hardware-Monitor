@@ -243,32 +243,41 @@ const HardwareStatusBar = ({ref}: Props) => {
         {dataConnected ? (
           <>
             {hasCpuSection &&
-              enabledMetrics.cpu.map((cpu, index) => (
-                <CpuSection
-                  metrics={cpu}
-                  key={`hardware_${cpu.name}_${index}`}
-                  data={hardwareData.cpu.find(item => item.name === cpu.name)}
-                />
-              ))}
+              enabledMetrics.cpu.map((cpu, index) => {
+                if (!cpu.active) return null;
+                return (
+                  <CpuSection
+                    metrics={cpu}
+                    key={`hardware_${cpu.name}_${index}`}
+                    data={hardwareData.cpu.find(item => item.name === cpu.name)}
+                  />
+                );
+              })}
             {(hasGpuSection || hasMemory || hasUptime) && hasCpuSection && <Divider type="vertical" className="mx-0" />}
 
             {hasGpuSection &&
-              enabledMetrics.gpu.map((gpu, index) => (
-                <GpuSection
-                  metrics={gpu}
-                  key={`hardware_${gpu.name}_${index}`}
-                  data={hardwareData.gpu.find(item => item.name === gpu.name)}
-                />
-              ))}
+              enabledMetrics.gpu.map((gpu, index) => {
+                if (!gpu.active) return null;
+                return (
+                  <GpuSection
+                    metrics={gpu}
+                    key={`hardware_${gpu.name}_${index}`}
+                    data={hardwareData.gpu.find(item => item.name === gpu.name)}
+                  />
+                );
+              })}
             {(hasGpuSection || hasUptime) && hasMemory && <Divider type="vertical" className="mx-0" />}
 
             {hasMemory &&
-              enabledMetrics.memory.map((memory, index) => (
-                <MemorySection
-                  key={`hardware_${memory.name}_${index}`}
-                  data={hardwareData.memory.find(item => item.name === memory.name)}
-                />
-              ))}
+              enabledMetrics.memory.map((memory, index) => {
+                if (!memory.active) return null;
+                return (
+                  <MemorySection
+                    key={`hardware_${memory.name}_${index}`}
+                    data={hardwareData.memory.find(item => item.name === memory.name)}
+                  />
+                );
+              })}
             {(hasGpuSection || hasMemory) && hasUptime && <Divider type="vertical" className="mx-0" />}
 
             {hasUptime && <UpTimeSection data={hardwareData.uptime} metrics={enabledMetrics.uptime} />}
