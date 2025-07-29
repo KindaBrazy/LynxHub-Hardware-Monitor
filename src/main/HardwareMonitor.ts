@@ -23,6 +23,10 @@ let hwMonitor: HardwareMonitor | undefined = undefined;
 let currentConfig: MonitoringSettings | undefined = undefined;
 let webContent: WebContents | undefined = undefined;
 
+const sendRenderer = (channel: string, data: any) => {
+  if (webContent && !webContent.isDestroyed()) webContent.send(channel, data);
+};
+
 async function startMonitoring() {
   if (!webContent || !currentConfig) {
     console.warn(
@@ -38,14 +42,14 @@ async function startMonitoring() {
     await hwMonitor.checkRequirements(targetDir);
 
     hwMonitor.on('data', (data: HardwareReport) => {
-      if (webContent) webContent.send(HMONITOR_IPC_DATA_ID, data);
+      sendRenderer(HMONITOR_IPC_DATA_ID, data);
     });
 
     hwMonitor.on('error', (error: MonitorError) => {
       console.error('Timed Monitoring Error:', error.message);
       if (error.stderrData) console.error('Stderr:', error.stderrData);
       if (error.rawError) console.error('Raw Error:', error.rawError);
-      if (webContent) webContent.send(HMONITOR_IPC_ERROR_MONITORING, error);
+      sendRenderer(HMONITOR_IPC_ERROR_MONITORING, error);
     });
 
     const targetInterval = (currentConfig.refreshInterval || 1) * 1000;
@@ -54,7 +58,7 @@ async function startMonitoring() {
     hwMonitor.startTimed(targetInterval, targetComponents);
   } catch (e) {
     console.error(e);
-    if (webContent) webContent.send(HMONITOR_IPC_ERROR_MONITORING, e);
+    sendRenderer(HMONITOR_IPC_ERROR_MONITORING, e);
   }
 }
 
