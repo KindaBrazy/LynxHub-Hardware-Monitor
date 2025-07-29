@@ -15289,11 +15289,33 @@ const HMONITOR_IPC_STOP_ID = "hmonitor-stop";
 const HMONITOR_IPC_UPDATE_CONFIG = "hmonitor-update-config";
 const HMONITOR_IPC_GET_HARDWARE = "hmonitor-ipc-get-hardware";
 const HMONITOR_IPC_ERROR_MONITORING = "hmonitor-error-monitoring";
+const HMONITOR_IPC_ON_CONFIG = "hmonitor-on-config";
 const initialSystemMetrics = {
   cpu: [],
   gpu: [],
   memory: [],
   uptime: { system: true, app: true }
+};
+const initAvailableHardware = {
+  gpu: [],
+  cpu: [],
+  memory: []
+};
+const initMetricVisibility = {
+  icon: true,
+  label: true,
+  value: true,
+  progressBar: true
+};
+const initialSettings = {
+  configVersion: 0.1,
+  refreshInterval: 1,
+  enabled: true,
+  compactMode: false,
+  showSectionLabel: true,
+  metricVisibility: initMetricVisibility,
+  enabledMetrics: initialSystemMetrics,
+  availableHardware: initAvailableHardware
 };
 function getActiveComponentTypes(metrics) {
   const componentTypes = [];
@@ -15320,6 +15342,9 @@ let storeManager = void 0;
 let hwMonitor = void 0;
 let currentConfig = void 0;
 let webContent = void 0;
+const sendRenderer = (channel, data) => {
+  if (webContent && !webContent.isDestroyed()) webContent.send(channel, data);
+};
 async function startMonitoring() {
   if (!webContent || !currentConfig) {
     console.warn(
@@ -15332,47 +15357,26 @@ async function startMonitoring() {
     const targetDir = join(app.getPath("downloads"), "LynxHub");
     await hwMonitor.checkRequirements(targetDir);
     hwMonitor.on("data", (data) => {
-      if (webContent) webContent.send(HMONITOR_IPC_DATA_ID, data);
+      sendRenderer(HMONITOR_IPC_DATA_ID, data);
     });
     hwMonitor.on("error", (error) => {
       console.error("Timed Monitoring Error:", error.message);
-      if (error.stderrData) console.error("Stderr:", error.stderrData);
       if (error.rawError) console.error("Raw Error:", error.rawError);
-      if (webContent) webContent.send(HMONITOR_IPC_ERROR_MONITORING, error);
+      sendRenderer(HMONITOR_IPC_ERROR_MONITORING, error);
     });
     const targetInterval = (currentConfig.refreshInterval || 1) * 1e3;
     const targetComponents = getActiveComponentTypes(currentConfig.enabledMetrics);
     hwMonitor.startTimed(targetInterval, targetComponents);
   } catch (e) {
     console.error(e);
-    if (webContent) webContent.send(HMONITOR_IPC_ERROR_MONITORING, e);
+    sendRenderer(HMONITOR_IPC_ERROR_MONITORING, e);
   }
 }
 function stopMonitoring() {
   hwMonitor?.stopTimed();
   hwMonitor = void 0;
 }
-async function onAppReady(utils) {
-  utils.getStorageManager().then((manager) => {
-    storeManager = manager;
-    currentConfig = storeManager.getCustomData(HMONITOR_STORAGE_ID);
-    if (!currentConfig || lodashExports.isArray(currentConfig.enabledMetrics)) {
-      currentConfig = {
-        enabled: true,
-        compactMode: false,
-        showSectionLabel: true,
-        showMetricLabel: true,
-        refreshInterval: 1,
-        enabledMetrics: initialSystemMetrics
-      };
-      storeManager.setCustomData(HMONITOR_STORAGE_ID, currentConfig);
-    } else if (!currentConfig.showMetricLabel) {
-      currentConfig.showMetricLabel = true;
-      storeManager.setCustomData(HMONITOR_STORAGE_ID, currentConfig);
-    }
-  });
-}
-async function getHardwareNames() {
+async function checkHardwareDevices() {
   const hm = new HardwareMonitor("error");
   const targetDir = join(app.getPath("downloads"), "LynxHub");
   await hm.checkRequirements(targetDir);
@@ -15380,7 +15384,43 @@ async function getHardwareNames() {
   const gpu = result.GPU.map((item) => item.Name);
   const cpu = result.CPU.map((item) => item.Name);
   const memory = result.Memory.map((item) => item.Name);
+  if (currentConfig && storeManager) {
+    currentConfig.availableHardware = { gpu, cpu, memory };
+    if (lodashExports.isEmpty(currentConfig.enabledMetrics.gpu)) {
+      currentConfig.enabledMetrics.gpu = gpu.map((name) => ({
+        name,
+        active: true,
+        enabled: ["temp", "usage", "vram"]
+      }));
+    }
+    if (lodashExports.isEmpty(currentConfig.enabledMetrics.cpu)) {
+      currentConfig.enabledMetrics.cpu = cpu.map((name) => ({ name, active: true, enabled: ["temp", "usage"] }));
+    }
+    if (lodashExports.isEmpty(currentConfig.enabledMetrics.memory)) {
+      currentConfig.enabledMetrics.memory = memory.map((name) => ({ name, active: true, enabled: ["memory"] }));
+    }
+    storeManager.setCustomData(HMONITOR_STORAGE_ID, currentConfig);
+    sendRenderer(HMONITOR_IPC_ON_CONFIG, currentConfig);
+  }
   return { cpu, gpu, memory };
+}
+async function onAppReady(utils) {
+  utils.getStorageManager().then((manager) => {
+    storeManager = manager;
+    currentConfig = storeManager.getCustomData(HMONITOR_STORAGE_ID);
+    if (!currentConfig || lodashExports.isArray(currentConfig.enabledMetrics)) {
+      currentConfig = initialSettings;
+      storeManager.setCustomData(HMONITOR_STORAGE_ID, currentConfig);
+    } else {
+      if (!currentConfig.configVersion) {
+        currentConfig.availableHardware = initAvailableHardware;
+        currentConfig.metricVisibility = initMetricVisibility;
+        currentConfig.configVersion = 0.1;
+        storeManager.setCustomData(HMONITOR_STORAGE_ID, currentConfig);
+      }
+    }
+    checkHardwareDevices();
+  });
 }
 let started = false;
 function onAppReadyToShow(utils) {
@@ -15410,7 +15450,7 @@ function updateConfig(config) {
 function listenForHWChannels() {
   ipcMain.on(HMONITOR_IPC_STOP_ID, () => stopMonitoring());
   ipcMain.on(HMONITOR_IPC_UPDATE_CONFIG, (_, config) => updateConfig(JSON.parse(config)));
-  ipcMain.handle(HMONITOR_IPC_GET_HARDWARE, () => getHardwareNames());
+  ipcMain.handle(HMONITOR_IPC_GET_HARDWARE, () => checkHardwareDevices());
 }
 async function initialExtension(lynxApi, utils) {
   lynxApi.listenForChannels(() => listenForHWChannels());
