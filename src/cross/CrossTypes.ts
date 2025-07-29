@@ -36,6 +36,7 @@ export type MonitoringSettings = {
   showMetricLabel: boolean;
   refreshInterval: number;
   enabledMetrics: NewSystemMetrics;
+  availableHardware: AvailableHardware;
 };
 
 export type SystemMetrics = 'temp' | 'usage' | 'vram' | 'memory' | 'uptimeSystemSeconds' | 'uptimeSeconds';

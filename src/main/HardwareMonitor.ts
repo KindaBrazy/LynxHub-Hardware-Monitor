@@ -2,7 +2,7 @@ import {join} from 'node:path';
 
 import HardwareMonitor, {HardwareReport, MonitorError} from '@lynxhub/hwmonitor';
 import {app, ipcMain, WebContents} from 'electron';
-import {isArray, isEqual} from 'lodash';
+import {isArray, isEmpty, isEqual} from 'lodash';
 
 import {MainExtensionUtils} from '../../../src/main/Managements/Plugin/Extensions/ExtensionTypes_Main';
 import StorageManager from '../../../src/main/Managements/Storage/StorageManager';
@@ -13,7 +13,8 @@ import {
   HMONITOR_IPC_STOP_ID,
   HMONITOR_IPC_UPDATE_CONFIG,
   HMONITOR_STORAGE_ID,
-  initialSystemMetrics,
+  initAvailableHardware,
+  initialSettings,
 } from '../cross/CrossConst';
 import {AvailableHardware, MonitoringSettings} from '../cross/CrossTypes';
 import {getActiveComponentTypes} from './Utils';
@@ -67,30 +68,7 @@ function stopMonitoring() {
   hwMonitor = undefined;
 }
 
-export async function onAppReady(utils: MainExtensionUtils) {
-  utils.getStorageManager().then(manager => {
-    storeManager = manager;
-    currentConfig = storeManager.getCustomData(HMONITOR_STORAGE_ID);
-
-    // noinspection SuspiciousTypeOfGuard
-    if (!currentConfig || isArray(currentConfig.enabledMetrics)) {
-      currentConfig = {
-        enabled: true,
-        compactMode: false,
-        showSectionLabel: true,
-        showMetricLabel: true,
-        refreshInterval: 1,
-        enabledMetrics: initialSystemMetrics,
-      };
-      storeManager.setCustomData(HMONITOR_STORAGE_ID, currentConfig);
-    } else if (!currentConfig.showMetricLabel) {
-      currentConfig.showMetricLabel = true;
-      storeManager.setCustomData(HMONITOR_STORAGE_ID, currentConfig);
-    }
-  });
-}
-
-async function getHardwareNames(): Promise<AvailableHardware> {
+async function checkHardwareDevices(): Promise<AvailableHardware> {
   const hm = new HardwareMonitor('error');
 
   const targetDir = join(app.getPath('downloads'), 'LynxHub');
@@ -101,7 +79,52 @@ async function getHardwareNames(): Promise<AvailableHardware> {
   const cpu = result.CPU.map(item => item.Name);
   const memory = result.Memory.map(item => item.Name);
 
+  if (currentConfig && storeManager) {
+    currentConfig.availableHardware = {gpu, cpu, memory};
+
+    if (isEmpty(currentConfig.enabledMetrics.gpu)) {
+      currentConfig.enabledMetrics.gpu = gpu.map(name => ({
+        name,
+        active: true,
+        enabled: ['temp', 'usage', 'vram'],
+      }));
+    }
+    if (isEmpty(currentConfig.enabledMetrics.cpu)) {
+      currentConfig.enabledMetrics.cpu = cpu.map(name => ({name, active: true, enabled: ['temp', 'usage']}));
+    }
+    if (isEmpty(currentConfig.enabledMetrics.memory)) {
+      currentConfig.enabledMetrics.memory = memory.map(name => ({name, active: true, enabled: ['memory']}));
+    }
+
+    storeManager.setCustomData(HMONITOR_STORAGE_ID, currentConfig);
+  }
+
   return {cpu, gpu, memory};
+}
+
+export async function onAppReady(utils: MainExtensionUtils) {
+  utils.getStorageManager().then(manager => {
+    storeManager = manager;
+    currentConfig = storeManager.getCustomData(HMONITOR_STORAGE_ID);
+
+    // noinspection SuspiciousTypeOfGuard
+    if (!currentConfig || isArray(currentConfig.enabledMetrics)) {
+      currentConfig = initialSettings;
+      storeManager.setCustomData(HMONITOR_STORAGE_ID, currentConfig);
+    } else {
+      if (!currentConfig.showMetricLabel) {
+        currentConfig.showMetricLabel = true;
+        storeManager.setCustomData(HMONITOR_STORAGE_ID, currentConfig);
+      }
+
+      if (!currentConfig.availableHardware) {
+        currentConfig.availableHardware = initAvailableHardware;
+        storeManager.setCustomData(HMONITOR_STORAGE_ID, currentConfig);
+      }
+    }
+
+    checkHardwareDevices();
+  });
 }
 
 let started: boolean = false;
@@ -140,5 +163,5 @@ function updateConfig(config: MonitoringSettings) {
 export function listenForHWChannels() {
   ipcMain.on(HMONITOR_IPC_STOP_ID, () => stopMonitoring());
   ipcMain.on(HMONITOR_IPC_UPDATE_CONFIG, (_, config: string) => updateConfig(JSON.parse(config)));
-  ipcMain.handle(HMONITOR_IPC_GET_HARDWARE, () => getHardwareNames());
+  ipcMain.handle(HMONITOR_IPC_GET_HARDWARE, () => checkHardwareDevices());
 }
