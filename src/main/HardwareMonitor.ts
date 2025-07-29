@@ -48,7 +48,7 @@ async function startMonitoring() {
 
     hwMonitor.on('error', (error: MonitorError) => {
       console.error('Timed Monitoring Error:', error.message);
-      if (error.stderrData) console.error('Stderr:', error.stderrData);
+      // if (error.stderrData) console.error('Stderr:', error.stderrData);
       if (error.rawError) console.error('Raw Error:', error.rawError);
       sendRenderer(HMONITOR_IPC_ERROR_MONITORING, error);
     });
