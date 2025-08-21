@@ -9,7 +9,6 @@ import StorageManager from '../../../src/main/Managements/Storage/StorageManager
 import {
   HMONITOR_IPC_DATA_ID,
   HMONITOR_IPC_ERROR_MONITORING,
-  HMONITOR_IPC_GET_HARDWARE,
   HMONITOR_IPC_ON_CONFIG,
   HMONITOR_IPC_STOP_ID,
   HMONITOR_IPC_UPDATE_CONFIG,
@@ -18,7 +17,7 @@ import {
   initialSettings,
   initMetricVisibility,
 } from '../cross/CrossConst';
-import {AvailableHardware, MonitoringSettings} from '../cross/CrossTypes';
+import {MonitoringSettings} from '../cross/CrossTypes';
 import {getActiveComponentTypes} from './Utils';
 
 let storeManager: StorageManager | undefined = undefined;
@@ -70,39 +69,41 @@ function stopMonitoring() {
   hwMonitor = undefined;
 }
 
-async function checkHardwareDevices(): Promise<AvailableHardware> {
-  const hm = new HardwareMonitor('error');
+async function checkHardwareDevices() {
+  try {
+    const hm = new HardwareMonitor('error');
 
-  const targetDir = join(app.getPath('downloads'), 'LynxHub');
-  await hm.checkRequirements(targetDir);
+    const targetDir = join(app.getPath('downloads'), 'LynxHub');
+    await hm.checkRequirements(targetDir);
 
-  const result = await hm.getDataOnce(['cpu', 'gpu', 'memory']);
-  const gpu = result.GPU.map(item => item.Name);
-  const cpu = result.CPU.map(item => item.Name);
-  const memory = result.Memory.map(item => item.Name);
+    const result = await hm.getDataOnce(['cpu', 'gpu', 'memory']);
+    const gpu = result.GPU.map(item => item.Name);
+    const cpu = result.CPU.map(item => item.Name);
+    const memory = result.Memory.map(item => item.Name);
 
-  if (currentConfig && storeManager) {
-    currentConfig.availableHardware = {gpu, cpu, memory};
+    if (currentConfig && storeManager) {
+      currentConfig.availableHardware = {gpu, cpu, memory};
 
-    if (isEmpty(currentConfig.enabledMetrics.gpu)) {
-      currentConfig.enabledMetrics.gpu = gpu.map(name => ({
-        name,
-        active: true,
-        enabled: ['temp', 'usage', 'vram'],
-      }));
+      if (isEmpty(currentConfig.enabledMetrics.gpu)) {
+        currentConfig.enabledMetrics.gpu = gpu.map(name => ({
+          name,
+          active: true,
+          enabled: ['temp', 'usage', 'vram'],
+        }));
+      }
+      if (isEmpty(currentConfig.enabledMetrics.cpu)) {
+        currentConfig.enabledMetrics.cpu = cpu.map(name => ({name, active: true, enabled: ['temp', 'usage']}));
+      }
+      if (isEmpty(currentConfig.enabledMetrics.memory)) {
+        currentConfig.enabledMetrics.memory = memory.map(name => ({name, active: true, enabled: ['memory']}));
+      }
+
+      storeManager.setCustomData(HMONITOR_STORAGE_ID, currentConfig);
+      sendRenderer(HMONITOR_IPC_ON_CONFIG, currentConfig);
     }
-    if (isEmpty(currentConfig.enabledMetrics.cpu)) {
-      currentConfig.enabledMetrics.cpu = cpu.map(name => ({name, active: true, enabled: ['temp', 'usage']}));
-    }
-    if (isEmpty(currentConfig.enabledMetrics.memory)) {
-      currentConfig.enabledMetrics.memory = memory.map(name => ({name, active: true, enabled: ['memory']}));
-    }
-
-    storeManager.setCustomData(HMONITOR_STORAGE_ID, currentConfig);
-    sendRenderer(HMONITOR_IPC_ON_CONFIG, currentConfig);
+  } catch (e) {
+    console.warn(e);
   }
-
-  return {cpu, gpu, memory};
 }
 
 export async function onAppReady(utils: MainExtensionUtils) {
@@ -163,5 +164,4 @@ function updateConfig(config: MonitoringSettings) {
 export function listenForHWChannels() {
   ipcMain.on(HMONITOR_IPC_STOP_ID, () => stopMonitoring());
   ipcMain.on(HMONITOR_IPC_UPDATE_CONFIG, (_, config: string) => updateConfig(JSON.parse(config)));
-  ipcMain.handle(HMONITOR_IPC_GET_HARDWARE, () => checkHardwareDevices());
 }
