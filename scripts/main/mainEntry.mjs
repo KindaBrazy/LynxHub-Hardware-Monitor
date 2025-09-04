@@ -1008,7 +1008,7 @@ function requireFileType$2() {
       const idPos = sliced.findIndex((el, i, arr) => arr[i] === 66 && arr[i + 1] === 130);
       if (idPos >= 0) {
         const docTypePos = idPos + 3;
-        const findDocType = (type) => Array.from(type).every((c, i) => sliced[docTypePos + i] === c.charCodeAt(0));
+        const findDocType = (type2) => Array.from(type2).every((c, i) => sliced[docTypePos + i] === c.charCodeAt(0));
         if (findDocType("matroska")) {
           return {
             ext: "mkv",
@@ -1331,16 +1331,16 @@ function requireProcessNextickArgs() {
   }
   return processNextickArgs.exports;
 }
-var isarray;
-var hasRequiredIsarray;
-function requireIsarray() {
-  if (hasRequiredIsarray) return isarray;
-  hasRequiredIsarray = 1;
+var isarray$1;
+var hasRequiredIsarray$1;
+function requireIsarray$1() {
+  if (hasRequiredIsarray$1) return isarray$1;
+  hasRequiredIsarray$1 = 1;
   var toString = {}.toString;
-  isarray = Array.isArray || function(arr) {
+  isarray$1 = Array.isArray || function(arr) {
     return toString.call(arr) == "[object Array]";
   };
-  return isarray;
+  return isarray$1;
 }
 var stream$1;
 var hasRequiredStream$1;
@@ -2504,12 +2504,12 @@ function require_stream_readable() {
   hasRequired_stream_readable = 1;
   var pna = requireProcessNextickArgs();
   _stream_readable = Readable;
-  var isArray = requireIsarray();
+  var isArray = requireIsarray$1();
   var Duplex;
   Readable.ReadableState = ReadableState;
   require$$2$1.EventEmitter;
-  var EElistenerCount = function(emitter, type) {
-    return emitter.listeners(type).length;
+  var EElistenerCount = function(emitter, type2) {
+    return emitter.listeners(type2).length;
   };
   var Stream = requireStream$1();
   var Buffer2 = requireSafeBuffer$2().Buffer;
@@ -3480,7 +3480,7 @@ function requireBl() {
       this._callback = null;
     }
   };
-  BufferList2.prototype.get = function get(index) {
+  BufferList2.prototype.get = function get2(index) {
     return this.slice(index, index + 1)[0];
   };
   BufferList2.prototype.slice = function slice(start, end) {
@@ -3628,23 +3628,1432 @@ function requireImmutable() {
   return immutable;
 }
 var headers = {};
-var toBuffer_1;
+var isarray;
+var hasRequiredIsarray;
+function requireIsarray() {
+  if (hasRequiredIsarray) return isarray;
+  hasRequiredIsarray = 1;
+  var toString = {}.toString;
+  isarray = Array.isArray || function(arr) {
+    return toString.call(arr) == "[object Array]";
+  };
+  return isarray;
+}
+var type;
+var hasRequiredType;
+function requireType() {
+  if (hasRequiredType) return type;
+  hasRequiredType = 1;
+  type = TypeError;
+  return type;
+}
+var esObjectAtoms;
+var hasRequiredEsObjectAtoms;
+function requireEsObjectAtoms() {
+  if (hasRequiredEsObjectAtoms) return esObjectAtoms;
+  hasRequiredEsObjectAtoms = 1;
+  esObjectAtoms = Object;
+  return esObjectAtoms;
+}
+var esErrors;
+var hasRequiredEsErrors;
+function requireEsErrors() {
+  if (hasRequiredEsErrors) return esErrors;
+  hasRequiredEsErrors = 1;
+  esErrors = Error;
+  return esErrors;
+}
+var _eval;
+var hasRequired_eval;
+function require_eval() {
+  if (hasRequired_eval) return _eval;
+  hasRequired_eval = 1;
+  _eval = EvalError;
+  return _eval;
+}
+var range;
+var hasRequiredRange;
+function requireRange() {
+  if (hasRequiredRange) return range;
+  hasRequiredRange = 1;
+  range = RangeError;
+  return range;
+}
+var ref;
+var hasRequiredRef;
+function requireRef() {
+  if (hasRequiredRef) return ref;
+  hasRequiredRef = 1;
+  ref = ReferenceError;
+  return ref;
+}
+var syntax;
+var hasRequiredSyntax;
+function requireSyntax() {
+  if (hasRequiredSyntax) return syntax;
+  hasRequiredSyntax = 1;
+  syntax = SyntaxError;
+  return syntax;
+}
+var uri;
+var hasRequiredUri;
+function requireUri() {
+  if (hasRequiredUri) return uri;
+  hasRequiredUri = 1;
+  uri = URIError;
+  return uri;
+}
+var abs;
+var hasRequiredAbs;
+function requireAbs() {
+  if (hasRequiredAbs) return abs;
+  hasRequiredAbs = 1;
+  abs = Math.abs;
+  return abs;
+}
+var floor;
+var hasRequiredFloor;
+function requireFloor() {
+  if (hasRequiredFloor) return floor;
+  hasRequiredFloor = 1;
+  floor = Math.floor;
+  return floor;
+}
+var max;
+var hasRequiredMax;
+function requireMax() {
+  if (hasRequiredMax) return max;
+  hasRequiredMax = 1;
+  max = Math.max;
+  return max;
+}
+var min;
+var hasRequiredMin;
+function requireMin() {
+  if (hasRequiredMin) return min;
+  hasRequiredMin = 1;
+  min = Math.min;
+  return min;
+}
+var pow;
+var hasRequiredPow;
+function requirePow() {
+  if (hasRequiredPow) return pow;
+  hasRequiredPow = 1;
+  pow = Math.pow;
+  return pow;
+}
+var round;
+var hasRequiredRound;
+function requireRound() {
+  if (hasRequiredRound) return round;
+  hasRequiredRound = 1;
+  round = Math.round;
+  return round;
+}
+var _isNaN;
+var hasRequired_isNaN;
+function require_isNaN() {
+  if (hasRequired_isNaN) return _isNaN;
+  hasRequired_isNaN = 1;
+  _isNaN = Number.isNaN || function isNaN2(a) {
+    return a !== a;
+  };
+  return _isNaN;
+}
+var sign;
+var hasRequiredSign;
+function requireSign() {
+  if (hasRequiredSign) return sign;
+  hasRequiredSign = 1;
+  var $isNaN = /* @__PURE__ */ require_isNaN();
+  sign = function sign2(number) {
+    if ($isNaN(number) || number === 0) {
+      return number;
+    }
+    return number < 0 ? -1 : 1;
+  };
+  return sign;
+}
+var gOPD;
+var hasRequiredGOPD;
+function requireGOPD() {
+  if (hasRequiredGOPD) return gOPD;
+  hasRequiredGOPD = 1;
+  gOPD = Object.getOwnPropertyDescriptor;
+  return gOPD;
+}
+var gopd;
+var hasRequiredGopd;
+function requireGopd() {
+  if (hasRequiredGopd) return gopd;
+  hasRequiredGopd = 1;
+  var $gOPD = /* @__PURE__ */ requireGOPD();
+  if ($gOPD) {
+    try {
+      $gOPD([], "length");
+    } catch (e) {
+      $gOPD = null;
+    }
+  }
+  gopd = $gOPD;
+  return gopd;
+}
+var esDefineProperty;
+var hasRequiredEsDefineProperty;
+function requireEsDefineProperty() {
+  if (hasRequiredEsDefineProperty) return esDefineProperty;
+  hasRequiredEsDefineProperty = 1;
+  var $defineProperty = Object.defineProperty || false;
+  if ($defineProperty) {
+    try {
+      $defineProperty({}, "a", { value: 1 });
+    } catch (e) {
+      $defineProperty = false;
+    }
+  }
+  esDefineProperty = $defineProperty;
+  return esDefineProperty;
+}
+var shams$1;
+var hasRequiredShams$1;
+function requireShams$1() {
+  if (hasRequiredShams$1) return shams$1;
+  hasRequiredShams$1 = 1;
+  shams$1 = function hasSymbols2() {
+    if (typeof Symbol !== "function" || typeof Object.getOwnPropertySymbols !== "function") {
+      return false;
+    }
+    if (typeof Symbol.iterator === "symbol") {
+      return true;
+    }
+    var obj = {};
+    var sym = Symbol("test");
+    var symObj = Object(sym);
+    if (typeof sym === "string") {
+      return false;
+    }
+    if (Object.prototype.toString.call(sym) !== "[object Symbol]") {
+      return false;
+    }
+    if (Object.prototype.toString.call(symObj) !== "[object Symbol]") {
+      return false;
+    }
+    var symVal = 42;
+    obj[sym] = symVal;
+    for (var _ in obj) {
+      return false;
+    }
+    if (typeof Object.keys === "function" && Object.keys(obj).length !== 0) {
+      return false;
+    }
+    if (typeof Object.getOwnPropertyNames === "function" && Object.getOwnPropertyNames(obj).length !== 0) {
+      return false;
+    }
+    var syms = Object.getOwnPropertySymbols(obj);
+    if (syms.length !== 1 || syms[0] !== sym) {
+      return false;
+    }
+    if (!Object.prototype.propertyIsEnumerable.call(obj, sym)) {
+      return false;
+    }
+    if (typeof Object.getOwnPropertyDescriptor === "function") {
+      var descriptor = (
+        /** @type {PropertyDescriptor} */
+        Object.getOwnPropertyDescriptor(obj, sym)
+      );
+      if (descriptor.value !== symVal || descriptor.enumerable !== true) {
+        return false;
+      }
+    }
+    return true;
+  };
+  return shams$1;
+}
+var hasSymbols;
+var hasRequiredHasSymbols;
+function requireHasSymbols() {
+  if (hasRequiredHasSymbols) return hasSymbols;
+  hasRequiredHasSymbols = 1;
+  var origSymbol = typeof Symbol !== "undefined" && Symbol;
+  var hasSymbolSham = requireShams$1();
+  hasSymbols = function hasNativeSymbols() {
+    if (typeof origSymbol !== "function") {
+      return false;
+    }
+    if (typeof Symbol !== "function") {
+      return false;
+    }
+    if (typeof origSymbol("foo") !== "symbol") {
+      return false;
+    }
+    if (typeof Symbol("bar") !== "symbol") {
+      return false;
+    }
+    return hasSymbolSham();
+  };
+  return hasSymbols;
+}
+var Reflect_getPrototypeOf;
+var hasRequiredReflect_getPrototypeOf;
+function requireReflect_getPrototypeOf() {
+  if (hasRequiredReflect_getPrototypeOf) return Reflect_getPrototypeOf;
+  hasRequiredReflect_getPrototypeOf = 1;
+  Reflect_getPrototypeOf = typeof Reflect !== "undefined" && Reflect.getPrototypeOf || null;
+  return Reflect_getPrototypeOf;
+}
+var Object_getPrototypeOf;
+var hasRequiredObject_getPrototypeOf;
+function requireObject_getPrototypeOf() {
+  if (hasRequiredObject_getPrototypeOf) return Object_getPrototypeOf;
+  hasRequiredObject_getPrototypeOf = 1;
+  var $Object = /* @__PURE__ */ requireEsObjectAtoms();
+  Object_getPrototypeOf = $Object.getPrototypeOf || null;
+  return Object_getPrototypeOf;
+}
+var implementation;
+var hasRequiredImplementation;
+function requireImplementation() {
+  if (hasRequiredImplementation) return implementation;
+  hasRequiredImplementation = 1;
+  var ERROR_MESSAGE = "Function.prototype.bind called on incompatible ";
+  var toStr = Object.prototype.toString;
+  var max2 = Math.max;
+  var funcType = "[object Function]";
+  var concatty = function concatty2(a, b) {
+    var arr = [];
+    for (var i = 0; i < a.length; i += 1) {
+      arr[i] = a[i];
+    }
+    for (var j = 0; j < b.length; j += 1) {
+      arr[j + a.length] = b[j];
+    }
+    return arr;
+  };
+  var slicy = function slicy2(arrLike, offset) {
+    var arr = [];
+    for (var i = offset, j = 0; i < arrLike.length; i += 1, j += 1) {
+      arr[j] = arrLike[i];
+    }
+    return arr;
+  };
+  var joiny = function(arr, joiner) {
+    var str = "";
+    for (var i = 0; i < arr.length; i += 1) {
+      str += arr[i];
+      if (i + 1 < arr.length) {
+        str += joiner;
+      }
+    }
+    return str;
+  };
+  implementation = function bind(that) {
+    var target = this;
+    if (typeof target !== "function" || toStr.apply(target) !== funcType) {
+      throw new TypeError(ERROR_MESSAGE + target);
+    }
+    var args = slicy(arguments, 1);
+    var bound;
+    var binder = function() {
+      if (this instanceof bound) {
+        var result = target.apply(
+          this,
+          concatty(args, arguments)
+        );
+        if (Object(result) === result) {
+          return result;
+        }
+        return this;
+      }
+      return target.apply(
+        that,
+        concatty(args, arguments)
+      );
+    };
+    var boundLength = max2(0, target.length - args.length);
+    var boundArgs = [];
+    for (var i = 0; i < boundLength; i++) {
+      boundArgs[i] = "$" + i;
+    }
+    bound = Function("binder", "return function (" + joiny(boundArgs, ",") + "){ return binder.apply(this,arguments); }")(binder);
+    if (target.prototype) {
+      var Empty = function Empty2() {
+      };
+      Empty.prototype = target.prototype;
+      bound.prototype = new Empty();
+      Empty.prototype = null;
+    }
+    return bound;
+  };
+  return implementation;
+}
+var functionBind;
+var hasRequiredFunctionBind;
+function requireFunctionBind() {
+  if (hasRequiredFunctionBind) return functionBind;
+  hasRequiredFunctionBind = 1;
+  var implementation2 = requireImplementation();
+  functionBind = Function.prototype.bind || implementation2;
+  return functionBind;
+}
+var functionCall;
+var hasRequiredFunctionCall;
+function requireFunctionCall() {
+  if (hasRequiredFunctionCall) return functionCall;
+  hasRequiredFunctionCall = 1;
+  functionCall = Function.prototype.call;
+  return functionCall;
+}
+var functionApply;
+var hasRequiredFunctionApply;
+function requireFunctionApply() {
+  if (hasRequiredFunctionApply) return functionApply;
+  hasRequiredFunctionApply = 1;
+  functionApply = Function.prototype.apply;
+  return functionApply;
+}
+var reflectApply;
+var hasRequiredReflectApply;
+function requireReflectApply() {
+  if (hasRequiredReflectApply) return reflectApply;
+  hasRequiredReflectApply = 1;
+  reflectApply = typeof Reflect !== "undefined" && Reflect && Reflect.apply;
+  return reflectApply;
+}
+var actualApply;
+var hasRequiredActualApply;
+function requireActualApply() {
+  if (hasRequiredActualApply) return actualApply;
+  hasRequiredActualApply = 1;
+  var bind = requireFunctionBind();
+  var $apply = requireFunctionApply();
+  var $call = requireFunctionCall();
+  var $reflectApply = requireReflectApply();
+  actualApply = $reflectApply || bind.call($call, $apply);
+  return actualApply;
+}
+var callBindApplyHelpers;
+var hasRequiredCallBindApplyHelpers;
+function requireCallBindApplyHelpers() {
+  if (hasRequiredCallBindApplyHelpers) return callBindApplyHelpers;
+  hasRequiredCallBindApplyHelpers = 1;
+  var bind = requireFunctionBind();
+  var $TypeError = /* @__PURE__ */ requireType();
+  var $call = requireFunctionCall();
+  var $actualApply = requireActualApply();
+  callBindApplyHelpers = function callBindBasic(args) {
+    if (args.length < 1 || typeof args[0] !== "function") {
+      throw new $TypeError("a function is required");
+    }
+    return $actualApply(bind, $call, args);
+  };
+  return callBindApplyHelpers;
+}
+var get;
+var hasRequiredGet;
+function requireGet() {
+  if (hasRequiredGet) return get;
+  hasRequiredGet = 1;
+  var callBind2 = requireCallBindApplyHelpers();
+  var gOPD2 = /* @__PURE__ */ requireGopd();
+  var hasProtoAccessor;
+  try {
+    hasProtoAccessor = /** @type {{ __proto__?: typeof Array.prototype }} */
+    [].__proto__ === Array.prototype;
+  } catch (e) {
+    if (!e || typeof e !== "object" || !("code" in e) || e.code !== "ERR_PROTO_ACCESS") {
+      throw e;
+    }
+  }
+  var desc = !!hasProtoAccessor && gOPD2 && gOPD2(
+    Object.prototype,
+    /** @type {keyof typeof Object.prototype} */
+    "__proto__"
+  );
+  var $Object = Object;
+  var $getPrototypeOf = $Object.getPrototypeOf;
+  get = desc && typeof desc.get === "function" ? callBind2([desc.get]) : typeof $getPrototypeOf === "function" ? (
+    /** @type {import('./get')} */
+    function getDunder(value) {
+      return $getPrototypeOf(value == null ? value : $Object(value));
+    }
+  ) : false;
+  return get;
+}
+var getProto;
+var hasRequiredGetProto;
+function requireGetProto() {
+  if (hasRequiredGetProto) return getProto;
+  hasRequiredGetProto = 1;
+  var reflectGetProto = requireReflect_getPrototypeOf();
+  var originalGetProto = requireObject_getPrototypeOf();
+  var getDunderProto = /* @__PURE__ */ requireGet();
+  getProto = reflectGetProto ? function getProto2(O) {
+    return reflectGetProto(O);
+  } : originalGetProto ? function getProto2(O) {
+    if (!O || typeof O !== "object" && typeof O !== "function") {
+      throw new TypeError("getProto: not an object");
+    }
+    return originalGetProto(O);
+  } : getDunderProto ? function getProto2(O) {
+    return getDunderProto(O);
+  } : null;
+  return getProto;
+}
+var hasown;
+var hasRequiredHasown;
+function requireHasown() {
+  if (hasRequiredHasown) return hasown;
+  hasRequiredHasown = 1;
+  var call = Function.prototype.call;
+  var $hasOwn = Object.prototype.hasOwnProperty;
+  var bind = requireFunctionBind();
+  hasown = bind.call(call, $hasOwn);
+  return hasown;
+}
+var getIntrinsic;
+var hasRequiredGetIntrinsic;
+function requireGetIntrinsic() {
+  if (hasRequiredGetIntrinsic) return getIntrinsic;
+  hasRequiredGetIntrinsic = 1;
+  var undefined$1;
+  var $Object = /* @__PURE__ */ requireEsObjectAtoms();
+  var $Error = /* @__PURE__ */ requireEsErrors();
+  var $EvalError = /* @__PURE__ */ require_eval();
+  var $RangeError = /* @__PURE__ */ requireRange();
+  var $ReferenceError = /* @__PURE__ */ requireRef();
+  var $SyntaxError = /* @__PURE__ */ requireSyntax();
+  var $TypeError = /* @__PURE__ */ requireType();
+  var $URIError = /* @__PURE__ */ requireUri();
+  var abs2 = /* @__PURE__ */ requireAbs();
+  var floor2 = /* @__PURE__ */ requireFloor();
+  var max2 = /* @__PURE__ */ requireMax();
+  var min2 = /* @__PURE__ */ requireMin();
+  var pow2 = /* @__PURE__ */ requirePow();
+  var round2 = /* @__PURE__ */ requireRound();
+  var sign2 = /* @__PURE__ */ requireSign();
+  var $Function = Function;
+  var getEvalledConstructor = function(expressionSyntax) {
+    try {
+      return $Function('"use strict"; return (' + expressionSyntax + ").constructor;")();
+    } catch (e) {
+    }
+  };
+  var $gOPD = /* @__PURE__ */ requireGopd();
+  var $defineProperty = /* @__PURE__ */ requireEsDefineProperty();
+  var throwTypeError = function() {
+    throw new $TypeError();
+  };
+  var ThrowTypeError = $gOPD ? function() {
+    try {
+      arguments.callee;
+      return throwTypeError;
+    } catch (calleeThrows) {
+      try {
+        return $gOPD(arguments, "callee").get;
+      } catch (gOPDthrows) {
+        return throwTypeError;
+      }
+    }
+  }() : throwTypeError;
+  var hasSymbols2 = requireHasSymbols()();
+  var getProto2 = requireGetProto();
+  var $ObjectGPO = requireObject_getPrototypeOf();
+  var $ReflectGPO = requireReflect_getPrototypeOf();
+  var $apply = requireFunctionApply();
+  var $call = requireFunctionCall();
+  var needsEval = {};
+  var TypedArray = typeof Uint8Array === "undefined" || !getProto2 ? undefined$1 : getProto2(Uint8Array);
+  var INTRINSICS = {
+    __proto__: null,
+    "%AggregateError%": typeof AggregateError === "undefined" ? undefined$1 : AggregateError,
+    "%Array%": Array,
+    "%ArrayBuffer%": typeof ArrayBuffer === "undefined" ? undefined$1 : ArrayBuffer,
+    "%ArrayIteratorPrototype%": hasSymbols2 && getProto2 ? getProto2([][Symbol.iterator]()) : undefined$1,
+    "%AsyncFromSyncIteratorPrototype%": undefined$1,
+    "%AsyncFunction%": needsEval,
+    "%AsyncGenerator%": needsEval,
+    "%AsyncGeneratorFunction%": needsEval,
+    "%AsyncIteratorPrototype%": needsEval,
+    "%Atomics%": typeof Atomics === "undefined" ? undefined$1 : Atomics,
+    "%BigInt%": typeof BigInt === "undefined" ? undefined$1 : BigInt,
+    "%BigInt64Array%": typeof BigInt64Array === "undefined" ? undefined$1 : BigInt64Array,
+    "%BigUint64Array%": typeof BigUint64Array === "undefined" ? undefined$1 : BigUint64Array,
+    "%Boolean%": Boolean,
+    "%DataView%": typeof DataView === "undefined" ? undefined$1 : DataView,
+    "%Date%": Date,
+    "%decodeURI%": decodeURI,
+    "%decodeURIComponent%": decodeURIComponent,
+    "%encodeURI%": encodeURI,
+    "%encodeURIComponent%": encodeURIComponent,
+    "%Error%": $Error,
+    "%eval%": eval,
+    // eslint-disable-line no-eval
+    "%EvalError%": $EvalError,
+    "%Float16Array%": typeof Float16Array === "undefined" ? undefined$1 : Float16Array,
+    "%Float32Array%": typeof Float32Array === "undefined" ? undefined$1 : Float32Array,
+    "%Float64Array%": typeof Float64Array === "undefined" ? undefined$1 : Float64Array,
+    "%FinalizationRegistry%": typeof FinalizationRegistry === "undefined" ? undefined$1 : FinalizationRegistry,
+    "%Function%": $Function,
+    "%GeneratorFunction%": needsEval,
+    "%Int8Array%": typeof Int8Array === "undefined" ? undefined$1 : Int8Array,
+    "%Int16Array%": typeof Int16Array === "undefined" ? undefined$1 : Int16Array,
+    "%Int32Array%": typeof Int32Array === "undefined" ? undefined$1 : Int32Array,
+    "%isFinite%": isFinite,
+    "%isNaN%": isNaN,
+    "%IteratorPrototype%": hasSymbols2 && getProto2 ? getProto2(getProto2([][Symbol.iterator]())) : undefined$1,
+    "%JSON%": typeof JSON === "object" ? JSON : undefined$1,
+    "%Map%": typeof Map === "undefined" ? undefined$1 : Map,
+    "%MapIteratorPrototype%": typeof Map === "undefined" || !hasSymbols2 || !getProto2 ? undefined$1 : getProto2((/* @__PURE__ */ new Map())[Symbol.iterator]()),
+    "%Math%": Math,
+    "%Number%": Number,
+    "%Object%": $Object,
+    "%Object.getOwnPropertyDescriptor%": $gOPD,
+    "%parseFloat%": parseFloat,
+    "%parseInt%": parseInt,
+    "%Promise%": typeof Promise === "undefined" ? undefined$1 : Promise,
+    "%Proxy%": typeof Proxy === "undefined" ? undefined$1 : Proxy,
+    "%RangeError%": $RangeError,
+    "%ReferenceError%": $ReferenceError,
+    "%Reflect%": typeof Reflect === "undefined" ? undefined$1 : Reflect,
+    "%RegExp%": RegExp,
+    "%Set%": typeof Set === "undefined" ? undefined$1 : Set,
+    "%SetIteratorPrototype%": typeof Set === "undefined" || !hasSymbols2 || !getProto2 ? undefined$1 : getProto2((/* @__PURE__ */ new Set())[Symbol.iterator]()),
+    "%SharedArrayBuffer%": typeof SharedArrayBuffer === "undefined" ? undefined$1 : SharedArrayBuffer,
+    "%String%": String,
+    "%StringIteratorPrototype%": hasSymbols2 && getProto2 ? getProto2(""[Symbol.iterator]()) : undefined$1,
+    "%Symbol%": hasSymbols2 ? Symbol : undefined$1,
+    "%SyntaxError%": $SyntaxError,
+    "%ThrowTypeError%": ThrowTypeError,
+    "%TypedArray%": TypedArray,
+    "%TypeError%": $TypeError,
+    "%Uint8Array%": typeof Uint8Array === "undefined" ? undefined$1 : Uint8Array,
+    "%Uint8ClampedArray%": typeof Uint8ClampedArray === "undefined" ? undefined$1 : Uint8ClampedArray,
+    "%Uint16Array%": typeof Uint16Array === "undefined" ? undefined$1 : Uint16Array,
+    "%Uint32Array%": typeof Uint32Array === "undefined" ? undefined$1 : Uint32Array,
+    "%URIError%": $URIError,
+    "%WeakMap%": typeof WeakMap === "undefined" ? undefined$1 : WeakMap,
+    "%WeakRef%": typeof WeakRef === "undefined" ? undefined$1 : WeakRef,
+    "%WeakSet%": typeof WeakSet === "undefined" ? undefined$1 : WeakSet,
+    "%Function.prototype.call%": $call,
+    "%Function.prototype.apply%": $apply,
+    "%Object.defineProperty%": $defineProperty,
+    "%Object.getPrototypeOf%": $ObjectGPO,
+    "%Math.abs%": abs2,
+    "%Math.floor%": floor2,
+    "%Math.max%": max2,
+    "%Math.min%": min2,
+    "%Math.pow%": pow2,
+    "%Math.round%": round2,
+    "%Math.sign%": sign2,
+    "%Reflect.getPrototypeOf%": $ReflectGPO
+  };
+  if (getProto2) {
+    try {
+      null.error;
+    } catch (e) {
+      var errorProto = getProto2(getProto2(e));
+      INTRINSICS["%Error.prototype%"] = errorProto;
+    }
+  }
+  var doEval = function doEval2(name) {
+    var value;
+    if (name === "%AsyncFunction%") {
+      value = getEvalledConstructor("async function () {}");
+    } else if (name === "%GeneratorFunction%") {
+      value = getEvalledConstructor("function* () {}");
+    } else if (name === "%AsyncGeneratorFunction%") {
+      value = getEvalledConstructor("async function* () {}");
+    } else if (name === "%AsyncGenerator%") {
+      var fn = doEval2("%AsyncGeneratorFunction%");
+      if (fn) {
+        value = fn.prototype;
+      }
+    } else if (name === "%AsyncIteratorPrototype%") {
+      var gen = doEval2("%AsyncGenerator%");
+      if (gen && getProto2) {
+        value = getProto2(gen.prototype);
+      }
+    }
+    INTRINSICS[name] = value;
+    return value;
+  };
+  var LEGACY_ALIASES = {
+    __proto__: null,
+    "%ArrayBufferPrototype%": ["ArrayBuffer", "prototype"],
+    "%ArrayPrototype%": ["Array", "prototype"],
+    "%ArrayProto_entries%": ["Array", "prototype", "entries"],
+    "%ArrayProto_forEach%": ["Array", "prototype", "forEach"],
+    "%ArrayProto_keys%": ["Array", "prototype", "keys"],
+    "%ArrayProto_values%": ["Array", "prototype", "values"],
+    "%AsyncFunctionPrototype%": ["AsyncFunction", "prototype"],
+    "%AsyncGenerator%": ["AsyncGeneratorFunction", "prototype"],
+    "%AsyncGeneratorPrototype%": ["AsyncGeneratorFunction", "prototype", "prototype"],
+    "%BooleanPrototype%": ["Boolean", "prototype"],
+    "%DataViewPrototype%": ["DataView", "prototype"],
+    "%DatePrototype%": ["Date", "prototype"],
+    "%ErrorPrototype%": ["Error", "prototype"],
+    "%EvalErrorPrototype%": ["EvalError", "prototype"],
+    "%Float32ArrayPrototype%": ["Float32Array", "prototype"],
+    "%Float64ArrayPrototype%": ["Float64Array", "prototype"],
+    "%FunctionPrototype%": ["Function", "prototype"],
+    "%Generator%": ["GeneratorFunction", "prototype"],
+    "%GeneratorPrototype%": ["GeneratorFunction", "prototype", "prototype"],
+    "%Int8ArrayPrototype%": ["Int8Array", "prototype"],
+    "%Int16ArrayPrototype%": ["Int16Array", "prototype"],
+    "%Int32ArrayPrototype%": ["Int32Array", "prototype"],
+    "%JSONParse%": ["JSON", "parse"],
+    "%JSONStringify%": ["JSON", "stringify"],
+    "%MapPrototype%": ["Map", "prototype"],
+    "%NumberPrototype%": ["Number", "prototype"],
+    "%ObjectPrototype%": ["Object", "prototype"],
+    "%ObjProto_toString%": ["Object", "prototype", "toString"],
+    "%ObjProto_valueOf%": ["Object", "prototype", "valueOf"],
+    "%PromisePrototype%": ["Promise", "prototype"],
+    "%PromiseProto_then%": ["Promise", "prototype", "then"],
+    "%Promise_all%": ["Promise", "all"],
+    "%Promise_reject%": ["Promise", "reject"],
+    "%Promise_resolve%": ["Promise", "resolve"],
+    "%RangeErrorPrototype%": ["RangeError", "prototype"],
+    "%ReferenceErrorPrototype%": ["ReferenceError", "prototype"],
+    "%RegExpPrototype%": ["RegExp", "prototype"],
+    "%SetPrototype%": ["Set", "prototype"],
+    "%SharedArrayBufferPrototype%": ["SharedArrayBuffer", "prototype"],
+    "%StringPrototype%": ["String", "prototype"],
+    "%SymbolPrototype%": ["Symbol", "prototype"],
+    "%SyntaxErrorPrototype%": ["SyntaxError", "prototype"],
+    "%TypedArrayPrototype%": ["TypedArray", "prototype"],
+    "%TypeErrorPrototype%": ["TypeError", "prototype"],
+    "%Uint8ArrayPrototype%": ["Uint8Array", "prototype"],
+    "%Uint8ClampedArrayPrototype%": ["Uint8ClampedArray", "prototype"],
+    "%Uint16ArrayPrototype%": ["Uint16Array", "prototype"],
+    "%Uint32ArrayPrototype%": ["Uint32Array", "prototype"],
+    "%URIErrorPrototype%": ["URIError", "prototype"],
+    "%WeakMapPrototype%": ["WeakMap", "prototype"],
+    "%WeakSetPrototype%": ["WeakSet", "prototype"]
+  };
+  var bind = requireFunctionBind();
+  var hasOwn = /* @__PURE__ */ requireHasown();
+  var $concat = bind.call($call, Array.prototype.concat);
+  var $spliceApply = bind.call($apply, Array.prototype.splice);
+  var $replace = bind.call($call, String.prototype.replace);
+  var $strSlice = bind.call($call, String.prototype.slice);
+  var $exec = bind.call($call, RegExp.prototype.exec);
+  var rePropName = /[^%.[\]]+|\[(?:(-?\d+(?:\.\d+)?)|(["'])((?:(?!\2)[^\\]|\\.)*?)\2)\]|(?=(?:\.|\[\])(?:\.|\[\]|%$))/g;
+  var reEscapeChar = /\\(\\)?/g;
+  var stringToPath = function stringToPath2(string) {
+    var first = $strSlice(string, 0, 1);
+    var last = $strSlice(string, -1);
+    if (first === "%" && last !== "%") {
+      throw new $SyntaxError("invalid intrinsic syntax, expected closing `%`");
+    } else if (last === "%" && first !== "%") {
+      throw new $SyntaxError("invalid intrinsic syntax, expected opening `%`");
+    }
+    var result = [];
+    $replace(string, rePropName, function(match, number, quote, subString) {
+      result[result.length] = quote ? $replace(subString, reEscapeChar, "$1") : number || match;
+    });
+    return result;
+  };
+  var getBaseIntrinsic = function getBaseIntrinsic2(name, allowMissing) {
+    var intrinsicName = name;
+    var alias;
+    if (hasOwn(LEGACY_ALIASES, intrinsicName)) {
+      alias = LEGACY_ALIASES[intrinsicName];
+      intrinsicName = "%" + alias[0] + "%";
+    }
+    if (hasOwn(INTRINSICS, intrinsicName)) {
+      var value = INTRINSICS[intrinsicName];
+      if (value === needsEval) {
+        value = doEval(intrinsicName);
+      }
+      if (typeof value === "undefined" && !allowMissing) {
+        throw new $TypeError("intrinsic " + name + " exists, but is not available. Please file an issue!");
+      }
+      return {
+        alias,
+        name: intrinsicName,
+        value
+      };
+    }
+    throw new $SyntaxError("intrinsic " + name + " does not exist!");
+  };
+  getIntrinsic = function GetIntrinsic(name, allowMissing) {
+    if (typeof name !== "string" || name.length === 0) {
+      throw new $TypeError("intrinsic name must be a non-empty string");
+    }
+    if (arguments.length > 1 && typeof allowMissing !== "boolean") {
+      throw new $TypeError('"allowMissing" argument must be a boolean');
+    }
+    if ($exec(/^%?[^%]*%?$/, name) === null) {
+      throw new $SyntaxError("`%` may not be present anywhere but at the beginning and end of the intrinsic name");
+    }
+    var parts = stringToPath(name);
+    var intrinsicBaseName = parts.length > 0 ? parts[0] : "";
+    var intrinsic = getBaseIntrinsic("%" + intrinsicBaseName + "%", allowMissing);
+    var intrinsicRealName = intrinsic.name;
+    var value = intrinsic.value;
+    var skipFurtherCaching = false;
+    var alias = intrinsic.alias;
+    if (alias) {
+      intrinsicBaseName = alias[0];
+      $spliceApply(parts, $concat([0, 1], alias));
+    }
+    for (var i = 1, isOwn = true; i < parts.length; i += 1) {
+      var part = parts[i];
+      var first = $strSlice(part, 0, 1);
+      var last = $strSlice(part, -1);
+      if ((first === '"' || first === "'" || first === "`" || (last === '"' || last === "'" || last === "`")) && first !== last) {
+        throw new $SyntaxError("property names with quotes must have matching quotes");
+      }
+      if (part === "constructor" || !isOwn) {
+        skipFurtherCaching = true;
+      }
+      intrinsicBaseName += "." + part;
+      intrinsicRealName = "%" + intrinsicBaseName + "%";
+      if (hasOwn(INTRINSICS, intrinsicRealName)) {
+        value = INTRINSICS[intrinsicRealName];
+      } else if (value != null) {
+        if (!(part in value)) {
+          if (!allowMissing) {
+            throw new $TypeError("base intrinsic for " + name + " exists, but the property is not available.");
+          }
+          return void undefined$1;
+        }
+        if ($gOPD && i + 1 >= parts.length) {
+          var desc = $gOPD(value, part);
+          isOwn = !!desc;
+          if (isOwn && "get" in desc && !("originalValue" in desc.get)) {
+            value = desc.get;
+          } else {
+            value = value[part];
+          }
+        } else {
+          isOwn = hasOwn(value, part);
+          value = value[part];
+        }
+        if (isOwn && !skipFurtherCaching) {
+          INTRINSICS[intrinsicRealName] = value;
+        }
+      }
+    }
+    return value;
+  };
+  return getIntrinsic;
+}
+var callBound;
+var hasRequiredCallBound;
+function requireCallBound() {
+  if (hasRequiredCallBound) return callBound;
+  hasRequiredCallBound = 1;
+  var GetIntrinsic = /* @__PURE__ */ requireGetIntrinsic();
+  var callBindBasic = requireCallBindApplyHelpers();
+  var $indexOf = callBindBasic([GetIntrinsic("%String.prototype.indexOf%")]);
+  callBound = function callBoundIntrinsic(name, allowMissing) {
+    var intrinsic = (
+      /** @type {(this: unknown, ...args: unknown[]) => unknown} */
+      GetIntrinsic(name, !!allowMissing)
+    );
+    if (typeof intrinsic === "function" && $indexOf(name, ".prototype.") > -1) {
+      return callBindBasic(
+        /** @type {const} */
+        [intrinsic]
+      );
+    }
+    return intrinsic;
+  };
+  return callBound;
+}
+var isCallable;
+var hasRequiredIsCallable;
+function requireIsCallable() {
+  if (hasRequiredIsCallable) return isCallable;
+  hasRequiredIsCallable = 1;
+  var fnToStr = Function.prototype.toString;
+  var reflectApply2 = typeof Reflect === "object" && Reflect !== null && Reflect.apply;
+  var badArrayLike;
+  var isCallableMarker;
+  if (typeof reflectApply2 === "function" && typeof Object.defineProperty === "function") {
+    try {
+      badArrayLike = Object.defineProperty({}, "length", {
+        get: function() {
+          throw isCallableMarker;
+        }
+      });
+      isCallableMarker = {};
+      reflectApply2(function() {
+        throw 42;
+      }, null, badArrayLike);
+    } catch (_) {
+      if (_ !== isCallableMarker) {
+        reflectApply2 = null;
+      }
+    }
+  } else {
+    reflectApply2 = null;
+  }
+  var constructorRegex = /^\s*class\b/;
+  var isES6ClassFn = function isES6ClassFunction(value) {
+    try {
+      var fnStr = fnToStr.call(value);
+      return constructorRegex.test(fnStr);
+    } catch (e) {
+      return false;
+    }
+  };
+  var tryFunctionObject = function tryFunctionToStr(value) {
+    try {
+      if (isES6ClassFn(value)) {
+        return false;
+      }
+      fnToStr.call(value);
+      return true;
+    } catch (e) {
+      return false;
+    }
+  };
+  var toStr = Object.prototype.toString;
+  var objectClass = "[object Object]";
+  var fnClass = "[object Function]";
+  var genClass = "[object GeneratorFunction]";
+  var ddaClass = "[object HTMLAllCollection]";
+  var ddaClass2 = "[object HTML document.all class]";
+  var ddaClass3 = "[object HTMLCollection]";
+  var hasToStringTag = typeof Symbol === "function" && !!Symbol.toStringTag;
+  var isIE68 = !(0 in [,]);
+  var isDDA = function isDocumentDotAll() {
+    return false;
+  };
+  if (typeof document === "object") {
+    var all = document.all;
+    if (toStr.call(all) === toStr.call(document.all)) {
+      isDDA = function isDocumentDotAll(value) {
+        if ((isIE68 || !value) && (typeof value === "undefined" || typeof value === "object")) {
+          try {
+            var str = toStr.call(value);
+            return (str === ddaClass || str === ddaClass2 || str === ddaClass3 || str === objectClass) && value("") == null;
+          } catch (e) {
+          }
+        }
+        return false;
+      };
+    }
+  }
+  isCallable = reflectApply2 ? function isCallable2(value) {
+    if (isDDA(value)) {
+      return true;
+    }
+    if (!value) {
+      return false;
+    }
+    if (typeof value !== "function" && typeof value !== "object") {
+      return false;
+    }
+    try {
+      reflectApply2(value, null, badArrayLike);
+    } catch (e) {
+      if (e !== isCallableMarker) {
+        return false;
+      }
+    }
+    return !isES6ClassFn(value) && tryFunctionObject(value);
+  } : function isCallable2(value) {
+    if (isDDA(value)) {
+      return true;
+    }
+    if (!value) {
+      return false;
+    }
+    if (typeof value !== "function" && typeof value !== "object") {
+      return false;
+    }
+    if (hasToStringTag) {
+      return tryFunctionObject(value);
+    }
+    if (isES6ClassFn(value)) {
+      return false;
+    }
+    var strClass = toStr.call(value);
+    if (strClass !== fnClass && strClass !== genClass && !/^\[object HTML/.test(strClass)) {
+      return false;
+    }
+    return tryFunctionObject(value);
+  };
+  return isCallable;
+}
+var forEach;
+var hasRequiredForEach;
+function requireForEach() {
+  if (hasRequiredForEach) return forEach;
+  hasRequiredForEach = 1;
+  var isCallable2 = requireIsCallable();
+  var toStr = Object.prototype.toString;
+  var hasOwnProperty = Object.prototype.hasOwnProperty;
+  var forEachArray = function forEachArray2(array, iterator, receiver) {
+    for (var i = 0, len = array.length; i < len; i++) {
+      if (hasOwnProperty.call(array, i)) {
+        if (receiver == null) {
+          iterator(array[i], i, array);
+        } else {
+          iterator.call(receiver, array[i], i, array);
+        }
+      }
+    }
+  };
+  var forEachString = function forEachString2(string, iterator, receiver) {
+    for (var i = 0, len = string.length; i < len; i++) {
+      if (receiver == null) {
+        iterator(string.charAt(i), i, string);
+      } else {
+        iterator.call(receiver, string.charAt(i), i, string);
+      }
+    }
+  };
+  var forEachObject = function forEachObject2(object, iterator, receiver) {
+    for (var k in object) {
+      if (hasOwnProperty.call(object, k)) {
+        if (receiver == null) {
+          iterator(object[k], k, object);
+        } else {
+          iterator.call(receiver, object[k], k, object);
+        }
+      }
+    }
+  };
+  function isArray(x) {
+    return toStr.call(x) === "[object Array]";
+  }
+  forEach = function forEach2(list, iterator, thisArg) {
+    if (!isCallable2(iterator)) {
+      throw new TypeError("iterator must be a function");
+    }
+    var receiver;
+    if (arguments.length >= 3) {
+      receiver = thisArg;
+    }
+    if (isArray(list)) {
+      forEachArray(list, iterator, receiver);
+    } else if (typeof list === "string") {
+      forEachString(list, iterator, receiver);
+    } else {
+      forEachObject(list, iterator, receiver);
+    }
+  };
+  return forEach;
+}
+var possibleTypedArrayNames;
+var hasRequiredPossibleTypedArrayNames;
+function requirePossibleTypedArrayNames() {
+  if (hasRequiredPossibleTypedArrayNames) return possibleTypedArrayNames;
+  hasRequiredPossibleTypedArrayNames = 1;
+  possibleTypedArrayNames = [
+    "Float16Array",
+    "Float32Array",
+    "Float64Array",
+    "Int8Array",
+    "Int16Array",
+    "Int32Array",
+    "Uint8Array",
+    "Uint8ClampedArray",
+    "Uint16Array",
+    "Uint32Array",
+    "BigInt64Array",
+    "BigUint64Array"
+  ];
+  return possibleTypedArrayNames;
+}
+var availableTypedArrays;
+var hasRequiredAvailableTypedArrays;
+function requireAvailableTypedArrays() {
+  if (hasRequiredAvailableTypedArrays) return availableTypedArrays;
+  hasRequiredAvailableTypedArrays = 1;
+  var possibleNames = /* @__PURE__ */ requirePossibleTypedArrayNames();
+  var g = typeof globalThis === "undefined" ? commonjsGlobal : globalThis;
+  availableTypedArrays = function availableTypedArrays2() {
+    var out = [];
+    for (var i = 0; i < possibleNames.length; i++) {
+      if (typeof g[possibleNames[i]] === "function") {
+        out[out.length] = possibleNames[i];
+      }
+    }
+    return out;
+  };
+  return availableTypedArrays;
+}
+var callBind = { exports: {} };
+var defineDataProperty;
+var hasRequiredDefineDataProperty;
+function requireDefineDataProperty() {
+  if (hasRequiredDefineDataProperty) return defineDataProperty;
+  hasRequiredDefineDataProperty = 1;
+  var $defineProperty = /* @__PURE__ */ requireEsDefineProperty();
+  var $SyntaxError = /* @__PURE__ */ requireSyntax();
+  var $TypeError = /* @__PURE__ */ requireType();
+  var gopd2 = /* @__PURE__ */ requireGopd();
+  defineDataProperty = function defineDataProperty2(obj, property, value) {
+    if (!obj || typeof obj !== "object" && typeof obj !== "function") {
+      throw new $TypeError("`obj` must be an object or a function`");
+    }
+    if (typeof property !== "string" && typeof property !== "symbol") {
+      throw new $TypeError("`property` must be a string or a symbol`");
+    }
+    if (arguments.length > 3 && typeof arguments[3] !== "boolean" && arguments[3] !== null) {
+      throw new $TypeError("`nonEnumerable`, if provided, must be a boolean or null");
+    }
+    if (arguments.length > 4 && typeof arguments[4] !== "boolean" && arguments[4] !== null) {
+      throw new $TypeError("`nonWritable`, if provided, must be a boolean or null");
+    }
+    if (arguments.length > 5 && typeof arguments[5] !== "boolean" && arguments[5] !== null) {
+      throw new $TypeError("`nonConfigurable`, if provided, must be a boolean or null");
+    }
+    if (arguments.length > 6 && typeof arguments[6] !== "boolean") {
+      throw new $TypeError("`loose`, if provided, must be a boolean");
+    }
+    var nonEnumerable = arguments.length > 3 ? arguments[3] : null;
+    var nonWritable = arguments.length > 4 ? arguments[4] : null;
+    var nonConfigurable = arguments.length > 5 ? arguments[5] : null;
+    var loose = arguments.length > 6 ? arguments[6] : false;
+    var desc = !!gopd2 && gopd2(obj, property);
+    if ($defineProperty) {
+      $defineProperty(obj, property, {
+        configurable: nonConfigurable === null && desc ? desc.configurable : !nonConfigurable,
+        enumerable: nonEnumerable === null && desc ? desc.enumerable : !nonEnumerable,
+        value,
+        writable: nonWritable === null && desc ? desc.writable : !nonWritable
+      });
+    } else if (loose || !nonEnumerable && !nonWritable && !nonConfigurable) {
+      obj[property] = value;
+    } else {
+      throw new $SyntaxError("This environment does not support defining a property as non-configurable, non-writable, or non-enumerable.");
+    }
+  };
+  return defineDataProperty;
+}
+var hasPropertyDescriptors_1;
+var hasRequiredHasPropertyDescriptors;
+function requireHasPropertyDescriptors() {
+  if (hasRequiredHasPropertyDescriptors) return hasPropertyDescriptors_1;
+  hasRequiredHasPropertyDescriptors = 1;
+  var $defineProperty = /* @__PURE__ */ requireEsDefineProperty();
+  var hasPropertyDescriptors = function hasPropertyDescriptors2() {
+    return !!$defineProperty;
+  };
+  hasPropertyDescriptors.hasArrayLengthDefineBug = function hasArrayLengthDefineBug() {
+    if (!$defineProperty) {
+      return null;
+    }
+    try {
+      return $defineProperty([], "length", { value: 1 }).length !== 1;
+    } catch (e) {
+      return true;
+    }
+  };
+  hasPropertyDescriptors_1 = hasPropertyDescriptors;
+  return hasPropertyDescriptors_1;
+}
+var setFunctionLength;
+var hasRequiredSetFunctionLength;
+function requireSetFunctionLength() {
+  if (hasRequiredSetFunctionLength) return setFunctionLength;
+  hasRequiredSetFunctionLength = 1;
+  var GetIntrinsic = /* @__PURE__ */ requireGetIntrinsic();
+  var define = /* @__PURE__ */ requireDefineDataProperty();
+  var hasDescriptors = /* @__PURE__ */ requireHasPropertyDescriptors()();
+  var gOPD2 = /* @__PURE__ */ requireGopd();
+  var $TypeError = /* @__PURE__ */ requireType();
+  var $floor = GetIntrinsic("%Math.floor%");
+  setFunctionLength = function setFunctionLength2(fn, length) {
+    if (typeof fn !== "function") {
+      throw new $TypeError("`fn` is not a function");
+    }
+    if (typeof length !== "number" || length < 0 || length > 4294967295 || $floor(length) !== length) {
+      throw new $TypeError("`length` must be a positive 32-bit integer");
+    }
+    var loose = arguments.length > 2 && !!arguments[2];
+    var functionLengthIsConfigurable = true;
+    var functionLengthIsWritable = true;
+    if ("length" in fn && gOPD2) {
+      var desc = gOPD2(fn, "length");
+      if (desc && !desc.configurable) {
+        functionLengthIsConfigurable = false;
+      }
+      if (desc && !desc.writable) {
+        functionLengthIsWritable = false;
+      }
+    }
+    if (functionLengthIsConfigurable || functionLengthIsWritable || !loose) {
+      if (hasDescriptors) {
+        define(
+          /** @type {Parameters<define>[0]} */
+          fn,
+          "length",
+          length,
+          true,
+          true
+        );
+      } else {
+        define(
+          /** @type {Parameters<define>[0]} */
+          fn,
+          "length",
+          length
+        );
+      }
+    }
+    return fn;
+  };
+  return setFunctionLength;
+}
+var applyBind;
+var hasRequiredApplyBind;
+function requireApplyBind() {
+  if (hasRequiredApplyBind) return applyBind;
+  hasRequiredApplyBind = 1;
+  var bind = requireFunctionBind();
+  var $apply = requireFunctionApply();
+  var actualApply2 = requireActualApply();
+  applyBind = function applyBind2() {
+    return actualApply2(bind, $apply, arguments);
+  };
+  return applyBind;
+}
+var hasRequiredCallBind;
+function requireCallBind() {
+  if (hasRequiredCallBind) return callBind.exports;
+  hasRequiredCallBind = 1;
+  (function(module) {
+    var setFunctionLength2 = /* @__PURE__ */ requireSetFunctionLength();
+    var $defineProperty = /* @__PURE__ */ requireEsDefineProperty();
+    var callBindBasic = requireCallBindApplyHelpers();
+    var applyBind2 = requireApplyBind();
+    module.exports = function callBind2(originalFunction) {
+      var func = callBindBasic(arguments);
+      var adjustedLength = originalFunction.length - (arguments.length - 1);
+      return setFunctionLength2(
+        func,
+        1 + (adjustedLength > 0 ? adjustedLength : 0),
+        true
+      );
+    };
+    if ($defineProperty) {
+      $defineProperty(module.exports, "apply", { value: applyBind2 });
+    } else {
+      module.exports.apply = applyBind2;
+    }
+  })(callBind);
+  return callBind.exports;
+}
+var shams;
+var hasRequiredShams;
+function requireShams() {
+  if (hasRequiredShams) return shams;
+  hasRequiredShams = 1;
+  var hasSymbols2 = requireShams$1();
+  shams = function hasToStringTagShams() {
+    return hasSymbols2() && !!Symbol.toStringTag;
+  };
+  return shams;
+}
+var whichTypedArray;
+var hasRequiredWhichTypedArray;
+function requireWhichTypedArray() {
+  if (hasRequiredWhichTypedArray) return whichTypedArray;
+  hasRequiredWhichTypedArray = 1;
+  var forEach2 = requireForEach();
+  var availableTypedArrays2 = /* @__PURE__ */ requireAvailableTypedArrays();
+  var callBind2 = requireCallBind();
+  var callBound2 = /* @__PURE__ */ requireCallBound();
+  var gOPD2 = /* @__PURE__ */ requireGopd();
+  var getProto2 = requireGetProto();
+  var $toString = callBound2("Object.prototype.toString");
+  var hasToStringTag = requireShams()();
+  var g = typeof globalThis === "undefined" ? commonjsGlobal : globalThis;
+  var typedArrays = availableTypedArrays2();
+  var $slice = callBound2("String.prototype.slice");
+  var $indexOf = callBound2("Array.prototype.indexOf", true) || function indexOf(array, value) {
+    for (var i = 0; i < array.length; i += 1) {
+      if (array[i] === value) {
+        return i;
+      }
+    }
+    return -1;
+  };
+  var cache = { __proto__: null };
+  if (hasToStringTag && gOPD2 && getProto2) {
+    forEach2(typedArrays, function(typedArray) {
+      var arr = new g[typedArray]();
+      if (Symbol.toStringTag in arr && getProto2) {
+        var proto = getProto2(arr);
+        var descriptor = gOPD2(proto, Symbol.toStringTag);
+        if (!descriptor && proto) {
+          var superProto = getProto2(proto);
+          descriptor = gOPD2(superProto, Symbol.toStringTag);
+        }
+        cache["$" + typedArray] = callBind2(descriptor.get);
+      }
+    });
+  } else {
+    forEach2(typedArrays, function(typedArray) {
+      var arr = new g[typedArray]();
+      var fn = arr.slice || arr.set;
+      if (fn) {
+        cache[
+          /** @type {`$${import('.').TypedArrayName}`} */
+          "$" + typedArray
+        ] = /** @type {import('./types').BoundSlice | import('./types').BoundSet} */
+        // @ts-expect-error TODO FIXME
+        callBind2(fn);
+      }
+    });
+  }
+  var tryTypedArrays = function tryAllTypedArrays(value) {
+    var found = false;
+    forEach2(
+      /** @type {Record<`\$${import('.').TypedArrayName}`, Getter>} */
+      cache,
+      /** @type {(getter: Getter, name: `\$${import('.').TypedArrayName}`) => void} */
+      function(getter, typedArray) {
+        if (!found) {
+          try {
+            if ("$" + getter(value) === typedArray) {
+              found = /** @type {import('.').TypedArrayName} */
+              $slice(typedArray, 1);
+            }
+          } catch (e) {
+          }
+        }
+      }
+    );
+    return found;
+  };
+  var trySlices = function tryAllSlices(value) {
+    var found = false;
+    forEach2(
+      /** @type {Record<`\$${import('.').TypedArrayName}`, Getter>} */
+      cache,
+      /** @type {(getter: Getter, name: `\$${import('.').TypedArrayName}`) => void} */
+      function(getter, name) {
+        if (!found) {
+          try {
+            getter(value);
+            found = /** @type {import('.').TypedArrayName} */
+            $slice(name, 1);
+          } catch (e) {
+          }
+        }
+      }
+    );
+    return found;
+  };
+  whichTypedArray = function whichTypedArray2(value) {
+    if (!value || typeof value !== "object") {
+      return false;
+    }
+    if (!hasToStringTag) {
+      var tag = $slice($toString(value), 8, -1);
+      if ($indexOf(typedArrays, tag) > -1) {
+        return tag;
+      }
+      if (tag !== "Object") {
+        return false;
+      }
+      return trySlices(value);
+    }
+    if (!gOPD2) {
+      return null;
+    }
+    return tryTypedArrays(value);
+  };
+  return whichTypedArray;
+}
+var isTypedArray;
+var hasRequiredIsTypedArray;
+function requireIsTypedArray() {
+  if (hasRequiredIsTypedArray) return isTypedArray;
+  hasRequiredIsTypedArray = 1;
+  var whichTypedArray2 = /* @__PURE__ */ requireWhichTypedArray();
+  isTypedArray = function isTypedArray2(value) {
+    return !!whichTypedArray2(value);
+  };
+  return isTypedArray;
+}
+var typedArrayBuffer;
+var hasRequiredTypedArrayBuffer;
+function requireTypedArrayBuffer() {
+  if (hasRequiredTypedArrayBuffer) return typedArrayBuffer;
+  hasRequiredTypedArrayBuffer = 1;
+  var $TypeError = /* @__PURE__ */ requireType();
+  var callBound2 = /* @__PURE__ */ requireCallBound();
+  var $typedArrayBuffer = callBound2("TypedArray.prototype.buffer", true);
+  var isTypedArray2 = /* @__PURE__ */ requireIsTypedArray();
+  typedArrayBuffer = $typedArrayBuffer || function typedArrayBuffer2(x) {
+    if (!isTypedArray2(x)) {
+      throw new $TypeError("Not a Typed Array");
+    }
+    return x.buffer;
+  };
+  return typedArrayBuffer;
+}
+var toBuffer;
 var hasRequiredToBuffer;
 function requireToBuffer() {
-  if (hasRequiredToBuffer) return toBuffer_1;
+  if (hasRequiredToBuffer) return toBuffer;
   hasRequiredToBuffer = 1;
-  toBuffer_1 = toBuffer;
-  var makeBuffer = Buffer.from && Buffer.from !== Uint8Array.from ? Buffer.from : bufferFrom;
-  function bufferFrom(buf, enc) {
-    return new Buffer(buf, enc);
-  }
-  function toBuffer(buf, enc) {
-    if (Buffer.isBuffer(buf)) return buf;
-    if (typeof buf === "string") return makeBuffer(buf, enc);
-    if (Array.isArray(buf)) return makeBuffer(buf);
-    throw new Error("Input should be a buffer or a string");
-  }
-  return toBuffer_1;
+  var Buffer2 = requireSafeBuffer().Buffer;
+  var isArray = requireIsarray();
+  var typedArrayBuffer2 = /* @__PURE__ */ requireTypedArrayBuffer();
+  var isView = ArrayBuffer.isView || function isView2(obj) {
+    try {
+      typedArrayBuffer2(obj);
+      return true;
+    } catch (e) {
+      return false;
+    }
+  };
+  var useUint8Array = typeof Uint8Array !== "undefined";
+  var useArrayBuffer = typeof ArrayBuffer !== "undefined" && typeof Uint8Array !== "undefined";
+  var useFromArrayBuffer = useArrayBuffer && (Buffer2.prototype instanceof Uint8Array || Buffer2.TYPED_ARRAY_SUPPORT);
+  toBuffer = function toBuffer2(data, encoding) {
+    if (data instanceof Buffer2) {
+      return data;
+    }
+    if (typeof data === "string") {
+      return Buffer2.from(data, encoding);
+    }
+    if (useArrayBuffer && isView(data)) {
+      if (data.byteLength === 0) {
+        return Buffer2.alloc(0);
+      }
+      if (useFromArrayBuffer) {
+        var res = Buffer2.from(data.buffer, data.byteOffset, data.byteLength);
+        if (res.byteLength === data.byteLength) {
+          return res;
+        }
+      }
+      var uint8 = data instanceof Uint8Array ? data : new Uint8Array(data.buffer, data.byteOffset, data.byteLength);
+      var result = Buffer2.from(uint8);
+      if (result.length === data.byteLength) {
+        return result;
+      }
+    }
+    if (useUint8Array && data instanceof Uint8Array) {
+      return Buffer2.from(data);
+    }
+    var isArr = isArray(data);
+    if (isArr) {
+      for (var i = 0; i < data.length; i += 1) {
+        var x = data[i];
+        if (typeof x !== "number" || x < 0 || x > 255 || ~~x !== x) {
+          throw new RangeError("Array items must be numbers in the range 0-255.");
+        }
+      }
+    }
+    if (isArr || Buffer2.isBuffer(data) && data.constructor && typeof data.constructor.isBuffer === "function" && data.constructor.isBuffer(data)) {
+      return Buffer2.from(data);
+    }
+    throw new TypeError('The "data" argument must be a string, an Array, a Buffer, a Uint8Array, or a DataView.');
+  };
+  return toBuffer;
 }
 var bufferFill;
 var hasRequiredBufferFill;
@@ -3794,7 +5203,7 @@ var hasRequiredHeaders;
 function requireHeaders() {
   if (hasRequiredHeaders) return headers;
   hasRequiredHeaders = 1;
-  var toBuffer = requireToBuffer();
+  var toBuffer2 = /* @__PURE__ */ requireToBuffer();
   var alloc = requireBufferAlloc();
   var ZEROS = "0000000000000000000";
   var SEVENS = "7777777777777777777";
@@ -3933,7 +5342,7 @@ function requireHeaders() {
         result += addLength(" " + key + "=" + pax[key] + "\n");
       }
     }
-    return toBuffer(result);
+    return toBuffer2(result);
   };
   headers.decodePax = function(buf) {
     var result = {};
@@ -3989,7 +5398,7 @@ function requireHeaders() {
     var gid = decodeOct(buf, 116, 8);
     var size = decodeOct(buf, 124, 12);
     var mtime = decodeOct(buf, 136, 12);
-    var type = toType(typeflag);
+    var type2 = toType(typeflag);
     var linkname = buf[157] === 0 ? null : decodeStr(buf, 157, 100, filenameEncoding);
     var uname = decodeStr(buf, 265, 32);
     var gname = decodeStr(buf, 297, 32);
@@ -4007,7 +5416,7 @@ function requireHeaders() {
       gid,
       size,
       mtime: new Date(1e3 * mtime),
-      type,
+      type: type2,
       linkname,
       uname,
       gname,
@@ -4327,6 +5736,7 @@ function requireEndOfStream() {
   var once2 = requireOnce();
   var noop = function() {
   };
+  var qnt = commonjsGlobal.Bare ? queueMicrotask : process.nextTick.bind(process);
   var isRequest = function(stream2) {
     return stream2.setHeader && typeof stream2.abort === "function";
   };
@@ -4360,7 +5770,7 @@ function requireEndOfStream() {
       callback.call(stream2, err);
     };
     var onclose = function() {
-      process.nextTick(onclosenexttick);
+      qnt(onclosenexttick);
     };
     var onclosenexttick = function() {
       if (cancelled) return;
@@ -4411,7 +5821,7 @@ function requirePack() {
   var eos = requireEndOfStream();
   var util2 = require$$1;
   var alloc = requireBufferAlloc();
-  var toBuffer = requireToBuffer();
+  var toBuffer2 = /* @__PURE__ */ requireToBuffer();
   var Readable = requireReadable().Readable;
   var Writable = requireReadable().Writable;
   var StringDecoder = require$$6.StringDecoder;
@@ -4511,7 +5921,7 @@ function requirePack() {
     if (!header.uid) header.uid = 0;
     if (!header.gid) header.gid = 0;
     if (!header.mtime) header.mtime = /* @__PURE__ */ new Date();
-    if (typeof buffer === "string") buffer = toBuffer(buffer);
+    if (typeof buffer === "string") buffer = toBuffer2(buffer);
     if (Buffer.isBuffer(buffer)) {
       header.size = buffer.length;
       this._encode(header);
@@ -4878,7 +6288,7 @@ function requireFileType$1() {
       const idPos = sliced.findIndex((el, i, arr) => arr[i] === 66 && arr[i + 1] === 130);
       if (idPos !== -1) {
         const docTypePos = idPos + 3;
-        const findDocType = (type) => Array.from(type).every((c, i) => sliced[docTypePos + i] === c.charCodeAt(0));
+        const findDocType = (type2) => Array.from(type2).every((c, i) => sliced[docTypePos + i] === c.charCodeAt(0));
         if (findDocType("matroska")) {
           return {
             ext: "mkv",
@@ -10525,10 +11935,10 @@ function requireLodash() {
         }();
         var ctxClearTimeout = context.clearTimeout !== root.clearTimeout && context.clearTimeout, ctxNow = Date2 && Date2.now !== root.Date.now && Date2.now, ctxSetTimeout = context.setTimeout !== root.setTimeout && context.setTimeout;
         var nativeCeil = Math2.ceil, nativeFloor = Math2.floor, nativeGetSymbols = Object2.getOwnPropertySymbols, nativeIsBuffer = Buffer2 ? Buffer2.isBuffer : undefined$1, nativeIsFinite = context.isFinite, nativeJoin = arrayProto.join, nativeKeys = overArg(Object2.keys, Object2), nativeMax = Math2.max, nativeMin = Math2.min, nativeNow = Date2.now, nativeParseInt = context.parseInt, nativeRandom = Math2.random, nativeReverse = arrayProto.reverse;
-        var DataView = getNative(context, "DataView"), Map = getNative(context, "Map"), Promise2 = getNative(context, "Promise"), Set2 = getNative(context, "Set"), WeakMap = getNative(context, "WeakMap"), nativeCreate = getNative(Object2, "create");
-        var metaMap = WeakMap && new WeakMap();
+        var DataView2 = getNative(context, "DataView"), Map2 = getNative(context, "Map"), Promise2 = getNative(context, "Promise"), Set2 = getNative(context, "Set"), WeakMap2 = getNative(context, "WeakMap"), nativeCreate = getNative(Object2, "create");
+        var metaMap = WeakMap2 && new WeakMap2();
         var realNames = {};
-        var dataViewCtorString = toSource(DataView), mapCtorString = toSource(Map), promiseCtorString = toSource(Promise2), setCtorString = toSource(Set2), weakMapCtorString = toSource(WeakMap);
+        var dataViewCtorString = toSource(DataView2), mapCtorString = toSource(Map2), promiseCtorString = toSource(Promise2), setCtorString = toSource(Set2), weakMapCtorString = toSource(WeakMap2);
         var symbolProto = Symbol2 ? Symbol2.prototype : undefined$1, symbolValueOf = symbolProto ? symbolProto.valueOf : undefined$1, symbolToString = symbolProto ? symbolProto.toString : undefined$1;
         function lodash2(value) {
           if (isObjectLike(value) && !isArray(value) && !(value instanceof LazyWrapper)) {
@@ -10656,11 +12066,11 @@ function requireLodash() {
               index += dir;
               var iterIndex = -1, value = array[index];
               while (++iterIndex < iterLength) {
-                var data = iteratees[iterIndex], iteratee2 = data.iteratee, type = data.type, computed = iteratee2(value);
-                if (type == LAZY_MAP_FLAG) {
+                var data = iteratees[iterIndex], iteratee2 = data.iteratee, type2 = data.type, computed = iteratee2(value);
+                if (type2 == LAZY_MAP_FLAG) {
                   value = computed;
                 } else if (!computed) {
-                  if (type == LAZY_FILTER_FLAG) {
+                  if (type2 == LAZY_FILTER_FLAG) {
                     continue outer;
                   } else {
                     break outer;
@@ -10773,7 +12183,7 @@ function requireLodash() {
           this.size = 0;
           this.__data__ = {
             "hash": new Hash(),
-            "map": new (Map || ListCache)(),
+            "map": new (Map2 || ListCache)(),
             "string": new Hash()
           };
         }
@@ -10838,7 +12248,7 @@ function requireLodash() {
           var data = this.__data__;
           if (data instanceof ListCache) {
             var pairs = data.__data__;
-            if (!Map || pairs.length < LARGE_ARRAY_SIZE - 1) {
+            if (!Map2 || pairs.length < LARGE_ARRAY_SIZE - 1) {
               pairs.push([key, value]);
               this.size = ++data.size;
               return this;
@@ -10855,7 +12265,7 @@ function requireLodash() {
         Stack.prototype.has = stackHas;
         Stack.prototype.set = stackSet;
         function arrayLikeKeys(value, inherited) {
-          var isArr = isArray(value), isArg = !isArr && isArguments(value), isBuff = !isArr && !isArg && isBuffer(value), isType = !isArr && !isArg && !isBuff && isTypedArray(value), skipIndexes = isArr || isArg || isBuff || isType, result2 = skipIndexes ? baseTimes(value.length, String2) : [], length = result2.length;
+          var isArr = isArray(value), isArg = !isArr && isArguments(value), isBuff = !isArr && !isArg && isBuffer(value), isType = !isArr && !isArg && !isBuff && isTypedArray2(value), skipIndexes = isArr || isArg || isBuff || isType, result2 = skipIndexes ? baseTimes(value.length, String2) : [], length = result2.length;
           for (var key in value) {
             if ((inherited || hasOwnProperty.call(value, key)) && !(skipIndexes && // Safari 9 has enumerable `arguments.length` in strict mode.
             (key == "length" || // Node.js 0.10 has enumerable non-index properties on buffers.
@@ -10924,7 +12334,7 @@ function requireLodash() {
         function baseAt(object, paths) {
           var index = -1, length = paths.length, result2 = Array2(length), skip = object == null;
           while (++index < length) {
-            result2[index] = skip ? undefined$1 : get(object, paths[index]);
+            result2[index] = skip ? undefined$1 : get2(object, paths[index]);
           }
           return result2;
         }
@@ -11243,7 +12653,7 @@ function requireLodash() {
           }
           if (isSameTag && !objIsObj) {
             stack || (stack = new Stack());
-            return objIsArr || isTypedArray(object) ? equalArrays(object, other, bitmask, customizer, equalFunc, stack) : equalByTag(object, other, objTag, bitmask, customizer, equalFunc, stack);
+            return objIsArr || isTypedArray2(object) ? equalArrays(object, other, bitmask, customizer, equalFunc, stack) : equalByTag(object, other, objTag, bitmask, customizer, equalFunc, stack);
           }
           if (!(bitmask & COMPARE_PARTIAL_FLAG)) {
             var objIsWrapped = objIsObj && hasOwnProperty.call(object, "__wrapped__"), othIsWrapped = othIsObj && hasOwnProperty.call(other, "__wrapped__");
@@ -11369,7 +12779,7 @@ function requireLodash() {
             return matchesStrictComparable(toKey(path2), srcValue);
           }
           return function(object) {
-            var objValue = get(object, path2);
+            var objValue = get2(object, path2);
             return objValue === undefined$1 && objValue === srcValue ? hasIn(object, path2) : baseIsEqual(srcValue, objValue, COMPARE_PARTIAL_FLAG | COMPARE_UNORDERED_FLAG);
           };
         }
@@ -11399,7 +12809,7 @@ function requireLodash() {
           var newValue = customizer ? customizer(objValue, srcValue, key + "", object, source, stack) : undefined$1;
           var isCommon = newValue === undefined$1;
           if (isCommon) {
-            var isArr = isArray(srcValue), isBuff = !isArr && isBuffer(srcValue), isTyped = !isArr && !isBuff && isTypedArray(srcValue);
+            var isArr = isArray(srcValue), isBuff = !isArr && isBuffer(srcValue), isTyped = !isArr && !isBuff && isTypedArray2(srcValue);
             newValue = srcValue;
             if (isArr || isBuff || isTyped) {
               if (isArray(objValue)) {
@@ -11696,7 +13106,7 @@ function requireLodash() {
             return symbolToString ? symbolToString.call(value) : "";
           }
           var result2 = value + "";
-          return result2 == "0" && 1 / value == -Infinity ? "-0" : result2;
+          return result2 == "0" && 1 / value == -INFINITY ? "-0" : result2;
         }
         function baseUniq(array, iteratee2, comparator) {
           var index = -1, includes2 = arrayIncludes, length = array.length, isCommon = true, result2 = [], seen = result2;
@@ -12582,7 +13992,7 @@ function requireLodash() {
           return result2;
         };
         var getTag = baseGetTag;
-        if (DataView && getTag(new DataView(new ArrayBuffer(1))) != dataViewTag || Map && getTag(new Map()) != mapTag || Promise2 && getTag(Promise2.resolve()) != promiseTag || Set2 && getTag(new Set2()) != setTag || WeakMap && getTag(new WeakMap()) != weakMapTag) {
+        if (DataView2 && getTag(new DataView2(new ArrayBuffer(1))) != dataViewTag || Map2 && getTag(new Map2()) != mapTag || Promise2 && getTag(Promise2.resolve()) != promiseTag || Set2 && getTag(new Set2()) != setTag || WeakMap2 && getTag(new WeakMap2()) != weakMapTag) {
           getTag = function(value) {
             var result2 = baseGetTag(value), Ctor = result2 == objectTag ? value.constructor : undefined$1, ctorString = Ctor ? toSource(Ctor) : "";
             if (ctorString) {
@@ -12701,16 +14111,16 @@ function requireLodash() {
           return isArray(value) || isArguments(value) || !!(spreadableSymbol && value && value[spreadableSymbol]);
         }
         function isIndex(value, length) {
-          var type = typeof value;
+          var type2 = typeof value;
           length = length == null ? MAX_SAFE_INTEGER : length;
-          return !!length && (type == "number" || type != "symbol" && reIsUint.test(value)) && (value > -1 && value % 1 == 0 && value < length);
+          return !!length && (type2 == "number" || type2 != "symbol" && reIsUint.test(value)) && (value > -1 && value % 1 == 0 && value < length);
         }
         function isIterateeCall(value, index, object) {
           if (!isObject(object)) {
             return false;
           }
-          var type = typeof index;
-          if (type == "number" ? isArrayLike(object) && isIndex(index, object.length) : type == "string" && index in object) {
+          var type2 = typeof index;
+          if (type2 == "number" ? isArrayLike(object) && isIndex(index, object.length) : type2 == "string" && index in object) {
             return eq(object[index], value);
           }
           return false;
@@ -12719,15 +14129,15 @@ function requireLodash() {
           if (isArray(value)) {
             return false;
           }
-          var type = typeof value;
-          if (type == "number" || type == "symbol" || type == "boolean" || value == null || isSymbol(value)) {
+          var type2 = typeof value;
+          if (type2 == "number" || type2 == "symbol" || type2 == "boolean" || value == null || isSymbol(value)) {
             return true;
           }
           return reIsPlainProp.test(value) || !reIsDeepProp.test(value) || object != null && value in Object2(object);
         }
         function isKeyable(value) {
-          var type = typeof value;
-          return type == "string" || type == "number" || type == "symbol" || type == "boolean" ? value !== "__proto__" : value === null;
+          var type2 = typeof value;
+          return type2 == "string" || type2 == "number" || type2 == "symbol" || type2 == "boolean" ? value !== "__proto__" : value === null;
         }
         function isLaziable(func) {
           var funcName = getFuncName(func), other = lodash2[funcName];
@@ -12903,7 +14313,7 @@ function requireLodash() {
             return value;
           }
           var result2 = value + "";
-          return result2 == "0" && 1 / value == -Infinity ? "-0" : result2;
+          return result2 == "0" && 1 / value == -INFINITY ? "-0" : result2;
         }
         function toSource(func) {
           if (func != null) {
@@ -13445,7 +14855,7 @@ function requireLodash() {
           depth = depth === undefined$1 ? 1 : toInteger(depth);
           return baseFlatten(map(collection, iteratee2), depth);
         }
-        function forEach(collection, iteratee2) {
+        function forEach2(collection, iteratee2) {
           var func = isArray(collection) ? arrayEach : baseEach;
           return func(collection, getIteratee(iteratee2, 3));
         }
@@ -13873,7 +15283,7 @@ function requireLodash() {
           if (value == null) {
             return true;
           }
-          if (isArrayLike(value) && (isArray(value) || typeof value == "string" || typeof value.splice == "function" || isBuffer(value) || isTypedArray(value) || isArguments(value))) {
+          if (isArrayLike(value) && (isArray(value) || typeof value == "string" || typeof value.splice == "function" || isBuffer(value) || isTypedArray2(value) || isArguments(value))) {
             return !value.length;
           }
           var tag = getTag(value);
@@ -13905,7 +15315,7 @@ function requireLodash() {
           var tag = baseGetTag(value);
           return tag == errorTag || tag == domExcTag || typeof value.message == "string" && typeof value.name == "string" && !isPlainObject(value);
         }
-        function isFinite(value) {
+        function isFinite2(value) {
           return typeof value == "number" && nativeIsFinite(value);
         }
         function isFunction(value) {
@@ -13922,8 +15332,8 @@ function requireLodash() {
           return typeof value == "number" && value > -1 && value % 1 == 0 && value <= MAX_SAFE_INTEGER;
         }
         function isObject(value) {
-          var type = typeof value;
-          return value != null && (type == "object" || type == "function");
+          var type2 = typeof value;
+          return value != null && (type2 == "object" || type2 == "function");
         }
         function isObjectLike(value) {
           return value != null && typeof value == "object";
@@ -13936,7 +15346,7 @@ function requireLodash() {
           customizer = typeof customizer == "function" ? customizer : undefined$1;
           return baseIsMatch(object, source, getMatchData(source), customizer);
         }
-        function isNaN(value) {
+        function isNaN2(value) {
           return isNumber(value) && value != +value;
         }
         function isNative(value) {
@@ -13967,7 +15377,7 @@ function requireLodash() {
         }
         var isRegExp = nodeIsRegExp ? baseUnary(nodeIsRegExp) : baseIsRegExp;
         function isSafeInteger(value) {
-          return isInteger(value) && value >= -9007199254740991 && value <= MAX_SAFE_INTEGER;
+          return isInteger(value) && value >= -MAX_SAFE_INTEGER && value <= MAX_SAFE_INTEGER;
         }
         var isSet = nodeIsSet ? baseUnary(nodeIsSet) : baseIsSet;
         function isString(value) {
@@ -13976,7 +15386,7 @@ function requireLodash() {
         function isSymbol(value) {
           return typeof value == "symbol" || isObjectLike(value) && baseGetTag(value) == symbolTag;
         }
-        var isTypedArray = nodeIsTypedArray ? baseUnary(nodeIsTypedArray) : baseIsTypedArray;
+        var isTypedArray2 = nodeIsTypedArray ? baseUnary(nodeIsTypedArray) : baseIsTypedArray;
         function isUndefined(value) {
           return value === undefined$1;
         }
@@ -14008,9 +15418,9 @@ function requireLodash() {
             return value === 0 ? value : 0;
           }
           value = toNumber(value);
-          if (value === INFINITY || value === -Infinity) {
-            var sign = value < 0 ? -1 : 1;
-            return sign * MAX_INTEGER;
+          if (value === INFINITY || value === -INFINITY) {
+            var sign2 = value < 0 ? -1 : 1;
+            return sign2 * MAX_INTEGER;
           }
           return value === value ? value : 0;
         }
@@ -14043,7 +15453,7 @@ function requireLodash() {
           return copyObject(value, keysIn(value));
         }
         function toSafeInteger(value) {
-          return value ? baseClamp(toInteger(value), -9007199254740991, MAX_SAFE_INTEGER) : value === 0 ? value : 0;
+          return value ? baseClamp(toInteger(value), -MAX_SAFE_INTEGER, MAX_SAFE_INTEGER) : value === 0 ? value : 0;
         }
         function toString(value) {
           return value == null ? "" : baseToString(value);
@@ -14124,7 +15534,7 @@ function requireLodash() {
         function functionsIn(object) {
           return object == null ? [] : baseFunctions(object, keysIn(object));
         }
-        function get(object, path2, defaultValue) {
+        function get2(object, path2, defaultValue) {
           var result2 = object == null ? undefined$1 : baseGet(object, path2);
           return result2 === undefined$1 ? defaultValue : result2;
         }
@@ -14245,7 +15655,7 @@ function requireLodash() {
         var toPairs = createToPairs(keys);
         var toPairsIn = createToPairs(keysIn);
         function transform(object, iteratee2, accumulator) {
-          var isArr = isArray(object), isArrLike = isArr || isBuffer(object) || isTypedArray(object);
+          var isArr = isArray(object), isArrLike = isArr || isBuffer(object) || isTypedArray2(object);
           iteratee2 = getIteratee(iteratee2, 4);
           if (accumulator == null) {
             var Ctor = object && object.constructor;
@@ -14716,7 +16126,7 @@ function requireLodash() {
             return object == null ? undefined$1 : baseGet(object, path2);
           };
         }
-        var range = createRange();
+        var range2 = createRange();
         var rangeRight = createRange(true);
         function stubArray() {
           return [];
@@ -14764,8 +16174,8 @@ function requireLodash() {
         var divide = createMathOperation(function(dividend, divisor) {
           return dividend / divisor;
         }, 1);
-        var floor = createRound("floor");
-        function max(array) {
+        var floor2 = createRound("floor");
+        function max2(array) {
           return array && array.length ? baseExtremum(array, identity, baseGt) : undefined$1;
         }
         function maxBy(array, iteratee2) {
@@ -14777,7 +16187,7 @@ function requireLodash() {
         function meanBy(array, iteratee2) {
           return baseMean(array, getIteratee(iteratee2, 2));
         }
-        function min(array) {
+        function min2(array) {
           return array && array.length ? baseExtremum(array, identity, baseLt) : undefined$1;
         }
         function minBy(array, iteratee2) {
@@ -14786,7 +16196,7 @@ function requireLodash() {
         var multiply = createMathOperation(function(multiplier, multiplicand) {
           return multiplier * multiplicand;
         }, 1);
-        var round = createRound("round");
+        var round2 = createRound("round");
         var subtract = createMathOperation(function(minuend, subtrahend) {
           return minuend - subtrahend;
         }, 0);
@@ -14890,7 +16300,7 @@ function requireLodash() {
         lodash2.pullAllBy = pullAllBy;
         lodash2.pullAllWith = pullAllWith;
         lodash2.pullAt = pullAt;
-        lodash2.range = range;
+        lodash2.range = range2;
         lodash2.rangeRight = rangeRight;
         lodash2.rearg = rearg;
         lodash2.reject = reject;
@@ -14975,14 +16385,14 @@ function requireLodash() {
         lodash2.findLast = findLast;
         lodash2.findLastIndex = findLastIndex;
         lodash2.findLastKey = findLastKey;
-        lodash2.floor = floor;
-        lodash2.forEach = forEach;
+        lodash2.floor = floor2;
+        lodash2.forEach = forEach2;
         lodash2.forEachRight = forEachRight;
         lodash2.forIn = forIn;
         lodash2.forInRight = forInRight;
         lodash2.forOwn = forOwn;
         lodash2.forOwnRight = forOwnRight;
-        lodash2.get = get;
+        lodash2.get = get2;
         lodash2.gt = gt;
         lodash2.gte = gte;
         lodash2.has = has;
@@ -15006,14 +16416,14 @@ function requireLodash() {
         lodash2.isEqual = isEqual;
         lodash2.isEqualWith = isEqualWith;
         lodash2.isError = isError;
-        lodash2.isFinite = isFinite;
+        lodash2.isFinite = isFinite2;
         lodash2.isFunction = isFunction;
         lodash2.isInteger = isInteger;
         lodash2.isLength = isLength;
         lodash2.isMap = isMap;
         lodash2.isMatch = isMatch;
         lodash2.isMatchWith = isMatchWith;
-        lodash2.isNaN = isNaN;
+        lodash2.isNaN = isNaN2;
         lodash2.isNative = isNative;
         lodash2.isNil = isNil;
         lodash2.isNull = isNull;
@@ -15026,7 +16436,7 @@ function requireLodash() {
         lodash2.isSet = isSet;
         lodash2.isString = isString;
         lodash2.isSymbol = isSymbol;
-        lodash2.isTypedArray = isTypedArray;
+        lodash2.isTypedArray = isTypedArray2;
         lodash2.isUndefined = isUndefined;
         lodash2.isWeakMap = isWeakMap;
         lodash2.isWeakSet = isWeakSet;
@@ -15038,11 +16448,11 @@ function requireLodash() {
         lodash2.lowerFirst = lowerFirst;
         lodash2.lt = lt;
         lodash2.lte = lte;
-        lodash2.max = max;
+        lodash2.max = max2;
         lodash2.maxBy = maxBy;
         lodash2.mean = mean;
         lodash2.meanBy = meanBy;
-        lodash2.min = min;
+        lodash2.min = min2;
         lodash2.minBy = minBy;
         lodash2.stubArray = stubArray;
         lodash2.stubFalse = stubFalse;
@@ -15064,7 +16474,7 @@ function requireLodash() {
         lodash2.repeat = repeat;
         lodash2.replace = replace;
         lodash2.result = result;
-        lodash2.round = round;
+        lodash2.round = round2;
         lodash2.runInContext = runInContext2;
         lodash2.sample = sample;
         lodash2.size = size;
@@ -15099,7 +16509,7 @@ function requireLodash() {
         lodash2.uniqueId = uniqueId;
         lodash2.upperCase = upperCase;
         lodash2.upperFirst = upperFirst;
-        lodash2.each = forEach;
+        lodash2.each = forEach2;
         lodash2.eachRight = forEachRight;
         lodash2.first = head;
         mixin(lodash2, function() {
@@ -15134,12 +16544,12 @@ function requireLodash() {
           };
         });
         arrayEach(["filter", "map", "takeWhile"], function(methodName, index) {
-          var type = index + 1, isFilter = type == LAZY_FILTER_FLAG || type == LAZY_WHILE_FLAG;
+          var type2 = index + 1, isFilter = type2 == LAZY_FILTER_FLAG || type2 == LAZY_WHILE_FLAG;
           LazyWrapper.prototype[methodName] = function(iteratee2) {
             var result2 = this.clone();
             result2.__iteratees__.push({
               "iteratee": getIteratee(iteratee2, 3),
-              "type": type
+              "type": type2
             });
             result2.__filtered__ = result2.__filtered__ || isFilter;
             return result2;
@@ -15287,7 +16697,6 @@ const HMONITOR_STORAGE_ID = "hmonitor_storage";
 const HMONITOR_IPC_DATA_ID = "hardware-data-update";
 const HMONITOR_IPC_STOP_ID = "hmonitor-stop";
 const HMONITOR_IPC_UPDATE_CONFIG = "hmonitor-update-config";
-const HMONITOR_IPC_GET_HARDWARE = "hmonitor-ipc-get-hardware";
 const HMONITOR_IPC_ERROR_MONITORING = "hmonitor-error-monitoring";
 const HMONITOR_IPC_ON_CONFIG = "hmonitor-on-config";
 const initialSystemMetrics = {
@@ -15377,32 +16786,35 @@ function stopMonitoring() {
   hwMonitor = void 0;
 }
 async function checkHardwareDevices() {
-  const hm = new HardwareMonitor("error");
-  const targetDir = join(app.getPath("downloads"), "LynxHub");
-  await hm.checkRequirements(targetDir);
-  const result = await hm.getDataOnce(["cpu", "gpu", "memory"]);
-  const gpu = result.GPU.map((item) => item.Name);
-  const cpu = result.CPU.map((item) => item.Name);
-  const memory = result.Memory.map((item) => item.Name);
-  if (currentConfig && storeManager) {
-    currentConfig.availableHardware = { gpu, cpu, memory };
-    if (lodashExports.isEmpty(currentConfig.enabledMetrics.gpu)) {
-      currentConfig.enabledMetrics.gpu = gpu.map((name) => ({
-        name,
-        active: true,
-        enabled: ["temp", "usage", "vram"]
-      }));
+  try {
+    const hm = new HardwareMonitor("error");
+    const targetDir = join(app.getPath("downloads"), "LynxHub");
+    await hm.checkRequirements(targetDir);
+    const result = await hm.getDataOnce(["cpu", "gpu", "memory"]);
+    const gpu = result.GPU.map((item) => item.Name);
+    const cpu = result.CPU.map((item) => item.Name);
+    const memory = result.Memory.map((item) => item.Name);
+    if (currentConfig && storeManager) {
+      currentConfig.availableHardware = { gpu, cpu, memory };
+      if (lodashExports.isEmpty(currentConfig.enabledMetrics.gpu)) {
+        currentConfig.enabledMetrics.gpu = gpu.map((name) => ({
+          name,
+          active: true,
+          enabled: ["temp", "usage", "vram"]
+        }));
+      }
+      if (lodashExports.isEmpty(currentConfig.enabledMetrics.cpu)) {
+        currentConfig.enabledMetrics.cpu = cpu.map((name) => ({ name, active: true, enabled: ["temp", "usage"] }));
+      }
+      if (lodashExports.isEmpty(currentConfig.enabledMetrics.memory)) {
+        currentConfig.enabledMetrics.memory = memory.map((name) => ({ name, active: true, enabled: ["memory"] }));
+      }
+      storeManager.setCustomData(HMONITOR_STORAGE_ID, currentConfig);
+      sendRenderer(HMONITOR_IPC_ON_CONFIG, currentConfig);
     }
-    if (lodashExports.isEmpty(currentConfig.enabledMetrics.cpu)) {
-      currentConfig.enabledMetrics.cpu = cpu.map((name) => ({ name, active: true, enabled: ["temp", "usage"] }));
-    }
-    if (lodashExports.isEmpty(currentConfig.enabledMetrics.memory)) {
-      currentConfig.enabledMetrics.memory = memory.map((name) => ({ name, active: true, enabled: ["memory"] }));
-    }
-    storeManager.setCustomData(HMONITOR_STORAGE_ID, currentConfig);
-    sendRenderer(HMONITOR_IPC_ON_CONFIG, currentConfig);
+  } catch (e) {
+    console.warn(e);
   }
-  return { cpu, gpu, memory };
 }
 async function onAppReady(utils) {
   utils.getStorageManager().then((manager) => {
@@ -15450,7 +16862,6 @@ function updateConfig(config) {
 function listenForHWChannels() {
   ipcMain.on(HMONITOR_IPC_STOP_ID, () => stopMonitoring());
   ipcMain.on(HMONITOR_IPC_UPDATE_CONFIG, (_, config) => updateConfig(JSON.parse(config)));
-  ipcMain.handle(HMONITOR_IPC_GET_HARDWARE, () => checkHardwareDevices());
 }
 async function initialExtension(lynxApi, utils) {
   lynxApi.listenForChannels(() => listenForHWChannels());

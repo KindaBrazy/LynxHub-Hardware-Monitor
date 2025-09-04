@@ -3,7 +3,7 @@ import { j as jsxRuntimeExports } from './jsx-runtime-BA-u0cS_.js';
 import { c as commonjsGlobal, g as getDefaultExportFromCjs } from './_commonjsHelpers-BFTU3MAI.js';
 
 /**
- * @license lucide-react v0.526.0 - ISC
+ * @license lucide-react v0.542.0 - ISC
  *
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
@@ -30,7 +30,7 @@ const hasA11yProp = (props) => {
 };
 
 /**
- * @license lucide-react v0.526.0 - ISC
+ * @license lucide-react v0.542.0 - ISC
  *
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
@@ -49,7 +49,7 @@ var defaultAttributes = {
 };
 
 /**
- * @license lucide-react v0.526.0 - ISC
+ * @license lucide-react v0.542.0 - ISC
  *
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
@@ -88,7 +88,7 @@ const Icon = forwardRef$1(
 );
 
 /**
- * @license lucide-react v0.526.0 - ISC
+ * @license lucide-react v0.542.0 - ISC
  *
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
@@ -114,7 +114,7 @@ const createLucideIcon = (iconName, iconNode) => {
 };
 
 /**
- * @license lucide-react v0.526.0 - ISC
+ * @license lucide-react v0.542.0 - ISC
  *
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
@@ -133,29 +133,29 @@ const __iconNode$b = [
 const Activity = createLucideIcon("activity", __iconNode$b);
 
 /**
- * @license lucide-react v0.526.0 - ISC
+ * @license lucide-react v0.542.0 - ISC
  *
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
  */
 
 
-const __iconNode$a = [["path", { d: "m9 18 6-6-6-6", key: "mthhwq" }]];
-const ChevronRight = createLucideIcon("chevron-right", __iconNode$a);
+const __iconNode$a = [["path", { d: "m15 18-6-6 6-6", key: "1wnfg3" }]];
+const ChevronLeft = createLucideIcon("chevron-left", __iconNode$a);
 
 /**
- * @license lucide-react v0.526.0 - ISC
+ * @license lucide-react v0.542.0 - ISC
  *
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
  */
 
 
-const __iconNode$9 = [["path", { d: "m15 18-6-6 6-6", key: "1wnfg3" }]];
-const ChevronLeft = createLucideIcon("chevron-left", __iconNode$9);
+const __iconNode$9 = [["path", { d: "m9 18 6-6-6-6", key: "mthhwq" }]];
+const ChevronRight = createLucideIcon("chevron-right", __iconNode$9);
 
 /**
- * @license lucide-react v0.526.0 - ISC
+ * @license lucide-react v0.542.0 - ISC
  *
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
@@ -169,7 +169,7 @@ const __iconNode$8 = [
 const Clock = createLucideIcon("clock", __iconNode$8);
 
 /**
- * @license lucide-react v0.526.0 - ISC
+ * @license lucide-react v0.542.0 - ISC
  *
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
@@ -195,7 +195,7 @@ const __iconNode$7 = [
 const Cpu = createLucideIcon("cpu", __iconNode$7);
 
 /**
- * @license lucide-react v0.526.0 - ISC
+ * @license lucide-react v0.542.0 - ISC
  *
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
@@ -210,7 +210,7 @@ const __iconNode$6 = [
 const Database = createLucideIcon("database", __iconNode$6);
 
 /**
- * @license lucide-react v0.526.0 - ISC
+ * @license lucide-react v0.542.0 - ISC
  *
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
@@ -232,7 +232,7 @@ const __iconNode$5 = [
 const HardDrive = createLucideIcon("hard-drive", __iconNode$5);
 
 /**
- * @license lucide-react v0.526.0 - ISC
+ * @license lucide-react v0.542.0 - ISC
  *
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
@@ -259,7 +259,7 @@ const __iconNode$4 = [
 const MemoryStick = createLucideIcon("memory-stick", __iconNode$4);
 
 /**
- * @license lucide-react v0.526.0 - ISC
+ * @license lucide-react v0.542.0 - ISC
  *
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
@@ -274,7 +274,7 @@ const __iconNode$3 = [
 const Monitor = createLucideIcon("monitor", __iconNode$3);
 
 /**
- * @license lucide-react v0.526.0 - ISC
+ * @license lucide-react v0.542.0 - ISC
  *
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
@@ -287,7 +287,7 @@ const __iconNode$2 = [
 const Thermometer = createLucideIcon("thermometer", __iconNode$2);
 
 /**
- * @license lucide-react v0.526.0 - ISC
+ * @license lucide-react v0.542.0 - ISC
  *
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
@@ -302,7 +302,7 @@ const __iconNode$1 = [
 const Timer = createLucideIcon("timer", __iconNode$1);
 
 /**
- * @license lucide-react v0.526.0 - ISC
+ * @license lucide-react v0.542.0 - ISC
  *
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
@@ -1393,13 +1393,13 @@ function formatProdErrorMessage(code) {
 
 const {omit} = await importShared('lodash');
 
-const {useSelector: useSelector$2} = await importShared('react-redux');
-const initialState$2 = {
+const {useSelector: useSelector$3} = await importShared('react-redux');
+const initialState$3 = {
   ...initialSettings,
   modals: []
 };
 const systemMonitorSlice = createSlice({
-  initialState: initialState$2,
+  initialState: initialState$3,
   name: "systemMonitor",
   reducers: {
     updateState: (state, action) => {
@@ -1433,7 +1433,7 @@ const systemMonitorSlice = createSlice({
     }
   }
 });
-const useSystemMonitorState = (propertyName) => useSelector$2((state) => state.extension[propertyName]);
+const useSystemMonitorState = (propertyName) => useSelector$3((state) => state.extension[propertyName]);
 const systemMonitorActions = systemMonitorSlice.actions;
 const extensionReducer = systemMonitorSlice.reducer;
 
@@ -1463,7 +1463,7 @@ const ProgressBar = ({ value, max = 100, isTemp = false }) => {
   return /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: `${compactMode ? "w-8 h-1" : "w-12 h-1.5"} bg-white/10 rounded-full overflow-hidden`, children: /* @__PURE__ */ jsxRuntimeExports.jsx(
     "div",
     {
-      className: `h-full bg-gradient-to-r ${getProgressColor(isTemp ? value : percentage, isTemp)} rounded-full transition-all duration-700 ease-out`,
+      className: `h-full bg-linear-to-r ${getProgressColor(isTemp ? value : percentage, isTemp)} rounded-full transition-all duration-700 ease-out`,
       style: { width: `${percentage}%` }
     }
   ) });
@@ -1483,7 +1483,7 @@ function MetricItem({
     {
       className: `flex items-center ${compactMode ? "px-2 py-0.5 gap-x-1.5" : "px-3 py-2 gap-x-2"} rounded-lg border backdrop-blur-sm transition-all duration-300 hover:scale-105 hover:shadow-lg ${colorClass || "text-slate-300 border-slate-600/30 bg-slate-800/40"}`,
       children: [
-        metricVisibility.icon && /* @__PURE__ */ jsxRuntimeExports.jsx(Icon, { className: `${compactMode ? "size-3" : "size-4"} flex-shrink-0` }),
+        metricVisibility.icon && /* @__PURE__ */ jsxRuntimeExports.jsx(Icon, { className: `${compactMode ? "size-3" : "size-4"} shrink-0` }),
         /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-2 text-xs font-medium whitespace-nowrap", children: [
           metricVisibility.label && /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { className: "opacity-80", children: [
             label,
@@ -1544,7 +1544,7 @@ function CpuSection({ data, metrics }) {
       {
         className: `flex items-center ${compactMode ? "px-2 py-0.5 gap-x-1.5" : "px-3 py-2 gap-x-2"} rounded-lg border backdrop-blur-sm transition-all duration-300 hover:scale-105 hover:shadow-lg text-slate-300 border-slate-600/30 bg-slate-800/40`,
         children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx(Thermometer, { className: `${compactMode ? "size-3" : "size-4"} flex-shrink-0 text-danger` }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx(Thermometer, { className: `${compactMode ? "size-3" : "size-4"} shrink-0 text-danger` }),
           /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex items-center gap-2 text-xs font-medium whitespace-nowrap", children: /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-danger", children: "Admin Require" }) })
         ]
       }
@@ -1848,7 +1848,7 @@ const HardwareStatusBar = ({ ref }) => {
   return /* @__PURE__ */ jsxRuntimeExports.jsxs(
     "div",
     {
-      className: `relative ${compactMode ? "h-7" : "h-12"} w-full bg-gradient-to-r from-slate-900/95 to-slate-800/95 border-t border-slate-700/50 backdrop-blur-sm`,
+      className: `relative ${compactMode ? "h-7" : "h-12"} w-full bg-linear-to-r from-slate-900/95 to-slate-800/95 border-t border-slate-700/50 backdrop-blur-sm`,
       children: [
         canScrollLeft && /* @__PURE__ */ jsxRuntimeExports.jsx(
           "button",
@@ -1918,6 +1918,619 @@ const HardwareStatusBar = ({ ref }) => {
   );
 };
 
+function AudioGeneration_Icon(props) {
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("svg", { ...props, height: "1em", viewBox: "0 0 24 24", xmlns: "http://www.w3.org/2000/svg", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx(
+      "path",
+      {
+        fill: "currentColor",
+        d: "M2 12.124C2 6.533 6.477 2 12 2s10 4.533 10 10.124v5.243c0 .817 0 1.378-.143 1.87a3.52 3.52 0 0 1-1.847 2.188c-.458.22-1.004.307-1.801.434l-.13.02a13 13 0 0 1-.727.105c-.209.02-.422.027-.64-.016a2.1 2.1 0 0 1-1.561-1.35a2.2 2.2 0 0 1-.116-.639c-.012-.204-.012-.452-.012-.742v-4.173c0-.425 0-.791.097-1.105a2.1 2.1 0 0 1 1.528-1.43c.316-.073.677-.044 1.096-.01l.093.007l.11.01c.783.062 1.32.104 1.775.275q.481.181.883.487v-1.174c0-4.811-3.853-8.711-8.605-8.711s-8.605 3.9-8.605 8.711v1.174c.267-.203.563-.368.883-.487c.455-.17.992-.213 1.775-.276l.11-.009l.093-.007c.42-.034.78-.063 1.096.01a2.1 2.1 0 0 1 1.528 1.43c.098.314.097.68.097 1.105v4.172c0 .291 0 .54-.012.743c-.012.213-.04.427-.116.638a2.1 2.1 0 0 1-1.56 1.35a2.2 2.2 0 0 1-.641.017c-.201-.02-.444-.059-.727-.104l-.13-.02c-.797-.128-1.344-.215-1.801-.436a3.52 3.52 0 0 1-1.847-2.188c-.118-.405-.139-.857-.142-1.461L2 17.58z"
+      }
+    ),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(
+      "path",
+      {
+        fillRule: "evenodd",
+        clipRule: "evenodd",
+        fill: "currentColor",
+        d: "M12 5.75a.75.75 0 0 1 .75.75v5a.75.75 0 1 1-1.5 0v-5a.75.75 0 0 1 .75-.75m3 1.5a.75.75 0 0 1 .75.75v2a.75.75 0 1 1-1.5 0V8a.75.75 0 0 1 .75-.75m-6 0a.75.75 0 0 1 .75.75v2a.75.75 0 0 1-1.5 0V8A.75.75 0 0 1 9 7.25"
+      }
+    )
+  ] });
+}
+function Circle_Icon(props) {
+  return /* @__PURE__ */ jsxRuntimeExports.jsx("svg", { ...props, height: "1em", viewBox: "0 0 256 256", xmlns: "http://www.w3.org/2000/svg", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+    "path",
+    {
+      fill: "currentColor",
+      d: "M128 20a108 108 0 1 0 108 108A108.12 108.12 0 0 0 128 20m0 192a84 84 0 1 1 84-84a84.09 84.09 0 0 1-84 84"
+    }
+  ) });
+}
+function Copy_Icon(props) {
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("svg", { ...props, height: "1em", viewBox: "0 0 24 24", xmlns: "http://www.w3.org/2000/svg", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx(
+      "path",
+      {
+        fill: "currentColor",
+        d: "M15.24 2h-3.894c-1.764 0-3.162 0-4.255.148c-1.126.152-2.037.472-2.755 1.193c-.719.721-1.038 1.636-1.189 2.766C3 7.205 3 8.608 3 10.379v5.838c0 1.508.92 2.8 2.227 3.342c-.067-.91-.067-2.185-.067-3.247v-5.01c0-1.281 0-2.386.118-3.27c.127-.948.413-1.856 1.147-2.593c.734-.737 1.639-1.024 2.583-1.152c.88-.118 1.98-.118 3.257-.118h3.07c1.276 0 2.374 0 3.255.118A3.601 3.601 0 0 0 15.24 2"
+      }
+    ),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(
+      "path",
+      {
+        fill: "currentColor",
+        d: "M6.6 11.397c0-2.726 0-4.089.844-4.936c.843-.847 2.2-.847 4.916-.847h2.88c2.715 0 4.073 0 4.917.847c.843.847.843 2.21.843 4.936v4.82c0 2.726 0 4.089-.843 4.936c-.844.847-2.202.847-4.917.847h-2.88c-2.715 0-4.073 0-4.916-.847c-.844-.847-.844-2.21-.844-4.936z"
+      }
+    )
+  ] });
+}
+function Download_Icon(props) {
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("svg", { ...props, height: "1em", viewBox: "0 0 24 24", xmlns: "http://www.w3.org/2000/svg", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx(
+      "path",
+      {
+        fill: "currentColor",
+        d: "M12.554 16.506a.75.75 0 0 1-1.107 0l-4-4.375a.75.75 0 0 1 1.107-1.012l2.696 2.95V3a.75.75 0 0 1 1.5 0v11.068l2.697-2.95a.75.75 0 1 1 1.107 1.013z"
+      }
+    ),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(
+      "path",
+      {
+        fill: "currentColor",
+        d: "M3.75 15a.75.75 0 0 0-1.5 0v.055c0 1.367 0 2.47.117 3.337c.12.9.38 1.658.981 2.26c.602.602 1.36.86 2.26.982c.867.116 1.97.116 3.337.116h6.11c1.367 0 2.47 0 3.337-.116c.9-.122 1.658-.38 2.26-.982c.602-.602.86-1.36.982-2.26c.116-.867.116-1.97.116-3.337V15a.75.75 0 0 0-1.5 0c0 1.435-.002 2.436-.103 3.192c-.099.734-.28 1.122-.556 1.399c-.277.277-.665.457-1.4.556c-.755.101-1.756.103-3.191.103H9c-1.435 0-2.437-.002-3.192-.103c-.734-.099-1.122-.28-1.399-.556c-.277-.277-.457-.665-.556-1.4c-.101-.755-.103-1.756-.103-3.191"
+      }
+    )
+  ] });
+}
+function Download2_Icon(props) {
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("svg", { ...props, height: "1em", viewBox: "0 0 24 24", xmlns: "http://www.w3.org/2000/svg", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx(
+      "path",
+      {
+        fillRule: "evenodd",
+        clipRule: "evenodd",
+        fill: "currentColor",
+        d: "M12 1.25a.75.75 0 0 0-.75.75v10.973l-1.68-1.961a.75.75 0 1 0-1.14.976l3 3.5a.75.75 0 0 0 1.14 0l3-3.5a.75.75 0 1 0-1.14-.976l-1.68 1.96V2a.75.75 0 0 0-.75-.75"
+      }
+    ),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(
+      "path",
+      {
+        fill: "currentColor",
+        d: "M14.25 9v.378a2.249 2.249 0 0 1 2.458 3.586l-3 3.5a2.25 2.25 0 0 1-3.416 0l-3-3.5A2.25 2.25 0 0 1 9.75 9.378V9H8c-2.828 0-4.243 0-5.121.879C2 10.757 2 12.172 2 15v1c0 2.828 0 4.243.879 5.121C3.757 22 5.172 22 8 22h8c2.828 0 4.243 0 5.121-.879C22 20.243 22 18.828 22 16v-1c0-2.828 0-4.243-.879-5.121C20.243 9 18.828 9 16 9z"
+      }
+    )
+  ] });
+}
+function Extensions_Icon(props) {
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("svg", { ...props, height: "1em", viewBox: "0 0 24 24", xmlns: "http://www.w3.org/2000/svg", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx(
+      "path",
+      {
+        fillRule: "evenodd",
+        clipRule: "evenodd",
+        fill: "currentColor",
+        d: "M17.5 2.75a.75.75 0 0 1 .75.75v2.25h2.25a.75.75 0 0 1 0 1.5h-2.25V9.5a.75.75 0 0 1-1.5 0V7.25H14.5a.75.75 0 0 1 0-1.5h2.25V3.5a.75.75 0 0 1 .75-.75"
+      }
+    ),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(
+      "path",
+      {
+        fill: "currentColor",
+        d: "M2 6.5c0-2.121 0-3.182.659-3.841C3.318 2 4.379 2 6.5 2c2.121 0 3.182 0 3.841.659C11 3.318 11 4.379 11 6.5c0 2.121 0 3.182-.659 3.841C9.682 11 8.621 11 6.5 11c-2.121 0-3.182 0-3.841-.659C2 9.682 2 8.621 2 6.5m11 11c0-2.121 0-3.182.659-3.841C14.318 13 15.379 13 17.5 13c2.121 0 3.182 0 3.841.659c.659.659.659 1.72.659 3.841c0 2.121 0 3.182-.659 3.841c-.659.659-1.72.659-3.841.659c-2.121 0-3.182 0-3.841-.659C13 20.682 13 19.621 13 17.5"
+      }
+    ),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(
+      "path",
+      {
+        opacity: ".4",
+        fill: "currentColor",
+        d: "M2 17.5c0-2.121 0-3.182.659-3.841C3.318 13 4.379 13 6.5 13c2.121 0 3.182 0 3.841.659c.659.659.659 1.72.659 3.841c0 2.121 0 3.182-.659 3.841C9.682 22 8.621 22 6.5 22c-2.121 0-3.182 0-3.841-.659C2 20.682 2 19.621 2 17.5"
+      }
+    )
+  ] });
+}
+function Extensions2_Icon(props) {
+  return /* @__PURE__ */ jsxRuntimeExports.jsx("svg", { ...props, height: "1em", viewBox: "0 0 24 24", xmlns: "http://www.w3.org/2000/svg", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+    "path",
+    {
+      fill: "currentColor",
+      d: "M19 10V7c0-1.103-.897-2-2-2h-3c0-1.654-1.346-3-3-3S8 3.346 8 5H5c-1.103 0-2 .897-2 2v4h1a2 2 0 0 1 0 4H3v4c0 1.103.897 2 2 2h4v-1a2 2 0 0 1 4 0v1h4c1.103 0 2-.897 2-2v-3c1.654 0 3-1.346 3-3s-1.346-3-3-3"
+    }
+  ) });
+}
+function ExternalLink_Icon(props) {
+  return /* @__PURE__ */ jsxRuntimeExports.jsx("svg", { ...props, height: "1em", viewBox: "0 0 24 24", xmlns: "http://www.w3.org/2000/svg", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { fill: "none", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx("path", { d: "M24 0v24H0V0zM12.593 23.258l-.011.002l-.071.035l-.02.004l-.014-.004l-.071-.035c-.01-.004-.019-.001-.024.005l-.004.01l-.017.428l.005.02l.01.013l.104.074l.015.004l.012-.004l.104-.074l.012-.016l.004-.017l-.017-.427c-.002-.01-.009-.017-.017-.018m.265-.113l-.013.002l-.185.093l-.01.01l-.003.011l.018.43l.005.012l.008.007l.201.093c.012.004.023 0 .029-.008l.004-.014l-.034-.614c-.003-.012-.01-.02-.02-.022m-.715.002a.023.023 0 0 0-.027.006l-.006.014l-.034.614c0 .012.007.02.017.024l.015-.002l.201-.093l.01-.008l.004-.011l.017-.43l-.003-.012l-.01-.01z" }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(
+      "path",
+      {
+        fill: "currentColor",
+        d: "M11 6a1 1 0 1 1 0 2H5v11h11v-6a1 1 0 1 1 2 0v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2zm9-3a1 1 0 0 1 1 1v5a1 1 0 1 1-2 0V6.414l-8.293 8.293a1 1 0 0 1-1.414-1.414L17.586 5H15a1 1 0 1 1 0-2Z"
+      }
+    )
+  ] }) });
+}
+function Fork_Icon(props) {
+  return /* @__PURE__ */ jsxRuntimeExports.jsx("svg", { ...props, height: "1em", viewBox: "0 0 24 24", xmlns: "http://www.w3.org/2000/svg", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+    "path",
+    {
+      fill: "currentColor",
+      d: "M5.559 8.855c.166 1.183.789 3.207 3.087 4.079C11 13.829 11 14.534 11 15v.163c-1.44.434-2.5 1.757-2.5 3.337c0 1.93 1.57 3.5 3.5 3.5s3.5-1.57 3.5-3.5c0-1.58-1.06-2.903-2.5-3.337V15c0-.466 0-1.171 2.354-2.065c2.298-.872 2.921-2.896 3.087-4.079C19.912 8.441 21 7.102 21 5.5C21 3.57 19.43 2 17.5 2S14 3.57 14 5.5c0 1.552 1.022 2.855 2.424 3.313c-.146.735-.565 1.791-1.778 2.252c-1.192.452-2.053.953-2.646 1.536c-.593-.583-1.453-1.084-2.646-1.536c-1.213-.461-1.633-1.517-1.778-2.252C8.978 8.355 10 7.052 10 5.5C10 3.57 8.43 2 6.5 2S3 3.57 3 5.5c0 1.602 1.088 2.941 2.559 3.355M17.5 4c.827 0 1.5.673 1.5 1.5S18.327 7 17.5 7S16 6.327 16 5.5S16.673 4 17.5 4m-4 14.5c0 .827-.673 1.5-1.5 1.5s-1.5-.673-1.5-1.5s.673-1.5 1.5-1.5s1.5.673 1.5 1.5M6.5 4C7.327 4 8 4.673 8 5.5S7.327 7 6.5 7S5 6.327 5 5.5S5.673 4 6.5 4"
+    }
+  ) });
+}
+function GitHub_Icon(props) {
+  return /* @__PURE__ */ jsxRuntimeExports.jsx("svg", { ...props, height: "1em", viewBox: "0 0 16 16", xmlns: "http://www.w3.org/2000/svg", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+    "path",
+    {
+      fill: "currentColor",
+      d: "M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59c.4.07.55-.17.55-.38c0-.19-.01-.82-.01-1.49c-2.01.37-2.53-.49-2.69-.94c-.09-.23-.48-.94-.82-1.13c-.28-.15-.68-.52-.01-.53c.63-.01 1.08.58 1.23.82c.72 1.21 1.87.87 2.33.66c.07-.52.28-.87.51-1.07c-1.78-.2-3.64-.89-3.64-3.95c0-.87.31-1.59.8-2.15c-.08-.2-.36-1.02.08-2.12c0 0 .67-.21 2.2.82c.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82c.44 1.1.16 1.92.08 2.12c.51.56.82 1.27.82 2.15c0 3.07-1.87 3.75-3.65 3.95c.29.25.54.73.54 1.48c0 1.07-.01 1.93-.01 2.2c0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8"
+    }
+  ) });
+}
+function HomeSmile_Icon(props) {
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("svg", { ...props, height: "1em", viewBox: "0 0 24 24", xmlns: "http://www.w3.org/2000/svg", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx("rect", { fill: "none", height: "1em" }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(
+      "path",
+      {
+        fillRule: "evenodd",
+        clipRule: "evenodd",
+        fill: "currentColor",
+        d: "M13.106 22h-2.212c-3.447 0-5.17 0-6.345-1.012s-1.419-2.705-1.906-6.093l-.279-1.937c-.38-2.637-.57-3.956-.029-5.083s1.691-1.813 3.992-3.183l1.385-.825C9.8 2.622 10.846 2 12 2s2.199.622 4.288 1.867l1.385.825c2.3 1.37 3.451 2.056 3.992 3.183s.35 2.446-.03 5.083l-.278 1.937c-.487 3.388-.731 5.081-1.906 6.093S16.553 22 13.106 22m-4.708-6.447a.75.75 0 0 1 1.049-.156c.728.54 1.607.853 2.553.853s1.825-.313 2.553-.853a.75.75 0 1 1 .894 1.205A5.77 5.77 0 0 1 12 17.75a5.77 5.77 0 0 1-3.447-1.148a.75.75 0 0 1-.155-1.049"
+      }
+    )
+  ] });
+}
+function ImageGeneration_Icon(props) {
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("svg", { ...props, height: "1em", viewBox: "0 0 24 24", xmlns: "http://www.w3.org/2000/svg", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "currentColor", d: "M18 8a2 2 0 1 1-4 0a2 2 0 0 1 4 0" }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(
+      "path",
+      {
+        fillRule: "evenodd",
+        clipRule: "evenodd",
+        fill: "currentColor",
+        d: "M12.057 1.25h-.114c-2.309 0-4.118 0-5.53.19c-1.444.194-2.584.6-3.479 1.494c-.895.895-1.3 2.035-1.494 3.48c-.19 1.411-.19 3.22-.19 5.529v.114c0 2.309 0 4.118.19 5.53c.194 1.444.6 2.584 1.494 3.479c.895.895 2.035 1.3 3.48 1.494c1.411.19 3.22.19 5.529.19h.114c2.309 0 4.118 0 5.53-.19c1.444-.194 2.584-.6 3.479-1.494c.895-.895 1.3-2.035 1.494-3.48c.19-1.411.19-3.22.19-5.529v-.114c0-2.309 0-4.118-.19-5.53c-.194-1.444-.6-2.584-1.494-3.479c-.895-.895-2.035-1.3-3.48-1.494c-1.411-.19-3.22-.19-5.529-.19M3.995 3.995c.57-.57 1.34-.897 2.619-1.069c1.3-.174 3.008-.176 5.386-.176s4.086.002 5.386.176c1.279.172 2.05.5 2.62 1.069c.569.57.896 1.34 1.068 2.619c.174 1.3.176 3.008.176 5.386l-.001 1.28l-.222-.03c-2.844-.394-5.446 1.084-6.772 3.313c-1.71-4.325-6.227-7.275-11.274-6.55l-.226.032c.011-1.405.049-2.519.171-3.431c.172-1.279.5-2.05 1.069-2.62"
+      }
+    )
+  ] });
+}
+function Info_Icon(props) {
+  return /* @__PURE__ */ jsxRuntimeExports.jsx("svg", { ...props, height: "1em", viewBox: "0 0 24 24", xmlns: "http://www.w3.org/2000/svg", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+    "path",
+    {
+      fillRule: "evenodd",
+      clipRule: "evenodd",
+      fill: "currentColor",
+      d: "M22 12c0 5.523-4.477 10-10 10S2 17.523 2 12S6.477 2 12 2s10 4.477 10 10m-10 5.75a.75.75 0 0 0 .75-.75v-6a.75.75 0 0 0-1.5 0v6c0 .414.336.75.75.75M12 7a1 1 0 1 1 0 2a1 1 0 0 1 0-2"
+    }
+  ) });
+}
+function ListCheck_Icon(props) {
+  return /* @__PURE__ */ jsxRuntimeExports.jsx("svg", { ...props, height: "1em", viewBox: "0 0 24 24", xmlns: "http://www.w3.org/2000/svg", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+    "path",
+    {
+      fillRule: "evenodd",
+      clipRule: "evenodd",
+      fill: "currentColor",
+      d: "M3.464 3.464C2 4.93 2 7.286 2 12c0 4.714 0 7.071 1.464 8.535C4.93 22 7.286 22 12 22c4.714 0 7.071 0 8.535-1.465C22 19.072 22 16.714 22 12s0-7.071-1.465-8.536C19.072 2 16.714 2 12 2S4.929 2 3.464 3.464m7.08 4.053a.75.75 0 1 0-1.087-1.034l-2.314 2.43l-.6-.63a.75.75 0 1 0-1.086 1.034l1.143 1.2a.75.75 0 0 0 1.086 0zM13 8.25a.75.75 0 0 0 0 1.5h5a.75.75 0 0 0 0-1.5zm-2.457 6.267a.75.75 0 1 0-1.086-1.034l-2.314 2.43l-.6-.63a.75.75 0 1 0-1.086 1.034l1.143 1.2a.75.75 0 0 0 1.086 0zM13 15.25a.75.75 0 0 0 0 1.5h5a.75.75 0 0 0 0-1.5z"
+    }
+  ) });
+}
+function MenuDots_Icon(props) {
+  return /* @__PURE__ */ jsxRuntimeExports.jsx("svg", { ...props, height: "1em", viewBox: "0 0 24 24", xmlns: "http://www.w3.org/2000/svg", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+    "path",
+    {
+      fill: "currentColor",
+      d: "M7 12a2 2 0 1 1-4 0a2 2 0 0 1 4 0m7 0a2 2 0 1 1-4 0a2 2 0 0 1 4 0m7 0a2 2 0 1 1-4 0a2 2 0 0 1 4 0"
+    }
+  ) });
+}
+function Pin_Icon(props) {
+  return /* @__PURE__ */ jsxRuntimeExports.jsx("svg", { ...props, height: "1em", viewBox: "0 0 24 24", xmlns: "http://www.w3.org/2000/svg", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+    "path",
+    {
+      fill: "currentColor",
+      d: "m19.184 7.805l-2.965-2.967c-2.027-2.03-3.04-3.043-4.129-2.803c-1.088.24-1.581 1.587-2.568 4.28l-.668 1.823c-.263.718-.395 1.077-.632 1.355a2.035 2.035 0 0 1-.36.332c-.296.213-.664.314-1.4.517c-1.66.458-2.491.687-2.804 1.23a1.528 1.528 0 0 0-.204.773c.004.627.613 1.236 1.83 2.455L6.7 16.216l-4.476 4.48a.764.764 0 0 0 1.08 1.08l4.475-4.48l1.466 1.468c1.226 1.226 1.839 1.84 2.47 1.84c.265 0 .526-.068.757-.2c.548-.313.778-1.149 1.239-2.822c.202-.735.303-1.102.515-1.399c.093-.129.201-.247.322-.352c.275-.238.632-.372 1.345-.64l1.844-.693c2.664-1 3.996-1.501 4.23-2.586c.235-1.086-.77-2.093-2.783-4.107"
+    }
+  ) });
+}
+function Play_Icon(props) {
+  return /* @__PURE__ */ jsxRuntimeExports.jsx("svg", { ...props, height: "1em", viewBox: "0 0 24 24", xmlns: "http://www.w3.org/2000/svg", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+    "path",
+    {
+      fill: "currentColor",
+      d: "M21.409 9.353a2.998 2.998 0 0 1 0 5.294L8.597 21.614C6.534 22.737 4 21.277 4 18.968V5.033c0-2.31 2.534-3.769 4.597-2.648z"
+    }
+  ) });
+}
+function Refresh_Icon(props) {
+  return /* @__PURE__ */ jsxRuntimeExports.jsx("svg", { ...props, height: "1em", viewBox: "0 0 24 24", xmlns: "http://www.w3.org/2000/svg", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { fill: "none", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx("path", { d: "M24 0v24H0V0zM12.594 23.258l-.012.002l-.071.035l-.02.004l-.014-.004l-.071-.036c-.01-.003-.019 0-.024.006l-.004.01l-.017.428l.005.02l.01.013l.104.074l.015.004l.012-.004l.104-.074l.012-.016l.004-.017l-.017-.427c-.002-.01-.009-.017-.016-.018m.264-.113l-.014.002l-.184.093l-.01.01l-.003.011l.018.43l.005.012l.008.008l.201.092c.012.004.023 0 .029-.008l.004-.014l-.034-.614c-.003-.012-.01-.02-.02-.022m-.715.002a.023.023 0 0 0-.027.006l-.006.014l-.034.614c0 .012.007.02.017.024l.015-.002l.201-.093l.01-.008l.003-.011l.018-.43l-.003-.012l-.01-.01z" }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(
+      "path",
+      {
+        fill: "currentColor",
+        d: "M4 9.5A1.5 1.5 0 0 1 5.5 11a5.5 5.5 0 0 0 5.279 5.496L11 16.5h2.382a1.5 1.5 0 0 1 2.065-2.164l.114.103l2.5 2.5a1.494 1.494 0 0 1 .43.89l.009.157v.028a1.49 1.49 0 0 1-.348.947l-.097.105l-2.494 2.495a1.5 1.5 0 0 1-2.272-1.947l.093-.114H11A8.5 8.5 0 0 1 2.5 11A1.5 1.5 0 0 1 4 9.5m4.44-7.06a1.5 1.5 0 0 1 2.27 1.946l-.092.114H13a8.5 8.5 0 0 1 8.5 8.5a1.5 1.5 0 1 1-3 0a5.5 5.5 0 0 0-5.279-5.496L13 7.5h-2.382a1.5 1.5 0 0 1-2.065 2.164L8.44 9.56l-2.5-2.5a1.5 1.5 0 0 1-.103-2.008l.103-.114l2.5-2.5Z"
+      }
+    )
+  ] }) });
+}
+function CallChat_Icon(props) {
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("svg", { ...props, height: "1em", viewBox: "0 0 24 24", xmlns: "http://www.w3.org/2000/svg", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx(
+      "path",
+      {
+        opacity: "0.5",
+        fill: "currentColor",
+        d: "m14.556 15.548l-.455.48s-1.083 1.139-4.038-1.972c-2.955-3.111-1.872-4.25-1.872-4.25l.287-.303c.706-.744.773-1.938.156-2.81L7.374 4.91C6.61 3.83 5.135 3.688 4.26 4.609L2.691 6.26c-.433.457-.723 1.048-.688 1.705c.09 1.68.808 5.293 4.812 9.51c4.247 4.47 8.232 4.648 9.861 4.487c.516-.05.964-.329 1.325-.709l1.42-1.496c.96-1.01.69-2.74-.538-3.446l-1.91-1.1c-.806-.463-1.787-.327-2.417.336"
+      }
+    ),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(
+      "path",
+      {
+        fill: "currentColor",
+        d: "M17 12a5 5 0 1 0-4.478-2.774a.817.817 0 0 1 .067.574l-.298 1.113a.65.65 0 0 0 .796.796l1.113-.298a.817.817 0 0 1 .574.067A4.98 4.98 0 0 0 17 12"
+      }
+    )
+  ] });
+}
+function Database_Icon(props) {
+  return /* @__PURE__ */ jsxRuntimeExports.jsx("svg", { ...props, height: "1em", viewBox: "0 0 20 20", xmlns: "http://www.w3.org/2000/svg", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+    "path",
+    {
+      fill: "currentColor",
+      d: "M18 4c0 1.657-2.686 3-6 3S6 5.657 6 4s2.686-3 6-3s6 1.343 6 3m0 2.12c-.383.362-.84.661-1.31.896C15.438 7.642 13.778 8 12 8c-.623 0-1.23-.044-1.811-.128c.935.528 1.724 1.341 1.804 2.442l.01-.008L12 12.553V16.5q0 .26-.051.5H12c3.314 0 6-1.343 6-3zm-10.69.896l.05.025A9 9 0 0 0 6 7.014V6.12c.383.362.84.661 1.31.896M9 8.42a6.5 6.5 0 0 0-1.12-.301A8 8 0 0 0 6.5 8C4.015 8 2 9.12 2 10.5S4.015 13 6.5 13s4.5-1.12 4.5-2.5c0-.867-.794-1.63-2-2.08m1.168 4.72c-.99.55-2.288.859-3.668.859s-2.679-.309-3.668-.858A4.6 4.6 0 0 1 2 12.554v3.945C2 17.88 4.015 19 6.5 19s4.5-1.12 4.5-2.5l.001-3.946a4.5 4.5 0 0 1-.833.589"
+    }
+  ) });
+}
+function Discord_Icon(props) {
+  return /* @__PURE__ */ jsxRuntimeExports.jsx("svg", { ...props, height: "1em", viewBox: "0 0 24 24", xmlns: "http://www.w3.org/2000/svg", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+    "path",
+    {
+      fill: "currentColor",
+      d: "M19.27 5.33C17.94 4.71 16.5 4.26 15 4a.09.09 0 0 0-.07.03c-.18.33-.39.76-.53 1.09a16.09 16.09 0 0 0-4.8 0c-.14-.34-.35-.76-.54-1.09c-.01-.02-.04-.03-.07-.03c-1.5.26-2.93.71-4.27 1.33c-.01 0-.02.01-.03.02c-2.72 4.07-3.47 8.03-3.1 11.95c0 .02.01.04.03.05c1.8 1.32 3.53 2.12 5.24 2.65c.03.01.06 0 .07-.02c.4-.55.76-1.13 1.07-1.74c.02-.04 0-.08-.04-.09c-.57-.22-1.11-.48-1.64-.78c-.04-.02-.04-.08-.01-.11c.11-.08.22-.17.33-.25c.02-.02.05-.02.07-.01c3.44 1.57 7.15 1.57 10.55 0c.02-.01.05-.01.07.01c.11.09.22.17.33.26c.04.03.04.09-.01.11c-.52.31-1.07.56-1.64.78c-.04.01-.05.06-.04.09c.32.61.68 1.19 1.07 1.74c.03.01.06.02.09.01c1.72-.53 3.45-1.33 5.25-2.65c.02-.01.03-.03.03-.05c.44-4.53-.73-8.46-3.1-11.95c-.01-.01-.02-.02-.04-.02M8.52 14.91c-1.03 0-1.89-.95-1.89-2.12s.84-2.12 1.89-2.12c1.06 0 1.9.96 1.89 2.12c0 1.17-.84 2.12-1.89 2.12m6.97 0c-1.03 0-1.89-.95-1.89-2.12s.84-2.12 1.89-2.12c1.06 0 1.9.96 1.89 2.12c0 1.17-.83 2.12-1.89 2.12"
+    }
+  ) });
+}
+function Heart_Icon(props) {
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("svg", { ...props, height: "1em", viewBox: "0 0 24 24", xmlns: "http://www.w3.org/2000/svg", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx(
+      "path",
+      {
+        opacity: "0.5",
+        fillRule: "evenodd",
+        clipRule: "evenodd",
+        fill: "currentColor",
+        d: "M8.106 18.247C5.298 16.083 2 13.542 2 9.137C2 4.274 7.5.825 12 5.501V20.5c-1 0-2-.77-3.038-1.59c-.277-.218-.564-.438-.856-.663"
+      }
+    ),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(
+      "path",
+      {
+        fill: "currentColor",
+        d: "M15.038 18.91C17.981 16.592 22 14 22 9.138c0-4.863-5.5-8.312-10-3.636V20.5c1 0 2-.77 3.038-1.59"
+      }
+    )
+  ] });
+}
+function Scales_Icon(props) {
+  return /* @__PURE__ */ jsxRuntimeExports.jsx("svg", { ...props, height: "1em", viewBox: "0 0 20 20", xmlns: "http://www.w3.org/2000/svg", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+    "path",
+    {
+      fill: "currentColor",
+      d: "M3.5 3a.5.5 0 1 0 0 1h.75L2.077 9.215a1 1 0 0 0-.075.405a3 3 0 0 0 5.996 0a1 1 0 0 0-.075-.405L5.75 4H9.5v11h-4a1.5 1.5 0 0 0 0 3h9a1.5 1.5 0 0 0 0-3h-4V4h3.75l-2.173 5.215a1 1 0 0 0-.075.405a3 3 0 0 0 5.996 0a1 1 0 0 0-.075-.405L15.75 4h.75a.5.5 0 0 0 0-1zM5 4.8L6.75 9h-3.5zM16.75 9h-3.5L15 4.8z"
+    }
+  ) });
+}
+function SettingsMinimal_Icon(props) {
+  return /* @__PURE__ */ jsxRuntimeExports.jsx("svg", { ...props, height: "1em", viewBox: "0 0 24 24", xmlns: "http://www.w3.org/2000/svg", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+    "path",
+    {
+      fillRule: "evenodd",
+      clipRule: "evenodd",
+      fill: "currentColor",
+      d: "M12.428 2c-1.114 0-2.129.6-4.157 1.802l-.686.406C5.555 5.41 4.542 6.011 3.985 7c-.557.99-.557 2.19-.557 4.594v.812c0 2.403 0 3.605.557 4.594c.557.99 1.57 1.59 3.6 2.791l.686.407C10.299 21.399 11.314 22 12.428 22c1.114 0 2.128-.6 4.157-1.802l.686-.407c2.028-1.2 3.043-1.802 3.6-2.791c.557-.99.557-2.19.557-4.594v-.812c0-2.403 0-3.605-.557-4.594c-.557-.99-1.572-1.59-3.6-2.792l-.686-.406C14.555 2.601 13.542 2 12.428 2m-3.75 10a3.75 3.75 0 1 1 7.5 0a3.75 3.75 0 0 1-7.5 0"
+    }
+  ) });
+}
+function Star_Icon(props) {
+  return /* @__PURE__ */ jsxRuntimeExports.jsx("svg", { ...props, height: "1em", viewBox: "0 0 24 24", xmlns: "http://www.w3.org/2000/svg", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+    "path",
+    {
+      fill: "currentColor",
+      d: "M9.153 5.408C10.42 3.136 11.053 2 12 2c.947 0 1.58 1.136 2.847 3.408l.328.588c.36.646.54.969.82 1.182c.28.213.63.292 1.33.45l.636.144c2.46.557 3.689.835 3.982 1.776c.292.94-.546 1.921-2.223 3.882l-.434.507c-.476.557-.715.836-.822 1.18c-.107.345-.071.717.001 1.46l.066.677c.253 2.617.38 3.925-.386 4.506c-.766.582-1.918.051-4.22-1.009l-.597-.274c-.654-.302-.981-.452-1.328-.452c-.347 0-.674.15-1.328.452l-.596.274c-2.303 1.06-3.455 1.59-4.22 1.01c-.767-.582-.64-1.89-.387-4.507l.066-.676c.072-.744.108-1.116 0-1.46c-.106-.345-.345-.624-.821-1.18l-.434-.508c-1.677-1.96-2.515-2.941-2.223-3.882c.293-.941 1.523-1.22 3.983-1.776l.636-.144c.699-.158 1.048-.237 1.329-.45c.28-.213.46-.536.82-1.182z"
+    }
+  ) });
+}
+function Terminal_Icon(props) {
+  return /* @__PURE__ */ jsxRuntimeExports.jsx("svg", { ...props, height: "1em", viewBox: "0 0 24 24", xmlns: "http://www.w3.org/2000/svg", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { fill: "none", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx("path", { d: "M24 0v24H0V0zM12.593 23.258l-.011.002l-.071.035l-.02.004l-.014-.004l-.071-.035c-.01-.004-.019-.001-.024.005l-.004.01l-.017.428l.005.02l.01.013l.104.074l.015.004l.012-.004l.104-.074l.012-.016l.004-.017l-.017-.427c-.002-.01-.009-.017-.017-.018m.265-.113l-.013.002l-.185.093l-.01.01l-.003.011l.018.43l.005.012l.008.007l.201.093c.012.004.023 0 .029-.008l.004-.014l-.034-.614c-.003-.012-.01-.02-.02-.022m-.715.002a.023.023 0 0 0-.027.006l-.006.014l-.034.614c0 .012.007.02.017.024l.015-.002l.201-.093l.01-.008l.004-.011l.017-.43l-.003-.012l-.01-.01z" }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(
+      "path",
+      {
+        fill: "currentColor",
+        d: "M20 16.5a1.5 1.5 0 0 1 .145 2.993L20 19.5h-8a1.5 1.5 0 0 1-.144-2.993L12 16.5zM3.283 5.283A1.5 1.5 0 0 1 5.29 5.18l.114.103l5.657 5.657a1.5 1.5 0 0 1 .103 2.007l-.103.114l-5.657 5.657A1.5 1.5 0 0 1 3.18 16.71l.103-.114L7.879 12L3.283 7.404a1.5 1.5 0 0 1 0-2.121"
+      }
+    )
+  ] }) });
+}
+function TextGeneration_Icon(props) {
+  return /* @__PURE__ */ jsxRuntimeExports.jsx("svg", { ...props, height: "1em", viewBox: "0 0 24 24", xmlns: "http://www.w3.org/2000/svg", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { fill: "none", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx("path", { d: "M24 0v24H0V0zM12.593 23.258l-.011.002l-.071.035l-.02.004l-.014-.004l-.071-.035c-.01-.004-.019-.001-.024.005l-.004.01l-.017.428l.005.02l.01.013l.104.074l.015.004l.012-.004l.104-.074l.012-.016l.004-.017l-.017-.427c-.002-.01-.009-.017-.017-.018m.265-.113l-.013.002l-.185.093l-.01.01l-.003.011l.018.43l.005.012l.008.007l.201.093c.012.004.023 0 .029-.008l.004-.014l-.034-.614c-.003-.012-.01-.02-.02-.022m-.715.002a.023.023 0 0 0-.027.006l-.006.014l-.034.614c0 .012.007.02.017.024l.015-.002l.201-.093l.01-.008l.004-.011l.017-.43l-.003-.012l-.01-.01z" }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(
+      "path",
+      {
+        fill: "currentColor",
+        d: "M12 2c5.523 0 10 4.477 10 10s-4.477 10-10 10H4a2 2 0 0 1-2-2v-8C2 6.477 6.477 2 12 2m0 12H9a1 1 0 1 0 0 2h3a1 1 0 1 0 0-2m3-4H9a1 1 0 0 0-.117 1.993L9 12h6a1 1 0 0 0 .117-1.993z"
+      }
+    )
+  ] }) });
+}
+function Trash_Icon(props) {
+  return /* @__PURE__ */ jsxRuntimeExports.jsx("svg", { ...props, height: "1em", viewBox: "0 0 24 24", xmlns: "http://www.w3.org/2000/svg", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+    "path",
+    {
+      fill: "currentColor",
+      d: "M2.75 6.167c0-.46.345-.834.771-.834h2.665c.529-.015.996-.378 1.176-.916l.03-.095l.115-.372c.07-.228.131-.427.217-.605c.338-.702.964-1.189 1.687-1.314c.184-.031.377-.031.6-.031h3.478c.223 0 .417 0 .6.031c.723.125 1.35.612 1.687 1.314c.086.178.147.377.217.605l.115.372l.03.095c.18.538.74.902 1.27.916h2.57c.427 0 .772.373.772.834c0 .46-.345.833-.771.833H3.52c-.426 0-.771-.373-.771-.833M11.607 22h.787c2.707 0 4.06 0 4.941-.863c.88-.864.97-2.28 1.15-5.111l.26-4.081c.098-1.537.147-2.305-.295-2.792c-.442-.487-1.187-.487-2.679-.487H8.23c-1.491 0-2.237 0-2.679.487c-.441.487-.392 1.255-.295 2.792l.26 4.08c.18 2.833.27 4.248 1.15 5.112C7.545 22 8.9 22 11.607 22"
+    }
+  ) });
+}
+function Tuning_Icon(props) {
+  return /* @__PURE__ */ jsxRuntimeExports.jsx("svg", { ...props, height: "1em", viewBox: "0 0 24 24", xmlns: "http://www.w3.org/2000/svg", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+    "path",
+    {
+      fill: "currentColor",
+      d: "M9.25 14a3 3 0 1 1 0 6a3 3 0 0 1 0-6m5-10a3 3 0 1 0 0 6a3 3 0 0 0 0-6m-5.5 2.209a.75.75 0 0 1 0 1.5h-7a.75.75 0 0 1 0-1.5zm6 10a.75.75 0 0 0 0 1.5h7a.75.75 0 0 0 0-1.5zM1 16.959a.75.75 0 0 1 .75-.75h2a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1-.75-.75m20.75-10.75a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5z"
+    }
+  ) });
+}
+function User_Icon(props) {
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("svg", { ...props, height: "1em", viewBox: "0 0 24 24", xmlns: "http://www.w3.org/2000/svg", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx("circle", { r: "4", cy: "6", cx: "12", fill: "currentColor" }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("ellipse", { rx: "7", ry: "4", cx: "12", cy: "17", fill: "currentColor" })
+  ] });
+}
+function Web_Icon(props) {
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("svg", { ...props, height: "1em", viewBox: "0 0 24 24", xmlns: "http://www.w3.org/2000/svg", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx("circle", { r: "10", cx: "12", cy: "12", opacity: "0.5", fill: "currentColor" }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(
+      "path",
+      {
+        fill: "currentColor",
+        d: "M8.575 9.447C8.388 7.363 6.781 5.421 6 4.711l-.43-.37A9.96 9.96 0 0 1 12 2c2.214 0 4.26.72 5.916 1.936c.234.711-.212 2.196-.68 2.906c-.17.257-.554.577-.976.88c-.95.683-2.15 1.02-2.76 2.278a1.42 1.42 0 0 0-.083 1.016c.06.22.1.459.1.692c.002.755-.762 1.3-1.517 1.292c-1.964-.021-3.25-1.604-3.425-3.553m4.862 8.829c.988-1.862 4.281-1.862 4.281-1.862c3.432-.036 3.896-2.12 4.206-3.173a10.006 10.006 0 0 1-8.535 8.664c-.323-.68-.705-2.21.048-3.629"
+      }
+    )
+  ] });
+}
+function Gmail_Icon(props) {
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("svg", { ...props, height: "1em", width: "1.33em", viewBox: "0 0 256 193", xmlns: "http://www.w3.org/2000/svg", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx(
+      "path",
+      {
+        fill: "#4285f4",
+        d: "M58.182 192.05V93.14L27.507 65.077L0 49.504v125.091c0 9.658 7.825 17.455 17.455 17.455z"
+      }
+    ),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(
+      "path",
+      {
+        fill: "#34a853",
+        d: "M197.818 192.05h40.727c9.659 0 17.455-7.826 17.455-17.455V49.505l-31.156 17.837l-27.026 25.798z"
+      }
+    ),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(
+      "path",
+      {
+        fill: "#ea4335",
+        d: "m58.182 93.14l-4.174-38.647l4.174-36.989L128 69.868l69.818-52.364l4.669 34.992l-4.669 40.644L128 145.504z"
+      }
+    ),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "#fbbc04", d: "M197.818 17.504V93.14L256 49.504V26.231c0-21.585-24.64-33.89-41.89-20.945z" }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "#c5221f", d: "m0 49.504l26.759 20.07L58.182 93.14V17.504L41.89 5.286C24.61-7.66 0 4.646 0 26.23z" })
+  ] });
+}
+function DiscordColor_Icon(props) {
+  return /* @__PURE__ */ jsxRuntimeExports.jsx("svg", { ...props, height: "1em", width: "1.29em", viewBox: "0 0 256 199", xmlns: "http://www.w3.org/2000/svg", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+    "path",
+    {
+      fill: "#5865f2",
+      d: "M216.856 16.597A208.502 208.502 0 0 0 164.042 0c-2.275 4.113-4.933 9.645-6.766 14.046c-19.692-2.961-39.203-2.961-58.533 0c-1.832-4.4-4.55-9.933-6.846-14.046a207.809 207.809 0 0 0-52.855 16.638C5.618 67.147-3.443 116.4 1.087 164.956c22.169 16.555 43.653 26.612 64.775 33.193A161.094 161.094 0 0 0 79.735 175.3a136.413 136.413 0 0 1-21.846-10.632a108.636 108.636 0 0 0 5.356-4.237c42.122 19.702 87.89 19.702 129.51 0a131.66 131.66 0 0 0 5.355 4.237a136.07 136.07 0 0 1-21.886 10.653c4.006 8.02 8.638 15.67 13.873 22.848c21.142-6.58 42.646-16.637 64.815-33.213c5.316-56.288-9.08-105.09-38.056-148.36M85.474 135.095c-12.645 0-23.015-11.805-23.015-26.18s10.149-26.2 23.015-26.2c12.867 0 23.236 11.804 23.015 26.2c.02 14.375-10.148 26.18-23.015 26.18m85.051 0c-12.645 0-23.014-11.805-23.014-26.18s10.148-26.2 23.014-26.2c12.867 0 23.236 11.804 23.015 26.2c0 14.375-10.148 26.18-23.015 26.18"
+    }
+  ) });
+}
+function Patreon_Icon(props) {
+  return /* @__PURE__ */ jsxRuntimeExports.jsx("svg", { ...props, height: "1em", viewBox: "0 0 256 256", xmlns: "http://www.w3.org/2000/svg", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+    "path",
+    {
+      fill: "currentColor",
+      d: "M232 93.17c0 41-29.69 52.47-53.55 61.67c-8.41 3.24-16.35 6.3-22.21 10.28c-11.39 7.72-18.59 21.78-25.55 35.38c-9.94 19.42-20.23 39.5-43.17 39.5c-12.91 0-24.61-11.64-33.85-33.66s-14.31-51-13.61-77.45c1.08-40.65 14.58-62.68 25.7-74c14.95-15.2 35.24-25.3 58.68-29.2c21.79-3.62 44.14-1.38 62.93 6.3C215.73 43.6 232 65.9 232 93.17"
+    }
+  ) });
+}
+function Keyboard_Icon(props) {
+  return /* @__PURE__ */ jsxRuntimeExports.jsx("svg", { ...props, height: "1em", viewBox: "0 0 16 16", xmlns: "http://www.w3.org/2000/svg", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+    "path",
+    {
+      fill: "currentColor",
+      d: "M2.75 3A1.75 1.75 0 0 0 1 4.75v6.5c0 .966.784 1.75 1.75 1.75h10.5A1.75 1.75 0 0 0 15 11.25v-6.5A1.75 1.75 0 0 0 13.25 3zM3 10.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5M3.25 7a.75.75 0 1 1 0-1.5a.75.75 0 0 1 0 1.5M10 6.25a.75.75 0 1 1-1.5 0a.75.75 0 0 1 1.5 0M6.25 7a.75.75 0 1 1 0-1.5a.75.75 0 0 1 0 1.5M13 6.25a.75.75 0 1 1-1.5 0a.75.75 0 0 1 1.5 0M5.25 9a.75.75 0 1 1 0-1.5a.75.75 0 0 1 0 1.5M9 8.25a.75.75 0 1 1-1.5 0a.75.75 0 0 1 1.5 0m2.25.75a.75.75 0 1 1 0-1.5a.75.75 0 0 1 0 1.5"
+    }
+  ) });
+}
+function OpenFolder_Icon(props) {
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("svg", { ...props, height: "1em", viewBox: "0 0 24 24", xmlns: "http://www.w3.org/2000/svg", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx(
+      "path",
+      {
+        fill: "currentColor",
+        d: "M16.07 9.952c1.329 0 2.462 0 3.366.102c.154.017.306.038.458.064c.532.09 1.05.235 1.53.488v-.85c0-.91 0-1.663-.085-2.264c-.09-.635-.286-1.197-.756-1.66a3.082 3.082 0 0 0-.241-.214c-.512-.408-1.126-.575-1.82-.652c-.67-.074-1.512-.074-2.545-.074h-.353c-.982 0-1.335-.006-1.653-.087a2.717 2.717 0 0 1-.536-.196c-.285-.14-.532-.351-1.228-.968l-.474-.42a6.91 6.91 0 0 0-.48-.403a4.289 4.289 0 0 0-2.182-.803A8.075 8.075 0 0 0 8.413 2h-.116c-.641 0-1.064 0-1.431.061c-1.605.268-2.903 1.39-3.219 2.875c-.072.337-.071.724-.071 1.283v4.387c.48-.253.998-.399 1.53-.488c.151-.026.304-.047.458-.064c.904-.102 2.037-.102 3.367-.102z"
+      }
+    ),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(
+      "path",
+      {
+        fillRule: "evenodd",
+        clipRule: "evenodd",
+        fill: "currentColor",
+        d: "M3.358 12.779c-.61.941-.358 2.25.145 4.868c.363 1.885.544 2.827 1.172 3.452c.163.163.346.306.544.429C5.982 22 6.995 22 9.022 22h6.956c2.027 0 3.04 0 3.803-.472c.199-.123.38-.266.544-.429c.628-.625.81-1.567 1.172-3.452c.503-2.618.755-3.927.145-4.868a2.937 2.937 0 0 0-.57-.646c-.87-.735-2.279-.735-5.094-.735H9.022c-2.815 0-4.223 0-5.094.735a2.936 2.936 0 0 0-.57.646m6.337 4.402c0-.4.343-.723.765-.723h4.08c.422 0 .765.324.765.723c0 .399-.343.723-.765.723h-4.08c-.422 0-.765-.324-.765-.723"
+      }
+    )
+  ] });
+}
+function UserHeart_Icon(props) {
+  return /* @__PURE__ */ jsxRuntimeExports.jsx("svg", { ...props, height: "1em", viewBox: "0 0 24 24", xmlns: "http://www.w3.org/2000/svg", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { fill: "none", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx("path", { d: "m12.594 23.258l-.012.002l-.071.035l-.02.004l-.014-.004l-.071-.036q-.016-.004-.024.006l-.004.01l-.017.428l.005.02l.01.013l.104.074l.015.004l.012-.004l.104-.074l.012-.016l.004-.017l-.017-.427q-.004-.016-.016-.018m.264-.113l-.014.002l-.184.093l-.01.01l-.003.011l.018.43l.005.012l.008.008l.201.092q.019.005.029-.008l.004-.014l-.034-.614q-.005-.019-.02-.022m-.715.002a.02.02 0 0 0-.027.006l-.006.014l-.034.614q.001.018.017.024l.015-.002l.201-.093l.01-.008l.003-.011l.018-.43l-.003-.012l-.01-.01z" }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(
+      "path",
+      {
+        fill: "currentColor",
+        d: "M11 2a5 5 0 1 0 0 10a5 5 0 0 0 0-10m0 11c-2.395 0-4.575.694-6.178 1.672c-.8.488-1.484 1.064-1.978 1.69C2.358 16.976 2 17.713 2 18.5c0 .845.411 1.511 1.003 1.986c.56.45 1.299.748 2.084.956C6.665 21.859 8.771 22 11 22l.685-.005a1 1 0 0 0 .89-1.428A6 6 0 0 1 12 18c0-1.252.383-2.412 1.037-3.373a1 1 0 0 0-.72-1.557Q11.671 13 11 13m4.5 1.691c.753-.439 1.679-.496 2.5-.046c.821-.45 1.747-.393 2.5.046c.916.534 1.526 1.59 1.5 2.788c-.036 1.57-1.248 2.798-2.886 3.771c-.343.203-.703.417-1.114.417c-.41 0-.771-.214-1.114-.417c-1.638-.973-2.85-2.202-2.885-3.77c-.027-1.198.583-2.255 1.499-2.789"
+      }
+    )
+  ] }) });
+}
+function XSite_Icon(props) {
+  return /* @__PURE__ */ jsxRuntimeExports.jsx("svg", { ...props, height: "1em", viewBox: "0 0 14 14", xmlns: "http://www.w3.org/2000/svg", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { fill: "none", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx("g", { clipPath: "url(#primeTwitter0)", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+      "path",
+      {
+        fill: "currentColor",
+        d: "M11.025.656h2.147L8.482 6.03L14 13.344H9.68L6.294 8.909l-3.87 4.435H.275l5.016-5.75L0 .657h4.43L7.486 4.71zm-.755 11.4h1.19L3.78 1.877H2.504z"
+      }
+    ) }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("defs", { children: /* @__PURE__ */ jsxRuntimeExports.jsx("clipPath", { id: "primeTwitter0", children: /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "#fff", d: "M0 0h14v14H0z" }) }) })
+  ] }) });
+}
+function Reddit_Icon(props) {
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("svg", { ...props, height: "1em", viewBox: "0 0 256 256", xmlns: "http://www.w3.org/2000/svg", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx("circle", { r: "128", cx: "128", cy: "128", fill: "#ff4500" }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(
+      "path",
+      {
+        fill: "#fff",
+        d: "M213.15 129.22c0-10.376-8.391-18.617-18.617-18.617a18.74 18.74 0 0 0-12.97 5.189c-12.818-9.157-30.368-15.107-49.9-15.87l8.544-39.981l27.773 5.95c.307 7.02 6.104 12.667 13.278 12.667c7.324 0 13.275-5.95 13.275-13.278c0-7.324-5.95-13.275-13.275-13.275c-5.188 0-9.768 3.052-11.904 7.478l-30.976-6.562c-.916-.154-1.832 0-2.443.458c-.763.458-1.22 1.22-1.371 2.136l-9.464 44.558c-19.837.612-37.692 6.562-50.662 15.872a18.74 18.74 0 0 0-12.971-5.188c-10.377 0-18.617 8.391-18.617 18.617c0 7.629 4.577 14.037 10.988 16.939a33.6 33.6 0 0 0-.458 5.646c0 28.686 33.42 52.036 74.621 52.036c41.202 0 74.622-23.196 74.622-52.036a35 35 0 0 0-.458-5.646c6.408-2.902 10.985-9.464 10.985-17.093M85.272 142.495c0-7.324 5.95-13.275 13.278-13.275c7.324 0 13.275 5.95 13.275 13.275s-5.95 13.278-13.275 13.278c-7.327.15-13.278-5.953-13.278-13.278m74.317 35.251c-9.156 9.157-26.553 9.768-31.588 9.768c-5.188 0-22.584-.765-31.59-9.768c-1.371-1.373-1.371-3.51 0-4.883c1.374-1.371 3.51-1.371 4.884 0c5.8 5.8 18.008 7.782 26.706 7.782s21.058-1.983 26.704-7.782c1.374-1.371 3.51-1.371 4.884 0c1.22 1.373 1.22 3.51 0 4.883m-2.443-21.822c-7.325 0-13.275-5.95-13.275-13.275s5.95-13.275 13.275-13.275c7.327 0 13.277 5.95 13.277 13.275c0 7.17-5.95 13.275-13.277 13.275"
+      }
+    )
+  ] });
+}
+function EditCard_Icon(props) {
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("svg", { ...props, height: "1em", viewBox: "0 0 24 24", xmlns: "http://www.w3.org/2000/svg", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx(
+      "path",
+      {
+        fill: "currentColor",
+        d: "M12 2c1.845 0 3.33 0 4.54.088L13.1 7.25H8.4L11.9 2zM3.464 3.464c1.253-1.252 3.158-1.433 6.632-1.46L6.599 7.25H2.104c.147-1.764.503-2.928 1.36-3.786M2 12c0-1.237 0-2.311.026-3.25h19.948C22 9.689 22 10.763 22 12v.258c-.567-.405-1.205-.578-1.831-.662c-.714-.096-1.595-.096-2.577-.096h-.184c-.982 0-1.863 0-2.577.096c-.779.104-1.578.348-2.233 1.002c-.654.655-.898 1.454-1.002 2.233c-.096.714-.096 1.595-.096 2.577v.184c0 .982 0 1.863.096 2.577c.084.626.257 1.264.662 1.831H12c-4.714 0-7.071 0-8.536-1.465C2 19.072 2 16.714 2 12m19.896-4.75c-.147-1.764-.503-2.928-1.36-3.786c-.598-.597-1.344-.95-2.337-1.16L14.9 7.25z"
+      }
+    ),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(
+      "path",
+      {
+        clipRule: "evenodd",
+        fillRule: "evenodd",
+        fill: "currentColor",
+        d: "M17.5 22c-2.121 0-3.182 0-3.841-.659S13 19.621 13 17.5s0-3.182.659-3.841S15.379 13 17.5 13s3.182 0 3.841.659S22 15.379 22 17.5s0 3.182-.659 3.841S19.621 22 17.5 22m2.212-6.712a.983.983 0 0 1 0 1.39l-.058.058a.24.24 0 0 1-.211.067a1.6 1.6 0 0 1-.81-.436a1.6 1.6 0 0 1-.436-.81a.24.24 0 0 1 .067-.211l.058-.058a.983.983 0 0 1 1.39 0M17.35 19.04a3 3 0 0 1-.296.279a1.6 1.6 0 0 1-.303.187a3 3 0 0 1-.381.14l-1.021.34a.265.265 0 0 1-.335-.335l.34-1.02c.064-.194.097-.291.14-.382q.077-.163.187-.303c.062-.08.134-.152.279-.296l1.799-1.799c.043-.043.118-.023.138.035a1.98 1.98 0 0 0 1.217 1.217c.058.02.078.095.035.138z"
+      }
+    )
+  ] });
+}
+function Refresh3_Icon(props) {
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("svg", { ...props, height: "1em", viewBox: "0 0 24 24", xmlns: "http://www.w3.org/2000/svg", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx(
+      "path",
+      {
+        fill: "currentColor",
+        d: "M12.079 2.25c-4.794 0-8.734 3.663-9.118 8.333H2a.75.75 0 0 0-.528 1.283l1.68 1.666a.75.75 0 0 0 1.056 0l1.68-1.666a.75.75 0 0 0-.528-1.283h-.893c.38-3.831 3.638-6.833 7.612-6.833a7.66 7.66 0 0 1 6.537 3.643a.75.75 0 1 0 1.277-.786A9.16 9.16 0 0 0 12.08 2.25"
+      }
+    ),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(
+      "path",
+      {
+        opacity: "0.5",
+        fill: "currentColor",
+        d: "M20.841 10.467a.75.75 0 0 0-1.054 0L18.1 12.133a.75.75 0 0 0 .527 1.284h.899c-.381 3.83-3.651 6.833-7.644 6.833a7.7 7.7 0 0 1-6.565-3.644a.75.75 0 1 0-1.276.788a9.2 9.2 0 0 0 7.84 4.356c4.809 0 8.766-3.66 9.151-8.333H22a.75.75 0 0 0 .527-1.284z"
+      }
+    )
+  ] });
+}
+function Rocket_Icon(props) {
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("svg", { ...props, width: "1em", height: "1em", viewBox: "0 0 24 24", xmlns: "http://www.w3.org/2000/svg", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx(
+      "path",
+      {
+        fillRule: "evenodd",
+        clipRule: "evenodd",
+        fill: "currentColor",
+        d: "m14.447 16.377l5.847-5.83c.842-.839 1.263-1.259 1.484-1.792S22 7.627 22 6.44v-.567c0-1.826 0-2.739-.569-3.306S19.947 2 18.116 2h-.57c-1.19 0-1.785 0-2.32.221c-.536.221-.957.641-1.8 1.48L7.58 9.531c-.984.98-1.594 1.589-1.83 2.176a1.5 1.5 0 0 0-.112.562c0 .802.647 1.448 1.942 2.739l.174.173l2.038-2.069a.75.75 0 1 1 1.069 1.053L8.816 16.24l.137.137c1.295 1.29 1.943 1.936 2.747 1.936c.178 0 .348-.031.519-.094c.603-.222 1.219-.836 2.228-1.842m2.747-6.846a1.946 1.946 0 0 1-2.747 0a1.93 1.93 0 0 1 0-2.738a1.946 1.946 0 0 1 2.747 0a1.93 1.93 0 0 1 0 2.738"
+      }
+    ),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(
+      "path",
+      {
+        opacity: 0.5,
+        fill: "currentColor",
+        d: "M9.034 5.963L6.491 8.5c-.467.466-.896.893-1.235 1.28a6 6 0 0 0-.619.82l-.024-.025l-.095-.094a4.9 4.9 0 0 0-1.532-1.004l-.123-.05l-.379-.15a.764.764 0 0 1-.259-1.252C3.345 6.907 4.69 5.566 5.34 5.297a3.4 3.4 0 0 1 1.788-.229c.546.081 1.063.362 1.907.895m4.342 13.35c.205.208.34.355.464.512q.243.311.434.658c.142.26.253.537.474 1.092a.69.69 0 0 0 1.126.224l.084-.083c1.12-1.117 2.465-2.458 2.735-3.105a3.35 3.35 0 0 0 .229-1.782c-.081-.545-.362-1.06-.897-1.902l-2.552 2.544c-.478.477-.916.914-1.313 1.256c-.237.206-.497.41-.784.586"
+      }
+    )
+  ] });
+}
+function Linux_Icon(props) {
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("svg", { ...props, height: "1rem", viewBox: "0 0 24 24", xmlns: "http://www.w3.org/2000/svg", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx("rect", { fill: "none", height: "1rem" }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(
+      "path",
+      {
+        fill: "currentColor",
+        d: "M14.62 8.35c-.42.28-1.75 1.04-1.95 1.19c-.39.31-.75.29-1.14-.01c-.2-.16-1.53-.92-1.95-1.19c-.48-.31-.45-.7.08-.92c1.64-.69 3.28-.64 4.91.03c.49.21.51.6.05.9m7.22 7.28c-.93-2.09-2.2-3.99-3.84-5.66a4.3 4.3 0 0 1-1.06-1.88c-.1-.33-.17-.67-.24-1.01c-.2-.88-.29-1.78-.7-2.61c-.73-1.58-2-2.4-3.84-2.47c-1.81.05-3.16.81-3.95 2.4c-.21.43-.36.88-.46 1.34c-.17.76-.32 1.55-.5 2.32c-.15.65-.45 1.21-.96 1.71c-1.61 1.57-2.9 3.37-3.88 5.35c-.14.29-.28.58-.37.88c-.19.66.29 1.12.99.96c.44-.09.88-.18 1.3-.31c.41-.15.57-.05.67.35c.65 2.15 2.07 3.66 4.24 4.5c4.12 1.56 8.93-.66 9.97-4.58c.07-.27.17-.37.47-.27c.46.14.93.24 1.4.35c.49.09.85-.16.92-.64c.03-.26-.06-.49-.16-.73"
+      }
+    )
+  ] });
+}
+function Windows_Icon(props) {
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("svg", { ...props, width: "256", height: "256", viewBox: "0 0 256 256", xmlns: "http://www.w3.org/2000/svg", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx("rect", { width: "256", fill: "none", height: "256" }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(
+      "path",
+      {
+        fill: "currentColor",
+        d: "M104 144v51.64a8 8 0 0 1-8 8a8.5 8.5 0 0 1-1.43-.13l-64-11.64A8 8 0 0 1 24 184v-40a8 8 0 0 1 8-8h64a8 8 0 0 1 8 8m-2.87-89.78a8 8 0 0 0-6.56-1.73l-64 11.64A8 8 0 0 0 24 72v40a8 8 0 0 0 8 8h64a8 8 0 0 0 8-8V60.36a8 8 0 0 0-2.87-6.14M208 136h-80a8 8 0 0 0-8 8v57.45a8 8 0 0 0 6.57 7.88l80 14.54a7.6 7.6 0 0 0 1.43.13a8 8 0 0 0 8-8v-72a8 8 0 0 0-8-8m5.13-102.14a8 8 0 0 0-6.56-1.73l-80 14.55a8 8 0 0 0-6.57 7.87V112a8 8 0 0 0 8 8h80a8 8 0 0 0 8-8V40a8 8 0 0 0-2.87-6.14"
+      }
+    )
+  ] });
+}
+function MacOS_Icon(props) {
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("svg", { ...props, width: "26", height: "26", viewBox: "0 0 26 26", xmlns: "http://www.w3.org/2000/svg", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx("rect", { width: "26", height: "26", fill: "none" }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(
+      "path",
+      {
+        fill: "currentColor",
+        d: "M23.934 18.947c-.598 1.324-.884 1.916-1.652 3.086c-1.073 1.634-2.588 3.673-4.461 3.687c-1.666.014-2.096-1.087-4.357-1.069c-2.261.011-2.732 1.089-4.4 1.072c-1.873-.017-3.307-1.854-4.381-3.485c-3.003-4.575-3.32-9.937-1.464-12.79C4.532 7.425 6.61 6.237 8.561 6.237c1.987 0 3.236 1.092 4.879 1.092c1.594 0 2.565-1.095 4.863-1.095c1.738 0 3.576.947 4.889 2.581c-4.296 2.354-3.598 8.49.742 10.132M16.559 4.408c.836-1.073 1.47-2.587 1.24-4.131c-1.364.093-2.959.964-3.891 2.092c-.844 1.027-1.544 2.553-1.271 4.029c1.488.048 3.028-.839 3.922-1.99"
+      }
+    )
+  ] });
+}
+function ShieldWarning_Icon(props) {
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("svg", { ...props, height: "1rem", viewBox: "0 0 24 24", xmlns: "http://www.w3.org/2000/svg", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx(
+      "path",
+      {
+        opacity: "0.5",
+        fill: "currentColor",
+        d: "M3 10.417c0-3.198 0-4.797.378-5.335c.377-.537 1.88-1.052 4.887-2.081l.573-.196C10.405 2.268 11.188 2 12 2s1.595.268 3.162.805l.573.196c3.007 1.029 4.51 1.544 4.887 2.081C21 5.62 21 7.22 21 10.417v1.574c0 5.638-4.239 8.375-6.899 9.536C13.38 21.842 13.02 22 12 22s-1.38-.158-2.101-.473C7.239 20.365 3 17.63 3 11.991z"
+      }
+    ),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(
+      "path",
+      {
+        fill: "currentColor",
+        d: "M12 7.25a.75.75 0 0 1 .75.75v4a.75.75 0 0 1-1.5 0V8a.75.75 0 0 1 .75-.75M12 16a1 1 0 1 0 0-2a1 1 0 0 0 0 2"
+      }
+    )
+  ] });
+}
 function Clock_Icon(props) {
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("svg", { ...props, height: "1rem", viewBox: "0 0 24 24", xmlns: "http://www.w3.org/2000/svg", children: [
     /* @__PURE__ */ jsxRuntimeExports.jsx(
@@ -1939,9 +2552,363 @@ function Clock_Icon(props) {
     )
   ] });
 }
+function CheckDuo_Icon(props) {
+  return /* @__PURE__ */ jsxRuntimeExports.jsx("svg", { ...props, height: "1rem", viewBox: "0 0 24 24", xmlns: "http://www.w3.org/2000/svg", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { fill: "none", strokeWidth: "1.5", stroke: "currentColor", strokeLinecap: "round", strokeLinejoin: "round", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx("path", { opacity: "0.5", d: "m4 12.9l3.143 3.6L15 7.5" }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("path", { d: "m20 7.563l-8.571 9L11 16" })
+  ] }) });
+}
+function DiskDuo_Icon(props) {
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("svg", { ...props, height: "1rem", viewBox: "0 0 24 24", xmlns: "http://www.w3.org/2000/svg", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx(
+      "path",
+      {
+        opacity: "0.5",
+        fill: "currentColor",
+        d: "M20.536 20.536C22 19.07 22 16.714 22 12c0-.341 0-.512-.015-.686a4.04 4.04 0 0 0-.921-2.224a8 8 0 0 0-.483-.504l-5.167-5.167a9 9 0 0 0-.504-.483a4.04 4.04 0 0 0-2.224-.92C12.512 2 12.342 2 12 2C7.286 2 4.929 2 3.464 3.464C2 4.93 2 7.286 2 12s0 7.071 1.464 8.535c.685.685 1.563 1.05 2.786 1.243l1.5.153C8.906 22 10.3 22 12 22s3.094 0 4.25-.069l1.5-.153c1.223-.194 2.102-.558 2.785-1.242"
+      }
+    ),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(
+      "path",
+      {
+        fill: "currentColor",
+        d: "M7 7.25a.75.75 0 0 0 0 1.5h6a.75.75 0 0 0 0-1.5zm6.052 9c.899 0 1.648 0 2.242.08c.628.084 1.195.27 1.65.726c.456.455.642 1.022.726 1.65c.08.594.08 1.343.08 2.242v.833l-1.5.14V21c0-.964-.002-1.612-.067-2.095c-.062-.461-.169-.659-.3-.789s-.327-.237-.788-.3c-.483-.064-1.131-.066-2.095-.066h-2c-.964 0-1.612.002-2.095.067c-.461.062-.659.169-.789.3s-.237.327-.3.788c-.064.483-.066 1.131-.066 2.095v.926l-1.5-.149v-.829c0-.899 0-1.648.08-2.242c.084-.628.27-1.195.725-1.65c.456-.456 1.023-.642 1.65-.726c.595-.08 1.345-.08 2.243-.08z"
+      }
+    )
+  ] });
+}
+function BroomDuo_Icon(props) {
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("svg", { ...props, height: "1em", viewBox: "0 0 24 24", xmlns: "http://www.w3.org/2000/svg", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx(
+      "path",
+      {
+        opacity: "0.5",
+        fill: "currentColor",
+        d: "M22.53 2.53a.75.75 0 1 0-1.06-1.06l-2.403 2.402a4.5 4.5 0 0 1 1.061 1.06zM2.449 11.411l.74 1.218a24.45 24.45 0 0 0 8.181 8.181l1.219.741c1.898.97 4.353.347 5.414-1.661c.5-.949.977-2.012 1.279-3.07a19.5 19.5 0 0 0 .712-4.33c.033-.64.049-.961-.104-1.357c-.152-.395-.416-.66-.944-1.187L14.12 5.12c-.491-.491-.737-.737-1.107-.89c-.37-.151-.664-.15-1.253-.148a17.2 17.2 0 0 0-4.581.635c-1.057.302-2.12.778-3.069 1.28c-2.008 1.06-2.63 3.515-1.661 5.413"
+      }
+    ),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(
+      "path",
+      {
+        fill: "currentColor",
+        d: "M19.643 4.358a4.445 4.445 0 0 0-6.287 0l-.038.037c.232.156.456.38.802.726l4.825 4.825c.302.302.518.517.675.72l.023-.022a4.445 4.445 0 0 0 0-6.286"
+      }
+    )
+  ] });
+}
+function FilterDuo_Icon(props) {
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("svg", { ...props, height: "1rem", viewBox: "0 0 24 24", xmlns: "http://www.w3.org/2000/svg", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx(
+      "path",
+      {
+        fillRule: "evenodd",
+        clipRule: "evenodd",
+        fill: "currentColor",
+        d: "M5 3h14L8.816 13.184a2.7 2.7 0 0 0-.778-1.086c-.228-.198-.547-.377-1.183-.736l-2.913-1.64c-.949-.533-1.423-.8-1.682-1.23C2 8.061 2 7.541 2 6.503v-.69c0-1.326 0-1.99.44-2.402C2.878 3 3.585 3 5 3"
+      }
+    ),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(
+      "path",
+      {
+        opacity: "0.5",
+        fill: "currentColor",
+        d: "M22 6.504v-.69c0-1.326 0-1.99-.44-2.402C21.122 3 20.415 3 19 3L8.815 13.184q.075.193.121.403c.064.285.064.619.064 1.286v2.67c0 .909 0 1.364.252 1.718c.252.355.7.53 1.594.88c1.879.734 2.818 1.101 3.486.683S15 19.452 15 17.542v-2.67c0-.666 0-1 .063-1.285a2.68 2.68 0 0 1 .9-1.49c.227-.197.545-.376 1.182-.735l2.913-1.64c.948-.533 1.423-.8 1.682-1.23c.26-.43.26-.95.26-1.988"
+      }
+    )
+  ] });
+}
+function BellDuo_Icon(props) {
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("svg", { ...props, height: "1rem", viewBox: "0 0 24 24", xmlns: "http://www.w3.org/2000/svg", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx(
+      "path",
+      {
+        opacity: "0.5",
+        fill: "currentColor",
+        d: "M18.75 9v.704c0 .845.24 1.671.692 2.374l1.108 1.723c1.011 1.574.239 3.713-1.52 4.21a25.8 25.8 0 0 1-14.06 0c-1.759-.497-2.531-2.636-1.52-4.21l1.108-1.723a4.4 4.4 0 0 0 .693-2.374V9c0-3.866 3.022-7 6.749-7s6.75 3.134 6.75 7"
+      }
+    ),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "currentColor", d: "M7.243 18.545a5.002 5.002 0 0 0 9.513 0c-3.145.59-6.367.59-9.513 0" })
+  ] });
+}
+function BoxDuo_Icon(props) {
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("svg", { ...props, height: "1rem", viewBox: "0 0 24 24", xmlns: "http://www.w3.org/2000/svg", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx(
+      "path",
+      {
+        fill: "currentColor",
+        d: "M8.422 20.618C10.178 21.54 11.056 22 12 22V12L2.638 7.073l-.04.067C2 8.154 2 9.417 2 11.942v.117c0 2.524 0 3.787.597 4.801c.598 1.015 1.674 1.58 3.825 2.709z"
+      }
+    ),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(
+      "path",
+      {
+        opacity: "0.7",
+        fill: "currentColor",
+        d: "m17.577 4.432l-2-1.05C13.822 2.461 12.944 2 12 2c-.945 0-1.822.46-3.578 1.382l-2 1.05C4.318 5.536 3.242 6.1 2.638 7.072L12 12l9.362-4.927c-.606-.973-1.68-1.537-3.785-2.641"
+      }
+    ),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(
+      "path",
+      {
+        opacity: "0.5",
+        fill: "currentColor",
+        d: "m21.403 7.14l-.041-.067L12 12v10c.944 0 1.822-.46 3.578-1.382l2-1.05c2.151-1.129 3.227-1.693 3.825-2.708c.597-1.014.597-2.277.597-4.8v-.117c0-2.525 0-3.788-.597-4.802"
+      }
+    ),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(
+      "path",
+      {
+        fill: "currentColor",
+        d: "m6.323 4.484l.1-.052l1.493-.784l9.1 5.005l4.025-2.011q.205.232.362.498c.15.254.262.524.346.825L17.75 9.964V13a.75.75 0 0 1-1.5 0v-2.286l-3.5 1.75v9.44A3 3 0 0 1 12 22c-.248 0-.493-.032-.75-.096v-9.44l-8.998-4.5c.084-.3.196-.57.346-.824q.156-.266.362-.498l9.04 4.52l3.387-1.693z"
+      }
+    )
+  ] });
+}
+function CalendarDuo_Icon(props) {
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("svg", { ...props, width: "1em", height: "1em", viewBox: "0 0 24 24", xmlns: "http://www.w3.org/2000/svg", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx(
+      "path",
+      {
+        fill: "currentColor",
+        d: "M6.94 2c.416 0 .753.324.753.724v1.46c.668-.012 1.417-.012 2.26-.012h4.015c.842 0 1.591 0 2.259.013v-1.46c0-.4.337-.725.753-.725s.753.324.753.724V4.25c1.445.111 2.394.384 3.09 1.055c.698.67.982 1.582 1.097 2.972L22 9H2v-.724c.116-1.39.4-2.302 1.097-2.972s1.645-.944 3.09-1.055V2.724c0-.4.337-.724.753-.724"
+      }
+    ),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(
+      "path",
+      {
+        opacity: 0.5,
+        fill: "currentColor",
+        d: "M22 14v-2c0-.839-.004-2.335-.017-3H2.01c-.013.665-.01 2.161-.01 3v2c0 3.771 0 5.657 1.172 6.828S6.228 22 10 22h4c3.77 0 5.656 0 6.828-1.172S22 17.772 22 14"
+      }
+    ),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(
+      "path",
+      {
+        fill: "currentColor",
+        d: "M18 17a1 1 0 1 1-2 0a1 1 0 0 1 2 0m0-4a1 1 0 1 1-2 0a1 1 0 0 1 2 0m-5 4a1 1 0 1 1-2 0a1 1 0 0 1 2 0m0-4a1 1 0 1 1-2 0a1 1 0 0 1 2 0m-5 4a1 1 0 1 1-2 0a1 1 0 0 1 2 0m0-4a1 1 0 1 1-2 0a1 1 0 0 1 2 0"
+      }
+    )
+  ] });
+}
+function UserDuo_Icon(props) {
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("svg", { ...props, width: "1em", height: "1em", viewBox: "0 0 24 24", xmlns: "http://www.w3.org/2000/svg", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx("circle", { r: 4, cy: 6, cx: 12, fill: "currentColor" }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(
+      "path",
+      {
+        opacity: 0.5,
+        fill: "currentColor",
+        d: "M20 17.5c0 2.485 0 4.5-8 4.5s-8-2.015-8-4.5S7.582 13 12 13s8 2.015 8 4.5"
+      }
+    )
+  ] });
+}
+function SmileCircleDuo_Icon(props) {
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("svg", { ...props, width: "1em", height: "1em", viewBox: "0 0 24 24", xmlns: "http://www.w3.org/2000/svg", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx(
+      "path",
+      {
+        opacity: 0.5,
+        fill: "currentColor",
+        d: "M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2S2 6.477 2 12s4.477 10 10 10"
+      }
+    ),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(
+      "path",
+      {
+        fill: "currentColor",
+        d: "M8.397 15.553a.75.75 0 0 1 1.05-.155c.728.54 1.607.852 2.553.852s1.825-.313 2.553-.852a.75.75 0 1 1 .894 1.204A5.77 5.77 0 0 1 12 17.75a5.77 5.77 0 0 1-3.447-1.148a.75.75 0 0 1-.156-1.049M15 12c.552 0 1-.672 1-1.5S15.552 9 15 9s-1 .672-1 1.5s.448 1.5 1 1.5m-6 0c.552 0 1-.672 1-1.5S9.552 9 9 9s-1 .672-1 1.5s.448 1.5 1 1.5"
+      }
+    )
+  ] });
+}
+function MinusSquareDuo_Icon(props) {
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("svg", { ...props, width: "1em", height: "1em", viewBox: "0 0 24 24", xmlns: "http://www.w3.org/2000/svg", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx(
+      "path",
+      {
+        opacity: 0.5,
+        fill: "currentColor",
+        d: "M12 22c-4.714 0-7.071 0-8.536-1.465C2 19.072 2 16.714 2 12s0-7.071 1.464-8.536C4.93 2 7.286 2 12 2s7.071 0 8.535 1.464C22 4.93 22 7.286 22 12s0 7.071-1.465 8.535C19.072 22 16.714 22 12 22"
+      }
+    ),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fill: "currentColor", d: "M15 12.75a.75.75 0 0 0 0-1.5H9a.75.75 0 0 0 0 1.5z" })
+  ] });
+}
 
 function mitt(n){return {all:n=n||new Map,on:function(t,e){var i=n.get(t);i?i.push(e):n.set(t,[e]);},off:function(t,e){var i=n.get(t);i&&(e?i.splice(i.indexOf(e)>>>0,1):n.set(t,[]));},emit:function(t,e){var i=n.get(t);i&&i.slice().map(function(n){n(e);}),(i=n.get("*"))&&i.slice().map(function(n){n(t,e);});}}}
 
+const {isEqual} = await importShared('lodash');
+function extractGitUrl(url) {
+  const gitRepoRegex = /^(https?:\/\/)?(www\.)?(github|gitlab)\.com\/([^/]+)\/([^/]+?)(?:\.git)?$/;
+  const match = url.match(gitRepoRegex);
+  if (!match) {
+    throw new Error(`Invalid Git repository URL: ${url}`);
+  }
+  const [, , , platform, owner, repo] = match;
+  return { owner, repo, platform };
+}
+function formatSizeKB(sizeKB) {
+  if (!sizeKB) return "0 KB";
+  if (sizeKB < 1024) {
+    return `${sizeKB.toFixed(2)} KB`;
+  } else if (sizeKB < 1024 * 1024) {
+    return `${(sizeKB / 1024).toFixed(2)} MB`;
+  } else {
+    return `${(sizeKB / (1024 * 1024)).toFixed(2)} GB`;
+  }
+}
+function validateGitRepoUrl(url) {
+  const githubMatch = url.toLowerCase().match(/^(?:https?:\/\/)?(?:www\.)?github\.com\/([^/]+)\/([^/]+?)(\.git)?(\/)?$/i);
+  if (githubMatch) {
+    return `https://github.com/${githubMatch[1]}/${githubMatch[2]}`;
+  }
+  const gitlabMatch = url.toLowerCase().match(/^(?:https?:\/\/)?(?:www\.)?gitlab\.com\/([^/]+)\/([^/]+?)(\.git)?(\/)?$/i);
+  if (gitlabMatch) {
+    return `https://gitlab.com/${gitlabMatch[1]}/${gitlabMatch[2]}`;
+  }
+  return "";
+}
+function isValidURL(str) {
+  const urlRegex = /^(https?:\/\/)?([\da-z.-]+)\.([a-z]{2,6})(?:[\\/\w .-]*)?$/i;
+  const check = (url) => {
+    if (urlRegex.test(url)) {
+      return true;
+    }
+    try {
+      new URL(url);
+      return true;
+    } catch {
+      return false;
+    }
+  };
+  return Array.isArray(str) ? str.every(check) : check(str);
+}
+
+const browserDownloadChannels = {
+  onDone: "browserDL:on-done",
+  onProgress: "browserDL:on-progress",
+  onDlStart: "browserDL:on-dl-start",
+  cancel: "browserDL:cancel",
+  pause: "browserDL:pause",
+  resume: "browserDL:resume",
+  clear: "browserDL:clear",
+  openDownloadsMenu: "browserDL:open-downloads-menu",
+  openItem: "browserDL:open-item",
+  mainDownloadCount: "browserDL:main-download-count"
+};
+const customNotifChannels = {
+  onOpen: "customNotif-onOpen",
+  onClose: "customNotif-onClose",
+  onBtnPress: "customNotif-onBtnPress"
+};
+
+const winChannels = {
+  changeState: "win:state-change",
+  onChangeState: "win:on-state-change",
+  setDarkMode: "win:set-darkMode",
+  getSystemDarkMode: "win:get-system-darkMode",
+  onDarkMode: "win:on-darkMode",
+  setTaskBarStatus: "win:set-taskbar-status",
+  setDiscordRP: "win:set-discord-rp",
+  setDiscordRpAiRunning: "win:set-discord-rp-ai-running",
+  getSystemInfo: "win:get-system-info",
+  openUrlDefaultBrowser: "win:open-url-default-browser"
+};
+const fileChannels = {
+  getAppDirectories: "app:getAppDirectories",
+  dialog: "app:openDialog",
+  openPath: "app:openPath",
+  removeDir: "app:removeDir",
+  trashDir: "app:trashDir",
+  listDir: "app:listDir",
+  checkFilesExist: "app:checkFilesExist",
+  calcFolderSize: "app:calcFolderSize",
+  getRelativePath: "app:getRelativePath",
+  getAbsolutePath: "app:getAbsolutePath",
+  isEmptyDir: "app:isEmptyDir"
+};
+const gitChannels = {
+  cloneShallow: "git:clone-shallow",
+  cloneShallowPromise: "git:clone-shallow-promise",
+  stashDrop: "git:stash-drop",
+  validateGitDir: "git:validateGitDir",
+  getRepoInfo: "git:get-repo-info",
+  changeBranch: "git:changeBranch",
+  unShallow: "git:unShallow",
+  resetHard: "git:resetHard",
+  pull: "git:pull",
+  onProgress: "git:on-progress"
+};
+const utilsChannels = {
+  cancelExtensionsData: "utils:cancel-extensions-data",
+  updateAllExtensions: "utils:update-all-extensions",
+  disableExtension: "utils:disable-extension",
+  onUpdateAllExtensions: "utils:on-update-all-extensions",
+  extensionsDetails: "utils:extensions-details",
+  updateStatus: "utils:extensions-update-status",
+  downloadFile: "utils:download-file",
+  cancelDownload: "utils:cancel-download",
+  onDownloadFile: "utils:on-download-file",
+  decompressFile: "utils:decompress-file",
+  isResponseValid: "utils:is-response-valid",
+  getImageAsDataURL: "utils:get-image-as-data-url"
+};
+const modulesChannels = {
+  cardUpdateAvailable: "modules:card-update-available",
+  installModule: "modules:install-module",
+  uninstallModule: "modules:uninstall-module",
+  uninstallCardByID: "modules:uninstall-card-by-id",
+  isUpdateAvailable: "modules:is-update-available",
+  updateAvailableList: "modules:update-available-list",
+  updateModule: "modules:update-module",
+  updateAllModules: "modules:update-all-modules",
+  checkEa: "modules:check-ea",
+  checkCardsUpdateInterval: "modules:cards_update_interval",
+  onCardsUpdateAvailable: "modules:on_cards_update_available",
+  onReload: "modules:on-reload",
+  onUpdatedModules: "modules:on-updated-modules",
+  getModulesData: "modules:get-modules-data",
+  getInstalledModulesInfo: "modules:get-installed-modules-info",
+  getSkipped: "modules:get-skipped"
+};
+const extensionsChannels = {
+  installExtension: "extensions:install-extensions",
+  uninstallExtension: "extensions:uninstall-extensions",
+  isUpdateAvailable: "extensions:is-update-available",
+  updateAvailableList: "extensions:any-update-available",
+  updateExtension: "extensions:update-extensions",
+  updateAllExtensions: "extensions:update-all-extensions",
+  checkEa: "extensions:check-ea",
+  onReload: "extensions:on-reload",
+  onUpdatedExtensions: "extensions:on-updated-extensions",
+  getExtensionsData: "extensions:get-extensions-data",
+  getInstalledExtensionsInfo: "extensions:get-installed-extensions-info",
+  getSkipped: "extensions:get-skipped"
+};
+const ptyChannels = {
+  process: "pty-process",
+  customProcess: "pty-custom-process",
+  emptyProcess: "pty-custom-process",
+  customCommands: "pty-custom-commands",
+  write: "pty-write",
+  clear: "pty-clear",
+  resize: "pty-resize",
+  onData: "pty-on-data",
+  onTitle: "pty-on-title",
+  onExit: "pty-on-exit-code"
+};
+const appUpdateChannels = {
+  statusError: "appUpdate:statusError",
+  status: "appUpdate:status",
+  download: "appUpdate:download",
+  cancel: "appUpdate:cancel",
+  install: "appUpdate:install"};
+const appDataChannels = {
+  getCurrentPath: "appData:get-current-path",
+  selectAnother: "appData:select-another",
+  isAppDir: "appData:is-app-dir"
+};
 const storageChannels = {
   get: "storage:getData",
   getCustom: "storage:get-custom",
@@ -1950,9 +2917,623 @@ const storageChannels = {
   update: "storage:updateData",
   clear: "storage:clearStorage"
 };
+const moduleApiChannels = {
+  getFolderCreationTime: "module_api_getFolderCreationTime",
+  getLastPulledDate: "module_api_getLastPulledDate",
+  getCurrentReleaseTag: "module_api_getCurrentReleaseTag"
+};
+const storageUtilsChannels = {
+  setSystemStartup: "storageUtils:setSystemStartup",
+  addInstalledCard: "storageUtils:add-installed-card",
+  removeInstalledCard: "storageUtils:remove-installed-card",
+  onInstalledCards: "storageUtils:on-installed-cards",
+  addAutoUpdateCard: "storageUtils:add-autoUpdate-card",
+  removeAutoUpdateCard: "storageUtils:remove-autoUpdate-card",
+  addAutoUpdateExtensions: "storageUtils:add-autoUpdate-extensions",
+  removeAutoUpdateExtensions: "storageUtils:remove-autoUpdate-extensions",
+  onAutoUpdateCards: "storageUtils:on-autoUpdate-cards",
+  onAutoUpdateExtensions: "storageUtils:on-autoUpdate-extensions",
+  onPinnedCardsChange: "storageUtils:on-pinned-cards",
+  pinnedCards: "storageUtils:pinned-cards",
+  recentlyUsedCards: "storageUtils:recently-used-cards",
+  onRecentlyUsedCardsChange: "storageUtils:on-recently-used-cards",
+  homeCategory: "storageUtils:home-category",
+  onHomeCategory: "storageUtils:on-home-category",
+  preCommands: "storageUtils:pre-commands",
+  onPreCommands: "storageUtils:on-pre-commands",
+  customRun: "storageUtils:custom-run",
+  onCustomRun: "storageUtils:on-custom-run",
+  customRunBehavior: "storageUtils:custom-run-behavior",
+  preOpen: "storageUtils:pre-open",
+  getCardArguments: "storageUtils:get-card-arguments",
+  setCardArguments: "storageUtils:set-card-arguments",
+  updateZoomFactor: "storageUtils:update-zoom-factor",
+  addBrowserRecent: "storageUtils:add-browser-recent",
+  addBrowserFavorite: "storageUtils:add-browser-favorite",
+  addBrowserHistory: "storageUtils:add-browser-history",
+  addBrowserRecentFavIcon: "storageUtils:add-browser-recent-favicon",
+  removeBrowserRecent: "storageUtils:remove-browser-recent",
+  removeBrowserFavorite: "storageUtils:remove-browser-favorite",
+  removeBrowserHistory: "storageUtils:remove-browser-favorite",
+  setShowConfirm: "storage:set-show-confirm",
+  onConfirmChange: "storage:on-confirm-change",
+  addReadNotif: "storageUtils:add-read-notif",
+  setCardTerminalPreCommands: "storageUtils:card-terminal-preCommands",
+  unassignCard: "storageUtils:unassign-card",
+  getBrowserHistoryData: "storageUtils:getBrowserHistoryData"
+};
+const appWindowChannels = {
+  hotkeysChange: "window:hotkeys-change",
+  showToast: "window:show-toast"};
+const contextMenuChannels = {
+  onInitView: "context:init-view",
+  onFind: "context:find-in-page",
+  onTerminateAI: "context:on-terminate-ai",
+  onTerminateTab: "context:on-terminate-tab",
+  onCloseApp: "context:on-close-app",
+  onZoom: "context:zoom-page",
+  relaunchAI: "context:relaunch-ai",
+  onRelaunchAI: "context:on-relaunch-ai",
+  stopAI: "context:stop-ai",
+  onStopAI: "context:on-stop-ai",
+  removeTab: "context:remove-tab",
+  onRemoveTab: "context:on-remove-tab",
+  resizeWindow: "context:resize-window",
+  showWindow: "context:show-window",
+  hideWindow: "context:hide-window",
+  copy: "context:copy",
+  paste: "context:paste",
+  replaceMisspelling: "context:replaceMisspelling",
+  selectAll: "context:selectAll",
+  undo: "context:undo",
+  redo: "context:redo",
+  newTab: "context:newTab",
+  openExternal: "context:openExternal",
+  downloadImage: "context:download-image",
+  navigate: "context:navigate",
+  openTerminateAI: "context:open-terminate-ai",
+  openTerminateTab: "context:open-terminate-tab",
+  openCloseApp: "context:open-close-app"
+};
+const tabsChannels = {
+  onNewTab: "tabs:new-tab"
+};
+const browserChannels = {
+  createBrowser: "browser:create-browser",
+  removeBrowser: "browser:remove-browser",
+  loadURL: "browser:load-url",
+  setVisible: "browser:set-visible",
+  openFindInPage: "browser:openFindInPage",
+  openZoom: "browser:openZoom",
+  findInPage: "browser:findInPage",
+  stopFindInPage: "browser:stopFindInPage",
+  setZoomFactor: "browser:setZoomFactor",
+  focusWebView: "browser:focus-webview",
+  clearCache: "browser:clear-cache",
+  clearCookies: "browser:clear-cookies",
+  reload: "browser:reload",
+  goBack: "browser:goBack",
+  goForward: "browser:goForward",
+  onCanGo: "browser:on-can-go",
+  isLoading: "browser:is-loading",
+  onTitleChange: "browser:on-title-change",
+  onFavIconChange: "browser:on-favicon-change",
+  onUrlChange: "browser:on-url-change",
+  onDomReady: "browser:on-dom-ready",
+  getUserAgent: "browser:get-user-agent",
+  updateUserAgent: "browser:update-user-agent",
+  addOffset: "browser:add-offset",
+  clearHistory: "browser:clear-history"
+};
+const staticsChannels = {
+  pull: "statics:pull",
+  getReleases: "statics:getReleases",
+  getInsider: "statics:getInsider",
+  getNotification: "statics:getNotification",
+  getModules: "statics:getModules",
+  getExtensions: "statics:getExtensions",
+  getExtensionsEA: "statics:getExtensionsEA",
+  getPatrons: "statics:getPatrons"
+};
+const eventsChannels = {
+  card_PreCommandUninstall: "events:card_PreCommandUninstall"
+};
 
 const ipc = window.electron.ipcRenderer;
 const rendererIpc = {
+  /** Managing app window states */
+  win: {
+    changeWinState: (state) => {
+      extensionRendererApi.events_ipc.emit("win_change_state", { state });
+      ipc.send(winChannels.changeState, state);
+    },
+    onChangeState: (result) => ipc.on(winChannels.onChangeState, result),
+    setDarkMode: (darkMode) => {
+      extensionRendererApi.events_ipc.emit("win_set_dark_mode", { darkMode });
+      ipc.send(winChannels.setDarkMode, darkMode);
+    },
+    getSystemDarkMode: () => {
+      extensionRendererApi.events_ipc.emit("win_get_system_dark_mode", {});
+      return ipc.invoke(winChannels.getSystemDarkMode);
+    },
+    onDarkMode: (result) => ipc.on(winChannels.onDarkMode, result),
+    setTaskBarStatus: (status) => {
+      extensionRendererApi.events_ipc.emit("win_set_taskbar_status", { status });
+      ipc.send(winChannels.setTaskBarStatus, status);
+    },
+    setDiscordRP: (discordRp) => {
+      extensionRendererApi.events_ipc.emit("win_set_discord_rp", { discordRp });
+      ipc.send(winChannels.setDiscordRP, discordRp);
+    },
+    setDiscordRpAiRunning: (status) => {
+      extensionRendererApi.events_ipc.emit("win_set_discord_rp_ai_running", { status });
+      ipc.send(winChannels.setDiscordRpAiRunning, status);
+    },
+    getSystemInfo: () => {
+      extensionRendererApi.events_ipc.emit("win_get_system_info", {});
+      return ipc.invoke(winChannels.getSystemInfo);
+    },
+    openUrlDefaultBrowser: (url) => {
+      extensionRendererApi.events_ipc.emit("win_open_url_default_browser", { url });
+      ipc.send(winChannels.openUrlDefaultBrowser, url);
+    }
+  },
+  /** Managing files and directories */
+  file: {
+    openDlg: (option) => {
+      extensionRendererApi.events_ipc.emit("file_open_dialog", { option });
+      return ipc.invoke(fileChannels.dialog, option);
+    },
+    openPath: (dir) => {
+      extensionRendererApi.events_ipc.emit("file_open_path", { dir });
+      ipc.send(fileChannels.openPath, dir);
+    },
+    getAppDirectories: (name) => {
+      extensionRendererApi.events_ipc.emit("file_get_app_directories", { name });
+      return ipc.invoke(fileChannels.getAppDirectories, name);
+    },
+    removeDir: (dir) => {
+      extensionRendererApi.events_ipc.emit("file_remove_dir", { dir });
+      return ipc.invoke(fileChannels.removeDir, dir);
+    },
+    trashDir: (dir) => {
+      extensionRendererApi.events_ipc.emit("file_trash_dir", { dir });
+      return ipc.invoke(fileChannels.trashDir, dir);
+    },
+    listDir: (dirPath, relatives) => {
+      extensionRendererApi.events_ipc.emit("file_list_dir", { dirPath, relatives });
+      return ipc.invoke(fileChannels.listDir, dirPath, relatives);
+    },
+    checkFilesExist: (dir, fileNames) => {
+      extensionRendererApi.events_ipc.emit("file_check_files_exist", { dir, fileNames });
+      return ipc.invoke(fileChannels.checkFilesExist, dir, fileNames);
+    },
+    calcFolderSize: (dir) => {
+      extensionRendererApi.events_ipc.emit("file_calc_folder_size", { dir });
+      return ipc.invoke(fileChannels.calcFolderSize, dir);
+    },
+    getRelativePath: (basePath, targetPath) => {
+      extensionRendererApi.events_ipc.emit("file_get_relative_path", { basePath, targetPath });
+      return ipc.invoke(fileChannels.getRelativePath, basePath, targetPath);
+    },
+    getAbsolutePath: (basePath, targetPath) => {
+      extensionRendererApi.events_ipc.emit("file_get_absolute_path", { basePath, targetPath });
+      return ipc.invoke(fileChannels.getAbsolutePath, basePath, targetPath);
+    },
+    isEmptyDir: (dir) => {
+      extensionRendererApi.events_ipc.emit("file_is_empty_dir", { dir });
+      return ipc.invoke(fileChannels.isEmptyDir, dir);
+    }
+  },
+  /** Git operations */
+  git: {
+    cloneShallow: (url, directory, singleBranch, depth, branch) => {
+      extensionRendererApi.events_ipc.emit("git_clone_shallow", { url, directory, singleBranch, depth, branch });
+      ipc.send(gitChannels.cloneShallow, url, directory, singleBranch, depth, branch);
+    },
+    cloneShallowPromise: (url, directory, singleBranch, depth, branch) => {
+      extensionRendererApi.events_ipc.emit("git_clone_shallow_promise", {
+        url,
+        directory,
+        singleBranch,
+        depth,
+        branch
+      });
+      return ipc.invoke(gitChannels.cloneShallowPromise, url, directory, singleBranch, depth, branch);
+    },
+    getRepoInfo: (dir) => {
+      extensionRendererApi.events_ipc.emit("git_get_repo_info", { dir });
+      return ipc.invoke(gitChannels.getRepoInfo, dir);
+    },
+    changeBranch: (dir, branchName) => {
+      extensionRendererApi.events_ipc.emit("git_change_branch", { dir, branchName });
+      return ipc.invoke(gitChannels.changeBranch, dir, branchName);
+    },
+    unShallow: (dir) => {
+      extensionRendererApi.events_ipc.emit("git_unshallow", { dir });
+      return ipc.invoke(gitChannels.unShallow, dir);
+    },
+    resetHard: (dir) => {
+      extensionRendererApi.events_ipc.emit("git_reset_hard", { dir });
+      return ipc.invoke(gitChannels.resetHard, dir);
+    },
+    validateGitDir: (dir, url) => {
+      extensionRendererApi.events_ipc.emit("git_validate_git_dir", { dir, url });
+      return ipc.invoke(gitChannels.validateGitDir, dir, url);
+    },
+    onProgress: (callback) => ipc.on(gitChannels.onProgress, callback),
+    offProgress: () => ipc.removeAllListeners(gitChannels.onProgress),
+    pull: (repoDir, id) => {
+      extensionRendererApi.events_ipc.emit("git_pull", { repoDir, id });
+      ipc.send(gitChannels.pull, repoDir, id);
+    },
+    stashDrop: (dir) => {
+      extensionRendererApi.events_ipc.emit("git_stash_drop", { dir });
+      return ipc.invoke(gitChannels.stashDrop, dir);
+    }
+  },
+  /** Managing app modules */
+  module: {
+    cardUpdateAvailable: (card, updateType) => {
+      extensionRendererApi.events_ipc.emit("module_card_update_available", { card, updateType });
+      return ipc.invoke(modulesChannels.cardUpdateAvailable, card, updateType);
+    },
+    getModulesData: () => {
+      extensionRendererApi.events_ipc.emit("module_get_modules_data", {});
+      return ipc.invoke(modulesChannels.getModulesData);
+    },
+    getInstalledModulesInfo: () => {
+      extensionRendererApi.events_ipc.emit("module_get_installed_modules_info", {});
+      return ipc.invoke(modulesChannels.getInstalledModulesInfo);
+    },
+    getSkipped: () => {
+      extensionRendererApi.events_ipc.emit("module_get_skipped", {});
+      return ipc.invoke(modulesChannels.getSkipped);
+    },
+    checkEa: (isEA, isInsider) => {
+      extensionRendererApi.events_ipc.emit("module_check_ea", { isEA, isInsider });
+      return ipc.invoke(modulesChannels.checkEa, isEA, isInsider);
+    },
+    installModule: (url) => {
+      extensionRendererApi.events_ipc.emit("module_install_module", { url });
+      return ipc.invoke(modulesChannels.installModule, url);
+    },
+    uninstallModule: (id) => {
+      extensionRendererApi.events_ipc.emit("module_uninstall_module", { id });
+      return ipc.invoke(modulesChannels.uninstallModule, id);
+    },
+    uninstallCardByID: (id) => {
+      extensionRendererApi.events_ipc.emit("module_uninstall_card_by_id", { id });
+      return ipc.invoke(modulesChannels.uninstallCardByID, id);
+    },
+    isUpdateAvailable: (id) => {
+      extensionRendererApi.events_ipc.emit("module_is_update_available", { id });
+      return ipc.invoke(modulesChannels.isUpdateAvailable, id);
+    },
+    updateAvailableList: () => {
+      extensionRendererApi.events_ipc.emit("module_update_available_list", {});
+      return ipc.invoke(modulesChannels.updateAvailableList);
+    },
+    updateModule: (id) => {
+      extensionRendererApi.events_ipc.emit("module_update_module", { id });
+      return ipc.invoke(modulesChannels.updateModule, id);
+    },
+    updateAllModules: () => {
+      extensionRendererApi.events_ipc.emit("module_update_all_modules", {});
+      return ipc.invoke(modulesChannels.updateAllModules);
+    },
+    onReload: (result) => ipc.on(modulesChannels.onReload, result),
+    onUpdatedModules: (result) => ipc.on(modulesChannels.onUpdatedModules, result),
+    checkCardsUpdateInterval: (updateType) => {
+      extensionRendererApi.events_ipc.emit("module_check_cards_update_interval", { updateType });
+      ipc.send(modulesChannels.checkCardsUpdateInterval, updateType);
+    },
+    onCardsUpdateAvailable: (result) => ipc.on(modulesChannels.onCardsUpdateAvailable, result)
+  },
+  moduleApi: {
+    getFolderCreationTime: (dir) => {
+      extensionRendererApi.events_ipc.emit("module_api_get_folder_creation_time", { dir });
+      return ipc.invoke(moduleApiChannels.getFolderCreationTime, dir);
+    },
+    getLastPulledDate: (dir) => {
+      extensionRendererApi.events_ipc.emit("module_api_get_last_pulled_date", { dir });
+      return ipc.invoke(moduleApiChannels.getLastPulledDate, dir);
+    },
+    getCurrentReleaseTag: (dir) => {
+      extensionRendererApi.events_ipc.emit("module_api_get_current_release_tag", { dir });
+      return ipc.invoke(moduleApiChannels.getCurrentReleaseTag, dir);
+    }
+  },
+  /** Managing app extensions */
+  extension: {
+    getExtensionsData: () => {
+      extensionRendererApi.events_ipc.emit("extension_get_extensions_data", {});
+      return ipc.invoke(extensionsChannels.getExtensionsData);
+    },
+    getInstalledExtensionsInfo: () => {
+      extensionRendererApi.events_ipc.emit("extension_get_installed_extensions_info", {});
+      return ipc.invoke(extensionsChannels.getInstalledExtensionsInfo);
+    },
+    getSkipped: () => {
+      extensionRendererApi.events_ipc.emit("extension_get_skipped", {});
+      return ipc.invoke(extensionsChannels.getSkipped);
+    },
+    installExtension: (url) => {
+      extensionRendererApi.events_ipc.emit("extension_install_extension", { url });
+      return ipc.invoke(extensionsChannels.installExtension, url);
+    },
+    uninstallExtension: (id) => {
+      extensionRendererApi.events_ipc.emit("extension_uninstall_extension", { id });
+      return ipc.invoke(extensionsChannels.uninstallExtension, id);
+    },
+    isUpdateAvailable: (id) => {
+      extensionRendererApi.events_ipc.emit("extension_is_update_available", { id });
+      return ipc.invoke(extensionsChannels.isUpdateAvailable, id);
+    },
+    updateAvailableList: () => {
+      extensionRendererApi.events_ipc.emit("extension_update_available_list", {});
+      return ipc.invoke(extensionsChannels.updateAvailableList);
+    },
+    updateExtension: (id) => {
+      extensionRendererApi.events_ipc.emit("extension_update_extension", { id });
+      return ipc.invoke(extensionsChannels.updateExtension, id);
+    },
+    checkEa: (isEA, isInsider) => {
+      extensionRendererApi.events_ipc.emit("extension_check_ea", { isEA, isInsider });
+      return ipc.invoke(extensionsChannels.checkEa, isEA, isInsider);
+    },
+    updateAllExtensions: () => {
+      extensionRendererApi.events_ipc.emit("extension_update_all_extensions", {});
+      return ipc.invoke(extensionsChannels.updateAllExtensions);
+    },
+    onReload: (result) => ipc.on(extensionsChannels.onReload, result),
+    onUpdatedExtensions: (result) => ipc.on(extensionsChannels.onUpdatedExtensions, result)
+  },
+  /** Utilities methods for working with app storage data */
+  storageUtils: {
+    addInstalledCard: (cardData) => {
+      extensionRendererApi.events_ipc.emit("storage_utils_add_installed_card", { cardData });
+      ipc.send(storageUtilsChannels.addInstalledCard, cardData);
+    },
+    removeInstalledCard: (cardId) => {
+      extensionRendererApi.events_ipc.emit("storage_utils_remove_installed_card", { cardId });
+      ipc.send(storageUtilsChannels.removeInstalledCard, cardId);
+    },
+    onInstalledCards: (result) => ipc.on(storageUtilsChannels.onInstalledCards, result),
+    addAutoUpdateCard: (cardId) => {
+      extensionRendererApi.events_ipc.emit("storage_utils_add_auto_update_card", { cardId });
+      ipc.send(storageUtilsChannels.addAutoUpdateCard, cardId);
+    },
+    removeAutoUpdateCard: (cardId) => {
+      extensionRendererApi.events_ipc.emit("storage_utils_remove_auto_update_card", { cardId });
+      ipc.send(storageUtilsChannels.removeAutoUpdateCard, cardId);
+    },
+    onAutoUpdateCards: (result) => ipc.on(storageUtilsChannels.onAutoUpdateCards, result),
+    addAutoUpdateExtensions: (cardId) => {
+      extensionRendererApi.events_ipc.emit("storage_utils_add_auto_update_extensions", { cardId });
+      ipc.send(storageUtilsChannels.addAutoUpdateExtensions, cardId);
+    },
+    removeAutoUpdateExtensions: (cardId) => {
+      extensionRendererApi.events_ipc.emit("storage_utils_remove_auto_update_extensions", { cardId });
+      ipc.send(storageUtilsChannels.removeAutoUpdateExtensions, cardId);
+    },
+    onAutoUpdateExtensions: (result) => ipc.on(storageUtilsChannels.onAutoUpdateExtensions, result),
+    pinnedCards: (opt, id, pinnedCards) => {
+      extensionRendererApi.events_ipc.emit("storage_utils_pinned_cards", { opt, id, pinnedCards });
+      return ipc.invoke(storageUtilsChannels.pinnedCards, opt, id, pinnedCards);
+    },
+    onPinnedCardsChange: (result) => ipc.on(storageUtilsChannels.onPinnedCardsChange, result),
+    preCommands: (opt, data) => {
+      extensionRendererApi.events_ipc.emit("storage_utils_pre_commands", { opt, data });
+      return ipc.invoke(storageUtilsChannels.preCommands, opt, data);
+    },
+    onPreCommands: (result) => ipc.on(storageUtilsChannels.onPreCommands, result),
+    offPreCommands: () => ipc.removeAllListeners(storageUtilsChannels.onPreCommands),
+    customRun: (opt, data) => {
+      extensionRendererApi.events_ipc.emit("storage_utils_custom_run", { opt, data });
+      return ipc.invoke(storageUtilsChannels.customRun, opt, data);
+    },
+    onCustomRun: (result) => ipc.on(storageUtilsChannels.onCustomRun, result),
+    offCustomRun: () => ipc.removeAllListeners(storageUtilsChannels.onCustomRun),
+    updateCustomRunBehavior: (data) => {
+      extensionRendererApi.events_ipc.emit("storage_utils_update_custom_run_behavior", { data });
+      ipc.send(storageUtilsChannels.customRunBehavior, data);
+    },
+    preOpen: (opt, open) => {
+      extensionRendererApi.events_ipc.emit("storage_utils_pre_open", { opt, open });
+      return ipc.invoke(storageUtilsChannels.preOpen, opt, open);
+    },
+    getCardArguments: (cardId) => {
+      extensionRendererApi.events_ipc.emit("storage_utils_get_card_arguments", { cardId });
+      return ipc.invoke(storageUtilsChannels.getCardArguments, cardId);
+    },
+    setCardArguments: (cardId, args) => {
+      extensionRendererApi.events_ipc.emit("storage_utils_set_card_arguments", { cardId, args });
+      return ipc.invoke(storageUtilsChannels.setCardArguments, cardId, args);
+    },
+    recentlyUsedCards: (opt, id) => {
+      extensionRendererApi.events_ipc.emit("storage_utils_recently_used_cards", { opt, id });
+      return ipc.invoke(storageUtilsChannels.recentlyUsedCards, opt, id);
+    },
+    onRecentlyUsedCardsChange: (result) => ipc.on(storageUtilsChannels.onRecentlyUsedCardsChange, result),
+    homeCategory: (opt, data) => {
+      extensionRendererApi.events_ipc.emit("storage_utils_home_category", { opt, data });
+      return ipc.invoke(storageUtilsChannels.homeCategory, opt, data);
+    },
+    onHomeCategory: (result) => ipc.on(storageUtilsChannels.onHomeCategory, result),
+    setSystemStartup: (startup) => {
+      extensionRendererApi.events_ipc.emit("storage_utils_set_system_startup", { startup });
+      ipc.send(storageUtilsChannels.setSystemStartup, startup);
+    },
+    updateZoomFactor: (zoomFactor) => {
+      extensionRendererApi.events_ipc.emit("storage_utils_update_zoom_factor", { zoomFactor });
+      ipc.send(storageUtilsChannels.updateZoomFactor, zoomFactor);
+    },
+    addBrowserRecent: (recentEntry) => {
+      extensionRendererApi.events_ipc.emit("storage_utils_add_browser_recent", { recentEntry });
+      ipc.send(storageUtilsChannels.addBrowserRecent, recentEntry);
+    },
+    addBrowserFavorite: (favoriteEntry) => {
+      extensionRendererApi.events_ipc.emit("storage_utils_add_browser_favorite", { favoriteEntry });
+      ipc.send(storageUtilsChannels.addBrowserFavorite, favoriteEntry);
+    },
+    addBrowserHistory: (historyEntry) => {
+      extensionRendererApi.events_ipc.emit("storage_utils_add_browser_history", { historyEntry });
+      ipc.send(storageUtilsChannels.addBrowserHistory, historyEntry);
+    },
+    addBrowserRecentFavIcon: (url, favIcon) => {
+      extensionRendererApi.events_ipc.emit("storage_utils_add_browser_recent_favicon", { url, favIcon });
+      ipc.send(storageUtilsChannels.addBrowserRecentFavIcon, url, favIcon);
+    },
+    removeBrowserRecent: (url) => {
+      extensionRendererApi.events_ipc.emit("storage_utils_remove_browser_recent", { url });
+      ipc.send(storageUtilsChannels.removeBrowserRecent, url);
+    },
+    removeBrowserFavorite: (url) => {
+      extensionRendererApi.events_ipc.emit("storage_utils_remove_browser_favorite", { url });
+      ipc.send(storageUtilsChannels.removeBrowserFavorite, url);
+    },
+    removeBrowserHistory: (url) => {
+      extensionRendererApi.events_ipc.emit("storage_utils_remove_browser_history", { url });
+      ipc.send(storageUtilsChannels.removeBrowserHistory, url);
+    },
+    setShowConfirm: (type, enable) => {
+      extensionRendererApi.events_ipc.emit("storage_utils_set_show_confirm", { type, enable });
+      ipc.send(storageUtilsChannels.setShowConfirm, type, enable);
+    },
+    onConfirmChange: (result) => ipc.on(storageUtilsChannels.onConfirmChange, result),
+    addReadNotif: (id) => {
+      extensionRendererApi.events_ipc.emit("storage_utils_add_read_notif", { id });
+      ipc.send(storageUtilsChannels.addReadNotif, id);
+    },
+    setCardTerminalPreCommands: (id, commands) => {
+      extensionRendererApi.events_ipc.emit("storage_utils_setCardTerminalPreCommands", { id, commands });
+      ipc.send(storageUtilsChannels.setCardTerminalPreCommands, id, commands);
+    },
+    unassignCard: (id, clearConfigs) => {
+      extensionRendererApi.events_ipc.emit("storage_utils_unassignCard", { id, clearConfigs });
+      return ipc.invoke(storageUtilsChannels.unassignCard, id, clearConfigs);
+    },
+    getBrowserHistoryData: () => ipc.invoke(storageUtilsChannels.getBrowserHistoryData)
+  },
+  /** Utilities methods */
+  utils: {
+    updateAllExtensions: (data) => {
+      extensionRendererApi.events_ipc.emit("utils_update_all_extensions", { data });
+      ipc.send(utilsChannels.updateAllExtensions, data);
+    },
+    onUpdateAllExtensions: (result) => ipc.on(utilsChannels.onUpdateAllExtensions, result),
+    offUpdateAllExtensions: () => ipc.removeAllListeners(utilsChannels.onUpdateAllExtensions),
+    getExtensionsDetails: (dir) => {
+      extensionRendererApi.events_ipc.emit("utils_get_extensions_details", { dir });
+      return ipc.invoke(utilsChannels.extensionsDetails, dir);
+    },
+    getExtensionsUpdateStatus: (dir) => {
+      extensionRendererApi.events_ipc.emit("utils_get_extensions_update_status", { dir });
+      return ipc.invoke(utilsChannels.updateStatus, dir);
+    },
+    disableExtension: (disable, dir) => {
+      extensionRendererApi.events_ipc.emit("utils_disable_extension", { disable, dir });
+      return ipc.invoke(utilsChannels.disableExtension, disable, dir);
+    },
+    cancelExtensionsData: () => {
+      extensionRendererApi.events_ipc.emit("utils_cancel_extensions_data", {});
+      ipc.send(utilsChannels.cancelExtensionsData);
+    },
+    downloadFile: (url) => {
+      extensionRendererApi.events_ipc.emit("utils_download_file", { url });
+      ipc.send(utilsChannels.downloadFile, url);
+    },
+    cancelDownload: () => {
+      extensionRendererApi.events_ipc.emit("utils_cancel_download", {});
+      ipc.send(utilsChannels.cancelDownload);
+    },
+    onDownloadFile: (result) => ipc.on(utilsChannels.onDownloadFile, result),
+    offDownloadFile: () => ipc.removeAllListeners(utilsChannels.onDownloadFile),
+    decompressFile: (filePath) => {
+      extensionRendererApi.events_ipc.emit("utils_decompress_file", { filePath });
+      return ipc.invoke(utilsChannels.decompressFile, filePath);
+    },
+    isResponseValid: (url) => {
+      extensionRendererApi.events_ipc.emit("utils_is_response_valid", { url });
+      return ipc.invoke(utilsChannels.isResponseValid, url);
+    },
+    getImageAsDataURL: (url) => {
+      extensionRendererApi.events_ipc.emit("utils_get_image_as_data_url", { url });
+      return ipc.invoke(utilsChannels.getImageAsDataURL, url);
+    }
+  },
+  /** Managing and using node_pty(Pseudo Terminal ) */
+  pty: {
+    process: (id, opt, cardId) => {
+      extensionRendererApi.events_ipc.emit("terminal_process", { id, opt, cardId });
+      ipc.send(ptyChannels.process, id, opt, cardId);
+    },
+    customProcess: (id, opt, dir, file) => {
+      extensionRendererApi.events_ipc.emit("terminal_process_custom", { id, opt, dir, file });
+      ipc.send(ptyChannels.customProcess, id, opt, dir, file);
+    },
+    emptyProcess: (id, opt, dir) => {
+      extensionRendererApi.events_ipc.emit("terminal_process_empty", { id, opt, dir });
+      ipc.send(ptyChannels.emptyProcess, id, opt, dir);
+    },
+    customCommands: (id, opt, commands, dir) => {
+      extensionRendererApi.events_ipc.emit("terminal_process_custom_command", { id, opt, commands, dir });
+      ipc.send(ptyChannels.customCommands, id, opt, commands, dir);
+    },
+    write: (id, data) => {
+      extensionRendererApi.events_ipc.emit("terminal_write", { id, data });
+      ipc.send(ptyChannels.write, id, data);
+    },
+    clear: (id) => {
+      extensionRendererApi.events_ipc.emit("terminal_clear", { id });
+      ipc.send(ptyChannels.clear, id);
+    },
+    resize: (id, cols, rows) => {
+      extensionRendererApi.events_ipc.emit("terminal_resize", { id, cols, rows });
+      ipc.send(ptyChannels.resize, id, cols, rows);
+    },
+    onData: (result) => ipc.on(ptyChannels.onData, result),
+    onTitle: (result) => ipc.on(ptyChannels.onTitle, result),
+    onExit: (result) => ipc.on(ptyChannels.onExit, result),
+    offData: () => ipc.removeAllListeners(ptyChannels.onData),
+    offTitle: () => ipc.removeAllListeners(ptyChannels.onTitle),
+    offExit: () => ipc.removeAllListeners(ptyChannels.onExit)
+  },
+  /** Managing app automatic updates */
+  appUpdate: {
+    statusError: (result) => ipc.on(appUpdateChannels.statusError, result),
+    offStatusError: () => ipc.removeAllListeners(appUpdateChannels.statusError),
+    status: (result) => ipc.on(appUpdateChannels.status, result),
+    offStatus: () => ipc.removeAllListeners(appUpdateChannels.status),
+    download: () => {
+      extensionRendererApi.events_ipc.emit("app_update_download", {});
+      ipc.send(appUpdateChannels.download);
+    },
+    cancel: () => {
+      extensionRendererApi.events_ipc.emit("app_update_cancel", {});
+      ipc.send(appUpdateChannels.cancel);
+    },
+    install: () => {
+      extensionRendererApi.events_ipc.emit("app_update_install", {});
+      ipc.send(appUpdateChannels.install);
+    }
+  },
+  /** Managing app data directories */
+  appData: {
+    getCurrentPath: () => {
+      extensionRendererApi.events_ipc.emit("app_data_get_current_path", {});
+      return ipc.invoke(appDataChannels.getCurrentPath);
+    },
+    selectAnother: () => {
+      extensionRendererApi.events_ipc.emit("app_data_select_another", {});
+      return ipc.invoke(appDataChannels.selectAnother);
+    },
+    isAppDir: (dir) => {
+      extensionRendererApi.events_ipc.emit("app_data_is_app_dir", { dir });
+      return ipc.invoke(appDataChannels.isAppDir, dir);
+    }
+  },
   /** Managing app storage data */
   storage: {
     getCustom: (key) => {
@@ -1979,11 +3560,375 @@ const rendererIpc = {
       extensionRendererApi.events_ipc.emit("storage_clear", {});
       return ipc.invoke(storageChannels.clear);
     }
-  }};
+  },
+  appWindow: {
+    onHotkeysChange: (result) => ipc.on(appWindowChannels.hotkeysChange, result),
+    offHotkeysChange: () => ipc.removeAllListeners(appWindowChannels.hotkeysChange),
+    onShowToast: (result) => ipc.on(appWindowChannels.showToast, result),
+    offShowToast: () => ipc.removeAllListeners(appWindowChannels.showToast)
+  },
+  contextMenu: {
+    resizeWindow: (dimensions) => {
+      extensionRendererApi.events_ipc.emit("context_menu_resize_window", { dimensions });
+      ipc.send(contextMenuChannels.resizeWindow, dimensions);
+    },
+    showWindow: () => {
+      extensionRendererApi.events_ipc.emit("context_menu_show_window", {});
+      ipc.send(contextMenuChannels.showWindow);
+    },
+    hideWindow: () => {
+      extensionRendererApi.events_ipc.emit("context_menu_hide_window", {});
+      ipc.send(contextMenuChannels.hideWindow);
+    },
+    onInitView: (result) => ipc.on(contextMenuChannels.onInitView, result),
+    offInitView: () => ipc.removeAllListeners(contextMenuChannels.onInitView),
+    openTerminateAI: (id) => {
+      extensionRendererApi.events_ipc.emit("context_menu_open_terminate_ai", { id });
+      ipc.send(contextMenuChannels.openTerminateAI, id);
+    },
+    openTerminateTab: (id, customPosition) => {
+      extensionRendererApi.events_ipc.emit("context_menu_open_terminate_tab", { id, customPosition });
+      ipc.send(contextMenuChannels.openTerminateTab, id, customPosition);
+    },
+    openCloseApp: () => {
+      extensionRendererApi.events_ipc.emit("context_menu_open_close_app", {});
+      ipc.send(contextMenuChannels.openCloseApp);
+    },
+    onFind: (result) => ipc.on(contextMenuChannels.onFind, result),
+    offFind: () => ipc.removeAllListeners(contextMenuChannels.onFind),
+    onTerminateAI: (result) => ipc.on(contextMenuChannels.onTerminateAI, result),
+    offTerminateAI: () => ipc.removeAllListeners(contextMenuChannels.onTerminateAI),
+    onTerminateTab: (result) => ipc.on(contextMenuChannels.onTerminateTab, result),
+    offTerminateTab: () => ipc.removeAllListeners(contextMenuChannels.onTerminateTab),
+    onCloseApp: (result) => ipc.on(contextMenuChannels.onCloseApp, result),
+    offCloseApp: () => ipc.removeAllListeners(contextMenuChannels.onCloseApp),
+    onZoom: (result) => ipc.on(contextMenuChannels.onZoom, result),
+    offZoom: () => ipc.removeAllListeners(contextMenuChannels.onZoom),
+    relaunchAI: (id) => {
+      extensionRendererApi.events_ipc.emit("context_menu_relaunch_ai", { id });
+      ipc.send(contextMenuChannels.relaunchAI, id);
+    },
+    onRelaunchAI: (result) => ipc.on(contextMenuChannels.onRelaunchAI, result),
+    offRelaunchAI: () => ipc.removeAllListeners(contextMenuChannels.onRelaunchAI),
+    stopAI: (id) => {
+      extensionRendererApi.events_ipc.emit("context_menu_stop_ai", { id });
+      ipc.send(contextMenuChannels.stopAI, id);
+    },
+    onStopAI: (result) => ipc.on(contextMenuChannels.onStopAI, result),
+    offStopAI: () => ipc.removeAllListeners(contextMenuChannels.onStopAI),
+    removeTab: (tabID) => {
+      extensionRendererApi.events_ipc.emit("context_menu_remove_tab", { tabID });
+      ipc.send(contextMenuChannels.removeTab, tabID);
+    },
+    onRemoveTab: (result) => ipc.on(contextMenuChannels.onRemoveTab, result),
+    offRemoveTab: () => ipc.removeAllListeners(contextMenuChannels.onRemoveTab)
+  },
+  tab: {
+    onNewTab: (result) => ipc.on(tabsChannels.onNewTab, result),
+    offNewTab: () => ipc.removeAllListeners(tabsChannels.onNewTab)
+  },
+  contextItems: {
+    copy: (id) => {
+      extensionRendererApi.events_ipc.emit("context_items_copy", { id });
+      ipc.send(contextMenuChannels.copy, id);
+    },
+    paste: (id) => {
+      extensionRendererApi.events_ipc.emit("context_items_paste", { id });
+      ipc.send(contextMenuChannels.paste, id);
+    },
+    replaceMisspelling: (id, text) => {
+      extensionRendererApi.events_ipc.emit("context_items_replace_misspelling", { id, text });
+      ipc.send(contextMenuChannels.replaceMisspelling, id, text);
+    },
+    selectAll: (id) => {
+      extensionRendererApi.events_ipc.emit("context_items_select_all", { id });
+      ipc.send(contextMenuChannels.selectAll, id);
+    },
+    undo: (id) => {
+      extensionRendererApi.events_ipc.emit("context_items_undo", { id });
+      ipc.send(contextMenuChannels.undo, id);
+    },
+    redo: (id) => {
+      extensionRendererApi.events_ipc.emit("context_items_redo", { id });
+      ipc.send(contextMenuChannels.redo, id);
+    },
+    newTab: (url) => {
+      extensionRendererApi.events_ipc.emit("context_items_new_tab", { url });
+      ipc.send(contextMenuChannels.newTab, url);
+    },
+    openExternal: (url) => {
+      extensionRendererApi.events_ipc.emit("context_items_open_external", { url });
+      ipc.send(contextMenuChannels.openExternal, url);
+    },
+    downloadImage: (id, url) => {
+      extensionRendererApi.events_ipc.emit("context_items_download_image", { id, url });
+      ipc.send(contextMenuChannels.downloadImage, id, url);
+    },
+    navigate: (id, action) => {
+      extensionRendererApi.events_ipc.emit("context_items_navigate", { id, action });
+      ipc.send(contextMenuChannels.navigate, id, action);
+    }
+  },
+  browser: {
+    createBrowser: (id) => {
+      extensionRendererApi.events_ipc.emit("browser_create", { id });
+      ipc.send(browserChannels.createBrowser, id);
+    },
+    removeBrowser: (id) => {
+      extensionRendererApi.events_ipc.emit("browser_remove", { id });
+      ipc.send(browserChannels.removeBrowser, id);
+    },
+    loadURL: (id, url) => {
+      extensionRendererApi.events_ipc.emit("browser_load_url", { id, url });
+      ipc.send(browserChannels.loadURL, id, url);
+    },
+    setVisible: (id, visible) => {
+      extensionRendererApi.events_ipc.emit("browser_set_visible", { id, visible });
+      ipc.send(browserChannels.setVisible, id, visible);
+    },
+    openFindInPage: (id, customPosition) => {
+      extensionRendererApi.events_ipc.emit("browser_open_find_in_page", { id, customPosition });
+      ipc.send(browserChannels.openFindInPage, id, customPosition);
+    },
+    openZoom: (id) => {
+      extensionRendererApi.events_ipc.emit("browser_open_zoom", { id });
+      ipc.send(browserChannels.openZoom, id);
+    },
+    findInPage: (id, value, options) => {
+      extensionRendererApi.events_ipc.emit("browser_find_in_page", { id, value, options });
+      ipc.send(browserChannels.findInPage, id, value, options);
+    },
+    stopFindInPage: (id, action) => {
+      extensionRendererApi.events_ipc.emit("browser_stop_find_in_page", { id, action });
+      ipc.send(browserChannels.stopFindInPage, id, action);
+    },
+    focusWebView: (id) => {
+      extensionRendererApi.events_ipc.emit("browser_focus_web_view", { id });
+      ipc.send(browserChannels.focusWebView, id);
+    },
+    clearCache: () => {
+      extensionRendererApi.events_ipc.emit("browser_clear_cache", {});
+      ipc.send(browserChannels.clearCache);
+    },
+    clearCookies: () => {
+      extensionRendererApi.events_ipc.emit("browser_clear_cookies", {});
+      ipc.send(browserChannels.clearCookies);
+    },
+    setZoomFactor: (id, factor) => {
+      extensionRendererApi.events_ipc.emit("browser_set_zoom_factor", { id, factor });
+      ipc.send(browserChannels.setZoomFactor, id, factor);
+    },
+    reload: (id) => {
+      extensionRendererApi.events_ipc.emit("browser_reload", { id });
+      ipc.send(browserChannels.reload, id);
+    },
+    goBack: (id) => {
+      extensionRendererApi.events_ipc.emit("browser_go_back", { id });
+      ipc.send(browserChannels.goBack, id);
+    },
+    goForward: (id) => {
+      extensionRendererApi.events_ipc.emit("browser_go_forward", { id });
+      ipc.send(browserChannels.goForward, id);
+    },
+    onCanGo: (result) => ipc.on(browserChannels.onCanGo, result),
+    offCanGo: () => ipc.removeAllListeners(browserChannels.onCanGo),
+    onIsLoading: (result) => ipc.on(browserChannels.isLoading, result),
+    offIsLoading: () => ipc.removeAllListeners(browserChannels.isLoading),
+    onTitleChange: (result) => ipc.on(browserChannels.onTitleChange, result),
+    offTitleChange: () => ipc.removeAllListeners(browserChannels.onTitleChange),
+    onFavIconChange: (result) => ipc.on(browserChannels.onFavIconChange, result),
+    offFavIconChange: () => ipc.removeAllListeners(browserChannels.onFavIconChange),
+    onUrlChange: (result) => ipc.on(browserChannels.onUrlChange, result),
+    offUrlChange: () => ipc.removeAllListeners(browserChannels.onUrlChange),
+    onDomReady: (result) => ipc.on(browserChannels.onDomReady, result),
+    offDomReady: () => ipc.removeAllListeners(browserChannels.onDomReady),
+    getUserAgent: (type) => {
+      extensionRendererApi.events_ipc.emit("browser_get_user_agent", { type });
+      return ipc.invoke(browserChannels.getUserAgent, type);
+    },
+    updateUserAgent: () => {
+      extensionRendererApi.events_ipc.emit("browser_update_user_agent", {});
+      ipc.send(browserChannels.updateUserAgent);
+    },
+    addOffset: (id, offset) => {
+      extensionRendererApi.events_ipc.emit("browser_add_offset", { id, offset });
+      ipc.send(browserChannels.addOffset, id, offset);
+    },
+    clearHistory: (selected) => ipc.send(browserChannels.clearHistory, selected)
+  },
+  statics: {
+    pull: () => {
+      extensionRendererApi.events_ipc.emit("statics_pull", {});
+      return ipc.invoke(staticsChannels.pull);
+    },
+    getReleases: () => {
+      extensionRendererApi.events_ipc.emit("statics_get_releases", {});
+      return ipc.invoke(staticsChannels.getReleases);
+    },
+    getInsider: () => {
+      extensionRendererApi.events_ipc.emit("statics_get_insider", {});
+      return ipc.invoke(staticsChannels.getInsider);
+    },
+    getNotification: () => {
+      extensionRendererApi.events_ipc.emit("statics_get_notification", {});
+      return ipc.invoke(staticsChannels.getNotification);
+    },
+    getModules: () => {
+      extensionRendererApi.events_ipc.emit("statics_get_modules", {});
+      return ipc.invoke(staticsChannels.getModules);
+    },
+    getExtensions: () => {
+      extensionRendererApi.events_ipc.emit("statics_get_extensions", {});
+      return ipc.invoke(staticsChannels.getExtensions);
+    },
+    getExtensionsEA: () => {
+      extensionRendererApi.events_ipc.emit("statics_get_extensions_ea", {});
+      return ipc.invoke(staticsChannels.getExtensionsEA);
+    },
+    getPatrons: () => {
+      extensionRendererApi.events_ipc.emit("statics_get_patrons", {});
+      return ipc.invoke(staticsChannels.getPatrons);
+    }
+  },
+  events: {
+    card_PreCommandUninstall: (preCommands) => ipc.send(eventsChannels.card_PreCommandUninstall, preCommands)
+  },
+  downloadManager: {
+    onDownloadCount: (result) => ipc.on(browserDownloadChannels.mainDownloadCount, result),
+    offDownloadCount: () => ipc.removeAllListeners(browserDownloadChannels.mainDownloadCount),
+    onDlStart: (result) => ipc.on(browserDownloadChannels.onDlStart, result),
+    offDlStart: () => ipc.removeAllListeners(browserDownloadChannels.onDlStart),
+    onProgress: (result) => ipc.on(browserDownloadChannels.onProgress, result),
+    offProgress: () => ipc.removeAllListeners(browserDownloadChannels.onProgress),
+    onDone: (result) => ipc.on(browserDownloadChannels.onDone, result),
+    offDone: () => ipc.removeAllListeners(browserDownloadChannels.onDone),
+    openMenu: () => ipc.send(browserDownloadChannels.openDownloadsMenu),
+    openItem: (name, action) => ipc.send(browserDownloadChannels.openItem, name, action),
+    cancel: (name) => ipc.send(browserDownloadChannels.cancel, name),
+    pause: (name) => ipc.send(browserDownloadChannels.pause, name),
+    resume: (name) => ipc.send(browserDownloadChannels.resume, name),
+    clear: (name) => ipc.send(browserDownloadChannels.clear, name)
+  },
+  customNotification: {
+    onOpen: (result) => ipc.on(customNotifChannels.onOpen, result),
+    onClose: (result) => ipc.on(customNotifChannels.onClose, result),
+    btnPress: (btnId, notifKey) => ipc.send(customNotifChannels.onBtnPress, btnId, notifKey),
+    offOpen: () => ipc.removeAllListeners(customNotifChannels.onOpen),
+    offClose: () => ipc.removeAllListeners(customNotifChannels.onClose)
+  }
+};
 
-mitt();
+const {isEmpty: isEmpty$2} = await importShared('lodash');
+
+function formatNumber(num) {
+  const suffixes = ["", "K", "M", "B", "T"];
+  const magnitude = Math.floor(Math.log10(Math.abs(num)) / 3);
+  if (magnitude === 0 || !Number.isFinite(num)) return num.toString();
+  const scaled = num / Math.pow(10, magnitude * 3);
+  return `${scaled.toFixed(1).replace(/\.0$/, "")}${suffixes[magnitude]}`;
+}
+function convertBlobToDataUrl(blob) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onloadend = () => resolve(reader.result);
+    reader.onerror = reject;
+    reader.readAsDataURL(blob);
+  });
+}
+function searchInStrings(searchText, targetTexts) {
+  if (isEmpty$2(searchText) || !targetTexts) return true;
+  const searchWords = searchText.toLowerCase().split(/\s+/);
+  const lowerTargetTexts = targetTexts.filter(Boolean).map((text) => text.toLowerCase());
+  return searchWords.every((word) => lowerTargetTexts.some((text) => text.includes(word)));
+}
+
+const emitter = mitt();
 const emitter_ipc = mitt();
+const extensionsData = {
+  customizePages: {
+    home: {
+      replace: {
+        searchAndFilter: void 0,
+        categories: void 0,
+        searchResult: void 0
+      },
+      add: {
+        top: [],
+        bottom: [],
+        scrollTop: [],
+        scrollBottom: [],
+        pinCategory: [],
+        recentlyCategory: [],
+        allCategory: []
+      }
+    },
+    audio: {
+      add: {
+        top: [],
+        bottom: [],
+        scrollTop: [],
+        scrollBottom: [],
+        cardsContainer: []
+      }
+    },
+    image: {
+      add: {
+        top: [],
+        bottom: [],
+        scrollTop: [],
+        scrollBottom: [],
+        cardsContainer: []
+      }
+    },
+    text: {
+      add: {
+        top: [],
+        bottom: [],
+        scrollTop: [],
+        scrollBottom: [],
+        cardsContainer: []
+      }
+    },
+    settings: {
+      add: {
+        navButton: [],
+        content: []
+      }
+    },
+    dashboard: {
+      add: {
+        navButton: [],
+        content: []
+      }
+    },
+    tools: {
+      addComponent: []
+    }},
+  cards: {
+    replace: void 0,
+    replaceComponent: void 0,
+    customize: {
+      header: void 0,
+      body: void 0,
+      footer: void 0,
+      menu: {
+        replace: void 0,
+        addSection: []
+      }
+    }
+  },
+  replaceMarkdownViewer: void 0
+};
 const extensionRendererApi = {
+  events: {
+    on: emitter.on,
+    off: emitter.off,
+    emit: emitter.emit,
+    getListenerCount: (eventName) => {
+      const listeners = emitter.all.get(eventName);
+      return listeners ? listeners.length : 0;
+    }
+  },
   events_ipc: {
     on: emitter_ipc.on,
     off: emitter_ipc.off,
@@ -1993,6 +3938,179 @@ const extensionRendererApi = {
       return listeners ? listeners.length : 0;
     }
   }};
+
+const {includes} = await importShared('lodash');
+
+const {useSelector: useSelector$2} = await importShared('react-redux');
+const {
+  installedCards,
+  autoUpdateCards,
+  pinnedCards,
+  recentlyUsedCards,
+  autoUpdateExtensions,
+  duplicated,
+  checkUpdateInterval
+} = await rendererIpc.storage.get("cards");
+const { homeCategory } = await rendererIpc.storage.get("app");
+const initialState$2 = {
+  autoUpdate: autoUpdateCards,
+  installedCards,
+  pinnedCards,
+  updateAvailable: [],
+  updatingCards: [],
+  runningCard: [],
+  recentlyUsedCards,
+  homeCategory,
+  autoUpdateExtensions,
+  updatingExtensions: void 0,
+  duplicates: duplicated,
+  checkUpdateInterval,
+  activeTab: ""
+};
+const cardsSlice = createSlice({
+  initialState: initialState$2,
+  name: "cards",
+  reducers: {
+    addUpdateAvailable: (state, action) => {
+      if (!includes(state.updateAvailable, action.payload)) {
+        state.updateAvailable = [...state.updateAvailable, action.payload];
+      }
+    },
+    setUpdateAvailable: (state, action) => {
+      state.updateAvailable = action.payload;
+    },
+    removeUpdateAvailable: (state, action) => {
+      state.updateAvailable = state.updateAvailable.filter((card) => card !== action.payload);
+    },
+    setUpdatingExtensions: (state, action) => {
+      state.updatingExtensions = action.payload;
+    },
+    setUpdateInterval: (state, action) => {
+      state.checkUpdateInterval = action.payload;
+    },
+    addUpdatingCard: (state, action) => {
+      if (!includes(state.updatingCards, action.payload)) {
+        state.updatingCards = [...state.updatingCards, action.payload];
+      }
+    },
+    removeUpdatingCard: (state, action) => {
+      const cardId = action.payload;
+      state.updatingCards = state.updatingCards.filter((card) => card.id !== cardId);
+    },
+    setAutoUpdate: (state, action) => {
+      state.autoUpdate = action.payload;
+    },
+    setAutoUpdateExtensions: (state, action) => {
+      state.autoUpdateExtensions = action.payload;
+    },
+    setInstalledCards: (state, action) => {
+      state.installedCards = action.payload;
+    },
+    setPinnedCards: (state, action) => {
+      state.pinnedCards = action.payload;
+    },
+    setHomeCategory: (state, action) => {
+      state.homeCategory = action.payload;
+    },
+    setRecentlyUsedCards: (state, action) => {
+      state.recentlyUsedCards = action.payload;
+    },
+    setDuplicates: (state, action) => {
+      state.duplicates = action.payload;
+    },
+    addRunningEmpty: (state, action) => {
+      const { tabId, type } = action.payload;
+      const id = `${tabId}_${type}`;
+      const currentView = type === "browser" ? "browser" : "terminal";
+      state.runningCard = [
+        ...state.runningCard,
+        {
+          tabId,
+          type,
+          id,
+          currentView,
+          webUIAddress: "",
+          customAddress: "",
+          currentAddress: "",
+          browserTitle: "Browser",
+          startTime: (/* @__PURE__ */ new Date()).toString(),
+          isEmptyRunning: true
+        }
+      ];
+      if (type !== "terminal") rendererIpc.browser.createBrowser(id);
+      if (type !== "browser") rendererIpc.pty.emptyProcess(id, "start");
+    },
+    addRunningCard: (state, action) => {
+      const { tabId, id } = action.payload;
+      state.runningCard = [
+        ...state.runningCard,
+        {
+          tabId,
+          id,
+          type: "both",
+          webUIAddress: "",
+          customAddress: "",
+          currentAddress: "",
+          browserTitle: "Browser",
+          currentView: "terminal",
+          startTime: (/* @__PURE__ */ new Date()).toString(),
+          isEmptyRunning: false
+        }
+      ];
+      rendererIpc.browser.createBrowser(id);
+    },
+    setRunningCardAddress: (state, action) => {
+      const { tabId, address } = action.payload;
+      state.runningCard = state.runningCard.map(
+        (card) => card.tabId === tabId ? {
+          ...card,
+          webUIAddress: address
+        } : card
+      );
+    },
+    setRunningCardCustomAddress: (state, action) => {
+      const { tabId, address } = action.payload;
+      state.runningCard = state.runningCard.map(
+        (card) => card.tabId === tabId ? {
+          ...card,
+          customAddress: address
+        } : card
+      );
+    },
+    setRunningCardCurrentAddress: (state, action) => {
+      const { tabId, address } = action.payload;
+      state.runningCard = state.runningCard.map(
+        (card) => card.tabId === tabId ? {
+          ...card,
+          currentAddress: address
+        } : card
+      );
+    },
+    setRunningCardView: (state, action) => {
+      const { tabId, view } = action.payload;
+      state.runningCard = state.runningCard.map((card) => card.tabId === tabId ? { ...card, currentView: view } : card);
+    },
+    setRunningCardBrowserTitle: (state, action) => {
+      const { tabId, title } = action.payload;
+      state.runningCard = state.runningCard.map((card) => card.tabId === tabId ? { ...card, browserTitle: title } : card);
+    },
+    toggleRunningCardView: (state, action) => {
+      if (!state.runningCard) return;
+      const { tabId } = action.payload;
+      state.runningCard = state.runningCard.map((card) => {
+        const currentView = card.currentView === "browser" ? "terminal" : "browser";
+        return card.tabId === tabId ? { ...card, currentView } : card;
+      });
+    },
+    stopRunningCard: (state, action) => {
+      const id = state.runningCard.find((card) => card.tabId === action.payload.tabId)?.id;
+      if (id) rendererIpc.browser.removeBrowser(id);
+      state.runningCard = state.runningCard.filter((card) => card.tabId !== action.payload.tabId);
+    }
+  }
+});
+const useCardsState = (name) => useSelector$2((state) => state.cards[name]);
+const cardsActions = cardsSlice.actions;
 
 /** Detect free variable `global` from Node.js. */
 
@@ -2246,9 +4364,18 @@ var isBooleanExports = /*@__PURE__*/ requireIsBoolean();
 const isBoolean$1 = /*@__PURE__*/getDefaultExportFromCjs(isBooleanExports);
 
 const {useSelector: useSelector$1} = await importShared('react-redux');
-
+const storageData = await rendererIpc.storage.get("app");
+let darkMode = true;
+if (storageData.darkMode === "dark") {
+  darkMode = true;
+} else if (storageData.darkMode === "light") {
+  darkMode = false;
+} else {
+  const systemDark = await rendererIpc.win.getSystemDarkMode();
+  darkMode = systemDark === "dark";
+}
 const initialState$1 = {
-  darkMode: true,
+  darkMode,
   fullscreen: false,
   isOnline: false,
   maximized: false,
@@ -2283,9 +4410,33 @@ const appActions = appSlice.actions;
 
 const {addToast,Button: Button$2} = await importShared('@heroui/react');
 
-const {isEmpty: isEmpty$2,isNil} = await importShared('lodash');
+const {isEmpty: isEmpty$1,isNil} = await importShared('lodash');
 
 const {Fragment: Fragment$1,useEffect: useEffect$4,useMemo,useState: useState$3} = await importShared('react');
+function useInstalledCard(cardId) {
+  const installedCards = useCardsState("installedCards");
+  return useMemo(() => installedCards.find((card) => card.id === cardId), [installedCards, cardId]);
+}
+function useUpdatingCard(cardId) {
+  const updatingCards = useCardsState("updatingCards");
+  return useMemo(() => updatingCards.find((card) => card.id === cardId), [updatingCards, cardId]);
+}
+function useUpdateAvailable(cardId) {
+  const updateAvailable = useCardsState("updateAvailable");
+  return useMemo(() => updateAvailable.includes(cardId), [updateAvailable, cardId]);
+}
+function useIsAutoUpdateCard(cardId) {
+  const autoUpdate = useCardsState("autoUpdate");
+  return useMemo(() => autoUpdate.includes(cardId), [autoUpdate, cardId]);
+}
+function useIsAutoUpdateExtensions(cardId) {
+  const autoUpdate = useCardsState("autoUpdateExtensions");
+  return useMemo(() => autoUpdate.includes(cardId), [autoUpdate, cardId]);
+}
+function useIsPinnedCard(cardId) {
+  const pinnedCards = useCardsState("pinnedCards");
+  return useMemo(() => pinnedCards.includes(cardId), [pinnedCards, cardId]);
+}
 function topToast(options) {
   const { title, color = "success", timeout = 2e3, promise, placement } = options;
   addToast({
@@ -2311,22 +4462,143 @@ const lynxTopToast = (dispatch, placement = "top-center") => {
     loading: (title, promise) => topToast({ title, color: "default", promise, timeout: 1, placement })
   };
 };
-
-const {isEmpty: isEmpty$1} = await importShared('lodash');
-function convertBlobToDataUrl(blob) {
-  return new Promise((resolve, reject) => {
-    const reader = new FileReader();
-    reader.onloadend = () => resolve(reader.result);
-    reader.onerror = reject;
-    reader.readAsDataURL(blob);
-  });
-}
+const isLinuxPortable = window.isPortable === "linux";
 
 const {Image: Image$1} = await importShared('@heroui/react');
 
 const {isEmpty} = await importShared('lodash');
 
 const {useEffect: useEffect$3,useState: useState$2} = await importShared('react');
+function renderImage(type, img) {
+  const commonProps = {
+    src: img,
+    className: "size-full object-cover",
+    isZoomed: true,
+    removeWrapper: true,
+    disableSkeleton: true
+  };
+  return type === "avatar" ? /* @__PURE__ */ jsxRuntimeExports.jsx(Image$1, { ...commonProps, className: "absolute size-full object-cover" }) : /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "absolute size-full overflow-hidden", children: /* @__PURE__ */ jsxRuntimeExports.jsx(Image$1, { ...commonProps, radius: "none" }) });
+}
+async function fetchRepoDetails(url) {
+  if (!url) return void 0;
+  const { owner, repo, platform } = extractGitUrl(url);
+  const cacheKey = `${owner}_${repo}_repo_details`;
+  const cachedData = localStorage.getItem(cacheKey);
+  if (cachedData) return JSON.parse(cachedData);
+  try {
+    let apiUrl;
+    let repoDetails;
+    if (platform === "github") {
+      apiUrl = `https://api.github.com/repos/${owner}/${repo}`;
+      const response = await fetch(apiUrl);
+      const { forks_count, open_issues_count, stargazers_count, size } = await response.json();
+      if (!stargazers_count || !forks_count || !open_issues_count || !size) return void 0;
+      repoDetails = {
+        forks: forks_count,
+        issues: open_issues_count,
+        stars: stargazers_count,
+        size
+      };
+      localStorage.setItem(cacheKey, JSON.stringify(repoDetails));
+    } else if (platform === "gitlab") {
+      apiUrl = `https://gitlab.com/api/v4/projects/${encodeURIComponent(`${owner}/${repo}`)}`;
+      const response = await fetch(apiUrl);
+      const { forks_count, star_count } = await response.json();
+      if (!star_count || !forks_count) return void 0;
+      repoDetails = {
+        forks: forks_count,
+        stars: star_count
+      };
+      localStorage.setItem(cacheKey, JSON.stringify(repoDetails));
+    } else {
+      console.error(`Unsupported platform: ${platform}`);
+      return void 0;
+    }
+    return repoDetails;
+  } catch (error) {
+    console.error("Error fetching repo details:", error);
+    return void 0;
+  }
+}
+function useDevInfo(repoUrl) {
+  const isOnline = useAppState("isOnline");
+  const [devInfo, setDevInfo] = useState$2({ name: "Unknown", picUrl: "" });
+  useEffect$3(() => {
+    if (!repoUrl) return;
+    const fetchDevInfo = async () => {
+      const { owner, repo, platform } = extractGitUrl(repoUrl);
+      const cacheKey = `${owner}_${repo}_dev_info`;
+      const cachedData = localStorage.getItem(cacheKey);
+      if (cachedData) {
+        setDevInfo(JSON.parse(cachedData));
+        return;
+      }
+      if (!isOnline) {
+        setDevInfo({ name: "Unknown", picUrl: "" });
+        return;
+      }
+      try {
+        let apiUrl;
+        let newDevInfo;
+        if (platform === "github") {
+          apiUrl = `https://api.github.com/repos/${owner}/${repo}`;
+          const response = await fetch(apiUrl);
+          const {
+            owner: { login, avatar_url }
+          } = await response.json();
+          if (login && avatar_url) {
+            newDevInfo = { name: login, picUrl: avatar_url };
+            localStorage.setItem(cacheKey, JSON.stringify(newDevInfo));
+          } else {
+            newDevInfo = { name: "Unknown", picUrl: "" };
+            console.error("Invalid GitHub API response");
+          }
+        } else if (platform === "gitlab") {
+          apiUrl = `https://gitlab.com/api/v4/projects/${encodeURIComponent(`${owner}/${repo}`)}`;
+          const response = await fetch(apiUrl);
+          const resp = await response.json();
+          const { avatar_url: a_url } = resp;
+          const {
+            namespace: { avatar_url, name }
+          } = resp;
+          console.info("resp", resp);
+          if (name && a_url) {
+            newDevInfo = { name, picUrl: a_url };
+            localStorage.setItem(cacheKey, JSON.stringify(newDevInfo));
+          } else if (name && avatar_url) {
+            newDevInfo = { name, picUrl: avatar_url };
+            localStorage.setItem(cacheKey, JSON.stringify(newDevInfo));
+          } else {
+            newDevInfo = { name: "Unknown", picUrl: "" };
+            console.error("Invalid GitLab API response");
+          }
+        } else {
+          newDevInfo = { name: "Unknown", picUrl: "" };
+          console.error(`Unsupported platform: ${platform}`);
+        }
+        setDevInfo(newDevInfo);
+      } catch (error) {
+        console.error("Error fetching dev info:", error);
+        setDevInfo({ name: "Unknown", picUrl: "" });
+      }
+    };
+    fetchDevInfo();
+  }, [repoUrl, isOnline]);
+  return devInfo;
+}
+function useRepoDetails(url) {
+  const isOnline = useAppState("isOnline");
+  const [repoDetails, setRepoDetails] = useState$2(void 0);
+  useEffect$3(() => {
+    if (!url) return;
+    const repoDetails2 = async () => {
+      const details = await fetchRepoDetails(url);
+      setRepoDetails(details);
+    };
+    repoDetails2();
+  }, [url, isOnline]);
+  return repoDetails;
+}
 function useCachedImageUrl(id, url) {
   const isOnline = useAppState("isOnline");
   const [imageSrc, setImageSrc] = useState$2("");
@@ -2353,10 +4625,42 @@ function useCachedImageUrl(id, url) {
   }, [id, url, isOnline]);
   return imageSrc;
 }
+function useLoadImage(id, url, type = "bg", darkMode) {
+  const isOnline = useAppState("isOnline");
+  const [imageSrc, setImageSrc] = useState$2(void 0);
+  useEffect$3(() => {
+    if (isEmpty(url)) return;
+    const fetchAndStoreImage = async () => {
+      try {
+        const response = await fetch(url);
+        const data = await response.blob();
+        const imageDataUrl = await convertBlobToDataUrl(data);
+        localStorage.setItem(id, imageDataUrl);
+        setImageSrc(renderImage(type, imageDataUrl));
+      } catch (error) {
+        console.error("Error fetching and storing image:", error);
+        setImageSrc(
+          type === "avatar" ? /* @__PURE__ */ jsxRuntimeExports.jsx(User_Icon, { className: "size-full p-2 dark:bg-LynxRaisinBlack/70 bg-white/70" }) : /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: `${"lightPattern"}` })
+        );
+      }
+    };
+    const cachedImage = localStorage.getItem(id);
+    if (cachedImage) {
+      setImageSrc(renderImage(type, cachedImage));
+    } else if (isOnline) {
+      fetchAndStoreImage();
+    } else {
+      setImageSrc(
+        type === "avatar" ? /* @__PURE__ */ jsxRuntimeExports.jsx(User_Icon, { className: "size-full p-2 dark:bg-LynxRaisinBlack/70 bg-white/70" }) : /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: `${"lightPattern"} ` })
+      );
+    }
+  }, [id, url, type, darkMode, isOnline]);
+  return imageSrc;
+}
 
 /*!
  * OverlayScrollbars
- * Version: 2.11.4
+ * Version: 2.12.0
  *
  * Copyright (c) Rene Haas | KingSora.
  * https://github.com/KingSora
@@ -2507,9 +4811,9 @@ const m = "overflowX";
 
 const O$1 = "overflowY";
 
-const $ = "width";
+const C$1 = "width";
 
-const C$1 = "height";
+const $ = "height";
 
 const x = "visible";
 
@@ -2576,51 +4880,50 @@ const debounce = (t, n) => {
   let i;
   let l;
   let a;
-  let u;
-  const f = function invokeFunctionToDebounce(n) {
+  const u = function invokeFunctionToDebounce(n) {
     if (i) {
       i();
     }
     if (r) {
       r();
     }
-    u = i = r = l = void 0;
+    a = i = r = l = void 0;
     t.apply(this, n);
   };
   const mergeParms = t => c && l ? c(l, t) : t;
   const flush = () => {
-    if (i) {
-      f(mergeParms(a) || a);
+    if (i && l) {
+      u(mergeParms(l) || l);
     }
   };
-  const _ = function debouncedFn() {
+  const f = function debouncedFn() {
     const t = from(arguments);
     const n = getDebouncer(o);
     if (n) {
       const o = getDebouncer(s);
       const c = mergeParms(t);
-      const _ = c || t;
-      const d = f.bind(0, _);
+      const f = c || t;
+      const _ = u.bind(0, f);
       if (i) {
         i();
       }
-      if (e && !u) {
-        d();
-        u = true;
-        i = n((() => u = void 0));
+      if (e && !a) {
+        _();
+        a = true;
+        i = n((() => a = void 0));
       } else {
-        i = n(d);
+        i = n(_);
         if (o && !r) {
           r = o(flush);
         }
       }
-      l = a = _;
+      l = f;
     } else {
-      f(t);
+      u(t);
     }
   };
-  _.O = flush;
-  return _;
+  f.O = flush;
+  return f;
 };
 
 const hasOwnProperty = (t, n) => Object.prototype.hasOwnProperty.call(t, n);
@@ -2699,8 +5002,8 @@ const domTokenListAttr = (t, n) => {
     return from(s).join(" ");
   };
   return {
-    $: t => s(domTokenListOperation(t, "delete")),
-    C: t => s(domTokenListOperation(t, "add")),
+    C: t => s(domTokenListOperation(t, "delete")),
+    $: t => s(domTokenListOperation(t, "add")),
     H: t => {
       const n = getDomTokensArray(t);
       return n.reduce(((t, n) => t && o.includes(n)), n.length > 0);
@@ -2709,12 +5012,12 @@ const domTokenListAttr = (t, n) => {
 };
 
 const removeAttrClass = (t, n, o) => {
-  domTokenListAttr(t, n).$(o);
+  domTokenListAttr(t, n).C(o);
   return bind(addAttrClass, t, n, o);
 };
 
 const addAttrClass = (t, n, o) => {
-  domTokenListAttr(t, n).C(o);
+  domTokenListAttr(t, n).$(o);
   return bind(removeAttrClass, t, n, o);
 };
 
@@ -2725,11 +5028,11 @@ const hasAttrClass = (t, n, o) => domTokenListAttr(t, n).H(o);
 const createDomTokenListClass = t => domTokenListAttr(t, "class");
 
 const removeClass = (t, n) => {
-  createDomTokenListClass(t).$(n);
+  createDomTokenListClass(t).C(n);
 };
 
 const addClass = (t, n) => {
-  createDomTokenListClass(t).C(n);
+  createDomTokenListClass(t).$(n);
   return bind(removeClass, t, n);
 };
 
@@ -2878,8 +5181,8 @@ const A = bind(getElmWidthHeightProperty, "client");
 const D = bind(getElmWidthHeightProperty, "scroll");
 
 const getFractionalSize = t => {
-  const n = parseFloat(getStyles(t, $)) || 0;
-  const o = parseFloat(getStyles(t, C$1)) || 0;
+  const n = parseFloat(getStyles(t, C$1)) || 0;
+  const o = parseFloat(getStyles(t, $)) || 0;
   return {
     w: n - e(n),
     h: o - e(o)
@@ -2890,7 +5193,7 @@ const getBoundingClientRect = t => t.getBoundingClientRect();
 
 const hasDimensions = t => !!t && elementHasDimensions(t);
 
-const domRectHasDimensions = t => !!(t && (t[C$1] || t[$]));
+const domRectHasDimensions = t => !!(t && (t[$] || t[C$1]));
 
 const domRectAppeared = (t, n) => {
   const o = domRectHasDimensions(t);
@@ -3171,7 +5474,7 @@ const mt = `${dt}-interactive`;
 
 const Ot = `${pt}-interactive`;
 
-const $t = "__osSizeObserverPlugin";
+const Ct = "__osSizeObserverPlugin";
 
 const getShowNativeOverlaidScrollbars = (t, n) => {
   const {k: o} = n;
@@ -3448,10 +5751,10 @@ const createDOMObserver = (t, n, o, s) => {
         const S = b && e;
         const m = S && getAttr(c, e || "");
         const O = isString(m) ? m : null;
-        const $ = S && u !== O;
-        const C = inArray(g, e) && $;
+        const C = S && u !== O;
+        const $ = inArray(g, e) && C;
         if (n && (w || !y)) {
-          const n = b && $;
+          const n = b && C;
           const a = n && l && is(c, l);
           const _ = a ? !r(c, e, u, O) : !b || n;
           const d = _ && !i(o, !!a, t, s);
@@ -3459,9 +5762,9 @@ const createDOMObserver = (t, n, o, s) => {
           each(h, (t => push(f, t)));
           v = v || d;
         }
-        if (!n && y && $ && !r(c, e, u, O)) {
+        if (!n && y && C && !r(c, e, u, O)) {
           push(_, e);
-          d = d || C;
+          d = d || $;
         }
       }));
       p((t => deduplicateArray(f).reduce(((n, o) => {
@@ -3513,7 +5816,7 @@ let Dt = null;
 
 const createSizeObserver = (t, n, o) => {
   const {ft: s} = o || {};
-  const e = getStaticPluginModuleInstance($t);
+  const e = getStaticPluginModuleInstance(Ct);
   const [c] = createCache({
     o: false,
     u: true
@@ -3630,11 +5933,11 @@ const createObserversSetup = (t, n, o, s) => {
   const _ = [ "id", "class", "style", "open", "wrap", "cols", "rows" ];
   const {dt: p, vt: v, L: g, gt: h, ht: b, V: w, bt: y, wt: S, yt: m, St: O} = t;
   const getDirectionIsRTL = t => getStyles(t, "direction") === "rtl";
-  const $ = {
+  const C = {
     Ot: false,
     B: getDirectionIsRTL(p)
   };
-  const C = getEnvironment();
+  const $ = getEnvironment();
   const x = getStaticPluginModuleInstance(xt);
   const [H] = createCache({
     i: equalWH,
@@ -3643,7 +5946,7 @@ const createObserversSetup = (t, n, o, s) => {
       h: 0
     }
   }, (() => {
-    const s = x && x.R(t, n, $, C, o).Y;
+    const s = x && x.R(t, n, C, $, o).Y;
     const e = y && w;
     const c = !e && hasAttrClass(v, B, N);
     const r = !w && S(W);
@@ -3683,9 +5986,9 @@ const createObserversSetup = (t, n, o, s) => {
   const setDirection = t => {
     const n = getDirectionIsRTL(p);
     assignDeep(t, {
-      $t: a !== n
+      Ct: a !== n
     });
-    assignDeep($, {
+    assignDeep(C, {
       B: n
     });
     a = n;
@@ -3693,9 +5996,9 @@ const createObserversSetup = (t, n, o, s) => {
   const onTrinsicChanged = (t, n) => {
     const [o, e] = t;
     const c = {
-      Ct: e
+      $t: e
     };
-    assignDeep($, {
+    assignDeep(C, {
       Ot: o
     });
     if (!n) {
@@ -3705,7 +6008,7 @@ const createObserversSetup = (t, n, o, s) => {
   };
   const onSizeChanged = ({_t: t, ft: n}) => {
     const o = t && !n;
-    const e = !o && C.U ? E : s;
+    const e = !o && $.U ? E : s;
     const c = {
       _t: t || n,
       ft: n
@@ -3754,7 +6057,8 @@ const createObserversSetup = (t, n, o, s) => {
   const R = debounce((() => {
     const [, t] = H();
     s({
-      xt: t
+      xt: t,
+      _t: y
     });
   }), {
     p: 222,
@@ -3767,7 +6071,7 @@ const createObserversSetup = (t, n, o, s) => {
     const t = I && I();
     const n = z && z();
     const o = A();
-    const s = C.G((t => {
+    const s = $.G((t => {
       if (t) {
         E({
           Et: t
@@ -3852,7 +6156,7 @@ const createObserversSetup = (t, n, o, s) => {
     }
     setDirection(s);
     return s;
-  }, $ ];
+  }, C ];
 };
 
 const resolveInitialization = (t, n) => isFunction(n) ? n.apply(0, t) : n;
@@ -3932,7 +6236,7 @@ const createScrollbarsSetupElements = (t, n, o, s) => {
       };
     }
   };
-  const $ = {
+  const C = {
     x: initScrollTimeline("x"),
     y: initScrollTimeline("y")
   };
@@ -3995,8 +6299,8 @@ const createScrollbarsSetupElements = (t, n, o, s) => {
     scrollbarStyle(S, createScrollbarStyleFn(n.x));
     scrollbarStyle(m, createScrollbarStyleFn(n.y));
     if (p$1) {
-      S.forEach($.x.kt);
-      m.forEach($.y.kt);
+      S.forEach(C.x.kt);
+      m.forEach(C.y.kt);
     }
   };
   const refreshScrollbarsScrollbarOffset = () => {
@@ -4033,19 +6337,19 @@ const createScrollbarsSetupElements = (t, n, o, s) => {
       Ut: c,
       Mt: r
     };
-    const l = $[n];
+    const l = C[n];
     push(t ? S : m, i);
     push(y, [ appendChildren(e, c), appendChildren(c, r), bind(removeElements, e), l && l.kt(i), s(i, scrollbarsAddRemoveClass, t) ]);
     return i;
   };
-  const C = bind(generateScrollbarDOM, true);
+  const $ = bind(generateScrollbarDOM, true);
   const x = bind(generateScrollbarDOM, false);
   const appendElements = () => {
     appendChildren(O, S[0].Lt);
     appendChildren(O, m[0].Lt);
     return bind(runEachAndClear, y);
   };
-  C();
+  $();
   x();
   return [ {
     Pt: refreshScrollbarsHandleLength,
@@ -4055,7 +6359,7 @@ const createScrollbarsSetupElements = (t, n, o, s) => {
     Ft: scrollbarsAddRemoveClass,
     jt: {
       Xt: S,
-      Yt: C,
+      Yt: $,
       Wt: bind(scrollbarStyle, S)
     },
     Jt: {
@@ -4083,7 +6387,7 @@ const createScrollbarsSetupEvents = (t, n, o, s) => (r, i, l) => {
   const createInteractiveScrollEvents = () => {
     const n = "pointerup pointercancel lostpointercapture";
     const s = `client${l ? "X" : "Y"}`;
-    const r = l ? $ : C$1;
+    const r = l ? C$1 : $;
     const i = l ? "left" : "top";
     const a = l ? "w" : "h";
     const u = l ? "x" : "y";
@@ -4102,9 +6406,9 @@ const createScrollbarsSetupEvents = (t, n, o, s) => (r, i, l) => {
       const _ = l ? b : h;
       const g = t.scrollbars;
       const w = g[l ? "dragScroll" : "clickScroll"];
-      const {button: y, isPrimary: O, pointerType: $} = o;
-      const {pointers: C} = g;
-      const x = y === 0 && O && w && (C || []).includes($);
+      const {button: y, isPrimary: O, pointerType: C} = o;
+      const {pointers: $} = g;
+      const x = y === 0 && O && w && ($ || []).includes(C);
       if (x) {
         runEachAndClear(f);
         m();
@@ -4113,13 +6417,13 @@ const createScrollbarsSetupEvents = (t, n, o, s) => (r, i, l) => {
         const y = bind(getBoundingClientRect, h);
         const getHandleOffset = (t, n) => (t || g())[i] - (n || y())[i];
         const O = e(getBoundingClientRect(d)[r]) / I(d)[a] || 1;
-        const $ = createRelativeHandleMove(getElementScroll(d)[u], 1 / O);
-        const C = o[s];
+        const C = createRelativeHandleMove(getElementScroll(d)[u], 1 / O);
+        const $ = o[s];
         const x = g();
         const H = y();
         const E = x[r];
         const z = getHandleOffset(x, H) + E / 2;
-        const T = C - H[i];
+        const T = $ - H[i];
         const A = l ? 0 : T - z;
         const releasePointerCapture = t => {
           runEachAndClear(k);
@@ -4129,7 +6433,7 @@ const createScrollbarsSetupEvents = (t, n, o, s) => (r, i, l) => {
         const M = v();
         const k = [ addEventListener(p, n, releasePointerCapture), addEventListener(p, "selectstart", (t => preventDefault(t)), {
           T: false
-        }), addEventListener(h, n, releasePointerCapture), D && addEventListener(h, "pointermove", (t => $(A + (t[s] - C)))), D && (() => {
+        }), addEventListener(h, n, releasePointerCapture), D && addEventListener(h, "pointermove", (t => C(A + (t[s] - $)))), D && (() => {
           const t = getElementScroll(d);
           M();
           const n = getElementScroll(d);
@@ -4146,11 +6450,11 @@ const createScrollbarsSetupEvents = (t, n, o, s) => (r, i, l) => {
         }) ];
         _.setPointerCapture(o.pointerId);
         if (t) {
-          $(A);
+          C(A);
         } else if (!l) {
           const t = getStaticPluginModuleInstance(Et);
           if (t) {
-            const n = t($, A, E, (t => {
+            const n = t(C, A, E, (t => {
               if (t) {
                 M();
               } else {
@@ -4229,7 +6533,7 @@ const createScrollbarsSetup = (t, n, o, s, e, c) => {
   const [b, w] = selfClearTimeout(100);
   const [y, S] = selfClearTimeout((() => _));
   const [m, O] = createScrollbarsSetupElements(t, e, s, createScrollbarsSetupEvents(n, e, s, (t => isHoverablePointerType(t) && manageScrollbarsAutoHideInstantInteraction())));
-  const {vt: $, Kt: C, bt: H} = e;
+  const {vt: C, Kt: $, bt: H} = e;
   const {Ft: z, Pt: T, Nt: I, qt: A, Bt: D} = m;
   const manageScrollbarsAutoHide = (t, n) => {
     S();
@@ -4264,20 +6568,20 @@ const createScrollbarsSetup = (t, n, o, s, e, c) => {
       }
     }
   };
-  const M = [ S, h, w, v, () => f(), addEventListener($, "pointerover", onHostMouseEnter, {
+  const M = [ S, h, w, v, () => f(), addEventListener(C, "pointerover", onHostMouseEnter, {
     A: true
-  }), addEventListener($, "pointerenter", onHostMouseEnter), addEventListener($, "pointerleave", (t => {
+  }), addEventListener(C, "pointerenter", onHostMouseEnter), addEventListener(C, "pointerleave", (t => {
     if (isHoverablePointerType(t)) {
       r = false;
       if (l) {
         manageScrollbarsAutoHide(false);
       }
     }
-  })), addEventListener($, "pointermove", (t => {
+  })), addEventListener(C, "pointermove", (t => {
     if (isHoverablePointerType(t) && i) {
       manageScrollbarsAutoHideInstantInteraction();
     }
-  })), addEventListener(C, "scroll", (t => {
+  })), addEventListener($, "scroll", (t => {
     p((() => {
       I();
       manageScrollbarsAutoHideInstantInteraction();
@@ -4285,38 +6589,41 @@ const createScrollbarsSetup = (t, n, o, s, e, c) => {
     c(t);
     D();
   })) ];
+  const k = getStaticPluginModuleInstance(xt);
   return [ () => bind(runEachAndClear, push(M, O())), ({zt: t, It: n, Qt: e, Zt: c}) => {
     const {tn: r, nn: d, sn: p, en: v} = c || {};
-    const {$t: g, ft: h} = e || {};
+    const {Ct: g, ft: h} = e || {};
     const {B: w} = o;
-    const {k: y} = getEnvironment();
-    const {cn: S, j: m} = s;
-    const [O, $] = t("showNativeOverlaidScrollbars");
-    const [M, k] = t("scrollbars.theme");
-    const [R, V] = t("scrollbars.visibility");
-    const [L, U] = t("scrollbars.autoHide");
-    const [P, N] = t("scrollbars.autoHideSuspend");
-    const [q] = t("scrollbars.autoHideDelay");
-    const [B, F] = t("scrollbars.dragScroll");
-    const [j, X] = t("scrollbars.clickScroll");
-    const [Y, W] = t("overflow");
-    const J = h && !n;
-    const G = m.x || m.y;
-    const K = r || d || v || g || n;
-    const Q = p || V || W;
-    const Z = O && y.x && y.y;
+    const {k: y, U: S} = getEnvironment();
+    const {cn: m, j: O} = s;
+    const [C, M] = t("showNativeOverlaidScrollbars");
+    const [R, V] = t("scrollbars.theme");
+    const [L, U] = t("scrollbars.visibility");
+    const [P, N] = t("scrollbars.autoHide");
+    const [q, B] = t("scrollbars.autoHideSuspend");
+    const [F] = t("scrollbars.autoHideDelay");
+    const [j, X] = t("scrollbars.dragScroll");
+    const [Y, W] = t("scrollbars.clickScroll");
+    const [J, G] = t("overflow");
+    const K = h && !n;
+    const Q = O.x || O.y;
+    const Z = r || d || v || g || n;
+    const tt = p || U || G;
+    const nt = C && y.x && y.y;
+    const ot = !S && !k;
+    const st = nt || ot;
     const setScrollbarVisibility = (t, n, o) => {
-      const s = t.includes(E$1) && (R === x || R === "auto" && n === E$1);
+      const s = t.includes(E$1) && (L === x || L === "auto" && n === E$1);
       z(vt, s, o);
       return s;
     };
-    _ = q;
-    if (J) {
-      if (P && G) {
+    _ = F;
+    if (K) {
+      if (q && Q) {
         manageAutoHideSuspension(false);
         f();
         b((() => {
-          f = addEventListener(C, "scroll", bind(manageAutoHideSuspension, true), {
+          f = addEventListener($, "scroll", bind(manageAutoHideSuspension, true), {
             A: true
           });
         }));
@@ -4324,44 +6631,44 @@ const createScrollbarsSetup = (t, n, o, s, e, c) => {
         manageAutoHideSuspension(true);
       }
     }
-    if ($) {
-      z(lt, Z);
+    if (M || ot) {
+      z(lt, st);
     }
-    if (k) {
+    if (V) {
       z(u);
-      z(M, true);
-      u = M;
+      z(R, true);
+      u = R;
     }
-    if (N && !P) {
+    if (B && !q) {
       manageAutoHideSuspension(true);
     }
-    if (U) {
-      i = L === "move";
-      l = L === "leave";
-      a = L === "never";
+    if (N) {
+      i = P === "move";
+      l = P === "leave";
+      a = P === "never";
       manageScrollbarsAutoHide(a, true);
     }
-    if (F) {
-      z(Ot, B);
-    }
     if (X) {
-      z(mt, !!j);
+      z(Ot, j);
     }
-    if (Q) {
-      const t = setScrollbarVisibility(Y.x, S.x, true);
-      const n = setScrollbarVisibility(Y.y, S.y, false);
+    if (W) {
+      z(mt, !!Y);
+    }
+    if (tt) {
+      const t = setScrollbarVisibility(J.x, m.x, true);
+      const n = setScrollbarVisibility(J.y, m.y, false);
       const o = t && n;
       z(gt, !o);
     }
-    if (K) {
+    if (Z) {
       I();
       T();
       D();
       if (v) {
         A();
       }
-      z(bt, !m.x, true);
-      z(bt, !m.y, false);
+      z(bt, !O.x, true);
+      z(bt, !O.y, false);
       z(ut, w && !H);
     }
   }, {}, m ];
@@ -4384,8 +6691,8 @@ const createStructureSetupElements = t => {
   const w = bind(staticInitializationElement, [ v ]);
   const y = bind(dynamicInitializationElement, [ v ]);
   const S = bind(createDiv, "");
-  const $ = bind(w, S, i);
-  const C = bind(y, S, l);
+  const C = bind(w, S, i);
+  const $ = bind(y, S, l);
   const elementHasOverflow = t => {
     const n = I(t);
     const o = D(t);
@@ -4393,10 +6700,10 @@ const createStructureSetupElements = t => {
     const e = getStyles(t, O$1);
     return o.w - n.w > 0 && !overflowIsVisible(s) || o.h - n.h > 0 && !overflowIsVisible(e);
   };
-  const x = $(d);
+  const x = C(d);
   const H = x === v;
   const E = H && g;
-  const z = !H && C(p);
+  const z = !H && $(p);
   const T = !H && x === z;
   const A = E ? b : x;
   const M = E ? A : v;
@@ -4505,12 +6812,12 @@ const createStructureSetupElements = t => {
 };
 
 const createTrinsicUpdateSegment = ({ht: t}) => ({Qt: n, un: o, It: s}) => {
-  const {Ct: e} = n || {};
+  const {$t: e} = n || {};
   const {Ot: c} = o;
   const r = t && (e || s);
   if (r) {
     setStyles(t, {
-      [C$1]: c && "100%"
+      [$]: c && "100%"
     });
   }
 };
@@ -4523,16 +6830,16 @@ const createPaddingUpdateSegment = ({vt: t, rn: n, L: o, V: s}, e) => {
   return ({zt: t, Qt: i, un: l, It: a}) => {
     let [u, f] = r(a);
     const {U: _} = getEnvironment();
-    const {_t: d, xt: p, $t: m} = i || {};
+    const {_t: d, xt: p, Ct: m} = i || {};
     const {B: O} = l;
-    const [C, x] = t("paddingAbsolute");
+    const [$, x] = t("paddingAbsolute");
     const H = a || p;
     if (d || f || H) {
       [u, f] = c(a);
     }
     const E = !s && (x || m || f);
     if (E) {
-      const t = !C || !n && !_;
+      const t = !$ || !n && !_;
       const s = u.r + u.l;
       const c = u.t + u.b;
       const r = {
@@ -4542,7 +6849,7 @@ const createPaddingUpdateSegment = ({vt: t, rn: n, L: o, V: s}, e) => {
         top: t ? -u.t : 0,
         right: t ? O ? -u.r : "auto" : 0,
         left: t ? O ? "auto" : -u.l : 0,
-        [$]: t && `calc(100% + ${s}px)`
+        [C$1]: t && `calc(100% + ${s}px)`
       };
       const i = {
         [v]: t ? u.t : 0,
@@ -4685,7 +6992,7 @@ const createOverflowUpdateSegment = (t, s) => {
     d(keys(t).map((n => createViewportOverflowStyleClassName(t[n], n === "x"))).join(" "), true);
   };
   const [m, O] = createCache(y, bind(getFractionalSize, i));
-  const [$, C] = createCache(y, bind(D, i));
+  const [C, $] = createCache(y, bind(D, i));
   const [z, T] = createCache(y);
   const [I] = createCache(S);
   const [M, k] = createCache(y);
@@ -4704,7 +7011,7 @@ const createOverflowUpdateSegment = (t, s) => {
     return `${o}${capitalizeFirstLetter(t)}`;
   };
   return ({zt: n, Qt: o, un: l, It: a}, {_n: u}) => {
-    const {_t: f, Ht: _, xt: b, $t: w, ft: y, Et: S} = o || {};
+    const {_t: f, Ht: _, xt: b, Ct: w, ft: y, Et: S} = o || {};
     const x = P && P.R(t, s, l, e, n);
     const {X: H, Y: E, W: D} = x || {};
     const [q, F] = getShowNativeOverlaidScrollbars(n, e);
@@ -4713,7 +7020,7 @@ const createOverflowUpdateSegment = (t, s) => {
     const W = overflowIsVisible(j.y);
     const J = f || u || b || w || S || F;
     let G = O(a);
-    let Q = C(a);
+    let Q = $(a);
     let tt = T(a);
     let nt = k(a);
     if (F && v) {
@@ -4725,7 +7032,7 @@ const createOverflowUpdateSegment = (t, s) => {
       }
       const t = E && E();
       const [n] = G = m(a);
-      const [o] = Q = $(a);
+      const [o] = Q = C(a);
       const s = A(i);
       const e = g && getWindowSize(p());
       const r = {
@@ -4785,8 +7092,7 @@ const createOverflowUpdateSegment = (t, s) => {
       sn: St,
       tn: st,
       nn: ct,
-      en: bt || ct,
-      dn: gt
+      en: bt || ct
     };
   };
 };
@@ -4864,12 +7170,12 @@ const createSetups = (t, n, o, s, e) => {
     if (o()) {
       return false;
     }
-    const {pn: r, It: i, Tt: a, vn: u} = t;
+    const {dn: r, It: i, Tt: a, pn: u} = t;
     const f = r || {};
     const _ = !!i || !c;
     const v = {
       zt: createOptionCheck(n, f, _),
-      pn: f,
+      dn: f,
       It: _
     };
     if (u) {
@@ -4908,11 +7214,11 @@ const createSetups = (t, n, o, s, e) => {
     c();
     return bind(runEachAndClear, e);
   }, update, () => ({
-    gn: p,
-    hn: a
+    vn: p,
+    gn: a
   }), {
-    bn: u,
-    wn: h
+    hn: u,
+    bn: h
   }, f ];
 };
 
@@ -4949,8 +7255,8 @@ const OverlayScrollbars = (t, n, o) => {
       v(t, n);
       _(t, n);
     };
-    const [g, h, b, w, y] = createSetups(t, a, (() => r), (({pn: t, It: n}, {Qt: o, Zt: s}) => {
-      const {_t: e, $t: c, Ct: r, xt: i, Ht: l, ft: a} = o;
+    const [g, h, b, w, y] = createSetups(t, a, (() => r), (({dn: t, It: n}, {Qt: o, Zt: s}) => {
+      const {_t: e, Ct: c, $t: r, xt: i, Ht: l, ft: a} = o;
       const {tn: u, nn: f, sn: _, en: d} = s;
       triggerEvent("updated", [ S, {
         updateHints: {
@@ -4985,7 +7291,7 @@ const OverlayScrollbars = (t, n, o) => {
           if (!isEmptyObject(e)) {
             assignDeep(a, e);
             h({
-              pn: e
+              dn: e
             });
           }
         }
@@ -4998,7 +7304,7 @@ const OverlayScrollbars = (t, n, o) => {
         }
       },
       state() {
-        const {gn: t, hn: n} = b();
+        const {vn: t, gn: n} = b();
         const {B: o} = t;
         const {Vt: s, Rt: e, cn: c, j: i, rn: l, fn: a, Dt: u} = n;
         return assignDeep({}, {
@@ -5017,8 +7323,8 @@ const OverlayScrollbars = (t, n, o) => {
         });
       },
       elements() {
-        const {dt: t, vt: n, rn: o, L: s, ht: e, gt: c, Kt: r} = w.bn;
-        const {jt: i, Jt: l} = w.wn;
+        const {dt: t, vt: n, rn: o, L: s, ht: e, gt: c, Kt: r} = w.hn;
+        const {jt: i, Jt: l} = w.bn;
         const translateScrollbarStructure = t => {
           const {Mt: n, Ut: o, Lt: s} = t;
           return {
@@ -5034,7 +7340,7 @@ const OverlayScrollbars = (t, n, o) => {
             clone: () => {
               const t = translateScrollbarStructure(o());
               h({
-                vn: true
+                pn: true
               });
               return t;
             }
@@ -5062,7 +7368,7 @@ const OverlayScrollbars = (t, n, o) => {
     push(i, [ y ]);
     addInstance(c, S);
     registerPluginModuleInstances(M, OverlayScrollbars, [ S, u, l ]);
-    if (cancelInitialization(w.bn.bt, !e && t.cancel)) {
+    if (cancelInitialization(w.hn.bt, !e && t.cancel)) {
       destroy(true);
       return S;
     }
@@ -5214,7 +7520,29 @@ function LynxScroll({ children, className, overflow = { x: "hidden", y: "scroll"
 }
 
 const PageID = {
-  home: "home_page"};
+  home: "home_page",
+  imageGen: "imageGen_page",
+  textGen: "textGen_page",
+  audioGen: "audioGen_page",
+  tools: "tools_page",
+  games: "games_page",
+  dashboard: "dashboard_page",
+  extensions: "extension_page",
+  modules: "modules_page",
+  settings: "settings_page"
+};
+const PageTitles = {
+  home: "Home",
+  imageGen: "Image Generation",
+  textGen: "Text Generation",
+  audioGen: "Audio Generation",
+  tools: "Tools",
+  games: "Games",
+  dashboard: "Dashboard",
+  extensions: "Extensions",
+  modules: "Modules",
+  settings: "Settings"
+};
 const defaultTabItem = {
   id: "tab",
   title: "Home",
@@ -5231,7 +7559,7 @@ const initialState = {
   activePage: defaultTabItem.pageID,
   prevTab: ""
 };
-createSlice({
+const tabsSlice = createSlice({
   name: "tabs",
   initialState,
   reducers: {
@@ -5331,6 +7659,7 @@ createSlice({
   }
 });
 const useTabsState = (key) => useSelector((state) => state.tabs[key]);
+const tabsActions = tabsSlice.actions;
 
 function Settings_Icon(props) {
   return /* @__PURE__ */ jsxRuntimeExports.jsx("svg", { ...props, height: "1rem", viewBox: "0 0 24 24", xmlns: "http://www.w3.org/2000/svg", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
@@ -5812,7 +8141,7 @@ function ToolsPage() {
         /* @__PURE__ */ jsxRuntimeExports.jsx(
           "div",
           {
-            className: "absolute inset-0 rounded-2xl bg-gradient-to-br from-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
+            className: "absolute inset-0 rounded-2xl bg-linear-to-br from-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
           }
         )
       ]

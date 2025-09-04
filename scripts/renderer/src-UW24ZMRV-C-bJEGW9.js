@@ -1,4 +1,4 @@
-import { d as domAnimation } from './index-DiboZtIl.js';
+import { d as domAnimation } from './index-C0l0Q0Xh.js';
 
 var src_default = domAnimation;
 
