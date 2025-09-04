@@ -10,7 +10,7 @@ const ProgressBar = ({value, max = 100, isTemp = false}: {value: number; max?: n
     <div className={`${compactMode ? 'w-8 h-1' : 'w-12 h-1.5'} bg-white/10 rounded-full overflow-hidden`}>
       <div
         className={
-          `h-full bg-gradient-to-r ${getProgressColor(isTemp ? value : percentage, isTemp)}` +
+          `h-full bg-linear-to-r ${getProgressColor(isTemp ? value : percentage, isTemp)}` +
           ` rounded-full transition-all duration-700 ease-out`
         }
         style={{width: `${percentage}%`}}
@@ -44,7 +44,7 @@ export default function MetricItem({
         ` ${colorClass || 'text-slate-300 border-slate-600/30 bg-slate-800/40'}`
       }
       key={`${label}`}>
-      {metricVisibility.icon && <Icon className={`${compactMode ? 'size-3' : 'size-4'} flex-shrink-0`} />}
+      {metricVisibility.icon && <Icon className={`${compactMode ? 'size-3' : 'size-4'} shrink-0`} />}
       <div className="flex items-center gap-2 text-xs font-medium whitespace-nowrap">
         {metricVisibility.label && <span className="opacity-80">{label}:</span>}
         {metricVisibility.value && (

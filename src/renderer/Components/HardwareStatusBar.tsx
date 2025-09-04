@@ -207,7 +207,7 @@ const HardwareStatusBar = ({ref}: Props) => {
   return (
     <div
       className={
-        `relative ${compactMode ? 'h-7' : 'h-12'} w-full bg-gradient-to-r from-slate-900/95 ` +
+        `relative ${compactMode ? 'h-7' : 'h-12'} w-full bg-linear-to-r from-slate-900/95 ` +
         'to-slate-800/95 border-t border-slate-700/50 backdrop-blur-sm'
       }>
       {/* Scroll Arrows */}

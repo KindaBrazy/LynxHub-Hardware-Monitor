@@ -1,6 +1,6 @@
 import './index.css';
 
-import {ExtensionRendererApi} from '../../../src/renderer/src/App/Extensions/ExtensionTypes_Renderer_Api';
+import {ExtensionRendererApi} from '../../../src/cross/plugin/ExtensionTypes_Renderer_Api';
 import HardwareStatusBar from './Components/HardwareStatusBar';
 import ModalManager from './Components/ModalManager';
 import ToolsPage from './Components/ToolsPage';

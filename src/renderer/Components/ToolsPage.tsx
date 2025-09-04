@@ -67,7 +67,7 @@ export default function ToolsPage() {
         {/* Hover glow effect */}
         <div
           className={
-            'absolute inset-0 rounded-2xl bg-gradient-to-br from-white/10 to-transparent opacity-0' +
+            'absolute inset-0 rounded-2xl bg-linear-to-br from-white/10 to-transparent opacity-0' +
             ' group-hover:opacity-100 transition-opacity duration-300 pointer-events-none'
           }
         />

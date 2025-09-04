@@ -39,7 +39,7 @@ export default function CpuSection({data, metrics}: Props) {
               ` backdrop-blur-sm transition-all duration-300 hover:scale-105 hover:shadow-lg` +
               ` text-slate-300 border-slate-600/30 bg-slate-800/40`
             }>
-            <Thermometer className={`${compactMode ? 'size-3' : 'size-4'} flex-shrink-0 text-danger`} />
+            <Thermometer className={`${compactMode ? 'size-3' : 'size-4'} shrink-0 text-danger`} />
             <div className="flex items-center gap-2 text-xs font-medium whitespace-nowrap">
               <span className="text-danger">Admin Require</span>
             </div>
