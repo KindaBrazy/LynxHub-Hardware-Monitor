@@ -7,6 +7,6 @@
     "@lynxhub/hwmonitor": "^0.10.2"
   },
   "devDependencies": {
-    "lucide-react": "^0.526.0"
+    "lucide-react": "^0.542.0"
   }
 }
