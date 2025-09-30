@@ -1,0 +1,8 @@
+{
+  "$schema": "https://raw.githubusercontent.com/KindaBrazy/LynxHub-Statics/refs/heads/schema/plugins/metadata.schema.json",
+  "id": "hardware_monitor",
+  "title": "Hardware Monitor",
+  "description": "Real-time hardware monitoring in the status bar.",
+  "platforms": ["win32"],
+  "type": "extension"
+}
