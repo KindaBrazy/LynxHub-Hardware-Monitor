@@ -3,6 +3,5 @@
   "id": "hardware_monitor",
   "title": "Hardware Monitor",
   "description": "Real-time hardware monitoring in the status bar.",
-  "platforms": ["win32"],
   "type": "extension"
 }
