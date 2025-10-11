@@ -11,7 +11,7 @@
     "extensionApi": "^1.0.0"
   },
   "repoUrl": "https://github.com/KindaBrazy/LynxHub-Hardware-Monitor",
-  "avatarUrl": "https://raw.githubusercontent.com/KindaBrazy/LynxHub-Hardware-Monitor/refs/heads/source_ea/resources/icon.png",
+  "avatarUrl": "https://raw.githubusercontent.com/KindaBrazy/LynxHub-Hardware-Monitor/refs/heads/metadata/icon.png",
   "platforms": ["win32"],
   "changeLog": [
     {

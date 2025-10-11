@@ -8103,7 +8103,7 @@ const {Button,Card,Image} = await importShared('@heroui/react');
 const {useCallback} = await importShared('react');
 
 const {useDispatch: useDispatch$1} = await importShared('react-redux');
-const iconUrl = "https://raw.githubusercontent.com/KindaBrazy/LynxHub-Hardware-Monitor/refs/heads/source_ea/resources/icon.png";
+const iconUrl = "https://raw.githubusercontent.com/KindaBrazy/LynxHub-Hardware-Monitor/refs/heads/metadata/icon.png";
 function ToolsPage() {
   const iconSrc = useCachedImageUrl(`hwmonitor_card_icon`, iconUrl);
   const activeTab = useTabsState("activeTab");
