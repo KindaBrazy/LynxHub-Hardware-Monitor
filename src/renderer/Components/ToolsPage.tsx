@@ -8,7 +8,7 @@ import {systemMonitorActions} from '../reducer';
 import {Settings_Icon} from '../SvgIcons';
 
 const iconUrl: string =
-  'https://raw.githubusercontent.com/KindaBrazy/LynxHub-Hardware-Monitor/refs/heads/source_ea/resources/icon.png';
+  'https://raw.githubusercontent.com/KindaBrazy/LynxHub-Hardware-Monitor/refs/heads/metadata/icon.png';
 
 export default function ToolsPage() {
   const iconSrc = useCachedImageUrl(`hwmonitor_card_icon`, iconUrl);
