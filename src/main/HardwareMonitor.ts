@@ -70,39 +70,50 @@ function stopMonitoring() {
 }
 
 async function checkHardwareDevices() {
-  try {
-    const hm = new HardwareMonitor('error');
+  const MAX_RETRIES = 5;
+  let retries = 0;
 
-    const targetDir = join(app.getPath('downloads'), 'LynxHub');
-    await hm.checkRequirements(targetDir);
+  while (retries < MAX_RETRIES) {
+    try {
+      const hm = new HardwareMonitor('error');
 
-    const result = await hm.getDataOnce(['cpu', 'gpu', 'memory']);
-    const gpu = result.GPU.map(item => item.Name);
-    const cpu = result.CPU.map(item => item.Name);
-    const memory = result.Memory.map(item => item.Name);
+      const targetDir = join(app.getPath('downloads'), 'LynxHub');
+      await hm.checkRequirements(targetDir);
 
-    if (currentConfig && storeManager) {
-      currentConfig.availableHardware = {gpu, cpu, memory};
+      const result = await hm.getDataOnce(['cpu', 'gpu', 'memory']);
+      const gpu = result.GPU.map(item => item.Name);
+      const cpu = result.CPU.map(item => item.Name);
+      const memory = result.Memory.map(item => item.Name);
 
-      if (isEmpty(currentConfig.enabledMetrics.gpu)) {
-        currentConfig.enabledMetrics.gpu = gpu.map(name => ({
-          name,
-          active: true,
-          enabled: ['temp', 'usage', 'vram'],
-        }));
+      if (currentConfig && storeManager) {
+        currentConfig.availableHardware = {gpu, cpu, memory};
+
+        if (isEmpty(currentConfig.enabledMetrics.gpu)) {
+          currentConfig.enabledMetrics.gpu = gpu.map(name => ({
+            name,
+            active: true,
+            enabled: ['temp', 'usage', 'vram'],
+          }));
+        }
+        if (isEmpty(currentConfig.enabledMetrics.cpu)) {
+          currentConfig.enabledMetrics.cpu = cpu.map(name => ({name, active: true, enabled: ['temp', 'usage']}));
+        }
+        if (isEmpty(currentConfig.enabledMetrics.memory)) {
+          currentConfig.enabledMetrics.memory = memory.map(name => ({name, active: true, enabled: ['memory']}));
+        }
+
+        storeManager.setCustomData(HMONITOR_STORAGE_ID, currentConfig);
+        sendRenderer(HMONITOR_IPC_ON_CONFIG, currentConfig);
       }
-      if (isEmpty(currentConfig.enabledMetrics.cpu)) {
-        currentConfig.enabledMetrics.cpu = cpu.map(name => ({name, active: true, enabled: ['temp', 'usage']}));
-      }
-      if (isEmpty(currentConfig.enabledMetrics.memory)) {
-        currentConfig.enabledMetrics.memory = memory.map(name => ({name, active: true, enabled: ['memory']}));
-      }
+      return;
+    } catch (e) {
+      console.warn(`Attempt ${retries + 1} failed to check hardware devices:`, e);
+      retries++;
 
-      storeManager.setCustomData(HMONITOR_STORAGE_ID, currentConfig);
-      sendRenderer(HMONITOR_IPC_ON_CONFIG, currentConfig);
+      if (retries >= MAX_RETRIES) {
+        console.error('Failed to check hardware devices after 5 attempts.');
+      }
     }
-  } catch (e) {
-    console.warn(e);
   }
 }
 
