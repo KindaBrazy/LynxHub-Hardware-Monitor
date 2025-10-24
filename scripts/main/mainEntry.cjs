@@ -1,27 +1,25 @@
-import path, { join } from "node:path";
-import { exec, spawn } from "node:child_process";
-import { EventEmitter } from "node:events";
-import os from "node:os";
-import { promisify } from "node:util";
-import fsPromises from "node:fs/promises";
-import originalFs from "node:fs";
-import https from "node:https";
-import require$$0$5 from "path";
-import require$$0$2 from "fs";
-import require$$0 from "constants";
-import require$$0$1 from "stream";
-import require$$1 from "util";
-import require$$5 from "assert";
-import require$$2$1 from "events";
-import require$$0$3 from "buffer";
-import require$$6 from "string_decoder";
-import require$$0$4 from "zlib";
-import { ipcMain, app } from "electron";
-import __cjs_mod__ from "node:module";
-const __filename = import.meta.filename;
-const __dirname = import.meta.dirname;
-const require2 = __cjs_mod__.createRequire(import.meta.url);
-const execAsync = promisify(exec);
+"use strict";
+Object.defineProperty(exports, Symbol.toStringTag, { value: "Module" });
+const path = require("node:path");
+const node_child_process = require("node:child_process");
+const node_events = require("node:events");
+const os = require("node:os");
+const node_util = require("node:util");
+const fsPromises = require("node:fs/promises");
+const originalFs = require("node:fs");
+const https = require("node:https");
+const require$$0$5 = require("path");
+const require$$0$2 = require("fs");
+const require$$0 = require("constants");
+const require$$0$1 = require("stream");
+const require$$1 = require("util");
+const require$$5 = require("assert");
+const require$$2$1 = require("events");
+const require$$0$3 = require("buffer");
+const require$$6 = require("string_decoder");
+const require$$0$4 = require("zlib");
+const electron = require("electron");
+const execAsync = node_util.promisify(node_child_process.exec);
 const DOTNET_LIST_RUNTIMES_COMMAND = "dotnet --list-runtimes";
 const DOTNET_8_RUNTIME_IDENTIFIER = "microsoft.netcore.app 8.0";
 function isDotNet8RuntimeInstalled(output) {
@@ -139,7 +137,7 @@ function requirePolyfills() {
       };
     }
     if (platform === "win32") {
-      fs.rename = typeof fs.rename !== "function" ? fs.rename : function(fs$rename) {
+      fs.rename = typeof fs.rename !== "function" ? fs.rename : (function(fs$rename) {
         function rename(from, to, cb) {
           var start = Date.now();
           var backoff = 0;
@@ -162,9 +160,9 @@ function requirePolyfills() {
         }
         if (Object.setPrototypeOf) Object.setPrototypeOf(rename, fs$rename);
         return rename;
-      }(fs.rename);
+      })(fs.rename);
     }
-    fs.read = typeof fs.read !== "function" ? fs.read : function(fs$read) {
+    fs.read = typeof fs.read !== "function" ? fs.read : (function(fs$read) {
       function read(fd, buffer, offset, length, position, callback_) {
         var callback;
         if (callback_ && typeof callback_ === "function") {
@@ -181,8 +179,8 @@ function requirePolyfills() {
       }
       if (Object.setPrototypeOf) Object.setPrototypeOf(read, fs$read);
       return read;
-    }(fs.read);
-    fs.readSync = typeof fs.readSync !== "function" ? fs.readSync : /* @__PURE__ */ function(fs$readSync) {
+    })(fs.read);
+    fs.readSync = typeof fs.readSync !== "function" ? fs.readSync : /* @__PURE__ */ (function(fs$readSync) {
       return function(fd, buffer, offset, length, position) {
         var eagCounter = 0;
         while (true) {
@@ -197,7 +195,7 @@ function requirePolyfills() {
           }
         }
       };
-    }(fs.readSync);
+    })(fs.readSync);
     function patchLchmod(fs2) {
       fs2.lchmod = function(path2, mode, callback) {
         fs2.open(
@@ -520,7 +518,7 @@ function requireGracefulFs() {
   if (!fs[gracefulQueue]) {
     var queue = commonjsGlobal[gracefulQueue] || [];
     publishQueue(fs, queue);
-    fs.close = function(fs$close) {
+    fs.close = (function(fs$close) {
       function close(fd, cb) {
         return fs$close.call(fs, fd, function(err) {
           if (!err) {
@@ -534,8 +532,8 @@ function requireGracefulFs() {
         value: fs$close
       });
       return close;
-    }(fs.close);
-    fs.closeSync = function(fs$closeSync) {
+    })(fs.close);
+    fs.closeSync = (function(fs$closeSync) {
       function closeSync(fd) {
         fs$closeSync.apply(fs, arguments);
         resetQueue();
@@ -544,7 +542,7 @@ function requireGracefulFs() {
         value: fs$closeSync
       });
       return closeSync;
-    }(fs.closeSync);
+    })(fs.closeSync);
     if (/\bgfs4\b/i.test(process.env.NODE_DEBUG || "")) {
       process.on("exit", function() {
         debug(fs[gracefulQueue]);
@@ -1355,7 +1353,7 @@ var hasRequiredSafeBuffer$2;
 function requireSafeBuffer$2() {
   if (hasRequiredSafeBuffer$2) return safeBuffer$2.exports;
   hasRequiredSafeBuffer$2 = 1;
-  (function(module, exports) {
+  (function(module2, exports2) {
     var buffer = require$$0$3;
     var Buffer2 = buffer.Buffer;
     function copyProps(src, dst) {
@@ -1364,10 +1362,10 @@ function requireSafeBuffer$2() {
       }
     }
     if (Buffer2.from && Buffer2.alloc && Buffer2.allocUnsafe && Buffer2.allocUnsafeSlow) {
-      module.exports = buffer;
+      module2.exports = buffer;
     } else {
-      copyProps(buffer, exports);
-      exports.Buffer = SafeBuffer;
+      copyProps(buffer, exports2);
+      exports2.Buffer = SafeBuffer;
     }
     function SafeBuffer(arg, encodingOrOffset, length) {
       return Buffer2(arg, encodingOrOffset, length);
@@ -1520,7 +1518,7 @@ function requireInherits() {
   if (hasRequiredInherits) return inherits.exports;
   hasRequiredInherits = 1;
   try {
-    var util2 = require2("util");
+    var util2 = require("util");
     if (typeof util2.inherits !== "function") throw "";
     inherits.exports = util2.inherits;
   } catch (e) {
@@ -1533,7 +1531,7 @@ var hasRequiredBufferList;
 function requireBufferList() {
   if (hasRequiredBufferList) return BufferList.exports;
   hasRequiredBufferList = 1;
-  (function(module) {
+  (function(module2) {
     function _classCallCheck(instance, Constructor) {
       if (!(instance instanceof Constructor)) {
         throw new TypeError("Cannot call a class as a function");
@@ -1544,7 +1542,7 @@ function requireBufferList() {
     function copyBuffer(src, target, offset) {
       src.copy(target, offset);
     }
-    module.exports = function() {
+    module2.exports = (function() {
       function BufferList2() {
         _classCallCheck(this, BufferList2);
         this.head = null;
@@ -1576,7 +1574,7 @@ function requireBufferList() {
         this.head = this.tail = null;
         this.length = 0;
       };
-      BufferList2.prototype.join = function join2(s) {
+      BufferList2.prototype.join = function join(s) {
         if (this.length === 0) return "";
         var p = this.head;
         var ret = "" + p.data;
@@ -1598,9 +1596,9 @@ function requireBufferList() {
         return ret;
       };
       return BufferList2;
-    }();
+    })();
     if (util2 && util2.inspect && util2.inspect.custom) {
-      module.exports.prototype[util2.inspect.custom] = function() {
+      module2.exports.prototype[util2.inspect.custom] = function() {
         var obj = util2.inspect({ length: this.length });
         return this.constructor.name + " " + obj;
       };
@@ -2205,7 +2203,7 @@ var hasRequiredSafeBuffer$1;
 function requireSafeBuffer$1() {
   if (hasRequiredSafeBuffer$1) return safeBuffer$1.exports;
   hasRequiredSafeBuffer$1 = 1;
-  (function(module, exports) {
+  (function(module2, exports2) {
     var buffer = require$$0$3;
     var Buffer2 = buffer.Buffer;
     function copyProps(src, dst) {
@@ -2214,10 +2212,10 @@ function requireSafeBuffer$1() {
       }
     }
     if (Buffer2.from && Buffer2.alloc && Buffer2.allocUnsafe && Buffer2.allocUnsafeSlow) {
-      module.exports = buffer;
+      module2.exports = buffer;
     } else {
-      copyProps(buffer, exports);
-      exports.Buffer = SafeBuffer;
+      copyProps(buffer, exports2);
+      exports2.Buffer = SafeBuffer;
     }
     function SafeBuffer(arg, encodingOrOffset, length) {
       return Buffer2(arg, encodingOrOffset, length);
@@ -3051,11 +3049,11 @@ function require_stream_readable() {
     });
     for (var i in stream2) {
       if (this[i] === void 0 && typeof stream2[i] === "function") {
-        this[i] = /* @__PURE__ */ function(method) {
+        this[i] = /* @__PURE__ */ (function(method) {
           return function() {
             return stream2[method].apply(stream2, arguments);
           };
-        }(i);
+        })(i);
       }
     }
     for (var n = 0; n < kProxyEvents.length; n++) {
@@ -3306,25 +3304,25 @@ var hasRequiredReadable;
 function requireReadable() {
   if (hasRequiredReadable) return readable.exports;
   hasRequiredReadable = 1;
-  (function(module, exports) {
+  (function(module2, exports2) {
     var Stream = require$$0$1;
     if (process.env.READABLE_STREAM === "disable" && Stream) {
-      module.exports = Stream;
-      exports = module.exports = Stream.Readable;
-      exports.Readable = Stream.Readable;
-      exports.Writable = Stream.Writable;
-      exports.Duplex = Stream.Duplex;
-      exports.Transform = Stream.Transform;
-      exports.PassThrough = Stream.PassThrough;
-      exports.Stream = Stream;
+      module2.exports = Stream;
+      exports2 = module2.exports = Stream.Readable;
+      exports2.Readable = Stream.Readable;
+      exports2.Writable = Stream.Writable;
+      exports2.Duplex = Stream.Duplex;
+      exports2.Transform = Stream.Transform;
+      exports2.PassThrough = Stream.PassThrough;
+      exports2.Stream = Stream;
     } else {
-      exports = module.exports = require_stream_readable();
-      exports.Stream = Stream || exports;
-      exports.Readable = exports;
-      exports.Writable = require_stream_writable();
-      exports.Duplex = require_stream_duplex();
-      exports.Transform = require_stream_transform();
-      exports.PassThrough = require_stream_passthrough();
+      exports2 = module2.exports = require_stream_readable();
+      exports2.Stream = Stream || exports2;
+      exports2.Readable = exports2;
+      exports2.Writable = require_stream_writable();
+      exports2.Duplex = require_stream_duplex();
+      exports2.Transform = require_stream_transform();
+      exports2.PassThrough = require_stream_passthrough();
     }
   })(readable, readable.exports);
   return readable.exports;
@@ -3343,7 +3341,7 @@ var hasRequiredSafeBuffer;
 function requireSafeBuffer() {
   if (hasRequiredSafeBuffer) return safeBuffer.exports;
   hasRequiredSafeBuffer = 1;
-  (function(module, exports) {
+  (function(module2, exports2) {
     var buffer = require$$0$3;
     var Buffer2 = buffer.Buffer;
     function copyProps(src, dst) {
@@ -3352,10 +3350,10 @@ function requireSafeBuffer() {
       }
     }
     if (Buffer2.from && Buffer2.alloc && Buffer2.allocUnsafe && Buffer2.allocUnsafeSlow) {
-      module.exports = buffer;
+      module2.exports = buffer;
     } else {
-      copyProps(buffer, exports);
-      exports.Buffer = SafeBuffer;
+      copyProps(buffer, exports2);
+      exports2.Buffer = SafeBuffer;
     }
     function SafeBuffer(arg, encodingOrOffset, length) {
       return Buffer2(arg, encodingOrOffset, length);
@@ -4144,7 +4142,7 @@ function requireGetIntrinsic() {
   var throwTypeError = function() {
     throw new $TypeError();
   };
-  var ThrowTypeError = $gOPD ? function() {
+  var ThrowTypeError = $gOPD ? (function() {
     try {
       arguments.callee;
       return throwTypeError;
@@ -4155,7 +4153,7 @@ function requireGetIntrinsic() {
         return throwTypeError;
       }
     }
-  }() : throwTypeError;
+  })() : throwTypeError;
   var hasSymbols2 = requireHasSymbols()();
   var getProto2 = requireGetProto();
   var $ObjectGPO = requireObject_getPrototypeOf();
@@ -4821,12 +4819,12 @@ var hasRequiredCallBind;
 function requireCallBind() {
   if (hasRequiredCallBind) return callBind.exports;
   hasRequiredCallBind = 1;
-  (function(module) {
+  (function(module2) {
     var setFunctionLength2 = /* @__PURE__ */ requireSetFunctionLength();
     var $defineProperty = /* @__PURE__ */ requireEsDefineProperty();
     var callBindBasic = requireCallBindApplyHelpers();
     var applyBind2 = requireApplyBind();
-    module.exports = function callBind2(originalFunction) {
+    module2.exports = function callBind2(originalFunction) {
       var func = callBindBasic(arguments);
       var adjustedLength = originalFunction.length - (arguments.length - 1);
       return setFunctionLength2(
@@ -4836,9 +4834,9 @@ function requireCallBind() {
       );
     };
     if ($defineProperty) {
-      $defineProperty(module.exports, "apply", { value: applyBind2 });
+      $defineProperty(module2.exports, "apply", { value: applyBind2 });
     } else {
-      module.exports.apply = applyBind2;
+      module2.exports.apply = applyBind2;
     }
   })(callBind);
   return callBind.exports;
@@ -5014,7 +5012,10 @@ function requireToBuffer() {
   var useArrayBuffer = typeof ArrayBuffer !== "undefined" && typeof Uint8Array !== "undefined";
   var useFromArrayBuffer = useArrayBuffer && (Buffer2.prototype instanceof Uint8Array || Buffer2.TYPED_ARRAY_SUPPORT);
   toBuffer = function toBuffer2(data, encoding) {
-    if (data instanceof Buffer2) {
+    if (Buffer2.isBuffer(data)) {
+      if (data.constructor && !("isBuffer" in data)) {
+        return Buffer2.from(data);
+      }
       return data;
     }
     if (typeof data === "string") {
@@ -5060,7 +5061,7 @@ var hasRequiredBufferFill;
 function requireBufferFill() {
   if (hasRequiredBufferFill) return bufferFill;
   hasRequiredBufferFill = 1;
-  var hasFullSupport = function() {
+  var hasFullSupport = (function() {
     try {
       if (!Buffer.isEncoding("latin1")) {
         return false;
@@ -5071,7 +5072,7 @@ function requireBufferFill() {
     } catch (_) {
       return false;
     }
-  }();
+  })();
   function isSingleByte(val) {
     return val.length === 1 && val.charCodeAt(0) < 256;
   }
@@ -6646,7 +6647,7 @@ var hasRequiredCrc32;
 function requireCrc32() {
   if (hasRequiredCrc32) return crc32;
   hasRequiredCrc32 = 1;
-  crc32 = function() {
+  crc32 = (function() {
     var crc32Lookup = new Uint32Array([
       0,
       79764919,
@@ -6920,7 +6921,7 @@ function requireCrc32() {
       };
     };
     return CRC32;
-  }();
+  })();
   return crc32;
 }
 const version = "1.0.6";
@@ -7372,9 +7373,9 @@ var hasRequiredThrough;
 function requireThrough() {
   if (hasRequiredThrough) return through.exports;
   hasRequiredThrough = 1;
-  (function(module, exports) {
+  (function(module2, exports2) {
     var Stream = require$$0$1;
-    module.exports = through2;
+    module2.exports = through2;
     through2.through = through2;
     function through2(write, end, opts) {
       write = write || function(data) {
@@ -9052,15 +9053,15 @@ function requireFdSlicer() {
   var Writable = stream2.Writable;
   var PassThrough = stream2.PassThrough;
   var Pend = requirePend();
-  var EventEmitter2 = require$$2$1.EventEmitter;
+  var EventEmitter = require$$2$1.EventEmitter;
   fdSlicer.createFromBuffer = createFromBuffer;
   fdSlicer.createFromFd = createFromFd;
   fdSlicer.BufferSlicer = BufferSlicer;
   fdSlicer.FdSlicer = FdSlicer;
-  util2.inherits(FdSlicer, EventEmitter2);
+  util2.inherits(FdSlicer, EventEmitter);
   function FdSlicer(fd, options) {
     options = options || {};
-    EventEmitter2.call(this);
+    EventEmitter.call(this);
     this.fd = fd;
     this.pend = new Pend();
     this.pend.max = 1;
@@ -9204,9 +9205,9 @@ function requireFdSlicer() {
     this.destroyed = true;
     this.context.unref();
   };
-  util2.inherits(BufferSlicer, EventEmitter2);
+  util2.inherits(BufferSlicer, EventEmitter);
   function BufferSlicer(buffer, options) {
-    EventEmitter2.call(this);
+    EventEmitter.call(this);
     options = options || {};
     this.refCount = 0;
     this.buffer = buffer;
@@ -9617,7 +9618,7 @@ function requireYauzl() {
   var fd_slicer = requireFdSlicer();
   var crc322 = requireBufferCrc32();
   var util2 = require$$1;
-  var EventEmitter2 = require$$2$1.EventEmitter;
+  var EventEmitter = require$$2$1.EventEmitter;
   var Transform = require$$0$1.Transform;
   var PassThrough = require$$0$1.PassThrough;
   var Writable = require$$0$1.Writable;
@@ -9749,10 +9750,10 @@ function requireYauzl() {
       callback(new Error("end of central directory record signature not found"));
     });
   }
-  util2.inherits(ZipFile, EventEmitter2);
+  util2.inherits(ZipFile, EventEmitter);
   function ZipFile(reader, centralDirectoryOffset, fileSize, entryCount, comment, autoClose, lazyEntries, decodeStrings, validateEntrySizes, strictFileNames) {
     var self2 = this;
-    EventEmitter2.call(self2);
+    EventEmitter.call(self2);
     self2.reader = reader;
     self2.reader.on("error", function(err) {
       emitError(self2, err);
@@ -10113,9 +10114,9 @@ function requireYauzl() {
     }
     cb();
   };
-  util2.inherits(RandomAccessReader, EventEmitter2);
+  util2.inherits(RandomAccessReader, EventEmitter);
   function RandomAccessReader() {
-    EventEmitter2.call(this);
+    EventEmitter.call(this);
     this.refCount = 0;
   }
   RandomAccessReader.prototype.ref = function() {
@@ -10851,7 +10852,7 @@ async function DownloadCli(targetDir, logLevel = "info") {
     throw error;
   }
 }
-class HardwareMonitor extends EventEmitter {
+class HardwareMonitor extends node_events.EventEmitter {
   executablePath = "";
   activeProcess = null;
   buffer = "";
@@ -10966,7 +10967,7 @@ class HardwareMonitor extends EventEmitter {
       let output = "";
       let errorOutput = "";
       let processKilled = false;
-      const proc = spawn(this.executablePath, args);
+      const proc = node_child_process.spawn(this.executablePath, args);
       const timeoutHandle = setTimeout(() => {
         processKilled = true;
         proc.kill();
@@ -11049,7 +11050,7 @@ class HardwareMonitor extends EventEmitter {
     const args = this.buildArgs("timed", intervalMs, components);
     this.buffer = "";
     this.initialMessageSkipped = false;
-    this.activeProcess = spawn(this.executablePath, args);
+    this.activeProcess = node_child_process.spawn(this.executablePath, args);
     this.activeProcess.stdout?.on("data", (dataChunk) => {
       this.buffer += dataChunk.toString();
       if (!this.initialMessageSkipped) {
@@ -11219,7 +11220,7 @@ var hasRequiredLodash;
 function requireLodash() {
   if (hasRequiredLodash) return lodash$1.exports;
   hasRequiredLodash = 1;
-  (function(module, exports) {
+  (function(module2, exports2) {
     (function() {
       var undefined$1;
       var VERSION = "4.17.21";
@@ -11547,11 +11548,11 @@ function requireLodash() {
       var freeGlobal = typeof commonjsGlobal == "object" && commonjsGlobal && commonjsGlobal.Object === Object && commonjsGlobal;
       var freeSelf = typeof self == "object" && self && self.Object === Object && self;
       var root = freeGlobal || freeSelf || Function("return this")();
-      var freeExports = exports && !exports.nodeType && exports;
-      var freeModule = freeExports && true && module && !module.nodeType && module;
+      var freeExports = exports2 && !exports2.nodeType && exports2;
+      var freeModule = freeExports && true && module2 && !module2.nodeType && module2;
       var moduleExports = freeModule && freeModule.exports === freeExports;
       var freeProcess = moduleExports && freeGlobal.process;
-      var nodeUtil = function() {
+      var nodeUtil = (function() {
         try {
           var types = freeModule && freeModule.require && freeModule.require("util").types;
           if (types) {
@@ -11560,7 +11561,7 @@ function requireLodash() {
           return freeProcess && freeProcess.binding && freeProcess.binding("util");
         } catch (e) {
         }
-      }();
+      })();
       var nodeIsArrayBuffer = nodeUtil && nodeUtil.isArrayBuffer, nodeIsDate = nodeUtil && nodeUtil.isDate, nodeIsMap = nodeUtil && nodeUtil.isMap, nodeIsRegExp = nodeUtil && nodeUtil.isRegExp, nodeIsSet = nodeUtil && nodeUtil.isSet, nodeIsTypedArray = nodeUtil && nodeUtil.isTypedArray;
       function apply(func, thisArg, args) {
         switch (args.length) {
@@ -11906,7 +11907,7 @@ function requireLodash() {
       function unicodeWords(string) {
         return string.match(reUnicodeWord) || [];
       }
-      var runInContext = function runInContext2(context) {
+      var runInContext = (function runInContext2(context) {
         context = context == null ? root : _.defaults(root.Object(), context, _.pick(root, contextProps));
         var Array2 = context.Array, Date2 = context.Date, Error2 = context.Error, Function2 = context.Function, Math2 = context.Math, Object2 = context.Object, RegExp2 = context.RegExp, String2 = context.String, TypeError2 = context.TypeError;
         var arrayProto = Array2.prototype, funcProto = Function2.prototype, objectProto = Object2.prototype;
@@ -11914,10 +11915,10 @@ function requireLodash() {
         var funcToString = funcProto.toString;
         var hasOwnProperty = objectProto.hasOwnProperty;
         var idCounter = 0;
-        var maskSrcKey = function() {
+        var maskSrcKey = (function() {
           var uid = /[^.]+$/.exec(coreJsData && coreJsData.keys && coreJsData.keys.IE_PROTO || "");
           return uid ? "Symbol(src)_1." + uid : "";
-        }();
+        })();
         var nativeObjectToString = objectProto.toString;
         var objectCtorString = funcToString.call(Object2);
         var oldDash = root._;
@@ -11925,14 +11926,14 @@ function requireLodash() {
           "^" + funcToString.call(hasOwnProperty).replace(reRegExpChar, "\\$&").replace(/hasOwnProperty|(function).*?(?=\\\()| for .+?(?=\\\])/g, "$1.*?") + "$"
         );
         var Buffer2 = moduleExports ? context.Buffer : undefined$1, Symbol2 = context.Symbol, Uint8Array2 = context.Uint8Array, allocUnsafe = Buffer2 ? Buffer2.allocUnsafe : undefined$1, getPrototype = overArg(Object2.getPrototypeOf, Object2), objectCreate = Object2.create, propertyIsEnumerable = objectProto.propertyIsEnumerable, splice = arrayProto.splice, spreadableSymbol = Symbol2 ? Symbol2.isConcatSpreadable : undefined$1, symIterator = Symbol2 ? Symbol2.iterator : undefined$1, symToStringTag = Symbol2 ? Symbol2.toStringTag : undefined$1;
-        var defineProperty = function() {
+        var defineProperty = (function() {
           try {
             var func = getNative(Object2, "defineProperty");
             func({}, "", {});
             return func;
           } catch (e) {
           }
-        }();
+        })();
         var ctxClearTimeout = context.clearTimeout !== root.clearTimeout && context.clearTimeout, ctxNow = Date2 && Date2.now !== root.Date.now && Date2.now, ctxSetTimeout = context.setTimeout !== root.setTimeout && context.setTimeout;
         var nativeCeil = Math2.ceil, nativeFloor = Math2.floor, nativeGetSymbols = Object2.getOwnPropertySymbols, nativeIsBuffer = Buffer2 ? Buffer2.isBuffer : undefined$1, nativeIsFinite = context.isFinite, nativeJoin = arrayProto.join, nativeKeys = overArg(Object2.keys, Object2), nativeMax = Math2.max, nativeMin = Math2.min, nativeNow = Date2.now, nativeParseInt = context.parseInt, nativeRandom = Math2.random, nativeReverse = arrayProto.reverse;
         var DataView2 = getNative(context, "DataView"), Map2 = getNative(context, "Map"), Promise2 = getNative(context, "Promise"), Set2 = getNative(context, "Set"), WeakMap2 = getNative(context, "WeakMap"), nativeCreate = getNative(Object2, "create");
@@ -11951,7 +11952,7 @@ function requireLodash() {
           }
           return new LodashWrapper(value);
         }
-        var baseCreate = /* @__PURE__ */ function() {
+        var baseCreate = /* @__PURE__ */ (function() {
           function object() {
           }
           return function(proto) {
@@ -11966,7 +11967,7 @@ function requireLodash() {
             object.prototype = undefined$1;
             return result2;
           };
-        }();
+        })();
         function baseLodash() {
         }
         function LodashWrapper(value, chainAll) {
@@ -14521,7 +14522,7 @@ function requireLodash() {
           }
           return mapped.length && mapped[0] === arrays[0] ? baseIntersection(mapped, undefined$1, comparator) : [];
         });
-        function join2(array, separator) {
+        function join(array, separator) {
           return array == null ? "" : nativeJoin.call(array, separator);
         }
         function last(array) {
@@ -15258,9 +15259,9 @@ function requireLodash() {
         var gte = createRelationalOperation(function(value, other) {
           return value >= other;
         });
-        var isArguments = baseIsArguments(/* @__PURE__ */ function() {
+        var isArguments = baseIsArguments(/* @__PURE__ */ (function() {
           return arguments;
-        }()) ? baseIsArguments : function(value) {
+        })()) ? baseIsArguments : function(value) {
           return isObjectLike(value) && hasOwnProperty.call(value, "callee") && !propertyIsEnumerable.call(value, "callee");
         };
         var isArray = Array2.isArray;
@@ -16440,7 +16441,7 @@ function requireLodash() {
         lodash2.isUndefined = isUndefined;
         lodash2.isWeakMap = isWeakMap;
         lodash2.isWeakSet = isWeakSet;
-        lodash2.join = join2;
+        lodash2.join = join;
         lodash2.kebabCase = kebabCase;
         lodash2.last = last;
         lodash2.lastIndexOf = lastIndexOf;
@@ -16512,7 +16513,7 @@ function requireLodash() {
         lodash2.each = forEach2;
         lodash2.eachRight = forEachRight;
         lodash2.first = head;
-        mixin(lodash2, function() {
+        mixin(lodash2, (function() {
           var source = {};
           baseForOwn(lodash2, function(func, methodName) {
             if (!hasOwnProperty.call(lodash2.prototype, methodName)) {
@@ -16520,7 +16521,7 @@ function requireLodash() {
             }
           });
           return source;
-        }(), { "chain": false });
+        })(), { "chain": false });
         lodash2.VERSION = VERSION;
         arrayEach(["bind", "bindKey", "curry", "curryRight", "partial", "partialRight"], function(methodName) {
           lodash2[methodName].placeholder = lodash2;
@@ -16680,7 +16681,7 @@ function requireLodash() {
           lodash2.prototype[symIterator] = wrapperToIterator;
         }
         return lodash2;
-      };
+      });
       var _ = runInContext();
       if (freeModule) {
         (freeModule.exports = _)._ = _;
@@ -16763,7 +16764,7 @@ async function startMonitoring() {
   }
   try {
     hwMonitor = new HardwareMonitor("error");
-    const targetDir = join(app.getPath("downloads"), "LynxHub");
+    const targetDir = path.join(electron.app.getPath("downloads"), "LynxHub");
     await hwMonitor.checkRequirements(targetDir);
     hwMonitor.on("data", (data) => {
       sendRenderer(HMONITOR_IPC_DATA_ID, data);
@@ -16786,34 +16787,43 @@ function stopMonitoring() {
   hwMonitor = void 0;
 }
 async function checkHardwareDevices() {
-  try {
-    const hm = new HardwareMonitor("error");
-    const targetDir = join(app.getPath("downloads"), "LynxHub");
-    await hm.checkRequirements(targetDir);
-    const result = await hm.getDataOnce(["cpu", "gpu", "memory"]);
-    const gpu = result.GPU.map((item) => item.Name);
-    const cpu = result.CPU.map((item) => item.Name);
-    const memory = result.Memory.map((item) => item.Name);
-    if (currentConfig && storeManager) {
-      currentConfig.availableHardware = { gpu, cpu, memory };
-      if (lodashExports.isEmpty(currentConfig.enabledMetrics.gpu)) {
-        currentConfig.enabledMetrics.gpu = gpu.map((name) => ({
-          name,
-          active: true,
-          enabled: ["temp", "usage", "vram"]
-        }));
+  const MAX_RETRIES = 5;
+  let retries = 0;
+  while (retries < MAX_RETRIES) {
+    try {
+      const hm = new HardwareMonitor("error");
+      const targetDir = path.join(electron.app.getPath("downloads"), "LynxHub");
+      await hm.checkRequirements(targetDir);
+      const result = await hm.getDataOnce(["cpu", "gpu", "memory"]);
+      const gpu = result.GPU.map((item) => item.Name);
+      const cpu = result.CPU.map((item) => item.Name);
+      const memory = result.Memory.map((item) => item.Name);
+      if (currentConfig && storeManager) {
+        currentConfig.availableHardware = { gpu, cpu, memory };
+        if (lodashExports.isEmpty(currentConfig.enabledMetrics.gpu)) {
+          currentConfig.enabledMetrics.gpu = gpu.map((name) => ({
+            name,
+            active: true,
+            enabled: ["temp", "usage", "vram"]
+          }));
+        }
+        if (lodashExports.isEmpty(currentConfig.enabledMetrics.cpu)) {
+          currentConfig.enabledMetrics.cpu = cpu.map((name) => ({ name, active: true, enabled: ["temp", "usage"] }));
+        }
+        if (lodashExports.isEmpty(currentConfig.enabledMetrics.memory)) {
+          currentConfig.enabledMetrics.memory = memory.map((name) => ({ name, active: true, enabled: ["memory"] }));
+        }
+        storeManager.setCustomData(HMONITOR_STORAGE_ID, currentConfig);
+        sendRenderer(HMONITOR_IPC_ON_CONFIG, currentConfig);
       }
-      if (lodashExports.isEmpty(currentConfig.enabledMetrics.cpu)) {
-        currentConfig.enabledMetrics.cpu = cpu.map((name) => ({ name, active: true, enabled: ["temp", "usage"] }));
+      return;
+    } catch (e) {
+      console.warn(`Attempt ${retries + 1} failed to check hardware devices:`, e);
+      retries++;
+      if (retries >= MAX_RETRIES) {
+        console.error("Failed to check hardware devices after 5 attempts.");
       }
-      if (lodashExports.isEmpty(currentConfig.enabledMetrics.memory)) {
-        currentConfig.enabledMetrics.memory = memory.map((name) => ({ name, active: true, enabled: ["memory"] }));
-      }
-      storeManager.setCustomData(HMONITOR_STORAGE_ID, currentConfig);
-      sendRenderer(HMONITOR_IPC_ON_CONFIG, currentConfig);
     }
-  } catch (e) {
-    console.warn(e);
   }
 }
 async function onAppReady(utils) {
@@ -16860,14 +16870,12 @@ function updateConfig(config) {
   storeManager?.setCustomData(HMONITOR_STORAGE_ID, config);
 }
 function listenForHWChannels() {
-  ipcMain.on(HMONITOR_IPC_STOP_ID, () => stopMonitoring());
-  ipcMain.on(HMONITOR_IPC_UPDATE_CONFIG, (_, config) => updateConfig(JSON.parse(config)));
+  electron.ipcMain.on(HMONITOR_IPC_STOP_ID, () => stopMonitoring());
+  electron.ipcMain.on(HMONITOR_IPC_UPDATE_CONFIG, (_, config) => updateConfig(JSON.parse(config)));
 }
 async function initialExtension(lynxApi, utils) {
   lynxApi.listenForChannels(() => listenForHWChannels());
   lynxApi.onReadyToShow(() => onAppReadyToShow(utils));
   lynxApi.onAppReady(() => onAppReady(utils));
 }
-export {
-  initialExtension
-};
+exports.initialExtension = initialExtension;

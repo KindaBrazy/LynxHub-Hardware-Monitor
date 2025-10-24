@@ -28,6 +28,7 @@ function requireReact_production () {
 	  REACT_SUSPENSE_TYPE = Symbol.for("react.suspense"),
 	  REACT_MEMO_TYPE = Symbol.for("react.memo"),
 	  REACT_LAZY_TYPE = Symbol.for("react.lazy"),
+	  REACT_ACTIVITY_TYPE = Symbol.for("react.activity"),
 	  MAYBE_ITERATOR_SYMBOL = Symbol.iterator;
 	function getIteratorFn(maybeIterable) {
 	  if (null === maybeIterable || "object" !== typeof maybeIterable) return null;
@@ -79,28 +80,22 @@ function requireReact_production () {
 	pureComponentPrototype.constructor = PureComponent;
 	assign(pureComponentPrototype, Component.prototype);
 	pureComponentPrototype.isPureReactComponent = true;
-	var isArrayImpl = Array.isArray,
-	  ReactSharedInternals = { H: null, A: null, T: null, S: null, V: null },
+	var isArrayImpl = Array.isArray;
+	function noop() {}
+	var ReactSharedInternals = { H: null, A: null, T: null, S: null },
 	  hasOwnProperty = Object.prototype.hasOwnProperty;
-	function ReactElement(type, key, self, source, owner, props) {
-	  self = props.ref;
+	function ReactElement(type, key, props) {
+	  var refProp = props.ref;
 	  return {
 	    $$typeof: REACT_ELEMENT_TYPE,
 	    type: type,
 	    key: key,
-	    ref: void 0 !== self ? self : null,
+	    ref: void 0 !== refProp ? refProp : null,
 	    props: props
 	  };
 	}
 	function cloneAndReplaceKey(oldElement, newKey) {
-	  return ReactElement(
-	    oldElement.type,
-	    newKey,
-	    void 0,
-	    void 0,
-	    void 0,
-	    oldElement.props
-	  );
+	  return ReactElement(oldElement.type, newKey, oldElement.props);
 	}
 	function isValidElement(object) {
 	  return (
@@ -124,7 +119,6 @@ function requireReact_production () {
 	    ? escape("" + element.key)
 	    : index.toString(36);
 	}
-	function noop$1() {}
 	function resolveThenable(thenable) {
 	  switch (thenable.status) {
 	    case "fulfilled":
@@ -134,7 +128,7 @@ function requireReact_production () {
 	    default:
 	      switch (
 	        ("string" === typeof thenable.status
-	          ? thenable.then(noop$1, noop$1)
+	          ? thenable.then(noop, noop)
 	          : ((thenable.status = "pending"),
 	            thenable.then(
 	              function (fulfilledValue) {
@@ -295,68 +289,69 @@ function requireReact_production () {
 	  throw payload._result;
 	}
 	var reportGlobalError =
-	  "function" === typeof reportError
-	    ? reportError
-	    : function (error) {
-	        if (
-	          "object" === typeof window &&
-	          "function" === typeof window.ErrorEvent
-	        ) {
-	          var event = new window.ErrorEvent("error", {
-	            bubbles: true,
-	            cancelable: true,
-	            message:
-	              "object" === typeof error &&
-	              null !== error &&
-	              "string" === typeof error.message
-	                ? String(error.message)
-	                : String(error),
-	            error: error
-	          });
-	          if (!window.dispatchEvent(event)) return;
-	        } else if (
-	          "object" === typeof process &&
-	          "function" === typeof process.emit
-	        ) {
-	          process.emit("uncaughtException", error);
-	          return;
-	        }
-	        console.error(error);
-	      };
-	function noop() {}
-	react_production.Children = {
-	  map: mapChildren,
-	  forEach: function (children, forEachFunc, forEachContext) {
-	    mapChildren(
-	      children,
-	      function () {
-	        forEachFunc.apply(this, arguments);
-	      },
-	      forEachContext
-	    );
-	  },
-	  count: function (children) {
-	    var n = 0;
-	    mapChildren(children, function () {
-	      n++;
-	    });
-	    return n;
-	  },
-	  toArray: function (children) {
-	    return (
-	      mapChildren(children, function (child) {
-	        return child;
-	      }) || []
-	    );
-	  },
-	  only: function (children) {
-	    if (!isValidElement(children))
-	      throw Error(
-	        "React.Children.only expected to receive a single React element child."
+	    "function" === typeof reportError
+	      ? reportError
+	      : function (error) {
+	          if (
+	            "object" === typeof window &&
+	            "function" === typeof window.ErrorEvent
+	          ) {
+	            var event = new window.ErrorEvent("error", {
+	              bubbles: true,
+	              cancelable: true,
+	              message:
+	                "object" === typeof error &&
+	                null !== error &&
+	                "string" === typeof error.message
+	                  ? String(error.message)
+	                  : String(error),
+	              error: error
+	            });
+	            if (!window.dispatchEvent(event)) return;
+	          } else if (
+	            "object" === typeof process &&
+	            "function" === typeof process.emit
+	          ) {
+	            process.emit("uncaughtException", error);
+	            return;
+	          }
+	          console.error(error);
+	        },
+	  Children = {
+	    map: mapChildren,
+	    forEach: function (children, forEachFunc, forEachContext) {
+	      mapChildren(
+	        children,
+	        function () {
+	          forEachFunc.apply(this, arguments);
+	        },
+	        forEachContext
 	      );
-	    return children;
-	  }
-	};
+	    },
+	    count: function (children) {
+	      var n = 0;
+	      mapChildren(children, function () {
+	        n++;
+	      });
+	      return n;
+	    },
+	    toArray: function (children) {
+	      return (
+	        mapChildren(children, function (child) {
+	          return child;
+	        }) || []
+	      );
+	    },
+	    only: function (children) {
+	      if (!isValidElement(children))
+	        throw Error(
+	          "React.Children.only expected to receive a single React element child."
+	        );
+	      return children;
+	    }
+	  };
+	react_production.Activity = REACT_ACTIVITY_TYPE;
+	react_production.Children = Children;
 	react_production.Component = Component;
 	react_production.Fragment = REACT_FRAGMENT_TYPE;
 	react_production.Profiler = REACT_PROFILER_TYPE;
@@ -376,18 +371,18 @@ function requireReact_production () {
 	    return fn.apply(null, arguments);
 	  };
 	};
+	react_production.cacheSignal = function () {
+	  return null;
+	};
 	react_production.cloneElement = function (element, config, children) {
 	  if (null === element || void 0 === element)
 	    throw Error(
 	      "The argument must be a React element, but you passed " + element + "."
 	    );
 	  var props = assign({}, element.props),
-	    key = element.key,
-	    owner = void 0;
+	    key = element.key;
 	  if (null != config)
-	    for (propName in (void 0 !== config.ref && (owner = void 0),
-	    void 0 !== config.key && (key = "" + config.key),
-	    config))
+	    for (propName in (void 0 !== config.key && (key = "" + config.key), config))
 	      !hasOwnProperty.call(config, propName) ||
 	        "key" === propName ||
 	        "__self" === propName ||
@@ -401,7 +396,7 @@ function requireReact_production () {
 	      childArray[i] = arguments[i + 2];
 	    props.children = childArray;
 	  }
-	  return ReactElement(element.type, key, void 0, void 0, owner, props);
+	  return ReactElement(element.type, key, props);
 	};
 	react_production.createContext = function (defaultValue) {
 	  defaultValue = {
@@ -441,7 +436,7 @@ function requireReact_production () {
 	    for (propName in ((childrenLength = type.defaultProps), childrenLength))
 	      void 0 === props[propName] &&
 	        (props[propName] = childrenLength[propName]);
-	  return ReactElement(type, key, void 0, void 0, null, props);
+	  return ReactElement(type, key, props);
 	};
 	react_production.createRef = function () {
 	  return { current: null };
@@ -480,7 +475,10 @@ function requireReact_production () {
 	  } catch (error) {
 	    reportGlobalError(error);
 	  } finally {
-	    ReactSharedInternals.T = prevTransition;
+	    null !== prevTransition &&
+	      null !== currentTransition.types &&
+	      (prevTransition.types = currentTransition.types),
+	      (ReactSharedInternals.T = prevTransition);
 	  }
 	};
 	react_production.unstable_useCacheRefresh = function () {
@@ -502,13 +500,11 @@ function requireReact_production () {
 	react_production.useDeferredValue = function (value, initialValue) {
 	  return ReactSharedInternals.H.useDeferredValue(value, initialValue);
 	};
-	react_production.useEffect = function (create, createDeps, update) {
-	  var dispatcher = ReactSharedInternals.H;
-	  if ("function" === typeof update)
-	    throw Error(
-	      "useEffect CRUD overload is not enabled in this build of React."
-	    );
-	  return dispatcher.useEffect(create, createDeps);
+	react_production.useEffect = function (create, deps) {
+	  return ReactSharedInternals.H.useEffect(create, deps);
+	};
+	react_production.useEffectEvent = function (callback) {
+	  return ReactSharedInternals.H.useEffectEvent(callback);
 	};
 	react_production.useId = function () {
 	  return ReactSharedInternals.H.useId();
@@ -551,7 +547,7 @@ function requireReact_production () {
 	react_production.useTransition = function () {
 	  return ReactSharedInternals.H.useTransition();
 	};
-	react_production.version = "19.1.1";
+	react_production.version = "19.2.0";
 	return react_production;
 }
 
