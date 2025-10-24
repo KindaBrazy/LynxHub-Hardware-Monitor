@@ -14,7 +14,7 @@ export default defineConfig({
       outDir: resolve('extension_out/main'),
       rollupOptions: {
         input: resolve('extension/src/main/lynxExtension.ts'),
-        output: {entryFileNames: 'mainEntry.mjs'},
+        output: {entryFileNames: 'mainEntry.cjs', format: 'cjs'},
       },
     },
   },
