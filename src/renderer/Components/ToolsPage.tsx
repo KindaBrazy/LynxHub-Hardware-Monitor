@@ -3,7 +3,6 @@ import {useCallback} from 'react';
 import {useDispatch} from 'react-redux';
 
 import {useTabsState} from '../../../../src/renderer/src/App/Redux/Reducer/TabsReducer';
-import {useCachedImageUrl} from '../../../../src/renderer/src/App/Utils/LocalStorage';
 import {systemMonitorActions} from '../reducer';
 import {Settings_Icon} from '../SvgIcons';
 
@@ -11,8 +10,6 @@ const iconUrl: string =
   'https://raw.githubusercontent.com/KindaBrazy/LynxHub-Hardware-Monitor/refs/heads/metadata/icon.png';
 
 export default function ToolsPage() {
-  const iconSrc = useCachedImageUrl(`hwmonitor_card_icon`, iconUrl);
-
   const activeTab = useTabsState('activeTab');
   const dispatch = useDispatch();
 
@@ -36,7 +33,7 @@ export default function ToolsPage() {
         <div className="relative h-full flex flex-col justify-between p-6">
           {/* Icon section */}
           <div className="mt-2 flex justify-center">
-            {iconSrc && <Image src={iconSrc} radius="none" className="size-20" />}
+            <Image src={iconUrl} radius="none" className="size-20" />
           </div>
 
           {/* Title and Description */}
