@@ -2,22 +2,25 @@
   "$schema": "https://raw.githubusercontent.com/KindaBrazy/LynxHub-Statics/refs/heads/schema/plugins/versioning.schema.json",
   "versions": [
     {
-      "version": "0.12.1",
-      "commit": "5694688",
+      "version": "0.13.0",
+      "commit": "8a9f12e",
       "engines": {
         "extensionApi": "^1.0.0"
       },
-      "stage": "public",
+      "stage": "early_access",
       "platforms": ["win32"]
     }
   ],
   "changes": [
     {
-      "version": "0.12.1",
-      "date": "2025-09-04",
+      "version": "0.13.0",
+      "date": "2025-10-24",
       "items": [
         {
-          "Improvements": ["Support LynxHub Version 3.2.0"]
+          "Improvements": ["Support LynxHub Version 3.3.0", "Implemented retry logic for device checks"]
+        },
+        {
+          "Bug Fixes": ["Fixed tools page icon."]
         }
       ]
     },
@@ -29,9 +32,7 @@
           "New Features": ["Introduce customizable metric visibility settings."]
         },
         {
-          "Improvements": [
-            "Improve 'Admin Require' layout to support compact mode configuration"
-          ]
+          "Improvements": ["Improve 'Admin Require' layout to support compact mode configuration"]
         },
         {
           "Bug Fixes": [
@@ -47,10 +48,7 @@
       "date": "2025-07-28",
       "items": [
         {
-          "New Features": [
-            "Multi-hardware metrics toggle added.",
-            "Option to toggle metric labels."
-          ]
+          "New Features": ["Multi-hardware metrics toggle added.", "Option to toggle metric labels."]
         },
         {
           "Improvements": [
@@ -60,10 +58,7 @@
           ]
         },
         {
-          "Bug Fixes": [
-            "Performance and interval issues fixed.",
-            "Fixed white screen issue from extensions."
-          ]
+          "Bug Fixes": ["Performance and interval issues fixed.", "Fixed white screen issue from extensions."]
         }
       ]
     },
