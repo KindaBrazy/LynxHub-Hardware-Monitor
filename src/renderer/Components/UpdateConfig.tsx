@@ -1,7 +1,7 @@
 import {Fragment, useEffect} from 'react';
 import {useDispatch} from 'react-redux';
 
-import {ExtensionRendererApi} from '../../../../src/renderer/src/App/Extensions/ExtensionTypes_Renderer_Api';
+import {ExtensionRendererApi} from '../../../../src/cross/plugin/ExtensionTypes_Renderer_Api';
 import {HMONITOR_IPC_ON_CONFIG} from '../../cross/CrossConst';
 import {MonitoringSettings} from '../../cross/CrossTypes';
 import {systemMonitorActions} from '../reducer';
