@@ -140,25 +140,23 @@ export default function SettingsModal({show, isOpen, tabID}: Props) {
         };
       }
 
-      const {Icon} = result;
+      const {Icon, label} = result;
+
       return (
         <div
           className={
-            'flex items-center justify-between rounded-lg px-2' +
-            ' py-2 hover:bg-content2 transition-all duration-300 cursor-pointer'
+            'flex items-center px-2 py-1 gap-x-2 rounded-lg hover:bg-foreground-100' +
+            ' transition-colors duration-200 cursor-pointer'
           }
           key={result.id}
           onClick={toggle}>
-          <div className="flex items-center gap-3">
-            <div className={'flex h-9 w-9 items-center justify-center ' + 'rounded-md bg-primary/10 text-primary'}>
-              <Icon className="text-xl" />
-            </div>
-            <div>
-              <p className="font-medium">{result.label}</p>
-              <p className="text-sm text-default-500">{result.description}</p>
-            </div>
+          <div className={'flex h-9 w-9 items-center justify-center rounded-md bg-primary/10 text-secondary'}>
+            <Icon className="text-xl" />
           </div>
-          <Checkbox onValueChange={toggle} isSelected={isSelected} />
+
+          <span className="font-medium">{label}</span>
+
+          <Checkbox color="secondary" onValueChange={toggle} isSelected={isSelected} />
         </div>
       );
     },
@@ -199,7 +197,7 @@ export default function SettingsModal({show, isOpen, tabID}: Props) {
         backdrop: `!top-10 ${show}`,
         wrapper: `!top-10 pb-8 ${show}`,
       }}
-      size="2xl"
+      size="3xl"
       isOpen={isOpen}
       placement="center"
       isDismissable={false}
@@ -312,7 +310,9 @@ export default function SettingsModal({show, isOpen, tabID}: Props) {
                       key={`hardware_${item}_item`}
                       isSelected={isActive(item, 'gpu')}>
                       {getMetricItem('temp', 'gpu', item)}
+                      <Divider className="h-4 mx-1" orientation="vertical" />
                       {getMetricItem('usage', 'gpu', item)}
+                      <Divider className="h-4 mx-1" orientation="vertical" />
                       {getMetricItem('vram', 'gpu', item)}
                     </SettingsModal_Card>
                   ))}
@@ -329,6 +329,7 @@ export default function SettingsModal({show, isOpen, tabID}: Props) {
                       key={`hardware_${item}_item`}
                       isSelected={isActive(item, 'cpu')}>
                       {getMetricItem('temp', 'cpu', item)}
+                      <Divider className="h-4 mx-1" orientation="vertical" />
                       {getMetricItem('usage', 'cpu', item)}
                     </SettingsModal_Card>
                   ))}
@@ -354,8 +355,9 @@ export default function SettingsModal({show, isOpen, tabID}: Props) {
                     as="div"
                     fullWidth>
                     <CardHeader className="font-medium">Uptime</CardHeader>
-                    <CardBody>
+                    <CardBody className="flex-row items-center">
                       {getMetricItem('uptimeSystemSeconds', 'uptime', 'uptime')}
+                      <Divider className="h-4 mx-1" orientation="vertical" />
                       {getMetricItem('uptimeSeconds', 'uptime', 'uptime')}
                     </CardBody>
                   </Card>
