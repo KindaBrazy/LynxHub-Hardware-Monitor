@@ -369,12 +369,12 @@ export default function SettingsModal({show, isOpen, tabID}: Props) {
               )}
             </ModalBody>
 
-            <ModalFooter className="justify-between">
-              <Button color="warning" variant="light" onPress={onClose} className="cursor-default">
-                Close
-              </Button>
+            <ModalFooter>
               <Button color="success" variant="light" isLoading={isSaving} onPress={saveSettings}>
                 {!isSaving && 'Save Settings'}
+              </Button>
+              <Button color="warning" variant="light" onPress={onClose}>
+                Close
               </Button>
             </ModalFooter>
           </>
