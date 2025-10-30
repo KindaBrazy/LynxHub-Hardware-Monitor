@@ -13,6 +13,7 @@ import {
   NumberInput,
   Switch,
 } from '@heroui/react';
+import {AnimatePresence, motion} from 'framer-motion';
 import {Clock, Cpu, Database, LucideProps, Thermometer, Timer} from 'lucide-react';
 import {ForwardRefExoticComponent, RefAttributes, useCallback, useState} from 'react';
 import {useDispatch} from 'react-redux';
@@ -223,144 +224,152 @@ export default function SettingsModal({show, isOpen, tabID}: Props) {
                 </div>
               </div>
 
-              {appEnabled && (
-                <>
-                  <Divider className="my-4 bg-foreground-100" />
-
-                  {/* Refresh interval */}
-                  <div className="mb-6 pt-1">
-                    <NumberInput
-                      step={0.5}
-                      maxValue={60}
-                      minValue={0.5}
-                      value={refreshInterval}
-                      labelPlacement="outside"
-                      label="Refresh Interval"
-                      classNames={{label: 'text-medium'}}
-                      startContent={<Clock_Icon className="size-6" />}
-                      onValueChange={value => updateState('refreshInterval', value)}
-                      description="How frequently metrics should update (0.5-60 seconds)"
-                      endContent={<span className="text-xs text-foreground-500">Seconds</span>}
-                    />
-                  </div>
-
-                  {/* Display options */}
-                  <div className="mb-6 space-y-4">
-                    <h3 className="text-medium font-medium">Display Options</h3>
-
-                    <div
-                      onClick={() => {
-                        updateState('compactMode', !compactMode);
-                      }}
-                      className={
-                        'flex items-center justify-between rounded-lg px-2 ' +
-                        'py-2 hover:bg-content2 transition-all duration-300 cursor-pointer'
-                      }>
-                      <div>
-                        <p className="font-medium">Compact Mode</p>
-                        <p className="text-xs text-foreground-400">Use condensed layout to save space</p>
+              <AnimatePresence>
+                {appEnabled && (
+                  <div className="flex flex-col gap-y-4">
+                    {/* Refresh interval */}
+                    <motion.div
+                      transition={{delay: 0.1}}
+                      exit={{translateY: -10, opacity: 0}}
+                      animate={{translateY: 0, opacity: 1}}
+                      initial={{translateY: 10, opacity: 0}}
+                      className="p-4 shadow-sm bg-foreground-100 dark:bg-LynxRaisinBlack rounded-xl">
+                      <div className="mb-6 pt-1">
+                        <NumberInput
+                          step={0.5}
+                          maxValue={60}
+                          minValue={0.5}
+                          value={refreshInterval}
+                          labelPlacement="outside"
+                          label="Refresh Interval"
+                          classNames={{label: 'text-medium'}}
+                          startContent={<Clock_Icon className="size-6" />}
+                          onValueChange={value => updateState('refreshInterval', value)}
+                          description="How frequently metrics should update (0.5-60 seconds)"
+                          endContent={<span className="text-xs text-foreground-500">Seconds</span>}
+                        />
                       </div>
-                      <Switch
-                        onValueChange={value => {
-                          updateState('compactMode', value);
-                        }}
-                        size="sm"
-                        isSelected={compactMode}
-                      />
-                    </div>
 
-                    <div
-                      onClick={() => {
-                        updateState('showSectionLabel', !showSectionLabel);
-                      }}
-                      className={
-                        'flex items-center justify-between rounded-lg px-2 py-2 ' +
-                        'hover:bg-content2 transition-all duration-300 cursor-pointer'
-                      }>
-                      <div>
-                        <p className="font-medium">Show Section Labels</p>
-                        <p className="text-xs text-foreground-400">Display headers for metric groups</p>
+                      {/* Display options */}
+                      <div className="mb-6 space-y-4">
+                        <div
+                          onClick={() => {
+                            updateState('compactMode', !compactMode);
+                          }}
+                          className={
+                            'flex items-center justify-between rounded-lg px-2 ' +
+                            'py-2 hover:bg-content2 transition-all duration-300 cursor-pointer'
+                          }>
+                          <div>
+                            <p className="font-medium">Compact Mode</p>
+                            <p className="text-xs text-foreground-400">Use condensed layout to save space</p>
+                          </div>
+                          <Switch
+                            onValueChange={value => {
+                              updateState('compactMode', value);
+                            }}
+                            size="sm"
+                            isSelected={compactMode}
+                          />
+                        </div>
+
+                        <div
+                          onClick={() => {
+                            updateState('showSectionLabel', !showSectionLabel);
+                          }}
+                          className={
+                            'flex items-center justify-between rounded-lg px-2 py-2 ' +
+                            'hover:bg-content2 transition-all duration-300 cursor-pointer'
+                          }>
+                          <div>
+                            <p className="font-medium">Show Section Labels</p>
+                            <p className="text-xs text-foreground-400">Display headers for metric groups</p>
+                          </div>
+                          <Switch
+                            onValueChange={value => {
+                              updateState('showSectionLabel', value);
+                            }}
+                            size="sm"
+                            isSelected={showSectionLabel}
+                          />
+                        </div>
+
+                        <Settings_MetricVisibility />
                       </div>
-                      <Switch
-                        onValueChange={value => {
-                          updateState('showSectionLabel', value);
-                        }}
-                        size="sm"
-                        isSelected={showSectionLabel}
-                      />
-                    </div>
+                    </motion.div>
 
-                    <Settings_MetricVisibility />
+                    {/* Metrics selection */}
+                    <motion.div
+                      className={
+                        'flex flex-col gap-y-2 shadow-sm p-4 bg-foreground-100 dark:bg-LynxRaisinBlack rounded-xl'
+                      }
+                      transition={{delay: 0.2}}
+                      exit={{translateY: -10, opacity: 0}}
+                      animate={{translateY: 0, opacity: 1}}
+                      initial={{translateY: 10, opacity: 0}}>
+                      {availableHardware.gpu.map(item => (
+                        <SettingsModal_Card
+                          onPress={() => {
+                            toggleHardware(item, 'gpu');
+                          }}
+                          onValueChange={value => {
+                            toggleHardware(item, 'gpu', value);
+                          }}
+                          title={item}
+                          key={`hardware_${item}_item`}
+                          isSelected={isActive(item, 'gpu')}>
+                          {getMetricItem('temp', 'gpu', item)}
+                          <Divider className="h-4 mx-1" orientation="vertical" />
+                          {getMetricItem('usage', 'gpu', item)}
+                          <Divider className="h-4 mx-1" orientation="vertical" />
+                          {getMetricItem('vram', 'gpu', item)}
+                        </SettingsModal_Card>
+                      ))}
+
+                      {availableHardware.cpu.map(item => (
+                        <SettingsModal_Card
+                          onPress={() => {
+                            toggleHardware(item, 'cpu');
+                          }}
+                          onValueChange={value => {
+                            toggleHardware(item, 'cpu', value);
+                          }}
+                          title={item}
+                          key={`hardware_${item}_item`}
+                          isSelected={isActive(item, 'cpu')}>
+                          {getMetricItem('temp', 'cpu', item)}
+                          <Divider className="h-4 mx-1" orientation="vertical" />
+                          {getMetricItem('usage', 'cpu', item)}
+                        </SettingsModal_Card>
+                      ))}
+
+                      {availableHardware.memory.map(item => (
+                        <SettingsModal_Card
+                          onPress={() => {
+                            toggleHardware(item, 'memory');
+                          }}
+                          onValueChange={value => {
+                            toggleHardware(item, 'memory', value);
+                          }}
+                          title={item}
+                          key={`hardware_${item}_item`}
+                          isSelected={isActive(item, 'memory')}>
+                          {getMetricItem('memory', 'memory', item)}
+                        </SettingsModal_Card>
+                      ))}
+
+                      <Card as="div" className="!shadow-sm p-2" fullWidth>
+                        <CardHeader className="font-medium">Uptime</CardHeader>
+                        <CardBody className="flex-row items-center">
+                          {getMetricItem('uptimeSystemSeconds', 'uptime', 'uptime')}
+                          <Divider className="h-4 mx-1" orientation="vertical" />
+                          {getMetricItem('uptimeSeconds', 'uptime', 'uptime')}
+                        </CardBody>
+                      </Card>
+                    </motion.div>
                   </div>
-
-                  {/* Metrics selection */}
-                  <Divider className="my-4 bg-foreground-100" />
-
-                  {availableHardware.gpu.map(item => (
-                    <SettingsModal_Card
-                      onPress={() => {
-                        toggleHardware(item, 'gpu');
-                      }}
-                      onValueChange={value => {
-                        toggleHardware(item, 'gpu', value);
-                      }}
-                      title={item}
-                      key={`hardware_${item}_item`}
-                      isSelected={isActive(item, 'gpu')}>
-                      {getMetricItem('temp', 'gpu', item)}
-                      <Divider className="h-4 mx-1" orientation="vertical" />
-                      {getMetricItem('usage', 'gpu', item)}
-                      <Divider className="h-4 mx-1" orientation="vertical" />
-                      {getMetricItem('vram', 'gpu', item)}
-                    </SettingsModal_Card>
-                  ))}
-
-                  {availableHardware.cpu.map(item => (
-                    <SettingsModal_Card
-                      onPress={() => {
-                        toggleHardware(item, 'cpu');
-                      }}
-                      onValueChange={value => {
-                        toggleHardware(item, 'cpu', value);
-                      }}
-                      title={item}
-                      key={`hardware_${item}_item`}
-                      isSelected={isActive(item, 'cpu')}>
-                      {getMetricItem('temp', 'cpu', item)}
-                      <Divider className="h-4 mx-1" orientation="vertical" />
-                      {getMetricItem('usage', 'cpu', item)}
-                    </SettingsModal_Card>
-                  ))}
-
-                  {availableHardware.memory.map(item => (
-                    <SettingsModal_Card
-                      onPress={() => {
-                        toggleHardware(item, 'memory');
-                      }}
-                      onValueChange={value => {
-                        toggleHardware(item, 'memory', value);
-                      }}
-                      title={item}
-                      key={`hardware_${item}_item`}
-                      isSelected={isActive(item, 'memory')}>
-                      {getMetricItem('memory', 'memory', item)}
-                    </SettingsModal_Card>
-                  ))}
-
-                  <Card
-                    className="border-1 border-foreground-100 pt-2 px-2
-                    hover:border-foreground-200 transition-all duration-200 mt-4"
-                    as="div"
-                    fullWidth>
-                    <CardHeader className="font-medium">Uptime</CardHeader>
-                    <CardBody className="flex-row items-center">
-                      {getMetricItem('uptimeSystemSeconds', 'uptime', 'uptime')}
-                      <Divider className="h-4 mx-1" orientation="vertical" />
-                      {getMetricItem('uptimeSeconds', 'uptime', 'uptime')}
-                    </CardBody>
-                  </Card>
-                </>
-              )}
+                )}
+              </AnimatePresence>
             </ModalBody>
 
             <ModalFooter>

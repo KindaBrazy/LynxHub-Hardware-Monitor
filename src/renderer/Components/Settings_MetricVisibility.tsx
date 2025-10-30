@@ -44,9 +44,9 @@ export default function Settings_MetricVisibility() {
       value={selected}
       isInvalid={isInvalid}
       orientation="horizontal"
+      label="Metric Visibility"
       defaultValue={defaultValues}
       onValueChange={onValueChange}
-      label="Choose Metric Visibility"
       classNames={{label: 'text-foreground'}}
       isRequired>
       <Checkbox value="icon">Icon</Checkbox>
