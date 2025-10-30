@@ -1,6 +1,6 @@
 import federation from '@originjs/vite-plugin-federation';
 import tailwindcss from '@tailwindcss/vite';
-import react from '@vitejs/plugin-react-swc';
+import react from '@vitejs/plugin-react';
 import {defineConfig, externalizeDepsPlugin} from 'electron-vite';
 import {resolve} from 'path';
 

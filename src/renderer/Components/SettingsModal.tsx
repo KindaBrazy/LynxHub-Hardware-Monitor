@@ -25,7 +25,6 @@ import {Clock_Icon} from '../../../../src/renderer/src/assets/icons/SvgIcons/Svg
 import {HMONITOR_STORAGE_ID} from '../../cross/CrossConst';
 import {AvailableHardware, MetricItem, MetricType, MonitoringSettings, SystemMetrics} from '../../cross/CrossTypes';
 import {systemMonitorActions, SystemMonitorState, useSystemMonitorState} from '../reducer';
-import {Settings_Icon} from '../SvgIcons';
 import SettingsModal_Card from './Sections/SettingsModal_Card';
 import Settings_MetricVisibility from './Settings_MetricVisibility';
 
@@ -159,7 +158,7 @@ export default function SettingsModal({show, isOpen, tabID}: Props) {
               <p className="text-sm text-default-500">{result.description}</p>
             </div>
           </div>
-          <Checkbox color="primary" onValueChange={toggle} isSelected={isSelected} />
+          <Checkbox onValueChange={toggle} isSelected={isSelected} />
         </div>
       );
     },
@@ -210,23 +209,17 @@ export default function SettingsModal({show, isOpen, tabID}: Props) {
       <ModalContent>
         {onClose => (
           <>
-            <ModalHeader className="flex flex-col gap-1">
-              <div className="flex items-center gap-2 justify-center">
-                <Settings_Icon className="size-6" />
-                <span>Hardware Monitor Settings</span>
-              </div>
-            </ModalHeader>
+            <ModalHeader className="items-center justify-center">Hardware Monitor Settings</ModalHeader>
 
             <ModalBody as={LynxScroll}>
               {/* Main app toggle */}
-              <div className="mb-4 rounded-lg bg-content2 p-4">
+              <div className="mb-4 rounded-xl bg-content2 p-4">
                 <div className="flex items-center justify-between">
                   <div>
                     <h3 className="text-lg font-medium">Enable System Monitoring</h3>
-                    <p className="text-sm text-default-500">When disabled, all metrics collection will be paused</p>
+                    <p className="text-xs text-foreground-400">When disabled, all metrics collection will be paused</p>
                   </div>
                   <Switch
-                    size="lg"
                     color="primary"
                     isSelected={appEnabled}
                     onValueChange={value => updateState('enabled', value)}
@@ -236,21 +229,22 @@ export default function SettingsModal({show, isOpen, tabID}: Props) {
 
               {appEnabled && (
                 <>
-                  <Divider className="my-4" />
+                  <Divider className="my-4 bg-foreground-100" />
 
                   {/* Refresh interval */}
                   <div className="mb-6">
                     <h3 className="mb-2 text-medium font-medium">Refresh Interval</h3>
                     <NumberInput
+                      size="sm"
                       step={0.5}
                       maxValue={60}
                       minValue={0.5}
-                      className="max-w-xs"
                       value={refreshInterval}
                       label="Seconds between updates"
                       startContent={<Clock_Icon className="size-6" />}
                       onValueChange={value => updateState('refreshInterval', value)}
                       description="How frequently metrics should update (0.5-60 seconds)"
+                      endContent={<span className="text-xs text-foreground-500">Seconds</span>}
                     />
                   </div>
 
@@ -268,13 +262,13 @@ export default function SettingsModal({show, isOpen, tabID}: Props) {
                       }>
                       <div>
                         <p className="font-medium">Compact Mode</p>
-                        <p className="text-sm text-default-500">Use condensed layout to save space</p>
+                        <p className="text-xs text-foreground-400">Use condensed layout to save space</p>
                       </div>
                       <Switch
                         onValueChange={value => {
                           updateState('compactMode', value);
                         }}
-                        size="md"
+                        size="sm"
                         isSelected={compactMode}
                       />
                     </div>
@@ -289,13 +283,13 @@ export default function SettingsModal({show, isOpen, tabID}: Props) {
                       }>
                       <div>
                         <p className="font-medium">Show Section Labels</p>
-                        <p className="text-sm text-default-500">Display headers for metric groups</p>
+                        <p className="text-xs text-foreground-400">Display headers for metric groups</p>
                       </div>
                       <Switch
                         onValueChange={value => {
                           updateState('showSectionLabel', value);
                         }}
-                        size="md"
+                        size="sm"
                         isSelected={showSectionLabel}
                       />
                     </div>
@@ -304,7 +298,7 @@ export default function SettingsModal({show, isOpen, tabID}: Props) {
                   </div>
 
                   {/* Metrics selection */}
-                  <Divider className="my-4" />
+                  <Divider className="my-4 bg-foreground-100" />
 
                   {availableHardware.gpu.map(item => (
                     <SettingsModal_Card

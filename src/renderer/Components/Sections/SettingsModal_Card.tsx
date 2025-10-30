@@ -16,7 +16,7 @@ export default function SettingsModal_Card({onPress, title, onValueChange, isSel
       fullWidth>
       <CardHeader onClick={onPress} className="flex flex-row justify-between cursor-pointer">
         <p className="font-medium">{title}</p>
-        <Switch size="md" isSelected={isSelected} onValueChange={onValueChange} />
+        <Switch isSelected={isSelected} onValueChange={onValueChange} />
       </CardHeader>
       <CardBody>{children}</CardBody>
     </Card>
