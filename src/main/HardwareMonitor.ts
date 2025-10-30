@@ -32,7 +32,7 @@ const sendRenderer = (channel: string, data: any) => {
 async function startMonitoring() {
   if (!webContent || !currentConfig) {
     console.warn(
-      `Cannot start monitoring. Web content or config not found., webContent: ${webContent}, config:${currentConfig}`,
+      `Cannot start monitoring. Web content or config not found. webContent: ${webContent}, config:${currentConfig}`,
     );
     return;
   }
