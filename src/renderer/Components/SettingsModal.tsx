@@ -145,14 +145,12 @@ export default function SettingsModal({show, isOpen, tabID}: Props) {
       return (
         <div
           className={
-            'flex items-center px-2 py-1 gap-x-2 rounded-lg hover:bg-foreground-100' +
+            'flex items-center p-2 gap-x-2 rounded-lg hover:bg-foreground-100' +
             ' transition-colors duration-200 cursor-pointer'
           }
           key={result.id}
           onClick={toggle}>
-          <div className={'flex h-9 w-9 items-center justify-center rounded-md bg-primary/10 text-secondary'}>
-            <Icon className="text-xl" />
-          </div>
+          <Icon className="size-5 text-secondary" />
 
           <span className="font-medium">{label}</span>
 
@@ -230,15 +228,15 @@ export default function SettingsModal({show, isOpen, tabID}: Props) {
                   <Divider className="my-4 bg-foreground-100" />
 
                   {/* Refresh interval */}
-                  <div className="mb-6">
-                    <h3 className="mb-2 text-medium font-medium">Refresh Interval</h3>
+                  <div className="mb-6 pt-1">
                     <NumberInput
-                      size="sm"
                       step={0.5}
                       maxValue={60}
                       minValue={0.5}
                       value={refreshInterval}
-                      label="Seconds between updates"
+                      labelPlacement="outside"
+                      label="Refresh Interval"
+                      classNames={{label: 'text-medium'}}
                       startContent={<Clock_Icon className="size-6" />}
                       onValueChange={value => updateState('refreshInterval', value)}
                       description="How frequently metrics should update (0.5-60 seconds)"

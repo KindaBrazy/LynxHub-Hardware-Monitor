@@ -48,7 +48,6 @@ export default function Settings_MetricVisibility() {
       onValueChange={onValueChange}
       label="Choose Metric Visibility"
       classNames={{label: 'text-foreground'}}
-      description="Select which elements to display for metrics in the status bar."
       isRequired>
       <Checkbox value="icon">Icon</Checkbox>
       <Checkbox value="label">Label</Checkbox>

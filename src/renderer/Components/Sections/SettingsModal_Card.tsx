@@ -18,7 +18,10 @@ export default function SettingsModal_Card({onPress, title, onValueChange, isSel
         <p className="font-medium">{title}</p>
         <Switch isSelected={isSelected} onValueChange={onValueChange} />
       </CardHeader>
-      <CardBody className="flex-row items-center">{children}</CardBody>
+      <CardBody className="flex-row items-center">
+        {!isSelected && <div className="absolute inset-0 bg-background/50 z-20 m-1 rounded-xl" />}
+        {children}
+      </CardBody>
     </Card>
   );
 }
