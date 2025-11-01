@@ -25,7 +25,7 @@ import {lynxTopToast} from '../../../../../src/renderer/src/App/Utils/UtilHooks'
 import {Clock_Icon} from '../../../../../src/renderer/src/assets/icons/SvgIcons/SvgIcons';
 import {HMONITOR_STORAGE_ID} from '../../../cross/constants';
 import {HardwareMetricsConfig, MetricType, MonitoringSettings, SystemMetric} from '../../../cross/types';
-import {hmonitorActions, HMonitorState, useHMonitorSelector} from '../../state/hmonitorSlice';
+import {hmonitorActions, SystemMonitorState, useHMonitorSelector} from '../../state/hmonitorSlice';
 import MetricVisibilitySettings from './MetricVisibilitySettings';
 import SettingsModalCard from './SettingsModalCard';
 
@@ -48,7 +48,7 @@ export default function SettingsModal({show, isOpen, tabID}: SettingsModalProps)
 
   const [isSaving, setIsSaving] = useState<boolean>(false);
 
-  function updateState<K extends keyof HMonitorState>(key: K, value: HMonitorState[K]) {
+  function updateState<K extends keyof SystemMonitorState>(key: K, value: SystemMonitorState[K]) {
     dispatch(hmonitorActions.updateState({key, value}));
   }
 
