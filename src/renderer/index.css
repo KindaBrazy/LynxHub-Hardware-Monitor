@@ -4,11 +4,10 @@
 
 @plugin '../../../src/renderer/HeroUiConfig.ts';
 
-@source '../renderer/**/*.{js,ts,jsx,tsx}';
-
+/* Include source files for TailwindCSS to scan for class names */
+@source './**/*.{js,ts,jsx,tsx}';
 @source '../../../src/renderer/src/App/Components/Reusable/SpotlightCard.tsx'
 @source '../../../src/renderer/src/App/Components/Reusable/ToolsCard.tsx'
-
 @source '../../../node_modules/@heroui/theme/dist/**/*.{js,ts,jsx,tsx}';
 
 @custom-variant dark (&:is(.dark *));

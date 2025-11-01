@@ -1,22 +1,19 @@
 import {Spinner} from '@heroui/react';
 import {isEmpty} from 'lodash';
-import React from 'react';
+import {ElementType, memo, ReactNode} from 'react';
 
-import {useSystemMonitorState} from '../reducer';
+import {useHMonitorState} from '../../state/hmonitorSlice';
 
-export default function Section({
-  title,
-  icon: Icon,
-  children,
-}: {
+type SectionProps = {
   title: string;
-  icon: React.ElementType;
-  children: React.ReactNode;
-}) {
-  const compactMode = useSystemMonitorState('compactMode');
-  const showSectionLabel = useSystemMonitorState('showSectionLabel');
+  icon: ElementType;
+  children: ReactNode;
+};
 
-  // Show loading instead of N/A for title
+function Section({title, icon: Icon, children}: SectionProps) {
+  const compactMode = useHMonitorState('compactMode');
+  const showSectionLabel = useHMonitorState('showSectionLabel');
+
   return (
     <div className={`flex items-center ${compactMode ? 'gap-x-2' : 'gap-x-3'}`}>
       {showSectionLabel && (
@@ -27,7 +24,7 @@ export default function Section({
           }>
           <Icon className={`${compactMode ? 'size-3' : 'size-3.5'} text-slate-400`} />
           {isEmpty(title) ? (
-            <Spinner size="sm" variant={'dots'} />
+            <Spinner size="sm" variant="dots" />
           ) : (
             <span className="text-xs font-semibold text-slate-300 uppercase tracking-wide text-nowrap">{title}</span>
           )}
@@ -37,3 +34,5 @@ export default function Section({
     </div>
   );
 }
+
+export default memo(Section);
