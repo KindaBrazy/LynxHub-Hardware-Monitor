@@ -34,7 +34,7 @@ export const initialEnabledMetrics: EnabledMetrics = {
 
 // Default settings for the hardware monitor
 export const initialSettings: MonitoringSettings = {
-  configVersion: 0.2, // Version to handle future settings migrations
+  configVersion: 0.3, // Version to handle future settings migrations
   refreshInterval: 1, // in seconds
   enabled: true,
   compactMode: false,

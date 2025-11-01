@@ -1,18 +1,35 @@
-import {Activity, Cpu as CpuIcon, Thermometer} from 'lucide-react';
-import {memo, useMemo} from 'react';
+import {Activity, Cpu as CpuIcon, Gauge, Power, Thermometer} from 'lucide-react';
+import {ElementType, memo, useMemo} from 'react';
 
-import {CpuData, HardwareMetricsConfig} from '../../../../cross/types';
+import {CpuData, HardwareInfo, HardwareMetricsConfig, RawSensorValue} from '../../../../cross/types';
 import {useHMonitorState} from '../../../state/hmonitorSlice';
 import {getTemperatureColor, getUsageColor} from '../../../utils/colorUtils';
 import MetricItem from '../../common/MetricItem';
 import Section from '../../common/Section';
 
+const getIconForSensorType = (type: string): ElementType => {
+  switch (type) {
+    case 'Temperature':
+      return Thermometer;
+    case 'Load':
+      return Activity;
+    case 'Power':
+      return Power;
+    case 'Clock':
+      return Gauge;
+    default:
+      return Activity;
+  }
+};
+
 type Props = {
   data: CpuData | undefined;
   metrics: HardwareMetricsConfig;
+  hardwareInfo: HardwareInfo | undefined;
+  rawSensorValues: RawSensorValue[];
 };
 
-function CpuSection({data, metrics}: Props) {
+function CpuSection({data, metrics, hardwareInfo, rawSensorValues}: Props) {
   const compactMode = useHMonitorState('compactMode');
   const {temp, usage, name} = data || {temp: 0, usage: 0, name: ''};
 
@@ -49,6 +66,30 @@ function CpuSection({data, metrics}: Props) {
           colorClass={getUsageColor(usage)}
         />
       )}
+
+      {/* Render Custom Metrics */}
+      {metrics.custom?.map(customMetric => {
+        const sensorInfo = hardwareInfo?.sensors.find(s => s.Identifier === customMetric.sensorIdentifier);
+        const sensorReading = rawSensorValues.find(s => s.Identifier === customMetric.sensorIdentifier);
+
+        if (!sensorInfo || sensorReading?.Value === null || sensorReading?.Value === undefined) {
+          return null;
+        }
+
+        const value = Number.isInteger(sensorReading.Value)
+          ? sensorReading.Value
+          : parseFloat(sensorReading.Value.toFixed(1));
+
+        return (
+          <MetricItem
+            value={value}
+            key={customMetric.id}
+            unit={sensorInfo.Unit}
+            label={customMetric.label}
+            icon={getIconForSensorType(sensorInfo.Type)}
+          />
+        );
+      })}
     </Section>
   );
 }

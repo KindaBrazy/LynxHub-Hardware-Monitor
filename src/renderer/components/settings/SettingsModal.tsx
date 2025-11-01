@@ -210,39 +210,42 @@ export default function SettingsModal({show, isOpen, tabID}: SettingsModalProps)
                       className={
                         'flex flex-col gap-y-2 shadow-sm p-4 bg-foreground-100 ' + 'dark:bg-LynxRaisinBlack rounded-xl'
                       }>
-                      {availableHardware.gpu.map(name => (
+                      {availableHardware.gpu.map(hw => (
                         <SettingsModalCard
-                          title={name}
-                          key={`gpu-settings-${name}`}
-                          onToggle={() => toggleHardwareActive(name, 'gpu')}
-                          isSelected={enabledMetrics.gpu.find(m => m.name === name)?.active ?? false}>
-                          {getMetricItem('temp', 'gpu', name)}
+                          type="gpu"
+                          hardware={hw}
+                          key={`gpu-settings-${hw.name}`}
+                          onToggle={() => toggleHardwareActive(hw.name, 'gpu')}
+                          config={enabledMetrics.gpu.find(m => m.name === hw.name)}>
+                          {getMetricItem('temp', 'gpu', hw.name)}
                           <Divider className="h-4 mx-1" orientation="vertical" />
-                          {getMetricItem('usage', 'gpu', name)}
+                          {getMetricItem('usage', 'gpu', hw.name)}
                           <Divider className="h-4 mx-1" orientation="vertical" />
-                          {getMetricItem('vram', 'gpu', name)}
+                          {getMetricItem('vram', 'gpu', hw.name)}
                         </SettingsModalCard>
                       ))}
 
-                      {availableHardware.cpu.map(name => (
+                      {availableHardware.cpu.map(hw => (
                         <SettingsModalCard
-                          title={name}
-                          key={`cpu-settings-${name}`}
-                          onToggle={() => toggleHardwareActive(name, 'cpu')}
-                          isSelected={enabledMetrics.cpu.find(m => m.name === name)?.active ?? false}>
-                          {getMetricItem('temp', 'cpu', name)}
+                          type="cpu"
+                          hardware={hw}
+                          key={`cpu-settings-${hw.name}`}
+                          onToggle={() => toggleHardwareActive(hw.name, 'cpu')}
+                          config={enabledMetrics.cpu.find(m => m.name === hw.name)}>
+                          {getMetricItem('temp', 'cpu', hw.name)}
                           <Divider className="h-4 mx-1" orientation="vertical" />
-                          {getMetricItem('usage', 'cpu', name)}
+                          {getMetricItem('usage', 'cpu', hw.name)}
                         </SettingsModalCard>
                       ))}
 
-                      {availableHardware.memory.map(name => (
+                      {availableHardware.memory.map(hw => (
                         <SettingsModalCard
-                          title={name}
-                          key={`memory-settings-${name}`}
-                          onToggle={() => toggleHardwareActive(name, 'memory')}
-                          isSelected={enabledMetrics.memory.find(m => m.name === name)?.active ?? false}>
-                          {getMetricItem('memory', 'memory', name)}
+                          type="memory"
+                          hardware={hw}
+                          key={`memory-settings-${hw.name}`}
+                          onToggle={() => toggleHardwareActive(hw.name, 'memory')}
+                          config={enabledMetrics.memory.find(m => m.name === hw.name)}>
+                          {getMetricItem('memory', 'memory', hw.name)}
                         </SettingsModalCard>
                       ))}
 

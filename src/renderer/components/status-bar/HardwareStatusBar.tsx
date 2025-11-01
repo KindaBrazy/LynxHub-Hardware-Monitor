@@ -18,6 +18,7 @@ function HardwareStatusBar({ref: forwardRef}: Props) {
   const enabled = useHMonitorState('enabled');
   const compactMode = useHMonitorState('compactMode');
   const enabledMetrics = useHMonitorState('enabledMetrics');
+  const availableHardware = useHMonitorState('availableHardware');
 
   const {hardwareData, isConnected, error} = useHardwareData();
   const {containerRef, canScrollLeft, canScrollRight, scroll} = useScrollManager<HTMLDivElement>();
@@ -33,9 +34,9 @@ function HardwareStatusBar({ref: forwardRef}: Props) {
   const hasMetricsEnabled = useMemo(() => {
     if (!enabledMetrics) return {cpu: false, gpu: false, memory: false, uptime: false};
     return {
-      gpu: enabledMetrics.gpu.some(item => item.active && item.enabled.length > 0),
-      cpu: enabledMetrics.cpu.some(item => item.active && item.enabled.length > 0),
-      memory: enabledMetrics.memory.some(item => item.active && item.enabled.length > 0),
+      gpu: enabledMetrics.gpu.some(item => item.active && (item.enabled.length > 0 || item.custom?.length > 0)),
+      cpu: enabledMetrics.cpu.some(item => item.active && (item.enabled.length > 0 || item.custom?.length > 0)),
+      memory: enabledMetrics.memory.some(item => item.active && (item.enabled.length > 0 || item.custom?.length > 0)),
       uptime: enabledMetrics.uptime.system || enabledMetrics.uptime.app,
     };
   }, [enabledMetrics]);
@@ -104,7 +105,9 @@ function HardwareStatusBar({ref: forwardRef}: Props) {
                     <CpuSection
                       metrics={cpu}
                       key={`cpu_${cpu.name}_${index}`}
+                      rawSensorValues={hardwareData.rawSensors}
                       data={hardwareData.cpu.find(item => item.name === cpu.name)}
+                      hardwareInfo={availableHardware.cpu.find(h => h.name === cpu.name)}
                     />
                   ),
               )}
@@ -118,7 +121,9 @@ function HardwareStatusBar({ref: forwardRef}: Props) {
                     <GpuSection
                       metrics={gpu}
                       key={`gpu_${gpu.name}_${index}`}
+                      rawSensorValues={hardwareData.rawSensors}
                       data={hardwareData.gpu.find(item => item.name === gpu.name)}
+                      hardwareInfo={availableHardware.gpu.find(h => h.name === gpu.name)}
                     />
                   ),
               )}
@@ -131,8 +136,11 @@ function HardwareStatusBar({ref: forwardRef}: Props) {
                 (memory, index) =>
                   memory.active && (
                     <MemorySection
+                      metrics={memory}
                       key={`memory_${memory.name}_${index}`}
+                      rawSensorValues={hardwareData.rawSensors}
                       data={hardwareData.memory.find(item => item.name === memory.name)}
+                      hardwareInfo={availableHardware.memory.find(h => h.name === memory.name)}
                     />
                   ),
               )}

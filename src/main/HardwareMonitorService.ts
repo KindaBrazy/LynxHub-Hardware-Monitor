@@ -14,7 +14,7 @@ import {
   HMONITOR_STORAGE_ID,
   initialSettings,
 } from '../cross/constants';
-import {MonitoringSettings} from '../cross/types';
+import {HardwareDataReport, HardwareInfo, MonitoringSettings} from '../cross/types';
 import {getActiveComponentTypes} from './utils';
 
 const HARDWARE_CHECK_MAX_RETRIES = 5;
@@ -47,8 +47,8 @@ class HardwareMonitorService {
     if (this.isInitialized) return;
 
     this.storeManager = await utils.getStorageManager();
+    await this.discoverHardware(); // Discover hardware before loading config for migration
     this.loadConfig();
-    await this.discoverHardware();
     this.registerIpcHandlers();
 
     this.isInitialized = true;
@@ -82,7 +82,7 @@ class HardwareMonitorService {
 
     // Perform migration or initialization if config is old or missing
     if (!storedConfig || storedConfig.configVersion < initialSettings.configVersion) {
-      storedConfig = {
+      const migratedConfig = {
         ...initialSettings,
         ...(storedConfig && {
           // Carry over old settings if they exist
@@ -90,10 +90,19 @@ class HardwareMonitorService {
           refreshInterval: storedConfig.refreshInterval,
           compactMode: storedConfig.compactMode,
           showSectionLabel: storedConfig.showSectionLabel,
+          enabledMetrics: storedConfig.enabledMetrics, // Carry over old metric selections
         }),
       };
+
+      // Add the new `custom` property during migration
+      migratedConfig.enabledMetrics.cpu.forEach(c => (c.custom ??= []));
+      migratedConfig.enabledMetrics.gpu.forEach(g => (g.custom ??= []));
+      migratedConfig.enabledMetrics.memory.forEach(m => (m.custom ??= []));
+
+      storedConfig = migratedConfig;
     }
-    this.config = storedConfig;
+
+    this.config = {...storedConfig, availableHardware: this.config.availableHardware};
     this.saveConfig();
   }
 
@@ -109,21 +118,48 @@ class HardwareMonitorService {
         await monitor.checkRequirements(targetDir);
 
         const result = await monitor.getDataOnce(['cpu', 'gpu', 'memory']);
-        const gpu = result.GPU.map(item => item.Name);
-        const cpu = result.CPU.map(item => item.Name);
-        const memory = result.Memory.map(item => item.Name);
+        const mapToHardwareInfo = (items: {Name: string; Sensors: any[]}[]): HardwareInfo[] => {
+          return items.map(item => ({
+            name: item.Name,
+            sensors: item.Sensors.map(s => ({
+              Name: s.Name,
+              Type: s.Type,
+              Unit: s.Unit,
+              Identifier: s.Identifier,
+            })),
+          }));
+        };
 
-        this.config.availableHardware = {gpu, cpu, memory};
+        this.config.availableHardware = {
+          gpu: mapToHardwareInfo(result.GPU),
+          cpu: mapToHardwareInfo(result.CPU),
+          memory: mapToHardwareInfo(result.Memory),
+        };
 
         // Populate enabled metrics for newly discovered hardware
         if (isEmpty(this.config.enabledMetrics.gpu)) {
-          this.config.enabledMetrics.gpu = gpu.map(name => ({name, active: true, enabled: ['temp', 'usage', 'vram']}));
+          this.config.enabledMetrics.gpu = this.config.availableHardware.gpu.map(h => ({
+            name: h.name,
+            active: true,
+            enabled: ['temp', 'usage', 'vram'],
+            custom: [],
+          }));
         }
         if (isEmpty(this.config.enabledMetrics.cpu)) {
-          this.config.enabledMetrics.cpu = cpu.map(name => ({name, active: true, enabled: ['temp', 'usage']}));
+          this.config.enabledMetrics.cpu = this.config.availableHardware.cpu.map(h => ({
+            name: h.name,
+            active: true,
+            enabled: ['temp', 'usage'],
+            custom: [],
+          }));
         }
         if (isEmpty(this.config.enabledMetrics.memory)) {
-          this.config.enabledMetrics.memory = memory.map(name => ({name, active: true, enabled: ['memory']}));
+          this.config.enabledMetrics.memory = this.config.availableHardware.memory.map(h => ({
+            name: h.name,
+            active: true,
+            enabled: ['memory'],
+            custom: [],
+          }));
         }
 
         this.saveConfig();
@@ -153,7 +189,12 @@ class HardwareMonitorService {
       await this.hwMonitor.checkRequirements(targetDir);
 
       this.hwMonitor.on('data', (data: HardwareReport) => {
-        this.sendToRenderer(HMONITOR_IPC_DATA_UPDATE, data);
+        // Flatten all sensor values for easy lookup on the renderer side
+        const rawSensors = [...data.CPU, ...data.GPU, ...data.Memory].flatMap(h =>
+          h.Sensors.map(s => ({Identifier: s.Identifier, Value: s.Value})),
+        );
+        const reportWithRawSensors: Partial<HardwareDataReport> & HardwareReport = {...data, rawSensors};
+        this.sendToRenderer(HMONITOR_IPC_DATA_UPDATE, reportWithRawSensors);
       });
 
       this.hwMonitor.on('error', (error: MonitorError) => {
@@ -203,10 +244,10 @@ class HardwareMonitorService {
   }
 
   private registerIpcHandlers(): void {
-    ipcMain.on(HMONITOR_IPC_SET_CONFIG, (_, newConfig: MonitoringSettings) => {
+    ipcMain.on(HMONITOR_IPC_SET_CONFIG, (_, newConfig: string) => {
       // JSON serialization over IPC can turn undefined into null
       if (isNil(newConfig)) return;
-      this.updateConfig(newConfig);
+      this.updateConfig(JSON.parse(newConfig));
     });
   }
 }

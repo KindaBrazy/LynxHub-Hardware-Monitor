@@ -4,6 +4,7 @@ import {TypedUseSelectorHook, useSelector} from 'react-redux';
 
 import {HMONITOR_IPC_SET_CONFIG, initialSettings} from '../../cross/constants';
 import {
+  CustomMetricConfig,
   EnabledMetrics,
   HardwareMetricsConfig,
   MetricType,
@@ -41,7 +42,7 @@ const hmonitorSlice = createSlice({
     },
     // Persists the current settings by sending them to the main process
     saveSettings: state => {
-      window.electron.ipcRenderer.send(HMONITOR_IPC_SET_CONFIG, omit(state, 'modals'));
+      window.electron.ipcRenderer.send(HMONITOR_IPC_SET_CONFIG, JSON.stringify(omit(state, 'modals')));
     },
     updateHardwareMetrics: (
       state,
@@ -67,6 +68,22 @@ const hmonitorSlice = createSlice({
     },
     updateUptime: (state, action: PayloadAction<Partial<EnabledMetrics['uptime']>>) => {
       state.enabledMetrics.uptime = {...state.enabledMetrics.uptime, ...action.payload};
+    },
+    addCustomMetric: (state, action: PayloadAction<{type: MetricType; name: string; metric: CustomMetricConfig}>) => {
+      const {type, name, metric} = action.payload;
+      const hardwareList = state.enabledMetrics[type] as HardwareMetricsConfig[];
+      const hardware = hardwareList.find(item => item.name === name);
+      if (hardware) {
+        hardware.custom.push(metric);
+      }
+    },
+    removeCustomMetric: (state, action: PayloadAction<{type: MetricType; name: string; metricId: string}>) => {
+      const {type, name, metricId} = action.payload;
+      const hardwareList = state.enabledMetrics[type] as HardwareMetricsConfig[];
+      const hardware = hardwareList.find(item => item.name === name);
+      if (hardware) {
+        hardware.custom = hardware.custom.filter(m => m.id !== metricId);
+      }
     },
     openModal: (state, action: PayloadAction<{tabID: string}>) => {
       const {tabID} = action.payload;

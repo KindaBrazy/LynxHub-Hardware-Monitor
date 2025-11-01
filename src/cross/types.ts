@@ -1,5 +1,23 @@
-// Represents the hardware detected on the system
-export type AvailableHardware = {cpu: string[]; gpu: string[]; memory: string[]};
+// Represents detailed sensor information discovered on the system
+export type SensorInfo = {
+  Name: string;
+  Type: string;
+  Unit: string;
+  Identifier: string;
+};
+
+// Represents a piece of hardware and all its available sensors
+export type HardwareInfo = {
+  name: string;
+  sensors: SensorInfo[];
+};
+
+// Represents all hardware detected on the system
+export type AvailableHardware = {
+  cpu: HardwareInfo[];
+  gpu: HardwareInfo[];
+  memory: HardwareInfo[];
+};
 
 // Data structures for individual hardware components
 export type GpuData = {
@@ -28,22 +46,34 @@ export type UptimeData = {
   app: number;
 };
 
+// Represents a single raw sensor value sent from main to renderer
+export type RawSensorValue = {Identifier: string; Value: number | null};
+
 // Combined hardware data report sent from main to renderer
 export type HardwareDataReport = {
   gpu: GpuData[];
   cpu: CpuData[];
   memory: MemoryData[];
   uptime: UptimeData;
+  rawSensors: RawSensorValue[]; // A flat list of all sensor values for easy lookup
 };
 
 // Configuration for which parts of a metric are visible (e.g., icon, label)
 export type MetricVisibility = {icon: boolean; label: boolean; value: boolean; progressBar: boolean};
+
+// Configuration for a user-defined custom metric
+export type CustomMetricConfig = {
+  id: string; // Unique ID for React keys
+  label: string; // User-defined label
+  sensorIdentifier: string; // The unique ID from sensor data
+};
 
 // Defines which specific metrics are enabled for a piece of hardware
 export type HardwareMetricsConfig = {
   name: string; // e.g., "NVIDIA GeForce RTX 3080"
   active: boolean; // Is this hardware component monitored?
   enabled: string[]; // e.g., ['temp', 'usage', 'vram']
+  custom: CustomMetricConfig[]; // User-added custom metrics
 };
 
 // Configuration for all enabled metrics across the system

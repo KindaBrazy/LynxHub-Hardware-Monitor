@@ -11,6 +11,7 @@ const initialData: HardwareDataReport = {
   cpu: [],
   memory: [],
   uptime: {system: 0, app: 0},
+  rawSensors: [],
 };
 
 /**
@@ -23,7 +24,7 @@ export default function useHardwareData() {
   const [error, setError] = useState<Error | null>(null);
 
   useEffect(() => {
-    const handleHardwareUpdate = (_: unknown, data: HardwareReport) => {
+    const handleHardwareUpdate = (_: unknown, data: HardwareReport & Partial<HardwareDataReport>) => {
       if (!data) return;
 
       const transformedData: HardwareDataReport = {
@@ -48,6 +49,7 @@ export default function useHardwareData() {
           system: data.Uptime?.rawSeconds || 0,
           app: data.ElapsedTime?.rawSeconds || 0,
         },
+        rawSensors: data.rawSensors || [],
       };
 
       setHardwareData(transformedData);
