@@ -2,7 +2,7 @@ import {join} from 'node:path';
 
 import HardwareMonitor, {HardwareReport, MonitorError} from '@lynxhub/hwmonitor';
 import {app, ipcMain, WebContents} from 'electron';
-import {isEmpty, isEqual, isNil} from 'lodash';
+import {isEqual, isNil} from 'lodash';
 
 import {MainExtensionUtils} from '../../../src/main/Managements/Plugin/Extensions/ExtensionTypes_Main';
 import StorageManager from '../../../src/main/Managements/Storage/StorageManager';
@@ -47,10 +47,17 @@ class HardwareMonitorService {
     if (this.isInitialized) return;
 
     this.storeManager = await utils.getStorageManager();
-    await this.discoverHardware(); // Discover hardware before loading config for migration
-    this.loadConfig();
-    this.registerIpcHandlers();
 
+    // 1. Load the user's saved configuration first.
+    this.loadConfig();
+
+    // 2. Discover hardware and reconcile it with the loaded configuration.
+    await this.discoverHardware();
+
+    // 3. Save any changes made during migration or hardware reconciliation.
+    this.saveConfig();
+
+    this.registerIpcHandlers();
     this.isInitialized = true;
   }
 
@@ -94,7 +101,7 @@ class HardwareMonitorService {
         }),
       };
 
-      // Add the new `custom` property during migration
+      // Ensure the 'custom' property exists during migration
       migratedConfig.enabledMetrics.cpu.forEach(c => (c.custom ??= []));
       migratedConfig.enabledMetrics.gpu.forEach(g => (g.custom ??= []));
       migratedConfig.enabledMetrics.memory.forEach(m => (m.custom ??= []));
@@ -102,8 +109,8 @@ class HardwareMonitorService {
       storedConfig = migratedConfig;
     }
 
-    this.config = {...storedConfig, availableHardware: this.config.availableHardware};
-    this.saveConfig();
+    // Assign the loaded/migrated config. availableHardware will be populated by discoverHardware.
+    this.config = {...storedConfig, availableHardware: initialSettings.availableHardware};
   }
 
   private saveConfig(): void {
@@ -136,33 +143,42 @@ class HardwareMonitorService {
           memory: mapToHardwareInfo(result.Memory),
         };
 
-        // Populate enabled metrics for newly discovered hardware
-        if (isEmpty(this.config.enabledMetrics.gpu)) {
-          this.config.enabledMetrics.gpu = this.config.availableHardware.gpu.map(h => ({
-            name: h.name,
-            active: true,
-            enabled: ['temp', 'usage', 'vram'],
-            custom: [],
-          }));
-        }
-        if (isEmpty(this.config.enabledMetrics.cpu)) {
-          this.config.enabledMetrics.cpu = this.config.availableHardware.cpu.map(h => ({
-            name: h.name,
-            active: true,
-            enabled: ['temp', 'usage'],
-            custom: [],
-          }));
-        }
-        if (isEmpty(this.config.enabledMetrics.memory)) {
-          this.config.enabledMetrics.memory = this.config.availableHardware.memory.map(h => ({
-            name: h.name,
-            active: true,
-            enabled: ['memory'],
-            custom: [],
-          }));
-        }
+        // Reconcile discovered hardware with existing configuration.
+        // Only add default settings for hardware that we don't have a configuration for.
 
-        this.saveConfig();
+        this.config.availableHardware.gpu.forEach(hw => {
+          if (!this.config.enabledMetrics.gpu.some(g => g.name === hw.name)) {
+            this.config.enabledMetrics.gpu.push({
+              name: hw.name,
+              active: true,
+              enabled: ['temp', 'usage', 'vram'],
+              custom: [],
+            });
+          }
+        });
+
+        this.config.availableHardware.cpu.forEach(hw => {
+          if (!this.config.enabledMetrics.cpu.some(c => c.name === hw.name)) {
+            this.config.enabledMetrics.cpu.push({
+              name: hw.name,
+              active: true,
+              enabled: ['temp', 'usage'],
+              custom: [],
+            });
+          }
+        });
+
+        this.config.availableHardware.memory.forEach(hw => {
+          if (!this.config.enabledMetrics.memory.some(m => m.name === hw.name)) {
+            this.config.enabledMetrics.memory.push({
+              name: hw.name,
+              active: true,
+              enabled: ['memory'],
+              custom: [],
+            });
+          }
+        });
+
         this.sendToRenderer(HMONITOR_IPC_CONFIG_UPDATE, this.config);
         return; // Success
       } catch (error) {
