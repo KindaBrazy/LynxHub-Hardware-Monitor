@@ -1,8 +1,9 @@
-import {Button, Card, CardBody, CardHeader, Chip, Divider, Input, Select, SelectItem, Switch} from '@heroui/react';
-import {Plus, Trash2} from 'lucide-react';
+import {Button, Card, CardBody, CardHeader, Chip, Input, Select, SelectItem, Switch} from '@heroui/react';
+import {Divider} from 'antd';
 import {memo, ReactNode, useState} from 'react';
 import {useDispatch} from 'react-redux';
 
+import {Add_Icon, Close_Icon, TrashDuo_Icon} from '../../../../../src/renderer/src/assets/icons/SvgIcons/SvgIcons';
 import {HardwareInfo, HardwareMetricsConfig, MetricType} from '../../../cross/types';
 import {hmonitorActions} from '../../state/hmonitorSlice';
 
@@ -49,13 +50,13 @@ function SettingsModalCard({onToggle, config, hardware, type, children}: Props) 
         <p className="font-medium">{hardware.name}</p>
         <Switch isSelected={active} onValueChange={onToggle} />
       </CardHeader>
-      <CardBody className="flex-col items-start relative">
+      <CardBody className="flex-col items-start relative gap-y-1">
         {/* Overlay to indicate that the controls are disabled */}
         {!active && <div className="absolute inset-0 bg-background/50 z-20 m-1 rounded-xl" />}
 
         <div className="flex flex-row items-center">{children}</div>
 
-        {(custom.length > 0 || isAdding) && <Divider className="my-2" />}
+        {(custom.length > 0 || isAdding) && <Divider className="my-2" variant="dashed" />}
 
         {/* Custom Metrics Section */}
         <div className="w-full flex flex-col gap-2">
@@ -65,8 +66,10 @@ function SettingsModalCard({onToggle, config, hardware, type, children}: Props) 
                 <Chip
                   variant="flat"
                   key={metric.id}
-                  endContent={<Trash2 className="size-3.5" />}
-                  onClose={() => handleRemoveMetric(metric.id)}>
+                  className="px-2"
+                  color="secondary"
+                  onClose={() => handleRemoveMetric(metric.id)}
+                  endContent={<TrashDuo_Icon className="size-3.5" />}>
                   {metric.label}
                 </Chip>
               ))}
@@ -74,7 +77,7 @@ function SettingsModalCard({onToggle, config, hardware, type, children}: Props) 
           )}
 
           {isAdding ? (
-            <div className="flex items-end gap-2 p-2 rounded-lg bg-content2">
+            <div className="flex items-center gap-2 p-2">
               <Select
                 onChange={e =>
                   setFormState(prev => ({
@@ -90,7 +93,9 @@ function SettingsModalCard({onToggle, config, hardware, type, children}: Props) 
                 placeholder="Select a sensor"
                 selectedKeys={formState.sensorIdentifier ? [formState.sensorIdentifier] : []}>
                 {hardware.sensors.map(sensor => (
-                  <SelectItem key={sensor.Identifier}>{`${sensor.Name} (${sensor.Type})`}</SelectItem>
+                  <SelectItem key={sensor.Identifier} textValue={`${sensor.Name} (${sensor.Type})`}>
+                    <span>{`${sensor.Name} (${sensor.Type})`}</span>
+                  </SelectItem>
                 ))}
               </Select>
               <Input
@@ -100,18 +105,18 @@ function SettingsModalCard({onToggle, config, hardware, type, children}: Props) 
                 onValueChange={label => setFormState(prev => ({...prev, label}))}
               />
               <Button size="sm" variant="flat" color="success" onPress={handleAddMetric} isIconOnly>
-                <Plus className="size-4" />
+                <Add_Icon className="size-3" />
               </Button>
               <Button size="sm" color="warning" variant="light" onPress={() => setIsAdding(false)} isIconOnly>
-                &times;
+                <Close_Icon className="size-3" />
               </Button>
             </div>
           ) : (
             <Button
-              size="sm"
-              variant="bordered"
+              variant="flat"
+              className="mt-2"
               onPress={() => setIsAdding(true)}
-              startContent={<Plus className="size-4" />}>
+              startContent={<Add_Icon className="size-3" />}>
               Add Custom Metric
             </Button>
           )}
