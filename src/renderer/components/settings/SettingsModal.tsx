@@ -29,7 +29,7 @@ import {HMONITOR_STORAGE_ID} from '../../../cross/constants';
 import {DisplayStyle, HardwareMetricsConfig, MetricType, MonitoringSettings, SystemMetric} from '../../../cross/types';
 import {hmonitorActions, SystemMonitorState, useHMonitorSelector} from '../../state/hmonitorSlice';
 import MetricVisibilitySettings from './MetricVisibilitySettings';
-import SettingsModalCard from './SettingsModalCard'; // Configuration for each available metric type, defining its UI representation.
+import SettingsModalCard from './SettingsModalCard';
 
 // Configuration for each available metric type, defining its UI representation.
 const METRIC_CONFIG: Record<string, {label: string; Icon: ForwardRefExoticComponent<Omit<LucideProps, 'ref'>>}> = {
@@ -198,7 +198,7 @@ export default function SettingsModal({show, isOpen, tabID}: SettingsModalProps)
                     animate={{translateY: 0, opacity: 1}}
                     initial={{translateY: 10, opacity: 0}}>
                     <div className="p-4 shadow-sm bg-foreground-100 dark:bg-LynxRaisinBlack rounded-xl">
-                      <div className="mb-6 pt-1">
+                      <div className="mb-10 pt-1">
                         <NumberInput
                           step={0.5}
                           maxValue={60}
@@ -222,7 +222,7 @@ export default function SettingsModal({show, isOpen, tabID}: SettingsModalProps)
                           placeholder="Select a display style"
                           onChange={e => handleDisplayStyleChange(e.target.value as DisplayStyle)}>
                           {DISPLAY_STYLES.map(style => (
-                            <SelectItem key={style.value} textValue={style.value} description={style.description}>
+                            <SelectItem key={style.value} description={style.description}>
                               {style.label}
                             </SelectItem>
                           ))}
