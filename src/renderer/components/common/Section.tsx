@@ -20,11 +20,15 @@ const Section = memo(({title, icon: Icon, children}: SectionProps) => {
 
   if (isRaw) {
     return (
-      <div className="flex items-center shrink-0 gap-x-2 text-xs font-mono whitespace-nowrap text-slate-300">
+      <div
+        className={
+          `flex items-center shrink-0 ${isTwoColumn ? 'gap-x-2' : 'gap-x-1'}` +
+          ` text-xs font-mono whitespace-nowrap text-slate-300`
+        }>
         <span className="font-semibold opacity-80">{title}:&nbsp;</span>
         <div
           className={
-            `flex items-center h-8 gap-x-2 shrink-0 ` +
+            `flex items-center h-8 ${isTwoColumn ? 'gap-x-2' : 'gap-x-1'} shrink-0 ` +
             `${
               isTwoColumn &&
               `flex-col flex-wrap items-start ${Children.count(children) > 1 ? 'justify-start' : 'justify-center'}`
@@ -33,7 +37,7 @@ const Section = memo(({title, icon: Icon, children}: SectionProps) => {
           {Children.map(children, (child, i) => (
             <Fragment key={i}>
               {child}
-              {!isTwoColumn && i < Children.count(children) - 1 && <span>,&nbsp;</span>}
+              {!isTwoColumn && i < Children.count(children) - 1 && <span>-</span>}
             </Fragment>
           ))}
         </div>
