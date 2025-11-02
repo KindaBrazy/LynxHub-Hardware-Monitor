@@ -242,7 +242,12 @@ export default function SettingsModal({show, isOpen, tabID}: SettingsModalProps)
                               Display headers for metric groups (disabled for Raw styles)
                             </p>
                           </div>
-                          <Switch size="sm" isDisabled={isRawStyle} isSelected={showSectionLabel} />
+                          <Switch
+                            size="sm"
+                            isDisabled={isRawStyle}
+                            isSelected={showSectionLabel}
+                            className="pointer-events-none"
+                          />
                         </div>
                         <div className={isRawStyle ? 'opacity-50 pointer-events-none' : ''}>
                           <MetricVisibilitySettings />
