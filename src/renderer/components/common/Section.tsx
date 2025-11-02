@@ -46,7 +46,7 @@ const Section = memo(({title, icon: Icon, children}: SectionProps) => {
   }
 
   return (
-    <div className={`flex items-center ${isCompact ? 'gap-x-2' : 'gap-x-3'}`}>
+    <div className={`flex items-center shrink-0 ${isCompact ? 'gap-x-2' : 'gap-x-3'}`}>
       {showSectionLabel && (
         <div
           className={
@@ -61,7 +61,15 @@ const Section = memo(({title, icon: Icon, children}: SectionProps) => {
           )}
         </div>
       )}
-      <div className={isTwoColumn ? 'grid grid-cols-1 gap-y-0.5' : 'flex items-center gap-x-2'}>{children}</div>
+      <div
+        className={
+          isTwoColumn
+            ? `flex flex-col flex-wrap gap-0.5 h-12 ` +
+              `${Children.count(children) > 1 ? 'justify-start' : 'justify-center'}`
+            : ' flex items-center gap-x-2'
+        }>
+        {children}
+      </div>
     </div>
   );
 });

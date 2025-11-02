@@ -65,8 +65,8 @@ function HardwareStatusBar({ref: forwardRef}: Props) {
   if (!enabled) return null;
 
   const isSmallStyle = ['compact', 'raw'].includes(displayStyle);
-  // const isTwoColumn = ['two-column', 'raw-two-column'].includes(displayStyle);
-  const heightClass = isSmallStyle ? 'h-7' : 'h-12';
+  const isTwoColumn = ['two-column', 'raw-two-column'].includes(displayStyle);
+  const heightClass = isSmallStyle ? 'h-7' : isTwoColumn ? 'h-13' : 'h-12';
   const buttonSizeClass = isSmallStyle ? 'size-5' : 'size-8';
 
   return (
