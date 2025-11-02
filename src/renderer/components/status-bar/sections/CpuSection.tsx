@@ -29,8 +29,8 @@ type Props = {
   rawSensorValues: RawSensorValue[];
 };
 
-function CpuSection({data, metrics, hardwareInfo, rawSensorValues}: Props) {
-  const compactMode = useHMonitorState('compactMode');
+const CpuSection = memo(({data, metrics, hardwareInfo, rawSensorValues}: Props) => {
+  const displayStyle = useHMonitorState('displayStyle');
   const {temp, usage, name} = data || {temp: 0, usage: 0, name: ''};
 
   const hasTemp = useMemo(() => metrics.enabled.includes('temp'), [metrics.enabled]);
@@ -50,8 +50,8 @@ function CpuSection({data, metrics, hardwareInfo, rawSensorValues}: Props) {
           />
         ) : (
           // Special case for when temperature could not be read (e.g., needs admin rights)
-          <MetricItem value="" label="Temp" icon={Thermometer}>
-            <Thermometer className={`${compactMode ? 'size-3' : 'size-4'} shrink-0 text-danger`} />
+          <MetricItem label="Temp" icon={Thermometer} value="Admin Required">
+            <Thermometer className={`${displayStyle === 'compact' ? 'size-3' : 'size-4'} shrink-0 text-danger`} />
             <span className="text-xs font-medium text-danger whitespace-nowrap">Admin Required</span>
           </MetricItem>
         ))}
@@ -92,5 +92,6 @@ function CpuSection({data, metrics, hardwareInfo, rawSensorValues}: Props) {
       })}
     </Section>
   );
-}
-export default memo(CpuSection);
+});
+
+export default CpuSection;

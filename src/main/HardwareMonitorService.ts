@@ -89,16 +89,18 @@ class HardwareMonitorService {
 
     // Perform migration or initialization if config is old or missing
     if (!storedConfig || storedConfig.configVersion < initialSettings.configVersion) {
-      const migratedConfig = {
+      const migratedConfig: MonitoringSettings = {
         ...initialSettings,
         ...(storedConfig && {
           // Carry over old settings if they exist
           enabled: storedConfig.enabled,
           refreshInterval: storedConfig.refreshInterval,
-          compactMode: storedConfig.compactMode,
           showSectionLabel: storedConfig.showSectionLabel,
           enabledMetrics: storedConfig.enabledMetrics, // Carry over old metric selections
+          // Migrate compactMode to displayStyle
+          displayStyle: (storedConfig as any).compactMode ? 'compact' : 'default',
         }),
+        configVersion: initialSettings.configVersion, // Ensure version is updated
       };
 
       // Ensure the 'custom' property exists during migration

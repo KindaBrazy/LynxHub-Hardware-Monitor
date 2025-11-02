@@ -26,10 +26,10 @@ import rendererIpc from '../../../../../src/renderer/src/App/RendererIpc';
 import {lynxTopToast} from '../../../../../src/renderer/src/App/Utils/UtilHooks';
 import {Clock_Icon} from '../../../../../src/renderer/src/assets/icons/SvgIcons/SvgIcons';
 import {HMONITOR_STORAGE_ID} from '../../../cross/constants';
-import {HardwareMetricsConfig, MetricType, MonitoringSettings, SystemMetric} from '../../../cross/types';
+import {DisplayStyle, HardwareMetricsConfig, MetricType, MonitoringSettings, SystemMetric} from '../../../cross/types';
 import {hmonitorActions, SystemMonitorState, useHMonitorSelector} from '../../state/hmonitorSlice';
 import MetricVisibilitySettings from './MetricVisibilitySettings';
-import SettingsModalCard from './SettingsModalCard';
+import SettingsModalCard from './SettingsModalCard'; // Configuration for each available metric type, defining its UI representation.
 
 // Configuration for each available metric type, defining its UI representation.
 const METRIC_CONFIG: Record<string, {label: string; Icon: ForwardRefExoticComponent<Omit<LucideProps, 'ref'>>}> = {
@@ -45,15 +45,29 @@ const METRIC_CONFIG: Record<string, {label: string; Icon: ForwardRefExoticCompon
   uptimeApp: {label: 'Application Uptime', Icon: Timer},
 };
 
+const DISPLAY_STYLES = [
+  {value: 'default', label: 'Default', description: 'Standard view with progress bars and labels.'},
+  {value: 'compact', label: 'Compact', description: 'A smaller, space-saving layout.'},
+  {value: 'two-column', label: 'Two Column', description: 'Metrics are stacked vertically to save horizontal space.'},
+  {value: 'raw', label: 'Raw Text', description: 'Minimalist text-only view for the smallest footprint.'},
+  {
+    value: 'raw-two-column',
+    label: 'Raw Text (Two Column)',
+    description: 'Minimalist text stacked vertically.',
+  },
+];
+
 type SettingsModalProps = {isOpen: boolean; show: string; tabID: string};
 
 export default function SettingsModal({show, isOpen, tabID}: SettingsModalProps) {
   const dispatch = useDispatch<AppDispatch>();
   const settings = useHMonitorSelector(state => state.hmonitor);
-  const {enabled, enabledMetrics, compactMode, refreshInterval, showSectionLabel, availableHardware} = settings;
+  const {enabled, enabledMetrics, displayStyle, refreshInterval, showSectionLabel, availableHardware} = settings;
 
   const [isSaving, setIsSaving] = useState<boolean>(false);
   const [selectedNetworkName, setSelectedNetworkName] = useState<string>(availableHardware.network[0]?.name || '');
+
+  const isRawStyle = useMemo(() => displayStyle === 'raw' || displayStyle === 'raw-two-column', [displayStyle]);
 
   const selectedNetworkConfig = useMemo(
     () => enabledMetrics.network.find(n => n.name === selectedNetworkName),
@@ -67,6 +81,14 @@ export default function SettingsModal({show, isOpen, tabID}: SettingsModalProps)
   function updateState<K extends keyof SystemMonitorState>(key: K, value: SystemMonitorState[K]) {
     dispatch(hmonitorActions.updateState({key, value}));
   }
+
+  const handleDisplayStyleChange = (style: DisplayStyle) => {
+    updateState('displayStyle', style);
+    // Automatically disable incompatible settings for raw modes
+    if (style === 'raw' || style === 'raw-two-column') {
+      updateState('showSectionLabel', false);
+    }
+  };
 
   const handleOpenChange = (value: boolean) => {
     if (!value) {
@@ -193,32 +215,43 @@ export default function SettingsModal({show, isOpen, tabID}: SettingsModalProps)
                       </div>
 
                       <div className="mb-6 space-y-4">
-                        <div
-                          className={
-                            'flex items-center justify-between rounded-lg px-2 py-2 ' +
-                            'hover:bg-content2 transition-all duration-300 cursor-pointer'
-                          }
-                          onClick={() => updateState('compactMode', !compactMode)}>
-                          <div>
-                            <p className="font-medium">Compact Mode</p>
-                            <p className="text-xs text-foreground-400">Use condensed layout to save space</p>
-                          </div>
-                          <Switch size="sm" isSelected={compactMode} />
-                        </div>
+                        <Select
+                          label="Display Style"
+                          labelPlacement="outside"
+                          selectedKeys={[displayStyle]}
+                          placeholder="Select a display style"
+                          onChange={e => handleDisplayStyleChange(e.target.value as DisplayStyle)}>
+                          {DISPLAY_STYLES.map(style => (
+                            <SelectItem key={style.value} textValue={style.value} description={style.description}>
+                              {style.label}
+                            </SelectItem>
+                          ))}
+                        </Select>
 
                         <div
                           className={
                             'flex items-center justify-between rounded-lg px-2 py-2 ' +
                             'hover:bg-content2 transition-all duration-300 cursor-pointer'
                           }
-                          onClick={() => updateState('showSectionLabel', !showSectionLabel)}>
+                          onClick={() => !isRawStyle && updateState('showSectionLabel', !showSectionLabel)}>
                           <div>
-                            <p className="font-medium">Show Section Labels</p>
-                            <p className="text-xs text-foreground-400">Display headers for metric groups</p>
+                            <p className={`font-medium ${isRawStyle ? 'text-foreground-400' : ''}`}>
+                              Show Section Labels
+                            </p>
+                            <p className="text-xs text-foreground-400">
+                              Display headers for metric groups (disabled for Raw styles)
+                            </p>
                           </div>
-                          <Switch size="sm" isSelected={showSectionLabel} />
+                          <Switch size="sm" isDisabled={isRawStyle} isSelected={showSectionLabel} />
                         </div>
-                        <MetricVisibilitySettings />
+                        <div className={isRawStyle ? 'opacity-50 pointer-events-none' : ''}>
+                          <MetricVisibilitySettings />
+                          {isRawStyle && (
+                            <p className="text-xs text-foreground-400 mt-1">
+                              Metric visibility is not applicable for Raw display styles.
+                            </p>
+                          )}
+                        </div>
                       </div>
                     </div>
 

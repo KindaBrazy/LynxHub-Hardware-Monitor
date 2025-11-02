@@ -95,12 +95,15 @@ export type EnabledMetrics = {
   uptime: {system: boolean; app: boolean};
 };
 
+// Defines the visual style of the status bar
+export type DisplayStyle = 'default' | 'compact' | 'two-column' | 'raw' | 'raw-two-column';
+
 // The complete settings object for the extension
 export type MonitoringSettings = {
   configVersion: number;
   enabled: boolean;
   refreshInterval: number;
-  compactMode: boolean;
+  displayStyle: DisplayStyle;
   showSectionLabel: boolean;
   metricVisibility: MetricVisibility;
   enabledMetrics: EnabledMetrics;

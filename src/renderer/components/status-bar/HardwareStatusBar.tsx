@@ -17,7 +17,7 @@ type Props = {ref: (node: HTMLDivElement) => void};
 
 function HardwareStatusBar({ref: forwardRef}: Props) {
   const enabled = useHMonitorState('enabled');
-  const compactMode = useHMonitorState('compactMode');
+  const displayStyle = useHMonitorState('displayStyle');
   const enabledMetrics = useHMonitorState('enabledMetrics');
   const availableHardware = useHMonitorState('availableHardware');
 
@@ -50,10 +50,10 @@ function HardwareStatusBar({ref: forwardRef}: Props) {
     if (error.message.includes('dotnet')) {
       return (
         <div>
-          <span>.NET 8 runtime not found. Please install it </span>
+          <span>.NET 9.0 runtime not found. Please install it </span>
           <Link
             className="cursor-pointer"
-            onPress={() => window.open('https://dotnet.microsoft.com/download/dotnet/8.0')}>
+            onPress={() => window.open('https://dotnet.microsoft.com/en-us/download/dotnet/9.0')}>
             Here
           </Link>
         </div>
@@ -64,16 +64,21 @@ function HardwareStatusBar({ref: forwardRef}: Props) {
 
   if (!enabled) return null;
 
+  const isSmallStyle = ['compact', 'raw'].includes(displayStyle);
+  // const isTwoColumn = ['two-column', 'raw-two-column'].includes(displayStyle);
+  const heightClass = isSmallStyle ? 'h-7' : 'h-12';
+  const buttonSizeClass = isSmallStyle ? 'size-5' : 'size-8';
+
   return (
     <div
       className={
-        `relative ${compactMode ? 'h-7' : 'h-12'} w-full bg-linear-to-r from-slate-900/95` +
+        `relative ${heightClass} w-full bg-linear-to-r from-slate-900/95` +
         ` to-slate-800/95 border-t border-slate-700/50 backdrop-blur-sm`
       }>
       {canScrollLeft && (
         <button
           className={
-            `absolute left-2 top-1/2 -translate-y-1/2 z-10 ${compactMode ? 'size-5' : 'size-8'}` +
+            `absolute left-2 top-1/2 -translate-y-1/2 z-10 ${buttonSizeClass}` +
             ` rounded-full bg-slate-800/80 border border-slate-600/50 flex items-center` +
             ` justify-center hover:bg-slate-700/80 transition-all duration-200 backdrop-blur-sm`
           }
@@ -85,7 +90,7 @@ function HardwareStatusBar({ref: forwardRef}: Props) {
       {canScrollRight && (
         <button
           className={
-            `absolute right-2 top-1/2 -translate-y-1/2 z-10 ${compactMode ? 'size-5' : 'size-8'}` +
+            `absolute right-2 top-1/2 -translate-y-1/2 z-10 ${buttonSizeClass}` +
             ` rounded-full bg-slate-800/80 border border-slate-600/50 flex items-center` +
             ` justify-center hover:bg-slate-700/80 transition-all duration-200 backdrop-blur-sm`
           }
@@ -97,7 +102,7 @@ function HardwareStatusBar({ref: forwardRef}: Props) {
       <div
         ref={initRef}
         style={{scrollbarWidth: 'none', msOverflowStyle: 'none'}}
-        className={`h-full flex items-center ${compactMode ? 'px-2' : 'px-3'} gap-x-4 overflow-x-auto`}>
+        className={`h-full flex items-center ${isSmallStyle ? 'px-2' : 'px-3'} gap-x-4 overflow-x-auto`}>
         {isConnected ? (
           <>
             {hasMetricsEnabled.cpu &&
