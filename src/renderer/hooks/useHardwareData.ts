@@ -5,7 +5,6 @@ import {HMONITOR_IPC_DATA_UPDATE, HMONITOR_IPC_MONITORING_ERROR} from '../../cro
 import {HardwareDataReport} from '../../cross/types';
 
 const convertMBtoGB = (mb: number): number => Number((mb / 1024).toFixed(2));
-const BpsToMbps = (bytes: number): number => Number(((bytes * 8) / 1e6).toFixed(2));
 
 const initialData: HardwareDataReport = {
   gpu: [],
@@ -49,8 +48,8 @@ export default function useHardwareData() {
         }),
         network: (data.Network ?? []).map(item => ({
           name: item.Name,
-          uploadSpeed: BpsToMbps(item.Sensors.find(s => s.Name === 'Upload Speed')?.Value || 0),
-          downloadSpeed: BpsToMbps(item.Sensors.find(s => s.Name === 'Download Speed')?.Value || 0),
+          uploadSpeed: item.Sensors.find(s => s.Name === 'Upload Speed')?.Value || 0,
+          downloadSpeed: item.Sensors.find(s => s.Name === 'Download Speed')?.Value || 0,
           uploadData: item.Sensors.find(s => s.Name === 'Data Uploaded')?.Value || 0,
           downloadData: item.Sensors.find(s => s.Name === 'Data Downloaded')?.Value || 0,
         })),

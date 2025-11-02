@@ -1,6 +1,7 @@
 import {Activity, ArrowDown, ArrowUp, Database, Gauge, Power, Thermometer, Wifi} from 'lucide-react';
 import {ElementType, memo, useMemo} from 'react';
 
+import {convertStorageUnit, formatSize} from '../../../../../../src/cross/CrossUtils';
 import {HardwareInfo, HardwareMetricsConfig, NetworkData, RawSensorValue} from '../../../../cross/types';
 import MetricItem from '../../common/MetricItem';
 import Section from '../../common/Section';
@@ -48,11 +49,23 @@ function NetworkSection({data, metrics, hardwareInfo, rawSensorValues}: Props) {
 
   return (
     <Section icon={Wifi} title={name}>
-      {hasUploadSpeed && <MetricItem label="Up" unit=" Mbps" icon={ArrowUp} value={uploadSpeed} />}
-      {hasDownloadSpeed && <MetricItem label="Down" unit=" Mbps" icon={ArrowDown} value={downloadSpeed} />}
+      {hasUploadSpeed && <MetricItem label="Up" icon={ArrowUp} value={formatSize(uploadSpeed)} />}
+      {hasDownloadSpeed && <MetricItem label="Down" icon={ArrowDown} value={formatSize(downloadSpeed)} />}
 
-      {hasUploadData && <MetricItem unit=" MB" icon={ArrowUp} label="Up Data" value={uploadData} />}
-      {hasDownloadData && <MetricItem unit=" MB" icon={ArrowDown} label="Down Data" value={downloadData} />}
+      {hasUploadData && (
+        <MetricItem
+          icon={ArrowUp}
+          label="Up Data"
+          value={formatSize(convertStorageUnit(uploadData.toString(), 'GB', 'B') || 0)}
+        />
+      )}
+      {hasDownloadData && (
+        <MetricItem
+          icon={ArrowDown}
+          label="Down Data"
+          value={formatSize(convertStorageUnit(downloadData.toString(), 'GB', 'B') || 0)}
+        />
+      )}
 
       {/* Render Custom Metrics */}
       {metrics.custom?.map(customMetric => {
