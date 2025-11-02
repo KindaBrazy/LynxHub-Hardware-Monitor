@@ -11,14 +11,17 @@ import {EnabledMetrics} from '../cross/types';
 export function getActiveComponentTypes(metrics: EnabledMetrics): ComponentType[] {
   const activeComponents = new Set<ComponentType>();
 
-  if (metrics.cpu.some(c => c.active && c.enabled.length > 0)) {
+  if (metrics.cpu.some(c => c.active && (c.enabled.length > 0 || c.custom?.length > 0))) {
     activeComponents.add('cpu');
   }
-  if (metrics.gpu.some(g => g.active && g.enabled.length > 0)) {
+  if (metrics.gpu.some(g => g.active && (g.enabled.length > 0 || g.custom?.length > 0))) {
     activeComponents.add('gpu');
   }
-  if (metrics.memory.some(m => m.active && m.enabled.length > 0)) {
+  if (metrics.memory.some(m => m.active && (m.enabled.length > 0 || m.custom?.length > 0))) {
     activeComponents.add('memory');
+  }
+  if (metrics.network?.some(n => n.active && (n.enabled.length > 0 || n.custom?.length > 0))) {
+    activeComponents.add('network');
   }
   if (metrics.uptime.system || metrics.uptime.app) {
     activeComponents.add('uptime');

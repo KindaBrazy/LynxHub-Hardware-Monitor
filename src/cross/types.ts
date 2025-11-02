@@ -17,6 +17,7 @@ export type AvailableHardware = {
   cpu: HardwareInfo[];
   gpu: HardwareInfo[];
   memory: HardwareInfo[];
+  network: HardwareInfo[];
 };
 
 // Data structures for individual hardware components
@@ -41,6 +42,14 @@ export type MemoryData = {
   total: number;
 };
 
+export type NetworkData = {
+  name: string;
+  uploadSpeed: number;
+  downloadSpeed: number;
+  uploadData: number;
+  downloadData: number;
+};
+
 export type UptimeData = {
   system: number;
   app: number;
@@ -54,6 +63,7 @@ export type HardwareDataReport = {
   gpu: GpuData[];
   cpu: CpuData[];
   memory: MemoryData[];
+  network: NetworkData[];
   uptime: UptimeData;
   rawSensors: RawSensorValue[]; // A flat list of all sensor values for easy lookup
 };
@@ -81,6 +91,7 @@ export type EnabledMetrics = {
   cpu: HardwareMetricsConfig[];
   gpu: HardwareMetricsConfig[];
   memory: HardwareMetricsConfig[];
+  network: HardwareMetricsConfig[];
   uptime: {system: boolean; app: boolean};
 };
 
@@ -97,7 +108,17 @@ export type MonitoringSettings = {
 };
 
 // Union type for all possible metric identifiers
-export type SystemMetric = 'temp' | 'usage' | 'vram' | 'memory' | 'uptimeSystem' | 'uptimeApp';
+export type SystemMetric =
+  | 'temp'
+  | 'usage'
+  | 'vram'
+  | 'memory'
+  | 'uptimeSystem'
+  | 'uptimeApp'
+  | 'uploadSpeed'
+  | 'downloadSpeed'
+  | 'uploadData'
+  | 'downloadData';
 
 // A key for each hardware type in the settings
 export type MetricType = keyof Omit<EnabledMetrics, 'uptime'>;

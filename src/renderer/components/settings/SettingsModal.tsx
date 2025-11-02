@@ -11,11 +11,13 @@ import {
   ModalFooter,
   ModalHeader,
   NumberInput,
+  Select,
+  SelectItem,
   Switch,
 } from '@heroui/react';
 import {AnimatePresence, motion} from 'framer-motion';
-import {Clock, Cpu, Database, LucideProps, Thermometer, Timer} from 'lucide-react';
-import {ForwardRefExoticComponent, useCallback, useState} from 'react';
+import {ArrowDown, ArrowUp, Clock, Cpu, Database, LucideProps, Thermometer, Timer} from 'lucide-react';
+import {ForwardRefExoticComponent, useCallback, useMemo, useState} from 'react';
 import {useDispatch} from 'react-redux';
 
 import LynxScroll from '../../../../../src/renderer/src/App/Components/Reusable/LynxScroll';
@@ -35,6 +37,10 @@ const METRIC_CONFIG: Record<string, {label: string; Icon: ForwardRefExoticCompon
   usage: {label: 'Usage', Icon: Cpu},
   vram: {label: 'VRAM', Icon: Database},
   memory: {label: 'Memory Usage', Icon: Database},
+  uploadSpeed: {label: 'Upload Speed', Icon: ArrowUp},
+  downloadSpeed: {label: 'Download Speed', Icon: ArrowDown},
+  uploadData: {label: 'Data Uploaded', Icon: ArrowUp},
+  downloadData: {label: 'Data Downloaded', Icon: ArrowDown},
   uptimeSystem: {label: 'System Uptime', Icon: Clock},
   uptimeApp: {label: 'Application Uptime', Icon: Timer},
 };
@@ -47,6 +53,16 @@ export default function SettingsModal({show, isOpen, tabID}: SettingsModalProps)
   const {enabled, enabledMetrics, compactMode, refreshInterval, showSectionLabel, availableHardware} = settings;
 
   const [isSaving, setIsSaving] = useState<boolean>(false);
+  const [selectedNetworkName, setSelectedNetworkName] = useState<string>(availableHardware.network[0]?.name || '');
+
+  const selectedNetworkConfig = useMemo(
+    () => enabledMetrics.network.find(n => n.name === selectedNetworkName),
+    [selectedNetworkName, enabledMetrics.network],
+  );
+  const selectedNetworkHardware = useMemo(
+    () => availableHardware.network.find(n => n.name === selectedNetworkName),
+    [selectedNetworkName, availableHardware.network],
+  );
 
   function updateState<K extends keyof SystemMonitorState>(key: K, value: SystemMonitorState[K]) {
     dispatch(hmonitorActions.updateState({key, value}));
@@ -248,6 +264,47 @@ export default function SettingsModal({show, isOpen, tabID}: SettingsModalProps)
                           {getMetricItem('memory', 'memory', hw.name)}
                         </SettingsModalCard>
                       ))}
+
+                      {/* Network Settings Card */}
+                      {availableHardware.network.length > 0 && (
+                        <Card as="div" className="!shadow-sm p-2" fullWidth>
+                          <CardHeader className="flex flex-row justify-between">
+                            <p className="font-medium">Network Interface</p>
+                            {selectedNetworkConfig && (
+                              <Switch
+                                isSelected={selectedNetworkConfig.active}
+                                onValueChange={() => toggleHardwareActive(selectedNetworkName, 'network')}
+                              />
+                            )}
+                          </CardHeader>
+                          <CardBody className="flex-col items-start relative gap-y-4">
+                            <Select
+                              selectionMode="single"
+                              items={availableHardware.network}
+                              aria-label="Select Network Interface"
+                              placeholder="Select a network interface to configure"
+                              onChange={e => setSelectedNetworkName(e.target.value)}
+                              selectedKeys={selectedNetworkName ? [selectedNetworkName] : []}
+                              disallowEmptySelection>
+                              {item => <SelectItem key={item.name}>{item.name}</SelectItem>}
+                            </Select>
+
+                            {selectedNetworkConfig && selectedNetworkHardware && (
+                              <div className="w-full relative">
+                                {!selectedNetworkConfig.active && (
+                                  <div className="absolute inset-0 bg-background/50 z-20 -m-1 rounded-xl" />
+                                )}
+                                <div className="grid grid-cols-2 items-center">
+                                  {getMetricItem('uploadSpeed', 'network', selectedNetworkName)}
+                                  {getMetricItem('downloadSpeed', 'network', selectedNetworkName)}
+                                  {getMetricItem('uploadData', 'network', selectedNetworkName)}
+                                  {getMetricItem('downloadData', 'network', selectedNetworkName)}
+                                </div>
+                              </div>
+                            )}
+                          </CardBody>
+                        </Card>
+                      )}
 
                       <Card as="div" className="!shadow-sm p-2" fullWidth>
                         <CardHeader className="font-medium">Uptime</CardHeader>

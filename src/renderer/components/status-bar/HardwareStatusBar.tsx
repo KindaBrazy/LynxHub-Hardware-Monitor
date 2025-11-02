@@ -10,6 +10,7 @@ import {useHMonitorState} from '../../state/hmonitorSlice';
 import CpuSection from './sections/CpuSection';
 import GpuSection from './sections/GpuSection';
 import MemorySection from './sections/MemorySection';
+import NetworkSection from './sections/NetworkSection';
 import UptimeSection from './sections/UptimeSection';
 
 type Props = {ref: (node: HTMLDivElement) => void};
@@ -32,11 +33,12 @@ function HardwareStatusBar({ref: forwardRef}: Props) {
   };
 
   const hasMetricsEnabled = useMemo(() => {
-    if (!enabledMetrics) return {cpu: false, gpu: false, memory: false, uptime: false};
+    if (!enabledMetrics) return {cpu: false, gpu: false, memory: false, network: false, uptime: false};
     return {
       gpu: enabledMetrics.gpu.some(item => item.active && (item.enabled.length > 0 || item.custom?.length > 0)),
       cpu: enabledMetrics.cpu.some(item => item.active && (item.enabled.length > 0 || item.custom?.length > 0)),
       memory: enabledMetrics.memory.some(item => item.active && (item.enabled.length > 0 || item.custom?.length > 0)),
+      network: enabledMetrics.network.some(item => item.active && (item.enabled.length > 0 || item.custom?.length > 0)),
       uptime: enabledMetrics.uptime.system || enabledMetrics.uptime.app,
     };
   }, [enabledMetrics]);
@@ -111,7 +113,10 @@ function HardwareStatusBar({ref: forwardRef}: Props) {
                     />
                   ),
               )}
-            {(hasMetricsEnabled.gpu || hasMetricsEnabled.memory || hasMetricsEnabled.uptime) &&
+            {(hasMetricsEnabled.gpu ||
+              hasMetricsEnabled.memory ||
+              hasMetricsEnabled.network ||
+              hasMetricsEnabled.uptime) &&
               hasMetricsEnabled.cpu && <Divider type="vertical" className="mx-0" />}
 
             {hasMetricsEnabled.gpu &&
@@ -127,9 +132,8 @@ function HardwareStatusBar({ref: forwardRef}: Props) {
                     />
                   ),
               )}
-            {(hasMetricsEnabled.gpu || hasMetricsEnabled.uptime) && hasMetricsEnabled.memory && (
-              <Divider type="vertical" className="mx-0" />
-            )}
+            {(hasMetricsEnabled.memory || hasMetricsEnabled.network || hasMetricsEnabled.uptime) &&
+              hasMetricsEnabled.gpu && <Divider type="vertical" className="mx-0" />}
 
             {hasMetricsEnabled.memory &&
               enabledMetrics.memory.map(
@@ -144,9 +148,24 @@ function HardwareStatusBar({ref: forwardRef}: Props) {
                     />
                   ),
               )}
-            {(hasMetricsEnabled.gpu || hasMetricsEnabled.memory) && hasMetricsEnabled.uptime && (
+            {(hasMetricsEnabled.network || hasMetricsEnabled.uptime) && hasMetricsEnabled.memory && (
               <Divider type="vertical" className="mx-0" />
             )}
+
+            {hasMetricsEnabled.network &&
+              enabledMetrics.network.map(
+                (network, index) =>
+                  network.active && (
+                    <NetworkSection
+                      metrics={network}
+                      key={`network_${network.name}_${index}`}
+                      rawSensorValues={hardwareData.rawSensors}
+                      data={hardwareData.network.find(item => item.name === network.name)}
+                      hardwareInfo={availableHardware.network.find(h => h.name === network.name)}
+                    />
+                  ),
+              )}
+            {hasMetricsEnabled.uptime && hasMetricsEnabled.network && <Divider type="vertical" className="mx-0" />}
 
             {hasMetricsEnabled.uptime && <UptimeSection data={hardwareData.uptime} metrics={enabledMetrics.uptime} />}
           </>

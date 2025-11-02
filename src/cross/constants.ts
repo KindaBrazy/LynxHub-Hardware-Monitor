@@ -14,6 +14,7 @@ export const initialAvailableHardware: AvailableHardware = {
   gpu: [],
   cpu: [],
   memory: [],
+  network: [],
 };
 
 // Default visibility settings for each metric item in the status bar
@@ -29,12 +30,13 @@ export const initialEnabledMetrics: EnabledMetrics = {
   cpu: [],
   gpu: [],
   memory: [],
+  network: [],
   uptime: {system: true, app: true},
 };
 
 // Default settings for the hardware monitor
 export const initialSettings: MonitoringSettings = {
-  configVersion: 0.3, // Version to handle future settings migrations
+  configVersion: 0.4, // Version to handle future settings migrations
   refreshInterval: 1, // in seconds
   enabled: true,
   compactMode: false,

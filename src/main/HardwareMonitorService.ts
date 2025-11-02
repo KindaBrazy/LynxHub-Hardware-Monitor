@@ -105,6 +105,9 @@ class HardwareMonitorService {
       migratedConfig.enabledMetrics.cpu.forEach(c => (c.custom ??= []));
       migratedConfig.enabledMetrics.gpu.forEach(g => (g.custom ??= []));
       migratedConfig.enabledMetrics.memory.forEach(m => (m.custom ??= []));
+      // Add network property if it doesn't exist from an older config
+      migratedConfig.enabledMetrics.network ??= [];
+      migratedConfig.enabledMetrics.network.forEach(n => (n.custom ??= []));
 
       storedConfig = migratedConfig;
     }
@@ -124,7 +127,7 @@ class HardwareMonitorService {
         const targetDir = join(app.getPath('downloads'), 'LynxHub');
         await monitor.checkRequirements(targetDir);
 
-        const result = await monitor.getDataOnce(['cpu', 'gpu', 'memory']);
+        const result = await monitor.getDataOnce(['cpu', 'gpu', 'memory', 'network']);
         const mapToHardwareInfo = (items: {Name: string; Sensors: any[]}[]): HardwareInfo[] => {
           return items.map(item => ({
             name: item.Name,
@@ -141,6 +144,7 @@ class HardwareMonitorService {
           gpu: mapToHardwareInfo(result.GPU),
           cpu: mapToHardwareInfo(result.CPU),
           memory: mapToHardwareInfo(result.Memory),
+          network: mapToHardwareInfo(result.Network),
         };
 
         // Reconcile discovered hardware with existing configuration.
@@ -179,6 +183,17 @@ class HardwareMonitorService {
           }
         });
 
+        this.config.availableHardware.network.forEach(hw => {
+          if (!this.config.enabledMetrics.network.some(n => n.name === hw.name)) {
+            this.config.enabledMetrics.network.push({
+              name: hw.name,
+              active: false,
+              enabled: ['uploadSpeed', 'downloadSpeed'],
+              custom: [],
+            });
+          }
+        });
+
         this.sendToRenderer(HMONITOR_IPC_CONFIG_UPDATE, this.config);
         return; // Success
       } catch (error) {
@@ -206,7 +221,7 @@ class HardwareMonitorService {
 
       this.hwMonitor.on('data', (data: HardwareReport) => {
         // Flatten all sensor values for easy lookup on the renderer side
-        const rawSensors = [...data.CPU, ...data.GPU, ...data.Memory].flatMap(h =>
+        const rawSensors = [...data.CPU, ...data.GPU, ...data.Memory, ...(data.Network ?? [])].flatMap(h =>
           h.Sensors.map(s => ({Identifier: s.Identifier, Value: s.Value})),
         );
         const reportWithRawSensors: Partial<HardwareDataReport> & HardwareReport = {...data, rawSensors};
