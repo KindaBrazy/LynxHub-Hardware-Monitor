@@ -21,17 +21,17 @@ const require$$0$4 = require("zlib");
 const electron = require("electron");
 const execAsync = node_util.promisify(node_child_process.exec);
 const DOTNET_LIST_RUNTIMES_COMMAND = "dotnet --list-runtimes";
-const DOTNET_8_RUNTIME_IDENTIFIER = "microsoft.netcore.app 8.0";
-function isDotNet8RuntimeInstalled(output) {
-  return output.toLowerCase().includes(DOTNET_8_RUNTIME_IDENTIFIER);
+const DOTNET_9_RUNTIME_IDENTIFIER = "microsoft.netcore.app 9.0";
+function isDotNet9RuntimeInstalled(output) {
+  return output.toLowerCase().includes(DOTNET_9_RUNTIME_IDENTIFIER);
 }
-async function checkDotNetRuntime8(logger = console) {
+async function checkDotNetRuntime9(logger = console) {
   try {
     const { stdout, stderr } = await execAsync(DOTNET_LIST_RUNTIMES_COMMAND);
     if (stderr) {
       logger.warn(`Stderr from 'dotnet --list-runtimes': ${stderr}`);
     }
-    return isDotNet8RuntimeInstalled(stdout);
+    return isDotNet9RuntimeInstalled(stdout);
   } catch (error) {
     logger.error(`Error executing 'dotnet --list-runtimes': ${error.message}`);
     return false;
@@ -10920,18 +10920,18 @@ class HardwareMonitor extends node_events.EventEmitter {
     return args;
   }
   /**
-   * Checks for .NET 8 runtime and downloads the CLI tool.
+   * Checks for .NET 9 runtime and downloads the CLI tool.
    * @param targetDir - Directory to download the CLI tool.
-   * @throws Error if .NET 8 is not found or download fails.
+   * @throws Error if .NET 9 is not found or download fails.
    */
   async checkRequirements(targetDir) {
     const logger = {
       warn: (...args) => this.log("warn", ...args),
       error: (...args) => this.log("error", ...args)
     };
-    const isDotNetInstalled = await checkDotNetRuntime8(logger);
+    const isDotNetInstalled = await checkDotNetRuntime9(logger);
     if (!isDotNetInstalled) {
-      throw new Error(".NET 8 runtime not found. Please install it from https://dotnet.microsoft.com/download/dotnet/8.0");
+      throw new Error(".NET 9 runtime not found. Please install it from https://dotnet.microsoft.com/download/dotnet/9.0");
     }
     this.executablePath = await DownloadCli(targetDir, this.logLevel);
     this.log("info", "✅ Lynx Hardware Monitor is ready to use.");
@@ -11012,7 +11012,10 @@ class HardwareMonitor extends node_events.EventEmitter {
               Memory: parsedReport.Memory || [],
               Motherboard: parsedReport.Motherboard || [],
               Storage: parsedReport.Storage || [],
-              Network: parsedReport.Network || []
+              Network: parsedReport.Network || [],
+              Battery: parsedReport.Battery || [],
+              Controller: parsedReport.Controller || [],
+              Psu: parsedReport.Psu || []
             };
           } else {
             finalReport = parsedReport;
@@ -11138,7 +11141,10 @@ class HardwareMonitor extends node_events.EventEmitter {
                   Memory: parsedData.Memory || [],
                   Motherboard: parsedData.Motherboard || [],
                   Storage: parsedData.Storage || [],
-                  Network: parsedData.Network || []
+                  Network: parsedData.Network || [],
+                  Battery: parsedData.Battery || [],
+                  Controller: parsedData.Controller || [],
+                  Psu: parsedData.Psu || []
                 };
               } else {
                 finalReport = parsedData;
@@ -16695,187 +16701,268 @@ function requireLodash() {
 }
 var lodashExports = requireLodash();
 const HMONITOR_STORAGE_ID = "hmonitor_storage";
-const HMONITOR_IPC_DATA_ID = "hardware-data-update";
-const HMONITOR_IPC_STOP_ID = "hmonitor-stop";
-const HMONITOR_IPC_UPDATE_CONFIG = "hmonitor-update-config";
-const HMONITOR_IPC_ERROR_MONITORING = "hmonitor-error-monitoring";
-const HMONITOR_IPC_ON_CONFIG = "hmonitor-on-config";
-const initialSystemMetrics = {
-  cpu: [],
+const HMONITOR_IPC_DATA_UPDATE = "hmonitor-data-update";
+const HMONITOR_IPC_CONFIG_UPDATE = "hmonitor-config-update";
+const HMONITOR_IPC_MONITORING_ERROR = "hmonitor-monitoring-error";
+const HMONITOR_IPC_SET_CONFIG = "hmonitor-set-config";
+const initialAvailableHardware = {
   gpu: [],
+  cpu: [],
   memory: [],
-  uptime: { system: true, app: true }
+  network: []
 };
-const initAvailableHardware = {
-  gpu: [],
-  cpu: [],
-  memory: []
-};
-const initMetricVisibility = {
+const initialMetricVisibility = {
   icon: true,
   label: true,
   value: true,
   progressBar: true
 };
+const initialEnabledMetrics = {
+  cpu: [],
+  gpu: [],
+  memory: [],
+  network: [],
+  uptime: { system: true, app: true }
+};
 const initialSettings = {
-  configVersion: 0.1,
+  configVersion: 0.5,
+  // Version to handle future settings migrations
   refreshInterval: 1,
+  // in seconds
   enabled: true,
-  compactMode: false,
+  displayStyle: "default",
   showSectionLabel: true,
-  metricVisibility: initMetricVisibility,
-  enabledMetrics: initialSystemMetrics,
-  availableHardware: initAvailableHardware
+  metricVisibility: initialMetricVisibility,
+  enabledMetrics: initialEnabledMetrics,
+  availableHardware: initialAvailableHardware
 };
 function getActiveComponentTypes(metrics) {
-  const componentTypes = [];
-  const processedComponents = /* @__PURE__ */ new Set();
-  if (metrics.cpu.some((item) => item.enabled.length > 0) && !processedComponents.has("cpu")) {
-    componentTypes.push("cpu");
-    processedComponents.add("cpu");
+  const activeComponents = /* @__PURE__ */ new Set();
+  if (metrics.cpu.some((c) => c.active && (c.enabled.length > 0 || c.custom?.length > 0))) {
+    activeComponents.add("cpu");
   }
-  if (metrics.gpu.some((item) => item.enabled.length > 0) && !processedComponents.has("gpu")) {
-    componentTypes.push("gpu");
-    processedComponents.add("gpu");
+  if (metrics.gpu.some((g) => g.active && (g.enabled.length > 0 || g.custom?.length > 0))) {
+    activeComponents.add("gpu");
   }
-  if (metrics.memory.some((item) => item.enabled.length > 0) && !processedComponents.has("memory")) {
-    componentTypes.push("memory");
-    processedComponents.add("memory");
+  if (metrics.memory.some((m) => m.active && (m.enabled.length > 0 || m.custom?.length > 0))) {
+    activeComponents.add("memory");
   }
-  if ((metrics.uptime.system || metrics.uptime.app) && !processedComponents.has("uptime")) {
-    componentTypes.push("uptime");
-    processedComponents.add("uptime");
+  if (metrics.network?.some((n) => n.active && (n.enabled.length > 0 || n.custom?.length > 0))) {
+    activeComponents.add("network");
   }
-  return componentTypes;
+  if (metrics.uptime.system || metrics.uptime.app) {
+    activeComponents.add("uptime");
+  }
+  return Array.from(activeComponents);
 }
-let storeManager = void 0;
-let hwMonitor = void 0;
-let currentConfig = void 0;
-let webContent = void 0;
-const sendRenderer = (channel, data) => {
-  if (webContent && !webContent.isDestroyed()) webContent.send(channel, data);
-};
-async function startMonitoring() {
-  if (!webContent || !currentConfig) {
-    console.warn(
-      `Cannot start monitoring. Web content or config not found., webContent: ${webContent}, config:${currentConfig}`
-    );
-    return;
+const HARDWARE_CHECK_MAX_RETRIES = 5;
+class HardwareMonitorService {
+  static instance;
+  storeManager;
+  hwMonitor;
+  config = initialSettings;
+  webContents;
+  isInitialized = false;
+  constructor() {
   }
-  try {
-    hwMonitor = new HardwareMonitor("error");
-    const targetDir = path.join(electron.app.getPath("downloads"), "LynxHub");
-    await hwMonitor.checkRequirements(targetDir);
-    hwMonitor.on("data", (data) => {
-      sendRenderer(HMONITOR_IPC_DATA_ID, data);
-    });
-    hwMonitor.on("error", (error) => {
-      console.error("Timed Monitoring Error:", error.message);
-      if (error.rawError) console.error("Raw Error:", error.rawError);
-      sendRenderer(HMONITOR_IPC_ERROR_MONITORING, error);
-    });
-    const targetInterval = (currentConfig.refreshInterval || 1) * 1e3;
-    const targetComponents = getActiveComponentTypes(currentConfig.enabledMetrics);
-    hwMonitor.startTimed(targetInterval, targetComponents);
-  } catch (e) {
-    console.error(e);
-    sendRenderer(HMONITOR_IPC_ERROR_MONITORING, e);
-  }
-}
-function stopMonitoring() {
-  hwMonitor?.stopTimed();
-  hwMonitor = void 0;
-}
-async function checkHardwareDevices() {
-  const MAX_RETRIES = 5;
-  let retries = 0;
-  while (retries < MAX_RETRIES) {
-    try {
-      const hm = new HardwareMonitor("error");
-      const targetDir = path.join(electron.app.getPath("downloads"), "LynxHub");
-      await hm.checkRequirements(targetDir);
-      const result = await hm.getDataOnce(["cpu", "gpu", "memory"]);
-      const gpu = result.GPU.map((item) => item.Name);
-      const cpu = result.CPU.map((item) => item.Name);
-      const memory = result.Memory.map((item) => item.Name);
-      if (currentConfig && storeManager) {
-        currentConfig.availableHardware = { gpu, cpu, memory };
-        if (lodashExports.isEmpty(currentConfig.enabledMetrics.gpu)) {
-          currentConfig.enabledMetrics.gpu = gpu.map((name) => ({
-            name,
-            active: true,
-            enabled: ["temp", "usage", "vram"]
-          }));
-        }
-        if (lodashExports.isEmpty(currentConfig.enabledMetrics.cpu)) {
-          currentConfig.enabledMetrics.cpu = cpu.map((name) => ({ name, active: true, enabled: ["temp", "usage"] }));
-        }
-        if (lodashExports.isEmpty(currentConfig.enabledMetrics.memory)) {
-          currentConfig.enabledMetrics.memory = memory.map((name) => ({ name, active: true, enabled: ["memory"] }));
-        }
-        storeManager.setCustomData(HMONITOR_STORAGE_ID, currentConfig);
-        sendRenderer(HMONITOR_IPC_ON_CONFIG, currentConfig);
-      }
-      return;
-    } catch (e) {
-      console.warn(`Attempt ${retries + 1} failed to check hardware devices:`, e);
-      retries++;
-      if (retries >= MAX_RETRIES) {
-        console.error("Failed to check hardware devices after 5 attempts.");
-      }
+  static getInstance() {
+    if (!HardwareMonitorService.instance) {
+      HardwareMonitorService.instance = new HardwareMonitorService();
     }
+    return HardwareMonitorService.instance;
   }
-}
-async function onAppReady(utils) {
-  utils.getStorageManager().then((manager) => {
-    storeManager = manager;
-    currentConfig = storeManager.getCustomData(HMONITOR_STORAGE_ID);
-    if (!currentConfig || lodashExports.isArray(currentConfig.enabledMetrics)) {
-      currentConfig = initialSettings;
-      storeManager.setCustomData(HMONITOR_STORAGE_ID, currentConfig);
-    } else {
-      if (!currentConfig.configVersion) {
-        currentConfig.availableHardware = initAvailableHardware;
-        currentConfig.metricVisibility = initMetricVisibility;
-        currentConfig.configVersion = 0.1;
-        storeManager.setCustomData(HMONITOR_STORAGE_ID, currentConfig);
-      }
-    }
-    checkHardwareDevices();
-  });
-}
-let started = false;
-function onAppReadyToShow(utils) {
-  if (!started) {
+  /**
+   * Initializes the service, loads configuration, and discovers hardware.
+   */
+  async initialize(utils) {
+    if (this.isInitialized) return;
+    this.storeManager = await utils.getStorageManager();
+    this.loadConfig();
+    await this.discoverHardware();
+    this.saveConfig();
+    this.registerIpcHandlers();
+    this.isInitialized = true;
+  }
+  /**
+   * Sets the webContents for IPC communication and starts monitoring if enabled.
+   */
+  onMainWindowReady(utils) {
     utils.getAppManager().then((appManager) => {
-      webContent = appManager.getWebContent();
-      if (currentConfig?.enabled) startMonitoring();
+      this.webContents = appManager.getWebContent();
+      this.sendToRenderer(HMONITOR_IPC_CONFIG_UPDATE, this.config);
+      if (this.config.enabled) {
+        this.startMonitoring();
+      }
     });
-    started = true;
   }
-}
-function updateConfig(config) {
-  if (config.enabled !== currentConfig?.enabled) {
-    if (config.enabled) {
-      startMonitoring();
-    } else {
-      stopMonitoring();
+  sendToRenderer(channel, data) {
+    if (this.webContents && !this.webContents.isDestroyed()) {
+      this.webContents.send(channel, data);
     }
   }
-  if (!lodashExports.isEqual(config.enabledMetrics, currentConfig?.enabledMetrics) || !lodashExports.isEqual(config.refreshInterval, currentConfig?.refreshInterval)) {
-    stopMonitoring();
-    startMonitoring();
+  loadConfig() {
+    if (!this.storeManager) return;
+    let storedConfig = this.storeManager.getCustomData(HMONITOR_STORAGE_ID);
+    if (!storedConfig || storedConfig.configVersion < initialSettings.configVersion) {
+      const migratedConfig = {
+        ...initialSettings,
+        ...storedConfig && {
+          // Carry over old settings if they exist
+          enabled: storedConfig.enabled,
+          refreshInterval: storedConfig.refreshInterval,
+          showSectionLabel: storedConfig.showSectionLabel,
+          enabledMetrics: storedConfig.enabledMetrics,
+          // Carry over old metric selections
+          // Migrate compactMode to displayStyle
+          displayStyle: storedConfig.compactMode ? "compact" : "default"
+        },
+        configVersion: initialSettings.configVersion
+        // Ensure version is updated
+      };
+      migratedConfig.enabledMetrics.cpu.forEach((c) => c.custom ??= []);
+      migratedConfig.enabledMetrics.gpu.forEach((g) => g.custom ??= []);
+      migratedConfig.enabledMetrics.memory.forEach((m) => m.custom ??= []);
+      migratedConfig.enabledMetrics.network ??= [];
+      migratedConfig.enabledMetrics.network.forEach((n) => n.custom ??= []);
+      storedConfig = migratedConfig;
+    }
+    this.config = { ...storedConfig, availableHardware: initialSettings.availableHardware };
   }
-  currentConfig = config;
-  storeManager?.setCustomData(HMONITOR_STORAGE_ID, config);
+  saveConfig() {
+    this.storeManager?.setCustomData(HMONITOR_STORAGE_ID, this.config);
+  }
+  async discoverHardware() {
+    for (let i = 0; i < HARDWARE_CHECK_MAX_RETRIES; i++) {
+      try {
+        const monitor = new HardwareMonitor("error");
+        const targetDir = path.join(electron.app.getPath("downloads"), "LynxHub");
+        await monitor.checkRequirements(targetDir);
+        const result = await monitor.getDataOnce(["cpu", "gpu", "memory", "network"]);
+        const mapToHardwareInfo = (items) => {
+          return items.map((item) => ({
+            name: item.Name,
+            sensors: item.Sensors.map((s) => ({
+              Name: s.Name,
+              Type: s.Type,
+              Unit: s.Unit,
+              Identifier: s.Identifier
+            }))
+          }));
+        };
+        this.config.availableHardware = {
+          gpu: mapToHardwareInfo(result.GPU),
+          cpu: mapToHardwareInfo(result.CPU),
+          memory: mapToHardwareInfo(result.Memory),
+          network: mapToHardwareInfo(result.Network)
+        };
+        this.config.availableHardware.gpu.forEach((hw) => {
+          if (!this.config.enabledMetrics.gpu.some((g) => g.name === hw.name)) {
+            this.config.enabledMetrics.gpu.push({
+              name: hw.name,
+              active: true,
+              enabled: ["temp", "usage", "vram"],
+              custom: []
+            });
+          }
+        });
+        this.config.availableHardware.cpu.forEach((hw) => {
+          if (!this.config.enabledMetrics.cpu.some((c) => c.name === hw.name)) {
+            this.config.enabledMetrics.cpu.push({
+              name: hw.name,
+              active: true,
+              enabled: ["temp", "usage"],
+              custom: []
+            });
+          }
+        });
+        this.config.availableHardware.memory.forEach((hw) => {
+          if (!this.config.enabledMetrics.memory.some((m) => m.name === hw.name)) {
+            this.config.enabledMetrics.memory.push({
+              name: hw.name,
+              active: true,
+              enabled: ["memory"],
+              custom: []
+            });
+          }
+        });
+        this.config.availableHardware.network.forEach((hw) => {
+          if (!this.config.enabledMetrics.network.some((n) => n.name === hw.name)) {
+            this.config.enabledMetrics.network.push({
+              name: hw.name,
+              active: false,
+              enabled: ["uploadSpeed", "downloadSpeed"],
+              custom: []
+            });
+          }
+        });
+        this.sendToRenderer(HMONITOR_IPC_CONFIG_UPDATE, this.config);
+        return;
+      } catch (error) {
+        console.warn(`Hardware discovery attempt ${i + 1} failed:`, error);
+        if (i === HARDWARE_CHECK_MAX_RETRIES - 1) {
+          console.error("All hardware discovery attempts failed.");
+          this.sendToRenderer(HMONITOR_IPC_MONITORING_ERROR, error);
+        }
+      }
+    }
+  }
+  async startMonitoring() {
+    if (this.hwMonitor || !this.config) {
+      return;
+    }
+    try {
+      this.hwMonitor = new HardwareMonitor("error");
+      const targetDir = path.join(electron.app.getPath("downloads"), "LynxHub");
+      await this.hwMonitor.checkRequirements(targetDir);
+      this.hwMonitor.on("data", (data) => {
+        const rawSensors = [...data.CPU, ...data.GPU, ...data.Memory, ...data.Network ?? []].flatMap(
+          (h) => h.Sensors.map((s) => ({ Identifier: s.Identifier, Value: s.Value }))
+        );
+        const reportWithRawSensors = { ...data, rawSensors };
+        this.sendToRenderer(HMONITOR_IPC_DATA_UPDATE, reportWithRawSensors);
+      });
+      this.hwMonitor.on("error", (error) => {
+        console.error("Hardware Monitoring Error:", error.message, error.rawError ?? "");
+        this.sendToRenderer(HMONITOR_IPC_MONITORING_ERROR, error);
+      });
+      const intervalMs = (this.config.refreshInterval || 1) * 1e3;
+      const components = getActiveComponentTypes(this.config.enabledMetrics);
+      if (components.length > 0) {
+        this.hwMonitor.startTimed(intervalMs, components);
+      }
+    } catch (error) {
+      console.error("Failed to start monitoring:", error);
+      this.sendToRenderer(HMONITOR_IPC_MONITORING_ERROR, error);
+    }
+  }
+  stopMonitoring() {
+    this.hwMonitor?.stopTimed();
+    this.hwMonitor = void 0;
+  }
+  updateConfig(newConfig) {
+    const oldConfig = this.config;
+    const shouldRestart = !lodashExports.isEqual(newConfig.enabledMetrics, oldConfig.enabledMetrics) || !lodashExports.isEqual(newConfig.refreshInterval, oldConfig.refreshInterval);
+    if (newConfig.enabled && shouldRestart) {
+      this.stopMonitoring();
+    }
+    if (newConfig.enabled !== oldConfig.enabled) {
+      newConfig.enabled ? this.startMonitoring() : this.stopMonitoring();
+    } else if (newConfig.enabled && shouldRestart) {
+      this.startMonitoring();
+    }
+    this.config = newConfig;
+    this.saveConfig();
+  }
+  registerIpcHandlers() {
+    electron.ipcMain.on(HMONITOR_IPC_SET_CONFIG, (_, newConfig) => {
+      if (lodashExports.isNil(newConfig)) return;
+      this.updateConfig(JSON.parse(newConfig));
+    });
+  }
 }
-function listenForHWChannels() {
-  electron.ipcMain.on(HMONITOR_IPC_STOP_ID, () => stopMonitoring());
-  electron.ipcMain.on(HMONITOR_IPC_UPDATE_CONFIG, (_, config) => updateConfig(JSON.parse(config)));
-}
+const hardwareMonitorService = HardwareMonitorService.getInstance();
 async function initialExtension(lynxApi, utils) {
-  lynxApi.listenForChannels(() => listenForHWChannels());
-  lynxApi.onReadyToShow(() => onAppReadyToShow(utils));
-  lynxApi.onAppReady(() => onAppReady(utils));
+  lynxApi.onAppReady(() => hardwareMonitorService.initialize(utils));
+  lynxApi.onReadyToShow(() => hardwareMonitorService.onMainWindowReady(utils));
 }
 exports.initialExtension = initialExtension;

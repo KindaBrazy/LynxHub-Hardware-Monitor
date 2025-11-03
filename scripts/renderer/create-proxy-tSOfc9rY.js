@@ -1,13 +1,70 @@
 import { importShared } from './__federation_fn_import-JrT3xvdd.js';
-import { j as jsxRuntimeExports } from './jsx-runtime-BA-u0cS_.js';
-import { aI as isBrowser, j as isHTMLElement, f as frame, b_ as featureDefinitions, b$ as isControllingVariants, c0 as isVariantLabel, B as isMotionValue, c1 as isForcedMotionValue, c2 as buildHTMLStyles, c3 as buildSVGAttrs, c4 as isSVGTag, c5 as isSVGComponent, c6 as isVariantNode, c7 as isAnimationControls, c8 as resolveVariantFromProps, c9 as scrapeMotionValuesFromProps, ca as scrapeMotionValuesFromProps$1, aK as optimizedAppearDataAttribute, k as MotionValue, h as transformProps } from './features-animation-BzRKjcON.js';
+import { ac as isBrowser, h as isHTMLElement, bZ as featureDefinitions, b_ as isControllingVariants, b$ as isVariantLabel, y as isMotionValue, c0 as isForcedMotionValue, c1 as buildHTMLStyles, c2 as buildSVGAttrs, c3 as isSVGTag, c4 as isSVGComponent, c5 as isVariantNode, c6 as isAnimationControls, c7 as resolveVariantFromProps, c8 as scrapeMotionValuesFromProps, c9 as scrapeMotionValuesFromProps$1, af as optimizedAppearDataAttribute } from './gestures-CkwOd1OX.js';
 
-const {createContext: createContext$6} = await importShared('react');
+var jsxRuntime = {exports: {}};
+
+var reactJsxRuntime_production = {};
+
+/**
+ * @license React
+ * react-jsx-runtime.production.js
+ *
+ * Copyright (c) Meta Platforms, Inc. and affiliates.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+var hasRequiredReactJsxRuntime_production;
+
+function requireReactJsxRuntime_production () {
+	if (hasRequiredReactJsxRuntime_production) return reactJsxRuntime_production;
+	hasRequiredReactJsxRuntime_production = 1;
+	var REACT_ELEMENT_TYPE = Symbol.for("react.transitional.element"),
+	  REACT_FRAGMENT_TYPE = Symbol.for("react.fragment");
+	function jsxProd(type, config, maybeKey) {
+	  var key = null;
+	  void 0 !== maybeKey && (key = "" + maybeKey);
+	  void 0 !== config.key && (key = "" + config.key);
+	  if ("key" in config) {
+	    maybeKey = {};
+	    for (var propName in config)
+	      "key" !== propName && (maybeKey[propName] = config[propName]);
+	  } else maybeKey = config;
+	  config = maybeKey.ref;
+	  return {
+	    $$typeof: REACT_ELEMENT_TYPE,
+	    type: type,
+	    key: key,
+	    ref: void 0 !== config ? config : null,
+	    props: maybeKey
+	  };
+	}
+	reactJsxRuntime_production.Fragment = REACT_FRAGMENT_TYPE;
+	reactJsxRuntime_production.jsx = jsxProd;
+	reactJsxRuntime_production.jsxs = jsxProd;
+	return reactJsxRuntime_production;
+}
+
+var hasRequiredJsxRuntime;
+
+function requireJsxRuntime () {
+	if (hasRequiredJsxRuntime) return jsxRuntime.exports;
+	hasRequiredJsxRuntime = 1;
+	{
+	  jsxRuntime.exports = /*@__PURE__*/ requireReactJsxRuntime_production();
+	}
+	return jsxRuntime.exports;
+}
+
+var jsxRuntimeExports = /*@__PURE__*/ requireJsxRuntime();
+
+const {createContext: createContext$5} = await importShared('react');
 
 
-const LayoutGroupContext = createContext$6({});
+const LayoutGroupContext = createContext$5({});
 
-const {useRef: useRef$6} = await importShared('react');
+const {useRef: useRef$3} = await importShared('react');
 
 
 /**
@@ -18,38 +75,16 @@ const {useRef: useRef$6} = await importShared('react');
  * you can ensure that initialisers don't execute twice or more.
  */
 function useConstant(init) {
-    const ref = useRef$6(null);
+    const ref = useRef$3(null);
     if (ref.current === null) {
         ref.current = init();
     }
     return ref.current;
 }
 
-const {useLayoutEffect,useEffect: useEffect$3} = await importShared('react');
+const {useLayoutEffect,useEffect: useEffect$2} = await importShared('react');
 
-const useIsomorphicLayoutEffect = isBrowser ? useLayoutEffect : useEffect$3;
-
-const {createContext: createContext$5} = await importShared('react');
-
-
-/**
- * @public
- */
-const PresenceContext = 
-/* @__PURE__ */ createContext$5(null);
-
-/**
- * A list of values that can be hardware-accelerated.
- */
-const acceleratedValues = new Set([
-    "opacity",
-    "clipPath",
-    "filter",
-    "transform",
-    // TODO: Can be accelerated but currently disabled until https://issues.chromium.org/issues/41491098 is resolved
-    // or until we implement support for linear() easing.
-    // "background-color"
-]);
+const useIsomorphicLayoutEffect = isBrowser ? useLayoutEffect : useEffect$2;
 
 const {createContext: createContext$4} = await importShared('react');
 
@@ -57,7 +92,16 @@ const {createContext: createContext$4} = await importShared('react');
 /**
  * @public
  */
-const MotionConfigContext = createContext$4({
+const PresenceContext = 
+/* @__PURE__ */ createContext$4(null);
+
+const {createContext: createContext$3} = await importShared('react');
+
+
+/**
+ * @public
+ */
+const MotionConfigContext = createContext$3({
     transformPagePoint: (p) => p,
     isStatic: false,
     reducedMotion: "never",
@@ -125,7 +169,7 @@ function useComposedRefs(...refs) {
 
 const React$1 = await importShared('react');
 
-const {useId: useId$2,useRef: useRef$5,useContext: useContext$8,useInsertionEffect: useInsertionEffect$1} = await importShared('react');
+const {useId: useId$2,useRef: useRef$2,useContext: useContext$6,useInsertionEffect: useInsertionEffect$1} = await importShared('react');
 
 /**
  * Measurement functionality has to be within a separate component
@@ -158,15 +202,15 @@ class PopChildMeasure extends React$1.Component {
 }
 function PopChild({ children, isPresent, anchorX, root }) {
     const id = useId$2();
-    const ref = useRef$5(null);
-    const size = useRef$5({
+    const ref = useRef$2(null);
+    const size = useRef$2({
         width: 0,
         height: 0,
         top: 0,
         left: 0,
         right: 0,
     });
-    const { nonce } = useContext$8(MotionConfigContext);
+    const { nonce } = useContext$6(MotionConfigContext);
     const composedRef = useComposedRefs(ref, children?.ref);
     /**
      * We create and inject a style block so we can apply this explicit
@@ -210,13 +254,13 @@ function PopChild({ children, isPresent, anchorX, root }) {
 
 const React = await importShared('react');
 
-const {useId: useId$1,useMemo: useMemo$7} = await importShared('react');
+const {useId: useId$1,useMemo: useMemo$5} = await importShared('react');
 
 const PresenceChild = ({ children, initial, isPresent, onExitComplete, custom, presenceAffectsLayout, mode, anchorX, root }) => {
     const presenceChildren = useConstant(newChildrenMap);
     const id = useId$1();
     let isReusedContext = true;
-    let context = useMemo$7(() => {
+    let context = useMemo$5(() => {
         isReusedContext = false;
         return {
             id,
@@ -245,7 +289,7 @@ const PresenceChild = ({ children, initial, isPresent, onExitComplete, custom, p
     if (presenceAffectsLayout && isReusedContext) {
         context = { ...context };
     }
-    useMemo$7(() => {
+    useMemo$5(() => {
         presenceChildren.forEach((_, key) => presenceChildren.set(key, false));
     }, [isPresent]);
     /**
@@ -267,7 +311,7 @@ function newChildrenMap() {
     return new Map();
 }
 
-const {useContext: useContext$7,useId,useEffect: useEffect$2,useCallback: useCallback$2} = await importShared('react');
+const {useContext: useContext$5,useId,useEffect: useEffect$1,useCallback: useCallback$1} = await importShared('react');
 
 /**
  * When a component is the child of `AnimatePresence`, it can use `usePresence`
@@ -293,19 +337,19 @@ const {useContext: useContext$7,useId,useEffect: useEffect$2,useCallback: useCal
  * @public
  */
 function usePresence(subscribe = true) {
-    const context = useContext$7(PresenceContext);
+    const context = useContext$5(PresenceContext);
     if (context === null)
         return [true, null];
     const { isPresent, onExitComplete, register } = context;
     // It's safe to call the following hooks conditionally (after an early return) because the context will always
     // either be null or non-null for the lifespan of the component.
     const id = useId();
-    useEffect$2(() => {
+    useEffect$1(() => {
         if (subscribe) {
             return register(id);
         }
     }, [subscribe]);
-    const safeToRemove = useCallback$2(() => subscribe && onExitComplete && onExitComplete(id), [id, onExitComplete, subscribe]);
+    const safeToRemove = useCallback$1(() => subscribe && onExitComplete && onExitComplete(id), [id, onExitComplete, subscribe]);
     return !isPresent && onExitComplete ? [false, safeToRemove] : [true];
 }
 /**
@@ -329,7 +373,7 @@ function usePresence(subscribe = true) {
  * @public
  */
 function useIsPresent() {
-    return isPresent(useContext$7(PresenceContext));
+    return isPresent(useContext$5(PresenceContext));
 }
 function isPresent(context) {
     return context === null ? true : context.isPresent;
@@ -349,16 +393,16 @@ function onlyElements(children) {
     return filtered;
 }
 
-const {useMemo: useMemo$6,useRef: useRef$4,useState: useState$2,useContext: useContext$6} = await importShared('react');
+const {useMemo: useMemo$4,useRef: useRef$1,useState,useContext: useContext$4} = await importShared('react');
 const AnimatePresence = ({ children, custom, initial = true, onExitComplete, presenceAffectsLayout = true, mode = "sync", propagate = false, anchorX = "left", root }) => {
   const [isParentPresent, safeToRemove] = usePresence(propagate);
-  const presentChildren = useMemo$6(() => onlyElements(children), [children]);
+  const presentChildren = useMemo$4(() => onlyElements(children), [children]);
   const presentKeys = propagate && !isParentPresent ? [] : presentChildren.map(getChildKey);
-  const isInitialRender = useRef$4(true);
-  const pendingPresentChildren = useRef$4(presentChildren);
+  const isInitialRender = useRef$1(true);
+  const pendingPresentChildren = useRef$1(presentChildren);
   const exitComplete = useConstant(() => /* @__PURE__ */ new Map());
-  const [diffedChildren, setDiffedChildren] = useState$2(presentChildren);
-  const [renderedChildren, setRenderedChildren] = useState$2(presentChildren);
+  const [diffedChildren, setDiffedChildren] = useState(presentChildren);
+  const [renderedChildren, setRenderedChildren] = useState(presentChildren);
   useIsomorphicLayoutEffect(() => {
     isInitialRender.current = false;
     pendingPresentChildren.current = presentChildren;
@@ -391,7 +435,7 @@ const AnimatePresence = ({ children, custom, initial = true, onExitComplete, pre
     setDiffedChildren(presentChildren);
     return null;
   }
-  const { forceRender } = useContext$6(LayoutGroupContext);
+  const { forceRender } = useContext$4(LayoutGroupContext);
   return jsxRuntimeExports.jsx(jsxRuntimeExports.Fragment, { children: renderedChildren.map((child) => {
     const key = getChildKey(child);
     const isPresent = propagate && !isParentPresent ? false : presentChildren === renderedChildren || presentKeys.includes(key);
@@ -417,93 +461,6 @@ const AnimatePresence = ({ children, custom, initial = true, onExitComplete, pre
   }) });
 };
 
-const {createContext: createContext$3} = await importShared('react');
-
-
-/**
- * Note: Still used by components generated by old versions of Framer
- *
- * @deprecated
- */
-const DeprecatedLayoutGroupContext = createContext$3(null);
-
-const {useRef: useRef$3} = await importShared('react');
-
-function useIsMounted() {
-    const isMounted = useRef$3(false);
-    useIsomorphicLayoutEffect(() => {
-        isMounted.current = true;
-        return () => {
-            isMounted.current = false;
-        };
-    }, []);
-    return isMounted;
-}
-
-const {useState: useState$1,useCallback: useCallback$1} = await importShared('react');
-
-function useForceUpdate() {
-    const isMounted = useIsMounted();
-    const [forcedRenderCount, setForcedRenderCount] = useState$1(0);
-    const forceRender = useCallback$1(() => {
-        isMounted.current && setForcedRenderCount(forcedRenderCount + 1);
-    }, [forcedRenderCount]);
-    /**
-     * Defer this to the end of the next animation frame in case there are multiple
-     * synchronous calls.
-     */
-    const deferredForceRender = useCallback$1(() => frame.postRender(forceRender), [forceRender]);
-    return [deferredForceRender, forcedRenderCount];
-}
-
-const notify = (node) => !node.isLayoutDirty && node.willUpdate(false);
-function nodeGroup() {
-    const nodes = new Set();
-    const subscriptions = new WeakMap();
-    const dirtyAll = () => nodes.forEach(notify);
-    return {
-        add: (node) => {
-            nodes.add(node);
-            subscriptions.set(node, node.addEventListener("willUpdate", dirtyAll));
-        },
-        remove: (node) => {
-            nodes.delete(node);
-            const unsubscribe = subscriptions.get(node);
-            if (unsubscribe) {
-                unsubscribe();
-                subscriptions.delete(node);
-            }
-            dirtyAll();
-        },
-        dirty: dirtyAll,
-    };
-}
-
-const {useContext: useContext$5,useRef: useRef$2,useMemo: useMemo$5} = await importShared('react');
-
-const shouldInheritGroup = (inherit) => inherit === true;
-const shouldInheritId = (inherit) => shouldInheritGroup(inherit === true) || inherit === "id";
-const LayoutGroup = ({ children, id, inherit = true }) => {
-    const layoutGroupContext = useContext$5(LayoutGroupContext);
-    const deprecatedLayoutGroupContext = useContext$5(DeprecatedLayoutGroupContext);
-    const [forceRender, key] = useForceUpdate();
-    const context = useRef$2(null);
-    const upstreamId = layoutGroupContext.id || deprecatedLayoutGroupContext;
-    if (context.current === null) {
-        if (shouldInheritId(inherit) && upstreamId) {
-            id = id ? upstreamId + "-" + id : upstreamId;
-        }
-        context.current = {
-            id,
-            group: shouldInheritGroup(inherit)
-                ? layoutGroupContext.group || nodeGroup()
-                : nodeGroup(),
-        };
-    }
-    const memoizedContext = useMemo$5(() => ({ ...context.current, forceRender }), [key]);
-    return (jsxRuntimeExports.jsx(LayoutGroupContext.Provider, { value: memoizedContext, children: children }));
-};
-
 const {createContext: createContext$2} = await importShared('react');
 
 
@@ -516,69 +473,6 @@ function loadFeatures(features) {
             ...features[key],
         };
     }
-}
-
-const {useState,useRef: useRef$1,useEffect: useEffect$1} = await importShared('react');
-
-/**
- * Used in conjunction with the `m` component to reduce bundle size.
- *
- * `m` is a version of the `motion` component that only loads functionality
- * critical for the initial render.
- *
- * `LazyMotion` can then be used to either synchronously or asynchronously
- * load animation and gesture support.
- *
- * ```jsx
- * // Synchronous loading
- * import { LazyMotion, m, domAnimation } from "framer-motion"
- *
- * function App() {
- *   return (
- *     <LazyMotion features={domAnimation}>
- *       <m.div animate={{ scale: 2 }} />
- *     </LazyMotion>
- *   )
- * }
- *
- * // Asynchronous loading
- * import { LazyMotion, m } from "framer-motion"
- *
- * function App() {
- *   return (
- *     <LazyMotion features={() => import('./path/to/domAnimation')}>
- *       <m.div animate={{ scale: 2 }} />
- *     </LazyMotion>
- *   )
- * }
- * ```
- *
- * @public
- */
-function LazyMotion({ children, features, strict = false }) {
-    const [, setIsLoaded] = useState(!isLazyBundle(features));
-    const loadedRenderer = useRef$1(undefined);
-    /**
-     * If this is a synchronous load, load features immediately
-     */
-    if (!isLazyBundle(features)) {
-        const { renderer, ...loadedFeatures } = features;
-        loadedRenderer.current = renderer;
-        loadFeatures(loadedFeatures);
-    }
-    useEffect$1(() => {
-        if (isLazyBundle(features)) {
-            features().then(({ renderer, ...loadedFeatures }) => {
-                loadFeatures(loadedFeatures);
-                loadedRenderer.current = renderer;
-                setIsLoaded(true);
-            });
-        }
-    }, []);
-    return (jsxRuntimeExports.jsx(LazyContext.Provider, { value: { renderer: loadedRenderer.current, strict }, children: children }));
-}
-function isLazyBundle(features) {
-    return typeof features === "function";
 }
 
 /**
@@ -691,48 +585,6 @@ function filterProps(props, isDom, forwardMotionProps) {
         }
     }
     return filteredProps;
-}
-
-const {useContext: useContext$4,useMemo: useMemo$4} = await importShared('react');
-
-/**
- * `MotionConfig` is used to set configuration options for all children `motion` components.
- *
- * ```jsx
- * import { motion, MotionConfig } from "framer-motion"
- *
- * export function App() {
- *   return (
- *     <MotionConfig transition={{ type: "spring" }}>
- *       <motion.div animate={{ x: 100 }} />
- *     </MotionConfig>
- *   )
- * }
- * ```
- *
- * @public
- */
-function MotionConfig({ children, isValidProp, ...config }) {
-    isValidProp && loadExternalIsValidProp(isValidProp);
-    /**
-     * Inherit props from any parent MotionConfig components
-     */
-    config = { ...useContext$4(MotionConfigContext), ...config };
-    /**
-     * Don't allow isStatic to change between renders as it affects how many hooks
-     * motion components fire.
-     */
-    config.isStatic = useConstant(() => config.isStatic);
-    /**
-     * Creating a new config context object will re-render every `motion` component
-     * every time it renders. So we only want to create a new one sparingly.
-     */
-    const context = useMemo$4(() => config, [
-        JSON.stringify(config.transition),
-        config.transformPagePoint,
-        config.reducedMotion,
-    ]);
-    return (jsxRuntimeExports.jsx(MotionConfigContext.Provider, { value: context, children: children }));
 }
 
 const {createContext: createContext$1} = await importShared('react');
@@ -1212,26 +1064,4 @@ function createMotionProxy(preloadedFeatures, createVisualElement) {
   });
 }
 
-const m = /*@__PURE__*/ createMotionProxy();
-
-class WillChangeMotionValue extends MotionValue {
-    constructor() {
-        super(...arguments);
-        this.isEnabled = false;
-    }
-    add(name) {
-        if (transformProps.has(name) || acceleratedValues.has(name)) {
-            this.isEnabled = true;
-            this.update();
-        }
-    }
-    update() {
-        this.set(this.isEnabled ? "transform" : "auto");
-    }
-}
-
-function useWillChange() {
-    return useConstant(() => new WillChangeMotionValue("auto"));
-}
-
-export { AnimatePresence as A, DeprecatedLayoutGroupContext as D, LazyMotion as L, MotionConfig as M, PresenceContext as P, SwitchLayoutGroupContext as S, WillChangeMotionValue as W, LayoutGroup as a, usePresence as b, LayoutGroupContext as c, createMotionProxy as d, useConstant as e, useIsomorphicLayoutEffect as f, MotionConfigContext as g, motionComponentSymbol as h, isRefObject as i, useForceUpdate as j, makeUseVisualState as k, MotionContext as l, m, PopChild as n, PresenceChild as o, filterProps as p, useComposedRefs as q, resolveMotionValue as r, useIsPresent as s, isValidMotionProp as t, useWillChange as u, acceleratedValues as v };
+export { AnimatePresence as A, LayoutGroupContext as L, MotionConfigContext as M, PresenceContext as P, SwitchLayoutGroupContext as S, useIsomorphicLayoutEffect as a, makeUseVisualState as b, MotionContext as c, PopChild as d, PresenceChild as e, filterProps as f, useComposedRefs as g, useIsPresent as h, usePresence as i, jsxRuntimeExports as j, isValidMotionProp as k, loadFeatures as l, motionComponentSymbol as m, LazyContext as n, loadExternalIsValidProp as o, createMotionProxy as p, isRefObject as q, resolveMotionValue as r, useConstant as u };
