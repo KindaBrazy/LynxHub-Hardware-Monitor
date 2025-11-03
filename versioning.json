@@ -2,25 +2,74 @@
   "$schema": "https://raw.githubusercontent.com/KindaBrazy/LynxHub-Statics/refs/heads/schema/plugins/versioning.schema.json",
   "versions": [
     {
+      "version": "0.14.0",
+      "commit": "8b5feb5",
+      "engines": {
+        "extensionApi": "^1.0.0"
+      },
+      "stage": "early_access",
+      "platforms": [
+        "win32"
+      ]
+    },
+    {
       "version": "0.13.0",
       "commit": "8a9f12e",
       "engines": {
         "extensionApi": "^1.0.0"
       },
       "stage": "early_access",
-      "platforms": ["win32"]
+      "platforms": [
+        "win32"
+      ]
     }
   ],
   "changes": [
+    {
+      "version": "0.14.0",
+      "date": "2025-11-03",
+      "items": [
+        {
+          "✨ New Features": [
+            "Added custom sensor metrics and improved hardware discovery.",
+            "Added support for network monitoring.",
+            {
+              "Added three new status bar styles:": [
+                "Two Column",
+                "Raw Text",
+                "Raw Text (Two Column)"
+              ]
+            },
+            "Updated the Tools page card design to match the new V3.3.0 style.",
+            "Refreshed the Settings UI with an improved layout and new animations."
+          ]
+        },
+        {
+          "⚡ Improvements": [
+            "Updated the .NET runtime from version 8 to 9."
+          ]
+        },
+        {
+          "🐛 Bug Fixes": [
+            "Fixed an issue where the 'Show Section Labels' option was not working."
+          ]
+        }
+      ]
+    },
     {
       "version": "0.13.0",
       "date": "2025-10-24",
       "items": [
         {
-          "Improvements": ["Support LynxHub Version 3.3.0", "Implemented retry logic for device checks"]
+          "Improvements": [
+            "Support LynxHub Version 3.3.0",
+            "Implemented retry logic for device checks"
+          ]
         },
         {
-          "Bug Fixes": ["Fixed tools page icon."]
+          "Bug Fixes": [
+            "Fixed tools page icon."
+          ]
         }
       ]
     },
@@ -29,10 +78,14 @@
       "date": "2025-07-29",
       "items": [
         {
-          "New Features": ["Introduce customizable metric visibility settings."]
+          "New Features": [
+            "Introduce customizable metric visibility settings."
+          ]
         },
         {
-          "Improvements": ["Improve 'Admin Require' layout to support compact mode configuration"]
+          "Improvements": [
+            "Improve 'Admin Require' layout to support compact mode configuration"
+          ]
         },
         {
           "Bug Fixes": [
@@ -48,7 +101,10 @@
       "date": "2025-07-28",
       "items": [
         {
-          "New Features": ["Multi-hardware metrics toggle added.", "Option to toggle metric labels."]
+          "New Features": [
+            "Multi-hardware metrics toggle added.",
+            "Option to toggle metric labels."
+          ]
         },
         {
           "Improvements": [
@@ -58,7 +114,10 @@
           ]
         },
         {
-          "Bug Fixes": ["Performance and interval issues fixed.", "Fixed white screen issue from extensions."]
+          "Bug Fixes": [
+            "Performance and interval issues fixed.",
+            "Fixed white screen issue from extensions."
+          ]
         }
       ]
     },
@@ -67,7 +126,9 @@
       "date": "2025-06-21",
       "items": [
         {
-          "New Features": ["Add VRAM monitoring."]
+          "New Features": [
+            "Add VRAM monitoring."
+          ]
         }
       ]
     },
