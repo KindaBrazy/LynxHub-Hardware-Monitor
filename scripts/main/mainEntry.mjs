@@ -23,7 +23,7 @@ const __dirname = import.meta.dirname;
 const require2 = __cjs_mod__.createRequire(import.meta.url);
 const execAsync = promisify(exec);
 const DOTNET_LIST_RUNTIMES_COMMAND = "dotnet --list-runtimes";
-const DOTNET_8_RUNTIME_IDENTIFIER = "microsoft.netcore.app 8.0";
+const DOTNET_8_RUNTIME_IDENTIFIER = "microsoft.netcore.app 9.0";
 function isDotNet8RuntimeInstalled(output) {
   return output.toLowerCase().includes(DOTNET_8_RUNTIME_IDENTIFIER);
 }
@@ -10919,9 +10919,9 @@ class HardwareMonitor extends EventEmitter {
     return args;
   }
   /**
-   * Checks for .NET 8 runtime and downloads the CLI tool.
+   * Checks for .NET 9 runtime and downloads the CLI tool.
    * @param targetDir - Directory to download the CLI tool.
-   * @throws Error if .NET 8 is not found or download fails.
+   * @throws Error if .NET 9 is not found or download fails.
    */
   async checkRequirements(targetDir) {
     const logger = {
@@ -10930,7 +10930,7 @@ class HardwareMonitor extends EventEmitter {
     };
     const isDotNetInstalled = await checkDotNetRuntime8(logger);
     if (!isDotNetInstalled) {
-      throw new Error(".NET 8 runtime not found. Please install it from https://dotnet.microsoft.com/download/dotnet/8.0");
+      throw new Error(".NET 9 runtime not found. Please install it from https://dotnet.microsoft.com/download/dotnet/9.0");
     }
     this.executablePath = await DownloadCli(targetDir, this.logLevel);
     this.log("info", "✅ Lynx Hardware Monitor is ready to use.");

@@ -1786,12 +1786,12 @@ const HardwareStatusBar = ({ ref }) => {
       if (error.message.includes("dotnet")) {
         setErrorElement(
           /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: ".NET 8 runtime not found. Please install it " }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: ".NET 9 runtime not found. Please install it " }),
             /* @__PURE__ */ jsxRuntimeExports.jsx(
               Link,
               {
                 className: "cursor-pointer",
-                onPress: () => window.open("https://dotnet.microsoft.com/download/dotnet/8.0"),
+                onPress: () => window.open("https://dotnet.microsoft.com/download/dotnet/9.0"),
                 children: "Here"
               }
             )
