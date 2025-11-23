@@ -1,12 +1,12 @@
 <div align="center">
 
-  <img src="resources/icon.png"  alt="LynxHub Hardware Monitor Icon" height="120"/>
+  <img src="https://raw.githubusercontent.com/KindaBrazy/LynxHub-Hardware-Monitor/refs/heads/metadata/icon.png"  alt="LynxHub Hardware Monitor Icon" height="120"/>
 
 # LynxHub Hardware Monitor
 
 ### A configurable LynxHub extension for real-time monitoring of CPU, GPU, and Memory usage, displayed conveniently in the status bar.
 
-  <img src="resources/screenshot.png"  alt="LynxHub Hardware Monitor Icon"/>
+  <img src="resources/screenshot.png"  alt="LynxHub Hardware Monitor Screenshot"/>
 
 </div>
 
@@ -14,19 +14,31 @@ The **LynxHub Hardware Monitor** is an extension for LynxHub that provides real-
 hardware resources directly within the application's status bar. It offers a clean, customizable, and efficient way to
 keep an eye on your system's performance without leaving your workspace.
 
-
 -----
 
 ## ❗ Requirements
 
 Before using this extension:
 
-- **.NET 8.0 Runtime**: This extension relies on the .NET 8.0 framework to gather hardware information. You can download
+- **.NET 9.0 Runtime**: This extension relies on the .NET 9.0 framework to gather hardware information. You can download
   it from the official Microsoft website:
-    - [Download .NET 8.0 Runtime](https://dotnet.microsoft.com/en-us/download/dotnet/8.0)
+    - [Download .NET 9.0 Runtime](https://dotnet.microsoft.com/en-us/download/dotnet/9.0)
 - **Missing Data? Run as Administrator**: Some hardware sensors require elevated permissions to be read correctly. If
-  you notice that certain metrics (like CPU/GPU temperature) are not appearing, please try running LynxHub as an
+  you notice that certain metrics (like CPU temperature) are not appearing, please try running LynxHub as an
   administrator.
+
+## ⚠️ Windows Security Warning (False Positive)
+
+You may see a **"Threat found: VulnerableDriver"** warning in Windows Defender.
+**This is NOT a virus.**
+
+This extension uses a kernel driver (`WinRing0.sys`) to read your CPU and GPU sensors. Microsoft blocks this specific
+driver by default because it is an older component.
+
+**To use this extension, you must:**
+
+1. Open Windows Security when the alert appears.
+2. Click **Actions** -> **Allow on device**.
 
 -----
 
@@ -35,7 +47,7 @@ Before using this extension:
 - **Real-Time Metrics**: Track essential hardware statistics, updated at your chosen interval.
 - **Comprehensive Monitoring**:
     - **CPU**: Monitor temperature and overall usage.
-    - **GPU**: Keep track of GPU temperature and load.
+    - **GPU**: Keep track of GPU temperature, load, and VRAM usage.
     - **Memory**: View your current RAM usage.
     - **Uptime**: Display both total system uptime and application runtime.
 - **Customizable Interface**:
@@ -65,7 +77,7 @@ From the settings modal, you can:
 - Select which **metrics** are displayed in the status bar.
 
 <div align="center">
-  <img src="resources/settings.png"  alt="LynxHub Hardware Monitor Icon"/>
+  <img src="resources/settings.png"  alt="LynxHub Hardware Monitor Settings"/>
 </div>
 
 -----
