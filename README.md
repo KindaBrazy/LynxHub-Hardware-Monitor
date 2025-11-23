@@ -27,6 +27,19 @@ Before using this extension:
   you notice that certain metrics (like CPU temperature) are not appearing, please try running LynxHub as an
   administrator.
 
+## ⚠️ Windows Security Warning (False Positive)
+
+You may see a **"Threat found: VulnerableDriver"** warning in Windows Defender.
+**This is NOT a virus.**
+
+This extension uses a kernel driver (`WinRing0.sys`) to read your CPU and GPU sensors. Microsoft blocks this specific
+driver by default because it is an older component.
+
+**To use this extension, you must:**
+
+1. Open Windows Security when the alert appears.
+2. Click **Actions** -> **Allow on device**.
+
 -----
 
 ## ✨ Features
