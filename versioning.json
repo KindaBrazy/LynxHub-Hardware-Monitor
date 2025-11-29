@@ -18,7 +18,7 @@
       "engines": {
         "extensionApi": "^1.0.0"
       },
-      "stage": "early_access",
+      "stage": "public",
       "platforms": [
         "win32"
       ]
