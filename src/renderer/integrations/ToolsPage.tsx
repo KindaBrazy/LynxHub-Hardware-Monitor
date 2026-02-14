@@ -1,8 +1,8 @@
+import {ToolsCard} from '@lynx/components/ToolsCard';
+import {useTabsState} from '@lynx/redux/reducers/tabs';
 import {useCallback} from 'react';
 import {useDispatch} from 'react-redux';
 
-import {ToolsCard} from '../../../../src/renderer/src/App/Components/Reusable/ToolsCard';
-import {useTabsState} from '../../../../src/renderer/src/App/Redux/Reducer/TabsReducer';
 import {hmonitorActions} from '../state/hmonitorSlice';
 
 const CARD_PROPS = {

@@ -1,7 +1,7 @@
+import {convertStorageUnit, formatSize} from '@lynx_common/utils';
 import {Activity, ArrowDown, ArrowUp, Database, Gauge, Power, Thermometer, Wifi} from 'lucide-react';
 import {ElementType, memo, useMemo} from 'react';
 
-import {convertStorageUnit, formatSize} from '../../../../../../src/cross/CrossUtils';
 import {HardwareInfo, HardwareMetricsConfig, NetworkData, RawSensorValue} from '../../../../cross/types';
 import MetricItem from '../../common/MetricItem';
 import Section from '../../common/Section';

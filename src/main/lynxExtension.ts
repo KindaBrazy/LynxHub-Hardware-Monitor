@@ -1,7 +1,5 @@
-import {
-  ExtensionMainApi,
-  MainExtensionUtils,
-} from '../../../src/main/Managements/Plugin/Extensions/ExtensionTypes_Main';
+import {ExtensionMainApi, MainExtensionUtils} from '@lynx_main/plugins/extensions/types';
+
 import {hardwareMonitorService} from './HardwareMonitorService';
 
 /**

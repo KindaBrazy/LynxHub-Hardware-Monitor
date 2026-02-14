@@ -15,16 +15,16 @@ import {
   SelectItem,
   Switch,
 } from '@heroui/react';
+import LynxScroll from '@lynx/components/LynxScroll';
+import {lynxTopToast} from '@lynx/hooks/utils';
+import {AppDispatch} from '@lynx/redux/store';
+import storageIpc from '@lynx_shared/ipc/storage';
+import {ClockCircle} from '@solar-icons/react-perf/BoldDuotone';
 import {AnimatePresence, motion} from 'framer-motion';
 import {ArrowDown, ArrowUp, Clock, Cpu, Database, LucideProps, Thermometer, Timer} from 'lucide-react';
 import {ForwardRefExoticComponent, useCallback, useMemo, useState} from 'react';
 import {useDispatch} from 'react-redux';
 
-import LynxScroll from '../../../../../src/renderer/src/App/Components/Reusable/LynxScroll';
-import {AppDispatch} from '../../../../../src/renderer/src/App/Redux/Store';
-import rendererIpc from '../../../../../src/renderer/src/App/RendererIpc';
-import {lynxTopToast} from '../../../../../src/renderer/src/App/Utils/UtilHooks';
-import {Clock_Icon} from '../../../../../src/renderer/src/assets/icons/SvgIcons/SvgIcons';
 import {HMONITOR_STORAGE_ID} from '../../../cross/constants';
 import {DisplayStyle, HardwareMetricsConfig, MetricType, MonitoringSettings, SystemMetric} from '../../../cross/types';
 import {hmonitorActions, SystemMonitorState, useHMonitorSelector} from '../../state/hmonitorSlice';
@@ -93,7 +93,7 @@ export default function SettingsModal({show, isOpen, tabID}: SettingsModalProps)
   const handleOpenChange = (value: boolean) => {
     if (!value) {
       // Revert changes if the modal is closed without saving
-      rendererIpc.storage.getCustom(HMONITOR_STORAGE_ID).then((savedSettings: MonitoringSettings) => {
+      storageIpc.getCustom(HMONITOR_STORAGE_ID).then((savedSettings: MonitoringSettings) => {
         if (savedSettings) dispatch(hmonitorActions.setConfig(savedSettings));
       });
       dispatch(hmonitorActions.closeModal({tabID}));
@@ -207,7 +207,7 @@ export default function SettingsModal({show, isOpen, tabID}: SettingsModalProps)
                           labelPlacement="outside"
                           label="Refresh Interval"
                           classNames={{label: 'text-medium'}}
-                          startContent={<Clock_Icon className="size-6" />}
+                          startContent={<ClockCircle className="size-6" />}
                           onValueChange={value => updateState('refreshInterval', value)}
                           description="How frequently metrics should update (0.5-60 seconds)"
                           endContent={<span className="text-xs text-foreground-500">Seconds</span>}

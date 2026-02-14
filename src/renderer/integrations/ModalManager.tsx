@@ -1,8 +1,8 @@
+import {useTabsState} from '@lynx/redux/reducers/tabs';
+import {AppDispatch} from '@lynx/redux/store';
 import {useEffect} from 'react';
 import {useDispatch} from 'react-redux';
 
-import {useTabsState} from '../../../../src/renderer/src/App/Redux/Reducer/TabsReducer';
-import {AppDispatch} from '../../../../src/renderer/src/App/Redux/Store';
 import SettingsModal from '../components/settings/SettingsModal';
 import {hmonitorActions, useHMonitorState} from '../state/hmonitorSlice';
 

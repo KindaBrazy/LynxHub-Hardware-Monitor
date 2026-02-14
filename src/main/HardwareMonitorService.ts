@@ -1,11 +1,11 @@
 import {join} from 'node:path';
 
+import {MainExtensionUtils} from '@lynx_main/plugins/extensions/types';
+import StorageManager from '@lynx_main/storage/helper';
 import HardwareMonitor, {HardwareReport, MonitorError} from '@lynxhub/hwmonitor';
 import {app, ipcMain, WebContents} from 'electron';
 import {isEqual, isNil} from 'lodash';
 
-import {MainExtensionUtils} from '../../../src/main/Managements/Plugin/Extensions/ExtensionTypes_Main';
-import StorageManager from '../../../src/main/Managements/Storage/StorageManager';
 import {
   HMONITOR_IPC_CONFIG_UPDATE,
   HMONITOR_IPC_DATA_UPDATE,

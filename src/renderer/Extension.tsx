@@ -1,6 +1,7 @@
 import './index.css';
 
-import {ExtensionRendererApi} from '../../../src/cross/plugin/ExtensionTypes_Renderer_Api';
+import {ExtensionRendererApi} from '@lynx_common/types/plugins/extensions/api';
+
 import HardwareStatusBar from './components/status-bar/HardwareStatusBar';
 import ConfigProvider from './integrations/ConfigProvider';
 import ModalManager from './integrations/ModalManager';

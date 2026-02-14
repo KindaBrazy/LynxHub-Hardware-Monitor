@@ -39,6 +39,16 @@ export default defineConfig({
         },
       }),
     ],
+    resolve: {
+      alias: {
+        '@lynx_module': resolve('module/src'),
+        '@lynx_extension': resolve('extension/src'),
+        '@lynx_common': resolve('src/common'),
+        '@lynx': resolve('src/renderer/main_window'),
+        '@lynx_shared': resolve('src/renderer/shared'),
+        '@lynx_assets': resolve('src/renderer/shared/assets'),
+      },
+    },
     build: {
       outDir: resolve('extension_out/renderer'),
       rollupOptions: {

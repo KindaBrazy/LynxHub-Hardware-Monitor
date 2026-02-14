@@ -1,9 +1,10 @@
 import {Button, Card, CardBody, CardHeader, Chip, Input, Select, SelectItem, Switch} from '@heroui/react';
+import {TrashBin2} from '@solar-icons/react-perf/BoldDuotone';
 import {Divider} from 'antd';
+import {Plus, X} from 'lucide-react';
 import {memo, ReactNode, useState} from 'react';
 import {useDispatch} from 'react-redux';
 
-import {Add_Icon, Close_Icon, TrashDuo_Icon} from '../../../../../src/renderer/src/assets/icons/SvgIcons/SvgIcons';
 import {HardwareInfo, HardwareMetricsConfig, MetricType} from '../../../cross/types';
 import {hmonitorActions} from '../../state/hmonitorSlice';
 
@@ -62,7 +63,7 @@ export function CustomMetricsSection({config, hardware, type}: CustomMetricsProp
                 className="px-2"
                 color="secondary"
                 onClose={() => handleRemoveMetric(metric.id)}
-                endContent={<TrashDuo_Icon className="size-3.5" />}>
+                endContent={<TrashBin2 className="size-3.5" />}>
                 {metric.label}
               </Chip>
             ))}
@@ -98,10 +99,10 @@ export function CustomMetricsSection({config, hardware, type}: CustomMetricsProp
               onValueChange={label => setFormState(prev => ({...prev, label}))}
             />
             <Button size="sm" variant="flat" color="success" onPress={handleAddMetric} isIconOnly>
-              <Add_Icon className="size-3" />
+              <Plus className="size-3" />
             </Button>
             <Button size="sm" color="warning" variant="light" onPress={() => setIsAdding(false)} isIconOnly>
-              <Close_Icon className="size-3" />
+              <X className="size-3" />
             </Button>
           </div>
         ) : (
@@ -109,7 +110,7 @@ export function CustomMetricsSection({config, hardware, type}: CustomMetricsProp
             variant="flat"
             className="mt-2"
             onPress={() => setIsAdding(true)}
-            startContent={<Add_Icon className="size-3" />}>
+            startContent={<Plus className="size-3" />}>
             Add Custom Metric
           </Button>
         )}

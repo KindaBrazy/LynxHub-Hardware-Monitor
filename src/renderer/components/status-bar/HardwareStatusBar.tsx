@@ -1,9 +1,9 @@
 import {Link} from '@heroui/react';
+import ShinyText from '@lynx/components/ShinyText';
 import {Divider} from 'antd';
 import {ChevronLeft, ChevronRight} from 'lucide-react';
 import {memo, ReactNode, useMemo} from 'react';
 
-import ShinyText from '../../../../../src/renderer/src/App/Components/Reusable/ShinyText';
 import useHardwareData from '../../hooks/useHardwareData';
 import useScrollManager from '../../hooks/useScrollManager';
 import {useHMonitorState} from '../../state/hmonitorSlice';

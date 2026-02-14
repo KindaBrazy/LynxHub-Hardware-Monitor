@@ -1,7 +1,7 @@
+import {ExtensionRendererApi} from '@lynx_common/types/plugins/extensions/api';
 import {Fragment, useEffect} from 'react';
 import {useDispatch} from 'react-redux';
 
-import {ExtensionRendererApi} from '../../../../src/cross/plugin/ExtensionTypes_Renderer_Api';
 import {HMONITOR_IPC_CONFIG_UPDATE} from '../../cross/constants';
 import {MonitoringSettings} from '../../cross/types';
 import {hmonitorActions} from '../state/hmonitorSlice';
