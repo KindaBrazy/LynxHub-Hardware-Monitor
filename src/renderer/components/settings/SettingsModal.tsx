@@ -16,7 +16,7 @@ import {
   Switch,
 } from '@heroui/react';
 import LynxScroll from '@lynx/components/LynxScroll';
-import {lynxTopToast} from '@lynx/hooks/utils';
+import {topToast} from '@lynx/layouts/ToastProviders';
 import {AppDispatch} from '@lynx/redux/store';
 import storageIpc from '@lynx_shared/ipc/storage';
 import {ClockCircle} from '@solar-icons/react-perf/BoldDuotone';
@@ -93,8 +93,8 @@ export default function SettingsModal({show, isOpen, tabID}: SettingsModalProps)
   const handleOpenChange = (value: boolean) => {
     if (!value) {
       // Revert changes if the modal is closed without saving
-      storageIpc.getCustom(HMONITOR_STORAGE_ID).then((savedSettings: MonitoringSettings) => {
-        if (savedSettings) dispatch(hmonitorActions.setConfig(savedSettings));
+      storageIpc.getCustom(HMONITOR_STORAGE_ID).then(savedSettings => {
+        if (savedSettings) dispatch(hmonitorActions.setConfig(savedSettings as MonitoringSettings));
       });
       dispatch(hmonitorActions.closeModal({tabID}));
       setTimeout(() => dispatch(hmonitorActions.removeModal({tabID})), 500);
@@ -106,7 +106,7 @@ export default function SettingsModal({show, isOpen, tabID}: SettingsModalProps)
     dispatch(hmonitorActions.saveSettings());
     setTimeout(() => {
       setIsSaving(false);
-      lynxTopToast(dispatch).success('Settings saved successfully!');
+      topToast.success('Settings saved successfully!');
     }, 700);
   };
 

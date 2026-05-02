@@ -1,6 +1,6 @@
 import './index.css';
 
-import {ExtensionRendererApi} from '@lynx_common/types/plugins/extensions/api';
+import {ExtensionRendererApi} from '@lynx/plugins/extensions/types/api';
 
 import HardwareStatusBar from './components/status-bar/HardwareStatusBar';
 import ConfigProvider from './integrations/ConfigProvider';
@@ -21,7 +21,7 @@ export function InitialExtensions(lynxAPI: ExtensionRendererApi) {
   lynxAPI.statusBar.replaceContainer(HardwareStatusBar);
 
   // Integrate the settings card into the "Tools" page.
-  lynxAPI.customizePages.tools.addComponent(ToolsPage);
+  lynxAPI.customizePages.tools.add.cardsContainer(ToolsPage);
 
   // Add the modal manager to handle the settings dialog.
   lynxAPI.addModal(ModalManager);

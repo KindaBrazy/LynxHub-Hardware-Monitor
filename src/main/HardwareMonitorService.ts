@@ -1,7 +1,7 @@
 import {join} from 'node:path';
 
 import {MainExtensionUtils} from '@lynx_main/plugins/extensions/types';
-import StorageManager from '@lynx_main/storage/helper';
+import StorageManager from '@lynx_main/storage/storageOperations';
 import HardwareMonitor, {HardwareReport, MonitorError} from '@lynxhub/hwmonitor';
 import {app, ipcMain, WebContents} from 'electron';
 import {isEqual, isNil} from 'lodash';

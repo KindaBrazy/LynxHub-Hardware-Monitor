@@ -1,6 +1,5 @@
-import {Link} from '@heroui/react';
+import {Divider, Link} from '@heroui/react';
 import ShinyText from '@lynx/components/ShinyText';
-import {Divider} from 'antd';
 import {ChevronLeft, ChevronRight} from 'lucide-react';
 import {memo, ReactNode, useMemo} from 'react';
 
@@ -13,9 +12,7 @@ import MemorySection from './sections/MemorySection';
 import NetworkSection from './sections/NetworkSection';
 import UptimeSection from './sections/UptimeSection';
 
-type Props = {ref: (node: HTMLDivElement) => void};
-
-function HardwareStatusBar({ref: forwardRef}: Props) {
+function HardwareStatusBar() {
   const enabled = useHMonitorState('enabled');
   const displayStyle = useHMonitorState('displayStyle');
   const enabledMetrics = useHMonitorState('enabledMetrics');
@@ -26,10 +23,7 @@ function HardwareStatusBar({ref: forwardRef}: Props) {
 
   // Combine the forwarded ref from the host app with our internal ref.
   const initRef = (node: HTMLDivElement) => {
-    if (node) {
-      forwardRef(node);
-      containerRef(node);
-    }
+    if (node) containerRef(node);
   };
 
   const hasMetricsEnabled = useMemo(() => {
@@ -122,7 +116,7 @@ function HardwareStatusBar({ref: forwardRef}: Props) {
               hasMetricsEnabled.memory ||
               hasMetricsEnabled.network ||
               hasMetricsEnabled.uptime) &&
-              hasMetricsEnabled.cpu && <Divider type="vertical" className="mx-0" />}
+              hasMetricsEnabled.cpu && <Divider className="mx-0" orientation="vertical" />}
 
             {hasMetricsEnabled.gpu &&
               enabledMetrics.gpu.map(
@@ -138,7 +132,7 @@ function HardwareStatusBar({ref: forwardRef}: Props) {
                   ),
               )}
             {(hasMetricsEnabled.memory || hasMetricsEnabled.network || hasMetricsEnabled.uptime) &&
-              hasMetricsEnabled.gpu && <Divider type="vertical" className="mx-0" />}
+              hasMetricsEnabled.gpu && <Divider className="mx-0" orientation="vertical" />}
 
             {hasMetricsEnabled.memory &&
               enabledMetrics.memory.map(
@@ -154,7 +148,7 @@ function HardwareStatusBar({ref: forwardRef}: Props) {
                   ),
               )}
             {(hasMetricsEnabled.network || hasMetricsEnabled.uptime) && hasMetricsEnabled.memory && (
-              <Divider type="vertical" className="mx-0" />
+              <Divider className="mx-0" orientation="vertical" />
             )}
 
             {hasMetricsEnabled.network &&
@@ -170,7 +164,9 @@ function HardwareStatusBar({ref: forwardRef}: Props) {
                     />
                   ),
               )}
-            {hasMetricsEnabled.uptime && hasMetricsEnabled.network && <Divider type="vertical" className="mx-0" />}
+            {hasMetricsEnabled.uptime && hasMetricsEnabled.network && (
+              <Divider className="mx-0" orientation="vertical" />
+            )}
 
             {hasMetricsEnabled.uptime && <UptimeSection data={hardwareData.uptime} metrics={enabledMetrics.uptime} />}
           </>

@@ -1,6 +1,5 @@
-import {Button, Card, CardBody, CardHeader, Chip, Input, Select, SelectItem, Switch} from '@heroui/react';
+import {Button, Card, CardBody, CardHeader, Chip, Divider, Input, Select, SelectItem, Switch} from '@heroui/react';
 import {TrashBin2} from '@solar-icons/react-perf/BoldDuotone';
-import {Divider} from 'antd';
 import {Plus, X} from 'lucide-react';
 import {memo, ReactNode, useState} from 'react';
 import {useDispatch} from 'react-redux';
@@ -52,7 +51,7 @@ export function CustomMetricsSection({config, hardware, type}: CustomMetricsProp
 
   return (
     <>
-      {(custom.length > 0 || isAdding) && <Divider className="my-2" variant="dashed" />}
+      {(custom.length > 0 || isAdding) && <Divider className="my-2" />}
       <div className="w-full flex flex-col gap-2">
         {custom.length > 0 && (
           <div className="flex flex-wrap gap-2">
@@ -132,7 +131,7 @@ function SettingsModalCard({onToggle, config, hardware, type, children}: Props) 
   const {active} = config;
 
   return (
-    <Card as="div" className="!shadow-sm p-2" fullWidth>
+    <Card as="div" className="shadow-sm! p-2" fullWidth>
       <CardHeader onClick={onToggle} className="flex flex-row justify-between cursor-pointer">
         <p className="font-medium">{hardware.name}</p>
         <Switch isSelected={active} onValueChange={onToggle} />

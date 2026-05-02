@@ -1,4 +1,4 @@
-import {ExtensionRendererApi} from '@lynx_common/types/plugins/extensions/api';
+import {ExtensionRendererApi} from '@lynx/plugins/extensions/types/api';
 import {Fragment, useEffect} from 'react';
 import {useDispatch} from 'react-redux';
 
