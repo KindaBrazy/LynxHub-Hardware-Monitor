@@ -64,11 +64,7 @@ function HardwareStatusBar() {
   const buttonSizeClass = isSmallStyle ? 'size-5' : 'size-8';
 
   return (
-    <div
-      className={
-        `relative ${heightClass} w-full bg-linear-to-r from-slate-900/95` +
-        ` to-slate-800/95 border-t border-slate-700/50 backdrop-blur-sm`
-      }>
+    <div className={`relative ${heightClass} w-full bg-surface`}>
       {canScrollLeft && (
         <button
           className={

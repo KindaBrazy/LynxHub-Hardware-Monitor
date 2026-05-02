@@ -59,8 +59,8 @@ const MetricItem = memo(({icon: Icon, label, value, unit = '', progress, colorCl
       <div
         className={
           `flex items-center ${isCompact ? 'px-2 py-0.5 gap-x-1.5' : 'px-3 py-2 gap-x-2'} rounded-lg border` +
-          ` backdrop-blur-sm transition-all duration-300 hover:scale-105 hover:shadow-lg text-slate-300 ` +
-          `border-slate-600/30 bg-slate-800/40`
+          ` backdrop-blur-sm transition-all duration-300 hover:scale-105 hover:shadow-lg text-foreground ` +
+          `bg-surface border-surface-secondary`
         }>
         {children}
       </div>
@@ -72,7 +72,7 @@ const MetricItem = memo(({icon: Icon, label, value, unit = '', progress, colorCl
       className={
         `flex items-center ${isCompact ? 'px-2 py-0.5 gap-x-1.5' : 'px-3 py-2 gap-x-2'} rounded-lg` +
         ` border backdrop-blur-sm transition-all duration-300 hover:scale-105 hover:shadow-lg` +
-        ` ${colorClass || 'text-slate-300 border-slate-600/30 bg-slate-800/40'}`
+        ` ${colorClass || 'text-semi-muted bg-surface border-surface-secondary'}`
       }>
       {metricVisibility.icon && <Icon className={`${isCompact ? 'size-3' : 'size-4'} shrink-0`} />}
       <div className="flex items-center gap-2 text-xs font-medium whitespace-nowrap">

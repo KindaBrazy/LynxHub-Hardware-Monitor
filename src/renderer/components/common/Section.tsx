@@ -23,7 +23,7 @@ const Section = memo(({title, icon: Icon, children}: SectionProps) => {
       <div
         className={
           `flex items-center shrink-0 ${isTwoColumn ? 'gap-x-2' : 'gap-x-1'}` +
-          ` text-xs font-mono whitespace-nowrap text-slate-300`
+          ` text-xs font-mono whitespace-nowrap text-foreground`
         }>
         <span className="font-semibold opacity-80">{title}:&nbsp;</span>
         <div
@@ -51,13 +51,13 @@ const Section = memo(({title, icon: Icon, children}: SectionProps) => {
         <div
           className={
             `flex items-center ${isCompact ? 'gap-x-1.5 px-1.5 py-0.5' : 'gap-x-2 px-2 py-1'}` +
-            ` rounded-md bg-slate-700/50 border border-slate-600/30`
+            ` rounded-md bg-surface border`
           }>
-          <Icon className={`${isCompact ? 'size-3' : 'size-3.5'} text-slate-400`} />
+          <Icon className={`${isCompact ? 'size-3' : 'size-3.5'} text-foreground/70`} />
           {isEmpty(title) ? (
             <Spinner size="sm" variant="dots" />
           ) : (
-            <span className="text-xs font-semibold text-slate-300 uppercase tracking-wide text-nowrap">{title}</span>
+            <span className="text-xs font-semibold text-foreground uppercase tracking-wide text-nowrap">{title}</span>
           )}
         </div>
       )}
