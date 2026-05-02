@@ -140,7 +140,7 @@ export default function SettingsModal({state}: SettingsModalProps) {
       return (
         <Checkbox variant="secondary" onChange={onToggle} isSelected={isSelected}>
           <Checkbox.Content className="flex flex-row items-center gap-x-1">
-            <config.Icon className="size-3.5 text-secondary" />
+            <config.Icon className="size-3.5" />
             <Label className="cursor-pointer">{config.label}</Label>
           </Checkbox.Content>
           <Checkbox.Control>
@@ -249,7 +249,7 @@ export default function SettingsModal({state}: SettingsModalProps) {
                   <div className={isRawStyle ? 'opacity-50 pointer-events-none' : ''}>
                     <MetricVisibilitySettings />
                     {isRawStyle && (
-                      <p className="text-xs text-foreground-400 mt-1">
+                      <p className="text-xs text-muted mt-1">
                         Metric visibility is not applicable for Raw display styles.
                       </p>
                     )}

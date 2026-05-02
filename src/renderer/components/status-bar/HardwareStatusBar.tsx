@@ -75,11 +75,11 @@ function HardwareStatusBar() {
         <button
           className={
             `absolute left-2 top-1/2 -translate-y-1/2 z-10 ${buttonSizeClass}` +
-            ` rounded-full bg-slate-800/80 border border-slate-600/50 flex items-center` +
-            ` justify-center hover:bg-slate-700/80 transition-all duration-200 backdrop-blur-sm`
+            ` rounded-full bg-surface-secondary border border-foreground/30 flex items-center` +
+            ` justify-center hover:bg-surface-tertiary transition-all duration-200 backdrop-blur-sm`
           }
           onClick={() => scroll('left')}>
-          <ChevronLeft className="size-4 text-slate-300" />
+          <ChevronLeft className="size-4 text-foreground" />
         </button>
       )}
 
@@ -87,11 +87,11 @@ function HardwareStatusBar() {
         <button
           className={
             `absolute right-2 top-1/2 -translate-y-1/2 z-10 ${buttonSizeClass}` +
-            ` rounded-full bg-slate-800/80 border border-slate-600/50 flex items-center` +
-            ` justify-center hover:bg-slate-700/80 transition-all duration-200 backdrop-blur-sm`
+            ` rounded-full bg-surface-secondary border border-foreground/30 flex items-center` +
+            ` justify-center hover:bg-surface-tertiary transition-all duration-200 backdrop-blur-sm`
           }
           onClick={() => scroll('right')}>
-          <ChevronRight className="size-4 text-slate-300" />
+          <ChevronRight className="size-4 text-foreground" />
         </button>
       )}
 
