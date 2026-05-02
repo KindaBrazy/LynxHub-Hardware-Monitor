@@ -5,8 +5,5 @@
   "type": "module",
   "dependencies": {
     "@lynxhub/hwmonitor": "^0.11.0"
-  },
-  "devDependencies": {
-    "lucide-react": "^0.552.0"
   }
 }
