@@ -1,5 +1,6 @@
-import {Divider, Link} from '@heroui/react';
+import {Link, Separator} from '@heroui-v3/react';
 import ShinyText from '@lynx/components/ShinyText';
+import {useAppState} from '@lynx/redux/reducers/app';
 import {ChevronLeft, ChevronRight} from 'lucide-react';
 import {memo, ReactNode, useMemo} from 'react';
 
@@ -17,6 +18,8 @@ function HardwareStatusBar() {
   const displayStyle = useHMonitorState('displayStyle');
   const enabledMetrics = useHMonitorState('enabledMetrics');
   const availableHardware = useHMonitorState('availableHardware');
+
+  const darkMode = useAppState('darkMode');
 
   const {hardwareData, isConnected, error} = useHardwareData();
   const {containerRef, canScrollLeft, canScrollRight, scroll} = useScrollManager<HTMLDivElement>();
@@ -39,17 +42,20 @@ function HardwareStatusBar() {
 
   const errorElement = useMemo((): ReactNode => {
     if (!error) {
-      return <ShinyText speed={2} className="font-semibold" text="Waiting for hardware information..." />;
+      return (
+        <ShinyText
+          speed={2}
+          darkMode={darkMode}
+          text="Waiting for hardware information..."
+          className="font-semibold text-semi-muted text-sm"
+        />
+      );
     }
     if (error.message.includes('dotnet')) {
       return (
-        <div>
-          <span>.NET 9.0 runtime not found. Please install it </span>
-          <Link
-            className="cursor-pointer"
-            onPress={() => window.open('https://dotnet.microsoft.com/en-us/download/dotnet/9.0')}>
-            Here
-          </Link>
+        <div className="text-sm">
+          <span className="text-semi-muted">.NET 9.0 runtime not found. Please install it </span>
+          <Link onPress={() => window.open('https://dotnet.microsoft.com/en-us/download/dotnet/9.0')}>Here</Link>
         </div>
       );
     }
@@ -112,7 +118,7 @@ function HardwareStatusBar() {
               hasMetricsEnabled.memory ||
               hasMetricsEnabled.network ||
               hasMetricsEnabled.uptime) &&
-              hasMetricsEnabled.cpu && <Divider className="mx-0" orientation="vertical" />}
+              hasMetricsEnabled.cpu && <Separator className="my-2" orientation="vertical" />}
 
             {hasMetricsEnabled.gpu &&
               enabledMetrics.gpu.map(
@@ -128,7 +134,7 @@ function HardwareStatusBar() {
                   ),
               )}
             {(hasMetricsEnabled.memory || hasMetricsEnabled.network || hasMetricsEnabled.uptime) &&
-              hasMetricsEnabled.gpu && <Divider className="mx-0" orientation="vertical" />}
+              hasMetricsEnabled.gpu && <Separator className="my-2" orientation="vertical" />}
 
             {hasMetricsEnabled.memory &&
               enabledMetrics.memory.map(
@@ -144,7 +150,7 @@ function HardwareStatusBar() {
                   ),
               )}
             {(hasMetricsEnabled.network || hasMetricsEnabled.uptime) && hasMetricsEnabled.memory && (
-              <Divider className="mx-0" orientation="vertical" />
+              <Separator className="my-2" orientation="vertical" />
             )}
 
             {hasMetricsEnabled.network &&
@@ -161,7 +167,7 @@ function HardwareStatusBar() {
                   ),
               )}
             {hasMetricsEnabled.uptime && hasMetricsEnabled.network && (
-              <Divider className="mx-0" orientation="vertical" />
+              <Separator className="my-2" orientation="vertical" />
             )}
 
             {hasMetricsEnabled.uptime && <UptimeSection data={hardwareData.uptime} metrics={enabledMetrics.uptime} />}

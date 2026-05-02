@@ -4,7 +4,6 @@ import {ExtensionRendererApi} from '@lynx/plugins/extensions/types/api';
 
 import HardwareStatusBar from './components/status-bar/HardwareStatusBar';
 import ConfigProvider from './integrations/ConfigProvider';
-import ModalManager from './integrations/ModalManager';
 import ToolsPage from './integrations/ToolsPage';
 import hmonitorReducer from './state/hmonitorSlice';
 
@@ -22,9 +21,6 @@ export function InitialExtensions(lynxAPI: ExtensionRendererApi) {
 
   // Integrate the settings card into the "Tools" page.
   lynxAPI.customizePages.tools.add.cardsContainer(ToolsPage);
-
-  // Add the modal manager to handle the settings dialog.
-  lynxAPI.addModal(ModalManager);
 
   // Add a provider component that listens for configuration updates from the main process.
   ConfigProvider(lynxAPI);

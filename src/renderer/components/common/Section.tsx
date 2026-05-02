@@ -1,4 +1,4 @@
-import {Spinner} from '@heroui/react';
+import {Spinner} from '@heroui-v3/react';
 import {isEmpty} from 'lodash';
 import {Children, ElementType, Fragment, memo, ReactNode} from 'react';
 
@@ -55,7 +55,7 @@ const Section = memo(({title, icon: Icon, children}: SectionProps) => {
           }>
           <Icon className={`${isCompact ? 'size-3' : 'size-3.5'} text-foreground/70`} />
           {isEmpty(title) ? (
-            <Spinner size="sm" variant="dots" />
+            <Spinner size="sm" color="current" className="text-muted" />
           ) : (
             <span className="text-xs font-semibold text-foreground uppercase tracking-wide text-nowrap">{title}</span>
           )}

@@ -1,9 +1,7 @@
+import {useOverlayState} from '@heroui-v3/react';
 import {ToolsCard} from '@lynx/components/ToolsCard';
-import {useTabsState} from '@lynx/redux/reducers/tabs';
-import {useCallback} from 'react';
-import {useDispatch} from 'react-redux';
 
-import {hmonitorActions} from '../state/hmonitorSlice';
+import SettingsModal from '../components/settings/SettingsModal';
 
 const CARD_PROPS = {
   title: 'Hardware Monitor',
@@ -16,12 +14,12 @@ const CARD_PROPS = {
  * to open the hardware monitor settings.
  */
 export default function ToolsPage() {
-  const activeTab = useTabsState('activeTab');
-  const dispatch = useDispatch();
+  const state = useOverlayState();
 
-  const openSettingsModal = useCallback(() => {
-    dispatch(hmonitorActions.openModal({tabID: activeTab}));
-  }, [activeTab, dispatch]);
-
-  return <ToolsCard {...CARD_PROPS} onPress={openSettingsModal} />;
+  return (
+    <>
+      <SettingsModal state={state} />
+      <ToolsCard {...CARD_PROPS} onPress={state.open} />
+    </>
+  );
 }

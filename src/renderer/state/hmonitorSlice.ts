@@ -12,17 +12,12 @@ import {
   MonitoringSettings,
 } from '../../cross/types';
 
-export type SystemMonitorState = MonitoringSettings & {
-  modals: {isOpen: boolean; tabID: string}[];
+type MonitoringSettingsTypes = {
+  [K in keyof MonitoringSettings]: MonitoringSettings[K];
 };
 
-type SystemMonitorStateTypes = {
-  [K in keyof SystemMonitorState]: SystemMonitorState[K];
-};
-
-const initialState: SystemMonitorState = {
+const initialState: MonitoringSettings = {
   ...initialSettings,
-  modals: [],
 };
 
 const hmonitorSlice = createSlice({
@@ -30,14 +25,14 @@ const hmonitorSlice = createSlice({
   name: 'hmonitor',
   reducers: {
     // A generic action to update any top-level state property
-    updateState: <K extends keyof SystemMonitorState>(
-      state: SystemMonitorState,
-      action: PayloadAction<{key: K; value: SystemMonitorState[K]}>,
+    updateState: <K extends keyof MonitoringSettings>(
+      state: MonitoringSettings,
+      action: PayloadAction<{key: K; value: MonitoringSettings[K]}>,
     ) => {
       state[action.payload.key] = action.payload.value;
     },
     // Replaces the entire configuration, used for syncing with the main process
-    setConfig: (state: SystemMonitorState, action: PayloadAction<MonitoringSettings>) => {
+    setConfig: (state: MonitoringSettings, action: PayloadAction<MonitoringSettings>) => {
       return {...state, ...action.payload};
     },
     // Persists the current settings by sending them to the main process
@@ -85,26 +80,13 @@ const hmonitorSlice = createSlice({
         hardware.custom = hardware.custom.filter(m => m.id !== metricId);
       }
     },
-    openModal: (state, action: PayloadAction<{tabID: string}>) => {
-      const {tabID} = action.payload;
-      if (!state.modals.some(m => m.tabID === tabID)) {
-        state.modals.push({isOpen: true, tabID});
-      }
-    },
-    closeModal: (state, action: PayloadAction<{tabID: string}>) => {
-      const modal = state.modals.find(m => m.tabID === action.payload.tabID);
-      if (modal) modal.isOpen = false;
-    },
-    removeModal: (state, action: PayloadAction<{tabID: string}>) => {
-      state.modals = state.modals.filter(m => m.tabID !== action.payload.tabID);
-    },
   },
 });
 
 // A typed selector hook for accessing the extension's state
-export const useHMonitorSelector: TypedUseSelectorHook<{hmonitor: SystemMonitorState}> = useSelector;
+export const useHMonitorSelector: TypedUseSelectorHook<{hmonitor: MonitoringSettings}> = useSelector;
 
-export const useHMonitorState = <T extends keyof SystemMonitorState>(propertyName: T): SystemMonitorStateTypes[T] =>
+export const useHMonitorState = <T extends keyof MonitoringSettings>(propertyName: T): MonitoringSettingsTypes[T] =>
   useSelector((state: any) => state.hmonitor[propertyName]);
 
 export const hmonitorActions = hmonitorSlice.actions;

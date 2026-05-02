@@ -1,4 +1,4 @@
-import {Checkbox, CheckboxGroup} from '@heroui/react';
+import {Checkbox, CheckboxGroup, Label} from '@heroui-v3/react';
 import {useCallback, useMemo} from 'react';
 import {useDispatch} from 'react-redux';
 
@@ -39,20 +39,20 @@ export default function MetricVisibilitySettings() {
   );
 
   return (
-    <CheckboxGroup
-      color="primary"
-      value={selectedValues}
-      orientation="horizontal"
-      label="Metric Visibility"
-      onValueChange={onValueChange}
-      isInvalid={selectedValues.length === 0}
-      classNames={{label: 'text-foreground'}}
-      isRequired>
-      {VISIBILITY_OPTIONS.map(({value, label}) => (
-        <Checkbox key={value} value={value}>
-          {label}
-        </Checkbox>
-      ))}
+    <CheckboxGroup value={selectedValues} onChange={onValueChange} isInvalid={selectedValues.length === 0} isRequired>
+      <Label>Metric Visibility</Label>
+      <div className="flex flex-row gap-x-4">
+        {VISIBILITY_OPTIONS.map(({value, label}) => (
+          <Checkbox id={value} key={value} value={value} className="mt-2">
+            <Checkbox.Control className="size-5 rounded-lg before:rounded-lg">
+              <Checkbox.Indicator />
+            </Checkbox.Control>
+            <Checkbox.Content>
+              <Label>{label}</Label>
+            </Checkbox.Content>
+          </Checkbox>
+        ))}
+      </div>
     </CheckboxGroup>
   );
 }

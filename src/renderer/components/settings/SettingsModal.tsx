@@ -1,25 +1,26 @@
 import {
   Button,
   Card,
-  CardBody,
-  CardHeader,
   Checkbox,
-  Divider,
+  Description,
+  Key,
+  Label,
+  ListBox,
   Modal,
-  ModalBody,
-  ModalContent,
-  ModalFooter,
-  ModalHeader,
-  NumberInput,
+  NumberField,
   Select,
-  SelectItem,
+  Separator,
+  Spinner,
   Switch,
-} from '@heroui/react';
+  UseOverlayStateReturn,
+} from '@heroui-v3/react';
 import LynxScroll from '@lynx/components/LynxScroll';
+import LynxSwitch from '@lynx/components/LynxSwitch';
+import TabModal from '@lynx/components/TabModal';
 import {topToast} from '@lynx/layouts/ToastProviders';
 import {AppDispatch} from '@lynx/redux/store';
 import storageIpc from '@lynx_shared/ipc/storage';
-import {ClockCircle} from '@solar-icons/react-perf/BoldDuotone';
+import {Diskette} from '@solar-icons/react-perf/BoldDuotone';
 import {AnimatePresence, motion} from 'framer-motion';
 import {ArrowDown, ArrowUp, Clock, Cpu, Database, LucideProps, Thermometer, Timer} from 'lucide-react';
 import {ForwardRefExoticComponent, useCallback, useMemo, useState} from 'react';
@@ -27,7 +28,7 @@ import {useDispatch} from 'react-redux';
 
 import {HMONITOR_STORAGE_ID} from '../../../cross/constants';
 import {DisplayStyle, HardwareMetricsConfig, MetricType, MonitoringSettings, SystemMetric} from '../../../cross/types';
-import {hmonitorActions, SystemMonitorState, useHMonitorSelector} from '../../state/hmonitorSlice';
+import {hmonitorActions, useHMonitorSelector} from '../../state/hmonitorSlice';
 import MetricVisibilitySettings from './MetricVisibilitySettings';
 import SettingsModalCard from './SettingsModalCard';
 
@@ -57,15 +58,15 @@ const DISPLAY_STYLES = [
   },
 ];
 
-type SettingsModalProps = {isOpen: boolean; show: string; tabID: string};
+type SettingsModalProps = {state: UseOverlayStateReturn};
 
-export default function SettingsModal({show, isOpen, tabID}: SettingsModalProps) {
+export default function SettingsModal({state}: SettingsModalProps) {
   const dispatch = useDispatch<AppDispatch>();
   const settings = useHMonitorSelector(state => state.hmonitor);
   const {enabled, enabledMetrics, displayStyle, refreshInterval, showSectionLabel, availableHardware} = settings;
 
   const [isSaving, setIsSaving] = useState<boolean>(false);
-  const [selectedNetworkName, setSelectedNetworkName] = useState<string>(availableHardware.network[0]?.name || '');
+  const [selectedNetworkName, setSelectedNetworkName] = useState<Key>(availableHardware.network[0]?.name || '');
 
   const isRawStyle = useMemo(() => displayStyle === 'raw' || displayStyle === 'raw-two-column', [displayStyle]);
 
@@ -78,7 +79,7 @@ export default function SettingsModal({show, isOpen, tabID}: SettingsModalProps)
     [selectedNetworkName, availableHardware.network],
   );
 
-  function updateState<K extends keyof SystemMonitorState>(key: K, value: SystemMonitorState[K]) {
+  function updateState<K extends keyof MonitoringSettings>(key: K, value: MonitoringSettings[K]) {
     dispatch(hmonitorActions.updateState({key, value}));
   }
 
@@ -96,9 +97,8 @@ export default function SettingsModal({show, isOpen, tabID}: SettingsModalProps)
       storageIpc.getCustom(HMONITOR_STORAGE_ID).then(savedSettings => {
         if (savedSettings) dispatch(hmonitorActions.setConfig(savedSettings as MonitoringSettings));
       });
-      dispatch(hmonitorActions.closeModal({tabID}));
-      setTimeout(() => dispatch(hmonitorActions.removeModal({tabID})), 500);
     }
+    state.setOpen(value);
   };
 
   const saveSettings = () => {
@@ -111,7 +111,7 @@ export default function SettingsModal({show, isOpen, tabID}: SettingsModalProps)
   };
 
   const getMetricItem = useCallback(
-    (metricId: SystemMetric, type: MetricType | 'uptime', hardwareName: string) => {
+    (metricId: SystemMetric, type: MetricType | 'uptime', hardwareName: string | Key) => {
       const config = METRIC_CONFIG[metricId];
       if (!config) return null;
 
@@ -133,242 +133,249 @@ export default function SettingsModal({show, isOpen, tabID}: SettingsModalProps)
           const newEnabled = isSelected
             ? hardwareConfig.enabled.filter(m => m !== metricId)
             : [...hardwareConfig.enabled, metricId];
-          dispatch(hmonitorActions.updateHardwareMetrics({type, name: hardwareName, enabled: newEnabled}));
+          dispatch(hmonitorActions.updateHardwareMetrics({type, name: hardwareName as string, enabled: newEnabled}));
         };
       }
 
       return (
-        <div
-          className={
-            'flex items-center p-2 gap-x-2 rounded-lg hover:bg-foreground-100' +
-            ' transition-colors duration-200 cursor-pointer'
-          }
-          key={metricId}
-          onClick={onToggle}>
-          <config.Icon className="size-5 text-secondary" />
-          <span className="font-medium">{config.label}</span>
-          <Checkbox color="secondary" isSelected={isSelected} onValueChange={onToggle} />
-        </div>
+        <Checkbox variant="secondary" onChange={onToggle} isSelected={isSelected}>
+          <Checkbox.Content className="flex flex-row items-center gap-x-1">
+            <config.Icon className="size-3.5 text-secondary" />
+            <Label className="cursor-pointer">{config.label}</Label>
+          </Checkbox.Content>
+          <Checkbox.Control>
+            <Checkbox.Indicator />
+          </Checkbox.Control>
+        </Checkbox>
       );
     },
     [enabledMetrics, dispatch],
   );
 
   const toggleHardwareActive = useCallback(
-    (name: string, type: MetricType) => {
+    (name: string | Key, type: MetricType) => {
       const hardwareConfig = enabledMetrics[type].find(metric => metric.name === name);
       if (hardwareConfig) {
-        dispatch(hmonitorActions.updateHardwareActive({type, name, active: !hardwareConfig.active}));
+        dispatch(hmonitorActions.updateHardwareActive({type, name: name as string, active: !hardwareConfig.active}));
       }
     },
     [enabledMetrics, dispatch],
   );
 
   return (
-    <Modal
-      size="3xl"
-      isOpen={isOpen}
-      placement="center"
-      isDismissable={false}
-      scrollBehavior="inside"
-      onOpenChange={handleOpenChange}
-      classNames={{backdrop: `!top-10 ${show}`, wrapper: `!top-10 pb-8 ${show}`}}
-      hideCloseButton>
-      <ModalContent>
-        {onClose => (
-          <>
-            <ModalHeader className="items-center justify-center">Hardware Monitor Settings</ModalHeader>
-            <ModalBody as={LynxScroll}>
-              <div className="mb-4 rounded-xl bg-content2 p-4">
-                <div className="flex items-center justify-between">
-                  <div>
-                    <h3 className="text-lg font-medium">Enable System Monitoring</h3>
-                    <p className="text-xs text-foreground-400">When disabled, all metrics collection will be paused</p>
+    <TabModal size="lg" isOpen={state.isOpen} onOpenChange={handleOpenChange} dialogClassName="max-w-3xl px-0">
+      <Modal.CloseTrigger />
+      <Modal.Header className="px-5">
+        <Modal.Heading className="items-center justify-center">Hardware Monitor Settings</Modal.Heading>
+      </Modal.Header>
+      <Modal.Body className="overflow-hidden">
+        <LynxScroll className="px-4 size-full">
+          <div
+            onClick={() => updateState('enabled', !enabled)}
+            className="mb-4 rounded-xl bg-surface-secondary p-4 cursor-pointer flex items-center justify-between">
+            <div className="flex flex-col">
+              <Label className="text-base pointer-events-none">Enable System Monitoring</Label>
+              <Description className="pointer-events-none">
+                When disabled, all metrics collection will be paused
+              </Description>
+            </div>
+            <Switch size="lg" isSelected={enabled} onChange={value => updateState('enabled', value)}>
+              <Switch.Control>
+                <Switch.Thumb />
+              </Switch.Control>
+            </Switch>
+          </div>
+
+          <AnimatePresence>
+            {enabled && (
+              <motion.div
+                transition={{delay: 0.1}}
+                className="flex flex-col gap-y-4"
+                exit={{translateY: -10, opacity: 0}}
+                animate={{translateY: 0, opacity: 1}}
+                initial={{translateY: 10, opacity: 0}}>
+                <div className="p-4 bg-surface-secondary rounded-3xl flex flex-col gap-y-4">
+                  <NumberField
+                    step={0.5}
+                    maxValue={60}
+                    minValue={0.5}
+                    value={refreshInterval}
+                    onChange={value => updateState('refreshInterval', value)}
+                    fullWidth>
+                    <Label>Refresh Interval (Seconds)</Label>
+                    <NumberField.Group>
+                      <NumberField.DecrementButton />
+                      <NumberField.Input />
+                      <NumberField.IncrementButton />
+                    </NumberField.Group>
+                    <Description>How frequently metrics should update (0.5-60 seconds)</Description>
+                  </NumberField>
+
+                  <Select
+                    value={displayStyle}
+                    selectionMode="single"
+                    placeholder="Select a display style"
+                    onChange={value => handleDisplayStyleChange(value as DisplayStyle)}>
+                    <Label>Display Style</Label>
+                    <Select.Trigger>
+                      <Select.Value />
+                      <Select.Indicator />
+                    </Select.Trigger>
+                    <Select.Popover>
+                      <ListBox>
+                        {DISPLAY_STYLES.map(style => (
+                          <ListBox.Item id={style.value} key={style.value}>
+                            <div className="flex flex-col">
+                              <Label>{style.label}</Label>
+                              <Description>{style.description}</Description>
+                            </div>
+                            <ListBox.ItemIndicator />
+                          </ListBox.Item>
+                        ))}
+                      </ListBox>
+                    </Select.Popover>
+                  </Select>
+
+                  <LynxSwitch
+                    onEnabledChange={value => {
+                      if (!isRawStyle) updateState('showSectionLabel', !value);
+                    }}
+                    className="p-1"
+                    isDisabled={isRawStyle}
+                    enabled={showSectionLabel}
+                    title="Show Section Labels"
+                    description="Display headers for metric groups (disabled for Raw styles)"
+                  />
+                  <div className={isRawStyle ? 'opacity-50 pointer-events-none' : ''}>
+                    <MetricVisibilitySettings />
+                    {isRawStyle && (
+                      <p className="text-xs text-foreground-400 mt-1">
+                        Metric visibility is not applicable for Raw display styles.
+                      </p>
+                    )}
                   </div>
-                  <Switch color="primary" isSelected={enabled} onValueChange={value => updateState('enabled', value)} />
                 </div>
-              </div>
 
-              <AnimatePresence>
-                {enabled && (
-                  <motion.div
-                    transition={{delay: 0.1}}
-                    className="flex flex-col gap-y-4"
-                    exit={{translateY: -10, opacity: 0}}
-                    animate={{translateY: 0, opacity: 1}}
-                    initial={{translateY: 10, opacity: 0}}>
-                    <div className="p-4 shadow-sm bg-foreground-100 dark:bg-LynxRaisinBlack rounded-xl">
-                      <div className="mb-9 pt-1">
-                        <NumberInput
-                          step={0.5}
-                          maxValue={60}
-                          minValue={0.5}
-                          value={refreshInterval}
-                          labelPlacement="outside"
-                          label="Refresh Interval"
-                          classNames={{label: 'text-medium'}}
-                          startContent={<ClockCircle className="size-6" />}
-                          onValueChange={value => updateState('refreshInterval', value)}
-                          description="How frequently metrics should update (0.5-60 seconds)"
-                          endContent={<span className="text-xs text-foreground-500">Seconds</span>}
-                        />
-                      </div>
+                <div className="flex flex-col gap-y-2 p-2 bg-surface-secondary rounded-3xl">
+                  {availableHardware.gpu.map(hw => (
+                    <SettingsModalCard
+                      type="gpu"
+                      hardware={hw}
+                      key={`gpu-settings-${hw.name}`}
+                      onToggle={() => toggleHardwareActive(hw.name, 'gpu')}
+                      config={enabledMetrics.gpu.find(m => m.name === hw.name)}>
+                      {getMetricItem('temp', 'gpu', hw.name)}
+                      <Separator className="h-2.5 w-px mx-1" />
+                      {getMetricItem('usage', 'gpu', hw.name)}
+                      <Separator className="h-2.5 w-px mx-1" />
+                      {getMetricItem('vram', 'gpu', hw.name)}
+                    </SettingsModalCard>
+                  ))}
 
-                      <div className="mb-6 space-y-4">
+                  {availableHardware.cpu.map(hw => (
+                    <SettingsModalCard
+                      type="cpu"
+                      hardware={hw}
+                      key={`cpu-settings-${hw.name}`}
+                      onToggle={() => toggleHardwareActive(hw.name, 'cpu')}
+                      config={enabledMetrics.cpu.find(m => m.name === hw.name)}>
+                      {getMetricItem('temp', 'cpu', hw.name)}
+                      <Separator className="h-2.5 w-px mx-1" />
+                      {getMetricItem('usage', 'cpu', hw.name)}
+                    </SettingsModalCard>
+                  ))}
+
+                  {availableHardware.memory.map(hw => (
+                    <SettingsModalCard
+                      type="memory"
+                      hardware={hw}
+                      key={`memory-settings-${hw.name}`}
+                      onToggle={() => toggleHardwareActive(hw.name, 'memory')}
+                      config={enabledMetrics.memory.find(m => m.name === hw.name)}>
+                      {getMetricItem('memory', 'memory', hw.name)}
+                    </SettingsModalCard>
+                  ))}
+
+                  {/* Network Settings Card */}
+                  {availableHardware.network.length > 0 && (
+                    <Card>
+                      <Card.Header className="flex flex-row justify-between">
+                        <p className="font-medium">Network Interface</p>
+                        {selectedNetworkConfig && (
+                          <Switch
+                            isSelected={selectedNetworkConfig.active}
+                            onChange={() => toggleHardwareActive(selectedNetworkName, 'network')}>
+                            <Switch.Control>
+                              <Switch.Thumb />
+                            </Switch.Control>
+                          </Switch>
+                        )}
+                      </Card.Header>
+                      <Card.Content className="flex-col items-start relative gap-y-4">
                         <Select
-                          label="Display Style"
-                          labelPlacement="outside"
-                          selectedKeys={[displayStyle]}
-                          placeholder="Select a display style"
-                          onChange={e => handleDisplayStyleChange(e.target.value as DisplayStyle)}>
-                          {DISPLAY_STYLES.map(style => (
-                            <SelectItem key={style.value} description={style.description}>
-                              {style.label}
-                            </SelectItem>
-                          ))}
+                          onChange={value => {
+                            if (value) setSelectedNetworkName(value);
+                          }}
+                          variant="secondary"
+                          selectionMode="single"
+                          value={selectedNetworkName}
+                          placeholder="Select a network interface to configure"
+                          fullWidth>
+                          <Label>Display Style</Label>
+                          <Select.Trigger>
+                            <Select.Value />
+                            <Select.Indicator />
+                          </Select.Trigger>
+                          <Select.Popover>
+                            <ListBox items={availableHardware.network}>
+                              {item => (
+                                <ListBox.Item id={item.name} key={item.name}>
+                                  <Label>{item.name}</Label>
+                                  <ListBox.ItemIndicator />
+                                </ListBox.Item>
+                              )}
+                            </ListBox>
+                          </Select.Popover>
                         </Select>
 
-                        <div
-                          className={
-                            'flex items-center justify-between rounded-lg px-2 py-2 ' +
-                            'hover:bg-content2 transition-all duration-300 cursor-pointer'
-                          }
-                          onClick={() => !isRawStyle && updateState('showSectionLabel', !showSectionLabel)}>
-                          <div>
-                            <p className={`font-medium ${isRawStyle ? 'text-foreground-400' : ''}`}>
-                              Show Section Labels
-                            </p>
-                            <p className="text-xs text-foreground-400">
-                              Display headers for metric groups (disabled for Raw styles)
-                            </p>
+                        {selectedNetworkConfig && selectedNetworkHardware && (
+                          <div className="w-full relative">
+                            {!selectedNetworkConfig.active && (
+                              <div className="absolute inset-0 bg-background/50 z-20 -m-1 rounded-xl" />
+                            )}
+                            <div className="grid grid-cols-2 items-center">
+                              {getMetricItem('uploadSpeed', 'network', selectedNetworkName)}
+                              {getMetricItem('downloadSpeed', 'network', selectedNetworkName)}
+                              {getMetricItem('uploadData', 'network', selectedNetworkName)}
+                              {getMetricItem('downloadData', 'network', selectedNetworkName)}
+                            </div>
                           </div>
-                          <Switch
-                            size="sm"
-                            isDisabled={isRawStyle}
-                            isSelected={showSectionLabel}
-                            className="pointer-events-none"
-                          />
-                        </div>
-                        <div className={isRawStyle ? 'opacity-50 pointer-events-none' : ''}>
-                          <MetricVisibilitySettings />
-                          {isRawStyle && (
-                            <p className="text-xs text-foreground-400 mt-1">
-                              Metric visibility is not applicable for Raw display styles.
-                            </p>
-                          )}
-                        </div>
-                      </div>
-                    </div>
+                        )}
+                      </Card.Content>
+                    </Card>
+                  )}
 
-                    <div
-                      className={
-                        'flex flex-col gap-y-2 shadow-sm p-4 bg-foreground-100 ' + 'dark:bg-LynxRaisinBlack rounded-xl'
-                      }>
-                      {availableHardware.gpu.map(hw => (
-                        <SettingsModalCard
-                          type="gpu"
-                          hardware={hw}
-                          key={`gpu-settings-${hw.name}`}
-                          onToggle={() => toggleHardwareActive(hw.name, 'gpu')}
-                          config={enabledMetrics.gpu.find(m => m.name === hw.name)}>
-                          {getMetricItem('temp', 'gpu', hw.name)}
-                          <Divider className="h-4 mx-1" orientation="vertical" />
-                          {getMetricItem('usage', 'gpu', hw.name)}
-                          <Divider className="h-4 mx-1" orientation="vertical" />
-                          {getMetricItem('vram', 'gpu', hw.name)}
-                        </SettingsModalCard>
-                      ))}
+                  <Card>
+                    <Card.Header className="font-medium">Uptime</Card.Header>
+                    <Card.Content className="flex-row items-center">
+                      {getMetricItem('uptimeSystem', 'uptime', 'system')}
+                      <Separator className="h-2.5 w-px mx-1" />
+                      {getMetricItem('uptimeApp', 'uptime', 'app')}
+                    </Card.Content>
+                  </Card>
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </LynxScroll>
+      </Modal.Body>
 
-                      {availableHardware.cpu.map(hw => (
-                        <SettingsModalCard
-                          type="cpu"
-                          hardware={hw}
-                          key={`cpu-settings-${hw.name}`}
-                          onToggle={() => toggleHardwareActive(hw.name, 'cpu')}
-                          config={enabledMetrics.cpu.find(m => m.name === hw.name)}>
-                          {getMetricItem('temp', 'cpu', hw.name)}
-                          <Divider className="h-4 mx-1" orientation="vertical" />
-                          {getMetricItem('usage', 'cpu', hw.name)}
-                        </SettingsModalCard>
-                      ))}
-
-                      {availableHardware.memory.map(hw => (
-                        <SettingsModalCard
-                          type="memory"
-                          hardware={hw}
-                          key={`memory-settings-${hw.name}`}
-                          onToggle={() => toggleHardwareActive(hw.name, 'memory')}
-                          config={enabledMetrics.memory.find(m => m.name === hw.name)}>
-                          {getMetricItem('memory', 'memory', hw.name)}
-                        </SettingsModalCard>
-                      ))}
-
-                      {/* Network Settings Card */}
-                      {availableHardware.network.length > 0 && (
-                        <Card as="div" className="!shadow-sm p-2" fullWidth>
-                          <CardHeader className="flex flex-row justify-between">
-                            <p className="font-medium">Network Interface</p>
-                            {selectedNetworkConfig && (
-                              <Switch
-                                isSelected={selectedNetworkConfig.active}
-                                onValueChange={() => toggleHardwareActive(selectedNetworkName, 'network')}
-                              />
-                            )}
-                          </CardHeader>
-                          <CardBody className="flex-col items-start relative gap-y-4">
-                            <Select
-                              selectionMode="single"
-                              items={availableHardware.network}
-                              aria-label="Select Network Interface"
-                              placeholder="Select a network interface to configure"
-                              onChange={e => setSelectedNetworkName(e.target.value)}
-                              selectedKeys={selectedNetworkName ? [selectedNetworkName] : []}
-                              disallowEmptySelection>
-                              {item => <SelectItem key={item.name}>{item.name}</SelectItem>}
-                            </Select>
-
-                            {selectedNetworkConfig && selectedNetworkHardware && (
-                              <div className="w-full relative">
-                                {!selectedNetworkConfig.active && (
-                                  <div className="absolute inset-0 bg-background/50 z-20 -m-1 rounded-xl" />
-                                )}
-                                <div className="grid grid-cols-2 items-center">
-                                  {getMetricItem('uploadSpeed', 'network', selectedNetworkName)}
-                                  {getMetricItem('downloadSpeed', 'network', selectedNetworkName)}
-                                  {getMetricItem('uploadData', 'network', selectedNetworkName)}
-                                  {getMetricItem('downloadData', 'network', selectedNetworkName)}
-                                </div>
-                              </div>
-                            )}
-                          </CardBody>
-                        </Card>
-                      )}
-
-                      <Card as="div" className="!shadow-sm p-2" fullWidth>
-                        <CardHeader className="font-medium">Uptime</CardHeader>
-                        <CardBody className="flex-row items-center">
-                          {getMetricItem('uptimeSystem', 'uptime', 'system')}
-                          <Divider className="h-4 mx-1" orientation="vertical" />
-                          {getMetricItem('uptimeApp', 'uptime', 'app')}
-                        </CardBody>
-                      </Card>
-                    </div>
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </ModalBody>
-
-            <ModalFooter>
-              <Button color="success" variant="light" isLoading={isSaving} onPress={saveSettings}>
-                {!isSaving && 'Save Settings'}
-              </Button>
-              <Button color="warning" variant="light" onPress={onClose}>
-                Close
-              </Button>
-            </ModalFooter>
-          </>
-        )}
-      </ModalContent>
-    </Modal>
+      <Modal.Footer className="px-4">
+        <Button isPending={isSaving} onPress={saveSettings}>
+          {isSaving ? <Spinner color="current" /> : <Diskette />}
+          {!isSaving && 'Save Settings'}
+        </Button>
+      </Modal.Footer>
+    </TabModal>
   );
 }

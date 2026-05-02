@@ -1,11 +1,6 @@
 @import 'tailwindcss';
 @import '@heroui-v3/styles';
 
-@plugin './heroUIConfig.ts';
-
-/* Include source files for TailwindCSS to scan for class names */
-@source '../../../node_modules/@heroui/theme/dist/**/*.{js,ts,jsx,tsx}';
-
 @source './**/*.{js,ts,jsx,tsx}';
 @source '../../../src/renderer/main_window/components/SpotlightCard.tsx';
 @source '../../../src/renderer/main_window/components/ToolsCard.tsx';

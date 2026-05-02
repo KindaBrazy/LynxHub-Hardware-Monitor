@@ -1,5 +1,4 @@
-import {Button, Card, CardBody, CardHeader, Chip, Divider, Input, Select, SelectItem, Switch} from '@heroui/react';
-import {TrashBin2} from '@solar-icons/react-perf/BoldDuotone';
+import {Button, Card, Chip, Input, ListBox, Select, Separator, Switch} from '@heroui-v3/react';
 import {Plus, X} from 'lucide-react';
 import {memo, ReactNode, useState} from 'react';
 import {useDispatch} from 'react-redux';
@@ -51,19 +50,21 @@ export function CustomMetricsSection({config, hardware, type}: CustomMetricsProp
 
   return (
     <>
-      {(custom.length > 0 || isAdding) && <Divider className="my-2" />}
+      {(custom.length > 0 || isAdding) && <Separator className="my-2" />}
       <div className="w-full flex flex-col gap-2">
         {custom.length > 0 && (
           <div className="flex flex-wrap gap-2">
             {custom.map(metric => (
-              <Chip
-                variant="flat"
-                key={metric.id}
-                className="px-2"
-                color="secondary"
-                onClose={() => handleRemoveMetric(metric.id)}
-                endContent={<TrashBin2 className="size-3.5" />}>
+              <Chip size="lg" variant="soft" color="accent" key={metric.id} className="px-2">
                 {metric.label}
+                <Button
+                  size="sm"
+                  className="size-4.5"
+                  variant="danger-soft"
+                  onPress={() => handleRemoveMetric(metric.id)}
+                  isIconOnly>
+                  <X className="size-3" />
+                </Button>
               </Chip>
             ))}
           </div>
@@ -72,44 +73,53 @@ export function CustomMetricsSection({config, hardware, type}: CustomMetricsProp
         {isAdding ? (
           <div className="flex items-center gap-2 p-2">
             <Select
-              onChange={e =>
+              onChange={key => {
+                if (!key) return;
+                const value = key as string;
                 setFormState(prev => ({
                   ...prev,
-                  sensorIdentifier: e.target.value,
-                  label: e.target.value
-                    ? (hardware.sensors.find(s => s.Identifier === e.target.value)?.Name ?? '')
-                    : '',
-                }))
-              }
-              size="sm"
-              label="Sensor"
+                  sensorIdentifier: value,
+                  label: value ? (hardware.sensors.find(s => s.Identifier === value)?.Name ?? '') : '',
+                }));
+              }}
+              variant="secondary"
               placeholder="Select a sensor"
-              selectedKeys={formState.sensorIdentifier ? [formState.sensorIdentifier] : []}>
-              {hardware.sensors.map(sensor => (
-                <SelectItem key={sensor.Identifier} textValue={`${sensor.Name} (${sensor.Type})`}>
-                  <span>{`${sensor.Name} (${sensor.Type})`}</span>
-                </SelectItem>
-              ))}
+              value={formState.sensorIdentifier}
+              fullWidth>
+              <Select.Trigger>
+                <Select.Value />
+                <Select.Indicator />
+              </Select.Trigger>
+              <Select.Popover>
+                <ListBox items={hardware.sensors}>
+                  {sensor => (
+                    <ListBox.Item
+                      id={sensor.Identifier}
+                      key={sensor.Identifier}
+                      textValue={`${sensor.Name} (${sensor.Type})`}>
+                      {`${sensor.Name} (${sensor.Type})`}
+                      <ListBox.ItemIndicator />
+                    </ListBox.Item>
+                  )}
+                </ListBox>
+              </Select.Popover>
             </Select>
             <Input
-              size="sm"
-              label="Display Label"
+              variant="secondary"
               value={formState.label}
-              onValueChange={label => setFormState(prev => ({...prev, label}))}
+              placeholder="Display Label"
+              onChange={e => setFormState(prev => ({...prev, label: e.target.value}))}
             />
-            <Button size="sm" variant="flat" color="success" onPress={handleAddMetric} isIconOnly>
-              <Plus className="size-3" />
+            <Button size="sm" variant="secondary" className="shrink-0" onPress={handleAddMetric} isIconOnly>
+              <Plus />
             </Button>
-            <Button size="sm" color="warning" variant="light" onPress={() => setIsAdding(false)} isIconOnly>
-              <X className="size-3" />
+            <Button size="sm" variant="tertiary" className="shrink-0" onPress={() => setIsAdding(false)} isIconOnly>
+              <X />
             </Button>
           </div>
         ) : (
-          <Button
-            variant="flat"
-            className="mt-2"
-            onPress={() => setIsAdding(true)}
-            startContent={<Plus className="size-3" />}>
+          <Button className="mt-2" variant="tertiary" onPress={() => setIsAdding(true)} fullWidth>
+            <Plus className="size-3" />
             Add Custom Metric
           </Button>
         )}
@@ -126,24 +136,29 @@ type Props = {
   children: ReactNode;
 };
 
-function SettingsModalCard({onToggle, config, hardware, type, children}: Props) {
+const SettingsModalCard = memo(({onToggle, config, hardware, type, children}: Props) => {
   if (!config) return null;
   const {active} = config;
 
   return (
-    <Card as="div" className="shadow-sm! p-2" fullWidth>
-      <CardHeader onClick={onToggle} className="flex flex-row justify-between cursor-pointer">
+    <Card>
+      <Card.Header onClick={onToggle} className="flex flex-row justify-between cursor-pointer">
         <p className="font-medium">{hardware.name}</p>
-        <Switch isSelected={active} onValueChange={onToggle} />
-      </CardHeader>
-      <CardBody className="flex-col items-start relative gap-y-1">
+        <Switch isSelected={active} onChange={onToggle}>
+          <Switch.Control>
+            <Switch.Thumb />
+          </Switch.Control>
+        </Switch>
+      </Card.Header>
+      <Card.Content className="flex-col items-start relative gap-y-1">
         {/* Overlay to indicate that the controls are disabled */}
-        {!active && <div className="absolute inset-0 bg-background/50 z-20 m-1 rounded-xl" />}
+        {!active && <div className="absolute inset-0 bg-surface-secondary/50 z-20 m-1 rounded-3xl" />}
 
-        <div className="flex flex-row items-center">{children}</div>
+        <div className="flex flex-row items-center gap-x-2">{children}</div>
         <CustomMetricsSection type={type} config={config} hardware={hardware} />
-      </CardBody>
+      </Card.Content>
     </Card>
   );
-}
-export default memo(SettingsModalCard);
+});
+
+export default SettingsModalCard;
