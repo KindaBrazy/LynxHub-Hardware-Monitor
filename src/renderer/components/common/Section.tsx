@@ -1,5 +1,5 @@
 import {Spinner} from '@heroui-v3/react';
-import {isEmpty} from 'lodash';
+import {isEmpty} from 'lodash-es';
 import {Children, ElementType, Fragment, memo, ReactNode} from 'react';
 
 import {useHMonitorState} from '../../state/hmonitorSlice';

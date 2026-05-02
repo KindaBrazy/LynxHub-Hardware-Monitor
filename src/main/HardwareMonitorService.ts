@@ -4,7 +4,7 @@ import {MainExtensionUtils} from '@lynx_main/plugins/extensions/types';
 import StorageManager from '@lynx_main/storage/storageOperations';
 import HardwareMonitor, {HardwareReport, MonitorError} from '@lynxhub/hwmonitor';
 import {app, ipcMain, WebContents} from 'electron';
-import {isEqual, isNil} from 'lodash';
+import {isEqual, isNil} from 'lodash-es';
 
 import {
   HMONITOR_IPC_CONFIG_UPDATE,

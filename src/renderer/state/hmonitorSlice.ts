@@ -1,5 +1,5 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
-import {omit} from 'lodash';
+import {omit} from 'lodash-es';
 import {TypedUseSelectorHook, useSelector} from 'react-redux';
 
 import {HMONITOR_IPC_SET_CONFIG, initialSettings} from '../../cross/constants';
