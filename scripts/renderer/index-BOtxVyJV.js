@@ -547,7 +547,7 @@ function requireReact_production () {
 	react_production.useTransition = function () {
 	  return ReactSharedInternals.H.useTransition();
 	};
-	react_production.version = "19.2.0";
+	react_production.version = "19.2.4";
 	return react_production;
 }
 
