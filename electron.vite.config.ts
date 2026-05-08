@@ -17,8 +17,8 @@ export default defineConfig({
     },
     resolve: {
       alias: {
-        '@lynx_common': resolve(__dirname, 'src/common'),
-        '@lynx_main': resolve(__dirname, 'src/main'),
+        '@lynx_common': resolve('src/common'),
+        '@lynx_main': resolve('src/main'),
       },
     },
   },
@@ -45,12 +45,12 @@ export default defineConfig({
     ],
     resolve: {
       alias: {
-        '@lynx_module': resolve(__dirname, 'module/src'),
-        '@lynx_extension': resolve(__dirname, 'extension/src'),
-        '@lynx_common': resolve(__dirname, 'src/common'),
-        '@lynx': resolve(__dirname, 'src/renderer/mainWindow'),
-        '@lynx_shared': resolve(__dirname, 'src/renderer/shared'),
-        '@lynx_assets': resolve(__dirname, 'src/renderer/shared/assets'),
+        '@lynx_module': resolve('module/src'),
+        '@lynx_extension': resolve('extension/src'),
+        '@lynx_common': resolve('src/common'),
+        '@lynx': resolve('src/renderer/mainWindow'),
+        '@lynx_shared': resolve('src/renderer/shared'),
+        '@lynx_assets': resolve('src/renderer/shared/assets'),
       },
     },
     build: {
