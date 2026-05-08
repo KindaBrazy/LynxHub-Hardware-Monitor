@@ -2,6 +2,17 @@
   "$schema": "https://raw.githubusercontent.com/KindaBrazy/LynxHub-Statics/refs/heads/schema/plugins/versioning.schema.json",
   "versions": [
     {
+      "version": "0.14.1",
+      "commit": "d3d5c52",
+      "engines": {
+        "extensionApi": "^2.0.0"
+      },
+      "stage": "early_access",
+      "platforms": [
+        "win32"
+      ]
+    },
+    {
       "version": "0.14.0",
       "commit": "8b5feb5",
       "engines": {
@@ -25,6 +36,20 @@
     }
   ],
   "changes": [
+    {
+      "version": "0.14.1",
+      "date": "2026-05-09",
+      "items": [
+        {
+          "⚡ Improvements": [
+            "Updated UI to v3.",
+            "Updated API to latest LynxHub API version.",
+            "Updated status bar and items background.",
+            "Support light mode."
+          ]
+        }
+      ]
+    },
     {
       "version": "0.14.0",
       "date": "2025-11-03",
