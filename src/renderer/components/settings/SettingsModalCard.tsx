@@ -150,9 +150,9 @@ const SettingsModalCard = memo(({onToggle, config, hardware, type, children}: Pr
           </Switch.Control>
         </Switch>
       </Card.Header>
-      <Card.Content className="flex-col items-start relative gap-y-1">
+      <Card.Content className="flex-col items-start gap-y-1">
         {/* Overlay to indicate that the controls are disabled */}
-        {!active && <div className="absolute inset-0 bg-surface-secondary/50 z-20 m-1 rounded-3xl" />}
+        {!active && <div className="absolute inset-1.5 top-10.5 bg-surface-secondary/50 z-20 rounded-3xl" />}
 
         <div className="flex flex-row items-center gap-x-2">{children}</div>
         <CustomMetricsSection type={type} config={config} hardware={hardware} />
