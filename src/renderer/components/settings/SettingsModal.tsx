@@ -13,7 +13,7 @@ import {
   Spinner,
   Switch,
   UseOverlayStateReturn,
-} from '@heroui-v3/react';
+} from '@heroui/react';
 import LynxScroll from '@lynx/components/LynxScroll';
 import LynxSwitch from '@lynx/components/LynxSwitch';
 import TabModal from '@lynx/components/TabModal';

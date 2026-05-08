@@ -1,4 +1,4 @@
-import {Spinner} from '@heroui-v3/react';
+import {Spinner} from '@heroui/react';
 import {isEmpty} from 'lodash-es';
 import {Children, ElementType, Fragment, memo, ReactNode} from 'react';
 

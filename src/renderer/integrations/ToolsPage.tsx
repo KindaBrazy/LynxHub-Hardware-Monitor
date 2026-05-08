@@ -1,4 +1,4 @@
-import {useOverlayState} from '@heroui-v3/react';
+import {useOverlayState} from '@heroui/react';
 import {ToolsCard} from '@lynx/components/ToolsCard';
 
 import SettingsModal from '../components/settings/SettingsModal';

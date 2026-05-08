@@ -1,4 +1,4 @@
-import {Button, Card, Chip, Input, ListBox, Select, Separator, Switch} from '@heroui-v3/react';
+import {Button, Card, Chip, Input, ListBox, Select, Separator, Switch} from '@heroui/react';
 import {Plus, X} from 'lucide-react';
 import {memo, ReactNode, useState} from 'react';
 import {useDispatch} from 'react-redux';

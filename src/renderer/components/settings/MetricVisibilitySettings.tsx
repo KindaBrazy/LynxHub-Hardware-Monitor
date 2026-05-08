@@ -1,4 +1,4 @@
-import {Checkbox, CheckboxGroup, Label} from '@heroui-v3/react';
+import {Checkbox, CheckboxGroup, Label} from '@heroui/react';
 import {useCallback, useMemo} from 'react';
 import {useDispatch} from 'react-redux';
 

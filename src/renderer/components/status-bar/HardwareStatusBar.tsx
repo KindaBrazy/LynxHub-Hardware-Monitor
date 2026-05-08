@@ -1,4 +1,4 @@
-import {Link, Separator} from '@heroui-v3/react';
+import {Link, Separator} from '@heroui/react';
 import ShinyText from '@lynx/components/ShinyText';
 import {useAppState} from '@lynx/redux/reducers/app';
 import {ChevronLeft, ChevronRight} from 'lucide-react';
