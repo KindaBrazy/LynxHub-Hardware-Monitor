@@ -238,7 +238,7 @@ export default function SettingsModal({state}: SettingsModalProps) {
 
                   <LynxSwitch
                     onEnabledChange={value => {
-                      if (!isRawStyle) updateState('showSectionLabel', !value);
+                      if (!isRawStyle) updateState('showSectionLabel', value);
                     }}
                     className="p-1"
                     isDisabled={isRawStyle}
