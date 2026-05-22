@@ -321,7 +321,6 @@ export default function SettingsModal({state}: SettingsModalProps) {
                           value={selectedNetworkName}
                           placeholder="Select a network interface to configure"
                           fullWidth>
-                          <Label>Display Style</Label>
                           <Select.Trigger>
                             <Select.Value />
                             <Select.Indicator />
