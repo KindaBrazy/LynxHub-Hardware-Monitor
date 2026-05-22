@@ -51,7 +51,11 @@ const CpuSection = memo(({data, metrics, hardwareInfo, rawSensorValues}: Props) 
         ) : (
           // Special case for when temperature could not be read (e.g., needs admin rights)
           <MetricItem label="Temp" icon={Thermometer} value="Admin Required">
-            <Thermometer className={`${displayStyle === 'compact' ? 'size-3' : 'size-4'} shrink-0 text-danger`} />
+            <Thermometer
+              className={`${
+                ['compact', 'two-column'].includes(displayStyle) ? 'size-3' : 'size-4'
+              } shrink-0 text-danger`}
+            />
             <span className="text-xs font-medium text-danger whitespace-nowrap">Admin Required</span>
           </MetricItem>
         ))}
