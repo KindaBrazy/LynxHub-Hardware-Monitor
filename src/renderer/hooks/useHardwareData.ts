@@ -61,8 +61,8 @@ export default function useHardwareData() {
       };
 
       setHardwareData(transformedData);
-      if (!isConnected) setIsConnected(true);
-      if (error) setError(null);
+      setIsConnected(true);
+      setError(null);
     };
 
     const handleError = (_: unknown, err: Error) => {
@@ -78,7 +78,7 @@ export default function useHardwareData() {
       clearDataListener();
       clearMonitorError();
     };
-  }, [isConnected, error]);
+  }, []);
 
   return {hardwareData, isConnected, error};
 }
