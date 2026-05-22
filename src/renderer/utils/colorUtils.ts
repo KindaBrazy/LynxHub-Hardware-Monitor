@@ -1,13 +1,50 @@
+type ThresholdRange = {
+  max: number;
+  classes: string;
+  gradient: string;
+};
+
 /**
- * Returns a Tailwind CSS color class based on a temperature value.
- * @param temp - The temperature in Celsius.
+ * Hardware temperature thresholds (Celsius).
+ * Safely handles idle (green), moderate (amber), heavy load (orange), and critical limits (red).
+ */
+const TEMP_THRESHOLDS: ThresholdRange[] = [
+  {
+    max: 60,
+    classes: 'text-emerald-400 border-emerald-400/30 bg-emerald-400/10',
+    gradient: 'from-emerald-400 to-emerald-500',
+  },
+  {max: 70, classes: 'text-amber-400 border-amber-400/30 bg-amber-400/10', gradient: 'from-amber-400 to-amber-500'},
+  {
+    max: 85,
+    classes: 'text-orange-400 border-orange-400/30 bg-orange-400/10',
+    gradient: 'from-orange-400 to-orange-500',
+  },
+  {max: Infinity, classes: 'text-red-400 border-red-400/30 bg-red-400/10', gradient: 'from-red-400 to-red-500'},
+];
+
+/**
+ * Hardware usage thresholds (0-100%).
+ * Handles low (green), moderate (blue), heavy (amber), and near-capacity (red) utilization.
+ */
+const USAGE_THRESHOLDS: ThresholdRange[] = [
+  {
+    max: 30,
+    classes: 'text-emerald-400 border-emerald-400/30 bg-emerald-400/10',
+    gradient: 'from-emerald-400 to-emerald-500',
+  },
+  {max: 60, classes: 'text-blue-400 border-blue-400/30 bg-blue-400/10', gradient: 'from-blue-400 to-blue-500'},
+  {max: 85, classes: 'text-amber-400 border-amber-400/30 bg-amber-400/10', gradient: 'from-amber-400 to-amber-500'},
+  {max: Infinity, classes: 'text-red-400 border-red-400/30 bg-red-400/10', gradient: 'from-red-400 to-red-500'},
+];
+
+/**
+ * Returns a Tailwind CSS color class based on a PC hardware temperature value.
+ * @param temp - The hardware temperature in Celsius.
  * @returns A string of Tailwind classes for text, border, and background color.
  */
 export const getTemperatureColor = (temp: number): string => {
-  if (temp < 50) return 'text-emerald-400 border-emerald-400/30 bg-emerald-400/10';
-  if (temp < 70) return 'text-amber-400 border-amber-400/30 bg-amber-400/10';
-  if (temp < 85) return 'text-orange-400 border-orange-400/30 bg-orange-400/10';
-  return 'text-red-400 border-red-400/30 bg-red-400/10';
+  return TEMP_THRESHOLDS.find(t => temp < t.max)!.classes;
 };
 
 /**
@@ -16,10 +53,7 @@ export const getTemperatureColor = (temp: number): string => {
  * @returns A string of Tailwind classes for text, border, and background color.
  */
 export const getUsageColor = (usage: number): string => {
-  if (usage < 30) return 'text-emerald-400 border-emerald-400/30 bg-emerald-400/10';
-  if (usage < 60) return 'text-blue-400 border-blue-400/30 bg-blue-400/10';
-  if (usage < 85) return 'text-amber-400 border-amber-400/30 bg-amber-400/10';
-  return 'text-red-400 border-red-400/30 bg-red-400/10';
+  return USAGE_THRESHOLDS.find(u => usage < u.max)!.classes;
 };
 
 /**
@@ -29,10 +63,6 @@ export const getUsageColor = (usage: number): string => {
  * @returns A string of Tailwind classes for a background gradient.
  */
 export const getProgressColor = (value: number, isTemp = false): string => {
-  const thresholds = isTemp ? {warn: 50, high: 70, crit: 85} : {warn: 30, high: 60, crit: 85};
-
-  if (value < thresholds.warn) return 'from-emerald-400 to-emerald-500';
-  if (value < thresholds.high) return isTemp ? 'from-amber-400 to-amber-500' : 'from-blue-400 to-blue-500';
-  if (value < thresholds.crit) return 'from-amber-400 to-amber-500';
-  return 'from-red-400 to-red-500';
+  const dataset = isTemp ? TEMP_THRESHOLDS : USAGE_THRESHOLDS;
+  return dataset.find(d => value < d.max)!.gradient;
 };
