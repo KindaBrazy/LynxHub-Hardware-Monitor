@@ -20,9 +20,9 @@ keep an eye on your system's performance without leaving your workspace.
 
 Before using this extension:
 
-- **.NET 9.0 Runtime**: This extension relies on the .NET 9.0 framework to gather hardware information. You can download
+- **.NET 10.0 Runtime**: This extension relies on the .NET 10.0 framework to gather hardware information. You can download
   it from the official Microsoft website:
-    - [Download .NET 9.0 Runtime](https://dotnet.microsoft.com/en-us/download/dotnet/9.0)
+    - [Download .NET 10.0 Runtime](https://dotnet.microsoft.com/en-us/download/dotnet/10.0)
 - **Missing Data? Run as Administrator**: Some hardware sensors require elevated permissions to be read correctly. If
   you notice that certain metrics (like CPU temperature) are not appearing, please try running LynxHub as an
   administrator.

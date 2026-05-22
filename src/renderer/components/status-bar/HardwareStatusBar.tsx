@@ -54,8 +54,8 @@ function HardwareStatusBar() {
     if (error.message.includes('dotnet')) {
       return (
         <div className="text-sm">
-          <span className="text-semi-muted">.NET 9.0 runtime not found. Please install it </span>
-          <Link onPress={() => window.open('https://dotnet.microsoft.com/en-us/download/dotnet/9.0')}>Here</Link>
+          <span className="text-semi-muted">.NET 10.0 runtime not found. Please install it </span>
+          <Link onPress={() => window.open('https://dotnet.microsoft.com/en-us/download/dotnet/10.0')}>Here</Link>
         </div>
       );
     }
