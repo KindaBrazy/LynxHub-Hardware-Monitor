@@ -130,15 +130,17 @@ class HardwareMonitorService {
         await monitor.checkRequirements(targetDir);
 
         const result = await monitor.getDataOnce(['cpu', 'gpu', 'memory', 'network']);
-        const mapToHardwareInfo = (items: {Name: string; Sensors: any[]}[]): HardwareInfo[] => {
+        const mapToHardwareInfo = (items: {Name: string; Sensors: any[]}[] | undefined | null): HardwareInfo[] => {
+          if (!items) return [];
           return items.map(item => ({
             name: item.Name,
-            sensors: item.Sensors.map(s => ({
-              Name: s.Name,
-              Type: s.Type,
-              Unit: s.Unit,
-              Identifier: s.Identifier,
-            })),
+            sensors:
+              item.Sensors?.map(s => ({
+                Name: s.Name,
+                Type: s.Type,
+                Unit: s.Unit,
+                Identifier: s.Identifier,
+              })) ?? [],
           }));
         };
 
@@ -223,9 +225,12 @@ class HardwareMonitorService {
 
       this.hwMonitor.on('data', (data: HardwareReport) => {
         // Flatten all sensor values for easy lookup on the renderer side
-        const rawSensors = [...data.CPU, ...data.GPU, ...data.Memory, ...(data.Network ?? [])].flatMap(h =>
-          h.Sensors.map(s => ({Identifier: s.Identifier, Value: s.Value})),
-        );
+        const rawSensors = [
+          ...(data.CPU ?? []),
+          ...(data.GPU ?? []),
+          ...(data.Memory ?? []),
+          ...(data.Network ?? []),
+        ].flatMap(h => h.Sensors?.map(s => ({Identifier: s.Identifier, Value: s.Value})) ?? []);
         const reportWithRawSensors: Partial<HardwareDataReport> & HardwareReport = {...data, rawSensors};
         this.sendToRenderer(HMONITOR_IPC_DATA_UPDATE, reportWithRawSensors);
       });
