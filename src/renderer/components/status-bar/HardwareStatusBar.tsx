@@ -165,7 +165,7 @@ function HardwareStatusBar() {
       <div
         ref={initRef}
         style={{scrollbarWidth: 'none', msOverflowStyle: 'none'}}
-        className={`h-full flex items-center ${isSmallStyle ? 'px-2' : 'px-3'} gap-x-4 overflow-x-auto`}>
+        className={`h-full flex items-center ${isSmallStyle ? 'px-2' : 'px-3'} gap-x-2 overflow-x-auto`}>
         {isConnected ? renderedElements : <div className="w-full text-center">{errorElement}</div>}
       </div>
     </div>
