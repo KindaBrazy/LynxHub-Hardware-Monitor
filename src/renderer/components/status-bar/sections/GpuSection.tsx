@@ -31,7 +31,7 @@ type Props = {
   rawSensorValues: RawSensorValue[];
 };
 
-function GpuSection({data, metrics, hardwareInfo, rawSensorValues}: Props) {
+const GpuSection = memo(({data, metrics, hardwareInfo, rawSensorValues}: Props) => {
   const {temp, usage, name, totalVram, usedVram} = data || {temp: 0, usage: 0, name: '', totalVram: 0, usedVram: 0};
 
   const hasTemp = useMemo(() => metrics.enabled.includes('temp'), [metrics.enabled]);
@@ -68,9 +68,9 @@ function GpuSection({data, metrics, hardwareInfo, rawSensorValues}: Props) {
           unit="%"
           icon={Zap}
           label="Usage"
-          value={usage}
-          progress={{value: usage}}
+          value={Math.min(usage, 100)}
           colorClass={getUsageColor(usage)}
+          progress={{value: Math.min(usage, 100)}}
         />
       )}
 
@@ -98,6 +98,6 @@ function GpuSection({data, metrics, hardwareInfo, rawSensorValues}: Props) {
       })}
     </Section>
   );
-}
+});
 
-export default memo(GpuSection);
+export default GpuSection;

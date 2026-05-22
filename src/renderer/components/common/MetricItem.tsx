@@ -1,4 +1,4 @@
-import {ElementType, memo, ReactNode} from 'react';
+import {ElementType, memo, ReactNode, useMemo} from 'react';
 
 import {useHMonitorState} from '../../state/hmonitorSlice';
 import {getProgressColor} from '../../utils/colorUtils';
@@ -45,6 +45,15 @@ const MetricItem = memo(({icon: Icon, label, value, unit = '', progress, colorCl
   const isRaw = ['raw', 'raw-two-column'].includes(displayStyle);
   const isCompact = ['compact', 'two-column'].includes(displayStyle);
 
+  const renderProgress = useMemo(() => {
+    if (!progress || !metricVisibility.progressBar) return null;
+
+    const max = progress.max || 100;
+    const progressValue = Math.min(progress.value, max);
+
+    return <ProgressBar {...progress} value={progressValue} />;
+  }, [progress, metricVisibility]);
+
   if (isRaw) {
     return (
       <span>
@@ -83,7 +92,7 @@ const MetricItem = memo(({icon: Icon, label, value, unit = '', progress, colorCl
             {unit}
           </span>
         )}
-        {progress && metricVisibility.progressBar && <ProgressBar {...progress} />}
+        {renderProgress}
       </div>
     </div>
   );
