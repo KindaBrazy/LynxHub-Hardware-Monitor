@@ -30,6 +30,7 @@ class HardwareMonitorService {
   private config: MonitoringSettings = initialSettings;
   private webContents?: WebContents;
   private isInitialized = false;
+  private lastError: any = null;
 
   private constructor() {}
 
@@ -67,6 +68,12 @@ class HardwareMonitorService {
   public onMainWindowReady(utils: MainExtensionUtils): void {
     utils.getAppManager().then(appManager => {
       this.webContents = appManager.getWebContent();
+
+      // Send any captured discovery errors that happened during early app launch
+      if (this.lastError) {
+        this.sendToRenderer(HMONITOR_IPC_MONITORING_ERROR, this.lastError);
+      }
+
       // Send the latest config to the renderer once it's ready
       this.sendToRenderer(HMONITOR_IPC_CONFIG_UPDATE, this.config);
 
@@ -198,12 +205,14 @@ class HardwareMonitorService {
           }
         });
 
+        this.lastError = null;
         this.sendToRenderer(HMONITOR_IPC_CONFIG_UPDATE, this.config);
         return; // Success
       } catch (error) {
         console.warn(`Hardware discovery attempt ${i + 1} failed:`, error);
         if (i === HARDWARE_CHECK_MAX_RETRIES - 1) {
           console.error('All hardware discovery attempts failed.');
+          this.lastError = error;
           this.sendToRenderer(HMONITOR_IPC_MONITORING_ERROR, error);
         }
       }
