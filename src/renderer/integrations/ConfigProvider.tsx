@@ -20,8 +20,8 @@ function ConfigProviderWrapper() {
       }
     };
 
-    window.electron.ipcRenderer.on(HMONITOR_IPC_CONFIG_UPDATE, handleConfigUpdate);
-    return () => window.electron.ipcRenderer.removeAllListeners(HMONITOR_IPC_CONFIG_UPDATE);
+    const clearListener = window.electron.ipcRenderer.on(HMONITOR_IPC_CONFIG_UPDATE, handleConfigUpdate);
+    return () => clearListener();
   }, [dispatch]);
 
   return <Fragment />;

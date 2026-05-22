@@ -71,12 +71,12 @@ export default function useHardwareData() {
       setIsConnected(false);
     };
 
-    window.electron.ipcRenderer.on(HMONITOR_IPC_DATA_UPDATE, handleHardwareUpdate);
-    window.electron.ipcRenderer.on(HMONITOR_IPC_MONITORING_ERROR, handleError);
+    const clearDataListener = window.electron.ipcRenderer.on(HMONITOR_IPC_DATA_UPDATE, handleHardwareUpdate);
+    const clearMonitorError = window.electron.ipcRenderer.on(HMONITOR_IPC_MONITORING_ERROR, handleError);
 
     return () => {
-      window.electron.ipcRenderer.removeAllListeners(HMONITOR_IPC_DATA_UPDATE);
-      window.electron.ipcRenderer.removeAllListeners(HMONITOR_IPC_MONITORING_ERROR);
+      clearDataListener();
+      clearMonitorError();
     };
   }, [isConnected, error]);
 
