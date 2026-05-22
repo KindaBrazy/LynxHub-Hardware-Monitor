@@ -13,6 +13,20 @@ import MemorySection from './sections/MemorySection';
 import NetworkSection from './sections/NetworkSection';
 import UptimeSection from './sections/UptimeSection';
 
+// Static mapping configuration
+const SECTIONS_CONFIG = [
+  {type: 'cpu', Component: CpuSection},
+  {type: 'gpu', Component: GpuSection},
+  {type: 'memory', Component: MemorySection},
+  {type: 'network', Component: NetworkSection},
+] as const;
+
+// Helper to determine active metrics inside a hardware type
+const isSectionActive = (items?: any[]) => {
+  if (!items) return false;
+  return items.some(item => item.active && (item.enabled?.length > 0 || item.custom?.length > 0));
+};
+
 function HardwareStatusBar() {
   const enabled = useHMonitorState('enabled');
   const displayStyle = useHMonitorState('displayStyle');
@@ -24,19 +38,20 @@ function HardwareStatusBar() {
   const {hardwareData, isConnected, error} = useHardwareData();
   const {containerRef, canScrollLeft, canScrollRight, scroll} = useScrollManager<HTMLDivElement>();
 
-  // Combine the forwarded ref from the host app with our internal ref.
   const initRef = (node: HTMLDivElement) => {
     if (node) containerRef(node);
   };
 
   const hasMetricsEnabled = useMemo(() => {
-    if (!enabledMetrics) return {cpu: false, gpu: false, memory: false, network: false, uptime: false};
+    if (!enabledMetrics) {
+      return {cpu: false, gpu: false, memory: false, network: false, uptime: false};
+    }
     return {
-      gpu: enabledMetrics.gpu.some(item => item.active && (item.enabled.length > 0 || item.custom?.length > 0)),
-      cpu: enabledMetrics.cpu.some(item => item.active && (item.enabled.length > 0 || item.custom?.length > 0)),
-      memory: enabledMetrics.memory.some(item => item.active && (item.enabled.length > 0 || item.custom?.length > 0)),
-      network: enabledMetrics.network.some(item => item.active && (item.enabled.length > 0 || item.custom?.length > 0)),
-      uptime: enabledMetrics.uptime.system || enabledMetrics.uptime.app,
+      cpu: isSectionActive(enabledMetrics.cpu),
+      gpu: isSectionActive(enabledMetrics.gpu),
+      memory: isSectionActive(enabledMetrics.memory),
+      network: isSectionActive(enabledMetrics.network),
+      uptime: !!(enabledMetrics.uptime?.system || enabledMetrics.uptime?.app),
     };
   }, [enabledMetrics]);
 
@@ -51,7 +66,7 @@ function HardwareStatusBar() {
         />
       );
     }
-    if (error.message.includes('dotnet')) {
+    if (error.message?.includes('dotnet')) {
       return (
         <div className="text-sm">
           <span className="text-semi-muted">.NET 10.0 runtime not found. Please install it </span>
@@ -60,7 +75,59 @@ function HardwareStatusBar() {
       );
     }
     return <span className="text-warning">{"Couldn't load metrics. Please try restarting LynxHub."}</span>;
-  }, [error]);
+  }, [error, darkMode]);
+
+  // Build the list of active sections and inject separators
+  const renderedElements = useMemo(() => {
+    if (!isConnected || !hardwareData) return [];
+
+    const elements: ReactNode[] = [];
+
+    // 1. Process main modular hardware sections
+    SECTIONS_CONFIG.forEach(({type, Component}) => {
+      if (!hasMetricsEnabled[type]) return;
+
+      const metricsList = enabledMetrics?.[type] || [];
+      const hardwareDataList = hardwareData[type] || [];
+      const availableList = availableHardware?.[type] || [];
+
+      // Cast to generic ComponentType to avoid TS intersection mismatches
+      const GenericComponent = Component as React.ComponentType<any>;
+
+      metricsList.forEach((metric, index) => {
+        if (!metric.active) return;
+
+        const data = hardwareDataList.find((item: any) => item.name === metric.name);
+        const hardwareInfo = availableList.find((h: any) => h.name === metric.name);
+
+        if (!data && !hardwareInfo) return;
+
+        elements.push(
+          <GenericComponent
+            data={data}
+            metrics={metric}
+            hardwareInfo={hardwareInfo}
+            key={`${type}_${metric.name}_${index}`}
+            rawSensorValues={hardwareData.rawSensors}
+          />,
+        );
+      });
+    });
+
+    // 2. Process Uptime section (non-iterable)
+    if (hasMetricsEnabled.uptime) {
+      elements.push(<UptimeSection key="uptime" data={hardwareData.uptime} metrics={enabledMetrics.uptime} />);
+    }
+
+    // 3. Inject vertical separators dynamically between active elements
+    return elements.reduce<ReactNode[]>((acc, element, index) => {
+      if (index > 0) {
+        acc.push(<Separator className="my-2" key={`sep_${index}`} orientation="vertical" />);
+      }
+      acc.push(element);
+      return acc;
+    }, []);
+  }, [isConnected, hardwareData, enabledMetrics, availableHardware, hasMetricsEnabled]);
 
   if (!enabled) return null;
 
@@ -99,82 +166,7 @@ function HardwareStatusBar() {
         ref={initRef}
         style={{scrollbarWidth: 'none', msOverflowStyle: 'none'}}
         className={`h-full flex items-center ${isSmallStyle ? 'px-2' : 'px-3'} gap-x-4 overflow-x-auto`}>
-        {isConnected ? (
-          <>
-            {hasMetricsEnabled.cpu &&
-              enabledMetrics.cpu.map(
-                (cpu, index) =>
-                  cpu.active && (
-                    <CpuSection
-                      metrics={cpu}
-                      key={`cpu_${cpu.name}_${index}`}
-                      rawSensorValues={hardwareData.rawSensors}
-                      data={hardwareData.cpu.find(item => item.name === cpu.name)}
-                      hardwareInfo={availableHardware.cpu.find(h => h.name === cpu.name)}
-                    />
-                  ),
-              )}
-            {(hasMetricsEnabled.gpu ||
-              hasMetricsEnabled.memory ||
-              hasMetricsEnabled.network ||
-              hasMetricsEnabled.uptime) &&
-              hasMetricsEnabled.cpu && <Separator className="my-2" orientation="vertical" />}
-
-            {hasMetricsEnabled.gpu &&
-              enabledMetrics.gpu.map(
-                (gpu, index) =>
-                  gpu.active && (
-                    <GpuSection
-                      metrics={gpu}
-                      key={`gpu_${gpu.name}_${index}`}
-                      rawSensorValues={hardwareData.rawSensors}
-                      data={hardwareData.gpu.find(item => item.name === gpu.name)}
-                      hardwareInfo={availableHardware.gpu.find(h => h.name === gpu.name)}
-                    />
-                  ),
-              )}
-            {(hasMetricsEnabled.memory || hasMetricsEnabled.network || hasMetricsEnabled.uptime) &&
-              hasMetricsEnabled.gpu && <Separator className="my-2" orientation="vertical" />}
-
-            {hasMetricsEnabled.memory &&
-              enabledMetrics.memory.map(
-                (memory, index) =>
-                  memory.active && (
-                    <MemorySection
-                      metrics={memory}
-                      key={`memory_${memory.name}_${index}`}
-                      rawSensorValues={hardwareData.rawSensors}
-                      data={hardwareData.memory.find(item => item.name === memory.name)}
-                      hardwareInfo={availableHardware.memory.find(h => h.name === memory.name)}
-                    />
-                  ),
-              )}
-            {(hasMetricsEnabled.network || hasMetricsEnabled.uptime) && hasMetricsEnabled.memory && (
-              <Separator className="my-2" orientation="vertical" />
-            )}
-
-            {hasMetricsEnabled.network &&
-              enabledMetrics.network.map(
-                (network, index) =>
-                  network.active && (
-                    <NetworkSection
-                      metrics={network}
-                      key={`network_${network.name}_${index}`}
-                      rawSensorValues={hardwareData.rawSensors}
-                      data={hardwareData.network.find(item => item.name === network.name)}
-                      hardwareInfo={availableHardware.network.find(h => h.name === network.name)}
-                    />
-                  ),
-              )}
-            {hasMetricsEnabled.uptime && hasMetricsEnabled.network && (
-              <Separator className="my-2" orientation="vertical" />
-            )}
-
-            {hasMetricsEnabled.uptime && <UptimeSection data={hardwareData.uptime} metrics={enabledMetrics.uptime} />}
-          </>
-        ) : (
-          <div className="w-full text-center">{errorElement}</div>
-        )}
+        {isConnected ? renderedElements : <div className="w-full text-center">{errorElement}</div>}
       </div>
     </div>
   );
