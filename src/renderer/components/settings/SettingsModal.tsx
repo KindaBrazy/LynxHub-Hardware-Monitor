@@ -30,6 +30,7 @@ import {HMONITOR_STORAGE_ID} from '../../../cross/constants';
 import {DisplayStyle, HardwareMetricsConfig, MetricType, MonitoringSettings, SystemMetric} from '../../../cross/types';
 import {hmonitorActions, useHMonitorSelector} from '../../state/hmonitorSlice';
 import MetricVisibilitySettings from './MetricVisibilitySettings';
+import PingSettings from './PingSettings';
 import SettingsModalCard from './SettingsModalCard';
 
 // Configuration for each available metric type, defining its UI representation.
@@ -363,6 +364,8 @@ export default function SettingsModal({state}: SettingsModalProps) {
                     </Card.Content>
                   </Card>
                 </div>
+
+                <PingSettings />
               </motion.div>
             )}
           </AnimatePresence>
