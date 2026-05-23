@@ -1,20 +1,7 @@
 import {exec} from 'node:child_process';
 import {platform} from 'node:os';
 
-export interface PingConfig {
-  host: string;
-  intervalMs: number;
-  timeoutMs?: number;
-}
-
-export interface PingResult {
-  host: string;
-  alive: boolean;
-  latency?: number; // in milliseconds
-  timestamp: Date;
-  rawOutput?: string;
-  error?: string;
-}
+import {PingConfig, PingResult} from '../cross/types';
 
 export class Pinger {
   private readonly config: Required<PingConfig>;

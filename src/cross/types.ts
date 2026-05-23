@@ -125,3 +125,18 @@ export type SystemMetric =
 
 // A key for each hardware type in the settings
 export type MetricType = keyof Omit<EnabledMetrics, 'uptime'>;
+
+export type PingConfig = {
+  host: string;
+  intervalMs: number;
+  timeoutMs?: number;
+};
+
+export type PingResult = {
+  host: string;
+  alive: boolean;
+  latency?: number; // in milliseconds
+  timestamp: Date;
+  rawOutput?: string;
+  error?: string;
+};
