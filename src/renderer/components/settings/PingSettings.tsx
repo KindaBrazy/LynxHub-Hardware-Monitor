@@ -21,6 +21,8 @@ export default function PingSettings() {
   const [hostLabel, setHostLabel] = useState<boolean>(true);
 
   const [hostInput, setHostInput] = useState<string>('');
+  const [interval, setInterval] = useState<number>(1000);
+  const [timeout, setTimeout] = useState<number>(2000);
 
   const [hosts, setHosts] = useState<string[]>([]);
 
@@ -62,36 +64,41 @@ export default function PingSettings() {
 
           <div className="flex flex-row gap-x-4 mb-4">
             <Switch isSelected={timestamp} onChange={setTimestamp}>
-              <Label>Show TimeStamp</Label>
+              <Label>Show timestamp</Label>
               <Switch.Control>
                 <Switch.Thumb />
               </Switch.Control>
             </Switch>
             <Switch isSelected={hostLabel} onChange={setHostLabel}>
-              <Label>Show Host Label</Label>
+              <Label>Show host label</Label>
               <Switch.Control>
                 <Switch.Thumb />
               </Switch.Control>
             </Switch>
           </div>
 
-          <div className="flex flex-row flex-wrap gap-2 mb-4">
-            <AnimatePresence>
-              {hosts.map(host => (
-                <motion.div key={host} layout>
-                  <ToggleButton size="sm">
-                    {({isSelected: selected}) => (
-                      <>
-                        {selected ? <Unread className="size-5" /> : <ForbiddenCircle className="size-3" />}
-                        {host}
-                        <CloseButton onPress={() => removeHost(host)} />
-                      </>
-                    )}
-                  </ToggleButton>
-                </motion.div>
-              ))}
-            </AnimatePresence>
-          </div>
+          {hosts.length > 0 && (
+            <>
+              <Label>Select hosts to display in the status bar</Label>
+              <div className="flex flex-row flex-wrap gap-2 mb-4">
+                <AnimatePresence>
+                  {hosts.map(host => (
+                    <motion.div key={host} layout>
+                      <ToggleButton size="sm">
+                        {({isSelected: selected}) => (
+                          <>
+                            {selected ? <Unread className="size-5" /> : <ForbiddenCircle className="size-3" />}
+                            {host}
+                            <CloseButton onPress={() => removeHost(host)} />
+                          </>
+                        )}
+                      </ToggleButton>
+                    </motion.div>
+                  ))}
+                </AnimatePresence>
+              </div>
+            </>
+          )}
 
           <TextField
             type="text"
@@ -101,34 +108,35 @@ export default function PingSettings() {
             onKeyDown={handleKeyDown}
             fullWidth>
             <Label>Host</Label>
-            <Input placeholder="google.com,8.8.8.8,1.1.1.1" />
+            <Input placeholder="8.8.8.8" />
             <Description className="flex flex-row items-center gap-x-1">
-              Enter hosts. Press
+              Type a host and press
               <Kbd className="h-5">Enter</Kbd>
-              <Kbd className="h-5">,</Kbd>
               <Kbd className="h-5">Space</Kbd>
-              to add.
+              or
+              <Kbd className="h-5">,</Kbd>
+              to add
             </Description>
           </TextField>
 
-          <NumberField minValue={100} variant="secondary" defaultValue={1000} fullWidth>
-            <Label>Interval (Milliseconds)</Label>
+          <NumberField minValue={100} value={interval} variant="secondary" onChange={setInterval} fullWidth>
+            <Label>Interval</Label>
             <NumberField.Group>
               <NumberField.DecrementButton />
               <NumberField.Input />
               <NumberField.IncrementButton />
             </NumberField.Group>
-            <Description>Enter interval</Description>
+            <Description>Interval in milliseconds</Description>
           </NumberField>
 
-          <NumberField minValue={100} variant="secondary" defaultValue={2000} fullWidth>
-            <Label>Timeout (Milliseconds)</Label>
+          <NumberField minValue={100} value={timeout} variant="secondary" onChange={setTimeout} fullWidth>
+            <Label>Timeout</Label>
             <NumberField.Group>
               <NumberField.DecrementButton />
               <NumberField.Input />
               <NumberField.IncrementButton />
             </NumberField.Group>
-            <Description>Enter timeout</Description>
+            <Description>Timeout in milliseconds</Description>
           </NumberField>
         </Card.Content>
       </Card>
