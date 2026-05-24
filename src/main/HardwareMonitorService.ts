@@ -78,9 +78,7 @@ class HardwareMonitorService {
   private startPinging() {
     const pingState = this.config.pingState;
 
-    this.pingers
-      .filter(pinger => pingState.enabledHosts.includes(pinger.host))
-      .forEach(pinger => this.stopPinger(pinger.host));
+    this.pingers.forEach(pinger => this.stopPinger(pinger.host));
 
     if (pingState.isActive) {
       pingState.enabledHosts.forEach(host => {
