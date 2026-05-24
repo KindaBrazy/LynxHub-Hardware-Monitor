@@ -44,4 +44,13 @@ export const initialSettings: MonitoringSettings = {
   metricVisibility: initialMetricVisibility,
   enabledMetrics: initialEnabledMetrics,
   availableHardware: initialAvailableHardware,
+  pingState: {
+    isActive: false,
+    hosts: [],
+    enabledHosts: [],
+    interval: 1000,
+    timeout: 2000,
+    showLabel: true,
+    showTimestamp: false,
+  },
 };

@@ -11,36 +11,57 @@ import {
   TextField,
   ToggleButton,
 } from '@heroui/react';
-import {ForbiddenCircle, Unread} from '@solar-icons/react-perf/Linear';
+import {Unread} from '@solar-icons/react-perf/Linear';
 import {AnimatePresence, motion} from 'framer-motion';
 import {useEffect, useState} from 'react';
+import {useDispatch} from 'react-redux';
+
+import {hmonitorActions, useHMonitorState} from '../../state/hmonitorSlice';
 
 export default function PingSettings() {
-  const [active, setActive] = useState<boolean>(false);
-  const [timestamp, setTimestamp] = useState<boolean>(false);
-  const [hostLabel, setHostLabel] = useState<boolean>(true);
+  const dispatch = useDispatch();
+  const preConfig = useHMonitorState('pingState');
+
+  const [isActive, setIsActive] = useState<boolean>(preConfig.isActive);
+
+  const [showTimestamp, setShowTimestamp] = useState<boolean>(preConfig.showTimestamp);
+  const [showLabel, setShowLabel] = useState<boolean>(preConfig.showLabel);
 
   const [hostInput, setHostInput] = useState<string>('');
-  const [interval, setInterval] = useState<number>(1000);
-  const [timeout, setTimeout] = useState<number>(2000);
+  const [interval, setInterval] = useState<number>(preConfig.interval);
+  const [timeout, setTimeout] = useState<number>(preConfig.timeout);
 
-  const [hosts, setHosts] = useState<string[]>([]);
+  const [hosts, setHosts] = useState<string[]>(preConfig.hosts);
+  const [enabledHosts, setEnabledHosts] = useState<string[]>(preConfig.enabledHosts);
 
-  const onToggle = () => setActive(prevState => !prevState);
+  useEffect(() => {
+    dispatch(
+      hmonitorActions.setPingState({
+        hosts,
+        enabledHosts,
+        timeout,
+        interval,
+        showLabel,
+        showTimestamp,
+        isActive,
+      }),
+    );
+  }, [isActive, showTimestamp, showLabel, interval, timeout, hosts, enabledHosts]);
 
-  const onHostChange = (forceProcess?: boolean) => {
+  const onToggleActivate = () => setIsActive(prevState => !prevState);
+  const onToggleHost = (host: string) =>
+    setEnabledHosts(preConfig => (preConfig.includes(host) ? preConfig.filter(p => p !== host) : [...preConfig, host]));
+
+  const onHostChange = (e?: KeyboardEvent) => {
+    const force = e?.key === 'Enter';
     const value = hostInput.replaceAll(',', '').trim();
 
-    if (forceProcess || hostInput.endsWith(' ') || hostInput.endsWith(',')) {
+    if (!value) return;
+
+    if (force || hostInput.endsWith(' ') || hostInput.endsWith(',')) {
       setHosts(prevState => (prevState.includes(value) ? prevState : [value, ...prevState]));
       setHostInput('');
     }
-  };
-
-  useEffect(() => onHostChange(), [hostInput]);
-
-  const handleKeyDown = (e: KeyboardEvent) => {
-    if (e.key === 'Enter') onHostChange(true);
   };
 
   const removeHost = (host: string) => {
@@ -50,9 +71,9 @@ export default function PingSettings() {
   return (
     <div className="flex flex-col gap-y-2 p-2 bg-surface-secondary rounded-3xl">
       <Card>
-        <Card.Header onClick={onToggle} className="flex flex-row justify-between cursor-pointer">
+        <Card.Header onClick={onToggleActivate} className="flex flex-row justify-between cursor-pointer">
           <p className="font-medium">Ping</p>
-          <Switch isSelected={active} onChange={onToggle}>
+          <Switch isSelected={isActive} onChange={onToggleActivate}>
             <Switch.Control>
               <Switch.Thumb />
             </Switch.Control>
@@ -60,16 +81,16 @@ export default function PingSettings() {
         </Card.Header>
         <Card.Content className="flex-col items-start gap-y-1">
           {/* Overlay to indicate that the controls are disabled */}
-          {!active && <div className="absolute inset-1.5 top-10.5 bg-surface-secondary/50 z-20 rounded-3xl" />}
+          {!isActive && <div className="absolute inset-1.5 top-10.5 bg-surface-secondary/50 z-20 rounded-3xl" />}
 
           <div className="flex flex-row gap-x-4 mb-4">
-            <Switch isSelected={timestamp} onChange={setTimestamp}>
+            <Switch isSelected={showTimestamp} onChange={setShowTimestamp}>
               <Label>Show timestamp</Label>
               <Switch.Control>
                 <Switch.Thumb />
               </Switch.Control>
             </Switch>
-            <Switch isSelected={hostLabel} onChange={setHostLabel}>
+            <Switch isSelected={showLabel} onChange={setShowLabel}>
               <Label>Show host label</Label>
               <Switch.Control>
                 <Switch.Thumb />
@@ -84,12 +105,15 @@ export default function PingSettings() {
                 <AnimatePresence>
                   {hosts.map(host => (
                     <motion.div key={host} layout>
-                      <ToggleButton size="sm">
+                      <ToggleButton
+                        size="sm"
+                        onChange={() => onToggleHost(host)}
+                        isSelected={enabledHosts.includes(host)}>
                         {({isSelected: selected}) => (
                           <>
-                            {selected ? <Unread className="size-5" /> : <ForbiddenCircle className="size-3" />}
+                            {selected && <Unread className="size-5" />}
                             {host}
-                            <CloseButton onPress={() => removeHost(host)} />
+                            {!selected && <CloseButton onPress={() => removeHost(host)} />}
                           </>
                         )}
                       </ToggleButton>
@@ -104,8 +128,8 @@ export default function PingSettings() {
             type="text"
             value={hostInput}
             variant="secondary"
+            onKeyUp={onHostChange}
             onChange={setHostInput}
-            onKeyDown={handleKeyDown}
             fullWidth>
             <Label>Host</Label>
             <Input placeholder="8.8.8.8" />

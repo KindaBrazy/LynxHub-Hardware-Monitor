@@ -10,6 +10,7 @@ import {
   MetricType,
   MetricVisibility,
   MonitoringSettings,
+  PingState,
 } from '../../cross/types';
 
 type MonitoringSettingsTypes = {
@@ -34,6 +35,9 @@ const hmonitorSlice = createSlice({
     // Replaces the entire configuration, used for syncing with the main process
     setConfig: (state: MonitoringSettings, action: PayloadAction<MonitoringSettings>) => {
       return {...state, ...action.payload};
+    },
+    setPingState: (state: MonitoringSettings, action: PayloadAction<PingState>) => {
+      state.pingState = action.payload;
     },
     // Persists the current settings by sending them to the main process
     saveSettings: state => {

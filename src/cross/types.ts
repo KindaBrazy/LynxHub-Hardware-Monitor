@@ -108,6 +108,7 @@ export type MonitoringSettings = {
   metricVisibility: MetricVisibility;
   enabledMetrics: EnabledMetrics;
   availableHardware: AvailableHardware;
+  pingState: PingState;
 };
 
 // Union type for all possible metric identifiers
@@ -139,4 +140,14 @@ export type PingResult = {
   timestamp: Date;
   rawOutput?: string;
   error?: string;
+};
+
+export type PingState = {
+  isActive: boolean;
+  hosts: string[];
+  enabledHosts: string[];
+  interval: number;
+  timeout: number;
+  showLabel: boolean;
+  showTimestamp: boolean;
 };

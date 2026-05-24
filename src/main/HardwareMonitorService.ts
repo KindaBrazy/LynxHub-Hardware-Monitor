@@ -120,9 +120,15 @@ class HardwareMonitorService {
 
       storedConfig = migratedConfig;
     }
+    if (!storedConfig.pingState) {
+      storedConfig.pingState = initialSettings.pingState;
+    }
 
     // Assign the loaded/migrated config. availableHardware will be populated by discoverHardware.
-    this.config = {...storedConfig, availableHardware: initialSettings.availableHardware};
+    this.config = {
+      ...storedConfig,
+      availableHardware: initialSettings.availableHardware,
+    };
   }
 
   private saveConfig(): void {
