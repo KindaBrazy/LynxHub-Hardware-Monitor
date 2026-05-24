@@ -13,9 +13,11 @@ import {
 } from '@heroui/react';
 import {Unread} from '@solar-icons/react-perf/Linear';
 import {AnimatePresence, motion} from 'framer-motion';
+import {isEqual} from 'lodash-es';
 import {useEffect, useRef, useState} from 'react';
 import {useDispatch} from 'react-redux';
 
+import {PingState} from '../../../cross/types';
 import {hmonitorActions, useHMonitorState} from '../../state/hmonitorSlice';
 
 export default function PingSettings() {
@@ -37,24 +39,26 @@ export default function PingSettings() {
   const [enabledHosts, setEnabledHosts] = useState<string[]>(preConfig.enabledHosts);
 
   useEffect(() => {
-    if (debounceTimerRef.current) {
-      clearTimeout(debounceTimerRef.current);
-      debounceTimerRef.current = null;
-    }
-
     debounceTimerRef.current = setTimeout(() => {
-      dispatch(
-        hmonitorActions.setPingState({
-          hosts,
-          enabledHosts,
-          timeout: timeoutMs,
-          interval,
-          showLabel,
-          showTimestamp,
-          isActive,
-        }),
-      );
+      const newState: PingState = {
+        hosts,
+        enabledHosts,
+        timeout: timeoutMs,
+        interval,
+        showLabel,
+        showTimestamp,
+        isActive,
+      };
+
+      if (!isEqual(newState, preConfig)) dispatch(hmonitorActions.setPingState(newState));
     }, 300);
+
+    return () => {
+      if (debounceTimerRef.current) {
+        clearTimeout(debounceTimerRef.current);
+        debounceTimerRef.current = null;
+      }
+    };
   }, [isActive, showTimestamp, showLabel, interval, timeoutMs, hosts, enabledHosts]);
 
   const onToggleActivate = () => setIsActive(prevState => !prevState);
