@@ -11,10 +11,13 @@ import {
   HMONITOR_IPC_DATA_UPDATE,
   HMONITOR_IPC_MONITORING_ERROR,
   HMONITOR_IPC_SET_CONFIG,
+  HMONITOR_IPC_STOP_PING,
+  HMONITOR_IPC_UPDATE_PING,
   HMONITOR_STORAGE_ID,
   initialSettings,
 } from '../cross/constants';
-import {HardwareDataReport, HardwareInfo, MonitoringSettings} from '../cross/types';
+import {HardwareDataReport, HardwareInfo, MonitoringSettings, PingData} from '../cross/types';
+import {Pinger} from './pinger';
 import {getActiveComponentTypes} from './utils';
 
 const HARDWARE_CHECK_MAX_RETRIES = 5;
@@ -31,6 +34,7 @@ class HardwareMonitorService {
   private webContents?: WebContents;
   private isInitialized = false;
   private lastError: any = null;
+  private pingers: Pinger[] = [];
 
   private constructor() {}
 
@@ -53,13 +57,57 @@ class HardwareMonitorService {
     this.loadConfig();
 
     // 2. Discover hardware and reconcile it with the loaded configuration.
-    await this.discoverHardware();
 
+    await this.discoverHardware();
     // 3. Save any changes made during migration or hardware reconciliation.
+
     this.saveConfig();
+
+    this.startPinging();
 
     this.registerIpcHandlers();
     this.isInitialized = true;
+  }
+
+  private stopPinger(host: string) {
+    this.pingers.find(p => p.host === host)?.stop();
+    this.pingers = this.pingers.filter(p => p.host !== host);
+    this.sendToRenderer(HMONITOR_IPC_STOP_PING, host);
+  }
+
+  private startPinging() {
+    const pingState = this.config.pingState;
+
+    this.pingers
+      .filter(pinger => pingState.enabledHosts.includes(pinger.host))
+      .forEach(pinger => this.stopPinger(pinger.host));
+
+    if (pingState.isActive) {
+      pingState.enabledHosts.forEach(host => {
+        if (!this.pingers.some(p => p.host === host)) {
+          const pinger = new Pinger({host, timeoutMs: pingState.timeout, intervalMs: pingState.interval});
+
+          pinger.onResult = result => {
+            const timeString = result.timestamp.toLocaleTimeString();
+            if (result.alive) {
+              const data: PingData = {host, timeString, latency: result.latency};
+              this.sendToRenderer(HMONITOR_IPC_UPDATE_PING, data);
+            } else {
+              this.sendToRenderer(HMONITOR_IPC_UPDATE_PING, host);
+            }
+          };
+
+          pinger.onError = () => {
+            this.sendToRenderer(HMONITOR_IPC_UPDATE_PING, host);
+          };
+
+          app.on('window-all-closed', () => pinger.stop());
+
+          pinger.start();
+          this.pingers.push(pinger);
+        }
+      });
+    }
   }
 
   /**
@@ -294,6 +342,8 @@ class HardwareMonitorService {
 
     this.config = newConfig;
     this.saveConfig();
+
+    this.startPinging();
   }
 
   private registerIpcHandlers(): void {

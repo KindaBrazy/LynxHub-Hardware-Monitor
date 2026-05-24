@@ -9,11 +9,14 @@ export class Pinger {
   private running: boolean = false;
   private timer: NodeJS.Timeout | null = null;
 
+  public host: string;
+
   // Callbacks for consumers to handle the events
   public onResult?: (result: PingResult) => void;
   public onError?: (error: Error) => void;
 
   constructor(config: PingConfig) {
+    this.host = config.host;
     this.config = {
       host: config.host,
       intervalMs: config.intervalMs,

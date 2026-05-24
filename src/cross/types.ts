@@ -151,3 +151,9 @@ export type PingState = {
   showLabel: boolean;
   showTimestamp: boolean;
 };
+
+export type PingData = {
+  host: string;
+  timeString: string;
+  latency: number | undefined;
+};

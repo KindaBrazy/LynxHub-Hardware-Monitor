@@ -11,6 +11,7 @@ import CpuSection from './sections/CpuSection';
 import GpuSection from './sections/GpuSection';
 import MemorySection from './sections/MemorySection';
 import NetworkSection from './sections/NetworkSection';
+import PingSection from './sections/PingSection';
 import UptimeSection from './sections/UptimeSection';
 
 // Static mapping configuration
@@ -32,6 +33,7 @@ function HardwareStatusBar() {
   const displayStyle = useHMonitorState('displayStyle');
   const enabledMetrics = useHMonitorState('enabledMetrics');
   const availableHardware = useHMonitorState('availableHardware');
+  const pingState = useHMonitorState('pingState');
 
   const darkMode = useAppState('darkMode');
 
@@ -119,6 +121,10 @@ function HardwareStatusBar() {
       elements.push(<UptimeSection key="uptime" data={hardwareData.uptime} metrics={enabledMetrics.uptime} />);
     }
 
+    if (pingState.isActive) {
+      elements.push(<PingSection key="ping" />);
+    }
+
     // 3. Inject vertical separators dynamically between active elements
     return elements.reduce<ReactNode[]>((acc, element, index) => {
       if (index > 0) {
@@ -127,7 +133,7 @@ function HardwareStatusBar() {
       acc.push(element);
       return acc;
     }, []);
-  }, [isConnected, hardwareData, enabledMetrics, availableHardware, hasMetricsEnabled]);
+  }, [isConnected, hardwareData, enabledMetrics, availableHardware, hasMetricsEnabled, pingState]);
 
   if (!enabled) return null;
 
