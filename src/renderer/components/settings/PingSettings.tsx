@@ -13,7 +13,7 @@ import {
 } from '@heroui/react';
 import {Unread} from '@solar-icons/react-perf/Linear';
 import {AnimatePresence, motion} from 'framer-motion';
-import {useEffect, useState} from 'react';
+import {useEffect, useRef, useState} from 'react';
 import {useDispatch} from 'react-redux';
 
 import {hmonitorActions, useHMonitorState} from '../../state/hmonitorSlice';
@@ -22,6 +22,8 @@ export default function PingSettings() {
   const dispatch = useDispatch();
   const preConfig = useHMonitorState('pingState');
 
+  const debounceTimerRef = useRef<NodeJS.Timeout | null>(null);
+
   const [isActive, setIsActive] = useState<boolean>(preConfig.isActive);
 
   const [showTimestamp, setShowTimestamp] = useState<boolean>(preConfig.showTimestamp);
@@ -29,24 +31,31 @@ export default function PingSettings() {
 
   const [hostInput, setHostInput] = useState<string>('');
   const [interval, setInterval] = useState<number>(preConfig.interval);
-  const [timeout, setTimeout] = useState<number>(preConfig.timeout);
+  const [timeoutMs, setTimeoutMs] = useState<number>(preConfig.timeout);
 
   const [hosts, setHosts] = useState<string[]>(preConfig.hosts);
   const [enabledHosts, setEnabledHosts] = useState<string[]>(preConfig.enabledHosts);
 
   useEffect(() => {
-    dispatch(
-      hmonitorActions.setPingState({
-        hosts,
-        enabledHosts,
-        timeout,
-        interval,
-        showLabel,
-        showTimestamp,
-        isActive,
-      }),
-    );
-  }, [isActive, showTimestamp, showLabel, interval, timeout, hosts, enabledHosts]);
+    if (debounceTimerRef.current) {
+      clearTimeout(debounceTimerRef.current);
+      debounceTimerRef.current = null;
+    }
+
+    debounceTimerRef.current = setTimeout(() => {
+      dispatch(
+        hmonitorActions.setPingState({
+          hosts,
+          enabledHosts,
+          timeout: timeoutMs,
+          interval,
+          showLabel,
+          showTimestamp,
+          isActive,
+        }),
+      );
+    }, 300);
+  }, [isActive, showTimestamp, showLabel, interval, timeoutMs, hosts, enabledHosts]);
 
   const onToggleActivate = () => setIsActive(prevState => !prevState);
   const onToggleHost = (host: string) =>
@@ -153,7 +162,7 @@ export default function PingSettings() {
             <Description>Interval in milliseconds</Description>
           </NumberField>
 
-          <NumberField minValue={100} value={timeout} variant="secondary" onChange={setTimeout} fullWidth>
+          <NumberField minValue={100} value={timeoutMs} variant="secondary" onChange={setTimeoutMs} fullWidth>
             <Label>Timeout</Label>
             <NumberField.Group>
               <NumberField.DecrementButton />
