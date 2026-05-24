@@ -20,9 +20,9 @@ function PingSection() {
         <MetricItem
           value={
             fails.includes(item.host) || !item.latency
-              ? 'N/A'
+              ? '-1'
               : pingState.showTimestamp
-                ? `[${item.timeString}] | ${item.latency}`
+                ? `${item.timeString} | ${item.latency}`
                 : item.latency
           }
           icon={Zap}
@@ -33,7 +33,7 @@ function PingSection() {
 
     const failResults = fails
       .filter(host => pingState.enabledHosts.includes(host))
-      .map(host => <MetricItem icon={Zap} key={host} value="N/A" label={host} colorClass="text-warning" />);
+      .map(host => <MetricItem icon={Zap} key={host} value="-1" label={host} colorClass="text-warning" />);
 
     return [...results, ...failResults];
   }, [hostResults, fails, pingState]);

@@ -69,16 +69,16 @@ class HardwareMonitorService {
     this.isInitialized = true;
   }
 
-  private stopPinger(host: string) {
-    this.pingers.find(p => p.host === host)?.stop();
-    this.pingers = this.pingers.filter(p => p.host !== host);
-    this.sendToRenderer(HMONITOR_IPC_STOP_PING, host);
-  }
-
   private startPinging() {
     const pingState = this.config.pingState;
 
-    this.pingers.forEach(pinger => this.stopPinger(pinger.host));
+    const stopPinger = (pinger: Pinger) => {
+      pinger.stop();
+      this.sendToRenderer(HMONITOR_IPC_STOP_PING, pinger.host);
+    };
+
+    this.pingers.forEach(stopPinger);
+    this.pingers = [];
 
     if (pingState.isActive) {
       pingState.enabledHosts.forEach(host => {
