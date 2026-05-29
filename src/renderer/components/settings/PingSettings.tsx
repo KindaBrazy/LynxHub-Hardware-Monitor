@@ -28,9 +28,6 @@ export default function PingSettings() {
 
   const [isActive, setIsActive] = useState<boolean>(preConfig.isActive);
 
-  const [showTimestamp, setShowTimestamp] = useState<boolean>(preConfig.showTimestamp);
-  const [showLabel, setShowLabel] = useState<boolean>(preConfig.showLabel);
-
   const [hostInput, setHostInput] = useState<string>('');
   const [interval, setInterval] = useState<number>(preConfig.interval);
   const [timeoutMs, setTimeoutMs] = useState<number>(preConfig.timeout);
@@ -47,8 +44,6 @@ export default function PingSettings() {
         enabledHosts: uniqueEnabledHosts,
         timeout: timeoutMs,
         interval,
-        showLabel,
-        showTimestamp,
         isActive,
       };
 
@@ -61,7 +56,7 @@ export default function PingSettings() {
         debounceTimerRef.current = null;
       }
     };
-  }, [isActive, showTimestamp, showLabel, interval, timeoutMs, hosts, enabledHosts]);
+  }, [isActive, interval, timeoutMs, hosts, enabledHosts]);
 
   const onToggleActivate = () => setIsActive(prevState => !prevState);
   const onToggleHost = (host: string) =>
@@ -97,21 +92,6 @@ export default function PingSettings() {
         <Card.Content className="flex-col items-start gap-y-1">
           {/* Overlay to indicate that the controls are disabled */}
           {!isActive && <div className="absolute inset-1.5 top-10.5 bg-surface-secondary/50 z-20 rounded-3xl" />}
-
-          <div className="flex flex-row gap-x-4 mb-4">
-            <Switch isSelected={showTimestamp} onChange={setShowTimestamp}>
-              <Label>Show timestamp</Label>
-              <Switch.Control>
-                <Switch.Thumb />
-              </Switch.Control>
-            </Switch>
-            <Switch isSelected={showLabel} onChange={setShowLabel}>
-              <Label>Show host label</Label>
-              <Switch.Control>
-                <Switch.Thumb />
-              </Switch.Control>
-            </Switch>
-          </div>
 
           {hosts.length > 0 && (
             <>

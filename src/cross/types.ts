@@ -148,8 +148,6 @@ export type PingState = {
   enabledHosts: string[];
   interval: number;
   timeout: number;
-  showLabel: boolean;
-  showTimestamp: boolean;
 };
 
 export type PingData = {
