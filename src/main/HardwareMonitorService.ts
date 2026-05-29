@@ -21,6 +21,7 @@ import {Pinger} from './pinger';
 import {getActiveComponentTypes} from './utils';
 
 const HARDWARE_CHECK_MAX_RETRIES = 5;
+const HARDWARE_REDISCOVERY_DELAY_MS = 10_000;
 
 /**
  * Singleton service to manage hardware monitoring lifecycle, configuration, and IPC communication.
@@ -35,6 +36,7 @@ class HardwareMonitorService {
   private isInitialized = false;
   private lastError: any = null;
   private pingers: Pinger[] = [];
+  private rediscoveryTimer?: ReturnType<typeof setTimeout>;
 
   private constructor() {}
 
@@ -61,7 +63,9 @@ class HardwareMonitorService {
     await this.discoverHardware();
     // 3. Save any changes made during migration or hardware reconciliation.
 
-    this.saveConfig();
+    if (!this.lastError) {
+      this.saveConfig();
+    }
 
     this.startPinging();
 
@@ -124,7 +128,7 @@ class HardwareMonitorService {
       this.sendToRenderer(HMONITOR_IPC_CONFIG_UPDATE, this.config);
 
       if (this.config.enabled) {
-        this.startMonitoring();
+        void this.startMonitoring();
       }
     });
   }
@@ -182,6 +186,8 @@ class HardwareMonitorService {
   }
 
   private async discoverHardware(): Promise<void> {
+    this.clearRediscoveryTimer();
+
     for (let i = 0; i < HARDWARE_CHECK_MAX_RETRIES; i++) {
       try {
         const monitor = new HardwareMonitor('error');
@@ -258,7 +264,11 @@ class HardwareMonitorService {
         });
 
         this.lastError = null;
+        this.saveConfig();
         this.sendToRenderer(HMONITOR_IPC_CONFIG_UPDATE, this.config);
+        if (this.config.enabled && !this.hwMonitor) {
+          void this.startMonitoring();
+        }
         return; // Success
       } catch (error) {
         console.warn(`Hardware discovery attempt ${i + 1} failed:`, error);
@@ -266,9 +276,26 @@ class HardwareMonitorService {
           console.error('All hardware discovery attempts failed.');
           this.lastError = error;
           this.sendToRenderer(HMONITOR_IPC_MONITORING_ERROR, error);
+          this.scheduleRediscovery();
         }
       }
     }
+  }
+
+  private scheduleRediscovery(): void {
+    if (this.rediscoveryTimer) return;
+
+    this.rediscoveryTimer = setTimeout(() => {
+      this.rediscoveryTimer = undefined;
+      void this.discoverHardware();
+    }, HARDWARE_REDISCOVERY_DELAY_MS);
+  }
+
+  private clearRediscoveryTimer(): void {
+    if (!this.rediscoveryTimer) return;
+
+    clearTimeout(this.rediscoveryTimer);
+    this.rediscoveryTimer = undefined;
   }
 
   private async startMonitoring(): Promise<void> {
@@ -278,6 +305,16 @@ class HardwareMonitorService {
     }
 
     try {
+      const components = getActiveComponentTypes(this.config.enabledMetrics);
+
+      if (components.length === 0 || components.every(component => component === 'uptime')) {
+        const hasDiscoveredHardware = Object.values(this.config.availableHardware).some(items => items.length > 0);
+        if (!hasDiscoveredHardware) {
+          this.scheduleRediscovery();
+          return;
+        }
+      }
+
       this.hwMonitor = new HardwareMonitor('error');
 
       // Ensure requirements are checked for this instance before starting
@@ -302,7 +339,6 @@ class HardwareMonitorService {
       });
 
       const intervalMs = (this.config.refreshInterval || 1) * 1000;
-      const components = getActiveComponentTypes(this.config.enabledMetrics);
 
       if (components.length > 0) {
         this.hwMonitor.startTimed(intervalMs, components);
@@ -326,20 +362,20 @@ class HardwareMonitorService {
       !isEqual(newConfig.enabledMetrics, oldConfig.enabledMetrics) ||
       !isEqual(newConfig.refreshInterval, oldConfig.refreshInterval);
 
+    this.config = newConfig;
+    this.saveConfig();
+
     if (newConfig.enabled && shouldRestart) {
       this.stopMonitoring();
     }
 
     // Toggle monitoring state if enabled status changed
     if (newConfig.enabled !== oldConfig.enabled) {
-      newConfig.enabled ? this.startMonitoring() : this.stopMonitoring();
+      newConfig.enabled ? void this.startMonitoring() : this.stopMonitoring();
     } else if (newConfig.enabled && shouldRestart) {
       // If already enabled but config changed, restart with new settings
-      this.startMonitoring();
+      void this.startMonitoring();
     }
-
-    this.config = newConfig;
-    this.saveConfig();
 
     this.startPinging();
   }
