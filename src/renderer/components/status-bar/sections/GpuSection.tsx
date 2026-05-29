@@ -40,6 +40,11 @@ const GpuSection = memo(({data, metrics, hardwareInfo, rawSensorValues}: Props) 
 
   const vramPercentage = useMemo(() => (totalVram > 0 ? (usedVram / totalVram) * 100 : 0), [totalVram, usedVram]);
 
+  const sensorReadingMap = useMemo(() => {
+    const map = new Map<string, RawSensorValue>();
+    rawSensorValues.forEach(val => map.set(val.Identifier, val));
+    return map;
+  }, [rawSensorValues]);
   return (
     <Section title={name} icon={Monitor}>
       {hasTemp && (
@@ -77,7 +82,7 @@ const GpuSection = memo(({data, metrics, hardwareInfo, rawSensorValues}: Props) 
       {/* Render Custom Metrics */}
       {metrics.custom?.map(customMetric => {
         const sensorInfo = hardwareInfo?.sensors.find(s => s.Identifier === customMetric.sensorIdentifier);
-        const sensorReading = rawSensorValues.find(s => s.Identifier === customMetric.sensorIdentifier);
+        const sensorReading = sensorReadingMap.get(customMetric.sensorIdentifier);
 
         if (!sensorInfo || sensorReading?.Value === null || sensorReading?.Value === undefined) {
           return null;

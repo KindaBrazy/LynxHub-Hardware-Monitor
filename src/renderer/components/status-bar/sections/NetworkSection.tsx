@@ -45,6 +45,12 @@ function NetworkSection({data, metrics, hardwareInfo, rawSensorValues}: Props) {
   const hasUploadData = useMemo(() => metrics.enabled.includes('uploadData'), [metrics.enabled]);
   const hasDownloadData = useMemo(() => metrics.enabled.includes('downloadData'), [metrics.enabled]);
 
+  const sensorReadingMap = useMemo(() => {
+    const map = new Map<string, RawSensorValue>();
+    rawSensorValues.forEach(val => map.set(val.Identifier, val));
+    return map;
+  }, [rawSensorValues]);
+
   if (!hasUploadSpeed && !hasDownloadSpeed && !hasUploadData && !hasDownloadData) return null;
 
   return (
@@ -56,21 +62,21 @@ function NetworkSection({data, metrics, hardwareInfo, rawSensorValues}: Props) {
         <MetricItem
           icon={ArrowUp}
           label="Up Data"
-          value={formatSize(convertStorageUnit(uploadData.toString(), 'GB', 'B') || 0)}
+          value={formatSize(convertStorageUnit(uploadData?.toString() ?? '0', 'GB', 'B') || 0)}
         />
       )}
       {hasDownloadData && (
         <MetricItem
           icon={ArrowDown}
           label="Down Data"
-          value={formatSize(convertStorageUnit(downloadData.toString(), 'GB', 'B') || 0)}
+          value={formatSize(convertStorageUnit(downloadData?.toString() ?? '0', 'GB', 'B') || 0)}
         />
       )}
 
       {/* Render Custom Metrics */}
       {metrics.custom?.map(customMetric => {
         const sensorInfo = hardwareInfo?.sensors.find(s => s.Identifier === customMetric.sensorIdentifier);
-        const sensorReading = rawSensorValues.find(s => s.Identifier === customMetric.sensorIdentifier);
+        const sensorReading = sensorReadingMap.get(customMetric.sensorIdentifier);
 
         if (!sensorInfo || sensorReading?.Value === null || sensorReading?.Value === undefined) {
           return null;

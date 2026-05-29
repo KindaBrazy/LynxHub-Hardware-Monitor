@@ -36,6 +36,12 @@ const CpuSection = memo(({data, metrics, hardwareInfo, rawSensorValues}: Props) 
   const hasTemp = useMemo(() => metrics.enabled.includes('temp'), [metrics.enabled]);
   const hasUsage = useMemo(() => metrics.enabled.includes('usage'), [metrics.enabled]);
 
+  const sensorReadingMap = useMemo(() => {
+    const map = new Map<string, RawSensorValue>();
+    rawSensorValues.forEach(val => map.set(val.Identifier, val));
+    return map;
+  }, [rawSensorValues]);
+
   return (
     <Section title={name} icon={CpuIcon}>
       {hasTemp &&
@@ -74,12 +80,11 @@ const CpuSection = memo(({data, metrics, hardwareInfo, rawSensorValues}: Props) 
       {/* Render Custom Metrics */}
       {metrics.custom?.map(customMetric => {
         const sensorInfo = hardwareInfo?.sensors.find(s => s.Identifier === customMetric.sensorIdentifier);
-        const sensorReading = rawSensorValues.find(s => s.Identifier === customMetric.sensorIdentifier);
+        const sensorReading = sensorReadingMap.get(customMetric.sensorIdentifier);
 
         if (!sensorInfo || sensorReading?.Value === null || sensorReading?.Value === undefined) {
           return null;
         }
-
         const value = Number.isInteger(sensorReading.Value)
           ? sensorReading.Value
           : parseFloat(sensorReading.Value.toFixed(1));

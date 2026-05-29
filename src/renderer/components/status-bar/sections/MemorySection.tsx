@@ -34,7 +34,11 @@ type Props = {
 function MemorySection({data, metrics, hardwareInfo, rawSensorValues}: Props) {
   const {name, used, total} = data || {name: '', used: 0, total: 0};
   const memPercentage = useMemo(() => (total > 0 ? (used / total) * 100 : 0), [total, used]);
-
+  const sensorReadingMap = useMemo(() => {
+    const map = new Map<string, RawSensorValue>();
+    rawSensorValues.forEach(val => map.set(val.Identifier, val));
+    return map;
+  }, [rawSensorValues]);
   return (
     <Section title={name} icon={MemoryStick}>
       <MetricItem
@@ -47,7 +51,7 @@ function MemorySection({data, metrics, hardwareInfo, rawSensorValues}: Props) {
       {/* Render Custom Metrics */}
       {metrics.custom?.map(customMetric => {
         const sensorInfo = hardwareInfo?.sensors.find(s => s.Identifier === customMetric.sensorIdentifier);
-        const sensorReading = rawSensorValues.find(s => s.Identifier === customMetric.sensorIdentifier);
+        const sensorReading = sensorReadingMap.get(customMetric.sensorIdentifier);
 
         if (!sensorInfo || sensorReading?.Value === null || sensorReading?.Value === undefined) {
           return null;
