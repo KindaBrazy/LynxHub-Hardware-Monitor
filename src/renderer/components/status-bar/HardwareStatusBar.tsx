@@ -128,18 +128,20 @@ function HardwareStatusBar() {
     // 3. Inject vertical separators dynamically between active elements
     return elements.reduce<ReactNode[]>((acc, element, index) => {
       if (index > 0) {
-        acc.push(<Separator className="my-2" key={`sep_${index}`} orientation="vertical" />);
+        acc.push(
+          <Separator className={displayStyle.includes('two-column') ? 'my-1 h-10' : 'my-2'} key={`sep_${index}`} orientation="vertical" />,
+        );
       }
       acc.push(element);
       return acc;
     }, []);
-  }, [isConnected, hardwareData, enabledMetrics, availableHardware, hasMetricsEnabled, pingState]);
+  }, [isConnected, hardwareData, enabledMetrics, availableHardware, hasMetricsEnabled, pingState, displayStyle]);
 
   if (!enabled) return null;
 
   const isSmallStyle = ['compact', 'raw'].includes(displayStyle);
   const isTwoColumn = ['two-column', 'raw-two-column'].includes(displayStyle);
-  const heightClass = isSmallStyle ? 'h-7' : isTwoColumn ? 'h-13' : 'h-12';
+  const heightClass = isSmallStyle ? 'h-7' : isTwoColumn ? 'h-11' : 'h-12';
   const buttonSizeClass = isSmallStyle ? 'size-5' : 'size-8';
 
   return (
