@@ -37,6 +37,7 @@ class HardwareMonitorService {
   private lastError: any = null;
   private pingers: Pinger[] = [];
   private rediscoveryTimer?: ReturnType<typeof setTimeout>;
+  private discoveryPromise?: Promise<void>;
 
   private constructor() {}
 
@@ -58,19 +59,14 @@ class HardwareMonitorService {
     // 1. Load the user's saved configuration first.
     this.loadConfig();
 
-    // 2. Discover hardware and reconcile it with the loaded configuration.
-
-    await this.discoverHardware();
-    // 3. Save any changes made during migration or hardware reconciliation.
-
-    if (!this.lastError) {
-      this.saveConfig();
-    }
-
     this.startPinging();
 
     this.registerIpcHandlers();
     this.isInitialized = true;
+
+    // Hardware probing can call .NET, GitHub, and the external CLI. Keep it off
+    // LynxHub's app-ready path so installing this extension does not delay window startup.
+    void this.discoverHardware();
   }
 
   private startPinging() {
@@ -174,10 +170,11 @@ class HardwareMonitorService {
       storedConfig.pingState = initialSettings.pingState;
     }
 
-    // Assign the loaded/migrated config. availableHardware will be populated by discoverHardware.
+    // Keep the last known hardware so the renderer can show configured sections immediately.
+    // Background discovery will refresh this shortly after startup.
     this.config = {
       ...storedConfig,
-      availableHardware: initialSettings.availableHardware,
+      availableHardware: storedConfig.availableHardware ?? initialSettings.availableHardware,
     };
   }
 
@@ -186,6 +183,18 @@ class HardwareMonitorService {
   }
 
   private async discoverHardware(): Promise<void> {
+    if (this.discoveryPromise) {
+      return this.discoveryPromise;
+    }
+
+    this.discoveryPromise = this.performHardwareDiscovery().finally(() => {
+      this.discoveryPromise = undefined;
+    });
+
+    return this.discoveryPromise;
+  }
+
+  private async performHardwareDiscovery(): Promise<void> {
     this.clearRediscoveryTimer();
 
     for (let i = 0; i < HARDWARE_CHECK_MAX_RETRIES; i++) {
