@@ -61,9 +61,14 @@ const MetricItem = memo(({icon: Icon, label, value, unit = '', progress, colorCl
 
   if (isRaw) {
     return (
-      <span>
-        {label}:{value}
-        {unit}
+      <span className="inline-flex items-baseline gap-1 whitespace-nowrap">
+        {metricVisibility.label && <span className="text-foreground/60">{label}:</span>}
+        {metricVisibility.value && (
+          <span className="font-semibold text-foreground">
+            {value}
+            {unit}
+          </span>
+        )}
       </span>
     );
   }

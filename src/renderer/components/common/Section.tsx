@@ -22,22 +22,22 @@ const Section = memo(({title, icon: Icon, children}: SectionProps) => {
     return (
       <div
         className={
-          `flex items-center shrink-0 ${isTwoColumn ? 'gap-x-2' : 'gap-x-1'}` +
-          ` text-xs font-mono whitespace-nowrap text-foreground`
+          `flex items-center shrink-0 ${isTwoColumn ? 'gap-x-2' : 'gap-x-1.5'}` +
+          ` text-xs font-mono whitespace-nowrap text-foreground leading-none`
         }>
-        <span className="font-semibold opacity-80">{title}:&nbsp;</span>
+        <span className="font-semibold text-foreground/80">{title}:</span>
         <div
           className={
-            `flex items-center h-8 ${isTwoColumn ? 'gap-x-2' : 'gap-x-1'} shrink-0 ` +
+            `${isTwoColumn ? 'grid grid-flow-col grid-rows-2 auto-cols-max gap-x-4 gap-y-1 h-10' : 'flex items-center gap-x-2 h-7'} shrink-0 ` +
             `${
               isTwoColumn &&
-              `flex-col flex-wrap items-start ${Children.count(children) > 1 ? 'justify-start' : 'justify-center'}`
+              `content-center items-start ${Children.count(children) > 1 ? 'justify-start' : 'justify-center'}`
             }`
           }>
           {Children.map(children, (child, i) => (
             <Fragment key={i}>
               {child}
-              {!isTwoColumn && i < Children.count(children) - 1 && <span>-</span>}
+              {!isTwoColumn && i < Children.count(children) - 1 && <span className="text-foreground/30">/</span>}
             </Fragment>
           ))}
         </div>

@@ -141,7 +141,7 @@ function HardwareStatusBar() {
 
   const isSmallStyle = ['compact', 'raw'].includes(displayStyle);
   const isTwoColumn = ['two-column', 'raw-two-column'].includes(displayStyle);
-  const heightClass = isSmallStyle ? 'h-7' : isTwoColumn ? 'h-11' : 'h-12';
+  const heightClass = displayStyle === 'raw' ? 'h-8' : isSmallStyle ? 'h-7' : isTwoColumn ? 'h-11' : 'h-12';
   const buttonSizeClass = isSmallStyle ? 'size-5' : 'size-8';
 
   return (
@@ -173,7 +173,9 @@ function HardwareStatusBar() {
       <div
         ref={initRef}
         style={{scrollbarWidth: 'none', msOverflowStyle: 'none'}}
-        className={`h-full flex items-center ${isSmallStyle ? 'px-2' : 'px-3'} gap-x-2 overflow-x-auto`}>
+        className={`h-full flex items-center ${isSmallStyle ? 'px-2' : 'px-3'} ${
+          displayStyle.includes('raw') ? 'gap-x-3' : 'gap-x-2'
+        } overflow-x-auto`}>
         {isConnected ? renderedElements : <div className="w-full text-center">{errorElement}</div>}
       </div>
     </div>
