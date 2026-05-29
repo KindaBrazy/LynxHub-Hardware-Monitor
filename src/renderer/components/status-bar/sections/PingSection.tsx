@@ -7,63 +7,46 @@ import {useHMonitorState} from '../../../state/hmonitorSlice';
 import MetricItem from '../../common/MetricItem';
 import Section from '../../common/Section';
 
+type PingDisplayState = Record<string, PingData | null>;
+
 function PingSection() {
   const pingState = useHMonitorState('pingState');
 
-  const [fails, setFails] = useState<string[]>([]);
-  const [hostResults, setHostResults] = useState<PingData[]>([]);
+  const [hostResults, setHostResults] = useState<PingDisplayState>({});
 
   const renderElements = useMemo(() => {
-    const results = hostResults
-      .filter(host => pingState.enabledHosts.includes(host.host))
-      .map(item => (
+    return Array.from(new Set(pingState.enabledHosts)).map(host => {
+      const item = hostResults[host];
+      const value =
+        !item || !item.latency ? '-1' : pingState.showTimestamp ? `${item.timeString} | ${item.latency}` : item.latency;
+
+      return (
         <MetricItem
-          value={
-            fails.includes(item.host) || !item.latency
-              ? '-1'
-              : pingState.showTimestamp
-                ? `${item.timeString} | ${item.latency}`
-                : item.latency
-          }
+          value={value}
           icon={Zap}
-          key={item.host}
-          label={item.host}
+          key={host}
+          label={host}
+          colorClass={value === '-1' ? 'text-warning' : undefined}
         />
-      ));
-
-    const failResults = fails
-      .filter(host => pingState.enabledHosts.includes(host))
-      .map(host => <MetricItem icon={Zap} key={host} value="-1" label={host} colorClass="text-warning" />);
-
-    return [...results, ...failResults];
-  }, [hostResults, fails, pingState]);
+      );
+    });
+  }, [hostResults, pingState]);
 
   useEffect(() => {
     const clearListener = window.electron.ipcRenderer.on(HMONITOR_IPC_UPDATE_PING, (_, result) => {
       if (typeof result === 'string') {
-        // It's a fail - add to fails and remove from hostResults
-        setFails(prevState => (prevState.includes(result) ? prevState : [...prevState, result]));
+        setHostResults(prevResults => ({...prevResults, [result]: null}));
       } else {
-        // It's data - add/update hostResults and remove from fails
         const data = result as PingData;
-        setHostResults(prevResults => {
-          const existingIndex = prevResults.findIndex(item => item.host === data.host);
-
-          if (existingIndex !== -1) {
-            const updatedResults = [...prevResults];
-            updatedResults[existingIndex] = data;
-            return updatedResults;
-          } else {
-            return [...prevResults, data];
-          }
-        });
-        setFails(prevState => prevState.filter(host => host !== data.host));
+        setHostResults(prevResults => ({...prevResults, [data.host]: data}));
       }
     });
 
     const clearStopListener = window.electron.ipcRenderer.on(HMONITOR_IPC_STOP_PING, (_, host) => {
-      setHostResults(prevState => prevState.filter(p => p.host !== host));
-      setFails(prevState => prevState.filter(p => p !== host));
+      setHostResults(prevState => {
+        const {[host]: _, ...remainingHosts} = prevState;
+        return remainingHosts;
+      });
     });
 
     return () => {

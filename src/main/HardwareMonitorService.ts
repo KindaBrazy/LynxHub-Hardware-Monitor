@@ -81,7 +81,7 @@ class HardwareMonitorService {
     this.pingers = [];
 
     if (pingState.isActive) {
-      pingState.enabledHosts.forEach(host => {
+      Array.from(new Set(pingState.enabledHosts)).forEach(host => {
         if (!this.pingers.some(p => p.host === host)) {
           const pinger = new Pinger({host, timeoutMs: pingState.timeout, intervalMs: pingState.interval});
 

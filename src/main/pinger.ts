@@ -55,11 +55,11 @@ export class Pinger {
     const startTime = Date.now();
     try {
       const result = await this.ping();
-      if (this.onResult) {
+      if (this.running && this.onResult) {
         this.onResult(result);
       }
     } catch (err) {
-      if (this.onError) {
+      if (this.running && this.onError) {
         this.onError(err instanceof Error ? err : new Error(String(err)));
       }
     }

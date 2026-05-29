@@ -40,9 +40,11 @@ export default function PingSettings() {
 
   useEffect(() => {
     debounceTimerRef.current = setTimeout(() => {
+      const uniqueHosts = Array.from(new Set(hosts));
+      const uniqueEnabledHosts = Array.from(new Set(enabledHosts)).filter(host => uniqueHosts.includes(host));
       const newState: PingState = {
-        hosts,
-        enabledHosts,
+        hosts: uniqueHosts,
+        enabledHosts: uniqueEnabledHosts,
         timeout: timeoutMs,
         interval,
         showLabel,
