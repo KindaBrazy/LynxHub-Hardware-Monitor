@@ -1,13 +1,8 @@
 import {useOverlayState} from '@heroui/react';
 import {ToolsCard} from '@lynx/components/ToolsCard';
+import {CpuBolt} from '@solar-icons/react-perf/BoldDuotone';
 
 import SettingsModal from '../components/settings/SettingsModal';
-
-const CARD_PROPS = {
-  title: 'Hardware Monitor',
-  description: 'Configure real-time monitoring of CPU, GPU, and Memory usage in the status bar.',
-  icon: 'https://raw.githubusercontent.com/KindaBrazy/LynxHub-Hardware-Monitor/refs/heads/metadata/icon.png',
-};
 
 /**
  * Renders a card on the LynxHub "Tools" page that allows users
@@ -19,7 +14,12 @@ export default function ToolsPage() {
   return (
     <>
       <SettingsModal state={state} />
-      <ToolsCard {...CARD_PROPS} onPress={state.open} />
+      <ToolsCard
+        onPress={state.open}
+        title="Hardware Monitor"
+        icon={<CpuBolt className="size-full m-1" />}
+        description="Configure real-time monitoring of CPU, GPU, and Memory usage in the status bar."
+      />
     </>
   );
 }
