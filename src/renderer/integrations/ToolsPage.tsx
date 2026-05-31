@@ -17,7 +17,7 @@ export default function ToolsPage() {
       <ToolsCard
         onPress={state.open}
         title="Hardware Monitor"
-        icon={<CpuBolt className="size-full m-1" />}
+        icon={<CpuBolt className="size-full m-1 text-indigo-500" />}
         description="Configure real-time monitoring of CPU, GPU, and Memory usage in the status bar."
       />
     </>
