@@ -21,7 +21,7 @@ const require$$0$4 = require("zlib");
 const electron = require("electron");
 const execAsync = node_util.promisify(node_child_process.exec);
 const DOTNET_LIST_RUNTIMES_COMMAND = "dotnet --list-runtimes";
-const DOTNET_9_RUNTIME_IDENTIFIER = "microsoft.netcore.app 9.0";
+const DOTNET_9_RUNTIME_IDENTIFIER = "microsoft.netcore.app 10.0";
 function isDotNet9RuntimeInstalled(output) {
   return output.toLowerCase().includes(DOTNET_9_RUNTIME_IDENTIFIER);
 }
@@ -10926,7 +10926,7 @@ class HardwareMonitor extends node_events.EventEmitter {
     };
     const isDotNetInstalled = await checkDotNetRuntime9(logger);
     if (!isDotNetInstalled) {
-      throw new Error(".NET 9 runtime not found. Please install it from https://dotnet.microsoft.com/download/dotnet/9.0");
+      throw new Error(".NET 10 runtime not found. Please install it from https://dotnet.microsoft.com/download/dotnet/10.0");
     }
     this.executablePath = await DownloadCli(targetDir, this.logLevel);
     this.log("info", "✅ Lynx Hardware Monitor is ready to use.");

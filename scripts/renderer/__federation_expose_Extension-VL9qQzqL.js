@@ -5654,8 +5654,8 @@ function HardwareStatusBar() {
     }
     if (error.message.includes("dotnet")) {
       return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "text-sm", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-semi-muted", children: ".NET 9.0 runtime not found. Please install it " }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx(Link, { onPress: () => window.open("https://dotnet.microsoft.com/en-us/download/dotnet/9.0"), children: "Here" })
+        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-semi-muted", children: ".NET 10.0 runtime not found. Please install it " }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx(Link, { onPress: () => window.open("https://dotnet.microsoft.com/en-us/download/dotnet/10.0"), children: "Here" })
       ] });
     }
     return /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-warning", children: "Couldn't load metrics. Please try restarting LynxHub." });
