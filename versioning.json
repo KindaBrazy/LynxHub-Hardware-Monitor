@@ -7,7 +7,7 @@
       "engines": {
         "extensionApi": "^2.0.0"
       },
-      "stage": "early_access",
+      "stage": "public",
       "platforms": [
         "win32"
       ]
