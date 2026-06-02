@@ -2,7 +2,7 @@
   "$schema": "https://raw.githubusercontent.com/KindaBrazy/LynxHub-Statics/refs/heads/schema/plugins/versioning.schema.json",
   "versions": [
     {
-      "version": "0.14.1",
+      "version": "0.14.2",
       "commit": "2291139",
       "engines": {
         "extensionApi": "^2.0.0"
@@ -37,7 +37,7 @@
   ],
   "changes": [
     {
-      "version": "0.14.1",
+      "version": "0.14.2",
       "date": "2026-05-09",
       "items": [
         {
