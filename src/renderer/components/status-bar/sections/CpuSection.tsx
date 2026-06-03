@@ -4,6 +4,7 @@ import {ElementType, memo, useMemo} from 'react';
 import {CpuData, HardwareInfo, HardwareMetricsConfig, RawSensorValue} from '../../../../cross/types';
 import {useHMonitorState} from '../../../state/hmonitorSlice';
 import {getTemperatureColor, getUsageColor} from '../../../utils/colorUtils';
+import {getCpuAlias} from '../../../utils/aliasUtils';
 import MetricItem from '../../common/MetricItem';
 import Section from '../../common/Section';
 
@@ -31,6 +32,7 @@ type Props = {
 
 const CpuSection = memo(({data, metrics, hardwareInfo, rawSensorValues}: Props) => {
   const displayStyle = useHMonitorState('displayStyle');
+  const showAliasCpu = useHMonitorState('showAliasCpu');
   const {temp, usage, name} = data || {temp: 0, usage: 0, name: ''};
 
   const hasTemp = useMemo(() => metrics.enabled.includes('temp'), [metrics.enabled]);
@@ -42,8 +44,10 @@ const CpuSection = memo(({data, metrics, hardwareInfo, rawSensorValues}: Props) 
     return map;
   }, [rawSensorValues]);
 
+  const title = showAliasCpu ? getCpuAlias(name) : name;
+
   return (
-    <Section title={name} icon={CpuIcon}>
+    <Section title={title} icon={CpuIcon}>
       {hasTemp &&
         (temp > 0 ? (
           <MetricItem

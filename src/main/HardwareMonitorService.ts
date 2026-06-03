@@ -152,6 +152,10 @@ class HardwareMonitorService {
           enabledMetrics: storedConfig.enabledMetrics, // Carry over old metric selections
           // Migrate compactMode to displayStyle
           displayStyle: (storedConfig as any).compactMode ? 'compact' : 'default',
+          showAliasCpu: storedConfig.showAliasCpu ?? initialSettings.showAliasCpu,
+          showAliasGpu: storedConfig.showAliasGpu ?? initialSettings.showAliasGpu,
+          showAliasMemory: storedConfig.showAliasMemory ?? initialSettings.showAliasMemory,
+          showAliasNetwork: storedConfig.showAliasNetwork ?? initialSettings.showAliasNetwork,
         }),
         configVersion: initialSettings.configVersion, // Ensure version is updated
       };
@@ -175,6 +179,10 @@ class HardwareMonitorService {
     this.config = {
       ...storedConfig,
       availableHardware: storedConfig.availableHardware ?? initialSettings.availableHardware,
+      showAliasCpu: storedConfig.showAliasCpu ?? initialSettings.showAliasCpu,
+      showAliasGpu: storedConfig.showAliasGpu ?? initialSettings.showAliasGpu,
+      showAliasMemory: storedConfig.showAliasMemory ?? initialSettings.showAliasMemory,
+      showAliasNetwork: storedConfig.showAliasNetwork ?? initialSettings.showAliasNetwork,
     };
   }
 

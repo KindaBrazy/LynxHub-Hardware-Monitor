@@ -18,7 +18,7 @@ function PingSection() {
     return Array.from(new Set(pingState.enabledHosts)).map(host => {
       const item = hostResults[host];
       const value =
-        !item || !item.latency ? '-1' : pingState.showTimestamp ? `${item.timeString} | ${item.latency}` : item.latency;
+        !item || !item.latency ? '-1' : `${item.latency} ms`;
 
       return (
         <MetricItem

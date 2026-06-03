@@ -270,6 +270,18 @@ export default function SettingsModal({state}: SettingsModalProps) {
                       {getMetricItem('usage', 'gpu', hw.name)}
                       <Separator className="h-2.5 w-px mx-1" />
                       {getMetricItem('vram', 'gpu', hw.name)}
+                      <Separator className="h-2.5 w-px mx-1" />
+                      <Checkbox
+                        variant="secondary"
+                        isSelected={settings.showAliasGpu}
+                        onChange={val => updateState('showAliasGpu', val)}>
+                        <Checkbox.Content>
+                          <Label className="cursor-pointer">Use Alias</Label>
+                        </Checkbox.Content>
+                        <Checkbox.Control>
+                          <Checkbox.Indicator />
+                        </Checkbox.Control>
+                      </Checkbox>
                     </SettingsModalCard>
                   ))}
 
@@ -283,6 +295,18 @@ export default function SettingsModal({state}: SettingsModalProps) {
                       {getMetricItem('temp', 'cpu', hw.name)}
                       <Separator className="h-2.5 w-px mx-1" />
                       {getMetricItem('usage', 'cpu', hw.name)}
+                      <Separator className="h-2.5 w-px mx-1" />
+                      <Checkbox
+                        variant="secondary"
+                        isSelected={settings.showAliasCpu}
+                        onChange={val => updateState('showAliasCpu', val)}>
+                        <Checkbox.Content>
+                          <Label className="cursor-pointer">Use Alias</Label>
+                        </Checkbox.Content>
+                        <Checkbox.Control>
+                          <Checkbox.Indicator />
+                        </Checkbox.Control>
+                      </Checkbox>
                     </SettingsModalCard>
                   ))}
 
@@ -294,6 +318,18 @@ export default function SettingsModal({state}: SettingsModalProps) {
                       onToggle={() => toggleHardwareActive(hw.name, 'memory')}
                       config={enabledMetrics.memory.find(m => m.name === hw.name)}>
                       {getMetricItem('memory', 'memory', hw.name)}
+                      <Separator className="h-2.5 w-px mx-1" />
+                      <Checkbox
+                        variant="secondary"
+                        isSelected={settings.showAliasMemory}
+                        onChange={val => updateState('showAliasMemory', val)}>
+                        <Checkbox.Content>
+                          <Label className="cursor-pointer">Use Alias</Label>
+                        </Checkbox.Content>
+                        <Checkbox.Control>
+                          <Checkbox.Indicator />
+                        </Checkbox.Control>
+                      </Checkbox>
                     </SettingsModalCard>
                   ))}
 
@@ -313,30 +349,45 @@ export default function SettingsModal({state}: SettingsModalProps) {
                         )}
                       </Card.Header>
                       <Card.Content className="flex-col items-start relative gap-y-4">
-                        <Select
-                          onChange={value => {
-                            if (value) setSelectedNetworkName(value);
-                          }}
-                          variant="secondary"
-                          selectionMode="single"
-                          value={selectedNetworkName}
-                          placeholder="Select a network interface to configure"
-                          fullWidth>
-                          <Select.Trigger>
-                            <Select.Value />
-                            <Select.Indicator />
-                          </Select.Trigger>
-                          <Select.Popover>
-                            <ListBox items={availableHardware.network}>
-                              {item => (
-                                <ListBox.Item id={item.name} key={item.name}>
-                                  <Label>{item.name}</Label>
-                                  <ListBox.ItemIndicator />
-                                </ListBox.Item>
-                              )}
-                            </ListBox>
-                          </Select.Popover>
-                        </Select>
+                        <div className="w-full flex items-center justify-between gap-4">
+                          <Select
+                            onChange={value => {
+                              if (value) setSelectedNetworkName(value);
+                            }}
+                            variant="secondary"
+                            selectionMode="single"
+                            value={selectedNetworkName}
+                            placeholder="Select a network interface to configure"
+                            fullWidth>
+                            <Select.Trigger>
+                              <Select.Value />
+                              <Select.Indicator />
+                            </Select.Trigger>
+                            <Select.Popover>
+                              <ListBox items={availableHardware.network}>
+                                {item => (
+                                  <ListBox.Item id={item.name} key={item.name}>
+                                    <Label>{item.name}</Label>
+                                    <ListBox.ItemIndicator />
+                                  </ListBox.Item>
+                                )}
+                              </ListBox>
+                            </Select.Popover>
+                          </Select>
+
+                          <Checkbox
+                            variant="secondary"
+                            isSelected={settings.showAliasNetwork}
+                            onChange={val => updateState('showAliasNetwork', val)}
+                            className="shrink-0">
+                            <Checkbox.Content>
+                              <Label className="cursor-pointer whitespace-nowrap">Use Alias</Label>
+                            </Checkbox.Content>
+                            <Checkbox.Control>
+                              <Checkbox.Indicator />
+                            </Checkbox.Control>
+                          </Checkbox>
+                        </div>
 
                         {selectedNetworkConfig && selectedNetworkHardware && (
                           <div className="w-full relative">

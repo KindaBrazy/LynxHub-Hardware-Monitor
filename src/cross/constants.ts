@@ -39,7 +39,7 @@ export const initialEnabledMetrics: EnabledMetrics = {
 
 // Default settings for the hardware monitor
 export const initialSettings: MonitoringSettings = {
-  configVersion: 0.5, // Version to handle future settings migrations
+  configVersion: 0.6, // Version to handle future settings migrations
   refreshInterval: 1, // in seconds
   enabled: true,
   displayStyle: 'default',
@@ -54,4 +54,8 @@ export const initialSettings: MonitoringSettings = {
     interval: 1000,
     timeout: 2000,
   },
+  showAliasCpu: true,
+  showAliasGpu: true,
+  showAliasMemory: true,
+  showAliasNetwork: true,
 };

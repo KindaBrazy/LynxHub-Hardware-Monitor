@@ -3,6 +3,8 @@ import {Activity, ArrowDown, ArrowUp, Database, Gauge, Power, Thermometer, Wifi}
 import {ElementType, memo, useMemo} from 'react';
 
 import {HardwareInfo, HardwareMetricsConfig, NetworkData, RawSensorValue} from '../../../../cross/types';
+import {useHMonitorState} from '../../../state/hmonitorSlice';
+import {getNetworkAlias} from '../../../utils/aliasUtils';
 import MetricItem from '../../common/MetricItem';
 import Section from '../../common/Section';
 
@@ -32,6 +34,7 @@ type Props = {
 };
 
 function NetworkSection({data, metrics, hardwareInfo, rawSensorValues}: Props) {
+  const showAliasNetwork = useHMonitorState('showAliasNetwork');
   const {name, uploadSpeed, downloadSpeed, uploadData, downloadData} = data || {
     name: '',
     uploadSpeed: 0,
@@ -53,8 +56,10 @@ function NetworkSection({data, metrics, hardwareInfo, rawSensorValues}: Props) {
 
   if (!hasUploadSpeed && !hasDownloadSpeed && !hasUploadData && !hasDownloadData) return null;
 
+  const title = showAliasNetwork ? getNetworkAlias(name) : name;
+
   return (
-    <Section icon={Wifi} title={name}>
+    <Section icon={Wifi} title={title}>
       {hasUploadSpeed && <MetricItem label="Up" icon={ArrowUp} value={formatSize(uploadSpeed)} />}
       {hasDownloadSpeed && <MetricItem label="Down" icon={ArrowDown} value={formatSize(downloadSpeed)} />}
 

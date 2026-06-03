@@ -2,7 +2,9 @@ import {Activity, Database, Gauge, Monitor, Power, Thermometer, Zap} from 'lucid
 import {ElementType, memo, useMemo} from 'react';
 
 import {GpuData, HardwareInfo, HardwareMetricsConfig, RawSensorValue} from '../../../../cross/types';
+import {useHMonitorState} from '../../../state/hmonitorSlice';
 import {getTemperatureColor, getUsageColor} from '../../../utils/colorUtils';
+import {getGpuAlias} from '../../../utils/aliasUtils';
 import MetricItem from '../../common/MetricItem';
 import Section from '../../common/Section';
 
@@ -32,6 +34,7 @@ type Props = {
 };
 
 const GpuSection = memo(({data, metrics, hardwareInfo, rawSensorValues}: Props) => {
+  const showAliasGpu = useHMonitorState('showAliasGpu');
   const {temp, usage, name, totalVram, usedVram} = data || {temp: 0, usage: 0, name: '', totalVram: 0, usedVram: 0};
 
   const hasTemp = useMemo(() => metrics.enabled.includes('temp'), [metrics.enabled]);
@@ -45,8 +48,11 @@ const GpuSection = memo(({data, metrics, hardwareInfo, rawSensorValues}: Props) 
     rawSensorValues.forEach(val => map.set(val.Identifier, val));
     return map;
   }, [rawSensorValues]);
+
+  const title = showAliasGpu ? getGpuAlias(name) : name;
+
   return (
-    <Section title={name} icon={Monitor}>
+    <Section title={title} icon={Monitor}>
       {hasTemp && (
         <MetricItem
           unit="°C"

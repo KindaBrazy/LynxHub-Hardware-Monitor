@@ -2,7 +2,9 @@ import {Activity, Database, Gauge, HardDrive, MemoryStick, Power, Thermometer} f
 import {ElementType, memo, useMemo} from 'react';
 
 import {HardwareInfo, HardwareMetricsConfig, MemoryData, RawSensorValue} from '../../../../cross/types';
+import {useHMonitorState} from '../../../state/hmonitorSlice';
 import {getUsageColor} from '../../../utils/colorUtils';
+import {getMemoryAlias} from '../../../utils/aliasUtils';
 import MetricItem from '../../common/MetricItem';
 import Section from '../../common/Section';
 
@@ -32,6 +34,7 @@ type Props = {
 };
 
 function MemorySection({data, metrics, hardwareInfo, rawSensorValues}: Props) {
+  const showAliasMemory = useHMonitorState('showAliasMemory');
   const {name, used, total} = data || {name: '', used: 0, total: 0};
   const memPercentage = useMemo(() => (total > 0 ? (used / total) * 100 : 0), [total, used]);
   const sensorReadingMap = useMemo(() => {
@@ -39,8 +42,11 @@ function MemorySection({data, metrics, hardwareInfo, rawSensorValues}: Props) {
     rawSensorValues.forEach(val => map.set(val.Identifier, val));
     return map;
   }, [rawSensorValues]);
+
+  const title = showAliasMemory ? getMemoryAlias(name) : name;
+
   return (
-    <Section title={name} icon={MemoryStick}>
+    <Section title={title} icon={MemoryStick}>
       <MetricItem
         label="RAM"
         icon={HardDrive}

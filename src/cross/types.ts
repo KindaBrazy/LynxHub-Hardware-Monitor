@@ -109,6 +109,10 @@ export type MonitoringSettings = {
   enabledMetrics: EnabledMetrics;
   availableHardware: AvailableHardware;
   pingState: PingState;
+  showAliasCpu: boolean;
+  showAliasGpu: boolean;
+  showAliasMemory: boolean;
+  showAliasNetwork: boolean;
 };
 
 // Union type for all possible metric identifiers
