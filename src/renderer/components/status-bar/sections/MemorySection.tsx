@@ -1,10 +1,10 @@
 import {Activity, Database, Gauge, HardDrive, MemoryStick, Power, Thermometer} from 'lucide-react';
-import {ElementType, memo, useMemo} from 'react';
+import {ElementType, memo, ReactNode, useMemo} from 'react';
 
 import {HardwareInfo, HardwareMetricsConfig, MemoryData, RawSensorValue} from '../../../../cross/types';
 import {useHMonitorState} from '../../../state/hmonitorSlice';
-import {getUsageColor} from '../../../utils/colorUtils';
 import {getMemoryAlias} from '../../../utils/aliasUtils';
+import {getUsageColor} from '../../../utils/colorUtils';
 import MetricItem from '../../common/MetricItem';
 import Section from '../../common/Section';
 
@@ -33,7 +33,7 @@ type Props = {
   rawSensorValues: RawSensorValue[];
 };
 
-function MemorySection({data, metrics, hardwareInfo, rawSensorValues}: Props) {
+const MemorySection = memo(({data, metrics, hardwareInfo, rawSensorValues}: Props) => {
   const showAliasMemory = useHMonitorState('showAliasMemory');
   const {name, used, total} = data || {name: '', used: 0, total: 0};
   const memPercentage = useMemo(() => (total > 0 ? (used / total) * 100 : 0), [total, used]);
@@ -45,40 +45,74 @@ function MemorySection({data, metrics, hardwareInfo, rawSensorValues}: Props) {
 
   const title = showAliasMemory ? getMemoryAlias(name) : name;
 
-  return (
-    <Section title={title} icon={MemoryStick}>
-      <MetricItem
-        label="RAM"
-        icon={HardDrive}
-        progress={{value: memPercentage}}
-        colorClass={getUsageColor(memPercentage)}
-        value={`${used.toFixed(1)}/${total.toFixed(1)}GB`}
-      />
-      {/* Render Custom Metrics */}
-      {metrics.custom?.map(customMetric => {
-        const sensorInfo = hardwareInfo?.sensors.find(s => s.Identifier === customMetric.sensorIdentifier);
-        const sensorReading = sensorReadingMap.get(customMetric.sensorIdentifier);
+  const renderedMetrics = useMemo(() => {
+    const list: ReactNode[] = [];
+    const processedIds = new Set<string>();
 
-        if (!sensorInfo || sensorReading?.Value === null || sensorReading?.Value === undefined) {
-          return null;
+    metrics.enabled.forEach(metricId => {
+      processedIds.add(metricId);
+      if (metricId === 'memory') {
+        list.push(
+          <MetricItem
+            label="RAM"
+            key="memory"
+            icon={HardDrive}
+            progress={{value: memPercentage}}
+            colorClass={getUsageColor(memPercentage)}
+            value={`${used.toFixed(1)}/${total.toFixed(1)}GB`}
+          />,
+        );
+      } else {
+        const customMetric = metrics.custom?.find(m => m.id === metricId);
+        if (customMetric) {
+          const sensorInfo = hardwareInfo?.sensors.find(s => s.Identifier === customMetric.sensorIdentifier);
+          const sensorReading = sensorReadingMap.get(customMetric.sensorIdentifier);
+          if (sensorInfo && sensorReading?.Value !== null && sensorReading?.Value !== undefined) {
+            const value = Number.isInteger(sensorReading.Value)
+              ? sensorReading.Value
+              : parseFloat(sensorReading.Value.toFixed(1));
+            list.push(
+              <MetricItem
+                value={value}
+                key={customMetric.id}
+                unit={sensorInfo.Unit}
+                label={customMetric.label}
+                icon={getIconForSensorType(sensorInfo.Type)}
+              />,
+            );
+          }
         }
+      }
+    });
 
+    metrics.custom?.forEach(customMetric => {
+      if (processedIds.has(customMetric.id)) return;
+      const sensorInfo = hardwareInfo?.sensors.find(s => s.Identifier === customMetric.sensorIdentifier);
+      const sensorReading = sensorReadingMap.get(customMetric.sensorIdentifier);
+      if (sensorInfo && sensorReading?.Value !== null && sensorReading?.Value !== undefined) {
         const value = Number.isInteger(sensorReading.Value)
           ? sensorReading.Value
           : parseFloat(sensorReading.Value.toFixed(1));
-
-        return (
+        list.push(
           <MetricItem
             value={value}
             key={customMetric.id}
             unit={sensorInfo.Unit}
             label={customMetric.label}
             icon={getIconForSensorType(sensorInfo.Type)}
-          />
+          />,
         );
-      })}
+      }
+    });
+
+    return list;
+  }, [metrics.enabled, metrics.custom, memPercentage, used, total, hardwareInfo, sensorReadingMap]);
+
+  return (
+    <Section title={title} icon={MemoryStick}>
+      {renderedMetrics}
     </Section>
   );
-}
+});
 
-export default memo(MemorySection);
+export default MemorySection;

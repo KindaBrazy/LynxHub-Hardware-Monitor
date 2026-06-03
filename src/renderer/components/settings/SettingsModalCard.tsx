@@ -134,25 +134,35 @@ type Props = {
   hardware: HardwareInfo;
   type: MetricType;
   children: ReactNode;
+  dragHandle?: ReactNode;
+  headerExtra?: (active: boolean) => ReactNode;
 };
 
-const SettingsModalCard = memo(({onToggle, config, hardware, type, children}: Props) => {
+const SettingsModalCard = memo(({onToggle, config, hardware, type, children, dragHandle, headerExtra}: Props) => {
   if (!config) return null;
   const {active} = config;
 
   return (
     <Card>
-      <Card.Header onClick={onToggle} className="flex flex-row justify-between cursor-pointer">
-        <p className="font-medium">{hardware.name}</p>
-        <Switch isSelected={active} onChange={onToggle}>
-          <Switch.Control>
-            <Switch.Thumb />
-          </Switch.Control>
-        </Switch>
+      <Card.Header className="flex flex-row justify-between items-center">
+        <div className="flex flex-row items-center gap-x-2">
+          {dragHandle}
+          <p onClick={onToggle} className="font-medium cursor-pointer">
+            {hardware.name}
+          </p>
+        </div>
+        <div className="flex flex-row items-center gap-x-4">
+          {headerExtra?.(active)}
+          <Switch isSelected={active} onChange={onToggle}>
+            <Switch.Control>
+              <Switch.Thumb />
+            </Switch.Control>
+          </Switch>
+        </div>
       </Card.Header>
-      <Card.Content className="flex-col items-start gap-y-1">
+      <Card.Content className="flex-col items-start gap-y-1 relative">
         {/* Overlay to indicate that the controls are disabled */}
-        {!active && <div className="absolute inset-1.5 top-10.5 bg-surface-secondary/50 z-20 rounded-3xl" />}
+        {!active && <div className="absolute inset-1.5 top-1.5 bg-surface-secondary/50 z-20 rounded-3xl" />}
 
         <div className="flex flex-row items-center gap-x-2">{children}</div>
         <CustomMetricsSection type={type} config={config} hardware={hardware} />

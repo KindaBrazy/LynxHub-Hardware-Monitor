@@ -58,4 +58,6 @@ export const initialSettings: MonitoringSettings = {
   showAliasGpu: true,
   showAliasMemory: true,
   showAliasNetwork: true,
+  sectionOrder: ['cpu', 'gpu', 'memory', 'network', 'uptime', 'ping'],
+  uptimeOrder: ['uptimeSystem', 'uptimeApp'],
 };

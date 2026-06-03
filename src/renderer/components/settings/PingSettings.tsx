@@ -20,7 +20,7 @@ import {useDispatch} from 'react-redux';
 import {PingState} from '../../../cross/types';
 import {hmonitorActions, useHMonitorState} from '../../state/hmonitorSlice';
 
-export default function PingSettings() {
+export default function PingSettings({dragHandle}: {dragHandle?: React.ReactNode}) {
   const dispatch = useDispatch();
   const preConfig = useHMonitorState('pingState');
 
@@ -79,86 +79,89 @@ export default function PingSettings() {
   };
 
   return (
-    <div className="flex flex-col gap-y-2 p-2 bg-surface-secondary rounded-3xl">
-      <Card>
-        <Card.Header onClick={onToggleActivate} className="flex flex-row justify-between cursor-pointer">
-          <p className="font-medium">Ping</p>
-          <Switch isSelected={isActive} onChange={onToggleActivate}>
-            <Switch.Control>
-              <Switch.Thumb />
-            </Switch.Control>
-          </Switch>
-        </Card.Header>
-        <Card.Content className="flex-col items-start gap-y-1">
-          {/* Overlay to indicate that the controls are disabled */}
-          {!isActive && <div className="absolute inset-1.5 top-10.5 bg-surface-secondary/50 z-20 rounded-3xl" />}
+    <Card>
+      <Card.Header className="flex flex-row justify-between items-center">
+        <div className="flex flex-row items-center gap-x-2">
+          {dragHandle}
+          <p onClick={onToggleActivate} className="font-medium cursor-pointer">
+            Ping
+          </p>
+        </div>
+        <Switch isSelected={isActive} onChange={onToggleActivate}>
+          <Switch.Control>
+            <Switch.Thumb />
+          </Switch.Control>
+        </Switch>
+      </Card.Header>
+      <Card.Content className="flex-col items-start gap-y-1">
+        {/* Overlay to indicate that the controls are disabled */}
+        {!isActive && <div className="absolute inset-1.5 top-10.5 bg-surface-secondary/50 z-20 rounded-3xl" />}
 
-          {hosts.length > 0 && (
-            <>
-              <Label>Select hosts to display in the status bar</Label>
-              <div className="flex flex-row flex-wrap gap-2 mb-4">
-                <AnimatePresence>
-                  {hosts.map(host => (
-                    <motion.div key={host} layout>
-                      <ToggleButton
-                        size="sm"
-                        onChange={() => onToggleHost(host)}
-                        isSelected={enabledHosts.includes(host)}>
-                        {({isSelected: selected}) => (
-                          <>
-                            {selected && <Unread className="size-5" />}
-                            {host}
-                            {!selected && <CloseButton onPress={() => removeHost(host)} />}
-                          </>
-                        )}
-                      </ToggleButton>
-                    </motion.div>
-                  ))}
-                </AnimatePresence>
-              </div>
-            </>
-          )}
+        {hosts.length > 0 && (
+          <>
+            <Label>Select hosts to display in the status bar</Label>
+            <div className="flex flex-row flex-wrap gap-2 mb-4">
+              <AnimatePresence>
+                {hosts.map(host => (
+                  <motion.div key={host} layout>
+                    <ToggleButton
+                      size="sm"
+                      onChange={() => onToggleHost(host)}
+                      isSelected={enabledHosts.includes(host)}>
+                      {({isSelected: selected}) => (
+                        <>
+                          {selected && <Unread className="size-5" />}
+                          {host}
+                          {!selected && <CloseButton onPress={() => removeHost(host)} />}
+                        </>
+                      )}
+                    </ToggleButton>
+                  </motion.div>
+                ))}
+              </AnimatePresence>
+            </div>
+          </>
+        )}
 
-          <TextField
-            type="text"
-            value={hostInput}
-            variant="secondary"
-            onKeyUp={onHostChange}
-            onChange={setHostInput}
-            fullWidth>
-            <Label>Host</Label>
-            <Input placeholder="8.8.8.8" />
-            <Description className="flex flex-row items-center gap-x-1">
-              Type a host and press
-              <Kbd className="h-5">Enter</Kbd>
-              <Kbd className="h-5">Space</Kbd>
-              or
-              <Kbd className="h-5">,</Kbd>
-              to add
-            </Description>
-          </TextField>
+        <TextField
+          type="text"
+          value={hostInput}
+          variant="secondary"
+          onKeyUp={onHostChange}
+          onChange={setHostInput}
+          fullWidth>
+          <Label>Host</Label>
+          <Input placeholder="8.8.8.8" />
+          <Description className="flex flex-row items-center gap-x-1">
+            Type a host and press
+            <Kbd className="h-5">Enter</Kbd>
+            <Kbd className="h-5">Space</Kbd>
+            or
+            <Kbd className="h-5">,</Kbd>
+            to add
+          </Description>
+        </TextField>
 
-          <NumberField minValue={100} value={interval} variant="secondary" onChange={setInterval} fullWidth>
-            <Label>Interval</Label>
-            <NumberField.Group>
-              <NumberField.DecrementButton />
-              <NumberField.Input />
-              <NumberField.IncrementButton />
-            </NumberField.Group>
-            <Description>Interval in milliseconds</Description>
-          </NumberField>
+        <NumberField minValue={100} value={interval} variant="secondary" onChange={setInterval} fullWidth>
+          <Label>Interval</Label>
+          <NumberField.Group>
+            <NumberField.DecrementButton />
+            <NumberField.Input />
+            <NumberField.IncrementButton />
+          </NumberField.Group>
+          <Description>Interval in milliseconds</Description>
+        </NumberField>
 
-          <NumberField minValue={100} value={timeoutMs} variant="secondary" onChange={setTimeoutMs} fullWidth>
-            <Label>Timeout</Label>
-            <NumberField.Group>
-              <NumberField.DecrementButton />
-              <NumberField.Input />
-              <NumberField.IncrementButton />
-            </NumberField.Group>
-            <Description>Timeout in milliseconds</Description>
-          </NumberField>
-        </Card.Content>
-      </Card>
-    </div>
+        <NumberField minValue={100} value={timeoutMs} variant="secondary" onChange={setTimeoutMs} fullWidth>
+          <Label>Timeout</Label>
+          <NumberField.Group>
+            <NumberField.DecrementButton />
+            <NumberField.Input />
+            <NumberField.IncrementButton />
+          </NumberField.Group>
+          <Description>Timeout in milliseconds</Description>
+        </NumberField>
+      </Card.Content>
+    </Card>
   );
 }

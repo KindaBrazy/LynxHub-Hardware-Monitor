@@ -9,7 +9,6 @@ import {
   Modal,
   NumberField,
   Select,
-  Separator,
   Spinner,
   Switch,
   UseOverlayStateReturn,
@@ -21,13 +20,13 @@ import {topToast} from '@lynx/layouts/ToastProviders';
 import {AppDispatch} from '@lynx/redux/store';
 import storageIpc from '@lynx_shared/ipc/storage';
 import {Diskette} from '@solar-icons/react-perf/BoldDuotone';
-import {AnimatePresence, motion} from 'framer-motion';
-import {ArrowDown, ArrowUp, Clock, Cpu, Database, LucideProps, Thermometer, Timer} from 'lucide-react';
-import {ForwardRefExoticComponent, useCallback, useMemo, useState} from 'react';
+import {AnimatePresence, motion, Reorder} from 'framer-motion';
+import {ArrowDown, ArrowUp, Clock, Cpu, Database, GripVertical, LucideProps, Thermometer, Timer} from 'lucide-react';
+import {ForwardRefExoticComponent, ReactNode, useCallback, useMemo, useState} from 'react';
 import {useDispatch} from 'react-redux';
 
 import {HMONITOR_STORAGE_ID} from '../../../cross/constants';
-import {DisplayStyle, HardwareMetricsConfig, MetricType, MonitoringSettings, SystemMetric} from '../../../cross/types';
+import {DisplayStyle, MetricType, MonitoringSettings, SystemMetric} from '../../../cross/types';
 import {hmonitorActions, useHMonitorSelector} from '../../state/hmonitorSlice';
 import MetricVisibilitySettings from './MetricVisibilitySettings';
 import PingSettings from './PingSettings';
@@ -111,48 +110,6 @@ export default function SettingsModal({state}: SettingsModalProps) {
     }, 700);
   };
 
-  const getMetricItem = useCallback(
-    (metricId: SystemMetric, type: MetricType | 'uptime', hardwareName: string | Key) => {
-      const config = METRIC_CONFIG[metricId];
-      if (!config) return null;
-
-      let isSelected: boolean;
-      let onToggle: () => void;
-
-      if (type === 'uptime') {
-        const uptimeType = metricId === 'uptimeApp' ? 'app' : 'system';
-        isSelected = enabledMetrics.uptime[uptimeType];
-        onToggle = () => dispatch(hmonitorActions.updateUptime({...enabledMetrics.uptime, [uptimeType]: !isSelected}));
-      } else {
-        const hardwareConfig = (enabledMetrics[type] as HardwareMetricsConfig[]).find(
-          metric => metric.name === hardwareName,
-        );
-        isSelected = !!hardwareConfig?.enabled.includes(metricId);
-
-        onToggle = () => {
-          if (!hardwareConfig) return;
-          const newEnabled = isSelected
-            ? hardwareConfig.enabled.filter(m => m !== metricId)
-            : [...hardwareConfig.enabled, metricId];
-          dispatch(hmonitorActions.updateHardwareMetrics({type, name: hardwareName as string, enabled: newEnabled}));
-        };
-      }
-
-      return (
-        <Checkbox variant="secondary" onChange={onToggle} isSelected={isSelected}>
-          <Checkbox.Content className="flex flex-row items-center gap-x-1">
-            <config.Icon className="size-3.5" />
-            <Label className="cursor-pointer">{config.label}</Label>
-          </Checkbox.Content>
-          <Checkbox.Control>
-            <Checkbox.Indicator />
-          </Checkbox.Control>
-        </Checkbox>
-      );
-    },
-    [enabledMetrics, dispatch],
-  );
-
   const toggleHardwareActive = useCallback(
     (name: string | Key, type: MetricType) => {
       const hardwareConfig = enabledMetrics[type].find(metric => metric.name === name);
@@ -162,6 +119,352 @@ export default function SettingsModal({state}: SettingsModalProps) {
     },
     [enabledMetrics, dispatch],
   );
+
+  const sectionsToRender = useMemo(() => {
+    const defaultOrder = ['cpu', 'gpu', 'memory', 'network', 'uptime', 'ping'];
+    const currentOrder =
+      settings.sectionOrder && settings.sectionOrder.length > 0 ? settings.sectionOrder : defaultOrder;
+    return currentOrder.filter(type => {
+      if (type === 'cpu') return availableHardware.cpu.length > 0;
+      if (type === 'gpu') return availableHardware.gpu.length > 0;
+      if (type === 'memory') return availableHardware.memory.length > 0;
+      if (type === 'network') return availableHardware.network.length > 0;
+      return true;
+    });
+  }, [settings.sectionOrder, availableHardware]);
+
+  const handleSectionReorder = (newOrder: string[]) => {
+    const allTypes = ['cpu', 'gpu', 'memory', 'network', 'uptime', 'ping'];
+    const missing = allTypes.filter(type => !newOrder.includes(type));
+    dispatch(hmonitorActions.updateSectionOrder([...newOrder, ...missing]));
+  };
+
+  const renderMetricsReorderGroup = (type: MetricType, hardwareName: string | Key) => {
+    const config = enabledMetrics[type].find(m => m.name === hardwareName);
+    if (!config) return null;
+
+    let nativeMetrics: SystemMetric[] = [];
+    if (type === 'cpu') nativeMetrics = ['temp', 'usage'];
+    else if (type === 'gpu') nativeMetrics = ['temp', 'usage', 'vram'];
+    else if (type === 'memory') nativeMetrics = ['memory'];
+    else if (type === 'network') nativeMetrics = ['uploadSpeed', 'downloadSpeed', 'uploadData', 'downloadData'];
+
+    const customIds = config.custom.map(m => m.id);
+    const allAvailableMetricIds = [...nativeMetrics, ...customIds];
+
+    const currentEnabled = config.enabled;
+    const orderedMetricIds = [
+      ...currentEnabled.filter(id => allAvailableMetricIds.includes(id as any)),
+      ...allAvailableMetricIds.filter(id => !currentEnabled.includes(id)),
+    ];
+
+    const handleReorder = (newOrder: string[]) => {
+      const newEnabled = newOrder.filter(id => currentEnabled.includes(id));
+      dispatch(hmonitorActions.updateHardwareMetrics({type, name: hardwareName as string, enabled: newEnabled}));
+    };
+
+    return (
+      <div className="flex flex-col gap-y-2 w-full">
+        <Reorder.Group
+          axis="x"
+          values={orderedMetricIds}
+          onReorder={handleReorder}
+          className="flex flex-row flex-wrap items-center gap-2 w-full">
+          {orderedMetricIds.map(metricId => {
+            const isCustom = !nativeMetrics.includes(metricId as any);
+            const isSelected = currentEnabled.includes(metricId);
+
+            const onToggle = () => {
+              const newEnabled = isSelected
+                ? currentEnabled.filter(id => id !== metricId)
+                : [...currentEnabled, metricId];
+              dispatch(
+                hmonitorActions.updateHardwareMetrics({type, name: hardwareName as string, enabled: newEnabled}),
+              );
+            };
+
+            let labelText: string;
+            let IconComp: any;
+
+            if (isCustom) {
+              const customConfig = config.custom.find(c => c.id === metricId);
+              labelText = customConfig?.label || 'Custom Metric';
+              IconComp = Database;
+            } else {
+              const metConfig = METRIC_CONFIG[metricId];
+              labelText = metConfig?.label || metricId;
+              IconComp = metConfig?.Icon || Cpu;
+            }
+
+            return (
+              <Reorder.Item
+                className={
+                  `flex flex-row items-center gap-x-1.5 px-3 py-1.5 bg-surface` +
+                  ` rounded-xl border border-foreground/10 ${!isSelected ? 'opacity-50' : ''}`
+                }
+                key={metricId}
+                value={metricId}>
+                <GripVertical
+                  className={
+                    'size-3.5 cursor-grab text-foreground/40 hover:text-foreground/80 active:cursor-grabbing shrink-0'
+                  }
+                />
+                <Checkbox variant="secondary" onChange={onToggle} isSelected={isSelected}>
+                  <Checkbox.Content className="flex flex-row items-center gap-x-1">
+                    <IconComp className="size-3.5 shrink-0" />
+                    <Label className="cursor-pointer select-none text-xs">{labelText}</Label>
+                  </Checkbox.Content>
+                  <Checkbox.Control>
+                    <Checkbox.Indicator />
+                  </Checkbox.Control>
+                </Checkbox>
+              </Reorder.Item>
+            );
+          })}
+        </Reorder.Group>
+      </div>
+    );
+  };
+
+  const renderUptimeMetricsReorderGroup = () => {
+    const defaultUptimeOrder = ['uptimeSystem', 'uptimeApp'];
+    const currentOrder = settings.uptimeOrder || defaultUptimeOrder;
+
+    const handleReorder = (newOrder: string[]) => {
+      dispatch(hmonitorActions.updateUptimeOrder(newOrder));
+    };
+
+    return (
+      <Reorder.Group
+        axis="x"
+        values={currentOrder}
+        onReorder={handleReorder}
+        className="flex flex-row items-center gap-2 w-full">
+        {currentOrder.map(metricId => {
+          const isSelected = metricId === 'uptimeApp' ? enabledMetrics.uptime.app : enabledMetrics.uptime.system;
+          const labelText = metricId === 'uptimeApp' ? 'Application Uptime' : 'System Uptime';
+          const IconComp = metricId === 'uptimeApp' ? Timer : Clock;
+
+          const onToggle = () => {
+            if (metricId === 'uptimeApp') {
+              dispatch(hmonitorActions.updateUptime({...enabledMetrics.uptime, app: !isSelected}));
+            } else {
+              dispatch(hmonitorActions.updateUptime({...enabledMetrics.uptime, system: !isSelected}));
+            }
+          };
+
+          return (
+            <Reorder.Item
+              className={
+                `flex flex-row items-center gap-x-1.5 px-3 py-1.5 bg-surface` +
+                ` rounded-xl border border-foreground/10 ${!isSelected ? 'opacity-50' : ''}`
+              }
+              key={metricId}
+              value={metricId}>
+              <GripVertical
+                className={
+                  'size-3.5 cursor-grab text-foreground/40 hover:text-foreground/80 active:cursor-grabbing shrink-0'
+                }
+              />
+              <Checkbox variant="secondary" onChange={onToggle} isSelected={isSelected}>
+                <Checkbox.Content className="flex flex-row items-center gap-x-1">
+                  <IconComp className="size-3.5 shrink-0" />
+                  <Label className="cursor-pointer select-none text-xs">{labelText}</Label>
+                </Checkbox.Content>
+                <Checkbox.Control>
+                  <Checkbox.Indicator />
+                </Checkbox.Control>
+              </Checkbox>
+            </Reorder.Item>
+          );
+        })}
+      </Reorder.Group>
+    );
+  };
+
+  const renderSectionSetting = (type: string, dragHandle: ReactNode) => {
+    switch (type) {
+      case 'gpu':
+        return (
+          <div className="flex flex-col gap-y-2">
+            {availableHardware.gpu.map(hw => (
+              <SettingsModalCard
+                headerExtra={active => (
+                  <Checkbox
+                    variant="secondary"
+                    isDisabled={!active}
+                    isSelected={settings.showAliasGpu}
+                    onChange={val => updateState('showAliasGpu', val)}>
+                    <Checkbox.Content>
+                      <Label className="cursor-pointer text-xs">Use Alias</Label>
+                    </Checkbox.Content>
+                    <Checkbox.Control>
+                      <Checkbox.Indicator />
+                    </Checkbox.Control>
+                  </Checkbox>
+                )}
+                type="gpu"
+                hardware={hw}
+                dragHandle={dragHandle}
+                key={`gpu-settings-${hw.name}`}
+                onToggle={() => toggleHardwareActive(hw.name, 'gpu')}
+                config={enabledMetrics.gpu.find(m => m.name === hw.name)}>
+                {renderMetricsReorderGroup('gpu', hw.name)}
+              </SettingsModalCard>
+            ))}
+          </div>
+        );
+      case 'cpu':
+        return (
+          <div className="flex flex-col gap-y-2">
+            {availableHardware.cpu.map(hw => (
+              <SettingsModalCard
+                headerExtra={active => (
+                  <Checkbox
+                    variant="secondary"
+                    isDisabled={!active}
+                    isSelected={settings.showAliasCpu}
+                    onChange={val => updateState('showAliasCpu', val)}>
+                    <Checkbox.Content>
+                      <Label className="cursor-pointer text-xs">Use Alias</Label>
+                    </Checkbox.Content>
+                    <Checkbox.Control>
+                      <Checkbox.Indicator />
+                    </Checkbox.Control>
+                  </Checkbox>
+                )}
+                type="cpu"
+                hardware={hw}
+                dragHandle={dragHandle}
+                key={`cpu-settings-${hw.name}`}
+                onToggle={() => toggleHardwareActive(hw.name, 'cpu')}
+                config={enabledMetrics.cpu.find(m => m.name === hw.name)}>
+                {renderMetricsReorderGroup('cpu', hw.name)}
+              </SettingsModalCard>
+            ))}
+          </div>
+        );
+      case 'memory':
+        return (
+          <div className="flex flex-col gap-y-2">
+            {availableHardware.memory.map(hw => (
+              <SettingsModalCard
+                headerExtra={active => (
+                  <Checkbox
+                    variant="secondary"
+                    isDisabled={!active}
+                    isSelected={settings.showAliasMemory}
+                    onChange={val => updateState('showAliasMemory', val)}>
+                    <Checkbox.Content>
+                      <Label className="cursor-pointer text-xs">Use Alias</Label>
+                    </Checkbox.Content>
+                    <Checkbox.Control>
+                      <Checkbox.Indicator />
+                    </Checkbox.Control>
+                  </Checkbox>
+                )}
+                type="memory"
+                hardware={hw}
+                dragHandle={dragHandle}
+                key={`memory-settings-${hw.name}`}
+                onToggle={() => toggleHardwareActive(hw.name, 'memory')}
+                config={enabledMetrics.memory.find(m => m.name === hw.name)}>
+                {renderMetricsReorderGroup('memory', hw.name)}
+              </SettingsModalCard>
+            ))}
+          </div>
+        );
+      case 'network':
+        return (
+          availableHardware.network.length > 0 && (
+            <Card>
+              <Card.Header className="flex flex-row justify-between items-center">
+                <div className="flex flex-row items-center gap-x-2">
+                  {dragHandle}
+                  <p className="font-medium">Network Interface</p>
+                </div>
+                <div className="flex flex-row items-center gap-x-4">
+                  {selectedNetworkConfig && (
+                    <Checkbox
+                      variant="secondary"
+                      isSelected={settings.showAliasNetwork}
+                      isDisabled={!selectedNetworkConfig.active}
+                      onChange={val => updateState('showAliasNetwork', val)}>
+                      <Checkbox.Content>
+                        <Label className="cursor-pointer text-xs">Use Alias</Label>
+                      </Checkbox.Content>
+                      <Checkbox.Control>
+                        <Checkbox.Indicator />
+                      </Checkbox.Control>
+                    </Checkbox>
+                  )}
+                  {selectedNetworkConfig && (
+                    <Switch
+                      isSelected={selectedNetworkConfig.active}
+                      onChange={() => toggleHardwareActive(selectedNetworkName, 'network')}>
+                      <Switch.Control>
+                        <Switch.Thumb />
+                      </Switch.Control>
+                    </Switch>
+                  )}
+                </div>
+              </Card.Header>
+              <Card.Content className="flex-col items-start relative gap-y-4">
+                <div className="w-full flex items-center justify-between gap-4">
+                  <Select
+                    onChange={value => {
+                      if (value) setSelectedNetworkName(value);
+                    }}
+                    variant="secondary"
+                    selectionMode="single"
+                    value={selectedNetworkName}
+                    placeholder="Select a network interface to configure"
+                    fullWidth>
+                    <Select.Trigger>
+                      <Select.Value />
+                      <Select.Indicator />
+                    </Select.Trigger>
+                    <Select.Popover>
+                      <ListBox items={availableHardware.network}>
+                        {item => (
+                          <ListBox.Item id={item.name} key={item.name}>
+                            <Label>{item.name}</Label>
+                            <ListBox.ItemIndicator />
+                          </ListBox.Item>
+                        )}
+                      </ListBox>
+                    </Select.Popover>
+                  </Select>
+                </div>
+
+                {selectedNetworkConfig && selectedNetworkHardware && (
+                  <div className="w-full relative">
+                    {!selectedNetworkConfig.active && (
+                      <div className="absolute inset-0 bg-background/50 z-20 -m-1 rounded-xl" />
+                    )}
+                    {renderMetricsReorderGroup('network', selectedNetworkName)}
+                  </div>
+                )}
+              </Card.Content>
+            </Card>
+          )
+        );
+      case 'uptime':
+        return (
+          <Card>
+            <Card.Header className="flex flex-row items-center gap-x-2">
+              {dragHandle}
+              <p className="font-medium">Uptime</p>
+            </Card.Header>
+            <Card.Content className="flex-row items-center gap-2">{renderUptimeMetricsReorderGroup()}</Card.Content>
+          </Card>
+        );
+      case 'ping':
+        return <PingSettings dragHandle={dragHandle} />;
+      default:
+        return null;
+    }
+  };
 
   return (
     <TabModal size="lg" isOpen={state.isOpen} onOpenChange={handleOpenChange} dialogClassName="max-w-3xl px-0">
@@ -257,166 +560,28 @@ export default function SettingsModal({state}: SettingsModalProps) {
                   </div>
                 </div>
 
-                <div className="flex flex-col gap-y-2 p-2 bg-surface-secondary rounded-3xl">
-                  {availableHardware.gpu.map(hw => (
-                    <SettingsModalCard
-                      type="gpu"
-                      hardware={hw}
-                      key={`gpu-settings-${hw.name}`}
-                      onToggle={() => toggleHardwareActive(hw.name, 'gpu')}
-                      config={enabledMetrics.gpu.find(m => m.name === hw.name)}>
-                      {getMetricItem('temp', 'gpu', hw.name)}
-                      <Separator className="h-2.5 w-px mx-1" />
-                      {getMetricItem('usage', 'gpu', hw.name)}
-                      <Separator className="h-2.5 w-px mx-1" />
-                      {getMetricItem('vram', 'gpu', hw.name)}
-                      <Separator className="h-2.5 w-px mx-1" />
-                      <Checkbox
-                        variant="secondary"
-                        isSelected={settings.showAliasGpu}
-                        onChange={val => updateState('showAliasGpu', val)}>
-                        <Checkbox.Content>
-                          <Label className="cursor-pointer">Use Alias</Label>
-                        </Checkbox.Content>
-                        <Checkbox.Control>
-                          <Checkbox.Indicator />
-                        </Checkbox.Control>
-                      </Checkbox>
-                    </SettingsModalCard>
-                  ))}
-
-                  {availableHardware.cpu.map(hw => (
-                    <SettingsModalCard
-                      type="cpu"
-                      hardware={hw}
-                      key={`cpu-settings-${hw.name}`}
-                      onToggle={() => toggleHardwareActive(hw.name, 'cpu')}
-                      config={enabledMetrics.cpu.find(m => m.name === hw.name)}>
-                      {getMetricItem('temp', 'cpu', hw.name)}
-                      <Separator className="h-2.5 w-px mx-1" />
-                      {getMetricItem('usage', 'cpu', hw.name)}
-                      <Separator className="h-2.5 w-px mx-1" />
-                      <Checkbox
-                        variant="secondary"
-                        isSelected={settings.showAliasCpu}
-                        onChange={val => updateState('showAliasCpu', val)}>
-                        <Checkbox.Content>
-                          <Label className="cursor-pointer">Use Alias</Label>
-                        </Checkbox.Content>
-                        <Checkbox.Control>
-                          <Checkbox.Indicator />
-                        </Checkbox.Control>
-                      </Checkbox>
-                    </SettingsModalCard>
-                  ))}
-
-                  {availableHardware.memory.map(hw => (
-                    <SettingsModalCard
-                      type="memory"
-                      hardware={hw}
-                      key={`memory-settings-${hw.name}`}
-                      onToggle={() => toggleHardwareActive(hw.name, 'memory')}
-                      config={enabledMetrics.memory.find(m => m.name === hw.name)}>
-                      {getMetricItem('memory', 'memory', hw.name)}
-                      <Separator className="h-2.5 w-px mx-1" />
-                      <Checkbox
-                        variant="secondary"
-                        isSelected={settings.showAliasMemory}
-                        onChange={val => updateState('showAliasMemory', val)}>
-                        <Checkbox.Content>
-                          <Label className="cursor-pointer">Use Alias</Label>
-                        </Checkbox.Content>
-                        <Checkbox.Control>
-                          <Checkbox.Indicator />
-                        </Checkbox.Control>
-                      </Checkbox>
-                    </SettingsModalCard>
-                  ))}
-
-                  {/* Network Settings Card */}
-                  {availableHardware.network.length > 0 && (
-                    <Card>
-                      <Card.Header className="flex flex-row justify-between">
-                        <p className="font-medium">Network Interface</p>
-                        {selectedNetworkConfig && (
-                          <Switch
-                            isSelected={selectedNetworkConfig.active}
-                            onChange={() => toggleHardwareActive(selectedNetworkName, 'network')}>
-                            <Switch.Control>
-                              <Switch.Thumb />
-                            </Switch.Control>
-                          </Switch>
-                        )}
-                      </Card.Header>
-                      <Card.Content className="flex-col items-start relative gap-y-4">
-                        <div className="w-full flex items-center justify-between gap-4">
-                          <Select
-                            onChange={value => {
-                              if (value) setSelectedNetworkName(value);
-                            }}
-                            variant="secondary"
-                            selectionMode="single"
-                            value={selectedNetworkName}
-                            placeholder="Select a network interface to configure"
-                            fullWidth>
-                            <Select.Trigger>
-                              <Select.Value />
-                              <Select.Indicator />
-                            </Select.Trigger>
-                            <Select.Popover>
-                              <ListBox items={availableHardware.network}>
-                                {item => (
-                                  <ListBox.Item id={item.name} key={item.name}>
-                                    <Label>{item.name}</Label>
-                                    <ListBox.ItemIndicator />
-                                  </ListBox.Item>
-                                )}
-                              </ListBox>
-                            </Select.Popover>
-                          </Select>
-
-                          <Checkbox
-                            variant="secondary"
-                            isSelected={settings.showAliasNetwork}
-                            onChange={val => updateState('showAliasNetwork', val)}
-                            className="shrink-0">
-                            <Checkbox.Content>
-                              <Label className="cursor-pointer whitespace-nowrap">Use Alias</Label>
-                            </Checkbox.Content>
-                            <Checkbox.Control>
-                              <Checkbox.Indicator />
-                            </Checkbox.Control>
-                          </Checkbox>
-                        </div>
-
-                        {selectedNetworkConfig && selectedNetworkHardware && (
-                          <div className="w-full relative">
-                            {!selectedNetworkConfig.active && (
-                              <div className="absolute inset-0 bg-background/50 z-20 -m-1 rounded-xl" />
-                            )}
-                            <div className="grid grid-cols-2 items-center">
-                              {getMetricItem('uploadSpeed', 'network', selectedNetworkName)}
-                              {getMetricItem('downloadSpeed', 'network', selectedNetworkName)}
-                              {getMetricItem('uploadData', 'network', selectedNetworkName)}
-                              {getMetricItem('downloadData', 'network', selectedNetworkName)}
-                            </div>
-                          </div>
-                        )}
-                      </Card.Content>
-                    </Card>
-                  )}
-
-                  <Card>
-                    <Card.Header className="font-medium">Uptime</Card.Header>
-                    <Card.Content className="flex-row items-center">
-                      {getMetricItem('uptimeSystem', 'uptime', 'system')}
-                      <Separator className="h-2.5 w-px mx-1" />
-                      {getMetricItem('uptimeApp', 'uptime', 'app')}
-                    </Card.Content>
-                  </Card>
-                </div>
-
-                <PingSettings />
+                <Reorder.Group
+                  axis="y"
+                  values={sectionsToRender}
+                  onReorder={handleSectionReorder}
+                  className="flex flex-col gap-y-2 p-2 bg-surface-secondary rounded-3xl">
+                  {sectionsToRender.map(type => {
+                    const dragHandle = (
+                      <div
+                        className={
+                          'cursor-grab active:cursor-grabbing p-1 text-foreground/40 hover:text-foreground/80' +
+                          ' transition-colors shrink-0'
+                        }>
+                        <GripVertical className="size-4" />
+                      </div>
+                    );
+                    return (
+                      <Reorder.Item key={type} value={type} className="relative select-none">
+                        {renderSectionSetting(type, dragHandle)}
+                      </Reorder.Item>
+                    );
+                  })}
+                </Reorder.Group>
               </motion.div>
             )}
           </AnimatePresence>

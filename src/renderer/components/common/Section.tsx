@@ -28,7 +28,11 @@ const Section = memo(({title, icon: Icon, children}: SectionProps) => {
         <span className="font-semibold text-foreground/80">{title}:</span>
         <div
           className={
-            `${isTwoColumn ? 'grid grid-flow-col grid-rows-2 auto-cols-max gap-x-4 gap-y-1 h-10' : 'flex items-center gap-x-2 h-7'} shrink-0 ` +
+            `${
+              isTwoColumn
+                ? 'grid grid-flow-col grid-rows-2 auto-cols-max gap-x-4 gap-y-1 h-10'
+                : 'flex items-center gap-x-2 h-7'
+            } shrink-0 ` +
             `${
               isTwoColumn &&
               `content-center items-start ${Children.count(children) > 1 ? 'justify-start' : 'justify-center'}`

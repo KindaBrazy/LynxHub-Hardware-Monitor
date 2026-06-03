@@ -74,6 +74,9 @@ const hmonitorSlice = createSlice({
       const hardware = hardwareList.find(item => item.name === name);
       if (hardware) {
         hardware.custom.push(metric);
+        if (!hardware.enabled.includes(metric.id)) {
+          hardware.enabled.push(metric.id);
+        }
       }
     },
     removeCustomMetric: (state, action: PayloadAction<{type: MetricType; name: string; metricId: string}>) => {
@@ -82,7 +85,14 @@ const hmonitorSlice = createSlice({
       const hardware = hardwareList.find(item => item.name === name);
       if (hardware) {
         hardware.custom = hardware.custom.filter(m => m.id !== metricId);
+        hardware.enabled = hardware.enabled.filter(m => m !== metricId);
       }
+    },
+    updateSectionOrder: (state, action: PayloadAction<string[]>) => {
+      state.sectionOrder = action.payload;
+    },
+    updateUptimeOrder: (state, action: PayloadAction<string[]>) => {
+      state.uptimeOrder = action.payload;
     },
   },
 });

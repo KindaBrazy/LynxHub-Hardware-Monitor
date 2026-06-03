@@ -2,7 +2,7 @@ import {Link, Separator} from '@heroui/react';
 import ShinyText from '@lynx/components/ShinyText';
 import {useAppState} from '@lynx/redux/reducers/app';
 import {ChevronLeft, ChevronRight} from 'lucide-react';
-import {memo, ReactNode, useMemo} from 'react';
+import {ComponentType, memo, ReactNode, useMemo} from 'react';
 
 import useHardwareData from '../../hooks/useHardwareData';
 import useScrollManager from '../../hooks/useScrollManager';
@@ -34,6 +34,8 @@ function HardwareStatusBar() {
   const enabledMetrics = useHMonitorState('enabledMetrics');
   const availableHardware = useHMonitorState('availableHardware');
   const pingState = useHMonitorState('pingState');
+
+  const sectionOrder = useHMonitorState('sectionOrder');
 
   const darkMode = useAppState('darkMode');
 
@@ -84,58 +86,73 @@ function HardwareStatusBar() {
     if (!isConnected || !hardwareData) return [];
 
     const elements: ReactNode[] = [];
+    const orderedSections = sectionOrder || ['cpu', 'gpu', 'memory', 'network', 'uptime', 'ping'];
 
-    // 1. Process main modular hardware sections
-    SECTIONS_CONFIG.forEach(({type, Component}) => {
-      if (!hasMetricsEnabled[type]) return;
+    orderedSections.forEach(sectionType => {
+      if (sectionType === 'uptime') {
+        if (hasMetricsEnabled.uptime) {
+          elements.push(<UptimeSection key="uptime" data={hardwareData.uptime} metrics={enabledMetrics.uptime} />);
+        }
+      } else if (sectionType === 'ping') {
+        if (pingState.isActive) {
+          elements.push(<PingSection key="ping" />);
+        }
+      } else {
+        const config = SECTIONS_CONFIG.find(c => c.type === sectionType);
+        if (!config || !hasMetricsEnabled[sectionType]) return;
 
-      const metricsList = enabledMetrics?.[type] || [];
-      const hardwareDataList = hardwareData[type] || [];
-      const availableList = availableHardware?.[type] || [];
+        const metricsList = enabledMetrics?.[sectionType] || [];
+        const hardwareDataList = hardwareData[sectionType] || [];
+        const availableList = availableHardware?.[sectionType] || [];
 
-      // Cast to generic ComponentType to avoid TS intersection mismatches
-      const GenericComponent = Component as React.ComponentType<any>;
+        // Cast to generic ComponentType to avoid TS intersection mismatches
+        const GenericComponent = config.Component as ComponentType<any>;
 
-      metricsList.forEach((metric, index) => {
-        if (!metric.active) return;
+        metricsList.forEach((metric, index) => {
+          if (!metric.active) return;
 
-        const data = hardwareDataList.find((item: any) => item.name === metric.name);
-        const hardwareInfo = availableList.find((h: any) => h.name === metric.name);
+          const data = hardwareDataList.find((item: any) => item.name === metric.name);
+          const hardwareInfo = availableList.find((h: any) => h.name === metric.name);
 
-        if (!data && !hardwareInfo) return;
+          if (!data && !hardwareInfo) return;
 
-        elements.push(
-          <GenericComponent
-            data={data}
-            metrics={metric}
-            hardwareInfo={hardwareInfo}
-            key={`${type}_${metric.name}_${index}`}
-            rawSensorValues={hardwareData.rawSensors}
-          />,
-        );
-      });
+          elements.push(
+            <GenericComponent
+              data={data}
+              metrics={metric}
+              hardwareInfo={hardwareInfo}
+              rawSensorValues={hardwareData.rawSensors}
+              key={`${sectionType}_${metric.name}_${index}`}
+            />,
+          );
+        });
+      }
     });
-
-    // 2. Process Uptime section (non-iterable)
-    if (hasMetricsEnabled.uptime) {
-      elements.push(<UptimeSection key="uptime" data={hardwareData.uptime} metrics={enabledMetrics.uptime} />);
-    }
-
-    if (pingState.isActive) {
-      elements.push(<PingSection key="ping" />);
-    }
 
     // 3. Inject vertical separators dynamically between active elements
     return elements.reduce<ReactNode[]>((acc, element, index) => {
       if (index > 0) {
         acc.push(
-          <Separator className={displayStyle.includes('two-column') ? 'my-1 h-10' : 'my-2'} key={`sep_${index}`} orientation="vertical" />,
+          <Separator
+            key={`sep_${index}`}
+            orientation="vertical"
+            className={displayStyle.includes('two-column') ? 'my-1 h-10' : 'my-2'}
+          />,
         );
       }
       acc.push(element);
       return acc;
     }, []);
-  }, [isConnected, hardwareData, enabledMetrics, availableHardware, hasMetricsEnabled, pingState, displayStyle]);
+  }, [
+    isConnected,
+    hardwareData,
+    enabledMetrics,
+    availableHardware,
+    hasMetricsEnabled,
+    pingState,
+    displayStyle,
+    sectionOrder,
+  ]);
 
   if (!enabled) return null;
 
@@ -171,11 +188,11 @@ function HardwareStatusBar() {
       )}
 
       <div
-        ref={initRef}
-        style={{scrollbarWidth: 'none', msOverflowStyle: 'none'}}
         className={`h-full flex items-center ${isSmallStyle ? 'px-2' : 'px-3'} ${
           displayStyle.includes('raw') ? 'gap-x-3' : 'gap-x-2'
-        } overflow-x-auto`}>
+        } overflow-x-auto`}
+        ref={initRef}
+        style={{scrollbarWidth: 'none', msOverflowStyle: 'none'}}>
         {isConnected ? renderedElements : <div className="w-full text-center">{errorElement}</div>}
       </div>
     </div>

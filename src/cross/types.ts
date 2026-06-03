@@ -113,6 +113,8 @@ export type MonitoringSettings = {
   showAliasGpu: boolean;
   showAliasMemory: boolean;
   showAliasNetwork: boolean;
+  sectionOrder?: string[];
+  uptimeOrder?: string[];
 };
 
 // Union type for all possible metric identifiers

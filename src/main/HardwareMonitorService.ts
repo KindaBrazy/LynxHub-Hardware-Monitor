@@ -183,6 +183,8 @@ class HardwareMonitorService {
       showAliasGpu: storedConfig.showAliasGpu ?? initialSettings.showAliasGpu,
       showAliasMemory: storedConfig.showAliasMemory ?? initialSettings.showAliasMemory,
       showAliasNetwork: storedConfig.showAliasNetwork ?? initialSettings.showAliasNetwork,
+      sectionOrder: storedConfig.sectionOrder ?? initialSettings.sectionOrder,
+      uptimeOrder: storedConfig.uptimeOrder ?? initialSettings.uptimeOrder,
     };
   }
 
