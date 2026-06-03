@@ -467,7 +467,7 @@ export default function SettingsModal({state}: SettingsModalProps) {
   };
 
   return (
-    <TabModal size="lg" isOpen={state.isOpen} onOpenChange={handleOpenChange} dialogClassName="max-w-3xl px-0">
+    <TabModal size="lg" isOpen={state.isOpen} onOpenChange={handleOpenChange} dialogClassName="max-w-4xl px-0">
       <Modal.CloseTrigger />
       <Modal.Header className="px-5">
         <Modal.Heading className="items-center justify-center">Hardware Monitor Settings</Modal.Heading>
