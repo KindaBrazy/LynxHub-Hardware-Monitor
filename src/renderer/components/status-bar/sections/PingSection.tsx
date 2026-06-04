@@ -17,15 +17,14 @@ function PingSection() {
   const renderElements = useMemo(() => {
     return Array.from(new Set(pingState.enabledHosts)).map(host => {
       const item = hostResults[host];
-      const value =
-        !item || !item.latency ? '-1' : `${item.latency} ms`;
+      const value = !item || !item.latency ? '-1' : `${item.latency} ms`;
 
       return (
         <MetricItem
-          value={value}
           icon={Zap}
           key={host}
           label={host}
+          value={value}
           colorClass={value === '-1' ? 'text-warning' : undefined}
         />
       );

@@ -21,11 +21,22 @@ import {AppDispatch} from '@lynx/redux/store';
 import storageIpc from '@lynx_shared/ipc/storage';
 import {Diskette} from '@solar-icons/react-perf/BoldDuotone';
 import {AnimatePresence, motion, Reorder} from 'framer-motion';
-import {ArrowDown, ArrowUp, Clock, Cpu, Database, GripVertical, LucideProps, Thermometer, Timer} from 'lucide-react';
+import {
+  ArrowDown,
+  ArrowUp,
+  Clock,
+  Cpu,
+  Database,
+  GripVertical,
+  LucideProps,
+  RotateCcw,
+  Thermometer,
+  Timer,
+} from 'lucide-react';
 import {ForwardRefExoticComponent, ReactNode, useCallback, useMemo, useState} from 'react';
 import {useDispatch} from 'react-redux';
 
-import {HMONITOR_STORAGE_ID} from '../../../cross/constants';
+import {HMONITOR_IPC_RESET_CONFIG, HMONITOR_STORAGE_ID} from '../../../cross/constants';
 import {DisplayStyle, MetricType, MonitoringSettings, SystemMetric} from '../../../cross/types';
 import {hmonitorActions, useHMonitorSelector} from '../../state/hmonitorSlice';
 import MetricVisibilitySettings from './MetricVisibilitySettings';
@@ -108,6 +119,15 @@ export default function SettingsModal({state}: SettingsModalProps) {
       setIsSaving(false);
       topToast.success('Settings saved successfully!');
     }, 700);
+  };
+
+  const resetSettings = () => {
+    setIsSaving(true);
+    window.electron.ipcRenderer.send(HMONITOR_IPC_RESET_CONFIG);
+    setTimeout(() => {
+      setIsSaving(false);
+      topToast.success('Settings reset successfully!');
+    }, 1000);
   };
 
   const toggleHardwareActive = useCallback(
@@ -588,7 +608,11 @@ export default function SettingsModal({state}: SettingsModalProps) {
         </LynxScroll>
       </Modal.Body>
 
-      <Modal.Footer className="px-4">
+      <Modal.Footer className="px-4 justify-between w-full flex flex-row">
+        <Button variant="danger-soft" isDisabled={isSaving} onPress={resetSettings}>
+          <RotateCcw className="size-4" />
+          Reset to Default
+        </Button>
         <Button isPending={isSaving} onPress={saveSettings}>
           {isSaving ? <Spinner color="current" /> : <Diskette />}
           {!isSaving && 'Save Settings'}

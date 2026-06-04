@@ -8,6 +8,7 @@ export const HMONITOR_IPC_DATA_UPDATE: string = 'hmonitor-data-update';
 export const HMONITOR_IPC_CONFIG_UPDATE: string = 'hmonitor-config-update';
 export const HMONITOR_IPC_MONITORING_ERROR: string = 'hmonitor-monitoring-error';
 export const HMONITOR_IPC_SET_CONFIG: string = 'hmonitor-set-config';
+export const HMONITOR_IPC_RESET_CONFIG: string = 'hmonitor-reset-config';
 
 export const HMONITOR_IPC_UPDATE_PING: string = 'hmonitor-update-ping';
 export const HMONITOR_IPC_STOP_PING: string = 'hmonitor-stop-ping';

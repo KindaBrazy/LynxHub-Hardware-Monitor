@@ -10,6 +10,7 @@ import {
   HMONITOR_IPC_CONFIG_UPDATE,
   HMONITOR_IPC_DATA_UPDATE,
   HMONITOR_IPC_MONITORING_ERROR,
+  HMONITOR_IPC_RESET_CONFIG,
   HMONITOR_IPC_SET_CONFIG,
   HMONITOR_IPC_STOP_PING,
   HMONITOR_IPC_UPDATE_PING,
@@ -399,11 +400,39 @@ class HardwareMonitorService {
     this.startPinging();
   }
 
+  private async resetConfig(): Promise<void> {
+    if (!this.storeManager) return;
+
+    this.config = {
+      ...initialSettings,
+      pingState: {
+        ...initialSettings.pingState,
+        hosts: [],
+        enabledHosts: [],
+      },
+    };
+    this.saveConfig();
+
+    this.stopMonitoring();
+
+    const stopPinger = (pinger: Pinger) => {
+      pinger.stop();
+      this.sendToRenderer(HMONITOR_IPC_STOP_PING, pinger.host);
+    };
+    this.pingers.forEach(stopPinger);
+    this.pingers = [];
+
+    await this.discoverHardware();
+  }
+
   private registerIpcHandlers(): void {
     ipcMain.on(HMONITOR_IPC_SET_CONFIG, (_, newConfig: string) => {
       // JSON serialization over IPC can turn undefined into null
       if (isNil(newConfig)) return;
       this.updateConfig(JSON.parse(newConfig));
+    });
+    ipcMain.on(HMONITOR_IPC_RESET_CONFIG, () => {
+      void this.resetConfig();
     });
   }
 }
