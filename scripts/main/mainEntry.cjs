@@ -10780,7 +10780,7 @@ async function downloadAndExtractLatestCli(repoOwner, repoName, cliName, baseDes
       } else {
         log("error", "An unexpected error occurred while finding a local fallback:", fsError.message);
       }
-      throw new Error(`No local versions of ${cliName} are available.`);
+      throw new Error(`No local versions of ${cliName} are available.`, { cause: fsError });
     }
   };
   try {
@@ -10926,7 +10926,7 @@ class HardwareMonitor extends node_events.EventEmitter {
     };
     const isDotNetInstalled = await checkDotNetRuntime9(logger);
     if (!isDotNetInstalled) {
-      throw new Error(".NET 10 runtime not found. Please install it from https://dotnet.microsoft.com/download/dotnet/10.0");
+      throw new Error(".NET 10.0 runtime not found. Please install it from https://dotnet.microsoft.com/download/dotnet/10.0");
     }
     this.executablePath = await DownloadCli(targetDir, this.logLevel);
     this.log("info", "✅ Lynx Hardware Monitor is ready to use.");
@@ -11921,6 +11921,9 @@ const HMONITOR_IPC_DATA_UPDATE = "hmonitor-data-update";
 const HMONITOR_IPC_CONFIG_UPDATE = "hmonitor-config-update";
 const HMONITOR_IPC_MONITORING_ERROR = "hmonitor-monitoring-error";
 const HMONITOR_IPC_SET_CONFIG = "hmonitor-set-config";
+const HMONITOR_IPC_RESET_CONFIG = "hmonitor-reset-config";
+const HMONITOR_IPC_UPDATE_PING = "hmonitor-update-ping";
+const HMONITOR_IPC_STOP_PING = "hmonitor-stop-ping";
 const initialAvailableHardware = {
   gpu: [],
   cpu: [],
@@ -11941,7 +11944,7 @@ const initialEnabledMetrics = {
   uptime: { system: true, app: true }
 };
 const initialSettings = {
-  configVersion: 0.5,
+  configVersion: 0.6,
   // Version to handle future settings migrations
   refreshInterval: 1,
   // in seconds
@@ -11950,8 +11953,134 @@ const initialSettings = {
   showSectionLabel: true,
   metricVisibility: initialMetricVisibility,
   enabledMetrics: initialEnabledMetrics,
-  availableHardware: initialAvailableHardware
+  availableHardware: initialAvailableHardware,
+  pingState: {
+    isActive: false,
+    hosts: [],
+    enabledHosts: [],
+    interval: 1e3,
+    timeout: 2e3
+  },
+  showAliasCpu: true,
+  showAliasGpu: true,
+  showAliasMemory: true,
+  showAliasNetwork: true,
+  sectionOrder: ["cpu", "gpu", "memory", "network", "uptime", "ping"],
+  uptimeOrder: ["uptimeSystem", "uptimeApp"]
 };
+class Pinger {
+  config;
+  isWindows;
+  running = false;
+  timer = null;
+  host;
+  // Callbacks for consumers to handle the events
+  onResult;
+  onError;
+  constructor(config) {
+    this.host = config.host;
+    this.config = {
+      host: config.host,
+      intervalMs: config.intervalMs,
+      timeoutMs: config.timeoutMs ?? 2e3
+    };
+    this.isWindows = os.platform() === "win32";
+  }
+  /**
+   * Starts the ping loop.
+   */
+  start() {
+    if (this.running) return;
+    this.running = true;
+    this.loop();
+  }
+  /**
+   * Stops the ping loop.
+   */
+  stop() {
+    this.running = false;
+    if (this.timer) {
+      clearTimeout(this.timer);
+      this.timer = null;
+    }
+  }
+  /**
+   * Recursive loop to ensure pings do not overlap if the response
+   * takes longer than the specified interval.
+   */
+  async loop() {
+    if (!this.running) return;
+    const startTime = Date.now();
+    try {
+      const result = await this.ping();
+      if (this.running && this.onResult) {
+        this.onResult(result);
+      }
+    } catch (err) {
+      if (this.running && this.onError) {
+        this.onError(err instanceof Error ? err : new Error(String(err)));
+      }
+    }
+    const elapsed = Date.now() - startTime;
+    const delay = Math.max(0, this.config.intervalMs - elapsed);
+    if (this.running) {
+      this.timer = setTimeout(() => this.loop(), delay);
+    }
+  }
+  /**
+   * Executes a single ping command and parses the output.
+   */
+  ping() {
+    return new Promise((resolve) => {
+      const command = this.buildCommand();
+      const timestamp = /* @__PURE__ */ new Date();
+      node_child_process.exec(command, (error, stdout, stderr) => {
+        const result = {
+          host: this.config.host,
+          alive: false,
+          timestamp
+        };
+        if (error) {
+          result.error = stderr || error.message;
+          result.rawOutput = stdout;
+          return resolve(result);
+        }
+        const latency = this.parseLatency(stdout);
+        if (latency !== null) {
+          result.alive = true;
+          result.latency = latency;
+        } else {
+          result.alive = false;
+          result.rawOutput = stdout;
+        }
+        resolve(result);
+      });
+    });
+  }
+  /**
+   * Generates the appropriate OS-specific ping command.
+   */
+  buildCommand() {
+    const { host, timeoutMs } = this.config;
+    if (this.isWindows) {
+      return `ping -n 1 -w ${timeoutMs} ${host}`;
+    } else {
+      const timeoutSec = Math.max(1, Math.ceil(timeoutMs / 1e3));
+      return `ping -c 1 -W ${timeoutSec} ${host}`;
+    }
+  }
+  /**
+   * Extract latency in milliseconds from standard ping output.
+   */
+  parseLatency(stdout) {
+    const match = /time[=<]([\d.]+)\s*ms/i.exec(stdout);
+    if (match && match[1]) {
+      const parsed = parseFloat(match[1]);
+      return isNaN(parsed) ? null : parsed;
+    }
+    return null;
+  }
+}
 function getActiveComponentTypes(metrics) {
   const activeComponents = /* @__PURE__ */ new Set();
   if (metrics.cpu.some((c) => c.active && (c.enabled.length > 0 || c.custom?.length > 0))) {
@@ -11972,6 +12101,7 @@ function getActiveComponentTypes(metrics) {
   return Array.from(activeComponents);
 }
 const HARDWARE_CHECK_MAX_RETRIES = 5;
+const HARDWARE_REDISCOVERY_DELAY_MS = 1e4;
 class HardwareMonitorService {
   static instance;
   storeManager;
@@ -11979,6 +12109,10 @@ class HardwareMonitorService {
   config = initialSettings;
   webContents;
   isInitialized = false;
+  lastError = null;
+  pingers = [];
+  rediscoveryTimer;
+  discoveryPromise;
   constructor() {
   }
   static getInstance() {
@@ -11994,10 +12128,41 @@ class HardwareMonitorService {
     if (this.isInitialized) return;
     this.storeManager = await utils.getStorageManager();
     this.loadConfig();
-    await this.discoverHardware();
-    this.saveConfig();
+    this.startPinging();
     this.registerIpcHandlers();
     this.isInitialized = true;
+    void this.discoverHardware();
+  }
+  startPinging() {
+    const pingState = this.config.pingState;
+    const stopPinger = (pinger) => {
+      pinger.stop();
+      this.sendToRenderer(HMONITOR_IPC_STOP_PING, pinger.host);
+    };
+    this.pingers.forEach(stopPinger);
+    this.pingers = [];
+    if (pingState.isActive) {
+      Array.from(new Set(pingState.enabledHosts)).forEach((host) => {
+        if (!this.pingers.some((p) => p.host === host)) {
+          const pinger = new Pinger({ host, timeoutMs: pingState.timeout, intervalMs: pingState.interval });
+          pinger.onResult = (result) => {
+            const timeString = result.timestamp.toLocaleTimeString();
+            if (result.alive) {
+              const data = { host, timeString, latency: result.latency };
+              this.sendToRenderer(HMONITOR_IPC_UPDATE_PING, data);
+            } else {
+              this.sendToRenderer(HMONITOR_IPC_UPDATE_PING, host);
+            }
+          };
+          pinger.onError = () => {
+            this.sendToRenderer(HMONITOR_IPC_UPDATE_PING, host);
+          };
+          electron.app.on("window-all-closed", () => pinger.stop());
+          pinger.start();
+          this.pingers.push(pinger);
+        }
+      });
+    }
   }
   /**
    * Sets the webContents for IPC communication and starts monitoring if enabled.
@@ -12005,9 +12170,12 @@ class HardwareMonitorService {
   onMainWindowReady(utils) {
     utils.getAppManager().then((appManager) => {
       this.webContents = appManager.getWebContent();
+      if (this.lastError) {
+        this.sendToRenderer(HMONITOR_IPC_MONITORING_ERROR, this.lastError);
+      }
       this.sendToRenderer(HMONITOR_IPC_CONFIG_UPDATE, this.config);
       if (this.config.enabled) {
-        this.startMonitoring();
+        void this.startMonitoring();
       }
     });
   }
@@ -12030,7 +12198,11 @@ class HardwareMonitorService {
           enabledMetrics: storedConfig.enabledMetrics,
           // Carry over old metric selections
           // Migrate compactMode to displayStyle
-          displayStyle: storedConfig.compactMode ? "compact" : "default"
+          displayStyle: storedConfig.compactMode ? "compact" : "default",
+          showAliasCpu: storedConfig.showAliasCpu ?? initialSettings.showAliasCpu,
+          showAliasGpu: storedConfig.showAliasGpu ?? initialSettings.showAliasGpu,
+          showAliasMemory: storedConfig.showAliasMemory ?? initialSettings.showAliasMemory,
+          showAliasNetwork: storedConfig.showAliasNetwork ?? initialSettings.showAliasNetwork
         },
         configVersion: initialSettings.configVersion
         // Ensure version is updated
@@ -12042,12 +12214,34 @@ class HardwareMonitorService {
       migratedConfig.enabledMetrics.network.forEach((n) => n.custom ??= []);
       storedConfig = migratedConfig;
     }
-    this.config = { ...storedConfig, availableHardware: initialSettings.availableHardware };
+    if (!storedConfig.pingState) {
+      storedConfig.pingState = initialSettings.pingState;
+    }
+    this.config = {
+      ...storedConfig,
+      availableHardware: storedConfig.availableHardware ?? initialSettings.availableHardware,
+      showAliasCpu: storedConfig.showAliasCpu ?? initialSettings.showAliasCpu,
+      showAliasGpu: storedConfig.showAliasGpu ?? initialSettings.showAliasGpu,
+      showAliasMemory: storedConfig.showAliasMemory ?? initialSettings.showAliasMemory,
+      showAliasNetwork: storedConfig.showAliasNetwork ?? initialSettings.showAliasNetwork,
+      sectionOrder: storedConfig.sectionOrder ?? initialSettings.sectionOrder,
+      uptimeOrder: storedConfig.uptimeOrder ?? initialSettings.uptimeOrder
+    };
   }
   saveConfig() {
     this.storeManager?.setCustomData(HMONITOR_STORAGE_ID, this.config);
   }
   async discoverHardware() {
+    if (this.discoveryPromise) {
+      return this.discoveryPromise;
+    }
+    this.discoveryPromise = this.performHardwareDiscovery().finally(() => {
+      this.discoveryPromise = void 0;
+    });
+    return this.discoveryPromise;
+  }
+  async performHardwareDiscovery() {
+    this.clearRediscoveryTimer();
     for (let i = 0; i < HARDWARE_CHECK_MAX_RETRIES; i++) {
       try {
         const monitor = new HardwareMonitor("error");
@@ -12055,14 +12249,15 @@ class HardwareMonitorService {
         await monitor.checkRequirements(targetDir);
         const result = await monitor.getDataOnce(["cpu", "gpu", "memory", "network"]);
         const mapToHardwareInfo = (items) => {
+          if (!items) return [];
           return items.map((item) => ({
             name: item.Name,
-            sensors: item.Sensors.map((s) => ({
+            sensors: item.Sensors?.map((s) => ({
               Name: s.Name,
               Type: s.Type,
               Unit: s.Unit,
               Identifier: s.Identifier
-            }))
+            })) ?? []
           }));
         };
         this.config.availableHardware = {
@@ -12111,29 +12306,59 @@ class HardwareMonitorService {
             });
           }
         });
+        this.lastError = null;
+        this.saveConfig();
         this.sendToRenderer(HMONITOR_IPC_CONFIG_UPDATE, this.config);
+        if (this.config.enabled && !this.hwMonitor) {
+          void this.startMonitoring();
+        }
         return;
       } catch (error) {
         console.warn(`Hardware discovery attempt ${i + 1} failed:`, error);
         if (i === HARDWARE_CHECK_MAX_RETRIES - 1) {
           console.error("All hardware discovery attempts failed.");
+          this.lastError = error;
           this.sendToRenderer(HMONITOR_IPC_MONITORING_ERROR, error);
+          this.scheduleRediscovery();
         }
       }
     }
+  }
+  scheduleRediscovery() {
+    if (this.rediscoveryTimer) return;
+    this.rediscoveryTimer = setTimeout(() => {
+      this.rediscoveryTimer = void 0;
+      void this.discoverHardware();
+    }, HARDWARE_REDISCOVERY_DELAY_MS);
+  }
+  clearRediscoveryTimer() {
+    if (!this.rediscoveryTimer) return;
+    clearTimeout(this.rediscoveryTimer);
+    this.rediscoveryTimer = void 0;
   }
   async startMonitoring() {
     if (this.hwMonitor || !this.config) {
       return;
     }
     try {
+      const components = getActiveComponentTypes(this.config.enabledMetrics);
+      if (components.length === 0 || components.every((component) => component === "uptime")) {
+        const hasDiscoveredHardware = Object.values(this.config.availableHardware).some((items) => items.length > 0);
+        if (!hasDiscoveredHardware) {
+          this.scheduleRediscovery();
+          return;
+        }
+      }
       this.hwMonitor = new HardwareMonitor("error");
       const targetDir = path.join(electron.app.getPath("downloads"), "LynxHub");
       await this.hwMonitor.checkRequirements(targetDir);
       this.hwMonitor.on("data", (data) => {
-        const rawSensors = [...data.CPU, ...data.GPU, ...data.Memory, ...data.Network ?? []].flatMap(
-          (h) => h.Sensors.map((s) => ({ Identifier: s.Identifier, Value: s.Value }))
-        );
+        const rawSensors = [
+          ...data.CPU ?? [],
+          ...data.GPU ?? [],
+          ...data.Memory ?? [],
+          ...data.Network ?? []
+        ].flatMap((h) => h.Sensors?.map((s) => ({ Identifier: s.Identifier, Value: s.Value })) ?? []);
         const reportWithRawSensors = { ...data, rawSensors };
         this.sendToRenderer(HMONITOR_IPC_DATA_UPDATE, reportWithRawSensors);
       });
@@ -12142,7 +12367,6 @@ class HardwareMonitorService {
         this.sendToRenderer(HMONITOR_IPC_MONITORING_ERROR, error);
       });
       const intervalMs = (this.config.refreshInterval || 1) * 1e3;
-      const components = getActiveComponentTypes(this.config.enabledMetrics);
       if (components.length > 0) {
         this.hwMonitor.startTimed(intervalMs, components);
       }
@@ -12158,21 +12382,45 @@ class HardwareMonitorService {
   updateConfig(newConfig) {
     const oldConfig = this.config;
     const shouldRestart = !isEqual(newConfig.enabledMetrics, oldConfig.enabledMetrics) || !isEqual(newConfig.refreshInterval, oldConfig.refreshInterval);
+    this.config = newConfig;
+    this.saveConfig();
     if (newConfig.enabled && shouldRestart) {
       this.stopMonitoring();
     }
     if (newConfig.enabled !== oldConfig.enabled) {
-      newConfig.enabled ? this.startMonitoring() : this.stopMonitoring();
+      newConfig.enabled ? void this.startMonitoring() : this.stopMonitoring();
     } else if (newConfig.enabled && shouldRestart) {
-      this.startMonitoring();
+      void this.startMonitoring();
     }
-    this.config = newConfig;
+    this.startPinging();
+  }
+  async resetConfig() {
+    if (!this.storeManager) return;
+    this.config = {
+      ...initialSettings,
+      pingState: {
+        ...initialSettings.pingState,
+        hosts: [],
+        enabledHosts: []
+      }
+    };
     this.saveConfig();
+    this.stopMonitoring();
+    const stopPinger = (pinger) => {
+      pinger.stop();
+      this.sendToRenderer(HMONITOR_IPC_STOP_PING, pinger.host);
+    };
+    this.pingers.forEach(stopPinger);
+    this.pingers = [];
+    await this.discoverHardware();
   }
   registerIpcHandlers() {
     electron.ipcMain.on(HMONITOR_IPC_SET_CONFIG, (_, newConfig) => {
       if (isNil(newConfig)) return;
       this.updateConfig(JSON.parse(newConfig));
+    });
+    electron.ipcMain.on(HMONITOR_IPC_RESET_CONFIG, () => {
+      void this.resetConfig();
     });
   }
 }
