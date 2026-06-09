@@ -2,15 +2,22 @@
   "$schema": "https://raw.githubusercontent.com/KindaBrazy/LynxHub-Statics/refs/heads/schema/plugins/versioning.schema.json",
   "versions": [
     {
+      "version": "0.15.0",
+      "commit": "6486608",
+      "engines": {
+        "extensionApi": "^2.0.0"
+      },
+      "stage": "early_access",
+      "platforms": ["win32"]
+    },
+    {
       "version": "0.14.2",
       "commit": "2291139",
       "engines": {
         "extensionApi": "^2.0.0"
       },
       "stage": "public",
-      "platforms": [
-        "win32"
-      ]
+      "platforms": ["win32"]
     },
     {
       "version": "0.14.0",
@@ -19,9 +26,7 @@
         "extensionApi": "^1.0.0"
       },
       "stage": "public",
-      "platforms": [
-        "win32"
-      ]
+      "platforms": ["win32"]
     },
     {
       "version": "0.13.0",
@@ -30,12 +35,42 @@
         "extensionApi": "^1.0.0"
       },
       "stage": "public",
-      "platforms": [
-        "win32"
-      ]
+      "platforms": ["win32"]
     }
   ],
   "changes": [
+    {
+      "version": "0.15.0",
+      "date": "2026-06-09",
+      "items": [
+        {
+          "✨ New Features": [
+            "Introduce real-time network ping latency monitoring.",
+            "Add support for custom aliases on monitor labels.",
+            "Implement drag-and-drop reordering for categories and items.",
+            "Add a factory reset option to restore default data and settings."
+          ],
+          "⚡ Improvements": [
+            "Optimized rendering performance for the status bar and its items.",
+            "Enhanced core hardware discovery speed and efficiency.",
+            "Refined the visual layout for two-column and raw styles in the status bar.",
+            "Improved hardware detection reliability on initial application startup.",
+            "Adjusted status bar color thresholds: green now represents values below 60 (previously 50).",
+            "Polished UI spacing by reducing gaps between categories.",
+            "Updated the tools page icon and increased the maximum width of the settings modal."
+          ],
+          "🐛 Bug Fixes": [
+            "Resolved a bottleneck where the extension slowed down LynxHub's startup time.",
+            "Cleaned up residual event listeners to prevent potential memory leaks.",
+            "Fixed application crashes and unhandled errors during hardware data discovery.",
+            "Fixed a bug causing percentages and progress bars to overflow past 100%.",
+            "Resolved an issue where missing .NET frameworks or related errors failed to display properly in the status bar.",
+            "Fixed the layout of the 'Admin Required' icon within the two-column view."
+          ],
+          "📌 Minor Changes": ["Removed redundant network label selection options."]
+        }
+      ]
+    },
     {
       "version": "0.14.2",
       "date": "2026-05-09",
@@ -59,25 +94,17 @@
             "Added custom sensor metrics and improved hardware discovery.",
             "Added support for network monitoring.",
             {
-              "Added three new status bar styles:": [
-                "Two Column",
-                "Raw Text",
-                "Raw Text (Two Column)"
-              ]
+              "Added three new status bar styles:": ["Two Column", "Raw Text", "Raw Text (Two Column)"]
             },
             "Updated the Tools page card design to match the new V3.3.0 style.",
             "Refreshed the Settings UI with an improved layout and new animations."
           ]
         },
         {
-          "⚡ Improvements": [
-            "Updated the .NET runtime from version 8 to 9."
-          ]
+          "⚡ Improvements": ["Updated the .NET runtime from version 8 to 9."]
         },
         {
-          "🐛 Bug Fixes": [
-            "Fixed an issue where the 'Show Section Labels' option was not working."
-          ]
+          "🐛 Bug Fixes": ["Fixed an issue where the 'Show Section Labels' option was not working."]
         }
       ]
     },
@@ -86,15 +113,10 @@
       "date": "2025-10-24",
       "items": [
         {
-          "Improvements": [
-            "Support LynxHub Version 3.3.0",
-            "Implemented retry logic for device checks"
-          ]
+          "Improvements": ["Support LynxHub Version 3.3.0", "Implemented retry logic for device checks"]
         },
         {
-          "Bug Fixes": [
-            "Fixed tools page icon."
-          ]
+          "Bug Fixes": ["Fixed tools page icon."]
         }
       ]
     },
@@ -103,14 +125,10 @@
       "date": "2025-07-29",
       "items": [
         {
-          "New Features": [
-            "Introduce customizable metric visibility settings."
-          ]
+          "New Features": ["Introduce customizable metric visibility settings."]
         },
         {
-          "Improvements": [
-            "Improve 'Admin Require' layout to support compact mode configuration"
-          ]
+          "Improvements": ["Improve 'Admin Require' layout to support compact mode configuration"]
         },
         {
           "Bug Fixes": [
@@ -126,10 +144,7 @@
       "date": "2025-07-28",
       "items": [
         {
-          "New Features": [
-            "Multi-hardware metrics toggle added.",
-            "Option to toggle metric labels."
-          ]
+          "New Features": ["Multi-hardware metrics toggle added.", "Option to toggle metric labels."]
         },
         {
           "Improvements": [
@@ -139,10 +154,7 @@
           ]
         },
         {
-          "Bug Fixes": [
-            "Performance and interval issues fixed.",
-            "Fixed white screen issue from extensions."
-          ]
+          "Bug Fixes": ["Performance and interval issues fixed.", "Fixed white screen issue from extensions."]
         }
       ]
     },
@@ -151,9 +163,7 @@
       "date": "2025-06-21",
       "items": [
         {
-          "New Features": [
-            "Add VRAM monitoring."
-          ]
+          "New Features": ["Add VRAM monitoring."]
         }
       ]
     },
