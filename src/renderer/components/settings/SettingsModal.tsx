@@ -117,7 +117,7 @@ export default function SettingsModal({state}: SettingsModalProps) {
     dispatch(hmonitorActions.saveSettings());
     setTimeout(() => {
       setIsSaving(false);
-      toastHolder?.bottom.success('Settings saved successfully!');
+      toastHolder?.top.success('Settings saved successfully!');
     }, 700);
   };
 
@@ -126,7 +126,7 @@ export default function SettingsModal({state}: SettingsModalProps) {
     window.electron.ipcRenderer.send(HMONITOR_IPC_RESET_CONFIG);
     setTimeout(() => {
       setIsSaving(false);
-      toastHolder?.bottom.success('Settings reset successfully!');
+      toastHolder?.top.success('Settings reset successfully!');
     }, 1000);
   };
 
