@@ -16,7 +16,6 @@ import {
 } from '@heroui/react';
 import LynxSwitch from '@lynx/components/LynxSwitch';
 import TabModal from '@lynx/components/TabModal';
-import {topToast} from '@lynx/layouts/ToastProviders';
 import {AppDispatch} from '@lynx/redux/store';
 import storageIpc from '@lynx_shared/ipc/storage';
 import {Diskette} from '@solar-icons/react-perf/BoldDuotone';
@@ -38,6 +37,7 @@ import {useDispatch} from 'react-redux';
 
 import {HMONITOR_IPC_RESET_CONFIG, HMONITOR_STORAGE_ID} from '../../../cross/constants';
 import {DisplayStyle, MetricType, MonitoringSettings, SystemMetric} from '../../../cross/types';
+import {toastHolder} from '../../classHolder';
 import {hmonitorActions, useHMonitorSelector} from '../../state/hmonitorSlice';
 import MetricVisibilitySettings from './MetricVisibilitySettings';
 import PingSettings from './PingSettings';
@@ -117,7 +117,7 @@ export default function SettingsModal({state}: SettingsModalProps) {
     dispatch(hmonitorActions.saveSettings());
     setTimeout(() => {
       setIsSaving(false);
-      topToast.success('Settings saved successfully!');
+      toastHolder?.bottom.success('Settings saved successfully!');
     }, 700);
   };
 
@@ -126,7 +126,7 @@ export default function SettingsModal({state}: SettingsModalProps) {
     window.electron.ipcRenderer.send(HMONITOR_IPC_RESET_CONFIG);
     setTimeout(() => {
       setIsSaving(false);
-      topToast.success('Settings reset successfully!');
+      toastHolder?.bottom.success('Settings reset successfully!');
     }, 1000);
   };
 

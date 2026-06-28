@@ -2,6 +2,7 @@ import './index.css';
 
 import {ExtensionRendererApi} from '@lynx/plugins/extensions/types/api';
 
+import {setToast} from './classHolder';
 import HardwareStatusBar from './components/status-bar/HardwareStatusBar';
 import ConfigProvider from './integrations/ConfigProvider';
 import ToolsPage from './integrations/ToolsPage';
@@ -14,6 +15,7 @@ import hmonitorReducer from './state/hmonitorSlice';
 export function InitialExtensions(lynxAPI: ExtensionRendererApi) {
   // Register the Redux slice for state management.
   lynxAPI.addReducer([{name: 'hmonitor', reducer: hmonitorReducer}]);
+  if (lynxAPI.toast) setToast(lynxAPI.toast);
 
   // Replace the default status bar container with our custom hardware monitor.
   // @ts-ignore-next-line - Type mismatch with host application, but functionally correct.
