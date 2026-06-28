@@ -44,11 +44,11 @@ export default function MetricVisibilitySettings() {
       <div className="flex flex-row gap-x-4">
         {VISIBILITY_OPTIONS.map(({value, label}) => (
           <Checkbox id={value} key={value} value={value} className="mt-2">
-            <Checkbox.Control className="size-5 rounded-lg before:rounded-lg">
-              <Checkbox.Indicator />
-            </Checkbox.Control>
             <Checkbox.Content>
-              <Label>{label}</Label>
+              <Checkbox.Control className="size-5 rounded-lg before:rounded-lg">
+                <Checkbox.Indicator />
+              </Checkbox.Control>
+              {label}
             </Checkbox.Content>
           </Checkbox>
         ))}

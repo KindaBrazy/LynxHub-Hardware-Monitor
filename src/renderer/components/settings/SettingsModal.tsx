@@ -231,12 +231,12 @@ export default function SettingsModal({state}: SettingsModalProps) {
                 />
                 <Checkbox variant="secondary" onChange={onToggle} isSelected={isSelected}>
                   <Checkbox.Content className="flex flex-row items-center gap-x-1">
+                    <Checkbox.Control>
+                      <Checkbox.Indicator />
+                    </Checkbox.Control>
                     <IconComp className="size-3.5 shrink-0" />
-                    <Label className="cursor-pointer select-none text-xs">{labelText}</Label>
+                    {labelText}
                   </Checkbox.Content>
-                  <Checkbox.Control>
-                    <Checkbox.Indicator />
-                  </Checkbox.Control>
                 </Checkbox>
               </Reorder.Item>
             );
@@ -288,12 +288,12 @@ export default function SettingsModal({state}: SettingsModalProps) {
               />
               <Checkbox variant="secondary" onChange={onToggle} isSelected={isSelected}>
                 <Checkbox.Content className="flex flex-row items-center gap-x-1">
+                  <Checkbox.Control>
+                    <Checkbox.Indicator />
+                  </Checkbox.Control>
                   <IconComp className="size-3.5 shrink-0" />
-                  <Label className="cursor-pointer select-none text-xs">{labelText}</Label>
+                  {labelText}
                 </Checkbox.Content>
-                <Checkbox.Control>
-                  <Checkbox.Indicator />
-                </Checkbox.Control>
               </Checkbox>
             </Reorder.Item>
           );
@@ -316,11 +316,11 @@ export default function SettingsModal({state}: SettingsModalProps) {
                     isSelected={settings.showAliasGpu}
                     onChange={val => updateState('showAliasGpu', val)}>
                     <Checkbox.Content>
-                      <Label className="cursor-pointer text-xs">Use Alias</Label>
+                      <Checkbox.Control>
+                        <Checkbox.Indicator />
+                      </Checkbox.Control>
+                      Use Alias
                     </Checkbox.Content>
-                    <Checkbox.Control>
-                      <Checkbox.Indicator />
-                    </Checkbox.Control>
                   </Checkbox>
                 )}
                 type="gpu"
@@ -346,11 +346,11 @@ export default function SettingsModal({state}: SettingsModalProps) {
                     isSelected={settings.showAliasCpu}
                     onChange={val => updateState('showAliasCpu', val)}>
                     <Checkbox.Content>
-                      <Label className="cursor-pointer text-xs">Use Alias</Label>
+                      <Checkbox.Control>
+                        <Checkbox.Indicator />
+                      </Checkbox.Control>
+                      Use Alias
                     </Checkbox.Content>
-                    <Checkbox.Control>
-                      <Checkbox.Indicator />
-                    </Checkbox.Control>
                   </Checkbox>
                 )}
                 type="cpu"
@@ -376,11 +376,11 @@ export default function SettingsModal({state}: SettingsModalProps) {
                     isSelected={settings.showAliasMemory}
                     onChange={val => updateState('showAliasMemory', val)}>
                     <Checkbox.Content>
-                      <Label className="cursor-pointer text-xs">Use Alias</Label>
+                      <Checkbox.Control>
+                        <Checkbox.Indicator />
+                      </Checkbox.Control>
+                      Use Alias
                     </Checkbox.Content>
-                    <Checkbox.Control>
-                      <Checkbox.Indicator />
-                    </Checkbox.Control>
                   </Checkbox>
                 )}
                 type="memory"
@@ -411,20 +411,23 @@ export default function SettingsModal({state}: SettingsModalProps) {
                       isDisabled={!selectedNetworkConfig.active}
                       onChange={val => updateState('showAliasNetwork', val)}>
                       <Checkbox.Content>
-                        <Label className="cursor-pointer text-xs">Use Alias</Label>
+                        <Checkbox.Control>
+                          <Checkbox.Indicator />
+                        </Checkbox.Control>
+                        Use Alias
                       </Checkbox.Content>
-                      <Checkbox.Control>
-                        <Checkbox.Indicator />
-                      </Checkbox.Control>
                     </Checkbox>
                   )}
                   {selectedNetworkConfig && (
                     <Switch
+                      aria-label="Toggle network monitoring"
                       isSelected={selectedNetworkConfig.active}
                       onChange={() => toggleHardwareActive(selectedNetworkName, 'network')}>
-                      <Switch.Control>
-                        <Switch.Thumb />
-                      </Switch.Control>
+                      <Switch.Content>
+                        <Switch.Control>
+                          <Switch.Thumb />
+                        </Switch.Control>
+                      </Switch.Content>
                     </Switch>
                   )}
                 </div>
@@ -503,10 +506,16 @@ export default function SettingsModal({state}: SettingsModalProps) {
                 When disabled, all metrics collection will be paused
               </Description>
             </div>
-            <Switch size="lg" isSelected={enabled} onChange={value => updateState('enabled', value)}>
-              <Switch.Control>
-                <Switch.Thumb />
-              </Switch.Control>
+            <Switch
+              size="lg"
+              isSelected={enabled}
+              aria-label="Toggle system monitoring"
+              onChange={value => updateState('enabled', value)}>
+              <Switch.Content>
+                <Switch.Control>
+                  <Switch.Thumb />
+                </Switch.Control>
+              </Switch.Content>
             </Switch>
           </div>
 

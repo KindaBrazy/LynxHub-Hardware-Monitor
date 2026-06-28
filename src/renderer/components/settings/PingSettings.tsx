@@ -87,10 +87,12 @@ export default function PingSettings({dragHandle}: {dragHandle?: React.ReactNode
             Ping
           </p>
         </div>
-        <Switch isSelected={isActive} onChange={onToggleActivate}>
-          <Switch.Control>
-            <Switch.Thumb />
-          </Switch.Control>
+        <Switch isSelected={isActive} aria-label="Activate Ping" onChange={onToggleActivate}>
+          <Switch.Content>
+            <Switch.Control>
+              <Switch.Thumb />
+            </Switch.Control>
+          </Switch.Content>
         </Switch>
       </Card.Header>
       <Card.Content className="flex-col items-start gap-y-1">

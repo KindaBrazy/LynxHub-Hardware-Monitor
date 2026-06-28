@@ -153,10 +153,12 @@ const SettingsModalCard = memo(({onToggle, config, hardware, type, children, dra
         </div>
         <div className="flex flex-row items-center gap-x-4">
           {headerExtra?.(active)}
-          <Switch isSelected={active} onChange={onToggle}>
-            <Switch.Control>
-              <Switch.Thumb />
-            </Switch.Control>
+          <Switch isSelected={active} onChange={onToggle} aria-label="Toggle active">
+            <Switch.Content>
+              <Switch.Control>
+                <Switch.Thumb />
+              </Switch.Control>
+            </Switch.Content>
           </Switch>
         </div>
       </Card.Header>
