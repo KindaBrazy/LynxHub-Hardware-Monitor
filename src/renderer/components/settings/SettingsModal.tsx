@@ -8,12 +8,12 @@ import {
   ListBox,
   Modal,
   NumberField,
+  ScrollShadow,
   Select,
   Spinner,
   Switch,
   UseOverlayStateReturn,
 } from '@heroui/react';
-import LynxScroll from '@lynx/components/LynxScroll';
 import LynxSwitch from '@lynx/components/LynxSwitch';
 import TabModal from '@lynx/components/TabModal';
 import {topToast} from '@lynx/layouts/ToastProviders';
@@ -493,7 +493,7 @@ export default function SettingsModal({state}: SettingsModalProps) {
         <Modal.Heading className="items-center justify-center">Hardware Monitor Settings</Modal.Heading>
       </Modal.Header>
       <Modal.Body className="overflow-hidden">
-        <LynxScroll className="px-4 size-full">
+        <ScrollShadow className="px-4 size-full">
           <div
             onClick={() => updateState('enabled', !enabled)}
             className="mb-4 rounded-xl bg-surface-secondary p-4 cursor-pointer flex items-center justify-between">
@@ -605,7 +605,7 @@ export default function SettingsModal({state}: SettingsModalProps) {
               </motion.div>
             )}
           </AnimatePresence>
-        </LynxScroll>
+        </ScrollShadow>
       </Modal.Body>
 
       <Modal.Footer className="px-4 justify-between w-full flex flex-row">
