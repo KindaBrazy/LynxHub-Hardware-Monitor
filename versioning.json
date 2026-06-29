@@ -1,6 +1,14 @@
 {
-  "$schema": "https://raw.githubusercontent.com/KindaBrazy/LynxHub-Statics/refs/heads/schema/plugins/versioning.schema.json",
   "versions": [
+    {
+      "version": "0.15.1",
+      "commit": "32fa625",
+      "engines": {
+        "extensionApi": "^2.0.0"
+      },
+      "stage": "early_access",
+      "platforms": ["win32"]
+    },
     {
       "version": "0.15.0",
       "commit": "6486608",
@@ -39,6 +47,21 @@
     }
   ],
   "changes": [
+    {
+      "version": "0.15.1",
+      "date": "2026-06-30",
+      "items": [
+        {
+          "🐛 Bug Fixes": ["Resolved an issue where toast notifications failed to display."]
+        },
+        {
+          "📌 Improvements": [
+            "Refined scrollbar styling for a cleaner UI.",
+            "Added official support for LynxHub v3.5.5"
+          ]
+        }
+      ]
+    },
     {
       "version": "0.15.0",
       "date": "2026-06-09",
