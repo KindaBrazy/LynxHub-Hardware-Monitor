@@ -8,7 +8,7 @@ import SettingsModal from '../components/settings/SettingsModal';
  * Renders a card on the LynxHub "Tools" page that allows users
  * to open the hardware monitor settings.
  */
-export default function ToolsPage() {
+export function HardwareMonitorCard() {
   const state = useOverlayState();
 
   return (
@@ -16,6 +16,7 @@ export default function ToolsPage() {
       <SettingsModal state={state} />
       <ToolsCard
         onPress={state.open}
+        id="hardware-monitor"
         title="Hardware Monitor"
         icon={<CpuBolt className="size-full m-1 text-indigo-500" />}
         description="Configure real-time monitoring of CPU, GPU, and Memory usage in the status bar."
@@ -23,3 +24,5 @@ export default function ToolsPage() {
     </>
   );
 }
+
+export default HardwareMonitorCard;

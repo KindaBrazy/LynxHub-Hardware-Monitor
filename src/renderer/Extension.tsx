@@ -5,7 +5,7 @@ import {ExtensionRendererApi} from '@lynx/plugins/extensions/types/api';
 import {setToast} from './classHolder';
 import HardwareStatusBar from './components/status-bar/HardwareStatusBar';
 import ConfigProvider from './integrations/ConfigProvider';
-import ToolsPage from './integrations/ToolsPage';
+import HardwareMonitorCard from './integrations/ToolsPage';
 import hmonitorReducer from './state/hmonitorSlice';
 
 /**
@@ -22,7 +22,17 @@ export function InitialExtensions(lynxAPI: ExtensionRendererApi) {
   lynxAPI.statusBar.replaceContainer(HardwareStatusBar);
 
   // Integrate the settings card into the "Tools" page.
-  lynxAPI.customizePages.tools.add.cardsContainer(ToolsPage);
+  lynxAPI.cards.registerToolsCard?.({
+    id: 'hardware-monitor',
+    title: 'Hardware Monitor',
+    description: 'Configure real-time monitoring of CPU, GPU, and Memory usage in the status bar.',
+    component: HardwareMonitorCard,
+    where: 'tools_page',
+  });
+
+  if (!lynxAPI.cards.registerToolsCard) {
+    lynxAPI.customizePages.tools.add.cardsContainer(HardwareMonitorCard);
+  }
 
   // Add a provider component that listens for configuration updates from the main process.
   ConfigProvider(lynxAPI);
