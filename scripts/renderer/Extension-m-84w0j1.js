@@ -966,7 +966,7 @@ function formatProdErrorMessage(code) {
 }
 //#endregion
 //#region src/renderer/mainWindow/redux/reducers/app.ts
-var { useSelector: useSelector$3 } = await importShared("react-redux");
+var { useSelector: useSelector$4 } = await importShared("react-redux");
 var appSlice = createSlice({
 	name: "app",
 	initialState: {
@@ -1002,13 +1002,13 @@ var appSlice = createSlice({
 * @param key - The key of the app state to retrieve
 * @returns The value of the specified app state
 */
-var useAppState = (key) => useSelector$3((state) => state.app[key]);
+var useAppState = (key) => useSelector$4((state) => state.app[key]);
 appSlice.actions;
 appSlice.reducer;
 //#endregion
 //#region node_modules/lucide-react/dist/esm/shared/src/utils/mergeClasses.mjs
 /**
-* @license lucide-react v1.21.0 - ISC
+* @license lucide-react v1.24.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -1019,7 +1019,7 @@ var mergeClasses = (...classes) => classes.filter((className, index, array) => {
 //#endregion
 //#region node_modules/lucide-react/dist/esm/shared/src/utils/toKebabCase.mjs
 /**
-* @license lucide-react v1.21.0 - ISC
+* @license lucide-react v1.24.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -1028,7 +1028,7 @@ var toKebabCase = (string) => string.replace(/([a-z0-9])([A-Z])/g, "$1-$2").toLo
 //#endregion
 //#region node_modules/lucide-react/dist/esm/shared/src/utils/toCamelCase.mjs
 /**
-* @license lucide-react v1.21.0 - ISC
+* @license lucide-react v1.24.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -1037,7 +1037,7 @@ var toCamelCase = (string) => string.replace(/^([A-Z])|[\s-_]+(\w)/g, (match, p1
 //#endregion
 //#region node_modules/lucide-react/dist/esm/shared/src/utils/toPascalCase.mjs
 /**
-* @license lucide-react v1.21.0 - ISC
+* @license lucide-react v1.24.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -1049,7 +1049,7 @@ var toPascalCase = (string) => {
 //#endregion
 //#region node_modules/lucide-react/dist/esm/defaultAttributes.mjs
 /**
-* @license lucide-react v1.21.0 - ISC
+* @license lucide-react v1.24.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -1068,7 +1068,7 @@ var defaultAttributes = {
 //#endregion
 //#region node_modules/lucide-react/dist/esm/shared/src/utils/hasA11yProp.mjs
 /**
-* @license lucide-react v1.21.0 - ISC
+* @license lucide-react v1.24.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -1080,7 +1080,7 @@ var hasA11yProp = (props) => {
 //#endregion
 //#region node_modules/lucide-react/dist/esm/context.mjs
 /**
-* @license lucide-react v1.21.0 - ISC
+* @license lucide-react v1.24.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -1091,7 +1091,7 @@ var useLucideContext = () => useContext$10(LucideContext);
 //#endregion
 //#region node_modules/lucide-react/dist/esm/Icon.mjs
 /**
-* @license lucide-react v1.21.0 - ISC
+* @license lucide-react v1.24.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -1115,7 +1115,7 @@ var Icon = forwardRef$4(({ color, size, strokeWidth, absoluteStrokeWidth, classN
 //#endregion
 //#region node_modules/lucide-react/dist/esm/createLucideIcon.mjs
 /**
-* @license lucide-react v1.21.0 - ISC
+* @license lucide-react v1.24.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -1132,7 +1132,7 @@ var createLucideIcon = (iconName, iconNode) => {
 	return Component;
 };
 /**
-* @license lucide-react v1.21.0 - ISC
+* @license lucide-react v1.24.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -1142,7 +1142,7 @@ var Activity = createLucideIcon("activity", [["path", {
 	key: "169zse"
 }]]);
 /**
-* @license lucide-react v1.21.0 - ISC
+* @license lucide-react v1.24.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -1155,7 +1155,7 @@ var ArrowDown = createLucideIcon("arrow-down", [["path", {
 	key: "1idqje"
 }]]);
 /**
-* @license lucide-react v1.21.0 - ISC
+* @license lucide-react v1.24.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -1168,7 +1168,7 @@ var ArrowUp = createLucideIcon("arrow-up", [["path", {
 	key: "x0mq9r"
 }]]);
 /**
-* @license lucide-react v1.21.0 - ISC
+* @license lucide-react v1.24.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -1178,7 +1178,7 @@ var ChevronLeft = createLucideIcon("chevron-left", [["path", {
 	key: "1wnfg3"
 }]]);
 /**
-* @license lucide-react v1.21.0 - ISC
+* @license lucide-react v1.24.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -1188,7 +1188,7 @@ var ChevronRight = createLucideIcon("chevron-right", [["path", {
 	key: "mthhwq"
 }]]);
 /**
-* @license lucide-react v1.21.0 - ISC
+* @license lucide-react v1.24.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -1203,7 +1203,7 @@ var Clock = createLucideIcon("clock", [["circle", {
 	key: "mmk7yg"
 }]]);
 /**
-* @license lucide-react v1.21.0 - ISC
+* @license lucide-react v1.24.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -1275,7 +1275,7 @@ var Cpu = createLucideIcon("cpu", [
 	}]
 ]);
 /**
-* @license lucide-react v1.21.0 - ISC
+* @license lucide-react v1.24.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -1298,7 +1298,7 @@ var Database = createLucideIcon("database", [
 	}]
 ]);
 /**
-* @license lucide-react v1.21.0 - ISC
+* @license lucide-react v1.24.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -1311,7 +1311,7 @@ var Gauge = createLucideIcon("gauge", [["path", {
 	key: "19p75a"
 }]]);
 /**
-* @license lucide-react v1.21.0 - ISC
+* @license lucide-react v1.24.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -1355,7 +1355,7 @@ var GripVertical = createLucideIcon("grip-vertical", [
 	}]
 ]);
 /**
-* @license lucide-react v1.21.0 - ISC
+* @license lucide-react v1.24.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -1379,7 +1379,7 @@ var HardDrive = createLucideIcon("hard-drive", [
 	}]
 ]);
 /**
-* @license lucide-react v1.21.0 - ISC
+* @license lucide-react v1.24.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -1435,7 +1435,7 @@ var MemoryStick = createLucideIcon("memory-stick", [
 	}]
 ]);
 /**
-* @license lucide-react v1.21.0 - ISC
+* @license lucide-react v1.24.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -1465,7 +1465,7 @@ var Monitor = createLucideIcon("monitor", [
 	}]
 ]);
 /**
-* @license lucide-react v1.21.0 - ISC
+* @license lucide-react v1.24.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -1478,7 +1478,7 @@ var Plus = createLucideIcon("plus", [["path", {
 	key: "s699le"
 }]]);
 /**
-* @license lucide-react v1.21.0 - ISC
+* @license lucide-react v1.24.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -1491,7 +1491,7 @@ var Power = createLucideIcon("power", [["path", {
 	key: "obofu9"
 }]]);
 /**
-* @license lucide-react v1.21.0 - ISC
+* @license lucide-react v1.24.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -1533,7 +1533,7 @@ var Radar = createLucideIcon("radar", [
 	}]
 ]);
 /**
-* @license lucide-react v1.21.0 - ISC
+* @license lucide-react v1.24.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -1546,7 +1546,7 @@ var RotateCcw = createLucideIcon("rotate-ccw", [["path", {
 	key: "1xhq8a"
 }]]);
 /**
-* @license lucide-react v1.21.0 - ISC
+* @license lucide-react v1.24.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -1556,7 +1556,7 @@ var Thermometer = createLucideIcon("thermometer", [["path", {
 	key: "17jzev"
 }]]);
 /**
-* @license lucide-react v1.21.0 - ISC
+* @license lucide-react v1.24.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -1584,7 +1584,7 @@ var Timer = createLucideIcon("timer", [
 	}]
 ]);
 /**
-* @license lucide-react v1.21.0 - ISC
+* @license lucide-react v1.24.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -1608,7 +1608,7 @@ var Wifi = createLucideIcon("wifi", [
 	}]
 ]);
 /**
-* @license lucide-react v1.21.0 - ISC
+* @license lucide-react v1.24.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -1621,7 +1621,7 @@ var X = createLucideIcon("x", [["path", {
 	key: "d8bk6v"
 }]]);
 /**
-* @license lucide-react v1.21.0 - ISC
+* @license lucide-react v1.24.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -1691,7 +1691,7 @@ var initialSettings = {
 };
 //#endregion
 //#region extension/src/renderer/hooks/useHardwareData.ts
-var { useEffect: useEffect$11, useState: useState$9 } = await importShared("react");
+var { useEffect: useEffect$13, useState: useState$10 } = await importShared("react");
 var convertMBtoGB = (mb) => Number((mb / 1024).toFixed(2));
 var initialData = {
 	gpu: [],
@@ -1709,13 +1709,13 @@ var initialData = {
 * It listens for IPC events from the main process and transforms the raw data.
 */
 function useHardwareData() {
-	const [hardwareData, setHardwareData] = useState$9(initialData);
-	const [isConnected, setIsConnected] = useState$9(false);
-	const [error, setError] = useState$9(null);
-	useEffect$11(() => {
+	const [hardwareData, setHardwareData] = useState$10(initialData);
+	const [isConnected, setIsConnected] = useState$10(false);
+	const [error, setError] = useState$10(null);
+	useEffect$13(() => {
 		const handleHardwareUpdate = (_, data) => {
 			if (!data) return;
-			setHardwareData({
+			const transformedData = {
 				cpu: data.CPU.map((item) => ({
 					name: item.Name,
 					temp: item.Sensors.find((s) => s.Name === "CPU Package" && s.Type === "Temperature")?.Value || 0,
@@ -1750,7 +1750,8 @@ function useHardwareData() {
 					app: data.ElapsedTime?.rawSeconds || 0
 				},
 				rawSensors: data.rawSensors || []
-			});
+			};
+			setHardwareData(transformedData);
 			setIsConnected(true);
 			setError(null);
 		};
@@ -1774,15 +1775,15 @@ function useHardwareData() {
 }
 //#endregion
 //#region extension/src/renderer/hooks/useScrollManager.ts
-var { useCallback: useCallback$5, useEffect: useEffect$10, useRef: useRef$8, useState: useState$8 } = await importShared("react");
+var { useCallback: useCallback$5, useEffect: useEffect$12, useRef: useRef$10, useState: useState$9 } = await importShared("react");
 /**
 * A hook to manage the scrolling state and behavior of a container element.
 * @returns Functions and state to manage scrolling, including refs and scroll button visibility.
 */
 function useScrollManager() {
-	const [canScrollLeft, setCanScrollLeft] = useState$8(false);
-	const [canScrollRight, setCanScrollRight] = useState$8(false);
-	const ref = useRef$8(null);
+	const [canScrollLeft, setCanScrollLeft] = useState$9(false);
+	const [canScrollRight, setCanScrollRight] = useState$9(false);
+	const ref = useRef$10(null);
 	const updateScrollState = useCallback$5(() => {
 		const element = ref.current;
 		if (!element) return;
@@ -1796,7 +1797,7 @@ function useScrollManager() {
 			behavior: "smooth"
 		});
 	}, []);
-	useEffect$10(() => {
+	useEffect$12(() => {
 		const element = ref.current;
 		if (!element) return;
 		const handleResize = () => updateScrollState();
@@ -1808,7 +1809,7 @@ function useScrollManager() {
 			element.removeEventListener("scroll", updateScrollState);
 		};
 	}, [updateScrollState]);
-	useEffect$10(() => {
+	useEffect$12(() => {
 		const element = ref.current;
 		if (!element) return;
 		const handleWheel = (event) => {
@@ -1845,48 +1846,6 @@ var root = freeGlobal || freeSelf || Function("return this")();
 //#region node_modules/lodash-es/_Symbol.js
 /** Built-in value references. */
 var Symbol$1 = root.Symbol;
-//#endregion
-//#region node_modules/lodash-es/_arrayMap.js
-/**
-* A specialized version of `_.map` for arrays without support for iteratee
-* shorthands.
-*
-* @private
-* @param {Array} [array] The array to iterate over.
-* @param {Function} iteratee The function invoked per iteration.
-* @returns {Array} Returns the new mapped array.
-*/
-function arrayMap(array, iteratee) {
-	var index = -1, length = array == null ? 0 : array.length, result = Array(length);
-	while (++index < length) result[index] = iteratee(array[index], index, array);
-	return result;
-}
-//#endregion
-//#region node_modules/lodash-es/isArray.js
-/**
-* Checks if `value` is classified as an `Array` object.
-*
-* @static
-* @memberOf _
-* @since 0.1.0
-* @category Lang
-* @param {*} value The value to check.
-* @returns {boolean} Returns `true` if `value` is an array, else `false`.
-* @example
-*
-* _.isArray([1, 2, 3]);
-* // => true
-*
-* _.isArray(document.body.children);
-* // => false
-*
-* _.isArray('abc');
-* // => false
-*
-* _.isArray(_.noop);
-* // => false
-*/
-var isArray = Array.isArray;
 //#endregion
 //#region node_modules/lodash-es/_getRawTag.js
 /** Used for built-in method references. */
@@ -2008,6 +1967,48 @@ function isSymbol(value) {
 	return typeof value == "symbol" || isObjectLike(value) && baseGetTag(value) == symbolTag$3;
 }
 //#endregion
+//#region node_modules/lodash-es/_arrayMap.js
+/**
+* A specialized version of `_.map` for arrays without support for iteratee
+* shorthands.
+*
+* @private
+* @param {Array} [array] The array to iterate over.
+* @param {Function} iteratee The function invoked per iteration.
+* @returns {Array} Returns the new mapped array.
+*/
+function arrayMap(array, iteratee) {
+	var index = -1, length = array == null ? 0 : array.length, result = Array(length);
+	while (++index < length) result[index] = iteratee(array[index], index, array);
+	return result;
+}
+//#endregion
+//#region node_modules/lodash-es/isArray.js
+/**
+* Checks if `value` is classified as an `Array` object.
+*
+* @static
+* @memberOf _
+* @since 0.1.0
+* @category Lang
+* @param {*} value The value to check.
+* @returns {boolean} Returns `true` if `value` is an array, else `false`.
+* @example
+*
+* _.isArray([1, 2, 3]);
+* // => true
+*
+* _.isArray(document.body.children);
+* // => false
+*
+* _.isArray('abc');
+* // => false
+*
+* _.isArray(_.noop);
+* // => false
+*/
+var isArray = Array.isArray;
+//#endregion
 //#region node_modules/lodash-es/_baseToString.js
 /** Used as references for various `Number` constants. */
 var INFINITY$1 = Infinity;
@@ -2028,6 +2029,1368 @@ function baseToString(value) {
 	var result = value + "";
 	return result == "0" && 1 / value == -INFINITY$1 ? "-0" : result;
 }
+//#endregion
+//#region node_modules/lodash-es/isObject.js
+/**
+* Checks if `value` is the
+* [language type](http://www.ecma-international.org/ecma-262/7.0/#sec-ecmascript-language-types)
+* of `Object`. (e.g. arrays, functions, objects, regexes, `new Number(0)`, and `new String('')`)
+*
+* @static
+* @memberOf _
+* @since 0.1.0
+* @category Lang
+* @param {*} value The value to check.
+* @returns {boolean} Returns `true` if `value` is an object, else `false`.
+* @example
+*
+* _.isObject({});
+* // => true
+*
+* _.isObject([1, 2, 3]);
+* // => true
+*
+* _.isObject(_.noop);
+* // => true
+*
+* _.isObject(null);
+* // => false
+*/
+function isObject$1(value) {
+	var type = typeof value;
+	return value != null && (type == "object" || type == "function");
+}
+//#endregion
+//#region node_modules/lodash-es/identity.js
+/**
+* This method returns the first argument it receives.
+*
+* @static
+* @since 0.1.0
+* @memberOf _
+* @category Util
+* @param {*} value Any value.
+* @returns {*} Returns `value`.
+* @example
+*
+* var object = { 'a': 1 };
+*
+* console.log(_.identity(object) === object);
+* // => true
+*/
+function identity(value) {
+	return value;
+}
+//#endregion
+//#region node_modules/lodash-es/isFunction.js
+/** `Object#toString` result references. */
+var asyncTag = "[object AsyncFunction]", funcTag$2 = "[object Function]", genTag$1 = "[object GeneratorFunction]", proxyTag = "[object Proxy]";
+/**
+* Checks if `value` is classified as a `Function` object.
+*
+* @static
+* @memberOf _
+* @since 0.1.0
+* @category Lang
+* @param {*} value The value to check.
+* @returns {boolean} Returns `true` if `value` is a function, else `false`.
+* @example
+*
+* _.isFunction(_);
+* // => true
+*
+* _.isFunction(/abc/);
+* // => false
+*/
+function isFunction(value) {
+	if (!isObject$1(value)) return false;
+	var tag = baseGetTag(value);
+	return tag == funcTag$2 || tag == genTag$1 || tag == asyncTag || tag == proxyTag;
+}
+//#endregion
+//#region node_modules/lodash-es/_coreJsData.js
+/** Used to detect overreaching core-js shims. */
+var coreJsData = root["__core-js_shared__"];
+//#endregion
+//#region node_modules/lodash-es/_isMasked.js
+/** Used to detect methods masquerading as native. */
+var maskSrcKey = function() {
+	var uid = /[^.]+$/.exec(coreJsData && coreJsData.keys && coreJsData.keys.IE_PROTO || "");
+	return uid ? "Symbol(src)_1." + uid : "";
+}();
+/**
+* Checks if `func` has its source masked.
+*
+* @private
+* @param {Function} func The function to check.
+* @returns {boolean} Returns `true` if `func` is masked, else `false`.
+*/
+function isMasked(func) {
+	return !!maskSrcKey && maskSrcKey in func;
+}
+//#endregion
+//#region node_modules/lodash-es/_toSource.js
+/** Used to resolve the decompiled source of functions. */
+var funcToString$2 = Function.prototype.toString;
+/**
+* Converts `func` to its source code.
+*
+* @private
+* @param {Function} func The function to convert.
+* @returns {string} Returns the source code.
+*/
+function toSource(func) {
+	if (func != null) {
+		try {
+			return funcToString$2.call(func);
+		} catch (e) {}
+		try {
+			return func + "";
+		} catch (e) {}
+	}
+	return "";
+}
+//#endregion
+//#region node_modules/lodash-es/_baseIsNative.js
+/**
+* Used to match `RegExp`
+* [syntax characters](http://ecma-international.org/ecma-262/7.0/#sec-patterns).
+*/
+var reRegExpChar = /[\\^$.*+?()[\]{}|]/g;
+/** Used to detect host constructors (Safari). */
+var reIsHostCtor = /^\[object .+?Constructor\]$/;
+/** Used for built-in method references. */
+var funcProto$1 = Function.prototype, objectProto$3 = Object.prototype;
+/** Used to resolve the decompiled source of functions. */
+var funcToString$1 = funcProto$1.toString;
+/** Used to check objects for own properties. */
+var hasOwnProperty$13 = objectProto$3.hasOwnProperty;
+/** Used to detect if a method is native. */
+var reIsNative = RegExp("^" + funcToString$1.call(hasOwnProperty$13).replace(reRegExpChar, "\\$&").replace(/hasOwnProperty|(function).*?(?=\\\()| for .+?(?=\\\])/g, "$1.*?") + "$");
+/**
+* The base implementation of `_.isNative` without bad shim checks.
+*
+* @private
+* @param {*} value The value to check.
+* @returns {boolean} Returns `true` if `value` is a native function,
+*  else `false`.
+*/
+function baseIsNative(value) {
+	if (!isObject$1(value) || isMasked(value)) return false;
+	return (isFunction(value) ? reIsNative : reIsHostCtor).test(toSource(value));
+}
+//#endregion
+//#region node_modules/lodash-es/_getValue.js
+/**
+* Gets the value at `key` of `object`.
+*
+* @private
+* @param {Object} [object] The object to query.
+* @param {string} key The key of the property to get.
+* @returns {*} Returns the property value.
+*/
+function getValue(object, key) {
+	return object == null ? void 0 : object[key];
+}
+//#endregion
+//#region node_modules/lodash-es/_getNative.js
+/**
+* Gets the native function at `key` of `object`.
+*
+* @private
+* @param {Object} object The object to query.
+* @param {string} key The key of the method to get.
+* @returns {*} Returns the function if it's native, else `undefined`.
+*/
+function getNative(object, key) {
+	var value = getValue(object, key);
+	return baseIsNative(value) ? value : void 0;
+}
+//#endregion
+//#region node_modules/lodash-es/_WeakMap.js
+var WeakMap$1 = getNative(root, "WeakMap");
+//#endregion
+//#region node_modules/lodash-es/_baseCreate.js
+/** Built-in value references. */
+var objectCreate = Object.create;
+/**
+* The base implementation of `_.create` without support for assigning
+* properties to the created object.
+*
+* @private
+* @param {Object} proto The object to inherit from.
+* @returns {Object} Returns the new object.
+*/
+var baseCreate = function() {
+	function object() {}
+	return function(proto) {
+		if (!isObject$1(proto)) return {};
+		if (objectCreate) return objectCreate(proto);
+		object.prototype = proto;
+		var result = new object();
+		object.prototype = void 0;
+		return result;
+	};
+}();
+//#endregion
+//#region node_modules/lodash-es/_apply.js
+/**
+* A faster alternative to `Function#apply`, this function invokes `func`
+* with the `this` binding of `thisArg` and the arguments of `args`.
+*
+* @private
+* @param {Function} func The function to invoke.
+* @param {*} thisArg The `this` binding of `func`.
+* @param {Array} args The arguments to invoke `func` with.
+* @returns {*} Returns the result of `func`.
+*/
+function apply(func, thisArg, args) {
+	switch (args.length) {
+		case 0: return func.call(thisArg);
+		case 1: return func.call(thisArg, args[0]);
+		case 2: return func.call(thisArg, args[0], args[1]);
+		case 3: return func.call(thisArg, args[0], args[1], args[2]);
+	}
+	return func.apply(thisArg, args);
+}
+//#endregion
+//#region node_modules/lodash-es/_copyArray.js
+/**
+* Copies the values of `source` to `array`.
+*
+* @private
+* @param {Array} source The array to copy values from.
+* @param {Array} [array=[]] The array to copy values to.
+* @returns {Array} Returns `array`.
+*/
+function copyArray(source, array) {
+	var index = -1, length = source.length;
+	array || (array = Array(length));
+	while (++index < length) array[index] = source[index];
+	return array;
+}
+//#endregion
+//#region node_modules/lodash-es/_shortOut.js
+/** Used to detect hot functions by number of calls within a span of milliseconds. */
+var HOT_COUNT = 800, HOT_SPAN = 16;
+var nativeNow = Date.now;
+/**
+* Creates a function that'll short out and invoke `identity` instead
+* of `func` when it's called `HOT_COUNT` or more times in `HOT_SPAN`
+* milliseconds.
+*
+* @private
+* @param {Function} func The function to restrict.
+* @returns {Function} Returns the new shortable function.
+*/
+function shortOut(func) {
+	var count = 0, lastCalled = 0;
+	return function() {
+		var stamp = nativeNow(), remaining = HOT_SPAN - (stamp - lastCalled);
+		lastCalled = stamp;
+		if (remaining > 0) {
+			if (++count >= HOT_COUNT) return arguments[0];
+		} else count = 0;
+		return func.apply(void 0, arguments);
+	};
+}
+//#endregion
+//#region node_modules/lodash-es/constant.js
+/**
+* Creates a function that returns `value`.
+*
+* @static
+* @memberOf _
+* @since 2.4.0
+* @category Util
+* @param {*} value The value to return from the new function.
+* @returns {Function} Returns the new constant function.
+* @example
+*
+* var objects = _.times(2, _.constant({ 'a': 1 }));
+*
+* console.log(objects);
+* // => [{ 'a': 1 }, { 'a': 1 }]
+*
+* console.log(objects[0] === objects[1]);
+* // => true
+*/
+function constant(value) {
+	return function() {
+		return value;
+	};
+}
+//#endregion
+//#region node_modules/lodash-es/_defineProperty.js
+var defineProperty = function() {
+	try {
+		var func = getNative(Object, "defineProperty");
+		func({}, "", {});
+		return func;
+	} catch (e) {}
+}();
+//#endregion
+//#region node_modules/lodash-es/_setToString.js
+/**
+* Sets the `toString` method of `func` to return `string`.
+*
+* @private
+* @param {Function} func The function to modify.
+* @param {Function} string The `toString` result.
+* @returns {Function} Returns `func`.
+*/
+var setToString = shortOut(!defineProperty ? identity : function(func, string) {
+	return defineProperty(func, "toString", {
+		"configurable": true,
+		"enumerable": false,
+		"value": constant(string),
+		"writable": true
+	});
+});
+//#endregion
+//#region node_modules/lodash-es/_arrayEach.js
+/**
+* A specialized version of `_.forEach` for arrays without support for
+* iteratee shorthands.
+*
+* @private
+* @param {Array} [array] The array to iterate over.
+* @param {Function} iteratee The function invoked per iteration.
+* @returns {Array} Returns `array`.
+*/
+function arrayEach(array, iteratee) {
+	var index = -1, length = array == null ? 0 : array.length;
+	while (++index < length) if (iteratee(array[index], index, array) === false) break;
+	return array;
+}
+//#endregion
+//#region node_modules/lodash-es/_isIndex.js
+/** Used as references for various `Number` constants. */
+var MAX_SAFE_INTEGER$1 = 9007199254740991;
+/** Used to detect unsigned integer values. */
+var reIsUint = /^(?:0|[1-9]\d*)$/;
+/**
+* Checks if `value` is a valid array-like index.
+*
+* @private
+* @param {*} value The value to check.
+* @param {number} [length=MAX_SAFE_INTEGER] The upper bounds of a valid index.
+* @returns {boolean} Returns `true` if `value` is a valid index, else `false`.
+*/
+function isIndex(value, length) {
+	var type = typeof value;
+	length = length == null ? MAX_SAFE_INTEGER$1 : length;
+	return !!length && (type == "number" || type != "symbol" && reIsUint.test(value)) && value > -1 && value % 1 == 0 && value < length;
+}
+//#endregion
+//#region node_modules/lodash-es/_baseAssignValue.js
+/**
+* The base implementation of `assignValue` and `assignMergeValue` without
+* value checks.
+*
+* @private
+* @param {Object} object The object to modify.
+* @param {string} key The key of the property to assign.
+* @param {*} value The value to assign.
+*/
+function baseAssignValue(object, key, value) {
+	if (key == "__proto__" && defineProperty) defineProperty(object, key, {
+		"configurable": true,
+		"enumerable": true,
+		"value": value,
+		"writable": true
+	});
+	else object[key] = value;
+}
+//#endregion
+//#region node_modules/lodash-es/eq.js
+/**
+* Performs a
+* [`SameValueZero`](http://ecma-international.org/ecma-262/7.0/#sec-samevaluezero)
+* comparison between two values to determine if they are equivalent.
+*
+* @static
+* @memberOf _
+* @since 4.0.0
+* @category Lang
+* @param {*} value The value to compare.
+* @param {*} other The other value to compare.
+* @returns {boolean} Returns `true` if the values are equivalent, else `false`.
+* @example
+*
+* var object = { 'a': 1 };
+* var other = { 'a': 1 };
+*
+* _.eq(object, object);
+* // => true
+*
+* _.eq(object, other);
+* // => false
+*
+* _.eq('a', 'a');
+* // => true
+*
+* _.eq('a', Object('a'));
+* // => false
+*
+* _.eq(NaN, NaN);
+* // => true
+*/
+function eq(value, other) {
+	return value === other || value !== value && other !== other;
+}
+//#endregion
+//#region node_modules/lodash-es/_assignValue.js
+/** Used to check objects for own properties. */
+var hasOwnProperty$12 = Object.prototype.hasOwnProperty;
+/**
+* Assigns `value` to `key` of `object` if the existing value is not equivalent
+* using [`SameValueZero`](http://ecma-international.org/ecma-262/7.0/#sec-samevaluezero)
+* for equality comparisons.
+*
+* @private
+* @param {Object} object The object to modify.
+* @param {string} key The key of the property to assign.
+* @param {*} value The value to assign.
+*/
+function assignValue(object, key, value) {
+	var objValue = object[key];
+	if (!(hasOwnProperty$12.call(object, key) && eq(objValue, value)) || value === void 0 && !(key in object)) baseAssignValue(object, key, value);
+}
+//#endregion
+//#region node_modules/lodash-es/_copyObject.js
+/**
+* Copies properties of `source` to `object`.
+*
+* @private
+* @param {Object} source The object to copy properties from.
+* @param {Array} props The property identifiers to copy.
+* @param {Object} [object={}] The object to copy properties to.
+* @param {Function} [customizer] The function to customize copied values.
+* @returns {Object} Returns `object`.
+*/
+function copyObject(source, props, object, customizer) {
+	var isNew = !object;
+	object || (object = {});
+	var index = -1, length = props.length;
+	while (++index < length) {
+		var key = props[index];
+		var newValue = customizer ? customizer(object[key], source[key], key, object, source) : void 0;
+		if (newValue === void 0) newValue = source[key];
+		if (isNew) baseAssignValue(object, key, newValue);
+		else assignValue(object, key, newValue);
+	}
+	return object;
+}
+//#endregion
+//#region node_modules/lodash-es/_overRest.js
+var nativeMax = Math.max;
+/**
+* A specialized version of `baseRest` which transforms the rest array.
+*
+* @private
+* @param {Function} func The function to apply a rest parameter to.
+* @param {number} [start=func.length-1] The start position of the rest parameter.
+* @param {Function} transform The rest array transform.
+* @returns {Function} Returns the new function.
+*/
+function overRest(func, start, transform) {
+	start = nativeMax(start === void 0 ? func.length - 1 : start, 0);
+	return function() {
+		var args = arguments, index = -1, length = nativeMax(args.length - start, 0), array = Array(length);
+		while (++index < length) array[index] = args[start + index];
+		index = -1;
+		var otherArgs = Array(start + 1);
+		while (++index < start) otherArgs[index] = args[index];
+		otherArgs[start] = transform(array);
+		return apply(func, this, otherArgs);
+	};
+}
+//#endregion
+//#region node_modules/lodash-es/isLength.js
+/** Used as references for various `Number` constants. */
+var MAX_SAFE_INTEGER = 9007199254740991;
+/**
+* Checks if `value` is a valid array-like length.
+*
+* **Note:** This method is loosely based on
+* [`ToLength`](http://ecma-international.org/ecma-262/7.0/#sec-tolength).
+*
+* @static
+* @memberOf _
+* @since 4.0.0
+* @category Lang
+* @param {*} value The value to check.
+* @returns {boolean} Returns `true` if `value` is a valid length, else `false`.
+* @example
+*
+* _.isLength(3);
+* // => true
+*
+* _.isLength(Number.MIN_VALUE);
+* // => false
+*
+* _.isLength(Infinity);
+* // => false
+*
+* _.isLength('3');
+* // => false
+*/
+function isLength(value) {
+	return typeof value == "number" && value > -1 && value % 1 == 0 && value <= MAX_SAFE_INTEGER;
+}
+//#endregion
+//#region node_modules/lodash-es/isArrayLike.js
+/**
+* Checks if `value` is array-like. A value is considered array-like if it's
+* not a function and has a `value.length` that's an integer greater than or
+* equal to `0` and less than or equal to `Number.MAX_SAFE_INTEGER`.
+*
+* @static
+* @memberOf _
+* @since 4.0.0
+* @category Lang
+* @param {*} value The value to check.
+* @returns {boolean} Returns `true` if `value` is array-like, else `false`.
+* @example
+*
+* _.isArrayLike([1, 2, 3]);
+* // => true
+*
+* _.isArrayLike(document.body.children);
+* // => true
+*
+* _.isArrayLike('abc');
+* // => true
+*
+* _.isArrayLike(_.noop);
+* // => false
+*/
+function isArrayLike(value) {
+	return value != null && isLength(value.length) && !isFunction(value);
+}
+//#endregion
+//#region node_modules/lodash-es/_isPrototype.js
+/** Used for built-in method references. */
+var objectProto$2 = Object.prototype;
+/**
+* Checks if `value` is likely a prototype object.
+*
+* @private
+* @param {*} value The value to check.
+* @returns {boolean} Returns `true` if `value` is a prototype, else `false`.
+*/
+function isPrototype(value) {
+	var Ctor = value && value.constructor;
+	return value === (typeof Ctor == "function" && Ctor.prototype || objectProto$2);
+}
+//#endregion
+//#region node_modules/lodash-es/_baseTimes.js
+/**
+* The base implementation of `_.times` without support for iteratee shorthands
+* or max array length checks.
+*
+* @private
+* @param {number} n The number of times to invoke `iteratee`.
+* @param {Function} iteratee The function invoked per iteration.
+* @returns {Array} Returns the array of results.
+*/
+function baseTimes(n, iteratee) {
+	var index = -1, result = Array(n);
+	while (++index < n) result[index] = iteratee(index);
+	return result;
+}
+//#endregion
+//#region node_modules/lodash-es/_baseIsArguments.js
+/** `Object#toString` result references. */
+var argsTag$3 = "[object Arguments]";
+/**
+* The base implementation of `_.isArguments`.
+*
+* @private
+* @param {*} value The value to check.
+* @returns {boolean} Returns `true` if `value` is an `arguments` object,
+*/
+function baseIsArguments(value) {
+	return isObjectLike(value) && baseGetTag(value) == argsTag$3;
+}
+//#endregion
+//#region node_modules/lodash-es/isArguments.js
+/** Used for built-in method references. */
+var objectProto$1 = Object.prototype;
+/** Used to check objects for own properties. */
+var hasOwnProperty$11 = objectProto$1.hasOwnProperty;
+/** Built-in value references. */
+var propertyIsEnumerable$1 = objectProto$1.propertyIsEnumerable;
+/**
+* Checks if `value` is likely an `arguments` object.
+*
+* @static
+* @memberOf _
+* @since 0.1.0
+* @category Lang
+* @param {*} value The value to check.
+* @returns {boolean} Returns `true` if `value` is an `arguments` object,
+*  else `false`.
+* @example
+*
+* _.isArguments(function() { return arguments; }());
+* // => true
+*
+* _.isArguments([1, 2, 3]);
+* // => false
+*/
+var isArguments = baseIsArguments(function() {
+	return arguments;
+}()) ? baseIsArguments : function(value) {
+	return isObjectLike(value) && hasOwnProperty$11.call(value, "callee") && !propertyIsEnumerable$1.call(value, "callee");
+};
+//#endregion
+//#region node_modules/lodash-es/stubFalse.js
+/**
+* This method returns `false`.
+*
+* @static
+* @memberOf _
+* @since 4.13.0
+* @category Util
+* @returns {boolean} Returns `false`.
+* @example
+*
+* _.times(2, _.stubFalse);
+* // => [false, false]
+*/
+function stubFalse() {
+	return false;
+}
+//#endregion
+//#region node_modules/lodash-es/isBuffer.js
+/** Detect free variable `exports`. */
+var freeExports$2 = typeof exports == "object" && exports && !exports.nodeType && exports;
+/** Detect free variable `module`. */
+var freeModule$2 = freeExports$2 && typeof module == "object" && module && !module.nodeType && module;
+/** Built-in value references. */
+var Buffer$1 = freeModule$2 && freeModule$2.exports === freeExports$2 ? root.Buffer : void 0;
+/**
+* Checks if `value` is a buffer.
+*
+* @static
+* @memberOf _
+* @since 4.3.0
+* @category Lang
+* @param {*} value The value to check.
+* @returns {boolean} Returns `true` if `value` is a buffer, else `false`.
+* @example
+*
+* _.isBuffer(new Buffer(2));
+* // => true
+*
+* _.isBuffer(new Uint8Array(2));
+* // => false
+*/
+var isBuffer = (Buffer$1 ? Buffer$1.isBuffer : void 0) || stubFalse;
+//#endregion
+//#region node_modules/lodash-es/_baseIsTypedArray.js
+/** `Object#toString` result references. */
+var argsTag$2 = "[object Arguments]", arrayTag$2 = "[object Array]", boolTag$3 = "[object Boolean]", dateTag$3 = "[object Date]", errorTag$2 = "[object Error]", funcTag$1 = "[object Function]", mapTag$6 = "[object Map]", numberTag$3 = "[object Number]", objectTag$4 = "[object Object]", regexpTag$3 = "[object RegExp]", setTag$6 = "[object Set]", stringTag$3 = "[object String]", weakMapTag$2 = "[object WeakMap]";
+var arrayBufferTag$3 = "[object ArrayBuffer]", dataViewTag$4 = "[object DataView]", float32Tag$2 = "[object Float32Array]", float64Tag$2 = "[object Float64Array]", int8Tag$2 = "[object Int8Array]", int16Tag$2 = "[object Int16Array]", int32Tag$2 = "[object Int32Array]", uint8Tag$2 = "[object Uint8Array]", uint8ClampedTag$2 = "[object Uint8ClampedArray]", uint16Tag$2 = "[object Uint16Array]", uint32Tag$2 = "[object Uint32Array]";
+/** Used to identify `toStringTag` values of typed arrays. */
+var typedArrayTags = {};
+typedArrayTags[float32Tag$2] = typedArrayTags[float64Tag$2] = typedArrayTags[int8Tag$2] = typedArrayTags[int16Tag$2] = typedArrayTags[int32Tag$2] = typedArrayTags[uint8Tag$2] = typedArrayTags[uint8ClampedTag$2] = typedArrayTags[uint16Tag$2] = typedArrayTags[uint32Tag$2] = true;
+typedArrayTags[argsTag$2] = typedArrayTags[arrayTag$2] = typedArrayTags[arrayBufferTag$3] = typedArrayTags[boolTag$3] = typedArrayTags[dataViewTag$4] = typedArrayTags[dateTag$3] = typedArrayTags[errorTag$2] = typedArrayTags[funcTag$1] = typedArrayTags[mapTag$6] = typedArrayTags[numberTag$3] = typedArrayTags[objectTag$4] = typedArrayTags[regexpTag$3] = typedArrayTags[setTag$6] = typedArrayTags[stringTag$3] = typedArrayTags[weakMapTag$2] = false;
+/**
+* The base implementation of `_.isTypedArray` without Node.js optimizations.
+*
+* @private
+* @param {*} value The value to check.
+* @returns {boolean} Returns `true` if `value` is a typed array, else `false`.
+*/
+function baseIsTypedArray(value) {
+	return isObjectLike(value) && isLength(value.length) && !!typedArrayTags[baseGetTag(value)];
+}
+//#endregion
+//#region node_modules/lodash-es/_baseUnary.js
+/**
+* The base implementation of `_.unary` without support for storing metadata.
+*
+* @private
+* @param {Function} func The function to cap arguments for.
+* @returns {Function} Returns the new capped function.
+*/
+function baseUnary(func) {
+	return function(value) {
+		return func(value);
+	};
+}
+//#endregion
+//#region node_modules/lodash-es/_nodeUtil.js
+/** Detect free variable `exports`. */
+var freeExports$1 = typeof exports == "object" && exports && !exports.nodeType && exports;
+/** Detect free variable `module`. */
+var freeModule$1 = freeExports$1 && typeof module == "object" && module && !module.nodeType && module;
+/** Detect free variable `process` from Node.js. */
+var freeProcess = freeModule$1 && freeModule$1.exports === freeExports$1 && freeGlobal.process;
+/** Used to access faster Node.js helpers. */
+var nodeUtil = function() {
+	try {
+		var types = freeModule$1 && freeModule$1.require && freeModule$1.require("util").types;
+		if (types) return types;
+		return freeProcess && freeProcess.binding && freeProcess.binding("util");
+	} catch (e) {}
+}();
+//#endregion
+//#region node_modules/lodash-es/isTypedArray.js
+var nodeIsTypedArray = nodeUtil && nodeUtil.isTypedArray;
+/**
+* Checks if `value` is classified as a typed array.
+*
+* @static
+* @memberOf _
+* @since 3.0.0
+* @category Lang
+* @param {*} value The value to check.
+* @returns {boolean} Returns `true` if `value` is a typed array, else `false`.
+* @example
+*
+* _.isTypedArray(new Uint8Array);
+* // => true
+*
+* _.isTypedArray([]);
+* // => false
+*/
+var isTypedArray = nodeIsTypedArray ? baseUnary(nodeIsTypedArray) : baseIsTypedArray;
+//#endregion
+//#region node_modules/lodash-es/_arrayLikeKeys.js
+/** Used to check objects for own properties. */
+var hasOwnProperty$10 = Object.prototype.hasOwnProperty;
+/**
+* Creates an array of the enumerable property names of the array-like `value`.
+*
+* @private
+* @param {*} value The value to query.
+* @param {boolean} inherited Specify returning inherited property names.
+* @returns {Array} Returns the array of property names.
+*/
+function arrayLikeKeys(value, inherited) {
+	var isArr = isArray(value), isArg = !isArr && isArguments(value), isBuff = !isArr && !isArg && isBuffer(value), isType = !isArr && !isArg && !isBuff && isTypedArray(value), skipIndexes = isArr || isArg || isBuff || isType, result = skipIndexes ? baseTimes(value.length, String) : [], length = result.length;
+	for (var key in value) if ((inherited || hasOwnProperty$10.call(value, key)) && !(skipIndexes && (key == "length" || isBuff && (key == "offset" || key == "parent") || isType && (key == "buffer" || key == "byteLength" || key == "byteOffset") || isIndex(key, length)))) result.push(key);
+	return result;
+}
+//#endregion
+//#region node_modules/lodash-es/_overArg.js
+/**
+* Creates a unary function that invokes `func` with its argument transformed.
+*
+* @private
+* @param {Function} func The function to wrap.
+* @param {Function} transform The argument transform.
+* @returns {Function} Returns the new function.
+*/
+function overArg(func, transform) {
+	return function(arg) {
+		return func(transform(arg));
+	};
+}
+//#endregion
+//#region node_modules/lodash-es/_nativeKeys.js
+var nativeKeys = overArg(Object.keys, Object);
+//#endregion
+//#region node_modules/lodash-es/_baseKeys.js
+/** Used to check objects for own properties. */
+var hasOwnProperty$9 = Object.prototype.hasOwnProperty;
+/**
+* The base implementation of `_.keys` which doesn't treat sparse arrays as dense.
+*
+* @private
+* @param {Object} object The object to query.
+* @returns {Array} Returns the array of property names.
+*/
+function baseKeys(object) {
+	if (!isPrototype(object)) return nativeKeys(object);
+	var result = [];
+	for (var key in Object(object)) if (hasOwnProperty$9.call(object, key) && key != "constructor") result.push(key);
+	return result;
+}
+//#endregion
+//#region node_modules/lodash-es/keys.js
+/**
+* Creates an array of the own enumerable property names of `object`.
+*
+* **Note:** Non-object values are coerced to objects. See the
+* [ES spec](http://ecma-international.org/ecma-262/7.0/#sec-object.keys)
+* for more details.
+*
+* @static
+* @since 0.1.0
+* @memberOf _
+* @category Object
+* @param {Object} object The object to query.
+* @returns {Array} Returns the array of property names.
+* @example
+*
+* function Foo() {
+*   this.a = 1;
+*   this.b = 2;
+* }
+*
+* Foo.prototype.c = 3;
+*
+* _.keys(new Foo);
+* // => ['a', 'b'] (iteration order is not guaranteed)
+*
+* _.keys('hi');
+* // => ['0', '1']
+*/
+function keys(object) {
+	return isArrayLike(object) ? arrayLikeKeys(object) : baseKeys(object);
+}
+//#endregion
+//#region node_modules/lodash-es/_nativeKeysIn.js
+/**
+* This function is like
+* [`Object.keys`](http://ecma-international.org/ecma-262/7.0/#sec-object.keys)
+* except that it includes inherited enumerable properties.
+*
+* @private
+* @param {Object} object The object to query.
+* @returns {Array} Returns the array of property names.
+*/
+function nativeKeysIn(object) {
+	var result = [];
+	if (object != null) for (var key in Object(object)) result.push(key);
+	return result;
+}
+//#endregion
+//#region node_modules/lodash-es/_baseKeysIn.js
+/** Used to check objects for own properties. */
+var hasOwnProperty$8 = Object.prototype.hasOwnProperty;
+/**
+* The base implementation of `_.keysIn` which doesn't treat sparse arrays as dense.
+*
+* @private
+* @param {Object} object The object to query.
+* @returns {Array} Returns the array of property names.
+*/
+function baseKeysIn(object) {
+	if (!isObject$1(object)) return nativeKeysIn(object);
+	var isProto = isPrototype(object), result = [];
+	for (var key in object) if (!(key == "constructor" && (isProto || !hasOwnProperty$8.call(object, key)))) result.push(key);
+	return result;
+}
+//#endregion
+//#region node_modules/lodash-es/keysIn.js
+/**
+* Creates an array of the own and inherited enumerable property names of `object`.
+*
+* **Note:** Non-object values are coerced to objects.
+*
+* @static
+* @memberOf _
+* @since 3.0.0
+* @category Object
+* @param {Object} object The object to query.
+* @returns {Array} Returns the array of property names.
+* @example
+*
+* function Foo() {
+*   this.a = 1;
+*   this.b = 2;
+* }
+*
+* Foo.prototype.c = 3;
+*
+* _.keysIn(new Foo);
+* // => ['a', 'b', 'c'] (iteration order is not guaranteed)
+*/
+function keysIn(object) {
+	return isArrayLike(object) ? arrayLikeKeys(object, true) : baseKeysIn(object);
+}
+//#endregion
+//#region node_modules/lodash-es/_isKey.js
+/** Used to match property names within property paths. */
+var reIsDeepProp = /\.|\[(?:[^[\]]*|(["'])(?:(?!\1)[^\\]|\\.)*?\1)\]/, reIsPlainProp = /^\w*$/;
+/**
+* Checks if `value` is a property name and not a property path.
+*
+* @private
+* @param {*} value The value to check.
+* @param {Object} [object] The object to query keys on.
+* @returns {boolean} Returns `true` if `value` is a property name, else `false`.
+*/
+function isKey(value, object) {
+	if (isArray(value)) return false;
+	var type = typeof value;
+	if (type == "number" || type == "symbol" || type == "boolean" || value == null || isSymbol(value)) return true;
+	return reIsPlainProp.test(value) || !reIsDeepProp.test(value) || object != null && value in Object(object);
+}
+//#endregion
+//#region node_modules/lodash-es/_nativeCreate.js
+var nativeCreate = getNative(Object, "create");
+//#endregion
+//#region node_modules/lodash-es/_hashClear.js
+/**
+* Removes all key-value entries from the hash.
+*
+* @private
+* @name clear
+* @memberOf Hash
+*/
+function hashClear() {
+	this.__data__ = nativeCreate ? nativeCreate(null) : {};
+	this.size = 0;
+}
+//#endregion
+//#region node_modules/lodash-es/_hashDelete.js
+/**
+* Removes `key` and its value from the hash.
+*
+* @private
+* @name delete
+* @memberOf Hash
+* @param {Object} hash The hash to modify.
+* @param {string} key The key of the value to remove.
+* @returns {boolean} Returns `true` if the entry was removed, else `false`.
+*/
+function hashDelete(key) {
+	var result = this.has(key) && delete this.__data__[key];
+	this.size -= result ? 1 : 0;
+	return result;
+}
+//#endregion
+//#region node_modules/lodash-es/_hashGet.js
+/** Used to stand-in for `undefined` hash values. */
+var HASH_UNDEFINED$2 = "__lodash_hash_undefined__";
+/** Used to check objects for own properties. */
+var hasOwnProperty$7 = Object.prototype.hasOwnProperty;
+/**
+* Gets the hash value for `key`.
+*
+* @private
+* @name get
+* @memberOf Hash
+* @param {string} key The key of the value to get.
+* @returns {*} Returns the entry value.
+*/
+function hashGet(key) {
+	var data = this.__data__;
+	if (nativeCreate) {
+		var result = data[key];
+		return result === HASH_UNDEFINED$2 ? void 0 : result;
+	}
+	return hasOwnProperty$7.call(data, key) ? data[key] : void 0;
+}
+//#endregion
+//#region node_modules/lodash-es/_hashHas.js
+/** Used to check objects for own properties. */
+var hasOwnProperty$6 = Object.prototype.hasOwnProperty;
+/**
+* Checks if a hash value for `key` exists.
+*
+* @private
+* @name has
+* @memberOf Hash
+* @param {string} key The key of the entry to check.
+* @returns {boolean} Returns `true` if an entry for `key` exists, else `false`.
+*/
+function hashHas(key) {
+	var data = this.__data__;
+	return nativeCreate ? data[key] !== void 0 : hasOwnProperty$6.call(data, key);
+}
+//#endregion
+//#region node_modules/lodash-es/_hashSet.js
+/** Used to stand-in for `undefined` hash values. */
+var HASH_UNDEFINED$1 = "__lodash_hash_undefined__";
+/**
+* Sets the hash `key` to `value`.
+*
+* @private
+* @name set
+* @memberOf Hash
+* @param {string} key The key of the value to set.
+* @param {*} value The value to set.
+* @returns {Object} Returns the hash instance.
+*/
+function hashSet(key, value) {
+	var data = this.__data__;
+	this.size += this.has(key) ? 0 : 1;
+	data[key] = nativeCreate && value === void 0 ? HASH_UNDEFINED$1 : value;
+	return this;
+}
+//#endregion
+//#region node_modules/lodash-es/_Hash.js
+/**
+* Creates a hash object.
+*
+* @private
+* @constructor
+* @param {Array} [entries] The key-value pairs to cache.
+*/
+function Hash(entries) {
+	var index = -1, length = entries == null ? 0 : entries.length;
+	this.clear();
+	while (++index < length) {
+		var entry = entries[index];
+		this.set(entry[0], entry[1]);
+	}
+}
+Hash.prototype.clear = hashClear;
+Hash.prototype["delete"] = hashDelete;
+Hash.prototype.get = hashGet;
+Hash.prototype.has = hashHas;
+Hash.prototype.set = hashSet;
+//#endregion
+//#region node_modules/lodash-es/_listCacheClear.js
+/**
+* Removes all key-value entries from the list cache.
+*
+* @private
+* @name clear
+* @memberOf ListCache
+*/
+function listCacheClear() {
+	this.__data__ = [];
+	this.size = 0;
+}
+//#endregion
+//#region node_modules/lodash-es/_assocIndexOf.js
+/**
+* Gets the index at which the `key` is found in `array` of key-value pairs.
+*
+* @private
+* @param {Array} array The array to inspect.
+* @param {*} key The key to search for.
+* @returns {number} Returns the index of the matched value, else `-1`.
+*/
+function assocIndexOf(array, key) {
+	var length = array.length;
+	while (length--) if (eq(array[length][0], key)) return length;
+	return -1;
+}
+//#endregion
+//#region node_modules/lodash-es/_listCacheDelete.js
+/** Built-in value references. */
+var splice = Array.prototype.splice;
+/**
+* Removes `key` and its value from the list cache.
+*
+* @private
+* @name delete
+* @memberOf ListCache
+* @param {string} key The key of the value to remove.
+* @returns {boolean} Returns `true` if the entry was removed, else `false`.
+*/
+function listCacheDelete(key) {
+	var data = this.__data__, index = assocIndexOf(data, key);
+	if (index < 0) return false;
+	if (index == data.length - 1) data.pop();
+	else splice.call(data, index, 1);
+	--this.size;
+	return true;
+}
+//#endregion
+//#region node_modules/lodash-es/_listCacheGet.js
+/**
+* Gets the list cache value for `key`.
+*
+* @private
+* @name get
+* @memberOf ListCache
+* @param {string} key The key of the value to get.
+* @returns {*} Returns the entry value.
+*/
+function listCacheGet(key) {
+	var data = this.__data__, index = assocIndexOf(data, key);
+	return index < 0 ? void 0 : data[index][1];
+}
+//#endregion
+//#region node_modules/lodash-es/_listCacheHas.js
+/**
+* Checks if a list cache value for `key` exists.
+*
+* @private
+* @name has
+* @memberOf ListCache
+* @param {string} key The key of the entry to check.
+* @returns {boolean} Returns `true` if an entry for `key` exists, else `false`.
+*/
+function listCacheHas(key) {
+	return assocIndexOf(this.__data__, key) > -1;
+}
+//#endregion
+//#region node_modules/lodash-es/_listCacheSet.js
+/**
+* Sets the list cache `key` to `value`.
+*
+* @private
+* @name set
+* @memberOf ListCache
+* @param {string} key The key of the value to set.
+* @param {*} value The value to set.
+* @returns {Object} Returns the list cache instance.
+*/
+function listCacheSet(key, value) {
+	var data = this.__data__, index = assocIndexOf(data, key);
+	if (index < 0) {
+		++this.size;
+		data.push([key, value]);
+	} else data[index][1] = value;
+	return this;
+}
+//#endregion
+//#region node_modules/lodash-es/_ListCache.js
+/**
+* Creates an list cache object.
+*
+* @private
+* @constructor
+* @param {Array} [entries] The key-value pairs to cache.
+*/
+function ListCache(entries) {
+	var index = -1, length = entries == null ? 0 : entries.length;
+	this.clear();
+	while (++index < length) {
+		var entry = entries[index];
+		this.set(entry[0], entry[1]);
+	}
+}
+ListCache.prototype.clear = listCacheClear;
+ListCache.prototype["delete"] = listCacheDelete;
+ListCache.prototype.get = listCacheGet;
+ListCache.prototype.has = listCacheHas;
+ListCache.prototype.set = listCacheSet;
+//#endregion
+//#region node_modules/lodash-es/_Map.js
+var Map$1 = getNative(root, "Map");
+//#endregion
+//#region node_modules/lodash-es/_mapCacheClear.js
+/**
+* Removes all key-value entries from the map.
+*
+* @private
+* @name clear
+* @memberOf MapCache
+*/
+function mapCacheClear() {
+	this.size = 0;
+	this.__data__ = {
+		"hash": new Hash(),
+		"map": new (Map$1 || ListCache)(),
+		"string": new Hash()
+	};
+}
+//#endregion
+//#region node_modules/lodash-es/_isKeyable.js
+/**
+* Checks if `value` is suitable for use as unique object key.
+*
+* @private
+* @param {*} value The value to check.
+* @returns {boolean} Returns `true` if `value` is suitable, else `false`.
+*/
+function isKeyable(value) {
+	var type = typeof value;
+	return type == "string" || type == "number" || type == "symbol" || type == "boolean" ? value !== "__proto__" : value === null;
+}
+//#endregion
+//#region node_modules/lodash-es/_getMapData.js
+/**
+* Gets the data for `map`.
+*
+* @private
+* @param {Object} map The map to query.
+* @param {string} key The reference key.
+* @returns {*} Returns the map data.
+*/
+function getMapData(map, key) {
+	var data = map.__data__;
+	return isKeyable(key) ? data[typeof key == "string" ? "string" : "hash"] : data.map;
+}
+//#endregion
+//#region node_modules/lodash-es/_mapCacheDelete.js
+/**
+* Removes `key` and its value from the map.
+*
+* @private
+* @name delete
+* @memberOf MapCache
+* @param {string} key The key of the value to remove.
+* @returns {boolean} Returns `true` if the entry was removed, else `false`.
+*/
+function mapCacheDelete(key) {
+	var result = getMapData(this, key)["delete"](key);
+	this.size -= result ? 1 : 0;
+	return result;
+}
+//#endregion
+//#region node_modules/lodash-es/_mapCacheGet.js
+/**
+* Gets the map value for `key`.
+*
+* @private
+* @name get
+* @memberOf MapCache
+* @param {string} key The key of the value to get.
+* @returns {*} Returns the entry value.
+*/
+function mapCacheGet(key) {
+	return getMapData(this, key).get(key);
+}
+//#endregion
+//#region node_modules/lodash-es/_mapCacheHas.js
+/**
+* Checks if a map value for `key` exists.
+*
+* @private
+* @name has
+* @memberOf MapCache
+* @param {string} key The key of the entry to check.
+* @returns {boolean} Returns `true` if an entry for `key` exists, else `false`.
+*/
+function mapCacheHas(key) {
+	return getMapData(this, key).has(key);
+}
+//#endregion
+//#region node_modules/lodash-es/_mapCacheSet.js
+/**
+* Sets the map `key` to `value`.
+*
+* @private
+* @name set
+* @memberOf MapCache
+* @param {string} key The key of the value to set.
+* @param {*} value The value to set.
+* @returns {Object} Returns the map cache instance.
+*/
+function mapCacheSet(key, value) {
+	var data = getMapData(this, key), size = data.size;
+	data.set(key, value);
+	this.size += data.size == size ? 0 : 1;
+	return this;
+}
+//#endregion
+//#region node_modules/lodash-es/_MapCache.js
+/**
+* Creates a map cache object to store key-value pairs.
+*
+* @private
+* @constructor
+* @param {Array} [entries] The key-value pairs to cache.
+*/
+function MapCache(entries) {
+	var index = -1, length = entries == null ? 0 : entries.length;
+	this.clear();
+	while (++index < length) {
+		var entry = entries[index];
+		this.set(entry[0], entry[1]);
+	}
+}
+MapCache.prototype.clear = mapCacheClear;
+MapCache.prototype["delete"] = mapCacheDelete;
+MapCache.prototype.get = mapCacheGet;
+MapCache.prototype.has = mapCacheHas;
+MapCache.prototype.set = mapCacheSet;
+//#endregion
+//#region node_modules/lodash-es/memoize.js
+/** Error message constants. */
+var FUNC_ERROR_TEXT = "Expected a function";
+/**
+* Creates a function that memoizes the result of `func`. If `resolver` is
+* provided, it determines the cache key for storing the result based on the
+* arguments provided to the memoized function. By default, the first argument
+* provided to the memoized function is used as the map cache key. The `func`
+* is invoked with the `this` binding of the memoized function.
+*
+* **Note:** The cache is exposed as the `cache` property on the memoized
+* function. Its creation may be customized by replacing the `_.memoize.Cache`
+* constructor with one whose instances implement the
+* [`Map`](http://ecma-international.org/ecma-262/7.0/#sec-properties-of-the-map-prototype-object)
+* method interface of `clear`, `delete`, `get`, `has`, and `set`.
+*
+* @static
+* @memberOf _
+* @since 0.1.0
+* @category Function
+* @param {Function} func The function to have its output memoized.
+* @param {Function} [resolver] The function to resolve the cache key.
+* @returns {Function} Returns the new memoized function.
+* @example
+*
+* var object = { 'a': 1, 'b': 2 };
+* var other = { 'c': 3, 'd': 4 };
+*
+* var values = _.memoize(_.values);
+* values(object);
+* // => [1, 2]
+*
+* values(other);
+* // => [3, 4]
+*
+* object.a = 2;
+* values(object);
+* // => [1, 2]
+*
+* // Modify the result cache.
+* values.cache.set(object, ['a', 'b']);
+* values(object);
+* // => ['a', 'b']
+*
+* // Replace `_.memoize.Cache`.
+* _.memoize.Cache = WeakMap;
+*/
+function memoize(func, resolver) {
+	if (typeof func != "function" || resolver != null && typeof resolver != "function") throw new TypeError(FUNC_ERROR_TEXT);
+	var memoized = function() {
+		var args = arguments, key = resolver ? resolver.apply(this, args) : args[0], cache = memoized.cache;
+		if (cache.has(key)) return cache.get(key);
+		var result = func.apply(this, args);
+		memoized.cache = cache.set(key, result) || cache;
+		return result;
+	};
+	memoized.cache = new (memoize.Cache || MapCache)();
+	return memoized;
+}
+memoize.Cache = MapCache;
+//#endregion
+//#region node_modules/lodash-es/_memoizeCapped.js
+/** Used as the maximum memoize cache size. */
+var MAX_MEMOIZE_SIZE = 500;
+/**
+* A specialized version of `_.memoize` which clears the memoized function's
+* cache when it exceeds `MAX_MEMOIZE_SIZE`.
+*
+* @private
+* @param {Function} func The function to have its output memoized.
+* @returns {Function} Returns the new memoized function.
+*/
+function memoizeCapped(func) {
+	var result = memoize(func, function(key) {
+		if (cache.size === MAX_MEMOIZE_SIZE) cache.clear();
+		return key;
+	});
+	var cache = result.cache;
+	return result;
+}
+//#endregion
+//#region node_modules/lodash-es/_stringToPath.js
+/** Used to match property names within property paths. */
+var rePropName = /[^.[\]]+|\[(?:(-?\d+(?:\.\d+)?)|(["'])((?:(?!\2)[^\\]|\\.)*?)\2)\]|(?=(?:\.|\[\])(?:\.|\[\]|$))/g;
+/** Used to match backslashes in property paths. */
+var reEscapeChar = /\\(\\)?/g;
+/**
+* Converts `string` to a property path array.
+*
+* @private
+* @param {string} string The string to convert.
+* @returns {Array} Returns the property path array.
+*/
+var stringToPath = memoizeCapped(function(string) {
+	var result = [];
+	if (string.charCodeAt(0) === 46) result.push("");
+	string.replace(rePropName, function(match, number, quote, subString) {
+		result.push(quote ? subString.replace(reEscapeChar, "$1") : number || match);
+	});
+	return result;
+});
 //#endregion
 //#region node_modules/lodash-es/toString.js
 /**
@@ -2053,6 +3416,188 @@ function baseToString(value) {
 */
 function toString(value) {
 	return value == null ? "" : baseToString(value);
+}
+//#endregion
+//#region node_modules/lodash-es/_castPath.js
+/**
+* Casts `value` to a path array if it's not one.
+*
+* @private
+* @param {*} value The value to inspect.
+* @param {Object} [object] The object to query keys on.
+* @returns {Array} Returns the cast property path array.
+*/
+function castPath(value, object) {
+	if (isArray(value)) return value;
+	return isKey(value, object) ? [value] : stringToPath(toString(value));
+}
+//#endregion
+//#region node_modules/lodash-es/_toKey.js
+/** Used as references for various `Number` constants. */
+var INFINITY = Infinity;
+/**
+* Converts `value` to a string key if it's not a string or symbol.
+*
+* @private
+* @param {*} value The value to inspect.
+* @returns {string|symbol} Returns the key.
+*/
+function toKey(value) {
+	if (typeof value == "string" || isSymbol(value)) return value;
+	var result = value + "";
+	return result == "0" && 1 / value == -INFINITY ? "-0" : result;
+}
+//#endregion
+//#region node_modules/lodash-es/_baseGet.js
+/**
+* The base implementation of `_.get` without support for default values.
+*
+* @private
+* @param {Object} object The object to query.
+* @param {Array|string} path The path of the property to get.
+* @returns {*} Returns the resolved value.
+*/
+function baseGet(object, path) {
+	path = castPath(path, object);
+	var index = 0, length = path.length;
+	while (object != null && index < length) object = object[toKey(path[index++])];
+	return index && index == length ? object : void 0;
+}
+//#endregion
+//#region node_modules/lodash-es/_arrayPush.js
+/**
+* Appends the elements of `values` to `array`.
+*
+* @private
+* @param {Array} array The array to modify.
+* @param {Array} values The values to append.
+* @returns {Array} Returns `array`.
+*/
+function arrayPush(array, values) {
+	var index = -1, length = values.length, offset = array.length;
+	while (++index < length) array[offset + index] = values[index];
+	return array;
+}
+//#endregion
+//#region node_modules/lodash-es/_isFlattenable.js
+/** Built-in value references. */
+var spreadableSymbol = Symbol$1 ? Symbol$1.isConcatSpreadable : void 0;
+/**
+* Checks if `value` is a flattenable `arguments` object or array.
+*
+* @private
+* @param {*} value The value to check.
+* @returns {boolean} Returns `true` if `value` is flattenable, else `false`.
+*/
+function isFlattenable(value) {
+	return isArray(value) || isArguments(value) || !!(spreadableSymbol && value && value[spreadableSymbol]);
+}
+//#endregion
+//#region node_modules/lodash-es/_baseFlatten.js
+/**
+* The base implementation of `_.flatten` with support for restricting flattening.
+*
+* @private
+* @param {Array} array The array to flatten.
+* @param {number} depth The maximum recursion depth.
+* @param {boolean} [predicate=isFlattenable] The function invoked per iteration.
+* @param {boolean} [isStrict] Restrict to values that pass `predicate` checks.
+* @param {Array} [result=[]] The initial result value.
+* @returns {Array} Returns the new flattened array.
+*/
+function baseFlatten(array, depth, predicate, isStrict, result) {
+	var index = -1, length = array.length;
+	predicate || (predicate = isFlattenable);
+	result || (result = []);
+	while (++index < length) {
+		var value = array[index];
+		if (depth > 0 && predicate(value)) if (depth > 1) baseFlatten(value, depth - 1, predicate, isStrict, result);
+		else arrayPush(result, value);
+		else if (!isStrict) result[result.length] = value;
+	}
+	return result;
+}
+//#endregion
+//#region node_modules/lodash-es/flatten.js
+/**
+* Flattens `array` a single level deep.
+*
+* @static
+* @memberOf _
+* @since 0.1.0
+* @category Array
+* @param {Array} array The array to flatten.
+* @returns {Array} Returns the new flattened array.
+* @example
+*
+* _.flatten([1, [2, [3, [4]], 5]]);
+* // => [1, 2, [3, [4]], 5]
+*/
+function flatten(array) {
+	return (array == null ? 0 : array.length) ? baseFlatten(array, 1) : [];
+}
+//#endregion
+//#region node_modules/lodash-es/_flatRest.js
+/**
+* A specialized version of `baseRest` which flattens the rest array.
+*
+* @private
+* @param {Function} func The function to apply a rest parameter to.
+* @returns {Function} Returns the new function.
+*/
+function flatRest(func) {
+	return setToString(overRest(func, void 0, flatten), func + "");
+}
+//#endregion
+//#region node_modules/lodash-es/_getPrototype.js
+/** Built-in value references. */
+var getPrototype = overArg(Object.getPrototypeOf, Object);
+//#endregion
+//#region node_modules/lodash-es/isPlainObject.js
+/** `Object#toString` result references. */
+var objectTag$3 = "[object Object]";
+/** Used for built-in method references. */
+var funcProto = Function.prototype, objectProto = Object.prototype;
+/** Used to resolve the decompiled source of functions. */
+var funcToString = funcProto.toString;
+/** Used to check objects for own properties. */
+var hasOwnProperty$5 = objectProto.hasOwnProperty;
+/** Used to infer the `Object` constructor. */
+var objectCtorString = funcToString.call(Object);
+/**
+* Checks if `value` is a plain object, that is, an object created by the
+* `Object` constructor or one with a `[[Prototype]]` of `null`.
+*
+* @static
+* @memberOf _
+* @since 0.8.0
+* @category Lang
+* @param {*} value The value to check.
+* @returns {boolean} Returns `true` if `value` is a plain object, else `false`.
+* @example
+*
+* function Foo() {
+*   this.a = 1;
+* }
+*
+* _.isPlainObject(new Foo);
+* // => false
+*
+* _.isPlainObject([1, 2, 3]);
+* // => false
+*
+* _.isPlainObject({ 'x': 0, 'y': 0 });
+* // => true
+*
+* _.isPlainObject(Object.create(null));
+* // => true
+*/
+function isPlainObject(value) {
+	if (!isObjectLike(value) || baseGetTag(value) != objectTag$3) return false;
+	var proto = getPrototype(value);
+	if (proto === null) return true;
+	var Ctor = hasOwnProperty$5.call(proto, "constructor") && proto.constructor;
+	return typeof Ctor == "function" && Ctor instanceof Ctor && funcToString.call(Ctor) == objectCtorString;
 }
 //#endregion
 //#region node_modules/lodash-es/_baseSlice.js
@@ -2219,681 +3764,6 @@ function capitalize(string) {
 	return upperFirst(toString(string).toLowerCase());
 }
 //#endregion
-//#region node_modules/lodash-es/_isPrototype.js
-/** Used for built-in method references. */
-var objectProto$3 = Object.prototype;
-/**
-* Checks if `value` is likely a prototype object.
-*
-* @private
-* @param {*} value The value to check.
-* @returns {boolean} Returns `true` if `value` is a prototype, else `false`.
-*/
-function isPrototype(value) {
-	var Ctor = value && value.constructor;
-	return value === (typeof Ctor == "function" && Ctor.prototype || objectProto$3);
-}
-//#endregion
-//#region node_modules/lodash-es/_overArg.js
-/**
-* Creates a unary function that invokes `func` with its argument transformed.
-*
-* @private
-* @param {Function} func The function to wrap.
-* @param {Function} transform The argument transform.
-* @returns {Function} Returns the new function.
-*/
-function overArg(func, transform) {
-	return function(arg) {
-		return func(transform(arg));
-	};
-}
-//#endregion
-//#region node_modules/lodash-es/_nativeKeys.js
-var nativeKeys = overArg(Object.keys, Object);
-//#endregion
-//#region node_modules/lodash-es/_baseKeys.js
-/** Used to check objects for own properties. */
-var hasOwnProperty$13 = Object.prototype.hasOwnProperty;
-/**
-* The base implementation of `_.keys` which doesn't treat sparse arrays as dense.
-*
-* @private
-* @param {Object} object The object to query.
-* @returns {Array} Returns the array of property names.
-*/
-function baseKeys(object) {
-	if (!isPrototype(object)) return nativeKeys(object);
-	var result = [];
-	for (var key in Object(object)) if (hasOwnProperty$13.call(object, key) && key != "constructor") result.push(key);
-	return result;
-}
-//#endregion
-//#region node_modules/lodash-es/isObject.js
-/**
-* Checks if `value` is the
-* [language type](http://www.ecma-international.org/ecma-262/7.0/#sec-ecmascript-language-types)
-* of `Object`. (e.g. arrays, functions, objects, regexes, `new Number(0)`, and `new String('')`)
-*
-* @static
-* @memberOf _
-* @since 0.1.0
-* @category Lang
-* @param {*} value The value to check.
-* @returns {boolean} Returns `true` if `value` is an object, else `false`.
-* @example
-*
-* _.isObject({});
-* // => true
-*
-* _.isObject([1, 2, 3]);
-* // => true
-*
-* _.isObject(_.noop);
-* // => true
-*
-* _.isObject(null);
-* // => false
-*/
-function isObject$1(value) {
-	var type = typeof value;
-	return value != null && (type == "object" || type == "function");
-}
-//#endregion
-//#region node_modules/lodash-es/isFunction.js
-/** `Object#toString` result references. */
-var asyncTag = "[object AsyncFunction]", funcTag$2 = "[object Function]", genTag$1 = "[object GeneratorFunction]", proxyTag = "[object Proxy]";
-/**
-* Checks if `value` is classified as a `Function` object.
-*
-* @static
-* @memberOf _
-* @since 0.1.0
-* @category Lang
-* @param {*} value The value to check.
-* @returns {boolean} Returns `true` if `value` is a function, else `false`.
-* @example
-*
-* _.isFunction(_);
-* // => true
-*
-* _.isFunction(/abc/);
-* // => false
-*/
-function isFunction(value) {
-	if (!isObject$1(value)) return false;
-	var tag = baseGetTag(value);
-	return tag == funcTag$2 || tag == genTag$1 || tag == asyncTag || tag == proxyTag;
-}
-//#endregion
-//#region node_modules/lodash-es/_coreJsData.js
-/** Used to detect overreaching core-js shims. */
-var coreJsData = root["__core-js_shared__"];
-//#endregion
-//#region node_modules/lodash-es/_isMasked.js
-/** Used to detect methods masquerading as native. */
-var maskSrcKey = function() {
-	var uid = /[^.]+$/.exec(coreJsData && coreJsData.keys && coreJsData.keys.IE_PROTO || "");
-	return uid ? "Symbol(src)_1." + uid : "";
-}();
-/**
-* Checks if `func` has its source masked.
-*
-* @private
-* @param {Function} func The function to check.
-* @returns {boolean} Returns `true` if `func` is masked, else `false`.
-*/
-function isMasked(func) {
-	return !!maskSrcKey && maskSrcKey in func;
-}
-//#endregion
-//#region node_modules/lodash-es/_toSource.js
-/** Used to resolve the decompiled source of functions. */
-var funcToString$2 = Function.prototype.toString;
-/**
-* Converts `func` to its source code.
-*
-* @private
-* @param {Function} func The function to convert.
-* @returns {string} Returns the source code.
-*/
-function toSource(func) {
-	if (func != null) {
-		try {
-			return funcToString$2.call(func);
-		} catch (e) {}
-		try {
-			return func + "";
-		} catch (e) {}
-	}
-	return "";
-}
-//#endregion
-//#region node_modules/lodash-es/_baseIsNative.js
-/**
-* Used to match `RegExp`
-* [syntax characters](http://ecma-international.org/ecma-262/7.0/#sec-patterns).
-*/
-var reRegExpChar = /[\\^$.*+?()[\]{}|]/g;
-/** Used to detect host constructors (Safari). */
-var reIsHostCtor = /^\[object .+?Constructor\]$/;
-/** Used for built-in method references. */
-var funcProto$1 = Function.prototype, objectProto$2 = Object.prototype;
-/** Used to resolve the decompiled source of functions. */
-var funcToString$1 = funcProto$1.toString;
-/** Used to check objects for own properties. */
-var hasOwnProperty$12 = objectProto$2.hasOwnProperty;
-/** Used to detect if a method is native. */
-var reIsNative = RegExp("^" + funcToString$1.call(hasOwnProperty$12).replace(reRegExpChar, "\\$&").replace(/hasOwnProperty|(function).*?(?=\\\()| for .+?(?=\\\])/g, "$1.*?") + "$");
-/**
-* The base implementation of `_.isNative` without bad shim checks.
-*
-* @private
-* @param {*} value The value to check.
-* @returns {boolean} Returns `true` if `value` is a native function,
-*  else `false`.
-*/
-function baseIsNative(value) {
-	if (!isObject$1(value) || isMasked(value)) return false;
-	return (isFunction(value) ? reIsNative : reIsHostCtor).test(toSource(value));
-}
-//#endregion
-//#region node_modules/lodash-es/_getValue.js
-/**
-* Gets the value at `key` of `object`.
-*
-* @private
-* @param {Object} [object] The object to query.
-* @param {string} key The key of the property to get.
-* @returns {*} Returns the property value.
-*/
-function getValue(object, key) {
-	return object == null ? void 0 : object[key];
-}
-//#endregion
-//#region node_modules/lodash-es/_getNative.js
-/**
-* Gets the native function at `key` of `object`.
-*
-* @private
-* @param {Object} object The object to query.
-* @param {string} key The key of the method to get.
-* @returns {*} Returns the function if it's native, else `undefined`.
-*/
-function getNative(object, key) {
-	var value = getValue(object, key);
-	return baseIsNative(value) ? value : void 0;
-}
-//#endregion
-//#region node_modules/lodash-es/_DataView.js
-var DataView = getNative(root, "DataView");
-//#endregion
-//#region node_modules/lodash-es/_Map.js
-var Map$1 = getNative(root, "Map");
-//#endregion
-//#region node_modules/lodash-es/_Promise.js
-var Promise$1 = getNative(root, "Promise");
-//#endregion
-//#region node_modules/lodash-es/_Set.js
-var Set$1 = getNative(root, "Set");
-//#endregion
-//#region node_modules/lodash-es/_WeakMap.js
-var WeakMap$1 = getNative(root, "WeakMap");
-//#endregion
-//#region node_modules/lodash-es/_getTag.js
-/** `Object#toString` result references. */
-var mapTag$6 = "[object Map]", objectTag$4 = "[object Object]", promiseTag = "[object Promise]", setTag$6 = "[object Set]", weakMapTag$2 = "[object WeakMap]";
-var dataViewTag$4 = "[object DataView]";
-/** Used to detect maps, sets, and weakmaps. */
-var dataViewCtorString = toSource(DataView), mapCtorString = toSource(Map$1), promiseCtorString = toSource(Promise$1), setCtorString = toSource(Set$1), weakMapCtorString = toSource(WeakMap$1);
-/**
-* Gets the `toStringTag` of `value`.
-*
-* @private
-* @param {*} value The value to query.
-* @returns {string} Returns the `toStringTag`.
-*/
-var getTag = baseGetTag;
-if (DataView && getTag(new DataView(/* @__PURE__ */ new ArrayBuffer(1))) != dataViewTag$4 || Map$1 && getTag(new Map$1()) != mapTag$6 || Promise$1 && getTag(Promise$1.resolve()) != promiseTag || Set$1 && getTag(new Set$1()) != setTag$6 || WeakMap$1 && getTag(new WeakMap$1()) != weakMapTag$2) getTag = function(value) {
-	var result = baseGetTag(value), Ctor = result == objectTag$4 ? value.constructor : void 0, ctorString = Ctor ? toSource(Ctor) : "";
-	if (ctorString) switch (ctorString) {
-		case dataViewCtorString: return dataViewTag$4;
-		case mapCtorString: return mapTag$6;
-		case promiseCtorString: return promiseTag;
-		case setCtorString: return setTag$6;
-		case weakMapCtorString: return weakMapTag$2;
-	}
-	return result;
-};
-var _getTag_default = getTag;
-//#endregion
-//#region node_modules/lodash-es/_baseIsArguments.js
-/** `Object#toString` result references. */
-var argsTag$3 = "[object Arguments]";
-/**
-* The base implementation of `_.isArguments`.
-*
-* @private
-* @param {*} value The value to check.
-* @returns {boolean} Returns `true` if `value` is an `arguments` object,
-*/
-function baseIsArguments(value) {
-	return isObjectLike(value) && baseGetTag(value) == argsTag$3;
-}
-//#endregion
-//#region node_modules/lodash-es/isArguments.js
-/** Used for built-in method references. */
-var objectProto$1 = Object.prototype;
-/** Used to check objects for own properties. */
-var hasOwnProperty$11 = objectProto$1.hasOwnProperty;
-/** Built-in value references. */
-var propertyIsEnumerable$1 = objectProto$1.propertyIsEnumerable;
-/**
-* Checks if `value` is likely an `arguments` object.
-*
-* @static
-* @memberOf _
-* @since 0.1.0
-* @category Lang
-* @param {*} value The value to check.
-* @returns {boolean} Returns `true` if `value` is an `arguments` object,
-*  else `false`.
-* @example
-*
-* _.isArguments(function() { return arguments; }());
-* // => true
-*
-* _.isArguments([1, 2, 3]);
-* // => false
-*/
-var isArguments = baseIsArguments(function() {
-	return arguments;
-}()) ? baseIsArguments : function(value) {
-	return isObjectLike(value) && hasOwnProperty$11.call(value, "callee") && !propertyIsEnumerable$1.call(value, "callee");
-};
-//#endregion
-//#region node_modules/lodash-es/isLength.js
-/** Used as references for various `Number` constants. */
-var MAX_SAFE_INTEGER$1 = 9007199254740991;
-/**
-* Checks if `value` is a valid array-like length.
-*
-* **Note:** This method is loosely based on
-* [`ToLength`](http://ecma-international.org/ecma-262/7.0/#sec-tolength).
-*
-* @static
-* @memberOf _
-* @since 4.0.0
-* @category Lang
-* @param {*} value The value to check.
-* @returns {boolean} Returns `true` if `value` is a valid length, else `false`.
-* @example
-*
-* _.isLength(3);
-* // => true
-*
-* _.isLength(Number.MIN_VALUE);
-* // => false
-*
-* _.isLength(Infinity);
-* // => false
-*
-* _.isLength('3');
-* // => false
-*/
-function isLength(value) {
-	return typeof value == "number" && value > -1 && value % 1 == 0 && value <= MAX_SAFE_INTEGER$1;
-}
-//#endregion
-//#region node_modules/lodash-es/isArrayLike.js
-/**
-* Checks if `value` is array-like. A value is considered array-like if it's
-* not a function and has a `value.length` that's an integer greater than or
-* equal to `0` and less than or equal to `Number.MAX_SAFE_INTEGER`.
-*
-* @static
-* @memberOf _
-* @since 4.0.0
-* @category Lang
-* @param {*} value The value to check.
-* @returns {boolean} Returns `true` if `value` is array-like, else `false`.
-* @example
-*
-* _.isArrayLike([1, 2, 3]);
-* // => true
-*
-* _.isArrayLike(document.body.children);
-* // => true
-*
-* _.isArrayLike('abc');
-* // => true
-*
-* _.isArrayLike(_.noop);
-* // => false
-*/
-function isArrayLike(value) {
-	return value != null && isLength(value.length) && !isFunction(value);
-}
-//#endregion
-//#region node_modules/lodash-es/stubFalse.js
-/**
-* This method returns `false`.
-*
-* @static
-* @memberOf _
-* @since 4.13.0
-* @category Util
-* @returns {boolean} Returns `false`.
-* @example
-*
-* _.times(2, _.stubFalse);
-* // => [false, false]
-*/
-function stubFalse() {
-	return false;
-}
-//#endregion
-//#region node_modules/lodash-es/isBuffer.js
-/** Detect free variable `exports`. */
-var freeExports$2 = typeof exports == "object" && exports && !exports.nodeType && exports;
-/** Detect free variable `module`. */
-var freeModule$2 = freeExports$2 && typeof module == "object" && module && !module.nodeType && module;
-/** Built-in value references. */
-var Buffer$1 = freeModule$2 && freeModule$2.exports === freeExports$2 ? root.Buffer : void 0;
-/**
-* Checks if `value` is a buffer.
-*
-* @static
-* @memberOf _
-* @since 4.3.0
-* @category Lang
-* @param {*} value The value to check.
-* @returns {boolean} Returns `true` if `value` is a buffer, else `false`.
-* @example
-*
-* _.isBuffer(new Buffer(2));
-* // => true
-*
-* _.isBuffer(new Uint8Array(2));
-* // => false
-*/
-var isBuffer = (Buffer$1 ? Buffer$1.isBuffer : void 0) || stubFalse;
-//#endregion
-//#region node_modules/lodash-es/_baseIsTypedArray.js
-/** `Object#toString` result references. */
-var argsTag$2 = "[object Arguments]", arrayTag$2 = "[object Array]", boolTag$3 = "[object Boolean]", dateTag$3 = "[object Date]", errorTag$2 = "[object Error]", funcTag$1 = "[object Function]", mapTag$5 = "[object Map]", numberTag$3 = "[object Number]", objectTag$3 = "[object Object]", regexpTag$3 = "[object RegExp]", setTag$5 = "[object Set]", stringTag$3 = "[object String]", weakMapTag$1 = "[object WeakMap]";
-var arrayBufferTag$3 = "[object ArrayBuffer]", dataViewTag$3 = "[object DataView]", float32Tag$2 = "[object Float32Array]", float64Tag$2 = "[object Float64Array]", int8Tag$2 = "[object Int8Array]", int16Tag$2 = "[object Int16Array]", int32Tag$2 = "[object Int32Array]", uint8Tag$2 = "[object Uint8Array]", uint8ClampedTag$2 = "[object Uint8ClampedArray]", uint16Tag$2 = "[object Uint16Array]", uint32Tag$2 = "[object Uint32Array]";
-/** Used to identify `toStringTag` values of typed arrays. */
-var typedArrayTags = {};
-typedArrayTags[float32Tag$2] = typedArrayTags[float64Tag$2] = typedArrayTags[int8Tag$2] = typedArrayTags[int16Tag$2] = typedArrayTags[int32Tag$2] = typedArrayTags[uint8Tag$2] = typedArrayTags[uint8ClampedTag$2] = typedArrayTags[uint16Tag$2] = typedArrayTags[uint32Tag$2] = true;
-typedArrayTags[argsTag$2] = typedArrayTags[arrayTag$2] = typedArrayTags[arrayBufferTag$3] = typedArrayTags[boolTag$3] = typedArrayTags[dataViewTag$3] = typedArrayTags[dateTag$3] = typedArrayTags[errorTag$2] = typedArrayTags[funcTag$1] = typedArrayTags[mapTag$5] = typedArrayTags[numberTag$3] = typedArrayTags[objectTag$3] = typedArrayTags[regexpTag$3] = typedArrayTags[setTag$5] = typedArrayTags[stringTag$3] = typedArrayTags[weakMapTag$1] = false;
-/**
-* The base implementation of `_.isTypedArray` without Node.js optimizations.
-*
-* @private
-* @param {*} value The value to check.
-* @returns {boolean} Returns `true` if `value` is a typed array, else `false`.
-*/
-function baseIsTypedArray(value) {
-	return isObjectLike(value) && isLength(value.length) && !!typedArrayTags[baseGetTag(value)];
-}
-//#endregion
-//#region node_modules/lodash-es/_baseUnary.js
-/**
-* The base implementation of `_.unary` without support for storing metadata.
-*
-* @private
-* @param {Function} func The function to cap arguments for.
-* @returns {Function} Returns the new capped function.
-*/
-function baseUnary(func) {
-	return function(value) {
-		return func(value);
-	};
-}
-//#endregion
-//#region node_modules/lodash-es/_nodeUtil.js
-/** Detect free variable `exports`. */
-var freeExports$1 = typeof exports == "object" && exports && !exports.nodeType && exports;
-/** Detect free variable `module`. */
-var freeModule$1 = freeExports$1 && typeof module == "object" && module && !module.nodeType && module;
-/** Detect free variable `process` from Node.js. */
-var freeProcess = freeModule$1 && freeModule$1.exports === freeExports$1 && freeGlobal.process;
-/** Used to access faster Node.js helpers. */
-var nodeUtil = function() {
-	try {
-		var types = freeModule$1 && freeModule$1.require && freeModule$1.require("util").types;
-		if (types) return types;
-		return freeProcess && freeProcess.binding && freeProcess.binding("util");
-	} catch (e) {}
-}();
-//#endregion
-//#region node_modules/lodash-es/isTypedArray.js
-var nodeIsTypedArray = nodeUtil && nodeUtil.isTypedArray;
-/**
-* Checks if `value` is classified as a typed array.
-*
-* @static
-* @memberOf _
-* @since 3.0.0
-* @category Lang
-* @param {*} value The value to check.
-* @returns {boolean} Returns `true` if `value` is a typed array, else `false`.
-* @example
-*
-* _.isTypedArray(new Uint8Array);
-* // => true
-*
-* _.isTypedArray([]);
-* // => false
-*/
-var isTypedArray = nodeIsTypedArray ? baseUnary(nodeIsTypedArray) : baseIsTypedArray;
-//#endregion
-//#region node_modules/lodash-es/isEmpty.js
-/** `Object#toString` result references. */
-var mapTag$4 = "[object Map]", setTag$4 = "[object Set]";
-/** Used to check objects for own properties. */
-var hasOwnProperty$10 = Object.prototype.hasOwnProperty;
-/**
-* Checks if `value` is an empty object, collection, map, or set.
-*
-* Objects are considered empty if they have no own enumerable string keyed
-* properties.
-*
-* Array-like values such as `arguments` objects, arrays, buffers, strings, or
-* jQuery-like collections are considered empty if they have a `length` of `0`.
-* Similarly, maps and sets are considered empty if they have a `size` of `0`.
-*
-* @static
-* @memberOf _
-* @since 0.1.0
-* @category Lang
-* @param {*} value The value to check.
-* @returns {boolean} Returns `true` if `value` is empty, else `false`.
-* @example
-*
-* _.isEmpty(null);
-* // => true
-*
-* _.isEmpty(true);
-* // => true
-*
-* _.isEmpty(1);
-* // => true
-*
-* _.isEmpty([1, 2, 3]);
-* // => false
-*
-* _.isEmpty({ 'a': 1 });
-* // => false
-*/
-function isEmpty(value) {
-	if (value == null) return true;
-	if (isArrayLike(value) && (isArray(value) || typeof value == "string" || typeof value.splice == "function" || isBuffer(value) || isTypedArray(value) || isArguments(value))) return !value.length;
-	var tag = _getTag_default(value);
-	if (tag == mapTag$4 || tag == setTag$4) return !value.size;
-	if (isPrototype(value)) return !baseKeys(value).length;
-	for (var key in value) if (hasOwnProperty$10.call(value, key)) return false;
-	return true;
-}
-//#endregion
-//#region node_modules/lodash-es/_listCacheClear.js
-/**
-* Removes all key-value entries from the list cache.
-*
-* @private
-* @name clear
-* @memberOf ListCache
-*/
-function listCacheClear() {
-	this.__data__ = [];
-	this.size = 0;
-}
-//#endregion
-//#region node_modules/lodash-es/eq.js
-/**
-* Performs a
-* [`SameValueZero`](http://ecma-international.org/ecma-262/7.0/#sec-samevaluezero)
-* comparison between two values to determine if they are equivalent.
-*
-* @static
-* @memberOf _
-* @since 4.0.0
-* @category Lang
-* @param {*} value The value to compare.
-* @param {*} other The other value to compare.
-* @returns {boolean} Returns `true` if the values are equivalent, else `false`.
-* @example
-*
-* var object = { 'a': 1 };
-* var other = { 'a': 1 };
-*
-* _.eq(object, object);
-* // => true
-*
-* _.eq(object, other);
-* // => false
-*
-* _.eq('a', 'a');
-* // => true
-*
-* _.eq('a', Object('a'));
-* // => false
-*
-* _.eq(NaN, NaN);
-* // => true
-*/
-function eq(value, other) {
-	return value === other || value !== value && other !== other;
-}
-//#endregion
-//#region node_modules/lodash-es/_assocIndexOf.js
-/**
-* Gets the index at which the `key` is found in `array` of key-value pairs.
-*
-* @private
-* @param {Array} array The array to inspect.
-* @param {*} key The key to search for.
-* @returns {number} Returns the index of the matched value, else `-1`.
-*/
-function assocIndexOf(array, key) {
-	var length = array.length;
-	while (length--) if (eq(array[length][0], key)) return length;
-	return -1;
-}
-//#endregion
-//#region node_modules/lodash-es/_listCacheDelete.js
-/** Built-in value references. */
-var splice = Array.prototype.splice;
-/**
-* Removes `key` and its value from the list cache.
-*
-* @private
-* @name delete
-* @memberOf ListCache
-* @param {string} key The key of the value to remove.
-* @returns {boolean} Returns `true` if the entry was removed, else `false`.
-*/
-function listCacheDelete(key) {
-	var data = this.__data__, index = assocIndexOf(data, key);
-	if (index < 0) return false;
-	if (index == data.length - 1) data.pop();
-	else splice.call(data, index, 1);
-	--this.size;
-	return true;
-}
-//#endregion
-//#region node_modules/lodash-es/_listCacheGet.js
-/**
-* Gets the list cache value for `key`.
-*
-* @private
-* @name get
-* @memberOf ListCache
-* @param {string} key The key of the value to get.
-* @returns {*} Returns the entry value.
-*/
-function listCacheGet(key) {
-	var data = this.__data__, index = assocIndexOf(data, key);
-	return index < 0 ? void 0 : data[index][1];
-}
-//#endregion
-//#region node_modules/lodash-es/_listCacheHas.js
-/**
-* Checks if a list cache value for `key` exists.
-*
-* @private
-* @name has
-* @memberOf ListCache
-* @param {string} key The key of the entry to check.
-* @returns {boolean} Returns `true` if an entry for `key` exists, else `false`.
-*/
-function listCacheHas(key) {
-	return assocIndexOf(this.__data__, key) > -1;
-}
-//#endregion
-//#region node_modules/lodash-es/_listCacheSet.js
-/**
-* Sets the list cache `key` to `value`.
-*
-* @private
-* @name set
-* @memberOf ListCache
-* @param {string} key The key of the value to set.
-* @param {*} value The value to set.
-* @returns {Object} Returns the list cache instance.
-*/
-function listCacheSet(key, value) {
-	var data = this.__data__, index = assocIndexOf(data, key);
-	if (index < 0) {
-		++this.size;
-		data.push([key, value]);
-	} else data[index][1] = value;
-	return this;
-}
-//#endregion
-//#region node_modules/lodash-es/_ListCache.js
-/**
-* Creates an list cache object.
-*
-* @private
-* @constructor
-* @param {Array} [entries] The key-value pairs to cache.
-*/
-function ListCache(entries) {
-	var index = -1, length = entries == null ? 0 : entries.length;
-	this.clear();
-	while (++index < length) {
-		var entry = entries[index];
-		this.set(entry[0], entry[1]);
-	}
-}
-ListCache.prototype.clear = listCacheClear;
-ListCache.prototype["delete"] = listCacheDelete;
-ListCache.prototype.get = listCacheGet;
-ListCache.prototype.has = listCacheHas;
-ListCache.prototype.set = listCacheSet;
-//#endregion
 //#region node_modules/lodash-es/_stackClear.js
 /**
 * Removes all key-value entries from the stack.
@@ -2951,249 +3821,6 @@ function stackHas(key) {
 	return this.__data__.has(key);
 }
 //#endregion
-//#region node_modules/lodash-es/_nativeCreate.js
-var nativeCreate = getNative(Object, "create");
-//#endregion
-//#region node_modules/lodash-es/_hashClear.js
-/**
-* Removes all key-value entries from the hash.
-*
-* @private
-* @name clear
-* @memberOf Hash
-*/
-function hashClear() {
-	this.__data__ = nativeCreate ? nativeCreate(null) : {};
-	this.size = 0;
-}
-//#endregion
-//#region node_modules/lodash-es/_hashDelete.js
-/**
-* Removes `key` and its value from the hash.
-*
-* @private
-* @name delete
-* @memberOf Hash
-* @param {Object} hash The hash to modify.
-* @param {string} key The key of the value to remove.
-* @returns {boolean} Returns `true` if the entry was removed, else `false`.
-*/
-function hashDelete(key) {
-	var result = this.has(key) && delete this.__data__[key];
-	this.size -= result ? 1 : 0;
-	return result;
-}
-//#endregion
-//#region node_modules/lodash-es/_hashGet.js
-/** Used to stand-in for `undefined` hash values. */
-var HASH_UNDEFINED$2 = "__lodash_hash_undefined__";
-/** Used to check objects for own properties. */
-var hasOwnProperty$9 = Object.prototype.hasOwnProperty;
-/**
-* Gets the hash value for `key`.
-*
-* @private
-* @name get
-* @memberOf Hash
-* @param {string} key The key of the value to get.
-* @returns {*} Returns the entry value.
-*/
-function hashGet(key) {
-	var data = this.__data__;
-	if (nativeCreate) {
-		var result = data[key];
-		return result === HASH_UNDEFINED$2 ? void 0 : result;
-	}
-	return hasOwnProperty$9.call(data, key) ? data[key] : void 0;
-}
-//#endregion
-//#region node_modules/lodash-es/_hashHas.js
-/** Used to check objects for own properties. */
-var hasOwnProperty$8 = Object.prototype.hasOwnProperty;
-/**
-* Checks if a hash value for `key` exists.
-*
-* @private
-* @name has
-* @memberOf Hash
-* @param {string} key The key of the entry to check.
-* @returns {boolean} Returns `true` if an entry for `key` exists, else `false`.
-*/
-function hashHas(key) {
-	var data = this.__data__;
-	return nativeCreate ? data[key] !== void 0 : hasOwnProperty$8.call(data, key);
-}
-//#endregion
-//#region node_modules/lodash-es/_hashSet.js
-/** Used to stand-in for `undefined` hash values. */
-var HASH_UNDEFINED$1 = "__lodash_hash_undefined__";
-/**
-* Sets the hash `key` to `value`.
-*
-* @private
-* @name set
-* @memberOf Hash
-* @param {string} key The key of the value to set.
-* @param {*} value The value to set.
-* @returns {Object} Returns the hash instance.
-*/
-function hashSet(key, value) {
-	var data = this.__data__;
-	this.size += this.has(key) ? 0 : 1;
-	data[key] = nativeCreate && value === void 0 ? HASH_UNDEFINED$1 : value;
-	return this;
-}
-//#endregion
-//#region node_modules/lodash-es/_Hash.js
-/**
-* Creates a hash object.
-*
-* @private
-* @constructor
-* @param {Array} [entries] The key-value pairs to cache.
-*/
-function Hash(entries) {
-	var index = -1, length = entries == null ? 0 : entries.length;
-	this.clear();
-	while (++index < length) {
-		var entry = entries[index];
-		this.set(entry[0], entry[1]);
-	}
-}
-Hash.prototype.clear = hashClear;
-Hash.prototype["delete"] = hashDelete;
-Hash.prototype.get = hashGet;
-Hash.prototype.has = hashHas;
-Hash.prototype.set = hashSet;
-//#endregion
-//#region node_modules/lodash-es/_mapCacheClear.js
-/**
-* Removes all key-value entries from the map.
-*
-* @private
-* @name clear
-* @memberOf MapCache
-*/
-function mapCacheClear() {
-	this.size = 0;
-	this.__data__ = {
-		"hash": new Hash(),
-		"map": new (Map$1 || ListCache)(),
-		"string": new Hash()
-	};
-}
-//#endregion
-//#region node_modules/lodash-es/_isKeyable.js
-/**
-* Checks if `value` is suitable for use as unique object key.
-*
-* @private
-* @param {*} value The value to check.
-* @returns {boolean} Returns `true` if `value` is suitable, else `false`.
-*/
-function isKeyable(value) {
-	var type = typeof value;
-	return type == "string" || type == "number" || type == "symbol" || type == "boolean" ? value !== "__proto__" : value === null;
-}
-//#endregion
-//#region node_modules/lodash-es/_getMapData.js
-/**
-* Gets the data for `map`.
-*
-* @private
-* @param {Object} map The map to query.
-* @param {string} key The reference key.
-* @returns {*} Returns the map data.
-*/
-function getMapData(map, key) {
-	var data = map.__data__;
-	return isKeyable(key) ? data[typeof key == "string" ? "string" : "hash"] : data.map;
-}
-//#endregion
-//#region node_modules/lodash-es/_mapCacheDelete.js
-/**
-* Removes `key` and its value from the map.
-*
-* @private
-* @name delete
-* @memberOf MapCache
-* @param {string} key The key of the value to remove.
-* @returns {boolean} Returns `true` if the entry was removed, else `false`.
-*/
-function mapCacheDelete(key) {
-	var result = getMapData(this, key)["delete"](key);
-	this.size -= result ? 1 : 0;
-	return result;
-}
-//#endregion
-//#region node_modules/lodash-es/_mapCacheGet.js
-/**
-* Gets the map value for `key`.
-*
-* @private
-* @name get
-* @memberOf MapCache
-* @param {string} key The key of the value to get.
-* @returns {*} Returns the entry value.
-*/
-function mapCacheGet(key) {
-	return getMapData(this, key).get(key);
-}
-//#endregion
-//#region node_modules/lodash-es/_mapCacheHas.js
-/**
-* Checks if a map value for `key` exists.
-*
-* @private
-* @name has
-* @memberOf MapCache
-* @param {string} key The key of the entry to check.
-* @returns {boolean} Returns `true` if an entry for `key` exists, else `false`.
-*/
-function mapCacheHas(key) {
-	return getMapData(this, key).has(key);
-}
-//#endregion
-//#region node_modules/lodash-es/_mapCacheSet.js
-/**
-* Sets the map `key` to `value`.
-*
-* @private
-* @name set
-* @memberOf MapCache
-* @param {string} key The key of the value to set.
-* @param {*} value The value to set.
-* @returns {Object} Returns the map cache instance.
-*/
-function mapCacheSet(key, value) {
-	var data = getMapData(this, key), size = data.size;
-	data.set(key, value);
-	this.size += data.size == size ? 0 : 1;
-	return this;
-}
-//#endregion
-//#region node_modules/lodash-es/_MapCache.js
-/**
-* Creates a map cache object to store key-value pairs.
-*
-* @private
-* @constructor
-* @param {Array} [entries] The key-value pairs to cache.
-*/
-function MapCache(entries) {
-	var index = -1, length = entries == null ? 0 : entries.length;
-	this.clear();
-	while (++index < length) {
-		var entry = entries[index];
-		this.set(entry[0], entry[1]);
-	}
-}
-MapCache.prototype.clear = mapCacheClear;
-MapCache.prototype["delete"] = mapCacheDelete;
-MapCache.prototype.get = mapCacheGet;
-MapCache.prototype.has = mapCacheHas;
-MapCache.prototype.set = mapCacheSet;
-//#endregion
 //#region node_modules/lodash-es/_stackSet.js
 /** Used as the size to enable large array optimizations. */
 var LARGE_ARRAY_SIZE = 200;
@@ -3240,6 +3867,523 @@ Stack.prototype["delete"] = stackDelete;
 Stack.prototype.get = stackGet;
 Stack.prototype.has = stackHas;
 Stack.prototype.set = stackSet;
+//#endregion
+//#region node_modules/lodash-es/_baseAssign.js
+/**
+* The base implementation of `_.assign` without support for multiple sources
+* or `customizer` functions.
+*
+* @private
+* @param {Object} object The destination object.
+* @param {Object} source The source object.
+* @returns {Object} Returns `object`.
+*/
+function baseAssign(object, source) {
+	return object && copyObject(source, keys(source), object);
+}
+//#endregion
+//#region node_modules/lodash-es/_baseAssignIn.js
+/**
+* The base implementation of `_.assignIn` without support for multiple sources
+* or `customizer` functions.
+*
+* @private
+* @param {Object} object The destination object.
+* @param {Object} source The source object.
+* @returns {Object} Returns `object`.
+*/
+function baseAssignIn(object, source) {
+	return object && copyObject(source, keysIn(source), object);
+}
+//#endregion
+//#region node_modules/lodash-es/_cloneBuffer.js
+/** Detect free variable `exports`. */
+var freeExports = typeof exports == "object" && exports && !exports.nodeType && exports;
+/** Detect free variable `module`. */
+var freeModule = freeExports && typeof module == "object" && module && !module.nodeType && module;
+/** Built-in value references. */
+var Buffer = freeModule && freeModule.exports === freeExports ? root.Buffer : void 0, allocUnsafe = Buffer ? Buffer.allocUnsafe : void 0;
+/**
+* Creates a clone of  `buffer`.
+*
+* @private
+* @param {Buffer} buffer The buffer to clone.
+* @param {boolean} [isDeep] Specify a deep clone.
+* @returns {Buffer} Returns the cloned buffer.
+*/
+function cloneBuffer(buffer, isDeep) {
+	if (isDeep) return buffer.slice();
+	var length = buffer.length, result = allocUnsafe ? allocUnsafe(length) : new buffer.constructor(length);
+	buffer.copy(result);
+	return result;
+}
+//#endregion
+//#region node_modules/lodash-es/_arrayFilter.js
+/**
+* A specialized version of `_.filter` for arrays without support for
+* iteratee shorthands.
+*
+* @private
+* @param {Array} [array] The array to iterate over.
+* @param {Function} predicate The function invoked per iteration.
+* @returns {Array} Returns the new filtered array.
+*/
+function arrayFilter(array, predicate) {
+	var index = -1, length = array == null ? 0 : array.length, resIndex = 0, result = [];
+	while (++index < length) {
+		var value = array[index];
+		if (predicate(value, index, array)) result[resIndex++] = value;
+	}
+	return result;
+}
+//#endregion
+//#region node_modules/lodash-es/stubArray.js
+/**
+* This method returns a new empty array.
+*
+* @static
+* @memberOf _
+* @since 4.13.0
+* @category Util
+* @returns {Array} Returns the new empty array.
+* @example
+*
+* var arrays = _.times(2, _.stubArray);
+*
+* console.log(arrays);
+* // => [[], []]
+*
+* console.log(arrays[0] === arrays[1]);
+* // => false
+*/
+function stubArray() {
+	return [];
+}
+//#endregion
+//#region node_modules/lodash-es/_getSymbols.js
+/** Built-in value references. */
+var propertyIsEnumerable = Object.prototype.propertyIsEnumerable;
+var nativeGetSymbols = Object.getOwnPropertySymbols;
+/**
+* Creates an array of the own enumerable symbols of `object`.
+*
+* @private
+* @param {Object} object The object to query.
+* @returns {Array} Returns the array of symbols.
+*/
+var getSymbols = !nativeGetSymbols ? stubArray : function(object) {
+	if (object == null) return [];
+	object = Object(object);
+	return arrayFilter(nativeGetSymbols(object), function(symbol) {
+		return propertyIsEnumerable.call(object, symbol);
+	});
+};
+//#endregion
+//#region node_modules/lodash-es/_copySymbols.js
+/**
+* Copies own symbols of `source` to `object`.
+*
+* @private
+* @param {Object} source The object to copy symbols from.
+* @param {Object} [object={}] The object to copy symbols to.
+* @returns {Object} Returns `object`.
+*/
+function copySymbols(source, object) {
+	return copyObject(source, getSymbols(source), object);
+}
+//#endregion
+//#region node_modules/lodash-es/_getSymbolsIn.js
+/**
+* Creates an array of the own and inherited enumerable symbols of `object`.
+*
+* @private
+* @param {Object} object The object to query.
+* @returns {Array} Returns the array of symbols.
+*/
+var getSymbolsIn = !Object.getOwnPropertySymbols ? stubArray : function(object) {
+	var result = [];
+	while (object) {
+		arrayPush(result, getSymbols(object));
+		object = getPrototype(object);
+	}
+	return result;
+};
+//#endregion
+//#region node_modules/lodash-es/_copySymbolsIn.js
+/**
+* Copies own and inherited symbols of `source` to `object`.
+*
+* @private
+* @param {Object} source The object to copy symbols from.
+* @param {Object} [object={}] The object to copy symbols to.
+* @returns {Object} Returns `object`.
+*/
+function copySymbolsIn(source, object) {
+	return copyObject(source, getSymbolsIn(source), object);
+}
+//#endregion
+//#region node_modules/lodash-es/_baseGetAllKeys.js
+/**
+* The base implementation of `getAllKeys` and `getAllKeysIn` which uses
+* `keysFunc` and `symbolsFunc` to get the enumerable property names and
+* symbols of `object`.
+*
+* @private
+* @param {Object} object The object to query.
+* @param {Function} keysFunc The function to get the keys of `object`.
+* @param {Function} symbolsFunc The function to get the symbols of `object`.
+* @returns {Array} Returns the array of property names and symbols.
+*/
+function baseGetAllKeys(object, keysFunc, symbolsFunc) {
+	var result = keysFunc(object);
+	return isArray(object) ? result : arrayPush(result, symbolsFunc(object));
+}
+//#endregion
+//#region node_modules/lodash-es/_getAllKeys.js
+/**
+* Creates an array of own enumerable property names and symbols of `object`.
+*
+* @private
+* @param {Object} object The object to query.
+* @returns {Array} Returns the array of property names and symbols.
+*/
+function getAllKeys(object) {
+	return baseGetAllKeys(object, keys, getSymbols);
+}
+//#endregion
+//#region node_modules/lodash-es/_getAllKeysIn.js
+/**
+* Creates an array of own and inherited enumerable property names and
+* symbols of `object`.
+*
+* @private
+* @param {Object} object The object to query.
+* @returns {Array} Returns the array of property names and symbols.
+*/
+function getAllKeysIn(object) {
+	return baseGetAllKeys(object, keysIn, getSymbolsIn);
+}
+//#endregion
+//#region node_modules/lodash-es/_DataView.js
+var DataView = getNative(root, "DataView");
+//#endregion
+//#region node_modules/lodash-es/_Promise.js
+var Promise$1 = getNative(root, "Promise");
+//#endregion
+//#region node_modules/lodash-es/_Set.js
+var Set$1 = getNative(root, "Set");
+//#endregion
+//#region node_modules/lodash-es/_getTag.js
+/** `Object#toString` result references. */
+var mapTag$5 = "[object Map]", objectTag$2 = "[object Object]", promiseTag = "[object Promise]", setTag$5 = "[object Set]", weakMapTag$1 = "[object WeakMap]";
+var dataViewTag$3 = "[object DataView]";
+/** Used to detect maps, sets, and weakmaps. */
+var dataViewCtorString = toSource(DataView), mapCtorString = toSource(Map$1), promiseCtorString = toSource(Promise$1), setCtorString = toSource(Set$1), weakMapCtorString = toSource(WeakMap$1);
+/**
+* Gets the `toStringTag` of `value`.
+*
+* @private
+* @param {*} value The value to query.
+* @returns {string} Returns the `toStringTag`.
+*/
+var getTag = baseGetTag;
+if (DataView && getTag(new DataView(/* @__PURE__ */ new ArrayBuffer(1))) != dataViewTag$3 || Map$1 && getTag(new Map$1()) != mapTag$5 || Promise$1 && getTag(Promise$1.resolve()) != promiseTag || Set$1 && getTag(new Set$1()) != setTag$5 || WeakMap$1 && getTag(new WeakMap$1()) != weakMapTag$1) getTag = function(value) {
+	var result = baseGetTag(value), Ctor = result == objectTag$2 ? value.constructor : void 0, ctorString = Ctor ? toSource(Ctor) : "";
+	if (ctorString) switch (ctorString) {
+		case dataViewCtorString: return dataViewTag$3;
+		case mapCtorString: return mapTag$5;
+		case promiseCtorString: return promiseTag;
+		case setCtorString: return setTag$5;
+		case weakMapCtorString: return weakMapTag$1;
+	}
+	return result;
+};
+var _getTag_default = getTag;
+//#endregion
+//#region node_modules/lodash-es/_initCloneArray.js
+/** Used to check objects for own properties. */
+var hasOwnProperty$4 = Object.prototype.hasOwnProperty;
+/**
+* Initializes an array clone.
+*
+* @private
+* @param {Array} array The array to clone.
+* @returns {Array} Returns the initialized clone.
+*/
+function initCloneArray(array) {
+	var length = array.length, result = new array.constructor(length);
+	if (length && typeof array[0] == "string" && hasOwnProperty$4.call(array, "index")) {
+		result.index = array.index;
+		result.input = array.input;
+	}
+	return result;
+}
+//#endregion
+//#region node_modules/lodash-es/_Uint8Array.js
+/** Built-in value references. */
+var Uint8Array = root.Uint8Array;
+//#endregion
+//#region node_modules/lodash-es/_cloneArrayBuffer.js
+/**
+* Creates a clone of `arrayBuffer`.
+*
+* @private
+* @param {ArrayBuffer} arrayBuffer The array buffer to clone.
+* @returns {ArrayBuffer} Returns the cloned array buffer.
+*/
+function cloneArrayBuffer(arrayBuffer) {
+	var result = new arrayBuffer.constructor(arrayBuffer.byteLength);
+	new Uint8Array(result).set(new Uint8Array(arrayBuffer));
+	return result;
+}
+//#endregion
+//#region node_modules/lodash-es/_cloneDataView.js
+/**
+* Creates a clone of `dataView`.
+*
+* @private
+* @param {Object} dataView The data view to clone.
+* @param {boolean} [isDeep] Specify a deep clone.
+* @returns {Object} Returns the cloned data view.
+*/
+function cloneDataView(dataView, isDeep) {
+	var buffer = isDeep ? cloneArrayBuffer(dataView.buffer) : dataView.buffer;
+	return new dataView.constructor(buffer, dataView.byteOffset, dataView.byteLength);
+}
+//#endregion
+//#region node_modules/lodash-es/_cloneRegExp.js
+/** Used to match `RegExp` flags from their coerced string values. */
+var reFlags = /\w*$/;
+/**
+* Creates a clone of `regexp`.
+*
+* @private
+* @param {Object} regexp The regexp to clone.
+* @returns {Object} Returns the cloned regexp.
+*/
+function cloneRegExp(regexp) {
+	var result = new regexp.constructor(regexp.source, reFlags.exec(regexp));
+	result.lastIndex = regexp.lastIndex;
+	return result;
+}
+//#endregion
+//#region node_modules/lodash-es/_cloneSymbol.js
+/** Used to convert symbols to primitives and strings. */
+var symbolProto$1 = Symbol$1 ? Symbol$1.prototype : void 0, symbolValueOf$1 = symbolProto$1 ? symbolProto$1.valueOf : void 0;
+/**
+* Creates a clone of the `symbol` object.
+*
+* @private
+* @param {Object} symbol The symbol object to clone.
+* @returns {Object} Returns the cloned symbol object.
+*/
+function cloneSymbol(symbol) {
+	return symbolValueOf$1 ? Object(symbolValueOf$1.call(symbol)) : {};
+}
+//#endregion
+//#region node_modules/lodash-es/_cloneTypedArray.js
+/**
+* Creates a clone of `typedArray`.
+*
+* @private
+* @param {Object} typedArray The typed array to clone.
+* @param {boolean} [isDeep] Specify a deep clone.
+* @returns {Object} Returns the cloned typed array.
+*/
+function cloneTypedArray(typedArray, isDeep) {
+	var buffer = isDeep ? cloneArrayBuffer(typedArray.buffer) : typedArray.buffer;
+	return new typedArray.constructor(buffer, typedArray.byteOffset, typedArray.length);
+}
+//#endregion
+//#region node_modules/lodash-es/_initCloneByTag.js
+/** `Object#toString` result references. */
+var boolTag$2 = "[object Boolean]", dateTag$2 = "[object Date]", mapTag$4 = "[object Map]", numberTag$2 = "[object Number]", regexpTag$2 = "[object RegExp]", setTag$4 = "[object Set]", stringTag$2 = "[object String]", symbolTag$2 = "[object Symbol]";
+var arrayBufferTag$2 = "[object ArrayBuffer]", dataViewTag$2 = "[object DataView]", float32Tag$1 = "[object Float32Array]", float64Tag$1 = "[object Float64Array]", int8Tag$1 = "[object Int8Array]", int16Tag$1 = "[object Int16Array]", int32Tag$1 = "[object Int32Array]", uint8Tag$1 = "[object Uint8Array]", uint8ClampedTag$1 = "[object Uint8ClampedArray]", uint16Tag$1 = "[object Uint16Array]", uint32Tag$1 = "[object Uint32Array]";
+/**
+* Initializes an object clone based on its `toStringTag`.
+*
+* **Note:** This function only supports cloning values with tags of
+* `Boolean`, `Date`, `Error`, `Map`, `Number`, `RegExp`, `Set`, or `String`.
+*
+* @private
+* @param {Object} object The object to clone.
+* @param {string} tag The `toStringTag` of the object to clone.
+* @param {boolean} [isDeep] Specify a deep clone.
+* @returns {Object} Returns the initialized clone.
+*/
+function initCloneByTag(object, tag, isDeep) {
+	var Ctor = object.constructor;
+	switch (tag) {
+		case arrayBufferTag$2: return cloneArrayBuffer(object);
+		case boolTag$2:
+		case dateTag$2: return new Ctor(+object);
+		case dataViewTag$2: return cloneDataView(object, isDeep);
+		case float32Tag$1:
+		case float64Tag$1:
+		case int8Tag$1:
+		case int16Tag$1:
+		case int32Tag$1:
+		case uint8Tag$1:
+		case uint8ClampedTag$1:
+		case uint16Tag$1:
+		case uint32Tag$1: return cloneTypedArray(object, isDeep);
+		case mapTag$4: return new Ctor();
+		case numberTag$2:
+		case stringTag$2: return new Ctor(object);
+		case regexpTag$2: return cloneRegExp(object);
+		case setTag$4: return new Ctor();
+		case symbolTag$2: return cloneSymbol(object);
+	}
+}
+//#endregion
+//#region node_modules/lodash-es/_initCloneObject.js
+/**
+* Initializes an object clone.
+*
+* @private
+* @param {Object} object The object to clone.
+* @returns {Object} Returns the initialized clone.
+*/
+function initCloneObject(object) {
+	return typeof object.constructor == "function" && !isPrototype(object) ? baseCreate(getPrototype(object)) : {};
+}
+//#endregion
+//#region node_modules/lodash-es/_baseIsMap.js
+/** `Object#toString` result references. */
+var mapTag$3 = "[object Map]";
+/**
+* The base implementation of `_.isMap` without Node.js optimizations.
+*
+* @private
+* @param {*} value The value to check.
+* @returns {boolean} Returns `true` if `value` is a map, else `false`.
+*/
+function baseIsMap(value) {
+	return isObjectLike(value) && _getTag_default(value) == mapTag$3;
+}
+//#endregion
+//#region node_modules/lodash-es/isMap.js
+var nodeIsMap = nodeUtil && nodeUtil.isMap;
+/**
+* Checks if `value` is classified as a `Map` object.
+*
+* @static
+* @memberOf _
+* @since 4.3.0
+* @category Lang
+* @param {*} value The value to check.
+* @returns {boolean} Returns `true` if `value` is a map, else `false`.
+* @example
+*
+* _.isMap(new Map);
+* // => true
+*
+* _.isMap(new WeakMap);
+* // => false
+*/
+var isMap = nodeIsMap ? baseUnary(nodeIsMap) : baseIsMap;
+//#endregion
+//#region node_modules/lodash-es/_baseIsSet.js
+/** `Object#toString` result references. */
+var setTag$3 = "[object Set]";
+/**
+* The base implementation of `_.isSet` without Node.js optimizations.
+*
+* @private
+* @param {*} value The value to check.
+* @returns {boolean} Returns `true` if `value` is a set, else `false`.
+*/
+function baseIsSet(value) {
+	return isObjectLike(value) && _getTag_default(value) == setTag$3;
+}
+//#endregion
+//#region node_modules/lodash-es/isSet.js
+var nodeIsSet = nodeUtil && nodeUtil.isSet;
+/**
+* Checks if `value` is classified as a `Set` object.
+*
+* @static
+* @memberOf _
+* @since 4.3.0
+* @category Lang
+* @param {*} value The value to check.
+* @returns {boolean} Returns `true` if `value` is a set, else `false`.
+* @example
+*
+* _.isSet(new Set);
+* // => true
+*
+* _.isSet(new WeakSet);
+* // => false
+*/
+var isSet = nodeIsSet ? baseUnary(nodeIsSet) : baseIsSet;
+//#endregion
+//#region node_modules/lodash-es/_baseClone.js
+/** Used to compose bitmasks for cloning. */
+var CLONE_DEEP_FLAG$1 = 1, CLONE_FLAT_FLAG$1 = 2, CLONE_SYMBOLS_FLAG$1 = 4;
+/** `Object#toString` result references. */
+var argsTag$1 = "[object Arguments]", arrayTag$1 = "[object Array]", boolTag$1 = "[object Boolean]", dateTag$1 = "[object Date]", errorTag$1 = "[object Error]", funcTag = "[object Function]", genTag = "[object GeneratorFunction]", mapTag$2 = "[object Map]", numberTag$1 = "[object Number]", objectTag$1 = "[object Object]", regexpTag$1 = "[object RegExp]", setTag$2 = "[object Set]", stringTag$1 = "[object String]", symbolTag$1 = "[object Symbol]", weakMapTag = "[object WeakMap]";
+var arrayBufferTag$1 = "[object ArrayBuffer]", dataViewTag$1 = "[object DataView]", float32Tag = "[object Float32Array]", float64Tag = "[object Float64Array]", int8Tag = "[object Int8Array]", int16Tag = "[object Int16Array]", int32Tag = "[object Int32Array]", uint8Tag = "[object Uint8Array]", uint8ClampedTag = "[object Uint8ClampedArray]", uint16Tag = "[object Uint16Array]", uint32Tag = "[object Uint32Array]";
+/** Used to identify `toStringTag` values supported by `_.clone`. */
+var cloneableTags = {};
+cloneableTags[argsTag$1] = cloneableTags[arrayTag$1] = cloneableTags[arrayBufferTag$1] = cloneableTags[dataViewTag$1] = cloneableTags[boolTag$1] = cloneableTags[dateTag$1] = cloneableTags[float32Tag] = cloneableTags[float64Tag] = cloneableTags[int8Tag] = cloneableTags[int16Tag] = cloneableTags[int32Tag] = cloneableTags[mapTag$2] = cloneableTags[numberTag$1] = cloneableTags[objectTag$1] = cloneableTags[regexpTag$1] = cloneableTags[setTag$2] = cloneableTags[stringTag$1] = cloneableTags[symbolTag$1] = cloneableTags[uint8Tag] = cloneableTags[uint8ClampedTag] = cloneableTags[uint16Tag] = cloneableTags[uint32Tag] = true;
+cloneableTags[errorTag$1] = cloneableTags[funcTag] = cloneableTags[weakMapTag] = false;
+/**
+* The base implementation of `_.clone` and `_.cloneDeep` which tracks
+* traversed objects.
+*
+* @private
+* @param {*} value The value to clone.
+* @param {boolean} bitmask The bitmask flags.
+*  1 - Deep clone
+*  2 - Flatten inherited properties
+*  4 - Clone symbols
+* @param {Function} [customizer] The function to customize cloning.
+* @param {string} [key] The key of `value`.
+* @param {Object} [object] The parent object of `value`.
+* @param {Object} [stack] Tracks traversed objects and their clone counterparts.
+* @returns {*} Returns the cloned value.
+*/
+function baseClone(value, bitmask, customizer, key, object, stack) {
+	var result, isDeep = bitmask & CLONE_DEEP_FLAG$1, isFlat = bitmask & CLONE_FLAT_FLAG$1, isFull = bitmask & CLONE_SYMBOLS_FLAG$1;
+	if (customizer) result = object ? customizer(value, key, object, stack) : customizer(value);
+	if (result !== void 0) return result;
+	if (!isObject$1(value)) return value;
+	var isArr = isArray(value);
+	if (isArr) {
+		result = initCloneArray(value);
+		if (!isDeep) return copyArray(value, result);
+	} else {
+		var tag = _getTag_default(value), isFunc = tag == funcTag || tag == genTag;
+		if (isBuffer(value)) return cloneBuffer(value, isDeep);
+		if (tag == objectTag$1 || tag == argsTag$1 || isFunc && !object) {
+			result = isFlat || isFunc ? {} : initCloneObject(value);
+			if (!isDeep) return isFlat ? copySymbolsIn(value, baseAssignIn(result, value)) : copySymbols(value, baseAssign(result, value));
+		} else {
+			if (!cloneableTags[tag]) return object ? value : {};
+			result = initCloneByTag(value, tag, isDeep);
+		}
+	}
+	stack || (stack = new Stack());
+	var stacked = stack.get(value);
+	if (stacked) return stacked;
+	stack.set(value, result);
+	if (isSet(value)) value.forEach(function(subValue) {
+		result.add(baseClone(subValue, bitmask, customizer, subValue, value, stack));
+	});
+	else if (isMap(value)) value.forEach(function(subValue, key) {
+		result.set(key, baseClone(subValue, bitmask, customizer, key, value, stack));
+	});
+	var props = isArr ? void 0 : (isFull ? isFlat ? getAllKeysIn : getAllKeys : isFlat ? keysIn : keys)(value);
+	arrayEach(props || value, function(subValue, key) {
+		if (props) {
+			key = subValue;
+			subValue = value[key];
+		}
+		assignValue(result, key, baseClone(subValue, bitmask, customizer, key, value, stack));
+	});
+	return result;
+}
 //#endregion
 //#region node_modules/lodash-es/_setCacheAdd.js
 /** Used to stand-in for `undefined` hash values. */
@@ -3370,10 +4514,6 @@ function equalArrays(array, other, bitmask, customizer, equalFunc, stack) {
 	return result;
 }
 //#endregion
-//#region node_modules/lodash-es/_Uint8Array.js
-/** Built-in value references. */
-var Uint8Array = root.Uint8Array;
-//#endregion
 //#region node_modules/lodash-es/_mapToArray.js
 /**
 * Converts `map` to its key-value pairs.
@@ -3410,10 +4550,10 @@ function setToArray(set) {
 /** Used to compose bitmasks for value comparisons. */
 var COMPARE_PARTIAL_FLAG$2 = 1, COMPARE_UNORDERED_FLAG = 2;
 /** `Object#toString` result references. */
-var boolTag$2 = "[object Boolean]", dateTag$2 = "[object Date]", errorTag$1 = "[object Error]", mapTag$3 = "[object Map]", numberTag$2 = "[object Number]", regexpTag$2 = "[object RegExp]", setTag$3 = "[object Set]", stringTag$2 = "[object String]", symbolTag$2 = "[object Symbol]";
-var arrayBufferTag$2 = "[object ArrayBuffer]", dataViewTag$2 = "[object DataView]";
+var boolTag = "[object Boolean]", dateTag = "[object Date]", errorTag = "[object Error]", mapTag$1 = "[object Map]", numberTag = "[object Number]", regexpTag = "[object RegExp]", setTag$1 = "[object Set]", stringTag = "[object String]", symbolTag = "[object Symbol]";
+var arrayBufferTag = "[object ArrayBuffer]", dataViewTag = "[object DataView]";
 /** Used to convert symbols to primitives and strings. */
-var symbolProto$1 = Symbol$1 ? Symbol$1.prototype : void 0, symbolValueOf$1 = symbolProto$1 ? symbolProto$1.valueOf : void 0;
+var symbolProto = Symbol$1 ? Symbol$1.prototype : void 0, symbolValueOf = symbolProto ? symbolProto.valueOf : void 0;
 /**
 * A specialized version of `baseIsEqualDeep` for comparing objects of
 * the same `toStringTag`.
@@ -3433,21 +4573,21 @@ var symbolProto$1 = Symbol$1 ? Symbol$1.prototype : void 0, symbolValueOf$1 = sy
 */
 function equalByTag(object, other, tag, bitmask, customizer, equalFunc, stack) {
 	switch (tag) {
-		case dataViewTag$2:
+		case dataViewTag:
 			if (object.byteLength != other.byteLength || object.byteOffset != other.byteOffset) return false;
 			object = object.buffer;
 			other = other.buffer;
-		case arrayBufferTag$2:
+		case arrayBufferTag:
 			if (object.byteLength != other.byteLength || !equalFunc(new Uint8Array(object), new Uint8Array(other))) return false;
 			return true;
-		case boolTag$2:
-		case dateTag$2:
-		case numberTag$2: return eq(+object, +other);
-		case errorTag$1: return object.name == other.name && object.message == other.message;
-		case regexpTag$2:
-		case stringTag$2: return object == other + "";
-		case mapTag$3: var convert = mapToArray;
-		case setTag$3:
+		case boolTag:
+		case dateTag:
+		case numberTag: return eq(+object, +other);
+		case errorTag: return object.name == other.name && object.message == other.message;
+		case regexpTag:
+		case stringTag: return object == other + "";
+		case mapTag$1: var convert = mapToArray;
+		case setTag$1:
 			var isPartial = bitmask & COMPARE_PARTIAL_FLAG$2;
 			convert || (convert = setToArray);
 			if (object.size != other.size && !isPartial) return false;
@@ -3458,206 +4598,16 @@ function equalByTag(object, other, tag, bitmask, customizer, equalFunc, stack) {
 			var result = equalArrays(convert(object), convert(other), bitmask, customizer, equalFunc, stack);
 			stack["delete"](object);
 			return result;
-		case symbolTag$2: if (symbolValueOf$1) return symbolValueOf$1.call(object) == symbolValueOf$1.call(other);
+		case symbolTag: if (symbolValueOf) return symbolValueOf.call(object) == symbolValueOf.call(other);
 	}
 	return false;
-}
-//#endregion
-//#region node_modules/lodash-es/_arrayPush.js
-/**
-* Appends the elements of `values` to `array`.
-*
-* @private
-* @param {Array} array The array to modify.
-* @param {Array} values The values to append.
-* @returns {Array} Returns `array`.
-*/
-function arrayPush(array, values) {
-	var index = -1, length = values.length, offset = array.length;
-	while (++index < length) array[offset + index] = values[index];
-	return array;
-}
-//#endregion
-//#region node_modules/lodash-es/_baseGetAllKeys.js
-/**
-* The base implementation of `getAllKeys` and `getAllKeysIn` which uses
-* `keysFunc` and `symbolsFunc` to get the enumerable property names and
-* symbols of `object`.
-*
-* @private
-* @param {Object} object The object to query.
-* @param {Function} keysFunc The function to get the keys of `object`.
-* @param {Function} symbolsFunc The function to get the symbols of `object`.
-* @returns {Array} Returns the array of property names and symbols.
-*/
-function baseGetAllKeys(object, keysFunc, symbolsFunc) {
-	var result = keysFunc(object);
-	return isArray(object) ? result : arrayPush(result, symbolsFunc(object));
-}
-//#endregion
-//#region node_modules/lodash-es/_arrayFilter.js
-/**
-* A specialized version of `_.filter` for arrays without support for
-* iteratee shorthands.
-*
-* @private
-* @param {Array} [array] The array to iterate over.
-* @param {Function} predicate The function invoked per iteration.
-* @returns {Array} Returns the new filtered array.
-*/
-function arrayFilter(array, predicate) {
-	var index = -1, length = array == null ? 0 : array.length, resIndex = 0, result = [];
-	while (++index < length) {
-		var value = array[index];
-		if (predicate(value, index, array)) result[resIndex++] = value;
-	}
-	return result;
-}
-//#endregion
-//#region node_modules/lodash-es/stubArray.js
-/**
-* This method returns a new empty array.
-*
-* @static
-* @memberOf _
-* @since 4.13.0
-* @category Util
-* @returns {Array} Returns the new empty array.
-* @example
-*
-* var arrays = _.times(2, _.stubArray);
-*
-* console.log(arrays);
-* // => [[], []]
-*
-* console.log(arrays[0] === arrays[1]);
-* // => false
-*/
-function stubArray() {
-	return [];
-}
-//#endregion
-//#region node_modules/lodash-es/_getSymbols.js
-/** Built-in value references. */
-var propertyIsEnumerable = Object.prototype.propertyIsEnumerable;
-var nativeGetSymbols = Object.getOwnPropertySymbols;
-/**
-* Creates an array of the own enumerable symbols of `object`.
-*
-* @private
-* @param {Object} object The object to query.
-* @returns {Array} Returns the array of symbols.
-*/
-var getSymbols = !nativeGetSymbols ? stubArray : function(object) {
-	if (object == null) return [];
-	object = Object(object);
-	return arrayFilter(nativeGetSymbols(object), function(symbol) {
-		return propertyIsEnumerable.call(object, symbol);
-	});
-};
-//#endregion
-//#region node_modules/lodash-es/_baseTimes.js
-/**
-* The base implementation of `_.times` without support for iteratee shorthands
-* or max array length checks.
-*
-* @private
-* @param {number} n The number of times to invoke `iteratee`.
-* @param {Function} iteratee The function invoked per iteration.
-* @returns {Array} Returns the array of results.
-*/
-function baseTimes(n, iteratee) {
-	var index = -1, result = Array(n);
-	while (++index < n) result[index] = iteratee(index);
-	return result;
-}
-//#endregion
-//#region node_modules/lodash-es/_isIndex.js
-/** Used as references for various `Number` constants. */
-var MAX_SAFE_INTEGER = 9007199254740991;
-/** Used to detect unsigned integer values. */
-var reIsUint = /^(?:0|[1-9]\d*)$/;
-/**
-* Checks if `value` is a valid array-like index.
-*
-* @private
-* @param {*} value The value to check.
-* @param {number} [length=MAX_SAFE_INTEGER] The upper bounds of a valid index.
-* @returns {boolean} Returns `true` if `value` is a valid index, else `false`.
-*/
-function isIndex(value, length) {
-	var type = typeof value;
-	length = length == null ? MAX_SAFE_INTEGER : length;
-	return !!length && (type == "number" || type != "symbol" && reIsUint.test(value)) && value > -1 && value % 1 == 0 && value < length;
-}
-//#endregion
-//#region node_modules/lodash-es/_arrayLikeKeys.js
-/** Used to check objects for own properties. */
-var hasOwnProperty$7 = Object.prototype.hasOwnProperty;
-/**
-* Creates an array of the enumerable property names of the array-like `value`.
-*
-* @private
-* @param {*} value The value to query.
-* @param {boolean} inherited Specify returning inherited property names.
-* @returns {Array} Returns the array of property names.
-*/
-function arrayLikeKeys(value, inherited) {
-	var isArr = isArray(value), isArg = !isArr && isArguments(value), isBuff = !isArr && !isArg && isBuffer(value), isType = !isArr && !isArg && !isBuff && isTypedArray(value), skipIndexes = isArr || isArg || isBuff || isType, result = skipIndexes ? baseTimes(value.length, String) : [], length = result.length;
-	for (var key in value) if ((inherited || hasOwnProperty$7.call(value, key)) && !(skipIndexes && (key == "length" || isBuff && (key == "offset" || key == "parent") || isType && (key == "buffer" || key == "byteLength" || key == "byteOffset") || isIndex(key, length)))) result.push(key);
-	return result;
-}
-//#endregion
-//#region node_modules/lodash-es/keys.js
-/**
-* Creates an array of the own enumerable property names of `object`.
-*
-* **Note:** Non-object values are coerced to objects. See the
-* [ES spec](http://ecma-international.org/ecma-262/7.0/#sec-object.keys)
-* for more details.
-*
-* @static
-* @since 0.1.0
-* @memberOf _
-* @category Object
-* @param {Object} object The object to query.
-* @returns {Array} Returns the array of property names.
-* @example
-*
-* function Foo() {
-*   this.a = 1;
-*   this.b = 2;
-* }
-*
-* Foo.prototype.c = 3;
-*
-* _.keys(new Foo);
-* // => ['a', 'b'] (iteration order is not guaranteed)
-*
-* _.keys('hi');
-* // => ['0', '1']
-*/
-function keys(object) {
-	return isArrayLike(object) ? arrayLikeKeys(object) : baseKeys(object);
-}
-//#endregion
-//#region node_modules/lodash-es/_getAllKeys.js
-/**
-* Creates an array of own enumerable property names and symbols of `object`.
-*
-* @private
-* @param {Object} object The object to query.
-* @returns {Array} Returns the array of property names and symbols.
-*/
-function getAllKeys(object) {
-	return baseGetAllKeys(object, keys, getSymbols);
 }
 //#endregion
 //#region node_modules/lodash-es/_equalObjects.js
 /** Used to compose bitmasks for value comparisons. */
 var COMPARE_PARTIAL_FLAG$1 = 1;
 /** Used to check objects for own properties. */
-var hasOwnProperty$6 = Object.prototype.hasOwnProperty;
+var hasOwnProperty$3 = Object.prototype.hasOwnProperty;
 /**
 * A specialized version of `baseIsEqualDeep` for objects with support for
 * partial deep comparisons.
@@ -3677,7 +4627,7 @@ function equalObjects(object, other, bitmask, customizer, equalFunc, stack) {
 	var index = objLength;
 	while (index--) {
 		var key = objProps[index];
-		if (!(isPartial ? key in other : hasOwnProperty$6.call(other, key))) return false;
+		if (!(isPartial ? key in other : hasOwnProperty$3.call(other, key))) return false;
 	}
 	var objStacked = stack.get(object);
 	var othStacked = stack.get(other);
@@ -3709,9 +4659,9 @@ function equalObjects(object, other, bitmask, customizer, equalFunc, stack) {
 /** Used to compose bitmasks for value comparisons. */
 var COMPARE_PARTIAL_FLAG = 1;
 /** `Object#toString` result references. */
-var argsTag$1 = "[object Arguments]", arrayTag$1 = "[object Array]", objectTag$2 = "[object Object]";
+var argsTag = "[object Arguments]", arrayTag = "[object Array]", objectTag = "[object Object]";
 /** Used to check objects for own properties. */
-var hasOwnProperty$5 = Object.prototype.hasOwnProperty;
+var hasOwnProperty$2 = Object.prototype.hasOwnProperty;
 /**
 * A specialized version of `baseIsEqual` for arrays and objects which performs
 * deep comparisons and tracks traversed objects enabling objects with circular
@@ -3727,10 +4677,10 @@ var hasOwnProperty$5 = Object.prototype.hasOwnProperty;
 * @returns {boolean} Returns `true` if the objects are equivalent, else `false`.
 */
 function baseIsEqualDeep(object, other, bitmask, customizer, equalFunc, stack) {
-	var objIsArr = isArray(object), othIsArr = isArray(other), objTag = objIsArr ? arrayTag$1 : _getTag_default(object), othTag = othIsArr ? arrayTag$1 : _getTag_default(other);
-	objTag = objTag == argsTag$1 ? objectTag$2 : objTag;
-	othTag = othTag == argsTag$1 ? objectTag$2 : othTag;
-	var objIsObj = objTag == objectTag$2, othIsObj = othTag == objectTag$2, isSameTag = objTag == othTag;
+	var objIsArr = isArray(object), othIsArr = isArray(other), objTag = objIsArr ? arrayTag : _getTag_default(object), othTag = othIsArr ? arrayTag : _getTag_default(other);
+	objTag = objTag == argsTag ? objectTag : objTag;
+	othTag = othTag == argsTag ? objectTag : othTag;
+	var objIsObj = objTag == objectTag, othIsObj = othTag == objectTag, isSameTag = objTag == othTag;
 	if (isSameTag && isBuffer(object)) {
 		if (!isBuffer(other)) return false;
 		objIsArr = true;
@@ -3741,7 +4691,7 @@ function baseIsEqualDeep(object, other, bitmask, customizer, equalFunc, stack) {
 		return objIsArr || isTypedArray(object) ? equalArrays(object, other, bitmask, customizer, equalFunc, stack) : equalByTag(object, other, objTag, bitmask, customizer, equalFunc, stack);
 	}
 	if (!(bitmask & COMPARE_PARTIAL_FLAG)) {
-		var objIsWrapped = objIsObj && hasOwnProperty$5.call(object, "__wrapped__"), othIsWrapped = othIsObj && hasOwnProperty$5.call(other, "__wrapped__");
+		var objIsWrapped = objIsObj && hasOwnProperty$2.call(object, "__wrapped__"), othIsWrapped = othIsObj && hasOwnProperty$2.call(other, "__wrapped__");
 		if (objIsWrapped || othIsWrapped) {
 			var objUnwrapped = objIsWrapped ? object.value() : object, othUnwrapped = othIsWrapped ? other.value() : other;
 			stack || (stack = new Stack());
@@ -3772,6 +4722,87 @@ function baseIsEqual(value, other, bitmask, customizer, stack) {
 	if (value === other) return true;
 	if (value == null || other == null || !isObjectLike(value) && !isObjectLike(other)) return value !== value && other !== other;
 	return baseIsEqualDeep(value, other, bitmask, customizer, baseIsEqual, stack);
+}
+//#endregion
+//#region node_modules/lodash-es/last.js
+/**
+* Gets the last element of `array`.
+*
+* @static
+* @memberOf _
+* @since 0.1.0
+* @category Array
+* @param {Array} array The array to query.
+* @returns {*} Returns the last element of `array`.
+* @example
+*
+* _.last([1, 2, 3]);
+* // => 3
+*/
+function last(array) {
+	var length = array == null ? 0 : array.length;
+	return length ? array[length - 1] : void 0;
+}
+//#endregion
+//#region node_modules/lodash-es/_parent.js
+/**
+* Gets the parent value at `path` of `object`.
+*
+* @private
+* @param {Object} object The object to query.
+* @param {Array} path The path to get the parent value of.
+* @returns {*} Returns the parent value.
+*/
+function parent(object, path) {
+	return path.length < 2 ? object : baseGet(object, baseSlice(path, 0, -1));
+}
+//#endregion
+//#region node_modules/lodash-es/isEmpty.js
+/** `Object#toString` result references. */
+var mapTag = "[object Map]", setTag = "[object Set]";
+/** Used to check objects for own properties. */
+var hasOwnProperty$1 = Object.prototype.hasOwnProperty;
+/**
+* Checks if `value` is an empty object, collection, map, or set.
+*
+* Objects are considered empty if they have no own enumerable string keyed
+* properties.
+*
+* Array-like values such as `arguments` objects, arrays, buffers, strings, or
+* jQuery-like collections are considered empty if they have a `length` of `0`.
+* Similarly, maps and sets are considered empty if they have a `size` of `0`.
+*
+* @static
+* @memberOf _
+* @since 0.1.0
+* @category Lang
+* @param {*} value The value to check.
+* @returns {boolean} Returns `true` if `value` is empty, else `false`.
+* @example
+*
+* _.isEmpty(null);
+* // => true
+*
+* _.isEmpty(true);
+* // => true
+*
+* _.isEmpty(1);
+* // => true
+*
+* _.isEmpty([1, 2, 3]);
+* // => false
+*
+* _.isEmpty({ 'a': 1 });
+* // => false
+*/
+function isEmpty(value) {
+	if (value == null) return true;
+	if (isArrayLike(value) && (isArray(value) || typeof value == "string" || typeof value.splice == "function" || isBuffer(value) || isTypedArray(value) || isArguments(value))) return !value.length;
+	var tag = _getTag_default(value);
+	if (tag == mapTag || tag == setTag) return !value.size;
+	if (isPrototype(value)) return !baseKeys(value).length;
+	for (var key in value) if (hasOwnProperty$1.call(value, key)) return false;
+	return true;
 }
 //#endregion
 //#region node_modules/lodash-es/isEqual.js
@@ -3807,787 +4838,9 @@ function isEqual(value, other) {
 	return baseIsEqual(value, other);
 }
 //#endregion
-//#region node_modules/lodash-es/_arrayEach.js
-/**
-* A specialized version of `_.forEach` for arrays without support for
-* iteratee shorthands.
-*
-* @private
-* @param {Array} [array] The array to iterate over.
-* @param {Function} iteratee The function invoked per iteration.
-* @returns {Array} Returns `array`.
-*/
-function arrayEach(array, iteratee) {
-	var index = -1, length = array == null ? 0 : array.length;
-	while (++index < length) if (iteratee(array[index], index, array) === false) break;
-	return array;
-}
-//#endregion
-//#region node_modules/lodash-es/_defineProperty.js
-var defineProperty = function() {
-	try {
-		var func = getNative(Object, "defineProperty");
-		func({}, "", {});
-		return func;
-	} catch (e) {}
-}();
-//#endregion
-//#region node_modules/lodash-es/_baseAssignValue.js
-/**
-* The base implementation of `assignValue` and `assignMergeValue` without
-* value checks.
-*
-* @private
-* @param {Object} object The object to modify.
-* @param {string} key The key of the property to assign.
-* @param {*} value The value to assign.
-*/
-function baseAssignValue(object, key, value) {
-	if (key == "__proto__" && defineProperty) defineProperty(object, key, {
-		"configurable": true,
-		"enumerable": true,
-		"value": value,
-		"writable": true
-	});
-	else object[key] = value;
-}
-//#endregion
-//#region node_modules/lodash-es/_assignValue.js
-/** Used to check objects for own properties. */
-var hasOwnProperty$4 = Object.prototype.hasOwnProperty;
-/**
-* Assigns `value` to `key` of `object` if the existing value is not equivalent
-* using [`SameValueZero`](http://ecma-international.org/ecma-262/7.0/#sec-samevaluezero)
-* for equality comparisons.
-*
-* @private
-* @param {Object} object The object to modify.
-* @param {string} key The key of the property to assign.
-* @param {*} value The value to assign.
-*/
-function assignValue(object, key, value) {
-	var objValue = object[key];
-	if (!(hasOwnProperty$4.call(object, key) && eq(objValue, value)) || value === void 0 && !(key in object)) baseAssignValue(object, key, value);
-}
-//#endregion
-//#region node_modules/lodash-es/_copyObject.js
-/**
-* Copies properties of `source` to `object`.
-*
-* @private
-* @param {Object} source The object to copy properties from.
-* @param {Array} props The property identifiers to copy.
-* @param {Object} [object={}] The object to copy properties to.
-* @param {Function} [customizer] The function to customize copied values.
-* @returns {Object} Returns `object`.
-*/
-function copyObject(source, props, object, customizer) {
-	var isNew = !object;
-	object || (object = {});
-	var index = -1, length = props.length;
-	while (++index < length) {
-		var key = props[index];
-		var newValue = customizer ? customizer(object[key], source[key], key, object, source) : void 0;
-		if (newValue === void 0) newValue = source[key];
-		if (isNew) baseAssignValue(object, key, newValue);
-		else assignValue(object, key, newValue);
-	}
-	return object;
-}
-//#endregion
-//#region node_modules/lodash-es/_baseAssign.js
-/**
-* The base implementation of `_.assign` without support for multiple sources
-* or `customizer` functions.
-*
-* @private
-* @param {Object} object The destination object.
-* @param {Object} source The source object.
-* @returns {Object} Returns `object`.
-*/
-function baseAssign(object, source) {
-	return object && copyObject(source, keys(source), object);
-}
-//#endregion
-//#region node_modules/lodash-es/_nativeKeysIn.js
-/**
-* This function is like
-* [`Object.keys`](http://ecma-international.org/ecma-262/7.0/#sec-object.keys)
-* except that it includes inherited enumerable properties.
-*
-* @private
-* @param {Object} object The object to query.
-* @returns {Array} Returns the array of property names.
-*/
-function nativeKeysIn(object) {
-	var result = [];
-	if (object != null) for (var key in Object(object)) result.push(key);
-	return result;
-}
-//#endregion
-//#region node_modules/lodash-es/_baseKeysIn.js
-/** Used to check objects for own properties. */
-var hasOwnProperty$3 = Object.prototype.hasOwnProperty;
-/**
-* The base implementation of `_.keysIn` which doesn't treat sparse arrays as dense.
-*
-* @private
-* @param {Object} object The object to query.
-* @returns {Array} Returns the array of property names.
-*/
-function baseKeysIn(object) {
-	if (!isObject$1(object)) return nativeKeysIn(object);
-	var isProto = isPrototype(object), result = [];
-	for (var key in object) if (!(key == "constructor" && (isProto || !hasOwnProperty$3.call(object, key)))) result.push(key);
-	return result;
-}
-//#endregion
-//#region node_modules/lodash-es/keysIn.js
-/**
-* Creates an array of the own and inherited enumerable property names of `object`.
-*
-* **Note:** Non-object values are coerced to objects.
-*
-* @static
-* @memberOf _
-* @since 3.0.0
-* @category Object
-* @param {Object} object The object to query.
-* @returns {Array} Returns the array of property names.
-* @example
-*
-* function Foo() {
-*   this.a = 1;
-*   this.b = 2;
-* }
-*
-* Foo.prototype.c = 3;
-*
-* _.keysIn(new Foo);
-* // => ['a', 'b', 'c'] (iteration order is not guaranteed)
-*/
-function keysIn(object) {
-	return isArrayLike(object) ? arrayLikeKeys(object, true) : baseKeysIn(object);
-}
-//#endregion
-//#region node_modules/lodash-es/_baseAssignIn.js
-/**
-* The base implementation of `_.assignIn` without support for multiple sources
-* or `customizer` functions.
-*
-* @private
-* @param {Object} object The destination object.
-* @param {Object} source The source object.
-* @returns {Object} Returns `object`.
-*/
-function baseAssignIn(object, source) {
-	return object && copyObject(source, keysIn(source), object);
-}
-//#endregion
-//#region node_modules/lodash-es/_cloneBuffer.js
-/** Detect free variable `exports`. */
-var freeExports = typeof exports == "object" && exports && !exports.nodeType && exports;
-/** Detect free variable `module`. */
-var freeModule = freeExports && typeof module == "object" && module && !module.nodeType && module;
-/** Built-in value references. */
-var Buffer = freeModule && freeModule.exports === freeExports ? root.Buffer : void 0, allocUnsafe = Buffer ? Buffer.allocUnsafe : void 0;
-/**
-* Creates a clone of  `buffer`.
-*
-* @private
-* @param {Buffer} buffer The buffer to clone.
-* @param {boolean} [isDeep] Specify a deep clone.
-* @returns {Buffer} Returns the cloned buffer.
-*/
-function cloneBuffer(buffer, isDeep) {
-	if (isDeep) return buffer.slice();
-	var length = buffer.length, result = allocUnsafe ? allocUnsafe(length) : new buffer.constructor(length);
-	buffer.copy(result);
-	return result;
-}
-//#endregion
-//#region node_modules/lodash-es/_copyArray.js
-/**
-* Copies the values of `source` to `array`.
-*
-* @private
-* @param {Array} source The array to copy values from.
-* @param {Array} [array=[]] The array to copy values to.
-* @returns {Array} Returns `array`.
-*/
-function copyArray(source, array) {
-	var index = -1, length = source.length;
-	array || (array = Array(length));
-	while (++index < length) array[index] = source[index];
-	return array;
-}
-//#endregion
-//#region node_modules/lodash-es/_copySymbols.js
-/**
-* Copies own symbols of `source` to `object`.
-*
-* @private
-* @param {Object} source The object to copy symbols from.
-* @param {Object} [object={}] The object to copy symbols to.
-* @returns {Object} Returns `object`.
-*/
-function copySymbols(source, object) {
-	return copyObject(source, getSymbols(source), object);
-}
-//#endregion
-//#region node_modules/lodash-es/_getPrototype.js
-/** Built-in value references. */
-var getPrototype = overArg(Object.getPrototypeOf, Object);
-//#endregion
-//#region node_modules/lodash-es/_getSymbolsIn.js
-/**
-* Creates an array of the own and inherited enumerable symbols of `object`.
-*
-* @private
-* @param {Object} object The object to query.
-* @returns {Array} Returns the array of symbols.
-*/
-var getSymbolsIn = !Object.getOwnPropertySymbols ? stubArray : function(object) {
-	var result = [];
-	while (object) {
-		arrayPush(result, getSymbols(object));
-		object = getPrototype(object);
-	}
-	return result;
-};
-//#endregion
-//#region node_modules/lodash-es/_copySymbolsIn.js
-/**
-* Copies own and inherited symbols of `source` to `object`.
-*
-* @private
-* @param {Object} source The object to copy symbols from.
-* @param {Object} [object={}] The object to copy symbols to.
-* @returns {Object} Returns `object`.
-*/
-function copySymbolsIn(source, object) {
-	return copyObject(source, getSymbolsIn(source), object);
-}
-//#endregion
-//#region node_modules/lodash-es/_getAllKeysIn.js
-/**
-* Creates an array of own and inherited enumerable property names and
-* symbols of `object`.
-*
-* @private
-* @param {Object} object The object to query.
-* @returns {Array} Returns the array of property names and symbols.
-*/
-function getAllKeysIn(object) {
-	return baseGetAllKeys(object, keysIn, getSymbolsIn);
-}
-//#endregion
-//#region node_modules/lodash-es/_initCloneArray.js
-/** Used to check objects for own properties. */
-var hasOwnProperty$2 = Object.prototype.hasOwnProperty;
-/**
-* Initializes an array clone.
-*
-* @private
-* @param {Array} array The array to clone.
-* @returns {Array} Returns the initialized clone.
-*/
-function initCloneArray(array) {
-	var length = array.length, result = new array.constructor(length);
-	if (length && typeof array[0] == "string" && hasOwnProperty$2.call(array, "index")) {
-		result.index = array.index;
-		result.input = array.input;
-	}
-	return result;
-}
-//#endregion
-//#region node_modules/lodash-es/_cloneArrayBuffer.js
-/**
-* Creates a clone of `arrayBuffer`.
-*
-* @private
-* @param {ArrayBuffer} arrayBuffer The array buffer to clone.
-* @returns {ArrayBuffer} Returns the cloned array buffer.
-*/
-function cloneArrayBuffer(arrayBuffer) {
-	var result = new arrayBuffer.constructor(arrayBuffer.byteLength);
-	new Uint8Array(result).set(new Uint8Array(arrayBuffer));
-	return result;
-}
-//#endregion
-//#region node_modules/lodash-es/_cloneDataView.js
-/**
-* Creates a clone of `dataView`.
-*
-* @private
-* @param {Object} dataView The data view to clone.
-* @param {boolean} [isDeep] Specify a deep clone.
-* @returns {Object} Returns the cloned data view.
-*/
-function cloneDataView(dataView, isDeep) {
-	var buffer = isDeep ? cloneArrayBuffer(dataView.buffer) : dataView.buffer;
-	return new dataView.constructor(buffer, dataView.byteOffset, dataView.byteLength);
-}
-//#endregion
-//#region node_modules/lodash-es/_cloneRegExp.js
-/** Used to match `RegExp` flags from their coerced string values. */
-var reFlags = /\w*$/;
-/**
-* Creates a clone of `regexp`.
-*
-* @private
-* @param {Object} regexp The regexp to clone.
-* @returns {Object} Returns the cloned regexp.
-*/
-function cloneRegExp(regexp) {
-	var result = new regexp.constructor(regexp.source, reFlags.exec(regexp));
-	result.lastIndex = regexp.lastIndex;
-	return result;
-}
-//#endregion
-//#region node_modules/lodash-es/_cloneSymbol.js
-/** Used to convert symbols to primitives and strings. */
-var symbolProto = Symbol$1 ? Symbol$1.prototype : void 0, symbolValueOf = symbolProto ? symbolProto.valueOf : void 0;
-/**
-* Creates a clone of the `symbol` object.
-*
-* @private
-* @param {Object} symbol The symbol object to clone.
-* @returns {Object} Returns the cloned symbol object.
-*/
-function cloneSymbol(symbol) {
-	return symbolValueOf ? Object(symbolValueOf.call(symbol)) : {};
-}
-//#endregion
-//#region node_modules/lodash-es/_cloneTypedArray.js
-/**
-* Creates a clone of `typedArray`.
-*
-* @private
-* @param {Object} typedArray The typed array to clone.
-* @param {boolean} [isDeep] Specify a deep clone.
-* @returns {Object} Returns the cloned typed array.
-*/
-function cloneTypedArray(typedArray, isDeep) {
-	var buffer = isDeep ? cloneArrayBuffer(typedArray.buffer) : typedArray.buffer;
-	return new typedArray.constructor(buffer, typedArray.byteOffset, typedArray.length);
-}
-//#endregion
-//#region node_modules/lodash-es/_initCloneByTag.js
-/** `Object#toString` result references. */
-var boolTag$1 = "[object Boolean]", dateTag$1 = "[object Date]", mapTag$2 = "[object Map]", numberTag$1 = "[object Number]", regexpTag$1 = "[object RegExp]", setTag$2 = "[object Set]", stringTag$1 = "[object String]", symbolTag$1 = "[object Symbol]";
-var arrayBufferTag$1 = "[object ArrayBuffer]", dataViewTag$1 = "[object DataView]", float32Tag$1 = "[object Float32Array]", float64Tag$1 = "[object Float64Array]", int8Tag$1 = "[object Int8Array]", int16Tag$1 = "[object Int16Array]", int32Tag$1 = "[object Int32Array]", uint8Tag$1 = "[object Uint8Array]", uint8ClampedTag$1 = "[object Uint8ClampedArray]", uint16Tag$1 = "[object Uint16Array]", uint32Tag$1 = "[object Uint32Array]";
-/**
-* Initializes an object clone based on its `toStringTag`.
-*
-* **Note:** This function only supports cloning values with tags of
-* `Boolean`, `Date`, `Error`, `Map`, `Number`, `RegExp`, `Set`, or `String`.
-*
-* @private
-* @param {Object} object The object to clone.
-* @param {string} tag The `toStringTag` of the object to clone.
-* @param {boolean} [isDeep] Specify a deep clone.
-* @returns {Object} Returns the initialized clone.
-*/
-function initCloneByTag(object, tag, isDeep) {
-	var Ctor = object.constructor;
-	switch (tag) {
-		case arrayBufferTag$1: return cloneArrayBuffer(object);
-		case boolTag$1:
-		case dateTag$1: return new Ctor(+object);
-		case dataViewTag$1: return cloneDataView(object, isDeep);
-		case float32Tag$1:
-		case float64Tag$1:
-		case int8Tag$1:
-		case int16Tag$1:
-		case int32Tag$1:
-		case uint8Tag$1:
-		case uint8ClampedTag$1:
-		case uint16Tag$1:
-		case uint32Tag$1: return cloneTypedArray(object, isDeep);
-		case mapTag$2: return new Ctor();
-		case numberTag$1:
-		case stringTag$1: return new Ctor(object);
-		case regexpTag$1: return cloneRegExp(object);
-		case setTag$2: return new Ctor();
-		case symbolTag$1: return cloneSymbol(object);
-	}
-}
-//#endregion
-//#region node_modules/lodash-es/_baseCreate.js
-/** Built-in value references. */
-var objectCreate = Object.create;
-/**
-* The base implementation of `_.create` without support for assigning
-* properties to the created object.
-*
-* @private
-* @param {Object} proto The object to inherit from.
-* @returns {Object} Returns the new object.
-*/
-var baseCreate = function() {
-	function object() {}
-	return function(proto) {
-		if (!isObject$1(proto)) return {};
-		if (objectCreate) return objectCreate(proto);
-		object.prototype = proto;
-		var result = new object();
-		object.prototype = void 0;
-		return result;
-	};
-}();
-//#endregion
-//#region node_modules/lodash-es/_initCloneObject.js
-/**
-* Initializes an object clone.
-*
-* @private
-* @param {Object} object The object to clone.
-* @returns {Object} Returns the initialized clone.
-*/
-function initCloneObject(object) {
-	return typeof object.constructor == "function" && !isPrototype(object) ? baseCreate(getPrototype(object)) : {};
-}
-//#endregion
-//#region node_modules/lodash-es/_baseIsMap.js
-/** `Object#toString` result references. */
-var mapTag$1 = "[object Map]";
-/**
-* The base implementation of `_.isMap` without Node.js optimizations.
-*
-* @private
-* @param {*} value The value to check.
-* @returns {boolean} Returns `true` if `value` is a map, else `false`.
-*/
-function baseIsMap(value) {
-	return isObjectLike(value) && _getTag_default(value) == mapTag$1;
-}
-//#endregion
-//#region node_modules/lodash-es/isMap.js
-var nodeIsMap = nodeUtil && nodeUtil.isMap;
-/**
-* Checks if `value` is classified as a `Map` object.
-*
-* @static
-* @memberOf _
-* @since 4.3.0
-* @category Lang
-* @param {*} value The value to check.
-* @returns {boolean} Returns `true` if `value` is a map, else `false`.
-* @example
-*
-* _.isMap(new Map);
-* // => true
-*
-* _.isMap(new WeakMap);
-* // => false
-*/
-var isMap = nodeIsMap ? baseUnary(nodeIsMap) : baseIsMap;
-//#endregion
-//#region node_modules/lodash-es/_baseIsSet.js
-/** `Object#toString` result references. */
-var setTag$1 = "[object Set]";
-/**
-* The base implementation of `_.isSet` without Node.js optimizations.
-*
-* @private
-* @param {*} value The value to check.
-* @returns {boolean} Returns `true` if `value` is a set, else `false`.
-*/
-function baseIsSet(value) {
-	return isObjectLike(value) && _getTag_default(value) == setTag$1;
-}
-//#endregion
-//#region node_modules/lodash-es/isSet.js
-var nodeIsSet = nodeUtil && nodeUtil.isSet;
-/**
-* Checks if `value` is classified as a `Set` object.
-*
-* @static
-* @memberOf _
-* @since 4.3.0
-* @category Lang
-* @param {*} value The value to check.
-* @returns {boolean} Returns `true` if `value` is a set, else `false`.
-* @example
-*
-* _.isSet(new Set);
-* // => true
-*
-* _.isSet(new WeakSet);
-* // => false
-*/
-var isSet = nodeIsSet ? baseUnary(nodeIsSet) : baseIsSet;
-//#endregion
-//#region node_modules/lodash-es/_baseClone.js
-/** Used to compose bitmasks for cloning. */
-var CLONE_DEEP_FLAG$1 = 1, CLONE_FLAT_FLAG$1 = 2, CLONE_SYMBOLS_FLAG$1 = 4;
-/** `Object#toString` result references. */
-var argsTag = "[object Arguments]", arrayTag = "[object Array]", boolTag = "[object Boolean]", dateTag = "[object Date]", errorTag = "[object Error]", funcTag = "[object Function]", genTag = "[object GeneratorFunction]", mapTag = "[object Map]", numberTag = "[object Number]", objectTag$1 = "[object Object]", regexpTag = "[object RegExp]", setTag = "[object Set]", stringTag = "[object String]", symbolTag = "[object Symbol]", weakMapTag = "[object WeakMap]";
-var arrayBufferTag = "[object ArrayBuffer]", dataViewTag = "[object DataView]", float32Tag = "[object Float32Array]", float64Tag = "[object Float64Array]", int8Tag = "[object Int8Array]", int16Tag = "[object Int16Array]", int32Tag = "[object Int32Array]", uint8Tag = "[object Uint8Array]", uint8ClampedTag = "[object Uint8ClampedArray]", uint16Tag = "[object Uint16Array]", uint32Tag = "[object Uint32Array]";
-/** Used to identify `toStringTag` values supported by `_.clone`. */
-var cloneableTags = {};
-cloneableTags[argsTag] = cloneableTags[arrayTag] = cloneableTags[arrayBufferTag] = cloneableTags[dataViewTag] = cloneableTags[boolTag] = cloneableTags[dateTag] = cloneableTags[float32Tag] = cloneableTags[float64Tag] = cloneableTags[int8Tag] = cloneableTags[int16Tag] = cloneableTags[int32Tag] = cloneableTags[mapTag] = cloneableTags[numberTag] = cloneableTags[objectTag$1] = cloneableTags[regexpTag] = cloneableTags[setTag] = cloneableTags[stringTag] = cloneableTags[symbolTag] = cloneableTags[uint8Tag] = cloneableTags[uint8ClampedTag] = cloneableTags[uint16Tag] = cloneableTags[uint32Tag] = true;
-cloneableTags[errorTag] = cloneableTags[funcTag] = cloneableTags[weakMapTag] = false;
-/**
-* The base implementation of `_.clone` and `_.cloneDeep` which tracks
-* traversed objects.
-*
-* @private
-* @param {*} value The value to clone.
-* @param {boolean} bitmask The bitmask flags.
-*  1 - Deep clone
-*  2 - Flatten inherited properties
-*  4 - Clone symbols
-* @param {Function} [customizer] The function to customize cloning.
-* @param {string} [key] The key of `value`.
-* @param {Object} [object] The parent object of `value`.
-* @param {Object} [stack] Tracks traversed objects and their clone counterparts.
-* @returns {*} Returns the cloned value.
-*/
-function baseClone(value, bitmask, customizer, key, object, stack) {
-	var result, isDeep = bitmask & CLONE_DEEP_FLAG$1, isFlat = bitmask & CLONE_FLAT_FLAG$1, isFull = bitmask & CLONE_SYMBOLS_FLAG$1;
-	if (customizer) result = object ? customizer(value, key, object, stack) : customizer(value);
-	if (result !== void 0) return result;
-	if (!isObject$1(value)) return value;
-	var isArr = isArray(value);
-	if (isArr) {
-		result = initCloneArray(value);
-		if (!isDeep) return copyArray(value, result);
-	} else {
-		var tag = _getTag_default(value), isFunc = tag == funcTag || tag == genTag;
-		if (isBuffer(value)) return cloneBuffer(value, isDeep);
-		if (tag == objectTag$1 || tag == argsTag || isFunc && !object) {
-			result = isFlat || isFunc ? {} : initCloneObject(value);
-			if (!isDeep) return isFlat ? copySymbolsIn(value, baseAssignIn(result, value)) : copySymbols(value, baseAssign(result, value));
-		} else {
-			if (!cloneableTags[tag]) return object ? value : {};
-			result = initCloneByTag(value, tag, isDeep);
-		}
-	}
-	stack || (stack = new Stack());
-	var stacked = stack.get(value);
-	if (stacked) return stacked;
-	stack.set(value, result);
-	if (isSet(value)) value.forEach(function(subValue) {
-		result.add(baseClone(subValue, bitmask, customizer, subValue, value, stack));
-	});
-	else if (isMap(value)) value.forEach(function(subValue, key) {
-		result.set(key, baseClone(subValue, bitmask, customizer, key, value, stack));
-	});
-	var props = isArr ? void 0 : (isFull ? isFlat ? getAllKeysIn : getAllKeys : isFlat ? keysIn : keys)(value);
-	arrayEach(props || value, function(subValue, key) {
-		if (props) {
-			key = subValue;
-			subValue = value[key];
-		}
-		assignValue(result, key, baseClone(subValue, bitmask, customizer, key, value, stack));
-	});
-	return result;
-}
-//#endregion
-//#region node_modules/lodash-es/_isKey.js
-/** Used to match property names within property paths. */
-var reIsDeepProp = /\.|\[(?:[^[\]]*|(["'])(?:(?!\1)[^\\]|\\.)*?\1)\]/, reIsPlainProp = /^\w*$/;
-/**
-* Checks if `value` is a property name and not a property path.
-*
-* @private
-* @param {*} value The value to check.
-* @param {Object} [object] The object to query keys on.
-* @returns {boolean} Returns `true` if `value` is a property name, else `false`.
-*/
-function isKey(value, object) {
-	if (isArray(value)) return false;
-	var type = typeof value;
-	if (type == "number" || type == "symbol" || type == "boolean" || value == null || isSymbol(value)) return true;
-	return reIsPlainProp.test(value) || !reIsDeepProp.test(value) || object != null && value in Object(object);
-}
-//#endregion
-//#region node_modules/lodash-es/memoize.js
-/** Error message constants. */
-var FUNC_ERROR_TEXT = "Expected a function";
-/**
-* Creates a function that memoizes the result of `func`. If `resolver` is
-* provided, it determines the cache key for storing the result based on the
-* arguments provided to the memoized function. By default, the first argument
-* provided to the memoized function is used as the map cache key. The `func`
-* is invoked with the `this` binding of the memoized function.
-*
-* **Note:** The cache is exposed as the `cache` property on the memoized
-* function. Its creation may be customized by replacing the `_.memoize.Cache`
-* constructor with one whose instances implement the
-* [`Map`](http://ecma-international.org/ecma-262/7.0/#sec-properties-of-the-map-prototype-object)
-* method interface of `clear`, `delete`, `get`, `has`, and `set`.
-*
-* @static
-* @memberOf _
-* @since 0.1.0
-* @category Function
-* @param {Function} func The function to have its output memoized.
-* @param {Function} [resolver] The function to resolve the cache key.
-* @returns {Function} Returns the new memoized function.
-* @example
-*
-* var object = { 'a': 1, 'b': 2 };
-* var other = { 'c': 3, 'd': 4 };
-*
-* var values = _.memoize(_.values);
-* values(object);
-* // => [1, 2]
-*
-* values(other);
-* // => [3, 4]
-*
-* object.a = 2;
-* values(object);
-* // => [1, 2]
-*
-* // Modify the result cache.
-* values.cache.set(object, ['a', 'b']);
-* values(object);
-* // => ['a', 'b']
-*
-* // Replace `_.memoize.Cache`.
-* _.memoize.Cache = WeakMap;
-*/
-function memoize(func, resolver) {
-	if (typeof func != "function" || resolver != null && typeof resolver != "function") throw new TypeError(FUNC_ERROR_TEXT);
-	var memoized = function() {
-		var args = arguments, key = resolver ? resolver.apply(this, args) : args[0], cache = memoized.cache;
-		if (cache.has(key)) return cache.get(key);
-		var result = func.apply(this, args);
-		memoized.cache = cache.set(key, result) || cache;
-		return result;
-	};
-	memoized.cache = new (memoize.Cache || MapCache)();
-	return memoized;
-}
-memoize.Cache = MapCache;
-//#endregion
-//#region node_modules/lodash-es/_memoizeCapped.js
-/** Used as the maximum memoize cache size. */
-var MAX_MEMOIZE_SIZE = 500;
-/**
-* A specialized version of `_.memoize` which clears the memoized function's
-* cache when it exceeds `MAX_MEMOIZE_SIZE`.
-*
-* @private
-* @param {Function} func The function to have its output memoized.
-* @returns {Function} Returns the new memoized function.
-*/
-function memoizeCapped(func) {
-	var result = memoize(func, function(key) {
-		if (cache.size === MAX_MEMOIZE_SIZE) cache.clear();
-		return key;
-	});
-	var cache = result.cache;
-	return result;
-}
-//#endregion
-//#region node_modules/lodash-es/_stringToPath.js
-/** Used to match property names within property paths. */
-var rePropName = /[^.[\]]+|\[(?:(-?\d+(?:\.\d+)?)|(["'])((?:(?!\2)[^\\]|\\.)*?)\2)\]|(?=(?:\.|\[\])(?:\.|\[\]|$))/g;
-/** Used to match backslashes in property paths. */
-var reEscapeChar = /\\(\\)?/g;
-/**
-* Converts `string` to a property path array.
-*
-* @private
-* @param {string} string The string to convert.
-* @returns {Array} Returns the property path array.
-*/
-var stringToPath = memoizeCapped(function(string) {
-	var result = [];
-	if (string.charCodeAt(0) === 46) result.push("");
-	string.replace(rePropName, function(match, number, quote, subString) {
-		result.push(quote ? subString.replace(reEscapeChar, "$1") : number || match);
-	});
-	return result;
-});
-//#endregion
-//#region node_modules/lodash-es/_castPath.js
-/**
-* Casts `value` to a path array if it's not one.
-*
-* @private
-* @param {*} value The value to inspect.
-* @param {Object} [object] The object to query keys on.
-* @returns {Array} Returns the cast property path array.
-*/
-function castPath(value, object) {
-	if (isArray(value)) return value;
-	return isKey(value, object) ? [value] : stringToPath(toString(value));
-}
-//#endregion
-//#region node_modules/lodash-es/last.js
-/**
-* Gets the last element of `array`.
-*
-* @static
-* @memberOf _
-* @since 0.1.0
-* @category Array
-* @param {Array} array The array to query.
-* @returns {*} Returns the last element of `array`.
-* @example
-*
-* _.last([1, 2, 3]);
-* // => 3
-*/
-function last(array) {
-	var length = array == null ? 0 : array.length;
-	return length ? array[length - 1] : void 0;
-}
-//#endregion
-//#region node_modules/lodash-es/_toKey.js
-/** Used as references for various `Number` constants. */
-var INFINITY = Infinity;
-/**
-* Converts `value` to a string key if it's not a string or symbol.
-*
-* @private
-* @param {*} value The value to inspect.
-* @returns {string|symbol} Returns the key.
-*/
-function toKey(value) {
-	if (typeof value == "string" || isSymbol(value)) return value;
-	var result = value + "";
-	return result == "0" && 1 / value == -INFINITY ? "-0" : result;
-}
-//#endregion
-//#region node_modules/lodash-es/_baseGet.js
-/**
-* The base implementation of `_.get` without support for default values.
-*
-* @private
-* @param {Object} object The object to query.
-* @param {Array|string} path The path of the property to get.
-* @returns {*} Returns the resolved value.
-*/
-function baseGet(object, path) {
-	path = castPath(path, object);
-	var index = 0, length = path.length;
-	while (object != null && index < length) object = object[toKey(path[index++])];
-	return index && index == length ? object : void 0;
-}
-//#endregion
-//#region node_modules/lodash-es/_parent.js
-/**
-* Gets the parent value at `path` of `object`.
-*
-* @private
-* @param {Object} object The object to query.
-* @param {Array} path The path to get the parent value of.
-* @returns {*} Returns the parent value.
-*/
-function parent(object, path) {
-	return path.length < 2 ? object : baseGet(object, baseSlice(path, 0, -1));
-}
-//#endregion
 //#region node_modules/lodash-es/_baseUnset.js
 /** Used to check objects for own properties. */
-var hasOwnProperty$1 = Object.prototype.hasOwnProperty;
+var hasOwnProperty = Object.prototype.hasOwnProperty;
 /**
 * The base implementation of `_.unset`.
 *
@@ -4602,58 +4855,11 @@ function baseUnset(object, path) {
 	if (!length) return true;
 	while (++index < length) {
 		var key = toKey(path[index]);
-		if (key === "__proto__" && !hasOwnProperty$1.call(object, "__proto__")) return false;
+		if (key === "__proto__" && !hasOwnProperty.call(object, "__proto__")) return false;
 		if ((key === "constructor" || key === "prototype") && index < length - 1) return false;
 	}
 	var obj = parent(object, path);
 	return obj == null || delete obj[toKey(last(path))];
-}
-//#endregion
-//#region node_modules/lodash-es/isPlainObject.js
-/** `Object#toString` result references. */
-var objectTag = "[object Object]";
-/** Used for built-in method references. */
-var funcProto = Function.prototype, objectProto = Object.prototype;
-/** Used to resolve the decompiled source of functions. */
-var funcToString = funcProto.toString;
-/** Used to check objects for own properties. */
-var hasOwnProperty = objectProto.hasOwnProperty;
-/** Used to infer the `Object` constructor. */
-var objectCtorString = funcToString.call(Object);
-/**
-* Checks if `value` is a plain object, that is, an object created by the
-* `Object` constructor or one with a `[[Prototype]]` of `null`.
-*
-* @static
-* @memberOf _
-* @since 0.8.0
-* @category Lang
-* @param {*} value The value to check.
-* @returns {boolean} Returns `true` if `value` is a plain object, else `false`.
-* @example
-*
-* function Foo() {
-*   this.a = 1;
-* }
-*
-* _.isPlainObject(new Foo);
-* // => false
-*
-* _.isPlainObject([1, 2, 3]);
-* // => false
-*
-* _.isPlainObject({ 'x': 0, 'y': 0 });
-* // => true
-*
-* _.isPlainObject(Object.create(null));
-* // => true
-*/
-function isPlainObject(value) {
-	if (!isObjectLike(value) || baseGetTag(value) != objectTag) return false;
-	var proto = getPrototype(value);
-	if (proto === null) return true;
-	var Ctor = hasOwnProperty.call(proto, "constructor") && proto.constructor;
-	return typeof Ctor == "function" && Ctor instanceof Ctor && funcToString.call(Ctor) == objectCtorString;
 }
 //#endregion
 //#region node_modules/lodash-es/_customOmitClone.js
@@ -4668,222 +4874,6 @@ function isPlainObject(value) {
 */
 function customOmitClone(value) {
 	return isPlainObject(value) ? void 0 : value;
-}
-//#endregion
-//#region node_modules/lodash-es/_isFlattenable.js
-/** Built-in value references. */
-var spreadableSymbol = Symbol$1 ? Symbol$1.isConcatSpreadable : void 0;
-/**
-* Checks if `value` is a flattenable `arguments` object or array.
-*
-* @private
-* @param {*} value The value to check.
-* @returns {boolean} Returns `true` if `value` is flattenable, else `false`.
-*/
-function isFlattenable(value) {
-	return isArray(value) || isArguments(value) || !!(spreadableSymbol && value && value[spreadableSymbol]);
-}
-//#endregion
-//#region node_modules/lodash-es/_baseFlatten.js
-/**
-* The base implementation of `_.flatten` with support for restricting flattening.
-*
-* @private
-* @param {Array} array The array to flatten.
-* @param {number} depth The maximum recursion depth.
-* @param {boolean} [predicate=isFlattenable] The function invoked per iteration.
-* @param {boolean} [isStrict] Restrict to values that pass `predicate` checks.
-* @param {Array} [result=[]] The initial result value.
-* @returns {Array} Returns the new flattened array.
-*/
-function baseFlatten(array, depth, predicate, isStrict, result) {
-	var index = -1, length = array.length;
-	predicate || (predicate = isFlattenable);
-	result || (result = []);
-	while (++index < length) {
-		var value = array[index];
-		if (depth > 0 && predicate(value)) if (depth > 1) baseFlatten(value, depth - 1, predicate, isStrict, result);
-		else arrayPush(result, value);
-		else if (!isStrict) result[result.length] = value;
-	}
-	return result;
-}
-//#endregion
-//#region node_modules/lodash-es/flatten.js
-/**
-* Flattens `array` a single level deep.
-*
-* @static
-* @memberOf _
-* @since 0.1.0
-* @category Array
-* @param {Array} array The array to flatten.
-* @returns {Array} Returns the new flattened array.
-* @example
-*
-* _.flatten([1, [2, [3, [4]], 5]]);
-* // => [1, 2, [3, [4]], 5]
-*/
-function flatten(array) {
-	return (array == null ? 0 : array.length) ? baseFlatten(array, 1) : [];
-}
-//#endregion
-//#region node_modules/lodash-es/_apply.js
-/**
-* A faster alternative to `Function#apply`, this function invokes `func`
-* with the `this` binding of `thisArg` and the arguments of `args`.
-*
-* @private
-* @param {Function} func The function to invoke.
-* @param {*} thisArg The `this` binding of `func`.
-* @param {Array} args The arguments to invoke `func` with.
-* @returns {*} Returns the result of `func`.
-*/
-function apply(func, thisArg, args) {
-	switch (args.length) {
-		case 0: return func.call(thisArg);
-		case 1: return func.call(thisArg, args[0]);
-		case 2: return func.call(thisArg, args[0], args[1]);
-		case 3: return func.call(thisArg, args[0], args[1], args[2]);
-	}
-	return func.apply(thisArg, args);
-}
-//#endregion
-//#region node_modules/lodash-es/_overRest.js
-var nativeMax = Math.max;
-/**
-* A specialized version of `baseRest` which transforms the rest array.
-*
-* @private
-* @param {Function} func The function to apply a rest parameter to.
-* @param {number} [start=func.length-1] The start position of the rest parameter.
-* @param {Function} transform The rest array transform.
-* @returns {Function} Returns the new function.
-*/
-function overRest(func, start, transform) {
-	start = nativeMax(start === void 0 ? func.length - 1 : start, 0);
-	return function() {
-		var args = arguments, index = -1, length = nativeMax(args.length - start, 0), array = Array(length);
-		while (++index < length) array[index] = args[start + index];
-		index = -1;
-		var otherArgs = Array(start + 1);
-		while (++index < start) otherArgs[index] = args[index];
-		otherArgs[start] = transform(array);
-		return apply(func, this, otherArgs);
-	};
-}
-//#endregion
-//#region node_modules/lodash-es/constant.js
-/**
-* Creates a function that returns `value`.
-*
-* @static
-* @memberOf _
-* @since 2.4.0
-* @category Util
-* @param {*} value The value to return from the new function.
-* @returns {Function} Returns the new constant function.
-* @example
-*
-* var objects = _.times(2, _.constant({ 'a': 1 }));
-*
-* console.log(objects);
-* // => [{ 'a': 1 }, { 'a': 1 }]
-*
-* console.log(objects[0] === objects[1]);
-* // => true
-*/
-function constant(value) {
-	return function() {
-		return value;
-	};
-}
-//#endregion
-//#region node_modules/lodash-es/identity.js
-/**
-* This method returns the first argument it receives.
-*
-* @static
-* @since 0.1.0
-* @memberOf _
-* @category Util
-* @param {*} value Any value.
-* @returns {*} Returns `value`.
-* @example
-*
-* var object = { 'a': 1 };
-*
-* console.log(_.identity(object) === object);
-* // => true
-*/
-function identity(value) {
-	return value;
-}
-//#endregion
-//#region node_modules/lodash-es/_baseSetToString.js
-/**
-* The base implementation of `setToString` without support for hot loop shorting.
-*
-* @private
-* @param {Function} func The function to modify.
-* @param {Function} string The `toString` result.
-* @returns {Function} Returns `func`.
-*/
-var baseSetToString = !defineProperty ? identity : function(func, string) {
-	return defineProperty(func, "toString", {
-		"configurable": true,
-		"enumerable": false,
-		"value": constant(string),
-		"writable": true
-	});
-};
-//#endregion
-//#region node_modules/lodash-es/_shortOut.js
-/** Used to detect hot functions by number of calls within a span of milliseconds. */
-var HOT_COUNT = 800, HOT_SPAN = 16;
-var nativeNow = Date.now;
-/**
-* Creates a function that'll short out and invoke `identity` instead
-* of `func` when it's called `HOT_COUNT` or more times in `HOT_SPAN`
-* milliseconds.
-*
-* @private
-* @param {Function} func The function to restrict.
-* @returns {Function} Returns the new shortable function.
-*/
-function shortOut(func) {
-	var count = 0, lastCalled = 0;
-	return function() {
-		var stamp = nativeNow(), remaining = HOT_SPAN - (stamp - lastCalled);
-		lastCalled = stamp;
-		if (remaining > 0) {
-			if (++count >= HOT_COUNT) return arguments[0];
-		} else count = 0;
-		return func.apply(void 0, arguments);
-	};
-}
-//#endregion
-//#region node_modules/lodash-es/_setToString.js
-/**
-* Sets the `toString` method of `func` to return `string`.
-*
-* @private
-* @param {Function} func The function to modify.
-* @param {Function} string The `toString` result.
-* @returns {Function} Returns `func`.
-*/
-var setToString = shortOut(baseSetToString);
-//#endregion
-//#region node_modules/lodash-es/_flatRest.js
-/**
-* A specialized version of `baseRest` which flattens the rest array.
-*
-* @private
-* @param {Function} func The function to apply a rest parameter to.
-* @returns {Function} Returns the new function.
-*/
-function flatRest(func) {
-	return setToString(overRest(func, void 0, flatten), func + "");
 }
 //#endregion
 //#region node_modules/lodash-es/omit.js
@@ -4926,7 +4916,7 @@ var omit = flatRest(function(object, paths) {
 });
 //#endregion
 //#region extension/src/renderer/state/hmonitorSlice.ts
-var { useSelector: useSelector$2 } = await importShared("react-redux");
+var { useSelector: useSelector$3 } = await importShared("react-redux");
 var hmonitorSlice = createSlice({
 	initialState: { ...initialSettings },
 	name: "hmonitor",
@@ -4991,8 +4981,8 @@ var hmonitorSlice = createSlice({
 		}
 	}
 });
-var useHMonitorSelector = useSelector$2;
-var useHMonitorState = (propertyName) => useSelector$2((state) => state.hmonitor[propertyName]);
+var useHMonitorSelector = useSelector$3;
+var useHMonitorState = (propertyName) => useSelector$3((state) => state.hmonitor[propertyName]);
 var hmonitorActions = hmonitorSlice.actions;
 var hmonitorSlice_default = hmonitorSlice.reducer;
 //#endregion
@@ -5161,7 +5151,7 @@ var MetricItem = memo$10(({ icon: Icon, label, value, unit = "", progress, color
 //#endregion
 //#region extension/src/renderer/components/common/Section.tsx
 var { Spinner: Spinner$1 } = await importShared("@heroui/react");
-var { Children: Children$1, Fragment: Fragment$4, memo: memo$9 } = await importShared("react");
+var { Children: Children$1, Fragment: Fragment$5, memo: memo$9 } = await importShared("react");
 var Section = memo$9(({ title, icon: Icon, children }) => {
 	const displayStyle = useHMonitorState("displayStyle");
 	const showSectionLabel = useHMonitorState("showSectionLabel");
@@ -5175,7 +5165,7 @@ var Section = memo$9(({ title, icon: Icon, children }) => {
 			children: [title, ":"]
 		}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
 			className: `${isTwoColumn ? "grid grid-flow-col grid-rows-2 auto-cols-max gap-x-4 gap-y-1 h-10" : "flex items-center gap-x-2 h-7"} shrink-0 ${isTwoColumn && `content-center items-start ${Children$1.count(children) > 1 ? "justify-start" : "justify-center"}`}`,
-			children: Children$1.map(children, (child, i) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Fragment$4, { children: [child, !isTwoColumn && i < Children$1.count(children) - 1 && /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+			children: Children$1.map(children, (child, i) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Fragment$5, { children: [child, !isTwoColumn && i < Children$1.count(children) - 1 && /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
 				className: "text-foreground/30",
 				children: "/"
 			})] }, i))
@@ -5666,10 +5656,10 @@ var NetworkSection = memo$5(({ data, metrics, hardwareInfo, rawSensorValues }) =
 });
 //#endregion
 //#region extension/src/renderer/components/status-bar/sections/PingSection.tsx
-var { memo: memo$4, useEffect: useEffect$9, useMemo: useMemo$10, useState: useState$7 } = await importShared("react");
+var { memo: memo$4, useEffect: useEffect$11, useMemo: useMemo$10, useState: useState$8 } = await importShared("react");
 function PingSection() {
 	const pingState = useHMonitorState("pingState");
-	const [hostResults, setHostResults] = useState$7({});
+	const [hostResults, setHostResults] = useState$8({});
 	const renderElements = useMemo$10(() => {
 		return Array.from(new Set(pingState.enabledHosts)).map((host) => {
 			const item = hostResults[host];
@@ -5682,7 +5672,7 @@ function PingSection() {
 			}, host);
 		});
 	}, [hostResults, pingState]);
-	useEffect$9(() => {
+	useEffect$11(() => {
 		const clearListener = window.electron.ipcRenderer.on(HMONITOR_IPC_UPDATE_PING, (_, result) => {
 			if (typeof result === "string") setHostResults((prevResults) => ({
 				...prevResults,
@@ -5935,7 +5925,7 @@ function HardwareStatusBar() {
 var HardwareStatusBar_default = memo$2(HardwareStatusBar);
 //#endregion
 //#region extension/src/renderer/integrations/ConfigProvider.tsx
-var { Fragment: Fragment$3, useEffect: useEffect$8 } = await importShared("react");
+var { Fragment: Fragment$4, useEffect: useEffect$10 } = await importShared("react");
 var { useDispatch: useDispatch$4 } = await importShared("react-redux");
 /**
 * A provider component that listens for configuration updates from the main process
@@ -5943,120 +5933,530 @@ var { useDispatch: useDispatch$4 } = await importShared("react-redux");
 */
 function ConfigProviderWrapper() {
 	const dispatch = useDispatch$4();
-	useEffect$8(() => {
+	useEffect$10(() => {
 		const handleConfigUpdate = (_, newConfig) => {
 			if (newConfig) dispatch(hmonitorActions.setConfig(newConfig));
 		};
 		const clearListener = window.electron.ipcRenderer.on(HMONITOR_IPC_CONFIG_UPDATE, handleConfigUpdate);
 		return () => clearListener();
 	}, [dispatch]);
-	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Fragment$3, {});
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Fragment$4, {});
 }
 function ConfigProvider(lynxAPI) {
 	lynxAPI.addCustomHook(ConfigProviderWrapper);
 }
 //#endregion
-//#region src/renderer/mainWindow/components/ToolsCard.tsx
-var { Avatar, Card: Card$3, Description: Description$3, Label: Label$3 } = await importShared("@heroui/react");
+//#region src/common/consts/ipcChannels/browser.ts
 /**
-* A card component for the Tools page, featuring a spotlight effect and hover animations.
+* IPC channels for browser-related functionality.
+* Handles tab management, navigation, zoom, volume, and other webview interactions.
 */
-function ToolsCard({ title, description, icon, onPress, footer, avatarClassName }) {
-	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Card$3, {
-		className: "w-75 h-46 relative group transform border border-surface  hover:shadow-lg hover:scale-[1.02] transition-all duration-200 cursor-pointer",
-		onClick: onPress,
-		children: [
-			/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Card$3.Header, { children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-				className: "inline-flex items-center gap-2",
-				children: [typeof icon === "string" ? /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Avatar, {
-					className: `size-12 shrink-0 ring-LynxPurple ring-2 ${avatarClassName}`,
-					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Avatar.Image, {
-						src: icon,
-						alt: title
-					}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Avatar.Fallback, { children: getFallbackString(title) })]
-				}) : /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-					className: `size-12 rounded-full ring-2 ring-LynxPurple flex items-center justify-center  ${avatarClassName}`,
-					children: icon
-				}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-					className: "flex flex-col pointer-events-none",
-					children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Label$3, { children: title })
-				})]
-			}) }),
-			/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Card$3.Content, { children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Description$3, {
-				className: "line-clamp-3 text-xs",
-				children: description
-			}) }),
-			/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Card$3.Footer, { children: footer })
-		]
-	});
-}
+var browserChannels = {
+	createBrowser: "browser:create-browser",
+	removeBrowser: "browser:remove-browser",
+	loadURL: "browser:load-url",
+	setVisible: "browser:set-visible",
+	openFindInPage: "browser:openFindInPage",
+	openZoom: "browser:openZoom",
+	openVolume: "browser:openVolume",
+	onZoomChanged: "browser:on-zoom-changed",
+	onLinkHover: "browser:on-link-hover",
+	resizeLinkPreview: "browser:resize-link-preview",
+	resizeBrowserView: "browser:resize-browser-view",
+	findInPage: "browser:findInPage",
+	stopFindInPage: "browser:stopFindInPage",
+	onFoundInPage: "browser:on-found-in-page",
+	setZoomFactor: "browser:setZoomFactor",
+	focusWebView: "browser:focus-webview",
+	clearCache: "browser:clear-cache",
+	clearCookies: "browser:clear-cookies",
+	reload: "browser:reload",
+	focus: "browser:focus",
+	stop: "browser:stop",
+	goBack: "browser:goBack",
+	goForward: "browser:goForward",
+	toggleDevTools: "browser:toggle-devtools",
+	onCanGo: "browser:on-can-go",
+	isLoading: "browser:is-loading",
+	onTitleChange: "browser:on-title-change",
+	onFavIconChange: "browser:on-favicon-change",
+	onUrlChange: "browser:on-url-change",
+	onDomReady: "browser:on-dom-ready",
+	getUserAgent: "browser:get-user-agent",
+	updateUserAgent: "browser:update-user-agent",
+	clearHistory: "browser:clear-history",
+	onFailedLoadUrl: "browser:on-failed-load-url",
+	onClearFailed: "browser:on-clear-failed",
+	setVolume: "volume:set",
+	setMuted: "volume:setMuted",
+	getState: "volume:getState",
+	updateTabVolume: "volume:updateTabVolume",
+	updateTabMuted: "volume:updateTabMuted",
+	onTabVolumeUpdate: "volume:onTabVolumeUpdate",
+	onTabMutedUpdate: "volume:onTabMutedUpdate",
+	onAudioStateChange: "volume:onAudioStateChange"
+};
 //#endregion
-//#region node_modules/@solar-icons/react-perf/dist/lib/IconBase.mjs
-var { forwardRef: e } = await importShared("react");
-var r$3 = e((e, r) => {
-	let { alt: i, color: a = `currentColor`, size: o = `1em`, mirrored: s = !1, children: c, ...l } = e;
-	return (0, import_jsx_runtime.jsxs)(`svg`, {
-		ref: r,
-		xmlns: `http://www.w3.org/2000/svg`,
-		width: o,
-		height: o,
-		color: a,
-		fill: `none`,
-		viewBox: `0 0 24 24`,
-		transform: s ? `scale(-1, 1)` : void 0,
-		...l,
-		children: [!!i && (0, import_jsx_runtime.jsx)(`title`, { children: i }), c]
-	});
+//#region src/renderer/shared/ipc/ipcEvents.ts
+var listeners = {
+	before: /* @__PURE__ */ new Set(),
+	after: /* @__PURE__ */ new Set()
+};
+var channelListeners = {
+	before: /* @__PURE__ */ new Map(),
+	after: /* @__PURE__ */ new Map()
+};
+var getListenersForEvent = (event) => {
+	const base = [...listeners[event.phase]];
+	const perChannel = channelListeners[event.phase].get(event.channel);
+	if (perChannel) base.push(...perChannel);
+	return base;
+};
+var logHookError = (error) => {
+	console.error("Extension renderer IPC hook failed:", error);
+};
+var runListenerSync = (listener, event) => {
+	try {
+		const result = listener(event);
+		if (result && typeof result.then === "function") result.catch(logHookError);
+	} catch (error) {
+		logHookError(error);
+	}
+};
+var runListener = async (listener, event) => {
+	try {
+		await listener(event);
+	} catch (error) {
+		logHookError(error);
+	}
+};
+var emitRendererIpcEventSync = (event) => {
+	for (const listener of getListenersForEvent(event)) runListenerSync(listener, event);
+};
+var emitRendererIpcEvent = async (event) => {
+	for (const listener of getListenersForEvent(event)) await runListener(listener, event);
+};
+//#endregion
+//#region src/renderer/shared/ipc/lynxIpc.ts
+var ipc = window.electron.ipcRenderer;
+var send = (channel, ...args) => {
+	const eventStart = Date.now();
+	const beforeEvent = {
+		phase: "before",
+		method: "send",
+		channel,
+		args: [...args],
+		timestamp: eventStart
+	};
+	emitRendererIpcEventSync(beforeEvent);
+	try {
+		ipc.send(channel, ...args);
+		emitRendererIpcEventSync({
+			...beforeEvent,
+			phase: "after",
+			status: "success",
+			durationMs: Date.now() - eventStart
+		});
+	} catch (error) {
+		emitRendererIpcEventSync({
+			...beforeEvent,
+			phase: "after",
+			status: "error",
+			durationMs: Date.now() - eventStart,
+			error
+		});
+		throw error;
+	}
+};
+var sendSync = (channel, ...args) => {
+	const eventStart = Date.now();
+	const beforeEvent = {
+		phase: "before",
+		method: "sendSync",
+		channel,
+		args: [...args],
+		timestamp: eventStart
+	};
+	emitRendererIpcEventSync(beforeEvent);
+	try {
+		const result = ipc.sendSync(channel, ...args);
+		emitRendererIpcEventSync({
+			...beforeEvent,
+			phase: "after",
+			status: "success",
+			durationMs: Date.now() - eventStart,
+			result
+		});
+		return result;
+	} catch (error) {
+		emitRendererIpcEventSync({
+			...beforeEvent,
+			phase: "after",
+			status: "error",
+			durationMs: Date.now() - eventStart,
+			error
+		});
+		throw error;
+	}
+};
+var invoke = async (channel, ...args) => {
+	const eventStart = Date.now();
+	const beforeEvent = {
+		phase: "before",
+		method: "invoke",
+		channel,
+		args: [...args],
+		timestamp: eventStart
+	};
+	await emitRendererIpcEvent(beforeEvent);
+	try {
+		const result = await ipc.invoke(channel, ...args);
+		await emitRendererIpcEvent({
+			...beforeEvent,
+			phase: "after",
+			status: "success",
+			durationMs: Date.now() - eventStart,
+			result
+		});
+		return result;
+	} catch (error) {
+		await emitRendererIpcEvent({
+			...beforeEvent,
+			phase: "after",
+			status: "error",
+			durationMs: Date.now() - eventStart,
+			error
+		});
+		throw error;
+	}
+};
+var on = (channel, callback) => ipc.on(channel, (_, ...args) => {
+	const typedArgs = args;
+	const eventStart = Date.now();
+	const beforeEvent = {
+		phase: "before",
+		method: "on",
+		channel,
+		args: [...typedArgs],
+		timestamp: eventStart
+	};
+	emitRendererIpcEventSync(beforeEvent);
+	try {
+		const result = callback(...typedArgs);
+		emitRendererIpcEventSync({
+			...beforeEvent,
+			phase: "after",
+			status: "success",
+			durationMs: Date.now() - eventStart,
+			result
+		});
+	} catch (error) {
+		emitRendererIpcEventSync({
+			...beforeEvent,
+			phase: "after",
+			status: "error",
+			durationMs: Date.now() - eventStart,
+			error
+		});
+		throw error;
+	}
 });
-r$3.displayName = `IconBase`;
+var once = (channel, callback) => ipc.once(channel, (_, ...args) => {
+	const typedArgs = args;
+	const eventStart = Date.now();
+	const beforeEvent = {
+		phase: "before",
+		method: "once",
+		channel,
+		args: [...typedArgs],
+		timestamp: eventStart
+	};
+	emitRendererIpcEventSync(beforeEvent);
+	try {
+		const result = callback(...typedArgs);
+		emitRendererIpcEventSync({
+			...beforeEvent,
+			phase: "after",
+			status: "success",
+			durationMs: Date.now() - eventStart,
+			result
+		});
+	} catch (error) {
+		emitRendererIpcEventSync({
+			...beforeEvent,
+			phase: "after",
+			status: "error",
+			durationMs: Date.now() - eventStart,
+			error
+		});
+		throw error;
+	}
+});
+var lynxIpc = {
+	send,
+	sendSync,
+	on,
+	once,
+	invoke
+};
 //#endregion
-//#region node_modules/@solar-icons/react-perf/dist/icons/devices/BoldDuotone/CpuBolt.mjs
-var { forwardRef: t$2 } = await importShared("react");
-var i$1 = t$2((t, i) => (0, import_jsx_runtime.jsxs)(r$3, {
-	ref: i,
-	...t,
-	children: [
-		(0, import_jsx_runtime.jsx)(`path`, {
-			opacity: `0.5`,
-			d: `M9.18091 9.18091C9.23402 9.1278 9.32886 9.06211 9.63147 9.02143C9.95415 8.97804 10.3921 8.97656 11.0696 8.97656H12.9301C13.6075 8.97656 14.0455 8.97804 14.3682 9.02143C14.6708 9.06211 14.7656 9.1278 14.8187 9.18091C14.8718 9.23402 14.9375 9.32886 14.9782 9.63147C15.0216 9.95415 15.0231 10.3921 15.0231 11.0696V12.9301C15.0231 13.6075 15.0216 14.0455 14.9782 14.3682C14.9375 14.6708 14.8718 14.7656 14.8187 14.8187C14.7656 14.8718 14.6708 14.9375 14.3682 14.9782C14.0455 15.0216 13.6075 15.0231 12.9301 15.0231H11.0696C10.3921 15.0231 9.95415 15.0216 9.63147 14.9782C9.32886 14.9375 9.23402 14.8718 9.18091 14.8187C9.1278 14.7656 9.06211 14.6708 9.02143 14.3682C8.97804 14.0455 8.97656 13.6075 8.97656 12.9301V11.0696C8.97656 10.3921 8.97804 9.95415 9.02143 9.63147C9.06211 9.32886 9.1278 9.23402 9.18091 9.18091Z`,
-			fill: `currentColor`
-		}),
-		(0, import_jsx_runtime.jsx)(`path`, {
-			fillRule: `evenodd`,
-			clipRule: `evenodd`,
-			d: `M12.6977 2.69767C12.6977 2.31236 12.3853 2 12 2C11.6147 2 11.3023 2.31236 11.3023 2.69767V5.48837C10.7916 5.48944 10.3283 5.49342 9.90678 5.50495L9.90698 5.48837V2.69767C9.90698 2.31236 9.59462 2 9.2093 2C8.82399 2 8.51163 2.31236 8.51163 2.69767V5.48837C8.51163 5.52487 8.51443 5.56072 8.51984 5.5957C7.58381 5.71067 6.93517 5.94879 6.44198 6.44198C5.94879 6.93517 5.71067 7.58381 5.5957 8.51984C5.56071 8.51443 5.52487 8.51163 5.48837 8.51163H2.69767C2.31236 8.51163 2 8.82399 2 9.2093C2 9.59462 2.31236 9.90698 2.69767 9.90698H5.48837L5.50495 9.90678C5.49342 10.3283 5.48991 10.7916 5.48884 11.3023L2.69767 11.3023C2.31236 11.3023 2 11.6147 2 12C2 12.3853 2.31236 12.6977 2.69767 12.6977H5.48837C5.48944 13.2084 5.49342 13.6717 5.50495 14.0932L5.48837 14.093H2.69767C2.31236 14.093 2 14.4054 2 14.7907C2 15.176 2.31236 15.4884 2.69767 15.4884H5.48837C5.52487 15.4884 5.56071 15.4856 5.5957 15.4802C5.71067 16.4162 5.94879 17.0648 6.44198 17.558C6.93517 18.0512 7.58381 18.2893 8.51984 18.4043C8.51443 18.4393 8.51163 18.4751 8.51163 18.5116V21.3023C8.51163 21.6876 8.82399 22 9.2093 22C9.59462 22 9.90698 21.6876 9.90698 21.3023V18.5116L9.90678 18.495C10.3283 18.5066 10.7916 18.5101 11.3023 18.5112L11.3023 21.3023C11.3023 21.6876 11.6147 22 12 22C12.3853 22 12.6977 21.6876 12.6977 21.3023V18.5116C13.2084 18.5106 13.6717 18.5066 14.0932 18.495L14.093 18.5116V21.3023C14.093 21.6876 14.4054 22 14.7907 22C15.176 22 15.4884 21.6876 15.4884 21.3023V18.5116C15.4884 18.4751 15.4856 18.4393 15.4802 18.4043C16.4162 18.2893 17.0648 18.0512 17.558 17.558C18.0512 17.0648 18.2893 16.4162 18.4043 15.4802C18.4393 15.4856 18.4751 15.4884 18.5116 15.4884H21.3023C21.6876 15.4884 22 15.176 22 14.7907C22 14.4054 21.6876 14.093 21.3023 14.093H18.5116L18.495 14.0932C18.5066 13.6717 18.5101 13.2084 18.5112 12.6977L21.3023 12.6977C21.6876 12.6977 22 12.3853 22 12C22 11.6147 21.6876 11.3023 21.3023 11.3023H18.5116C18.5106 10.7916 18.5066 10.3283 18.495 9.90678L18.5116 9.90698H21.3023C21.6876 9.90698 22 9.59462 22 9.2093C22 8.82399 21.6876 8.51163 21.3023 8.51163H18.5116C18.4751 8.51163 18.4393 8.51443 18.4043 8.51984C18.2893 7.58381 18.0512 6.93517 17.558 6.44198C17.0648 5.94879 16.4162 5.71067 15.4802 5.5957C15.4856 5.56072 15.4884 5.52487 15.4884 5.48837V2.69767C15.4884 2.31236 15.176 2 14.7907 2C14.4054 2 14.093 2.31236 14.093 2.69767V5.48837L14.0932 5.50495C13.6717 5.49342 13.2084 5.48991 12.6977 5.48884V2.69767ZM9.44573 7.63871C9.87247 7.58133 10.4054 7.58136 11.0238 7.5814H12.9762C13.5947 7.58136 14.1275 7.58133 14.5543 7.63871C15.0116 7.70019 15.45 7.83885 15.8056 8.19443C16.1612 8.55001 16.2998 8.98839 16.3613 9.44573C16.4187 9.87246 16.4186 10.4053 16.4186 11.0238V12.9762C16.4186 13.5946 16.4187 14.1275 16.3613 14.5543C16.2998 15.0116 16.1612 15.45 15.8056 15.8056C15.45 16.1612 15.0116 16.2998 14.5543 16.3613C14.1275 16.4187 13.5947 16.4186 12.9762 16.4186H11.0238C10.4054 16.4186 9.87246 16.4187 9.44573 16.3613C8.98839 16.2998 8.55001 16.1612 8.19443 15.8056C7.83885 15.45 7.70019 15.0116 7.63871 14.5543C7.58133 14.1275 7.58136 13.5946 7.5814 12.9762V11.0238C7.58136 10.4054 7.58133 9.87247 7.63871 9.44573C7.70019 8.98839 7.83885 8.55001 8.19443 8.19443C8.55001 7.83885 8.98839 7.70019 9.44573 7.63871Z`,
-			fill: `currentColor`
-		}),
-		(0, import_jsx_runtime.jsx)(`path`, {
-			d: `M12.9664 10.5446C13.1903 10.2311 13.1177 9.79537 12.8042 9.57141C12.4906 9.34745 12.0549 9.42008 11.8309 9.73362L10.502 11.5941C10.3501 11.8067 10.3298 12.0865 10.4494 12.3188C10.569 12.5512 10.8084 12.6973 11.0697 12.6973H11.5745L11.0336 13.4545C10.8096 13.7681 10.8822 14.2038 11.1958 14.4278C11.5093 14.6517 11.9451 14.5791 12.169 14.2656L13.4979 12.4051C13.6498 12.1925 13.6701 11.9127 13.5506 11.6804C13.431 11.448 13.1916 11.3019 12.9302 11.3019H12.4255L12.9664 10.5446Z`,
-			fill: `currentColor`
-		})
-	]
-}));
-i$1.displayName = `CpuBolt`;
+//#region src/renderer/shared/ipc/browser.ts
+var invokeWithSoftTimeout = async (channel, timeoutMessage, ...args) => {
+	try {
+		await Promise.race([lynxIpc.invoke(channel, ...args), new Promise((_, reject) => setTimeout(() => reject(new Error(timeoutMessage)), 8e3))]);
+	} catch {}
+};
+var browserIpc = {
+	send: {
+		resizeLinkPreview: (width) => lynxIpc.send(browserChannels.resizeLinkPreview, width),
+		resizeBrowserView: (data) => lynxIpc.send(browserChannels.resizeBrowserView, data),
+		createBrowser: (id) => lynxIpc.send(browserChannels.createBrowser, id),
+		removeBrowser: (id) => lynxIpc.send(browserChannels.removeBrowser, id),
+		loadURL: (id, url) => lynxIpc.send(browserChannels.loadURL, id, url),
+		setVisible: (id, visible) => lynxIpc.send(browserChannels.setVisible, id, visible),
+		openFindInPage: (id, customPosition) => lynxIpc.send(browserChannels.openFindInPage, id, customPosition),
+		openZoom: (id, customPosition) => lynxIpc.send(browserChannels.openZoom, id, customPosition),
+		openVolume: (data, customPosition) => lynxIpc.send(browserChannels.openVolume, data, customPosition),
+		findInPage: (id, value, options) => lynxIpc.send(browserChannels.findInPage, id, value, options),
+		stopFindInPage: (id, action) => lynxIpc.send(browserChannels.stopFindInPage, id, action),
+		focusWebView: (id) => lynxIpc.send(browserChannels.focusWebView, id),
+		setZoomFactor: (id, factor) => lynxIpc.send(browserChannels.setZoomFactor, id, factor),
+		reload: (id) => lynxIpc.send(browserChannels.reload, id),
+		focus: (id) => lynxIpc.send(browserChannels.focus, id),
+		stop: (id) => lynxIpc.send(browserChannels.stop, id),
+		goBack: (id) => lynxIpc.send(browserChannels.goBack, id),
+		goForward: (id) => lynxIpc.send(browserChannels.goForward, id),
+		toggleDevTools: (id) => lynxIpc.send(browserChannels.toggleDevTools, id),
+		updateUserAgent: () => lynxIpc.send(browserChannels.updateUserAgent),
+		clearHistory: (selected) => lynxIpc.send(browserChannels.clearHistory, selected),
+		updateTabVolume: (tabId, volume) => lynxIpc.send(browserChannels.updateTabVolume, tabId, volume),
+		updateTabMuted: (tabId, muted) => lynxIpc.send(browserChannels.updateTabMuted, tabId, muted)
+	},
+	on: {
+		linkHover: (callback) => lynxIpc.on(browserChannels.onLinkHover, callback),
+		canGoBackForward: (result) => lynxIpc.on(browserChannels.onCanGo, result),
+		loading: (result) => lynxIpc.on(browserChannels.isLoading, result),
+		titleChanged: (result) => lynxIpc.on(browserChannels.onTitleChange, result),
+		favIconChanged: (result) => lynxIpc.on(browserChannels.onFavIconChange, result),
+		urlChanged: (result) => lynxIpc.on(browserChannels.onUrlChange, result),
+		domReady: (result) => lynxIpc.on(browserChannels.onDomReady, result),
+		failedLoadUrl: (result) => lynxIpc.on(browserChannels.onFailedLoadUrl, result),
+		clearFailed: (result) => lynxIpc.on(browserChannels.onClearFailed, result),
+		onAudioStateChange: (callback) => lynxIpc.on(browserChannels.onAudioStateChange, callback),
+		onTabVolumeUpdate: (callback) => lynxIpc.on(browserChannels.onTabVolumeUpdate, callback),
+		onTabMutedUpdate: (callback) => lynxIpc.on(browserChannels.onTabMutedUpdate, callback),
+		foundInPage: (callback) => lynxIpc.on(browserChannels.onFoundInPage, callback),
+		onZoomChanged: (callback) => lynxIpc.on(browserChannels.onZoomChanged, callback)
+	},
+	invoke: {
+		clearCache: () => lynxIpc.invoke(browserChannels.clearCache),
+		clearCookies: () => lynxIpc.invoke(browserChannels.clearCookies),
+		getUserAgent: (type) => lynxIpc.invoke(browserChannels.getUserAgent, type),
+		setVolume: (id, volume) => invokeWithSoftTimeout(browserChannels.setVolume, "Volume set operation timed out", id, volume),
+		setMuted: (id, muted) => invokeWithSoftTimeout(browserChannels.setMuted, "Mute set operation timed out", id, muted)
+	}
+};
 //#endregion
-//#region node_modules/@solar-icons/react-perf/dist/icons/devices/BoldDuotone/Diskette.mjs
-var { forwardRef: t$1 } = await importShared("react");
-var i = t$1((t, i) => (0, import_jsx_runtime.jsxs)(r$3, {
-	ref: i,
-	...t,
-	children: [
-		(0, import_jsx_runtime.jsx)(`path`, {
-			opacity: `0.5`,
-			d: `M20.5355 20.5355C22 19.0711 22 16.714 22 12C22 11.6585 22 11.4878 21.9848 11.3142C21.9142 10.5049 21.586 9.71257 21.0637 9.09034C20.9516 8.95687 20.828 8.83317 20.5806 8.58578L15.4142 3.41944C15.1668 3.17206 15.0431 3.04835 14.9097 2.93631C14.2874 2.414 13.4951 2.08581 12.6858 2.01515C12.5122 2 12.3415 2 12 2C7.28595 2 4.92893 2 3.46447 3.46447C2 4.92893 2 7.28595 2 12C2 16.714 2 19.0711 3.46447 20.5355C4.1485 21.2196 5.02727 21.5841 6.25 21.7784L7.75 21.9313C8.9058 22 10.2996 22 12 22C13.7004 22 15.0942 22 16.25 21.9313L17.75 21.7784C18.9727 21.5841 19.8515 21.2196 20.5355 20.5355Z`,
-			fill: `currentColor`
-		}),
-		(0, import_jsx_runtime.jsx)(`path`, {
-			d: `M7 7.25C6.58579 7.25 6.25 7.58579 6.25 8C6.25 8.41421 6.58579 8.75 7 8.75H13C13.4142 8.75 13.75 8.41421 13.75 8C13.75 7.58579 13.4142 7.25 13 7.25H7Z`,
-			fill: `currentColor`
-		}),
-		(0, import_jsx_runtime.jsx)(`path`, {
-			d: `M13.052 16.25C13.9505 16.25 14.6997 16.2499 15.2945 16.3299C15.9223 16.4143 16.4891 16.6 16.9445 17.0555C17.4 17.5109 17.5857 18.0777 17.6701 18.7055C17.7501 19.3003 17.75 20.0495 17.75 20.948V20.948L17.75 21.7812L16.25 21.9219V21C16.25 20.036 16.2484 19.3884 16.1835 18.9054C16.1214 18.4439 16.0142 18.2464 15.8839 18.1161C15.7536 17.9858 15.5561 17.8786 15.0946 17.8165C14.6116 17.7516 13.964 17.75 13 17.75H11C10.036 17.75 9.38843 17.7516 8.90539 17.8165C8.44393 17.8786 8.24644 17.9858 8.11612 18.1161C7.9858 18.2464 7.87858 18.4439 7.81654 18.9054C7.7516 19.3884 7.75 20.036 7.75 21V21.9258L6.25 21.7773L6.25 20.948V20.948C6.24997 20.0495 6.24995 19.3003 6.32991 18.7055C6.41432 18.0777 6.59999 17.5109 7.05546 17.0555C7.51093 16.6 8.07773 16.4143 8.70552 16.3299C9.3003 16.2499 10.0495 16.25 10.948 16.25H10.948H13.052H13.052Z`,
-			fill: `currentColor`
-		})
-	]
-}));
-i.displayName = `Diskette`;
+//#region src/common/consts/ipcChannels/pty.ts
+/**
+* IPC channels for PTY (Pseudo-Terminal) operations.
+* Handles terminal process management, input/output, resizing, and custom commands.
+*/
+var ptyChannels = {
+	process: "pty-process",
+	customProcess: "pty-custom-process",
+	emptyProcess: "pty-custom-process",
+	stopProcess: "pty-stop-process",
+	customCommands: "pty-custom-commands",
+	write: "pty-write",
+	clear: "pty-clear",
+	resize: "pty-resize",
+	onData: "pty-on-data",
+	onTitle: "pty-on-title",
+	onExit: "pty-on-exit-code",
+	onProgress: "pty-on-progress"
+};
+//#endregion
+//#region src/renderer/shared/ipc/pty.ts
+var ptyIpc = {
+	process: (id, cardId) => lynxIpc.send(ptyChannels.process, id, cardId),
+	customProcess: (id, dir, file) => lynxIpc.send(ptyChannels.customProcess, id, dir, file),
+	emptyProcess: (id, dir) => lynxIpc.send(ptyChannels.emptyProcess, id, dir),
+	customCommands: (id, commands, dir) => lynxIpc.send(ptyChannels.customCommands, id, commands, dir),
+	stop: (id) => lynxIpc.send(ptyChannels.stopProcess, id),
+	write: (id, data) => lynxIpc.send(ptyChannels.write, id, data),
+	clear: (id) => lynxIpc.send(ptyChannels.clear, id),
+	resize: (id, cols, rows) => lynxIpc.send(ptyChannels.resize, id, cols, rows),
+	onData: (result) => lynxIpc.on(ptyChannels.onData, result),
+	onTitle: (result) => lynxIpc.on(ptyChannels.onTitle, result),
+	onExit: (result) => lynxIpc.on(ptyChannels.onExit, result)
+};
+//#endregion
+//#region src/renderer/mainWindow/redux/reducers/cards.ts
+var { useSelector: useSelector$2 } = await importShared("react-redux");
+var buildRunningCardBase = (tabId, id) => ({
+	tabId,
+	id,
+	webUIAddress: "",
+	customAddress: "",
+	currentAddress: "",
+	browserTitle: "Browser",
+	startTime: (/* @__PURE__ */ new Date()).toString()
+});
+var cardsSlice = createSlice({
+	initialState: {
+		autoUpdate: [],
+		installedCards: [],
+		pinnedCards: [],
+		updateAvailable: [],
+		updatingCards: [],
+		runningCard: [],
+		recentlyUsedCards: [],
+		homeCategory: [],
+		autoUpdateExtensions: [],
+		updatingExtensions: void 0,
+		duplicates: [],
+		checkUpdateInterval: 0,
+		activeTab: "",
+		browserDomReadyIds: [],
+		updateChecking: ""
+	},
+	name: "cards",
+	reducers: {
+		addUpdateAvailable: (state, action) => {
+			if (!state.updateAvailable.includes(action.payload)) state.updateAvailable.push(action.payload);
+		},
+		setUpdateAvailable: (state, action) => {
+			state.updateAvailable = action.payload;
+		},
+		setUpdateChecking: (state, action) => {
+			state.updateChecking = action.payload;
+		},
+		removeUpdateAvailable: (state, action) => {
+			state.updateAvailable = state.updateAvailable.filter((card) => card !== action.payload);
+		},
+		setUpdatingExtensions: (state, action) => {
+			state.updatingExtensions = action.payload;
+		},
+		setUpdateInterval: (state, action) => {
+			state.checkUpdateInterval = action.payload;
+		},
+		addUpdatingCard: (state, action) => {
+			if (!state.updatingCards.some((card) => card.id === action.payload.id)) state.updatingCards.push(action.payload);
+		},
+		removeUpdatingCard: (state, action) => {
+			const cardId = action.payload;
+			state.updatingCards = state.updatingCards.filter((card) => card.id !== cardId);
+		},
+		setAutoUpdate: (state, action) => {
+			state.autoUpdate = action.payload;
+		},
+		setAutoUpdateExtensions: (state, action) => {
+			state.autoUpdateExtensions = action.payload;
+		},
+		setInstalledCards: (state, action) => {
+			state.installedCards = action.payload;
+		},
+		setPinnedCards: (state, action) => {
+			state.pinnedCards = action.payload;
+		},
+		setHomeCategory: (state, action) => {
+			state.homeCategory = action.payload;
+		},
+		setRecentlyUsedCards: (state, action) => {
+			state.recentlyUsedCards = action.payload;
+		},
+		setDuplicates: (state, action) => {
+			state.duplicates = action.payload;
+		},
+		addDomReady: (state, action) => {
+			if (!state.browserDomReadyIds.includes(action.payload)) state.browserDomReadyIds.push(action.payload);
+		},
+		addRunningEmpty: (state, action) => {
+			const { tabId, type } = action.payload;
+			const id = `${tabId}_${type}`;
+			const currentView = type === "browser" ? "browser" : "terminal";
+			state.runningCard.push({
+				...buildRunningCardBase(tabId, id),
+				type,
+				currentView,
+				isEmptyRunning: true
+			});
+			if (type !== "terminal") browserIpc.send.createBrowser(id);
+			if (type !== "browser") ptyIpc.emptyProcess(id);
+		},
+		addRunningCard: (state, action) => {
+			const { tabId, id } = action.payload;
+			state.runningCard.push({
+				...buildRunningCardBase(tabId, id),
+				type: "both",
+				currentView: "terminal",
+				isEmptyRunning: false
+			});
+			browserIpc.send.createBrowser(id);
+		},
+		setRunningCardAddress: (state, action) => {
+			const { tabId, address } = action.payload;
+			state.runningCard = state.runningCard.map((card) => card.tabId === tabId ? {
+				...card,
+				webUIAddress: address
+			} : card);
+		},
+		setRunningCardCustomAddress: (state, action) => {
+			const { tabId, address } = action.payload;
+			state.runningCard = state.runningCard.map((card) => card.tabId === tabId ? {
+				...card,
+				customAddress: address
+			} : card);
+		},
+		setRunningCardCurrentAddress: (state, action) => {
+			const { tabId, address } = action.payload;
+			state.runningCard = state.runningCard.map((card) => card.tabId === tabId ? {
+				...card,
+				currentAddress: address
+			} : card);
+		},
+		setRunningCardView: (state, action) => {
+			const { tabId, view } = action.payload;
+			state.runningCard = state.runningCard.map((card) => card.tabId === tabId ? {
+				...card,
+				currentView: view
+			} : card);
+		},
+		setRunningCardBrowserTitle: (state, action) => {
+			const { tabId, title } = action.payload;
+			state.runningCard = state.runningCard.map((card) => card.tabId === tabId ? {
+				...card,
+				browserTitle: title
+			} : card);
+		},
+		toggleRunningCardView: (state, action) => {
+			if (!state.runningCard) return;
+			const { tabId } = action.payload;
+			state.runningCard = state.runningCard.map((card) => {
+				const currentView = card.currentView === "browser" ? "terminal" : "browser";
+				return card.tabId === tabId ? {
+					...card,
+					currentView
+				} : card;
+			});
+		},
+		stopRunningCard: (state, action) => {
+			const id = state.runningCard.find((card) => card.tabId === action.payload.tabId)?.id;
+			if (id) {
+				browserIpc.send.removeBrowser(id);
+				state.browserDomReadyIds = state.browserDomReadyIds.filter((item) => item !== id);
+			}
+			state.runningCard = state.runningCard.filter((card) => card.tabId !== action.payload.tabId);
+		}
+	}
+});
+/**
+* Hook to access a single cards state field with key-safe typing.
+*/
+var useCardsState = (name) => useSelector$2((state) => state.cards[name]);
+cardsSlice.actions;
+cardsSlice.reducer;
 //#endregion
 //#region src/renderer/mainWindow/redux/reducers/settings.ts
 var { useSelector: useSelector$1 } = await importShared("react-redux");
@@ -6098,6 +6498,306 @@ var settingsSlice = createSlice({
 var useSettingsState = (name) => useSelector$1((state) => state.settings[name]);
 settingsSlice.actions;
 settingsSlice.reducer;
+//#endregion
+//#region src/renderer/mainWindow/utils/hooks.tsx
+var { Fragment: Fragment$3, useEffect: useEffect$9, useRef: useRef$9, useState: useState$7 } = await importShared("react");
+/**
+* Hook to check if a card is pinned.
+* @param cardId - The ID of the card to check
+* @returns Boolean indicating if the card is pinned
+*/
+function useIsPinnedCard(cardId) {
+	return useCardsState("pinnedCards").includes(cardId);
+}
+window.isPortable;
+//#endregion
+//#region src/common/consts/ipcChannels/storage.ts
+/**
+* IPC channels for storage operations.
+* Handles data persistence, custom settings, and nested updates.
+*/
+var storageChannels = {
+	get: "storage:getData",
+	getCustom: "storage:get-custom",
+	setCustom: "storage:set-custom",
+	getAll: "storage:getAllData",
+	update: "storage:updateData",
+	updateNested: "storage:updateNested",
+	clear: "storage:clearStorage"
+};
+/**
+* IPC channels for storage utility operations.
+* Handles card management, auto-updates, pinned items, and history.
+*/
+var storageUtilsChannels = {
+	setSystemStartup: "storageUtils:setSystemStartup",
+	addInstalledCard: "storageUtils:add-installed-card",
+	removeInstalledCard: "storageUtils:remove-installed-card",
+	onInstalledCards: "storageUtils:on-installed-cards",
+	addAutoUpdateCard: "storageUtils:add-autoUpdate-card",
+	removeAutoUpdateCard: "storageUtils:remove-autoUpdate-card",
+	addAutoUpdateExtensions: "storageUtils:add-autoUpdate-extensions",
+	removeAutoUpdateExtensions: "storageUtils:remove-autoUpdate-extensions",
+	onAutoUpdateCards: "storageUtils:on-autoUpdate-cards",
+	onAutoUpdateExtensions: "storageUtils:on-autoUpdate-extensions",
+	onPinnedCardsChange: "storageUtils:on-pinned-cards",
+	pinnedCards: "storageUtils:pinned-cards",
+	recentlyUsedCards: "storageUtils:recently-used-cards",
+	onRecentlyUsedCardsChange: "storageUtils:on-recently-used-cards",
+	homeCategory: "storageUtils:home-category",
+	onHomeCategory: "storageUtils:on-home-category",
+	preCommands: "storageUtils:pre-commands",
+	onPreCommands: "storageUtils:on-pre-commands",
+	customRun: "storageUtils:custom-run",
+	onCustomRun: "storageUtils:on-custom-run",
+	customRunBehavior: "storageUtils:custom-run-behavior",
+	preOpen: "storageUtils:pre-open",
+	getCardArguments: "storageUtils:get-card-arguments",
+	setCardArguments: "storageUtils:set-card-arguments",
+	addBrowserRecent: "storageUtils:add-browser-recent",
+	addBrowserFavorite: "storageUtils:add-browser-favorite",
+	addBrowserHistory: "storageUtils:add-browser-history",
+	addBrowserRecentFavIcon: "storageUtils:add-browser-recent-favicon",
+	removeBrowserRecent: "storageUtils:remove-browser-recent",
+	removeBrowserFavorite: "storageUtils:remove-browser-favorite",
+	removeBrowserHistory: "storageUtils:remove-browser-favorite",
+	setShowConfirm: "storage:set-show-confirm",
+	onConfirmChange: "storage:on-confirm-change",
+	addReadNotif: "storageUtils:add-read-notif",
+	setCardTerminalPreCommands: "storageUtils:card-terminal-preCommands",
+	unassignCard: "storageUtils:unassign-card",
+	getBrowserHistoryData: "storageUtils:getBrowserHistoryData"
+};
+//#endregion
+//#region src/renderer/shared/ipc/storage.ts
+var storageIpc = {
+	getCustom: (key) => lynxIpc.invoke(storageChannels.getCustom, key),
+	setCustom: (key, data) => lynxIpc.send(storageChannels.setCustom, key, data),
+	get: (key) => lynxIpc.invoke(storageChannels.get, key),
+	getAll: () => lynxIpc.invoke(storageChannels.getAll),
+	update: (key, updateData) => lynxIpc.invoke(storageChannels.update, key, updateData),
+	clear: () => lynxIpc.invoke(storageChannels.clear)
+};
+var storageUtilsIpc = {
+	send: {
+		addInstalledCard: (cardData) => lynxIpc.send(storageUtilsChannels.addInstalledCard, cardData),
+		removeInstalledCard: (cardId) => lynxIpc.send(storageUtilsChannels.removeInstalledCard, cardId),
+		addAutoUpdateCard: (cardId) => lynxIpc.send(storageUtilsChannels.addAutoUpdateCard, cardId),
+		removeAutoUpdateCard: (cardId) => lynxIpc.send(storageUtilsChannels.removeAutoUpdateCard, cardId),
+		addAutoUpdateExtensions: (cardId) => lynxIpc.send(storageUtilsChannels.addAutoUpdateExtensions, cardId),
+		removeAutoUpdateExtensions: (cardId) => lynxIpc.send(storageUtilsChannels.removeAutoUpdateExtensions, cardId),
+		updateCustomRunBehavior: (data) => lynxIpc.send(storageUtilsChannels.customRunBehavior, data),
+		setSystemStartup: (startup) => lynxIpc.send(storageUtilsChannels.setSystemStartup, startup),
+		addBrowserRecent: (recentEntry) => lynxIpc.send(storageUtilsChannels.addBrowserRecent, recentEntry),
+		addBrowserFavorite: (favoriteEntry) => lynxIpc.send(storageUtilsChannels.addBrowserFavorite, favoriteEntry),
+		addBrowserHistory: (historyEntry) => lynxIpc.send(storageUtilsChannels.addBrowserHistory, historyEntry),
+		addBrowserRecentFavIcon: (url, favIcon, title) => lynxIpc.send(storageUtilsChannels.addBrowserRecentFavIcon, url, favIcon, title),
+		removeBrowserRecent: (url) => lynxIpc.send(storageUtilsChannels.removeBrowserRecent, url),
+		removeBrowserFavorite: (url) => lynxIpc.send(storageUtilsChannels.removeBrowserFavorite, url),
+		removeBrowserHistory: (url) => lynxIpc.send(storageUtilsChannels.removeBrowserHistory, url),
+		setShowConfirm: (type, enable) => lynxIpc.send(storageUtilsChannels.setShowConfirm, type, enable),
+		addReadNotif: (id) => lynxIpc.send(storageUtilsChannels.addReadNotif, id),
+		setCardTerminalPreCommands: (id, commands) => lynxIpc.send(storageUtilsChannels.setCardTerminalPreCommands, id, commands)
+	},
+	invoke: {
+		pinnedCards: (opt, id, pinnedCards) => lynxIpc.invoke(storageUtilsChannels.pinnedCards, opt, id, pinnedCards),
+		preCommands: (opt, data) => lynxIpc.invoke(storageUtilsChannels.preCommands, opt, data),
+		customRun: (opt, data) => lynxIpc.invoke(storageUtilsChannels.customRun, opt, data),
+		preOpen: (opt, open) => lynxIpc.invoke(storageUtilsChannels.preOpen, opt, open),
+		getCardArguments: (cardId) => lynxIpc.invoke(storageUtilsChannels.getCardArguments, cardId),
+		setCardArguments: (cardId, args) => lynxIpc.invoke(storageUtilsChannels.setCardArguments, cardId, args),
+		recentlyUsedCards: (opt, id) => lynxIpc.invoke(storageUtilsChannels.recentlyUsedCards, opt, id),
+		homeCategory: (opt, data) => lynxIpc.invoke(storageUtilsChannels.homeCategory, opt, data),
+		unassignCard: (id, clearConfigs) => lynxIpc.invoke(storageUtilsChannels.unassignCard, id, clearConfigs),
+		getBrowserHistoryData: () => lynxIpc.invoke(storageUtilsChannels.getBrowserHistoryData)
+	},
+	on: {
+		onInstalledCards: (result) => lynxIpc.on(storageUtilsChannels.onInstalledCards, result),
+		onAutoUpdateCards: (result) => lynxIpc.on(storageUtilsChannels.onAutoUpdateCards, result),
+		onAutoUpdateExtensions: (result) => lynxIpc.on(storageUtilsChannels.onAutoUpdateExtensions, result),
+		onPinnedCardsChange: (result) => lynxIpc.on(storageUtilsChannels.onPinnedCardsChange, result),
+		onPreCommands: (result) => lynxIpc.on(storageUtilsChannels.onPreCommands, result),
+		onCustomRun: (result) => lynxIpc.on(storageUtilsChannels.onCustomRun, result),
+		onRecentlyUsedCardsChange: (result) => lynxIpc.on(storageUtilsChannels.onRecentlyUsedCardsChange, result),
+		onHomeCategory: (result) => lynxIpc.on(storageUtilsChannels.onHomeCategory, result),
+		onConfirmChange: (result) => lynxIpc.on(storageUtilsChannels.onConfirmChange, result)
+	}
+};
+//#endregion
+//#region src/common/consts/ipcChannels/actions.ts
+/**
+* IPC channels for collecting and transmitting user actions.
+*/
+var actionChannels = { logAction: "actions:logAction" };
+//#endregion
+//#region src/renderer/shared/ipc/actions.ts
+var actionsIpc = { logAction: (payload) => lynxIpc.send(actionChannels.logAction, payload) };
+//#endregion
+//#region src/renderer/shared/sentry/Breadcrumbs.tsx
+var { useEffect: useEffect$8, useRef: useRef$8 } = await importShared("react");
+var isEnabled = true;
+/**
+* Adds an informational renderer breadcrumb when breadcrumb collection is enabled.
+*/
+function AddBreadcrumb_Renderer(message) {
+	if (isEnabled) actionsIpc.logAction({
+		category: "renderer-actions",
+		message,
+		level: "info"
+	});
+}
+//#endregion
+//#region node_modules/@solar-icons/react-perf/dist/lib/IconBase.mjs
+var { forwardRef: e } = await importShared("react");
+var r$5 = e((e, r) => {
+	let { alt: i, color: a = `currentColor`, size: o = `1em`, mirrored: s = !1, children: c, ...l } = e;
+	return (0, import_jsx_runtime.jsxs)(`svg`, {
+		ref: r,
+		xmlns: `http://www.w3.org/2000/svg`,
+		width: o,
+		height: o,
+		color: a,
+		fill: `none`,
+		viewBox: `0 0 24 24`,
+		transform: s ? `scale(-1, 1)` : void 0,
+		...l,
+		children: [!!i && (0, import_jsx_runtime.jsx)(`title`, { children: i }), c]
+	});
+});
+r$5.displayName = `IconBase`;
+//#endregion
+//#region node_modules/@solar-icons/react-perf/dist/icons/ui/Bold/Pin.mjs
+var { forwardRef: t$4 } = await importShared("react");
+var r$4 = t$4((t, r) => (0, import_jsx_runtime.jsx)(r$5, {
+	ref: r,
+	...t,
+	children: (0, import_jsx_runtime.jsx)(`path`, {
+		d: `M19.1835 7.80516L16.2188 4.83755C14.1921 2.8089 13.1788 1.79457 12.0904 2.03468C11.0021 2.2748 10.5086 3.62155 9.5217 6.31506L8.85373 8.1381C8.59063 8.85617 8.45908 9.2152 8.22239 9.49292C8.11619 9.61754 7.99536 9.72887 7.86251 9.82451C7.56644 10.0377 7.19811 10.1392 6.46145 10.3423C4.80107 10.8 3.97088 11.0289 3.65804 11.5721C3.5228 11.8069 3.45242 12.0735 3.45413 12.3446C3.45809 12.9715 4.06698 13.581 5.28476 14.8L6.69935 16.2163L2.22345 20.6964C1.92552 20.9946 1.92552 21.4782 2.22345 21.7764C2.52138 22.0746 3.00443 22.0746 3.30236 21.7764L7.77841 17.2961L9.24441 18.7635C10.4699 19.9902 11.0827 20.6036 11.7134 20.6045C11.9792 20.6049 12.2404 20.5358 12.4713 20.4041C13.0192 20.0914 13.2493 19.2551 13.7095 17.5825C13.9119 16.8472 14.013 16.4795 14.2254 16.1835C14.3184 16.054 14.4262 15.9358 14.5468 15.8314C14.8221 15.593 15.1788 15.459 15.8922 15.191L17.7362 14.4981C20.4 13.4973 21.7319 12.9969 21.9667 11.9115C22.2014 10.826 21.1954 9.81905 19.1835 7.80516Z`,
+		fill: `currentColor`
+	})
+}));
+r$4.displayName = `Pin`;
+//#endregion
+//#region node_modules/@solar-icons/react-perf/dist/icons/ui/LineDuotone/Pin.mjs
+var { forwardRef: t$3 } = await importShared("react");
+var i$2 = t$3((t, i) => (0, import_jsx_runtime.jsxs)(r$5, {
+	ref: i,
+	...t,
+	children: [(0, import_jsx_runtime.jsx)(`path`, {
+		d: `M15.9894 4.9502L16.52 4.42014L16.52 4.42014L15.9894 4.9502ZM19.0717 8.03562L18.5411 8.56568L18.5411 8.56568L19.0717 8.03562ZM8.73845 19.429L8.20785 19.9591L8.73845 19.429ZM4.62176 15.3081L5.15236 14.7781L4.62176 15.3081ZM17.567 14.9943L17.3032 14.2922L17.567 14.9943ZM15.6499 15.7146L15.9137 16.4167L15.6499 15.7146ZM8.33227 8.38177L7.62805 8.12375H7.62805L8.33227 8.38177ZM9.02673 6.48636L9.73095 6.74438L9.02673 6.48636ZM5.84512 10.6735L6.04445 11.3965H6.04445L5.84512 10.6735ZM7.30174 10.1351L6.86354 9.52646L6.86354 9.52646L7.30174 10.1351ZM7.6759 9.79038L8.24673 10.2768H8.24673L7.6759 9.79038ZM14.2511 16.3805L14.7421 16.9475L14.7421 16.9475L14.2511 16.3805ZM13.3807 18.2012L12.6575 18.0022V18.0022L13.3807 18.2012ZM13.917 16.7466L13.3076 16.3094L13.3076 16.3094L13.917 16.7466ZM2.71854 12.7552L1.96855 12.76V12.76L2.71854 12.7552ZM2.93053 11.9521L2.28061 11.5778H2.28061L2.93053 11.9521ZM11.3053 21.3431L11.3064 20.5931H11.3064L11.3053 21.3431ZM12.0933 21.1347L11.7216 20.4833L11.7216 20.4833L12.0933 21.1347ZM11.6973 2.03606L11.8589 2.76845L11.6973 2.03606ZM15.4588 5.48026L18.5411 8.56568L19.6023 7.50556L16.52 4.42014L15.4588 5.48026ZM9.26905 18.8989L5.15236 14.7781L4.09116 15.8382L8.20785 19.9591L9.26905 18.8989ZM17.3032 14.2922L15.3861 15.0125L15.9137 16.4167L17.8308 15.6964L17.3032 14.2922ZM9.03649 8.63979L9.73095 6.74438L8.32251 6.22834L7.62805 8.12375L9.03649 8.63979ZM6.04445 11.3965C6.75591 11.2003 7.29726 11.0625 7.73995 10.7438L6.86354 9.52646C6.6906 9.65097 6.46608 9.72428 5.64578 9.95044L6.04445 11.3965ZM7.62805 8.12375C7.3351 8.92332 7.24345 9.14153 7.10507 9.30391L8.24673 10.2768C8.60048 9.86175 8.78237 9.33337 9.03649 8.63979L7.62805 8.12375ZM7.73995 10.7438C7.92704 10.6091 8.09719 10.4523 8.24673 10.2768L7.10507 9.30391C7.03377 9.38757 6.95268 9.46229 6.86354 9.52646L7.73995 10.7438ZM15.3861 15.0125C14.697 15.2714 14.1717 15.4571 13.7601 15.8135L14.7421 16.9475C14.9029 16.8082 15.1193 16.7152 15.9137 16.4167L15.3861 15.0125ZM14.1038 18.4001C14.3291 17.5813 14.4022 17.3569 14.5263 17.1838L13.3076 16.3094C12.9903 16.7517 12.853 17.2919 12.6575 18.0022L14.1038 18.4001ZM13.7601 15.8135C13.5904 15.9605 13.4385 16.1269 13.3076 16.3094L14.5263 17.1838C14.5888 17.0968 14.6612 17.0175 14.7421 16.9475L13.7601 15.8135ZM5.15236 14.7781C4.50623 14.1313 4.06806 13.691 3.78374 13.3338C3.49842 12.9753 3.46896 12.8201 3.46852 12.7505L1.96855 12.76C1.97223 13.3422 2.26135 13.8297 2.6101 14.2679C2.95984 14.7073 3.47123 15.2176 4.09116 15.8382L5.15236 14.7781ZM5.64578 9.95044C4.80056 10.1835 4.10403 10.3743 3.58304 10.5835C3.06349 10.792 2.57124 11.0732 2.28061 11.5778L3.58045 12.3264C3.61507 12.2663 3.717 12.146 4.14187 11.9755C4.56531 11.8055 5.16345 11.6394 6.04445 11.3965L5.64578 9.95044ZM3.46852 12.7505C3.46758 12.6016 3.50623 12.4553 3.58045 12.3264L2.28061 11.5778C2.07362 11.9372 1.96593 12.3452 1.96855 12.76L3.46852 12.7505ZM8.20785 19.9591C8.83172 20.5836 9.34472 21.0987 9.78654 21.4506C10.2271 21.8015 10.718 22.0922 11.3042 22.0931L11.3064 20.5931C11.237 20.593 11.0815 20.5644 10.7211 20.2773C10.3619 19.9912 9.91931 19.5499 9.26905 18.8989L8.20785 19.9591ZM12.6575 18.0022C12.4133 18.8897 12.2463 19.4924 12.0752 19.9188C11.9034 20.3467 11.7822 20.4487 11.7216 20.4833L12.4651 21.7861C12.9741 21.4956 13.2573 21.0004 13.4672 20.4775C13.6777 19.9532 13.8695 19.2516 14.1038 18.4001L12.6575 18.0022ZM11.3042 22.0931C11.7113 22.0937 12.1115 21.9879 12.4651 21.7861L11.7216 20.4833C11.5951 20.5555 11.452 20.5933 11.3064 20.5931L11.3042 22.0931ZM18.5411 8.56568C19.6046 9.63022 20.3403 10.3695 20.7918 10.9788C21.2353 11.5774 21.2864 11.8959 21.2322 12.1464L22.6983 12.4634C22.8882 11.5854 22.5383 10.8162 21.997 10.0857C21.4636 9.36592 20.6306 8.53486 19.6023 7.50556L18.5411 8.56568ZM17.8308 15.6964C19.1922 15.1849 20.2941 14.773 21.0771 14.3384C21.8719 13.8973 22.5084 13.3416 22.6983 12.4634L21.2322 12.1464C21.178 12.3968 21.0002 12.6655 20.3492 13.0268C19.6865 13.3946 18.7113 13.7632 17.3032 14.2922L17.8308 15.6964ZM16.52 4.42014C15.4841 3.3832 14.6481 2.54353 13.9246 2.00638C13.1909 1.46165 12.4175 1.10912 11.5357 1.30367L11.8589 2.76845C12.1086 2.71335 12.4278 2.7633 13.0305 3.21075C13.6434 3.66579 14.3877 4.40801 15.4588 5.48026L16.52 4.42014ZM9.73095 6.74438C10.2526 5.32075 10.6162 4.33403 10.9813 3.66315C11.3403 3.00338 11.6091 2.82357 11.8589 2.76845L11.5357 1.30367C10.6541 1.49819 10.1006 2.14332 9.6637 2.94618C9.23286 3.73793 8.82695 4.85154 8.32251 6.22834L9.73095 6.74438Z`,
+		fill: `currentColor`
+	}), (0, import_jsx_runtime.jsx)(`path`, {
+		opacity: `0.5`,
+		d: `M1.4694 21.4697C1.17666 21.7627 1.1769 22.2376 1.46994 22.5304C1.76298 22.8231 2.23786 22.8229 2.5306 22.5298L1.4694 21.4697ZM7.18383 17.8719C7.47657 17.5788 7.47633 17.1039 7.18329 16.8112C6.89024 16.5185 6.41537 16.5187 6.12263 16.8117L7.18383 17.8719ZM2.5306 22.5298L7.18383 17.8719L6.12263 16.8117L1.4694 21.4697L2.5306 22.5298Z`,
+		fill: `currentColor`
+	})]
+}));
+i$2.displayName = `Pin`;
+//#endregion
+//#region src/renderer/mainWindow/components/ToolsCard.tsx
+var { Avatar, Button: Button$2, Card: Card$3, Description: Description$3, Label: Label$3 } = await importShared("@heroui/react");
+/**
+* A card component for the Tools page, featuring a spotlight effect and hover animations.
+*/
+function ToolsCard({ id, title, description, icon, onPress, footer, avatarClassName }) {
+	const isPinned = useIsPinnedCard(id || "");
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Card$3, {
+		className: "w-75 h-46 relative group transform border border-surface  hover:shadow-lg hover:scale-[1.02] transition-all duration-200 cursor-pointer",
+		onClick: () => {
+			AddBreadcrumb_Renderer(`Card Interaction: Clicked ToolsCard "${title}"`);
+			if (id) storageUtilsIpc.invoke.recentlyUsedCards("update", id);
+			onPress?.();
+		},
+		children: [
+			/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Card$3.Header, { children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+				className: "inline-flex items-center gap-2",
+				children: [typeof icon === "string" ? /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Avatar, {
+					className: `size-12 shrink-0 ring-LynxPurple ring-2 ${avatarClassName}`,
+					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Avatar.Image, {
+						src: icon,
+						alt: title
+					}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Avatar.Fallback, { children: getFallbackString(title) })]
+				}) : /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+					className: `size-12 rounded-full ring-2 ring-LynxPurple flex items-center justify-center  ${avatarClassName}`,
+					children: icon
+				}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+					className: "flex flex-col pointer-events-none",
+					children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Label$3, { children: title })
+				})]
+			}) }),
+			/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Card$3.Content, { children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Description$3, {
+				className: "line-clamp-3 text-xs",
+				children: description
+			}) }),
+			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Card$3.Footer, {
+				className: "justify-between flex items-center",
+				children: [id ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+					onClick: (e) => e.stopPropagation(),
+					className: "flex items-center gap-x-2",
+					children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Button$2, {
+						className: "shrink-0 -translate-x-2 opacity-0 transition duration-200 group-hover:translate-x-0 group-hover:opacity-100",
+						onPress: () => {
+							AddBreadcrumb_Renderer(`Pin ToolsCard: id:${id} , ${isPinned ? "remove" : "add"}`);
+							storageUtilsIpc.invoke.pinnedCards(isPinned ? "remove" : "add", id);
+						},
+						size: "sm",
+						variant: "ghost",
+						isIconOnly: true,
+						children: isPinned ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)(r$4, { className: "size-3" }) : /* @__PURE__ */ (0, import_jsx_runtime.jsx)(i$2, { className: "size-3" })
+					})
+				}) : /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {}), footer]
+			})
+		]
+	});
+}
+//#endregion
+//#region node_modules/@solar-icons/react-perf/dist/icons/devices/BoldDuotone/CpuBolt.mjs
+var { forwardRef: t$2 } = await importShared("react");
+var i$1 = t$2((t, i) => (0, import_jsx_runtime.jsxs)(r$5, {
+	ref: i,
+	...t,
+	children: [
+		(0, import_jsx_runtime.jsx)(`path`, {
+			opacity: `0.5`,
+			d: `M9.18091 9.18091C9.23402 9.1278 9.32886 9.06211 9.63147 9.02143C9.95415 8.97804 10.3921 8.97656 11.0696 8.97656H12.9301C13.6075 8.97656 14.0455 8.97804 14.3682 9.02143C14.6708 9.06211 14.7656 9.1278 14.8187 9.18091C14.8718 9.23402 14.9375 9.32886 14.9782 9.63147C15.0216 9.95415 15.0231 10.3921 15.0231 11.0696V12.9301C15.0231 13.6075 15.0216 14.0455 14.9782 14.3682C14.9375 14.6708 14.8718 14.7656 14.8187 14.8187C14.7656 14.8718 14.6708 14.9375 14.3682 14.9782C14.0455 15.0216 13.6075 15.0231 12.9301 15.0231H11.0696C10.3921 15.0231 9.95415 15.0216 9.63147 14.9782C9.32886 14.9375 9.23402 14.8718 9.18091 14.8187C9.1278 14.7656 9.06211 14.6708 9.02143 14.3682C8.97804 14.0455 8.97656 13.6075 8.97656 12.9301V11.0696C8.97656 10.3921 8.97804 9.95415 9.02143 9.63147C9.06211 9.32886 9.1278 9.23402 9.18091 9.18091Z`,
+			fill: `currentColor`
+		}),
+		(0, import_jsx_runtime.jsx)(`path`, {
+			fillRule: `evenodd`,
+			clipRule: `evenodd`,
+			d: `M12.6977 2.69767C12.6977 2.31236 12.3853 2 12 2C11.6147 2 11.3023 2.31236 11.3023 2.69767V5.48837C10.7916 5.48944 10.3283 5.49342 9.90678 5.50495L9.90698 5.48837V2.69767C9.90698 2.31236 9.59462 2 9.2093 2C8.82399 2 8.51163 2.31236 8.51163 2.69767V5.48837C8.51163 5.52487 8.51443 5.56072 8.51984 5.5957C7.58381 5.71067 6.93517 5.94879 6.44198 6.44198C5.94879 6.93517 5.71067 7.58381 5.5957 8.51984C5.56071 8.51443 5.52487 8.51163 5.48837 8.51163H2.69767C2.31236 8.51163 2 8.82399 2 9.2093C2 9.59462 2.31236 9.90698 2.69767 9.90698H5.48837L5.50495 9.90678C5.49342 10.3283 5.48991 10.7916 5.48884 11.3023L2.69767 11.3023C2.31236 11.3023 2 11.6147 2 12C2 12.3853 2.31236 12.6977 2.69767 12.6977H5.48837C5.48944 13.2084 5.49342 13.6717 5.50495 14.0932L5.48837 14.093H2.69767C2.31236 14.093 2 14.4054 2 14.7907C2 15.176 2.31236 15.4884 2.69767 15.4884H5.48837C5.52487 15.4884 5.56071 15.4856 5.5957 15.4802C5.71067 16.4162 5.94879 17.0648 6.44198 17.558C6.93517 18.0512 7.58381 18.2893 8.51984 18.4043C8.51443 18.4393 8.51163 18.4751 8.51163 18.5116V21.3023C8.51163 21.6876 8.82399 22 9.2093 22C9.59462 22 9.90698 21.6876 9.90698 21.3023V18.5116L9.90678 18.495C10.3283 18.5066 10.7916 18.5101 11.3023 18.5112L11.3023 21.3023C11.3023 21.6876 11.6147 22 12 22C12.3853 22 12.6977 21.6876 12.6977 21.3023V18.5116C13.2084 18.5106 13.6717 18.5066 14.0932 18.495L14.093 18.5116V21.3023C14.093 21.6876 14.4054 22 14.7907 22C15.176 22 15.4884 21.6876 15.4884 21.3023V18.5116C15.4884 18.4751 15.4856 18.4393 15.4802 18.4043C16.4162 18.2893 17.0648 18.0512 17.558 17.558C18.0512 17.0648 18.2893 16.4162 18.4043 15.4802C18.4393 15.4856 18.4751 15.4884 18.5116 15.4884H21.3023C21.6876 15.4884 22 15.176 22 14.7907C22 14.4054 21.6876 14.093 21.3023 14.093H18.5116L18.495 14.0932C18.5066 13.6717 18.5101 13.2084 18.5112 12.6977L21.3023 12.6977C21.6876 12.6977 22 12.3853 22 12C22 11.6147 21.6876 11.3023 21.3023 11.3023H18.5116C18.5106 10.7916 18.5066 10.3283 18.495 9.90678L18.5116 9.90698H21.3023C21.6876 9.90698 22 9.59462 22 9.2093C22 8.82399 21.6876 8.51163 21.3023 8.51163H18.5116C18.4751 8.51163 18.4393 8.51443 18.4043 8.51984C18.2893 7.58381 18.0512 6.93517 17.558 6.44198C17.0648 5.94879 16.4162 5.71067 15.4802 5.5957C15.4856 5.56072 15.4884 5.52487 15.4884 5.48837V2.69767C15.4884 2.31236 15.176 2 14.7907 2C14.4054 2 14.093 2.31236 14.093 2.69767V5.48837L14.0932 5.50495C13.6717 5.49342 13.2084 5.48991 12.6977 5.48884V2.69767ZM9.44573 7.63871C9.87247 7.58133 10.4054 7.58136 11.0238 7.5814H12.9762C13.5947 7.58136 14.1275 7.58133 14.5543 7.63871C15.0116 7.70019 15.45 7.83885 15.8056 8.19443C16.1612 8.55001 16.2998 8.98839 16.3613 9.44573C16.4187 9.87246 16.4186 10.4053 16.4186 11.0238V12.9762C16.4186 13.5946 16.4187 14.1275 16.3613 14.5543C16.2998 15.0116 16.1612 15.45 15.8056 15.8056C15.45 16.1612 15.0116 16.2998 14.5543 16.3613C14.1275 16.4187 13.5947 16.4186 12.9762 16.4186H11.0238C10.4054 16.4186 9.87246 16.4187 9.44573 16.3613C8.98839 16.2998 8.55001 16.1612 8.19443 15.8056C7.83885 15.45 7.70019 15.0116 7.63871 14.5543C7.58133 14.1275 7.58136 13.5946 7.5814 12.9762V11.0238C7.58136 10.4054 7.58133 9.87247 7.63871 9.44573C7.70019 8.98839 7.83885 8.55001 8.19443 8.19443C8.55001 7.83885 8.98839 7.70019 9.44573 7.63871Z`,
+			fill: `currentColor`
+		}),
+		(0, import_jsx_runtime.jsx)(`path`, {
+			d: `M12.9664 10.5446C13.1903 10.2311 13.1177 9.79537 12.8042 9.57141C12.4906 9.34745 12.0549 9.42008 11.8309 9.73362L10.502 11.5941C10.3501 11.8067 10.3298 12.0865 10.4494 12.3188C10.569 12.5512 10.8084 12.6973 11.0697 12.6973H11.5745L11.0336 13.4545C10.8096 13.7681 10.8822 14.2038 11.1958 14.4278C11.5093 14.6517 11.9451 14.5791 12.169 14.2656L13.4979 12.4051C13.6498 12.1925 13.6701 11.9127 13.5506 11.6804C13.431 11.448 13.1916 11.3019 12.9302 11.3019H12.4255L12.9664 10.5446Z`,
+			fill: `currentColor`
+		})
+	]
+}));
+i$1.displayName = `CpuBolt`;
+//#endregion
+//#region node_modules/@solar-icons/react-perf/dist/icons/devices/BoldDuotone/Diskette.mjs
+var { forwardRef: t$1 } = await importShared("react");
+var i = t$1((t, i) => (0, import_jsx_runtime.jsxs)(r$5, {
+	ref: i,
+	...t,
+	children: [
+		(0, import_jsx_runtime.jsx)(`path`, {
+			opacity: `0.5`,
+			d: `M20.5355 20.5355C22 19.0711 22 16.714 22 12C22 11.6585 22 11.4878 21.9848 11.3142C21.9142 10.5049 21.586 9.71257 21.0637 9.09034C20.9516 8.95687 20.828 8.83317 20.5806 8.58578L15.4142 3.41944C15.1668 3.17206 15.0431 3.04835 14.9097 2.93631C14.2874 2.414 13.4951 2.08581 12.6858 2.01515C12.5122 2 12.3415 2 12 2C7.28595 2 4.92893 2 3.46447 3.46447C2 4.92893 2 7.28595 2 12C2 16.714 2 19.0711 3.46447 20.5355C4.1485 21.2196 5.02727 21.5841 6.25 21.7784L7.75 21.9313C8.9058 22 10.2996 22 12 22C13.7004 22 15.0942 22 16.25 21.9313L17.75 21.7784C18.9727 21.5841 19.8515 21.2196 20.5355 20.5355Z`,
+			fill: `currentColor`
+		}),
+		(0, import_jsx_runtime.jsx)(`path`, {
+			d: `M7 7.25C6.58579 7.25 6.25 7.58579 6.25 8C6.25 8.41421 6.58579 8.75 7 8.75H13C13.4142 8.75 13.75 8.41421 13.75 8C13.75 7.58579 13.4142 7.25 13 7.25H7Z`,
+			fill: `currentColor`
+		}),
+		(0, import_jsx_runtime.jsx)(`path`, {
+			d: `M13.052 16.25C13.9505 16.25 14.6997 16.2499 15.2945 16.3299C15.9223 16.4143 16.4891 16.6 16.9445 17.0555C17.4 17.5109 17.5857 18.0777 17.6701 18.7055C17.7501 19.3003 17.75 20.0495 17.75 20.948V20.948L17.75 21.7812L16.25 21.9219V21C16.25 20.036 16.2484 19.3884 16.1835 18.9054C16.1214 18.4439 16.0142 18.2464 15.8839 18.1161C15.7536 17.9858 15.5561 17.8786 15.0946 17.8165C14.6116 17.7516 13.964 17.75 13 17.75H11C10.036 17.75 9.38843 17.7516 8.90539 17.8165C8.44393 17.8786 8.24644 17.9858 8.11612 18.1161C7.9858 18.2464 7.87858 18.4439 7.81654 18.9054C7.7516 19.3884 7.75 20.036 7.75 21V21.9258L6.25 21.7773L6.25 20.948V20.948C6.24997 20.0495 6.24995 19.3003 6.32991 18.7055C6.41432 18.0777 6.59999 17.5109 7.05546 17.0555C7.51093 16.6 8.07773 16.4143 8.70552 16.3299C9.3003 16.2499 10.0495 16.25 10.948 16.25H10.948H13.052H13.052Z`,
+			fill: `currentColor`
+		})
+	]
+}));
+i.displayName = `Diskette`;
 //#endregion
 //#region src/renderer/mainWindow/pages/settings/SettingsSearchHighlight.tsx
 var import_main = /* @__PURE__ */ __toESM((/* @__PURE__ */ __commonJSMin(((exports, module) => {
@@ -6533,7 +7233,7 @@ var package_default = {
 	name: "lynxhub",
 	productName: "LynxHub",
 	desktopName: "ai.kindabrazy.lynxhub.desktop",
-	version: "3.5.5",
+	version: "3.5.6",
 	type: "module",
 	description: "Cross-platform, extensible terminal/browser for AI management",
 	main: "./out/main/index.cjs",
@@ -6549,19 +7249,19 @@ var package_default = {
 	homepage: "https://github.com/KindaBrazy/LynxHub",
 	appDetails: {
 		"title": "LynxHub",
-		"buildNumber": 52,
+		"buildNumber": 53,
 		"detailedDescription": "Open-source, cross-platform terminal and browser, designed for managing AI. Highly modular and extensible, it's the all-in-one environment for AI power users.",
 		"moduleApiVersion": "2.1.0",
-		"extensionApiVersion": "2.0.0"
+		"extensionApiVersion": "2.2.0"
 	},
 	scripts: {
 		"typecheck:node": "tsc --noEmit -p tsconfig.node.json --composite false",
 		"typecheck:web": "tsc --noEmit -p tsconfig.web.json --composite false",
 		"typecheck": "npm run typecheck:node && npm run typecheck:web",
-		"fix-linter:web": "prettier --write src/renderer --list-different && eslint --fix src/renderer",
+		"fix-linter:web": "prettier --write src/renderer --list-different && eslint --fix src/renderer && tailwind-lint --auto --fix",
 		"fix-linter:node": "prettier --write src/main --list-different && eslint --fix src/main",
-		"fix-linter": "prettier --write src --list-different && eslint --fix src",
-		"fix-linter-ext": "prettier --write extension --list-different && eslint --fix extension",
+		"fix-linter": "prettier --write src --list-different && eslint --fix src && tailwind-lint --auto --fix",
+		"fix-linter-ext": "prettier --write extension --list-different && eslint --fix extension && tailwind-lint --config ./extension/src/renderer/index.css --fix",
 		"validate:web": "npm run fix-linter:web && npm run typecheck:web",
 		"validate:node": "npm run fix-linter:node && npm run typecheck:node",
 		"validate:ext": "npm run fix-linter-ext && npm run typecheck",
@@ -6598,10 +7298,11 @@ var package_default = {
 		"@electron-toolkit/preload": "^3.0.2",
 		"@electron-toolkit/utils": "^4.0.0",
 		"@originjs/vite-plugin-federation": "^1.4.1",
-		"@sentry/electron": "^7.14.0",
-		"@sentry/react": "^10.60.0",
+		"@sentry/electron": "^7.15.0",
+		"@sentry/react": "^10.62.0",
 		"axios": "^1.18.1",
 		"fix-path": "^5.0.0",
+		"fuse.js": "^7.4.2",
 		"graceful-fs": "^4.2.11",
 		"lowdb": "^7.0.1",
 		"node-pty": "^1.2.0-beta.13",
@@ -6615,15 +7316,15 @@ var package_default = {
 		"@electron-toolkit/eslint-config-prettier": "^3.0.0",
 		"@electron-toolkit/tsconfig": "^2.0.0",
 		"@eslint/js": "^10.0.1",
-		"@heroui/react": "^3.2.1",
-		"@heroui/styles": "^3.2.1",
+		"@heroui/react": "^3.2.2",
+		"@heroui/styles": "^3.2.2",
 		"@icons-pack/react-simple-icons": "^13.13.0",
-		"@number-flow/react": "^0.6.0",
+		"@number-flow/react": "^0.6.1",
 		"@reduxjs/toolkit": "^2.12.0",
 		"@sentry/vite-plugin": "^5.3.0",
 		"@solar-icons/react-perf": "^2.1.1",
 		"@tailwindcss/typography": "^0.5.20",
-		"@tailwindcss/vite": "^4.3.1",
+		"@tailwindcss/vite": "^4.3.2",
 		"@types/decompress": "^4.2.7",
 		"@types/fontfaceobserver": "^2.1.3",
 		"@types/graceful-fs": "^4.1.9",
@@ -6649,26 +7350,26 @@ var package_default = {
 		"@xterm/xterm": "^6.0.0",
 		"chokidar": "^5.0.0",
 		"decompress": "^4.2.1",
-		"electron": "^42.5.0",
+		"electron": "^43.1.0",
 		"electron-builder": "^26.15.3",
 		"electron-dl": "^4.0.0",
 		"electron-log": "^5.4.4",
 		"electron-updater": "^6.8.9",
 		"electron-vite": "^6.0.0-beta.1",
-		"eslint": "^10.5.0",
+		"eslint": "^10.6.0",
 		"eslint-plugin-jsx-a11y": "^6.10.2",
-		"eslint-plugin-perfectionist": "^5.9.1",
+		"eslint-plugin-perfectionist": "^5.10.0",
 		"eslint-plugin-react": "^7.37.5",
 		"eslint-plugin-react-hooks": "^7.1.1",
 		"eslint-plugin-simple-import-sort": "^13.0.0",
 		"fontfaceobserver": "^2.3.0",
-		"framer-motion": "^12.41.0",
+		"framer-motion": "^12.42.2",
 		"globals": "^17.7.0",
 		"lodash-es": "^4.18.1",
-		"lucide-react": "^1.21.0",
+		"lucide-react": "^1.24.0",
 		"normalize-url": "^9.0.1",
 		"ogl": "^1.0.11",
-		"prettier": "^3.8.4",
+		"prettier": "^3.9.5",
 		"react": "^19.2.7",
 		"react-dom": "^19.2.7",
 		"react-error-boundary": "^6.1.2",
@@ -6682,11 +7383,12 @@ var package_default = {
 		"remark-gfm": "^4.0.1",
 		"run-script-os": "^1.1.6",
 		"simple-git": "^3.36.0",
-		"tailwindcss": "^4.3.1",
-		"three": "^0.184.0",
+		"tailwind-lint": "^0.12.0",
+		"tailwindcss": "^4.3.2",
+		"three": "^0.185.1",
 		"typescript": "^6.0.3",
-		"typescript-eslint": "^8.62.0",
-		"vite": "^8.1.0"
+		"typescript-eslint": "^8.63.0",
+		"vite": "^8.1.4"
 	},
 	allowScripts: {
 		"electron": true,
@@ -6928,234 +7630,6 @@ function TabModal({ isOpen, onOpenChange, children, size = "cover", isDismissabl
 	});
 }
 //#endregion
-//#region src/common/consts/ipcChannels/storage.ts
-/**
-* IPC channels for storage operations.
-* Handles data persistence, custom settings, and nested updates.
-*/
-var storageChannels = {
-	get: "storage:getData",
-	getCustom: "storage:get-custom",
-	setCustom: "storage:set-custom",
-	getAll: "storage:getAllData",
-	update: "storage:updateData",
-	updateNested: "storage:updateNested",
-	clear: "storage:clearStorage"
-};
-//#endregion
-//#region src/renderer/shared/ipc/ipcEvents.ts
-var listeners = {
-	before: /* @__PURE__ */ new Set(),
-	after: /* @__PURE__ */ new Set()
-};
-var channelListeners = {
-	before: /* @__PURE__ */ new Map(),
-	after: /* @__PURE__ */ new Map()
-};
-var getListenersForEvent = (event) => {
-	const base = [...listeners[event.phase]];
-	const perChannel = channelListeners[event.phase].get(event.channel);
-	if (perChannel) base.push(...perChannel);
-	return base;
-};
-var logHookError = (error) => {
-	console.error("Extension renderer IPC hook failed:", error);
-};
-var runListenerSync = (listener, event) => {
-	try {
-		const result = listener(event);
-		if (result && typeof result.then === "function") result.catch(logHookError);
-	} catch (error) {
-		logHookError(error);
-	}
-};
-var runListener = async (listener, event) => {
-	try {
-		await listener(event);
-	} catch (error) {
-		logHookError(error);
-	}
-};
-var emitRendererIpcEventSync = (event) => {
-	for (const listener of getListenersForEvent(event)) runListenerSync(listener, event);
-};
-var emitRendererIpcEvent = async (event) => {
-	for (const listener of getListenersForEvent(event)) await runListener(listener, event);
-};
-//#endregion
-//#region src/renderer/shared/ipc/lynxIpc.ts
-var ipc = window.electron.ipcRenderer;
-var send = (channel, ...args) => {
-	const eventStart = Date.now();
-	const beforeEvent = {
-		phase: "before",
-		method: "send",
-		channel,
-		args: [...args],
-		timestamp: eventStart
-	};
-	emitRendererIpcEventSync(beforeEvent);
-	try {
-		ipc.send(channel, ...args);
-		emitRendererIpcEventSync({
-			...beforeEvent,
-			phase: "after",
-			status: "success",
-			durationMs: Date.now() - eventStart
-		});
-	} catch (error) {
-		emitRendererIpcEventSync({
-			...beforeEvent,
-			phase: "after",
-			status: "error",
-			durationMs: Date.now() - eventStart,
-			error
-		});
-		throw error;
-	}
-};
-var sendSync = (channel, ...args) => {
-	const eventStart = Date.now();
-	const beforeEvent = {
-		phase: "before",
-		method: "sendSync",
-		channel,
-		args: [...args],
-		timestamp: eventStart
-	};
-	emitRendererIpcEventSync(beforeEvent);
-	try {
-		const result = ipc.sendSync(channel, ...args);
-		emitRendererIpcEventSync({
-			...beforeEvent,
-			phase: "after",
-			status: "success",
-			durationMs: Date.now() - eventStart,
-			result
-		});
-		return result;
-	} catch (error) {
-		emitRendererIpcEventSync({
-			...beforeEvent,
-			phase: "after",
-			status: "error",
-			durationMs: Date.now() - eventStart,
-			error
-		});
-		throw error;
-	}
-};
-var invoke = async (channel, ...args) => {
-	const eventStart = Date.now();
-	const beforeEvent = {
-		phase: "before",
-		method: "invoke",
-		channel,
-		args: [...args],
-		timestamp: eventStart
-	};
-	await emitRendererIpcEvent(beforeEvent);
-	try {
-		const result = await ipc.invoke(channel, ...args);
-		await emitRendererIpcEvent({
-			...beforeEvent,
-			phase: "after",
-			status: "success",
-			durationMs: Date.now() - eventStart,
-			result
-		});
-		return result;
-	} catch (error) {
-		await emitRendererIpcEvent({
-			...beforeEvent,
-			phase: "after",
-			status: "error",
-			durationMs: Date.now() - eventStart,
-			error
-		});
-		throw error;
-	}
-};
-var on = (channel, callback) => ipc.on(channel, (_, ...args) => {
-	const typedArgs = args;
-	const eventStart = Date.now();
-	const beforeEvent = {
-		phase: "before",
-		method: "on",
-		channel,
-		args: [...typedArgs],
-		timestamp: eventStart
-	};
-	emitRendererIpcEventSync(beforeEvent);
-	try {
-		const result = callback(...typedArgs);
-		emitRendererIpcEventSync({
-			...beforeEvent,
-			phase: "after",
-			status: "success",
-			durationMs: Date.now() - eventStart,
-			result
-		});
-	} catch (error) {
-		emitRendererIpcEventSync({
-			...beforeEvent,
-			phase: "after",
-			status: "error",
-			durationMs: Date.now() - eventStart,
-			error
-		});
-		throw error;
-	}
-});
-var once = (channel, callback) => ipc.once(channel, (_, ...args) => {
-	const typedArgs = args;
-	const eventStart = Date.now();
-	const beforeEvent = {
-		phase: "before",
-		method: "once",
-		channel,
-		args: [...typedArgs],
-		timestamp: eventStart
-	};
-	emitRendererIpcEventSync(beforeEvent);
-	try {
-		const result = callback(...typedArgs);
-		emitRendererIpcEventSync({
-			...beforeEvent,
-			phase: "after",
-			status: "success",
-			durationMs: Date.now() - eventStart,
-			result
-		});
-	} catch (error) {
-		emitRendererIpcEventSync({
-			...beforeEvent,
-			phase: "after",
-			status: "error",
-			durationMs: Date.now() - eventStart,
-			error
-		});
-		throw error;
-	}
-});
-var lynxIpc = {
-	send,
-	sendSync,
-	on,
-	once,
-	invoke
-};
-//#endregion
-//#region src/renderer/shared/ipc/storage.ts
-var storageIpc = {
-	getCustom: (key) => lynxIpc.invoke(storageChannels.getCustom, key),
-	setCustom: (key, data) => lynxIpc.send(storageChannels.setCustom, key, data),
-	get: (key) => lynxIpc.invoke(storageChannels.get, key),
-	getAll: () => lynxIpc.invoke(storageChannels.getAll),
-	update: (key, updateData) => lynxIpc.invoke(storageChannels.update, key, updateData),
-	clear: () => lynxIpc.invoke(storageChannels.clear)
-};
-//#endregion
 //#region node_modules/framer-motion/dist/es/context/LayoutGroupContext.mjs
 var { createContext: createContext$6 } = await importShared("react");
 var LayoutGroupContext = createContext$6({});
@@ -7355,13 +7829,13 @@ var easeIn = /*@__PURE__*/ cubicBezier(.42, 0, 1, 1);
 var easeOut = /*@__PURE__*/ cubicBezier(0, 0, .58, 1);
 var easeInOut = /*@__PURE__*/ cubicBezier(.42, 0, .58, 1);
 //#endregion
-//#region node_modules/motion-utils/dist/es/easing/utils/is-bezier-definition.mjs
-var isBezierDefinition = /* @__NO_SIDE_EFFECTS__ */ (easing) => Array.isArray(easing) && typeof easing[0] === "number";
-//#endregion
 //#region node_modules/motion-utils/dist/es/easing/utils/is-easing-array.mjs
 var isEasingArray = /* @__NO_SIDE_EFFECTS__ */ (ease) => {
 	return Array.isArray(ease) && typeof ease[0] !== "number";
 };
+//#endregion
+//#region node_modules/motion-utils/dist/es/easing/utils/is-bezier-definition.mjs
+var isBezierDefinition = /* @__NO_SIDE_EFFECTS__ */ (easing) => Array.isArray(easing) && typeof easing[0] === "number";
 //#endregion
 //#region node_modules/motion-utils/dist/es/easing/utils/map.mjs
 var easingLookup = {
@@ -8220,7 +8694,8 @@ function spring(optionsOrVisualDuration = springDefaults.visualDuration, bounce 
 		angularFreq = calcAngularFreq(undampedAngularFreq, dampingRatio);
 		A = (initialVelocity + dampingRatio * undampedAngularFreq * initialDelta) / angularFreq;
 		resolveSpring = (t) => {
-			return target - Math.exp(-dampingRatio * undampedAngularFreq * t) * (A * Math.sin(angularFreq * t) + initialDelta * Math.cos(angularFreq * t));
+			const envelope = Math.exp(-dampingRatio * undampedAngularFreq * t);
+			return target - envelope * (A * Math.sin(angularFreq * t) + initialDelta * Math.cos(angularFreq * t));
 		};
 		sinCoeff = dampingRatio * undampedAngularFreq * A + initialDelta * angularFreq;
 		cosCoeff = dampingRatio * undampedAngularFreq * initialDelta - A * angularFreq;
@@ -9668,589 +10143,12 @@ var AsyncMotionValueAnimation = class extends WithPromise {
 	}
 };
 //#endregion
-//#region node_modules/motion-dom/dist/es/animation/utils/resolve-transition.mjs
-/**
-* If `transition` has `inherit: true`, shallow-merge it with
-* `parentTransition` (child keys win) and strip the `inherit` key.
-* Otherwise return `transition` unchanged.
-*/
-function resolveTransition(transition, parentTransition) {
-	if (transition?.inherit && parentTransition) {
-		const { inherit: _, ...rest } = transition;
-		return {
-			...parentTransition,
-			...rest
-		};
-	}
-	return transition;
-}
-//#endregion
-//#region node_modules/motion-dom/dist/es/animation/utils/get-value-transition.mjs
-function getValueTransition(transition, key) {
-	const valueTransition = transition?.[key] ?? transition?.["default"] ?? transition;
-	if (valueTransition !== transition) return resolveTransition(valueTransition, transition);
-	return valueTransition;
-}
-//#endregion
-//#region node_modules/motion-dom/dist/es/animation/utils/default-transitions.mjs
-var underDampedSpring = {
-	type: "spring",
-	stiffness: 500,
-	damping: 25,
-	restSpeed: 10
-};
-var criticallyDampedSpring = (target) => ({
-	type: "spring",
-	stiffness: 550,
-	damping: target === 0 ? 2 * Math.sqrt(550) : 30,
-	restSpeed: 10
-});
-var keyframesTransition = {
-	type: "keyframes",
-	duration: .8
-};
-/**
-* Default easing curve is a slightly shallower version of
-* the default browser easing curve.
-*/
-var ease = {
-	type: "keyframes",
-	ease: [
-		.25,
-		.1,
-		.35,
-		1
-	],
-	duration: .3
-};
-var getDefaultTransition = (valueKey, { keyframes }) => {
-	if (keyframes.length > 2) return keyframesTransition;
-	else if (transformProps.has(valueKey)) return valueKey.startsWith("scale") ? criticallyDampedSpring(keyframes[1]) : underDampedSpring;
-	return ease;
-};
-//#endregion
-//#region node_modules/motion-dom/dist/es/animation/utils/is-transition-defined.mjs
-var orchestrationKeys = /* @__PURE__ */ new Set([
-	"when",
-	"delay",
-	"delayChildren",
-	"staggerChildren",
-	"staggerDirection",
-	"repeat",
-	"repeatType",
-	"repeatDelay",
-	"from",
-	"elapsed"
-]);
-/**
-* Decide whether a transition is defined on a given Transition.
-* This filters out orchestration options and returns true
-* if any options are left.
-*/
-function isTransitionDefined(transition) {
-	for (const key in transition) if (!orchestrationKeys.has(key)) return true;
-	return false;
-}
-//#endregion
-//#region node_modules/motion-dom/dist/es/animation/interfaces/motion-value.mjs
-var animateMotionValue = (name, value, target, transition = {}, element, isHandoff) => (onComplete) => {
-	const valueTransition = getValueTransition(transition, name) || {};
-	/**
-	* Most transition values are currently completely overwritten by value-specific
-	* transitions. In the future it'd be nicer to blend these transitions. But for now
-	* delay actually does inherit from the root transition if not value-specific.
-	*/
-	const delay = valueTransition.delay || transition.delay || 0;
-	/**
-	* Elapsed isn't a public transition option but can be passed through from
-	* optimized appear effects in milliseconds.
-	*/
-	let { elapsed = 0 } = transition;
-	elapsed = elapsed - /* @__PURE__ */ secondsToMilliseconds(delay);
-	const options = {
-		keyframes: Array.isArray(target) ? target : [null, target],
-		ease: "easeOut",
-		velocity: value.getVelocity(),
-		...valueTransition,
-		delay: -elapsed,
-		onUpdate: (v) => {
-			value.set(v);
-			valueTransition.onUpdate && valueTransition.onUpdate(v);
-		},
-		onComplete: () => {
-			onComplete();
-			valueTransition.onComplete && valueTransition.onComplete();
-		},
-		name,
-		motionValue: value,
-		element: isHandoff ? void 0 : element
-	};
-	/**
-	* If there's no transition defined for this value, we can generate
-	* unique transition settings for this value.
-	*/
-	if (!isTransitionDefined(valueTransition)) Object.assign(options, getDefaultTransition(name, options));
-	/**
-	* Both WAAPI and our internal animation functions use durations
-	* as defined by milliseconds, while our external API defines them
-	* as seconds.
-	*/
-	options.duration && (options.duration = /* @__PURE__ */ secondsToMilliseconds(options.duration));
-	options.repeatDelay && (options.repeatDelay = /* @__PURE__ */ secondsToMilliseconds(options.repeatDelay));
-	/**
-	* Support deprecated way to set initial value. Prefer keyframe syntax.
-	*/
-	if (options.from !== void 0) options.keyframes[0] = options.from;
-	let shouldSkip = false;
-	if (options.type === false || options.duration === 0 && !options.repeatDelay) {
-		makeAnimationInstant(options);
-		if (options.delay === 0) shouldSkip = true;
-	}
-	if (MotionGlobalConfig.instantAnimations || MotionGlobalConfig.skipAnimations || element?.shouldSkipAnimations || valueTransition.skipAnimations) {
-		shouldSkip = true;
-		makeAnimationInstant(options);
-		options.delay = 0;
-	}
-	/**
-	* If the transition type or easing has been explicitly set by the user
-	* then we don't want to allow flattening the animation.
-	*/
-	options.allowFlatten = !valueTransition.type && !valueTransition.ease;
-	/**
-	* If we can or must skip creating the animation, and apply only
-	* the final keyframe, do so. We also check once keyframes are resolved but
-	* this early check prevents the need to create an animation at all.
-	*/
-	if (shouldSkip && !isHandoff && value.get() !== void 0) {
-		const finalKeyframe = getFinalKeyframe(options.keyframes, valueTransition);
-		if (finalKeyframe !== void 0) {
-			frame.update(() => {
-				options.onUpdate(finalKeyframe);
-				options.onComplete();
-			});
-			return;
-		}
-	}
-	return valueTransition.isSync ? new JSAnimation(options) : new AsyncMotionValueAnimation(options);
-};
-//#endregion
-//#region node_modules/motion-dom/dist/es/render/dom/utils/camel-to-dash.mjs
-function camelToDash(str) {
-	return str.replace(/([A-Z])/g, (match) => `-${match.toLowerCase()}`);
-}
-var optimizedAppearDataAttribute = "data-" + camelToDash("framerAppearId");
-//#endregion
-//#region node_modules/motion-dom/dist/es/frameloop/microtask.mjs
-var { schedule: microtask, cancel: cancelMicrotask } = /* @__PURE__ */ createRenderBatcher(queueMicrotask, false);
-//#endregion
-//#region node_modules/motion-dom/dist/es/gestures/drag/state/is-active.mjs
-var isDragging = {
-	x: false,
-	y: false
-};
-function isDragActive() {
-	return isDragging.x || isDragging.y;
-}
-//#endregion
-//#region node_modules/motion-dom/dist/es/gestures/drag/state/set-active.mjs
-function setDragLock(axis) {
-	if (axis === "x" || axis === "y") if (isDragging[axis]) return null;
-	else {
-		isDragging[axis] = true;
-		return () => {
-			isDragging[axis] = false;
-		};
-	}
-	else if (isDragging.x || isDragging.y) return null;
-	else {
-		isDragging.x = isDragging.y = true;
-		return () => {
-			isDragging.x = isDragging.y = false;
-		};
-	}
-}
-//#endregion
-//#region node_modules/motion-dom/dist/es/utils/resolve-elements.mjs
-function resolveElements(elementOrSelector, scope, selectorCache) {
-	if (elementOrSelector == null) return [];
-	if (elementOrSelector instanceof EventTarget) return [elementOrSelector];
-	else if (typeof elementOrSelector === "string") {
-		let root = document;
-		if (scope) root = scope.current;
-		const elements = selectorCache?.[elementOrSelector] ?? root.querySelectorAll(elementOrSelector);
-		return elements ? Array.from(elements) : [];
-	}
-	return Array.from(elementOrSelector).filter((element) => element != null);
-}
-//#endregion
-//#region node_modules/motion-dom/dist/es/gestures/utils/setup.mjs
-function setupGesture(elementOrSelector, options) {
-	const elements = resolveElements(elementOrSelector);
-	const gestureAbortController = new AbortController();
-	const eventOptions = {
-		passive: true,
-		...options,
-		signal: gestureAbortController.signal
-	};
-	const cancel = () => gestureAbortController.abort();
-	return [
-		elements,
-		eventOptions,
-		cancel
-	];
-}
-//#endregion
-//#region node_modules/motion-dom/dist/es/gestures/hover.mjs
-function isValidHover(event) {
-	return !(event.pointerType === "touch" || isDragActive());
-}
-/**
-* Create a hover gesture. hover() is different to .addEventListener("pointerenter")
-* in that it has an easier syntax, filters out polyfilled touch events, interoperates
-* with drag gestures, and automatically removes the "pointerennd" event listener when the hover ends.
-*
-* @public
-*/
-function hover(elementOrSelector, onHoverStart, options = {}) {
-	const [elements, eventOptions, cancel] = setupGesture(elementOrSelector, options);
-	elements.forEach((element) => {
-		let isPressed = false;
-		let deferredHoverEnd = false;
-		let hoverEndCallback;
-		const removePointerLeave = () => {
-			element.removeEventListener("pointerleave", onPointerLeave);
-		};
-		const endHover = (event) => {
-			if (hoverEndCallback) {
-				hoverEndCallback(event);
-				hoverEndCallback = void 0;
-			}
-			removePointerLeave();
-		};
-		const onPointerUp = (event) => {
-			isPressed = false;
-			window.removeEventListener("pointerup", onPointerUp);
-			window.removeEventListener("pointercancel", onPointerUp);
-			if (deferredHoverEnd) {
-				deferredHoverEnd = false;
-				endHover(event);
-			}
-		};
-		const onPointerDown = () => {
-			isPressed = true;
-			window.addEventListener("pointerup", onPointerUp, eventOptions);
-			window.addEventListener("pointercancel", onPointerUp, eventOptions);
-		};
-		const onPointerLeave = (leaveEvent) => {
-			if (leaveEvent.pointerType === "touch") return;
-			if (isPressed) {
-				deferredHoverEnd = true;
-				return;
-			}
-			endHover(leaveEvent);
-		};
-		const onPointerEnter = (enterEvent) => {
-			if (!isValidHover(enterEvent)) return;
-			deferredHoverEnd = false;
-			const onHoverEnd = onHoverStart(element, enterEvent);
-			if (typeof onHoverEnd !== "function") return;
-			hoverEndCallback = onHoverEnd;
-			element.addEventListener("pointerleave", onPointerLeave, eventOptions);
-		};
-		element.addEventListener("pointerenter", onPointerEnter, eventOptions);
-		element.addEventListener("pointerdown", onPointerDown, eventOptions);
-	});
-	return cancel;
-}
-//#endregion
-//#region node_modules/motion-dom/dist/es/utils/is-html-element.mjs
-/**
-* Checks if an element is an HTML element in a way
-* that works across iframes
-*/
-function isHTMLElement(element) {
-	return isObject(element) && "offsetHeight" in element && !("ownerSVGElement" in element);
-}
-//#endregion
-//#region node_modules/motion-dom/dist/es/gestures/utils/is-node-or-child.mjs
-/**
-* Recursively traverse up the tree to check whether the provided child node
-* is the parent or a descendant of it.
-*
-* @param parent - Element to find
-* @param child - Element to test against parent
-*/
-var isNodeOrChild = (parent, child) => {
-	if (!child) return false;
-	else if (parent === child) return true;
-	else return isNodeOrChild(parent, child.parentElement);
-};
-//#endregion
-//#region node_modules/motion-dom/dist/es/gestures/utils/is-primary-pointer.mjs
-var isPrimaryPointer = (event) => {
-	if (event.pointerType === "mouse") return typeof event.button !== "number" || event.button <= 0;
-	else
- /**
-	* isPrimary is true for all mice buttons, whereas every touch point
-	* is regarded as its own input. So subsequent concurrent touch points
-	* will be false.
-	*
-	* Specifically match against false here as incomplete versions of
-	* PointerEvents in very old browser might have it set as undefined.
-	*/
-	return event.isPrimary !== false;
-};
-//#endregion
-//#region node_modules/motion-dom/dist/es/gestures/press/utils/is-keyboard-accessible.mjs
-var keyboardAccessibleElements = /* @__PURE__ */ new Set([
-	"BUTTON",
-	"INPUT",
-	"SELECT",
-	"TEXTAREA",
-	"A"
-]);
-/**
-* Checks if an element is natively keyboard accessible (focusable).
-* Used by the press gesture to determine if we need to add tabIndex.
-*/
-function isElementKeyboardAccessible(element) {
-	return keyboardAccessibleElements.has(element.tagName) || element.isContentEditable === true;
-}
-var textInputElements = /* @__PURE__ */ new Set([
-	"INPUT",
-	"SELECT",
-	"TEXTAREA"
-]);
-/**
-* Checks if an element has text selection or direct interaction behavior
-* that should block drag gestures from starting.
-*
-* This specifically targets form controls where the user might want to select
-* text or interact with the control (e.g., sliders, dropdowns).
-*
-* Buttons and links are NOT included because they don't have click-and-move
-* actions of their own - they only respond to click events, so dragging
-* should still work when initiated from these elements.
-*/
-function isElementTextInput(element) {
-	return textInputElements.has(element.tagName) || element.isContentEditable === true;
-}
-//#endregion
-//#region node_modules/motion-dom/dist/es/gestures/press/utils/state.mjs
-var isPressing = /* @__PURE__ */ new WeakSet();
-//#endregion
-//#region node_modules/motion-dom/dist/es/gestures/press/utils/keyboard.mjs
-/**
-* Filter out events that are not "Enter" keys.
-*/
-function filterEvents(callback) {
-	return (event) => {
-		if (event.key !== "Enter") return;
-		callback(event);
-	};
-}
-function firePointerEvent(target, type) {
-	target.dispatchEvent(new PointerEvent("pointer" + type, {
-		isPrimary: true,
-		bubbles: true
-	}));
-}
-var enableKeyboardPress = (focusEvent, eventOptions) => {
-	const element = focusEvent.currentTarget;
-	if (!element) return;
-	const handleKeydown = filterEvents(() => {
-		if (isPressing.has(element)) return;
-		firePointerEvent(element, "down");
-		const handleKeyup = filterEvents(() => {
-			firePointerEvent(element, "up");
-		});
-		const handleBlur = () => firePointerEvent(element, "cancel");
-		element.addEventListener("keyup", handleKeyup, eventOptions);
-		element.addEventListener("blur", handleBlur, eventOptions);
-	});
-	element.addEventListener("keydown", handleKeydown, eventOptions);
-	/**
-	* Add an event listener that fires on blur to remove the keydown events.
-	*/
-	element.addEventListener("blur", () => element.removeEventListener("keydown", handleKeydown), eventOptions);
-};
-//#endregion
-//#region node_modules/motion-dom/dist/es/gestures/press/index.mjs
-/**
-* Filter out events that are not primary pointer events, or are triggering
-* while a Motion gesture is active.
-*/
-function isValidPressEvent(event) {
-	return isPrimaryPointer(event) && !isDragActive();
-}
-var claimedPointerDownEvents = /* @__PURE__ */ new WeakSet();
-/**
-* Create a press gesture.
-*
-* Press is different to `"pointerdown"`, `"pointerup"` in that it
-* automatically filters out secondary pointer events like right
-* click and multitouch.
-*
-* It also adds accessibility support for keyboards, where
-* an element with a press gesture will receive focus and
-*  trigger on Enter `"keydown"` and `"keyup"` events.
-*
-* This is different to a browser's `"click"` event, which does
-* respond to keyboards but only for the `"click"` itself, rather
-* than the press start and end/cancel. The element also needs
-* to be focusable for this to work, whereas a press gesture will
-* make an element focusable by default.
-*
-* @public
-*/
-function press(targetOrSelector, onPressStart, options = {}) {
-	const [targets, eventOptions, cancelEvents] = setupGesture(targetOrSelector, options);
-	const startPress = (startEvent) => {
-		const target = startEvent.currentTarget;
-		if (!isValidPressEvent(startEvent)) return;
-		if (claimedPointerDownEvents.has(startEvent)) return;
-		isPressing.add(target);
-		if (options.stopPropagation) claimedPointerDownEvents.add(startEvent);
-		const onPressEnd = onPressStart(target, startEvent);
-		/**
-		* End listeners run in the capture phase so a descendant calling
-		* stopPropagation() in its own pointerup handler can't prevent the
-		* press gesture from ending. This also keeps the gesture-end
-		* ordering consistent with the drag gesture. See #2794.
-		*/
-		const endEventOptions = {
-			...eventOptions,
-			capture: true
-		};
-		const onPointerEnd = (endEvent, success) => {
-			window.removeEventListener("pointerup", onPointerUp, endEventOptions);
-			window.removeEventListener("pointercancel", onPointerCancel, endEventOptions);
-			if (isPressing.has(target)) isPressing.delete(target);
-			if (!isValidPressEvent(endEvent)) return;
-			if (typeof onPressEnd === "function") onPressEnd(endEvent, { success });
-		};
-		const onPointerUp = (upEvent) => {
-			onPointerEnd(upEvent, target === window || target === document || options.useGlobalTarget || isNodeOrChild(target, upEvent.target));
-		};
-		const onPointerCancel = (cancelEvent) => {
-			onPointerEnd(cancelEvent, false);
-		};
-		window.addEventListener("pointerup", onPointerUp, endEventOptions);
-		window.addEventListener("pointercancel", onPointerCancel, endEventOptions);
-	};
-	targets.forEach((target) => {
-		(options.useGlobalTarget ? window : target).addEventListener("pointerdown", startPress, eventOptions);
-		if (isHTMLElement(target)) {
-			target.addEventListener("focus", (event) => enableKeyboardPress(event, eventOptions));
-			if (!isElementKeyboardAccessible(target) && !target.hasAttribute("tabindex")) target.tabIndex = 0;
-		}
-	});
-	return cancelEvents;
-}
-//#endregion
-//#region node_modules/motion-dom/dist/es/utils/is-svg-element.mjs
-/**
-* Checks if an element is an SVG element in a way
-* that works across iframes
-*/
-function isSVGElement(element) {
-	return isObject(element) && "ownerSVGElement" in element;
-}
-//#endregion
-//#region node_modules/motion-dom/dist/es/resize/handle-element.mjs
-var resizeHandlers = /* @__PURE__ */ new WeakMap();
-var observer;
-var getSize = (borderBoxAxis, svgAxis, htmlAxis) => (target, borderBoxSize) => {
-	if (borderBoxSize && borderBoxSize[0]) return borderBoxSize[0][borderBoxAxis + "Size"];
-	else if (isSVGElement(target) && "getBBox" in target) return target.getBBox()[svgAxis];
-	else return target[htmlAxis];
-};
-var getWidth = /*@__PURE__*/ getSize("inline", "width", "offsetWidth");
-var getHeight = /*@__PURE__*/ getSize("block", "height", "offsetHeight");
-function notifyTarget({ target, borderBoxSize }) {
-	resizeHandlers.get(target)?.forEach((handler) => {
-		handler(target, {
-			get width() {
-				return getWidth(target, borderBoxSize);
-			},
-			get height() {
-				return getHeight(target, borderBoxSize);
-			}
-		});
-	});
-}
-function notifyAll(entries) {
-	entries.forEach(notifyTarget);
-}
-function createResizeObserver() {
-	if (typeof ResizeObserver === "undefined") return;
-	observer = new ResizeObserver(notifyAll);
-}
-function resizeElement(target, handler) {
-	if (!observer) createResizeObserver();
-	const elements = resolveElements(target);
-	elements.forEach((element) => {
-		let elementHandlers = resizeHandlers.get(element);
-		if (!elementHandlers) {
-			elementHandlers = /* @__PURE__ */ new Set();
-			resizeHandlers.set(element, elementHandlers);
-		}
-		elementHandlers.add(handler);
-		observer?.observe(element);
-	});
-	return () => {
-		elements.forEach((element) => {
-			const elementHandlers = resizeHandlers.get(element);
-			elementHandlers?.delete(handler);
-			if (!elementHandlers?.size) observer?.unobserve(element);
-		});
-	};
-}
-//#endregion
-//#region node_modules/motion-dom/dist/es/resize/handle-window.mjs
-var windowCallbacks = /* @__PURE__ */ new Set();
-var windowResizeHandler;
-function createWindowResizeHandler() {
-	windowResizeHandler = () => {
-		const info = {
-			get width() {
-				return window.innerWidth;
-			},
-			get height() {
-				return window.innerHeight;
-			}
-		};
-		windowCallbacks.forEach((callback) => callback(info));
-	};
-	window.addEventListener("resize", windowResizeHandler);
-}
-function resizeWindow(callback) {
-	windowCallbacks.add(callback);
-	if (!windowResizeHandler) createWindowResizeHandler();
-	return () => {
-		windowCallbacks.delete(callback);
-		if (!windowCallbacks.size && typeof windowResizeHandler === "function") {
-			window.removeEventListener("resize", windowResizeHandler);
-			windowResizeHandler = void 0;
-		}
-	};
-}
-//#endregion
-//#region node_modules/motion-dom/dist/es/resize/index.mjs
-function resize(a, b) {
-	return typeof a === "function" ? resizeWindow(a) : resizeElement(a, b);
-}
-//#endregion
-//#region node_modules/motion-dom/dist/es/utils/transform.mjs
-function transform(...args) {
-	const useImmediate = !Array.isArray(args[0]);
-	const argOffset = useImmediate ? 0 : -1;
-	const inputValue = args[0 + argOffset];
-	const inputRange = args[1 + argOffset];
-	const outputRange = args[2 + argOffset];
-	const options = args[3 + argOffset];
-	const interpolator = interpolate(inputRange, outputRange, options);
-	return useImmediate ? interpolator(inputValue) : interpolator;
+//#region node_modules/motion-dom/dist/es/animation/utils/calc-child-stagger.mjs
+function calcChildStagger(children, child, delayChildren, staggerChildren = 0, staggerDirection = 1) {
+	const index = Array.from(children).sort((a, b) => a.sortNodePosition(b)).indexOf(child);
+	const numChildren = children.size;
+	const maxStaggerDuration = (numChildren - 1) * staggerChildren;
+	return typeof delayChildren === "function" ? delayChildren(index, numChildren) : staggerDirection === 1 ? index * staggerChildren : maxStaggerDuration - index * staggerChildren;
 }
 //#endregion
 //#region node_modules/motion-dom/dist/es/value/index.mjs
@@ -10525,6 +10423,278 @@ function motionValue(init, options) {
 	return new MotionValue(init, options);
 }
 //#endregion
+//#region node_modules/motion-dom/dist/es/animation/utils/resolve-transition.mjs
+/**
+* If `transition` has `inherit: true`, shallow-merge it with
+* `parentTransition` (child keys win) and strip the `inherit` key.
+* Otherwise return `transition` unchanged.
+*/
+function resolveTransition(transition, parentTransition) {
+	if (transition?.inherit && parentTransition) {
+		const { inherit: _, ...rest } = transition;
+		return {
+			...parentTransition,
+			...rest
+		};
+	}
+	return transition;
+}
+//#endregion
+//#region node_modules/motion-dom/dist/es/animation/utils/get-value-transition.mjs
+function getValueTransition(transition, key) {
+	const valueTransition = transition?.[key] ?? transition?.["default"] ?? transition;
+	if (valueTransition !== transition) return resolveTransition(valueTransition, transition);
+	return valueTransition;
+}
+//#endregion
+//#region node_modules/motion-dom/dist/es/animation/utils/default-transitions.mjs
+var underDampedSpring = {
+	type: "spring",
+	stiffness: 500,
+	damping: 25,
+	restSpeed: 10
+};
+var criticallyDampedSpring = (target) => ({
+	type: "spring",
+	stiffness: 550,
+	damping: target === 0 ? 2 * Math.sqrt(550) : 30,
+	restSpeed: 10
+});
+var keyframesTransition = {
+	type: "keyframes",
+	duration: .8
+};
+/**
+* Default easing curve is a slightly shallower version of
+* the default browser easing curve.
+*/
+var ease = {
+	type: "keyframes",
+	ease: [
+		.25,
+		.1,
+		.35,
+		1
+	],
+	duration: .3
+};
+var getDefaultTransition = (valueKey, { keyframes }) => {
+	if (keyframes.length > 2) return keyframesTransition;
+	else if (transformProps.has(valueKey)) return valueKey.startsWith("scale") ? criticallyDampedSpring(keyframes[1]) : underDampedSpring;
+	return ease;
+};
+//#endregion
+//#region node_modules/motion-dom/dist/es/animation/utils/is-transition-defined.mjs
+var orchestrationKeys = /* @__PURE__ */ new Set([
+	"when",
+	"delay",
+	"delayChildren",
+	"staggerChildren",
+	"staggerDirection",
+	"repeat",
+	"repeatType",
+	"repeatDelay",
+	"from",
+	"elapsed"
+]);
+/**
+* Decide whether a transition is defined on a given Transition.
+* This filters out orchestration options and returns true
+* if any options are left.
+*/
+function isTransitionDefined(transition) {
+	for (const key in transition) if (!orchestrationKeys.has(key)) return true;
+	return false;
+}
+//#endregion
+//#region node_modules/motion-dom/dist/es/animation/interfaces/motion-value.mjs
+var animateMotionValue = (name, value, target, transition = {}, element, isHandoff) => (onComplete) => {
+	const valueTransition = getValueTransition(transition, name) || {};
+	/**
+	* Most transition values are currently completely overwritten by value-specific
+	* transitions. In the future it'd be nicer to blend these transitions. But for now
+	* delay actually does inherit from the root transition if not value-specific.
+	*/
+	const delay = valueTransition.delay || transition.delay || 0;
+	/**
+	* Elapsed isn't a public transition option but can be passed through from
+	* optimized appear effects in milliseconds.
+	*/
+	let { elapsed = 0 } = transition;
+	elapsed = elapsed - /* @__PURE__ */ secondsToMilliseconds(delay);
+	const options = {
+		keyframes: Array.isArray(target) ? target : [null, target],
+		ease: "easeOut",
+		velocity: value.getVelocity(),
+		...valueTransition,
+		delay: -elapsed,
+		onUpdate: (v) => {
+			value.set(v);
+			valueTransition.onUpdate && valueTransition.onUpdate(v);
+		},
+		onComplete: () => {
+			onComplete();
+			valueTransition.onComplete && valueTransition.onComplete();
+		},
+		name,
+		motionValue: value,
+		element: isHandoff ? void 0 : element
+	};
+	/**
+	* If there's no transition defined for this value, we can generate
+	* unique transition settings for this value.
+	*/
+	if (!isTransitionDefined(valueTransition)) Object.assign(options, getDefaultTransition(name, options));
+	/**
+	* Both WAAPI and our internal animation functions use durations
+	* as defined by milliseconds, while our external API defines them
+	* as seconds.
+	*/
+	options.duration && (options.duration = /* @__PURE__ */ secondsToMilliseconds(options.duration));
+	options.repeatDelay && (options.repeatDelay = /* @__PURE__ */ secondsToMilliseconds(options.repeatDelay));
+	/**
+	* Support deprecated way to set initial value. Prefer keyframe syntax.
+	*/
+	if (options.from !== void 0) options.keyframes[0] = options.from;
+	let shouldSkip = false;
+	if (options.type === false || options.duration === 0 && !options.repeatDelay) {
+		makeAnimationInstant(options);
+		if (options.delay === 0) shouldSkip = true;
+	}
+	if (MotionGlobalConfig.instantAnimations || MotionGlobalConfig.skipAnimations || element?.shouldSkipAnimations || valueTransition.skipAnimations) {
+		shouldSkip = true;
+		makeAnimationInstant(options);
+		options.delay = 0;
+	}
+	/**
+	* If the transition type or easing has been explicitly set by the user
+	* then we don't want to allow flattening the animation.
+	*/
+	options.allowFlatten = !valueTransition.type && !valueTransition.ease;
+	/**
+	* If we can or must skip creating the animation, and apply only
+	* the final keyframe, do so. We also check once keyframes are resolved but
+	* this early check prevents the need to create an animation at all.
+	*/
+	if (shouldSkip && !isHandoff && value.get() !== void 0) {
+		const finalKeyframe = getFinalKeyframe(options.keyframes, valueTransition);
+		if (finalKeyframe !== void 0) {
+			frame.update(() => {
+				options.onUpdate(finalKeyframe);
+				options.onComplete();
+			});
+			return;
+		}
+	}
+	return valueTransition.isSync ? new JSAnimation(options) : new AsyncMotionValueAnimation(options);
+};
+//#endregion
+//#region node_modules/motion-dom/dist/es/animation/utils/css-variables-conversion.mjs
+/**
+* Parse Framer's special CSS variable format into a CSS token and a fallback.
+*
+* ```
+* `var(--foo, #fff)` => [`--foo`, '#fff']
+* ```
+*
+* @param current
+*/
+var splitCSSVariableRegex = /^var\(--(?:([\w-]+)|([\w-]+), ?([a-zA-Z\d ()%#.,-]+))\)/u;
+function parseCSSVariable(current) {
+	const match = splitCSSVariableRegex.exec(current);
+	if (!match) return [,];
+	const [, token1, token2, fallback] = match;
+	return [`--${token1 ?? token2}`, fallback];
+}
+function getVariableValue(current, element, depth = 1) {
+	`${current}`;
+	const [token, fallback] = parseCSSVariable(current);
+	if (!token) return;
+	const resolved = window.getComputedStyle(element).getPropertyValue(token);
+	if (resolved) {
+		const trimmed = resolved.trim();
+		return isNumericalString(trimmed) ? parseFloat(trimmed) : trimmed;
+	}
+	return isCSSVariableToken(fallback) ? getVariableValue(fallback, element, depth + 1) : fallback;
+}
+//#endregion
+//#region node_modules/motion-dom/dist/es/render/utils/resolve-variants.mjs
+function getValueState(visualElement) {
+	const state = [{}, {}];
+	visualElement?.values.forEach((value, key) => {
+		state[0][key] = value.get();
+		state[1][key] = value.getVelocity();
+	});
+	return state;
+}
+function resolveVariantFromProps(props, definition, custom, visualElement) {
+	/**
+	* If the variant definition is a function, resolve.
+	*/
+	if (typeof definition === "function") {
+		const [current, velocity] = getValueState(visualElement);
+		definition = definition(custom !== void 0 ? custom : props.custom, current, velocity);
+	}
+	/**
+	* If the variant definition is a variant label, or
+	* the function returned a variant label, resolve.
+	*/
+	if (typeof definition === "string") definition = props.variants && props.variants[definition];
+	/**
+	* At this point we've resolved both functions and variant labels,
+	* but the resolved variant label might itself have been a function.
+	* If so, resolve. This can only have returned a valid target object.
+	*/
+	if (typeof definition === "function") {
+		const [current, velocity] = getValueState(visualElement);
+		definition = definition(custom !== void 0 ? custom : props.custom, current, velocity);
+	}
+	return definition;
+}
+//#endregion
+//#region node_modules/motion-dom/dist/es/render/utils/resolve-dynamic-variants.mjs
+function resolveVariant(visualElement, definition, custom) {
+	const props = visualElement.getProps();
+	return resolveVariantFromProps(props, definition, custom !== void 0 ? custom : props.custom, visualElement);
+}
+//#endregion
+//#region node_modules/motion-dom/dist/es/render/utils/keys-position.mjs
+var positionalKeys = /* @__PURE__ */ new Set([
+	"width",
+	"height",
+	"top",
+	"left",
+	"right",
+	"bottom",
+	...transformPropOrder
+]);
+//#endregion
+//#region node_modules/motion-dom/dist/es/render/utils/is-keyframes-target.mjs
+var isKeyframesTarget = (v) => {
+	return Array.isArray(v);
+};
+//#endregion
+//#region node_modules/motion-dom/dist/es/render/utils/setters.mjs
+/**
+* Set VisualElement's MotionValue, creating a new MotionValue for it if
+* it doesn't exist.
+*/
+function setMotionValue(visualElement, key, value) {
+	if (visualElement.hasValue(key)) visualElement.getValue(key).set(value);
+	else visualElement.addValue(key, motionValue(value));
+}
+function resolveFinalValueInKeyframes(v) {
+	return isKeyframesTarget(v) ? v[v.length - 1] || 0 : v;
+}
+function setTarget(visualElement, definition) {
+	let { transitionEnd = {}, transition = {}, ...target } = resolveVariant(visualElement, definition) || {};
+	target = {
+		...target,
+		...transitionEnd
+	};
+	for (const key in target) setMotionValue(visualElement, key, resolveFinalValueInKeyframes(target[key]));
+}
+//#endregion
 //#region node_modules/motion-dom/dist/es/value/utils/is-motion-value.mjs
 var isMotionValue = (value) => Boolean(value && value.getVelocity);
 //#endregion
@@ -10548,204 +10718,146 @@ function addValueToWillChange(visualElement, key) {
 	}
 }
 //#endregion
-//#region node_modules/motion-dom/dist/es/render/Feature.mjs
-/**
-* Feature base class for extending VisualElement functionality.
-* Features are plugins that can be mounted/unmounted to add behavior
-* like gestures, animations, or layout tracking.
-*/
-var Feature = class {
-	constructor(node) {
-		this.isMounted = false;
-		this.node = node;
-	}
-	update() {}
-};
+//#region node_modules/motion-dom/dist/es/render/dom/utils/camel-to-dash.mjs
+function camelToDash(str) {
+	return str.replace(/([A-Z])/g, (match) => `-${match.toLowerCase()}`);
+}
+var optimizedAppearDataAttribute = "data-" + camelToDash("framerAppearId");
 //#endregion
-//#region node_modules/motion-dom/dist/es/projection/geometry/conversion.mjs
-/**
-* Bounding boxes tend to be defined as top, left, right, bottom. For various operations
-* it's easier to consider each axis individually. This function returns a bounding box
-* as a map of single-axis min/max values.
-*/
-function convertBoundingBoxToBox({ top, left, right, bottom }) {
-	return {
-		x: {
-			min: left,
-			max: right
-		},
-		y: {
-			min: top,
-			max: bottom
-		}
-	};
-}
-function convertBoxToBoundingBox({ x, y }) {
-	return {
-		top: y.min,
-		right: x.max,
-		bottom: y.max,
-		left: x.min
-	};
-}
-/**
-* Applies a TransformPoint function to a bounding box. TransformPoint is usually a function
-* provided by Framer to allow measured points to be corrected for device scaling. This is used
-* when measuring DOM elements and DOM event points.
-*/
-function transformBoxPoints(point, transformPoint) {
-	if (!transformPoint) return point;
-	const topLeft = transformPoint({
-		x: point.left,
-		y: point.top
-	});
-	const bottomRight = transformPoint({
-		x: point.right,
-		y: point.bottom
-	});
-	return {
-		top: topLeft.y,
-		left: topLeft.x,
-		bottom: bottomRight.y,
-		right: bottomRight.x
-	};
+//#region node_modules/motion-dom/dist/es/animation/optimized-appear/get-appear-id.mjs
+function getOptimisedAppearId(visualElement) {
+	return visualElement.props[optimizedAppearDataAttribute];
 }
 //#endregion
-//#region node_modules/motion-dom/dist/es/projection/utils/has-transform.mjs
-function isIdentityScale(scale) {
-	return scale === void 0 || scale === 1;
-}
-function hasScale({ scale, scaleX, scaleY }) {
-	return !isIdentityScale(scale) || !isIdentityScale(scaleX) || !isIdentityScale(scaleY);
-}
-function hasTransform(values) {
-	return hasScale(values) || has2DTranslate(values) || values.z || values.rotate || values.rotateX || values.rotateY || values.skewX || values.skewY;
-}
-function has2DTranslate(values) {
-	return is2DTranslate(values.x) || is2DTranslate(values.y);
-}
-function is2DTranslate(value) {
-	return value && value !== "0%";
-}
-//#endregion
-//#region node_modules/motion-dom/dist/es/projection/geometry/delta-apply.mjs
+//#region node_modules/motion-dom/dist/es/animation/interfaces/visual-element-target.mjs
 /**
-* Scales a point based on a factor and an originPoint
+* Decide whether we should block this animation. Previously, we achieved this
+* just by checking whether the key was listed in protectedKeys, but this
+* posed problems if an animation was triggered by afterChildren and protectedKeys
+* had been set to true in the meantime.
 */
-function scalePoint(point, scale, originPoint) {
-	return originPoint + scale * (point - originPoint);
+function shouldBlockAnimation({ protectedKeys, needsAnimating }, key) {
+	const shouldBlock = protectedKeys.hasOwnProperty(key) && needsAnimating[key] !== true;
+	needsAnimating[key] = false;
+	return shouldBlock;
 }
-/**
-* Applies a translate/scale delta to a point
-*/
-function applyPointDelta(point, translate, scale, originPoint, boxScale) {
-	if (boxScale !== void 0) point = scalePoint(point, boxScale, originPoint);
-	return scalePoint(point, scale, originPoint) + translate;
-}
-/**
-* Applies a translate/scale delta to an axis
-*/
-function applyAxisDelta(axis, translate = 0, scale = 1, originPoint, boxScale) {
-	axis.min = applyPointDelta(axis.min, translate, scale, originPoint, boxScale);
-	axis.max = applyPointDelta(axis.max, translate, scale, originPoint, boxScale);
-}
-/**
-* Applies a translate/scale delta to a box
-*/
-function applyBoxDelta(box, { x, y }) {
-	applyAxisDelta(box.x, x.translate, x.scale, x.originPoint);
-	applyAxisDelta(box.y, y.translate, y.scale, y.originPoint);
-}
-var TREE_SCALE_SNAP_MIN = .999999999999;
-var TREE_SCALE_SNAP_MAX = 1.0000000000001;
-/**
-* Apply a tree of deltas to a box. We do this to calculate the effect of all the transforms
-* in a tree upon our box before then calculating how to project it into our desired viewport-relative box
-*
-* This is the final nested loop within updateLayoutDelta for future refactoring
-*/
-function applyTreeDeltas(box, treeScale, treePath, isSharedTransition = false) {
-	const treeLength = treePath.length;
-	if (!treeLength) return;
-	treeScale.x = treeScale.y = 1;
-	let node;
-	let delta;
-	for (let i = 0; i < treeLength; i++) {
-		node = treePath[i];
-		delta = node.projectionDelta;
+function animateTarget(visualElement, targetAndTransition, { delay = 0, transitionOverride, type } = {}) {
+	let { transition, transitionEnd, ...target } = targetAndTransition;
+	const defaultTransition = visualElement.getDefaultTransition();
+	transition = transition ? resolveTransition(transition, defaultTransition) : defaultTransition;
+	const reduceMotion = transition?.reduceMotion;
+	const skipAnimations = transition?.skipAnimations;
+	if (transitionOverride) transition = transitionOverride;
+	const animations = [];
+	const animationTypeState = type && visualElement.animationState && visualElement.animationState.getState()[type];
+	const path = transition?.path;
+	if (path) path.animateVisualElement(visualElement, target, transition, delay, animations);
+	for (const key in target) {
+		const value = visualElement.getValue(key, visualElement.latestValues[key] ?? null);
+		const valueTarget = target[key];
+		if (valueTarget === void 0 || animationTypeState && shouldBlockAnimation(animationTypeState, key)) continue;
+		const valueTransition = {
+			delay,
+			...getValueTransition(transition || {}, key)
+		};
+		if (skipAnimations) valueTransition.skipAnimations = true;
 		/**
-		* TODO: Prefer to remove this, but currently we have motion components with
-		* display: contents in Framer.
+		* If the value is already at the defined target, skip the animation.
+		* We still re-assert the value via frame.update to take precedence
+		* over any stale transitionEnd callbacks from previous animations.
 		*/
-		const { visualElement } = node.options;
-		if (visualElement && visualElement.props.style && visualElement.props.style.display === "contents") continue;
-		if (isSharedTransition && node.options.layoutScroll && node.scroll && node !== node.root) {
-			translateAxis(box.x, -node.scroll.offset.x);
-			translateAxis(box.y, -node.scroll.offset.y);
+		const currentValue = value.get();
+		if (currentValue !== void 0 && !value.isAnimating() && !Array.isArray(valueTarget) && valueTarget === currentValue && !valueTransition.velocity) {
+			frame.update(() => value.set(valueTarget));
+			continue;
 		}
-		if (delta) {
-			treeScale.x *= delta.x.scale;
-			treeScale.y *= delta.y.scale;
-			applyBoxDelta(box, delta);
+		/**
+		* If this is the first time a value is being animated, check
+		* to see if we're handling off from an existing animation.
+		*/
+		let isHandoff = false;
+		if (window.MotionHandoffAnimation) {
+			const appearId = getOptimisedAppearId(visualElement);
+			if (appearId) {
+				const startTime = window.MotionHandoffAnimation(appearId, key, frame);
+				if (startTime !== null) {
+					valueTransition.startTime = startTime;
+					isHandoff = true;
+				}
+			}
 		}
-		if (isSharedTransition && hasTransform(node.latestValues)) transformBox(box, node.latestValues, node.layout?.layoutBox);
+		addValueToWillChange(visualElement, key);
+		const shouldReduceMotion = reduceMotion ?? visualElement.shouldReduceMotion;
+		value.start(animateMotionValue(key, value, valueTarget, shouldReduceMotion && positionalKeys.has(key) ? { type: false } : valueTransition, visualElement, isHandoff));
+		const animation = value.animation;
+		if (animation) animations.push(animation);
 	}
+	if (transitionEnd) {
+		const applyTransitionEnd = () => frame.update(() => {
+			transitionEnd && setTarget(visualElement, transitionEnd);
+		});
+		if (animations.length) Promise.all(animations).then(applyTransitionEnd);
+		else applyTransitionEnd();
+	}
+	return animations;
+}
+//#endregion
+//#region node_modules/motion-dom/dist/es/animation/interfaces/visual-element-variant.mjs
+function animateVariant(visualElement, variant, options = {}) {
+	const resolved = resolveVariant(visualElement, variant, options.type === "exit" ? visualElement.presenceContext?.custom : void 0);
+	let { transition = visualElement.getDefaultTransition() || {} } = resolved || {};
+	if (options.transitionOverride) transition = options.transitionOverride;
 	/**
-	* Snap tree scale back to 1 if it's within a non-perceivable threshold.
-	* This will help reduce useless scales getting rendered.
+	* If we have a variant, create a callback that runs it as an animation.
+	* Otherwise, we resolve a Promise immediately for a composable no-op.
 	*/
-	if (treeScale.x < TREE_SCALE_SNAP_MAX && treeScale.x > TREE_SCALE_SNAP_MIN) treeScale.x = 1;
-	if (treeScale.y < TREE_SCALE_SNAP_MAX && treeScale.y > TREE_SCALE_SNAP_MIN) treeScale.y = 1;
+	const getAnimation = resolved ? () => Promise.all(animateTarget(visualElement, resolved, options)) : () => Promise.resolve();
+	/**
+	* If we have children, create a callback that runs all their animations.
+	* Otherwise, we resolve a Promise immediately for a composable no-op.
+	*/
+	const getChildAnimations = visualElement.variantChildren && visualElement.variantChildren.size ? (forwardDelay = 0) => {
+		const { delayChildren = 0, staggerChildren, staggerDirection } = transition;
+		return animateChildren(visualElement, variant, forwardDelay, delayChildren, staggerChildren, staggerDirection, options);
+	} : () => Promise.resolve();
+	/**
+	* If the transition explicitly defines a "when" option, we need to resolve either
+	* this animation or all children animations before playing the other.
+	*/
+	const { when } = transition;
+	if (when) {
+		const [first, last] = when === "beforeChildren" ? [getAnimation, getChildAnimations] : [getChildAnimations, getAnimation];
+		return first().then(() => last());
+	} else return Promise.all([getAnimation(), getChildAnimations(options.delay)]);
 }
-function translateAxis(axis, distance) {
-	axis.min += distance;
-	axis.max += distance;
-}
-/**
-* Apply a transform to an axis from the latest resolved motion values.
-* This function basically acts as a bridge between a flat motion value map
-* and applyAxisDelta
-*/
-function transformAxis(axis, axisTranslate, axisScale, boxScale, axisOrigin = .5) {
-	applyAxisDelta(axis, axisTranslate, axisScale, mixNumber$1(axis.min, axis.max, axisOrigin), boxScale);
-}
-function resolveAxisTranslate(value, axis) {
-	if (typeof value === "string") return parseFloat(value) / 100 * (axis.max - axis.min);
-	return value;
-}
-/**
-* Apply a transform to a box from the latest resolved motion values.
-*/
-function transformBox(box, transform, sourceBox) {
-	const resolveBox = sourceBox ?? box;
-	transformAxis(box.x, resolveAxisTranslate(transform.x, resolveBox.x), transform.scaleX, transform.scale, transform.originX);
-	transformAxis(box.y, resolveAxisTranslate(transform.y, resolveBox.y), transform.scaleY, transform.scale, transform.originY);
-}
-//#endregion
-//#region node_modules/motion-dom/dist/es/projection/utils/measure.mjs
-function measureViewportBox(instance, transformPoint) {
-	return convertBoundingBoxToBox(transformBoxPoints(instance.getBoundingClientRect(), transformPoint));
-}
-function measurePageBox(element, rootProjectionNode, transformPagePoint) {
-	const viewportBox = measureViewportBox(element, transformPagePoint);
-	const { scroll } = rootProjectionNode;
-	if (scroll) {
-		translateAxis(viewportBox.x, scroll.offset.x);
-		translateAxis(viewportBox.y, scroll.offset.y);
+function animateChildren(visualElement, variant, delay = 0, delayChildren = 0, staggerChildren = 0, staggerDirection = 1, options) {
+	const animations = [];
+	for (const child of visualElement.variantChildren) {
+		child.notify("AnimationStart", variant);
+		animations.push(animateVariant(child, variant, {
+			...options,
+			delay: delay + (typeof delayChildren === "function" ? 0 : delayChildren) + calcChildStagger(visualElement.variantChildren, child, delayChildren, staggerChildren, staggerDirection)
+		}).then(() => child.notify("AnimationComplete", variant)));
 	}
-	return viewportBox;
+	return Promise.all(animations);
 }
 //#endregion
-//#region node_modules/motion-dom/dist/es/render/utils/keys-position.mjs
-var positionalKeys = /* @__PURE__ */ new Set([
-	"width",
-	"height",
-	"top",
-	"left",
-	"right",
-	"bottom",
-	...transformPropOrder
-]);
+//#region node_modules/motion-dom/dist/es/animation/interfaces/visual-element.mjs
+function animateVisualElement(visualElement, definition, options = {}) {
+	visualElement.notify("AnimationStart", definition);
+	let animation;
+	if (Array.isArray(definition)) {
+		const animations = definition.map((variant) => animateVariant(visualElement, variant, options));
+		animation = Promise.all(animations);
+	} else if (typeof definition === "string") animation = animateVariant(visualElement, definition, options);
+	else {
+		const resolvedDefinition = typeof definition === "function" ? resolveVariant(visualElement, definition, options.custom) : definition;
+		animation = Promise.all(animateTarget(visualElement, resolvedDefinition, options));
+	}
+	return animation.then(() => {
+		visualElement.notify("AnimationComplete", definition);
+	});
+}
 //#endregion
 //#region node_modules/motion-dom/dist/es/value/types/auto.mjs
 /**
@@ -10779,35 +10891,6 @@ var dimensionValueTypes = [
 * Tests a dimensional value against the list of dimension ValueTypes
 */
 var findDimensionValueType = (v) => dimensionValueTypes.find(testValueType(v));
-//#endregion
-//#region node_modules/motion-dom/dist/es/animation/utils/css-variables-conversion.mjs
-/**
-* Parse Framer's special CSS variable format into a CSS token and a fallback.
-*
-* ```
-* `var(--foo, #fff)` => [`--foo`, '#fff']
-* ```
-*
-* @param current
-*/
-var splitCSSVariableRegex = /^var\(--(?:([\w-]+)|([\w-]+), ?([a-zA-Z\d ()%#.,-]+))\)/u;
-function parseCSSVariable(current) {
-	const match = splitCSSVariableRegex.exec(current);
-	if (!match) return [,];
-	const [, token1, token2, fallback] = match;
-	return [`--${token1 ?? token2}`, fallback];
-}
-function getVariableValue(current, element, depth = 1) {
-	`${current}`;
-	const [token, fallback] = parseCSSVariable(current);
-	if (!token) return;
-	const resolved = window.getComputedStyle(element).getPropertyValue(token);
-	if (resolved) {
-		const trimmed = resolved.trim();
-		return isNumericalString(trimmed) ? parseFloat(trimmed) : trimmed;
-	}
-	return isCSSVariableToken(fallback) ? getVariableValue(fallback, element, depth + 1) : fallback;
-}
 //#endregion
 //#region node_modules/motion-dom/dist/es/animation/keyframes/utils/is-none.mjs
 function isNone(value) {
@@ -11100,6 +11183,470 @@ var DOMKeyframesResolver = class extends KeyframeResolver {
 	}
 };
 //#endregion
+//#region node_modules/motion-dom/dist/es/utils/border-radius.mjs
+/**
+* The four corner-radius longhands. Shared so the projection mixer, scale
+* corrector, WAAPI px-value set and view-transition crop pass don't each carry
+* their own copy. Order is irrelevant - every consumer mixes/corrects/animates
+* each corner independently.
+*/
+var cornerRadiusProps = [
+	"borderTopLeftRadius",
+	"borderTopRightRadius",
+	"borderBottomRightRadius",
+	"borderBottomLeftRadius"
+];
+//#endregion
+//#region node_modules/motion-dom/dist/es/utils/resolve-elements.mjs
+function resolveElements(elementOrSelector, scope, selectorCache) {
+	if (elementOrSelector == null) return [];
+	if (elementOrSelector instanceof EventTarget) return [elementOrSelector];
+	else if (typeof elementOrSelector === "string") {
+		let root = document;
+		if (scope) root = scope.current;
+		const elements = selectorCache?.[elementOrSelector] ?? root.querySelectorAll(elementOrSelector);
+		return elements ? Array.from(elements) : [];
+	}
+	return Array.from(elementOrSelector).filter((element) => element != null);
+}
+//#endregion
+//#region node_modules/motion-dom/dist/es/value/types/utils/get-as-type.mjs
+/**
+* Provided a value and a ValueType, returns the value as that value type.
+*/
+var getValueAsType = (value, type) => {
+	return type && typeof value === "number" ? type.transform(value) : value;
+};
+//#endregion
+//#region node_modules/motion-dom/dist/es/utils/is-html-element.mjs
+/**
+* Checks if an element is an HTML element in a way
+* that works across iframes
+*/
+function isHTMLElement(element) {
+	return isObject(element) && "offsetHeight" in element && !("ownerSVGElement" in element);
+}
+//#endregion
+//#region node_modules/motion-dom/dist/es/frameloop/microtask.mjs
+var { schedule: microtask, cancel: cancelMicrotask } = /* @__PURE__ */ createRenderBatcher(queueMicrotask, false);
+//#endregion
+//#region node_modules/motion-dom/dist/es/gestures/drag/state/is-active.mjs
+var isDragging = {
+	x: false,
+	y: false
+};
+function isDragActive() {
+	return isDragging.x || isDragging.y;
+}
+//#endregion
+//#region node_modules/motion-dom/dist/es/gestures/drag/state/set-active.mjs
+function setDragLock(axis) {
+	if (axis === "x" || axis === "y") if (isDragging[axis]) return null;
+	else {
+		isDragging[axis] = true;
+		return () => {
+			isDragging[axis] = false;
+		};
+	}
+	else if (isDragging.x || isDragging.y) return null;
+	else {
+		isDragging.x = isDragging.y = true;
+		return () => {
+			isDragging.x = isDragging.y = false;
+		};
+	}
+}
+//#endregion
+//#region node_modules/motion-dom/dist/es/gestures/utils/setup.mjs
+function setupGesture(elementOrSelector, options) {
+	const elements = resolveElements(elementOrSelector);
+	const gestureAbortController = new AbortController();
+	const eventOptions = {
+		passive: true,
+		...options,
+		signal: gestureAbortController.signal
+	};
+	const cancel = () => gestureAbortController.abort();
+	return [
+		elements,
+		eventOptions,
+		cancel
+	];
+}
+//#endregion
+//#region node_modules/motion-dom/dist/es/gestures/hover.mjs
+function isValidHover(event) {
+	return !(event.pointerType === "touch" || isDragActive());
+}
+/**
+* Create a hover gesture. hover() is different to .addEventListener("pointerenter")
+* in that it has an easier syntax, filters out polyfilled touch events, interoperates
+* with drag gestures, and automatically removes the "pointerennd" event listener when the hover ends.
+*
+* @public
+*/
+function hover(elementOrSelector, onHoverStart, options = {}) {
+	const [elements, eventOptions, cancel] = setupGesture(elementOrSelector, options);
+	elements.forEach((element) => {
+		let isPressed = false;
+		let deferredHoverEnd = false;
+		let hoverEndCallback;
+		const removePointerLeave = () => {
+			element.removeEventListener("pointerleave", onPointerLeave);
+		};
+		const endHover = (event) => {
+			if (hoverEndCallback) {
+				hoverEndCallback(event);
+				hoverEndCallback = void 0;
+			}
+			removePointerLeave();
+		};
+		const onPointerUp = (event) => {
+			isPressed = false;
+			window.removeEventListener("pointerup", onPointerUp);
+			window.removeEventListener("pointercancel", onPointerUp);
+			if (deferredHoverEnd) {
+				deferredHoverEnd = false;
+				endHover(event);
+			}
+		};
+		const onPointerDown = () => {
+			isPressed = true;
+			window.addEventListener("pointerup", onPointerUp, eventOptions);
+			window.addEventListener("pointercancel", onPointerUp, eventOptions);
+		};
+		const onPointerLeave = (leaveEvent) => {
+			if (leaveEvent.pointerType === "touch") return;
+			if (isPressed) {
+				deferredHoverEnd = true;
+				return;
+			}
+			endHover(leaveEvent);
+		};
+		const onPointerEnter = (enterEvent) => {
+			if (!isValidHover(enterEvent)) return;
+			deferredHoverEnd = false;
+			const onHoverEnd = onHoverStart(element, enterEvent);
+			if (typeof onHoverEnd !== "function") return;
+			hoverEndCallback = onHoverEnd;
+			element.addEventListener("pointerleave", onPointerLeave, eventOptions);
+		};
+		element.addEventListener("pointerenter", onPointerEnter, eventOptions);
+		element.addEventListener("pointerdown", onPointerDown, eventOptions);
+	});
+	return cancel;
+}
+//#endregion
+//#region node_modules/motion-dom/dist/es/gestures/utils/is-node-or-child.mjs
+/**
+* Recursively traverse up the tree to check whether the provided child node
+* is the parent or a descendant of it.
+*
+* @param parent - Element to find
+* @param child - Element to test against parent
+*/
+var isNodeOrChild = (parent, child) => {
+	if (!child) return false;
+	else if (parent === child) return true;
+	else return isNodeOrChild(parent, child.parentElement);
+};
+//#endregion
+//#region node_modules/motion-dom/dist/es/gestures/utils/is-primary-pointer.mjs
+var isPrimaryPointer = (event) => {
+	if (event.pointerType === "mouse") return typeof event.button !== "number" || event.button <= 0;
+	else
+ /**
+	* isPrimary is true for all mice buttons, whereas every touch point
+	* is regarded as its own input. So subsequent concurrent touch points
+	* will be false.
+	*
+	* Specifically match against false here as incomplete versions of
+	* PointerEvents in very old browser might have it set as undefined.
+	*/
+	return event.isPrimary !== false;
+};
+//#endregion
+//#region node_modules/motion-dom/dist/es/gestures/press/utils/is-keyboard-accessible.mjs
+var keyboardAccessibleElements = /* @__PURE__ */ new Set([
+	"BUTTON",
+	"INPUT",
+	"SELECT",
+	"TEXTAREA",
+	"A"
+]);
+/**
+* Checks if an element is natively keyboard accessible (focusable).
+* Used by the press gesture to determine if we need to add tabIndex.
+*/
+function isElementKeyboardAccessible(element) {
+	return keyboardAccessibleElements.has(element.tagName) || element.isContentEditable === true;
+}
+var textInputElements = /* @__PURE__ */ new Set([
+	"INPUT",
+	"SELECT",
+	"TEXTAREA"
+]);
+/**
+* Checks if an element has text selection or direct interaction behavior
+* that should block drag gestures from starting.
+*
+* This specifically targets form controls where the user might want to select
+* text or interact with the control (e.g., sliders, dropdowns).
+*
+* Buttons and links are NOT included because they don't have click-and-move
+* actions of their own - they only respond to click events, so dragging
+* should still work when initiated from these elements.
+*/
+function isElementTextInput(element) {
+	return textInputElements.has(element.tagName) || element.isContentEditable === true;
+}
+//#endregion
+//#region node_modules/motion-dom/dist/es/gestures/press/utils/state.mjs
+var isPressing = /* @__PURE__ */ new WeakSet();
+//#endregion
+//#region node_modules/motion-dom/dist/es/gestures/press/utils/keyboard.mjs
+/**
+* Filter out events that are not "Enter" keys.
+*/
+function filterEvents(callback) {
+	return (event) => {
+		if (event.key !== "Enter") return;
+		callback(event);
+	};
+}
+function firePointerEvent(target, type) {
+	target.dispatchEvent(new PointerEvent("pointer" + type, {
+		isPrimary: true,
+		bubbles: true
+	}));
+}
+var enableKeyboardPress = (focusEvent, eventOptions) => {
+	const element = focusEvent.currentTarget;
+	if (!element) return;
+	const handleKeydown = filterEvents(() => {
+		if (isPressing.has(element)) return;
+		firePointerEvent(element, "down");
+		const handleKeyup = filterEvents(() => {
+			firePointerEvent(element, "up");
+		});
+		const handleBlur = () => firePointerEvent(element, "cancel");
+		element.addEventListener("keyup", handleKeyup, eventOptions);
+		element.addEventListener("blur", handleBlur, eventOptions);
+	});
+	element.addEventListener("keydown", handleKeydown, eventOptions);
+	/**
+	* Add an event listener that fires on blur to remove the keydown events.
+	*/
+	element.addEventListener("blur", () => element.removeEventListener("keydown", handleKeydown), eventOptions);
+};
+//#endregion
+//#region node_modules/motion-dom/dist/es/gestures/press/index.mjs
+/**
+* Filter out events that are not primary pointer events, or are triggering
+* while a Motion gesture is active.
+*/
+function isValidPressEvent(event) {
+	return isPrimaryPointer(event) && !isDragActive();
+}
+var claimedPointerDownEvents = /* @__PURE__ */ new WeakSet();
+/**
+* Create a press gesture.
+*
+* Press is different to `"pointerdown"`, `"pointerup"` in that it
+* automatically filters out secondary pointer events like right
+* click and multitouch.
+*
+* It also adds accessibility support for keyboards, where
+* an element with a press gesture will receive focus and
+*  trigger on Enter `"keydown"` and `"keyup"` events.
+*
+* This is different to a browser's `"click"` event, which does
+* respond to keyboards but only for the `"click"` itself, rather
+* than the press start and end/cancel. The element also needs
+* to be focusable for this to work, whereas a press gesture will
+* make an element focusable by default.
+*
+* @public
+*/
+function press(targetOrSelector, onPressStart, options = {}) {
+	const [targets, eventOptions, cancelEvents] = setupGesture(targetOrSelector, options);
+	const startPress = (startEvent) => {
+		const target = startEvent.currentTarget;
+		if (!isValidPressEvent(startEvent)) return;
+		if (claimedPointerDownEvents.has(startEvent)) return;
+		isPressing.add(target);
+		if (options.stopPropagation) claimedPointerDownEvents.add(startEvent);
+		const onPressEnd = onPressStart(target, startEvent);
+		/**
+		* End listeners run in the capture phase so a descendant calling
+		* stopPropagation() in its own pointerup handler can't prevent the
+		* press gesture from ending. This also keeps the gesture-end
+		* ordering consistent with the drag gesture. See #2794.
+		*/
+		const endEventOptions = {
+			...eventOptions,
+			capture: true
+		};
+		const onPointerEnd = (endEvent, success) => {
+			window.removeEventListener("pointerup", onPointerUp, endEventOptions);
+			window.removeEventListener("pointercancel", onPointerCancel, endEventOptions);
+			if (isPressing.has(target)) isPressing.delete(target);
+			if (!isValidPressEvent(endEvent)) return;
+			if (typeof onPressEnd === "function") onPressEnd(endEvent, { success });
+		};
+		const onPointerUp = (upEvent) => {
+			onPointerEnd(upEvent, target === window || target === document || options.useGlobalTarget || isNodeOrChild(target, upEvent.target));
+		};
+		const onPointerCancel = (cancelEvent) => {
+			onPointerEnd(cancelEvent, false);
+		};
+		window.addEventListener("pointerup", onPointerUp, endEventOptions);
+		window.addEventListener("pointercancel", onPointerCancel, endEventOptions);
+	};
+	targets.forEach((target) => {
+		(options.useGlobalTarget ? window : target).addEventListener("pointerdown", startPress, eventOptions);
+		if (isHTMLElement(target)) {
+			target.addEventListener("focus", (event) => enableKeyboardPress(event, eventOptions));
+			if (!isElementKeyboardAccessible(target) && !target.hasAttribute("tabindex")) target.tabIndex = 0;
+		}
+	});
+	return cancelEvents;
+}
+//#endregion
+//#region node_modules/motion-dom/dist/es/utils/is-svg-element.mjs
+/**
+* Checks if an element is an SVG element in a way
+* that works across iframes
+*/
+function isSVGElement(element) {
+	return isObject(element) && "ownerSVGElement" in element;
+}
+//#endregion
+//#region node_modules/motion-dom/dist/es/resize/handle-element.mjs
+var resizeHandlers = /* @__PURE__ */ new WeakMap();
+var observer;
+var getSize = (borderBoxAxis, svgAxis, htmlAxis) => (target, borderBoxSize) => {
+	if (borderBoxSize && borderBoxSize[0]) return borderBoxSize[0][borderBoxAxis + "Size"];
+	else if (isSVGElement(target) && "getBBox" in target) return target.getBBox()[svgAxis];
+	else return target[htmlAxis];
+};
+var getWidth = /*@__PURE__*/ getSize("inline", "width", "offsetWidth");
+var getHeight = /*@__PURE__*/ getSize("block", "height", "offsetHeight");
+function notifyTarget({ target, borderBoxSize }) {
+	resizeHandlers.get(target)?.forEach((handler) => {
+		handler(target, {
+			get width() {
+				return getWidth(target, borderBoxSize);
+			},
+			get height() {
+				return getHeight(target, borderBoxSize);
+			}
+		});
+	});
+}
+function notifyAll(entries) {
+	entries.forEach(notifyTarget);
+}
+function createResizeObserver() {
+	if (typeof ResizeObserver === "undefined") return;
+	observer = new ResizeObserver(notifyAll);
+}
+function resizeElement(target, handler) {
+	if (!observer) createResizeObserver();
+	const elements = resolveElements(target);
+	elements.forEach((element) => {
+		let elementHandlers = resizeHandlers.get(element);
+		if (!elementHandlers) {
+			elementHandlers = /* @__PURE__ */ new Set();
+			resizeHandlers.set(element, elementHandlers);
+		}
+		elementHandlers.add(handler);
+		observer?.observe(element);
+	});
+	return () => {
+		elements.forEach((element) => {
+			const elementHandlers = resizeHandlers.get(element);
+			elementHandlers?.delete(handler);
+			if (!elementHandlers?.size) observer?.unobserve(element);
+		});
+	};
+}
+//#endregion
+//#region node_modules/motion-dom/dist/es/resize/handle-window.mjs
+var windowCallbacks = /* @__PURE__ */ new Set();
+var windowResizeHandler;
+function createWindowResizeHandler() {
+	windowResizeHandler = () => {
+		const info = {
+			get width() {
+				return window.innerWidth;
+			},
+			get height() {
+				return window.innerHeight;
+			}
+		};
+		windowCallbacks.forEach((callback) => callback(info));
+	};
+	window.addEventListener("resize", windowResizeHandler);
+}
+function resizeWindow(callback) {
+	windowCallbacks.add(callback);
+	if (!windowResizeHandler) createWindowResizeHandler();
+	return () => {
+		windowCallbacks.delete(callback);
+		if (!windowCallbacks.size && typeof windowResizeHandler === "function") {
+			window.removeEventListener("resize", windowResizeHandler);
+			windowResizeHandler = void 0;
+		}
+	};
+}
+//#endregion
+//#region node_modules/motion-dom/dist/es/resize/index.mjs
+function resize(a, b) {
+	return typeof a === "function" ? resizeWindow(a) : resizeElement(a, b);
+}
+//#endregion
+//#region node_modules/motion-dom/dist/es/stats/buffer.mjs
+var statsBuffer = {
+	value: null,
+	addProjectionMetrics: null
+};
+//#endregion
+//#region node_modules/motion-dom/dist/es/utils/is-svg-svg-element.mjs
+/**
+* Checks if an element is specifically an SVGSVGElement (the root SVG element)
+* in a way that works across iframes
+*/
+function isSVGSVGElement(element) {
+	return isSVGElement(element) && element.tagName === "svg";
+}
+//#endregion
+//#region node_modules/motion-dom/dist/es/utils/transform.mjs
+function transform(...args) {
+	const useImmediate = !Array.isArray(args[0]);
+	const argOffset = useImmediate ? 0 : -1;
+	const inputValue = args[0 + argOffset];
+	const inputRange = args[1 + argOffset];
+	const outputRange = args[2 + argOffset];
+	const options = args[3 + argOffset];
+	const interpolator = interpolate(inputRange, outputRange, options);
+	return useImmediate ? interpolator(inputValue) : interpolator;
+}
+//#endregion
+//#region node_modules/motion-dom/dist/es/value/types/utils/find.mjs
+/**
+* A list of all ValueTypes
+*/
+var valueTypes = [
+	...dimensionValueTypes,
+	color,
+	complex
+];
+/**
+* Tests a value against the list of ValueTypes
+*/
+var findValueType = (v) => valueTypes.find(testValueType(v));
+//#endregion
 //#region node_modules/motion-dom/dist/es/projection/geometry/models.mjs
 var createAxisDelta = () => ({
 	translate: 0,
@@ -11119,20 +11666,6 @@ var createBox = () => ({
 	x: createAxis(),
 	y: createAxis()
 });
-//#endregion
-//#region node_modules/motion-dom/dist/es/value/types/utils/find.mjs
-/**
-* A list of all ValueTypes
-*/
-var valueTypes = [
-	...dimensionValueTypes,
-	color,
-	complex
-];
-/**
-* Tests a value against the list of ValueTypes
-*/
-var findValueType = (v) => valueTypes.find(testValueType(v));
 //#endregion
 //#region node_modules/motion-dom/dist/es/render/store.mjs
 var visualElementStore = /* @__PURE__ */ new WeakMap();
@@ -11225,40 +11758,6 @@ function initPrefersReducedMotion() {
 		motionMediaQuery.addEventListener("change", setReducedMotionPreferences);
 		setReducedMotionPreferences();
 	} else prefersReducedMotion.current = false;
-}
-//#endregion
-//#region node_modules/motion-dom/dist/es/render/utils/resolve-variants.mjs
-function getValueState(visualElement) {
-	const state = [{}, {}];
-	visualElement?.values.forEach((value, key) => {
-		state[0][key] = value.get();
-		state[1][key] = value.getVelocity();
-	});
-	return state;
-}
-function resolveVariantFromProps(props, definition, custom, visualElement) {
-	/**
-	* If the variant definition is a function, resolve.
-	*/
-	if (typeof definition === "function") {
-		const [current, velocity] = getValueState(visualElement);
-		definition = definition(custom !== void 0 ? custom : props.custom, current, velocity);
-	}
-	/**
-	* If the variant definition is a variant label, or
-	* the function returned a variant label, resolve.
-	*/
-	if (typeof definition === "string") definition = props.variants && props.variants[definition];
-	/**
-	* At this point we've resolved both functions and variant labels,
-	* but the resolved variant label might itself have been a function.
-	* If so, resolve. This can only have returned a valid target object.
-	*/
-	if (typeof definition === "function") {
-		const [current, velocity] = getValueState(visualElement);
-		definition = definition(custom !== void 0 ? custom : props.custom, current, velocity);
-	}
-	return definition;
 }
 //#endregion
 //#region node_modules/motion-dom/dist/es/render/VisualElement.mjs
@@ -11747,13 +12246,193 @@ var DOMVisualElement = class extends VisualElement {
 	}
 };
 //#endregion
-//#region node_modules/motion-dom/dist/es/value/types/utils/get-as-type.mjs
+//#region node_modules/motion-dom/dist/es/render/Feature.mjs
 /**
-* Provided a value and a ValueType, returns the value as that value type.
+* Feature base class for extending VisualElement functionality.
+* Features are plugins that can be mounted/unmounted to add behavior
+* like gestures, animations, or layout tracking.
 */
-var getValueAsType = (value, type) => {
-	return type && typeof value === "number" ? type.transform(value) : value;
+var Feature = class {
+	constructor(node) {
+		this.isMounted = false;
+		this.node = node;
+	}
+	update() {}
 };
+//#endregion
+//#region node_modules/motion-dom/dist/es/projection/geometry/conversion.mjs
+/**
+* Bounding boxes tend to be defined as top, left, right, bottom. For various operations
+* it's easier to consider each axis individually. This function returns a bounding box
+* as a map of single-axis min/max values.
+*/
+function convertBoundingBoxToBox({ top, left, right, bottom }) {
+	return {
+		x: {
+			min: left,
+			max: right
+		},
+		y: {
+			min: top,
+			max: bottom
+		}
+	};
+}
+function convertBoxToBoundingBox({ x, y }) {
+	return {
+		top: y.min,
+		right: x.max,
+		bottom: y.max,
+		left: x.min
+	};
+}
+/**
+* Applies a TransformPoint function to a bounding box. TransformPoint is usually a function
+* provided by Framer to allow measured points to be corrected for device scaling. This is used
+* when measuring DOM elements and DOM event points.
+*/
+function transformBoxPoints(point, transformPoint) {
+	if (!transformPoint) return point;
+	const topLeft = transformPoint({
+		x: point.left,
+		y: point.top
+	});
+	const bottomRight = transformPoint({
+		x: point.right,
+		y: point.bottom
+	});
+	return {
+		top: topLeft.y,
+		left: topLeft.x,
+		bottom: bottomRight.y,
+		right: bottomRight.x
+	};
+}
+//#endregion
+//#region node_modules/motion-dom/dist/es/projection/utils/has-transform.mjs
+function isIdentityScale(scale) {
+	return scale === void 0 || scale === 1;
+}
+function hasScale({ scale, scaleX, scaleY }) {
+	return !isIdentityScale(scale) || !isIdentityScale(scaleX) || !isIdentityScale(scaleY);
+}
+function hasTransform(values) {
+	return hasScale(values) || has2DTranslate(values) || values.z || values.rotate || values.rotateX || values.rotateY || values.skewX || values.skewY;
+}
+function has2DTranslate(values) {
+	return is2DTranslate(values.x) || is2DTranslate(values.y);
+}
+function is2DTranslate(value) {
+	return value && value !== "0%";
+}
+//#endregion
+//#region node_modules/motion-dom/dist/es/projection/geometry/delta-apply.mjs
+/**
+* Scales a point based on a factor and an originPoint
+*/
+function scalePoint(point, scale, originPoint) {
+	return originPoint + scale * (point - originPoint);
+}
+/**
+* Applies a translate/scale delta to a point
+*/
+function applyPointDelta(point, translate, scale, originPoint, boxScale) {
+	if (boxScale !== void 0) point = scalePoint(point, boxScale, originPoint);
+	return scalePoint(point, scale, originPoint) + translate;
+}
+/**
+* Applies a translate/scale delta to an axis
+*/
+function applyAxisDelta(axis, translate = 0, scale = 1, originPoint, boxScale) {
+	axis.min = applyPointDelta(axis.min, translate, scale, originPoint, boxScale);
+	axis.max = applyPointDelta(axis.max, translate, scale, originPoint, boxScale);
+}
+/**
+* Applies a translate/scale delta to a box
+*/
+function applyBoxDelta(box, { x, y }) {
+	applyAxisDelta(box.x, x.translate, x.scale, x.originPoint);
+	applyAxisDelta(box.y, y.translate, y.scale, y.originPoint);
+}
+var TREE_SCALE_SNAP_MIN = .999999999999;
+var TREE_SCALE_SNAP_MAX = 1.0000000000001;
+/**
+* Apply a tree of deltas to a box. We do this to calculate the effect of all the transforms
+* in a tree upon our box before then calculating how to project it into our desired viewport-relative box
+*
+* This is the final nested loop within updateLayoutDelta for future refactoring
+*/
+function applyTreeDeltas(box, treeScale, treePath, isSharedTransition = false) {
+	const treeLength = treePath.length;
+	if (!treeLength) return;
+	treeScale.x = treeScale.y = 1;
+	let node;
+	let delta;
+	for (let i = 0; i < treeLength; i++) {
+		node = treePath[i];
+		delta = node.projectionDelta;
+		/**
+		* TODO: Prefer to remove this, but currently we have motion components with
+		* display: contents in Framer.
+		*/
+		const { visualElement } = node.options;
+		if (visualElement && visualElement.props.style && visualElement.props.style.display === "contents") continue;
+		if (isSharedTransition && node.options.layoutScroll && node.scroll && node !== node.root) {
+			translateAxis(box.x, -node.scroll.offset.x);
+			translateAxis(box.y, -node.scroll.offset.y);
+		}
+		if (delta) {
+			treeScale.x *= delta.x.scale;
+			treeScale.y *= delta.y.scale;
+			applyBoxDelta(box, delta);
+		}
+		if (isSharedTransition && hasTransform(node.latestValues)) transformBox(box, node.latestValues, node.layout?.layoutBox);
+	}
+	/**
+	* Snap tree scale back to 1 if it's within a non-perceivable threshold.
+	* This will help reduce useless scales getting rendered.
+	*/
+	if (treeScale.x < TREE_SCALE_SNAP_MAX && treeScale.x > TREE_SCALE_SNAP_MIN) treeScale.x = 1;
+	if (treeScale.y < TREE_SCALE_SNAP_MAX && treeScale.y > TREE_SCALE_SNAP_MIN) treeScale.y = 1;
+}
+function translateAxis(axis, distance) {
+	axis.min += distance;
+	axis.max += distance;
+}
+/**
+* Apply a transform to an axis from the latest resolved motion values.
+* This function basically acts as a bridge between a flat motion value map
+* and applyAxisDelta
+*/
+function transformAxis(axis, axisTranslate, axisScale, boxScale, axisOrigin = .5) {
+	applyAxisDelta(axis, axisTranslate, axisScale, mixNumber$1(axis.min, axis.max, axisOrigin), boxScale);
+}
+function resolveAxisTranslate(value, axis) {
+	if (typeof value === "string") return parseFloat(value) / 100 * (axis.max - axis.min);
+	return value;
+}
+/**
+* Apply a transform to a box from the latest resolved motion values.
+*/
+function transformBox(box, transform, sourceBox) {
+	const resolveBox = sourceBox ?? box;
+	transformAxis(box.x, resolveAxisTranslate(transform.x, resolveBox.x), transform.scaleX, transform.scale, transform.originX);
+	transformAxis(box.y, resolveAxisTranslate(transform.y, resolveBox.y), transform.scaleY, transform.scale, transform.originY);
+}
+//#endregion
+//#region node_modules/motion-dom/dist/es/projection/utils/measure.mjs
+function measureViewportBox(instance, transformPoint) {
+	return convertBoundingBoxToBox(transformBoxPoints(instance.getBoundingClientRect(), transformPoint));
+}
+function measurePageBox(element, rootProjectionNode, transformPagePoint) {
+	const viewportBox = measureViewportBox(element, transformPagePoint);
+	const { scroll } = rootProjectionNode;
+	if (scroll) {
+		translateAxis(viewportBox.x, scroll.offset.x);
+		translateAxis(viewportBox.y, scroll.offset.y);
+	}
+	return viewportBox;
+}
 //#endregion
 //#region node_modules/motion-dom/dist/es/render/html/utils/build-transform.mjs
 var translateAlias = {
@@ -11912,12 +12591,7 @@ var correctBoxShadow = { correct: (latest, { treeScale, projectionDelta }) => {
 var scaleCorrectors = {
 	borderRadius: {
 		...correctBorderRadius,
-		applyTo: [
-			"borderTopLeftRadius",
-			"borderTopRightRadius",
-			"borderBottomLeftRadius",
-			"borderBottomRightRadius"
-		]
+		applyTo: [...cornerRadiusProps]
 	},
 	borderTopLeftRadius: correctBorderRadius,
 	borderTopRightRadius: correctBorderRadius,
@@ -12134,181 +12808,6 @@ var SVGVisualElement = class extends DOMVisualElement {
 		super.mount(instance);
 	}
 };
-//#endregion
-//#region node_modules/motion-dom/dist/es/render/utils/resolve-dynamic-variants.mjs
-function resolveVariant(visualElement, definition, custom) {
-	const props = visualElement.getProps();
-	return resolveVariantFromProps(props, definition, custom !== void 0 ? custom : props.custom, visualElement);
-}
-//#endregion
-//#region node_modules/motion-dom/dist/es/render/utils/is-keyframes-target.mjs
-var isKeyframesTarget = (v) => {
-	return Array.isArray(v);
-};
-//#endregion
-//#region node_modules/motion-dom/dist/es/render/utils/setters.mjs
-/**
-* Set VisualElement's MotionValue, creating a new MotionValue for it if
-* it doesn't exist.
-*/
-function setMotionValue(visualElement, key, value) {
-	if (visualElement.hasValue(key)) visualElement.getValue(key).set(value);
-	else visualElement.addValue(key, motionValue(value));
-}
-function resolveFinalValueInKeyframes(v) {
-	return isKeyframesTarget(v) ? v[v.length - 1] || 0 : v;
-}
-function setTarget(visualElement, definition) {
-	let { transitionEnd = {}, transition = {}, ...target } = resolveVariant(visualElement, definition) || {};
-	target = {
-		...target,
-		...transitionEnd
-	};
-	for (const key in target) setMotionValue(visualElement, key, resolveFinalValueInKeyframes(target[key]));
-}
-//#endregion
-//#region node_modules/motion-dom/dist/es/animation/optimized-appear/get-appear-id.mjs
-function getOptimisedAppearId(visualElement) {
-	return visualElement.props[optimizedAppearDataAttribute];
-}
-//#endregion
-//#region node_modules/motion-dom/dist/es/animation/interfaces/visual-element-target.mjs
-/**
-* Decide whether we should block this animation. Previously, we achieved this
-* just by checking whether the key was listed in protectedKeys, but this
-* posed problems if an animation was triggered by afterChildren and protectedKeys
-* had been set to true in the meantime.
-*/
-function shouldBlockAnimation({ protectedKeys, needsAnimating }, key) {
-	const shouldBlock = protectedKeys.hasOwnProperty(key) && needsAnimating[key] !== true;
-	needsAnimating[key] = false;
-	return shouldBlock;
-}
-function animateTarget(visualElement, targetAndTransition, { delay = 0, transitionOverride, type } = {}) {
-	let { transition, transitionEnd, ...target } = targetAndTransition;
-	const defaultTransition = visualElement.getDefaultTransition();
-	transition = transition ? resolveTransition(transition, defaultTransition) : defaultTransition;
-	const reduceMotion = transition?.reduceMotion;
-	const skipAnimations = transition?.skipAnimations;
-	if (transitionOverride) transition = transitionOverride;
-	const animations = [];
-	const animationTypeState = type && visualElement.animationState && visualElement.animationState.getState()[type];
-	const path = transition?.path;
-	if (path) path.animateVisualElement(visualElement, target, transition, delay, animations);
-	for (const key in target) {
-		const value = visualElement.getValue(key, visualElement.latestValues[key] ?? null);
-		const valueTarget = target[key];
-		if (valueTarget === void 0 || animationTypeState && shouldBlockAnimation(animationTypeState, key)) continue;
-		const valueTransition = {
-			delay,
-			...getValueTransition(transition || {}, key)
-		};
-		if (skipAnimations) valueTransition.skipAnimations = true;
-		/**
-		* If the value is already at the defined target, skip the animation.
-		* We still re-assert the value via frame.update to take precedence
-		* over any stale transitionEnd callbacks from previous animations.
-		*/
-		const currentValue = value.get();
-		if (currentValue !== void 0 && !value.isAnimating() && !Array.isArray(valueTarget) && valueTarget === currentValue && !valueTransition.velocity) {
-			frame.update(() => value.set(valueTarget));
-			continue;
-		}
-		/**
-		* If this is the first time a value is being animated, check
-		* to see if we're handling off from an existing animation.
-		*/
-		let isHandoff = false;
-		if (window.MotionHandoffAnimation) {
-			const appearId = getOptimisedAppearId(visualElement);
-			if (appearId) {
-				const startTime = window.MotionHandoffAnimation(appearId, key, frame);
-				if (startTime !== null) {
-					valueTransition.startTime = startTime;
-					isHandoff = true;
-				}
-			}
-		}
-		addValueToWillChange(visualElement, key);
-		const shouldReduceMotion = reduceMotion ?? visualElement.shouldReduceMotion;
-		value.start(animateMotionValue(key, value, valueTarget, shouldReduceMotion && positionalKeys.has(key) ? { type: false } : valueTransition, visualElement, isHandoff));
-		const animation = value.animation;
-		if (animation) animations.push(animation);
-	}
-	if (transitionEnd) {
-		const applyTransitionEnd = () => frame.update(() => {
-			transitionEnd && setTarget(visualElement, transitionEnd);
-		});
-		if (animations.length) Promise.all(animations).then(applyTransitionEnd);
-		else applyTransitionEnd();
-	}
-	return animations;
-}
-//#endregion
-//#region node_modules/motion-dom/dist/es/animation/utils/calc-child-stagger.mjs
-function calcChildStagger(children, child, delayChildren, staggerChildren = 0, staggerDirection = 1) {
-	const index = Array.from(children).sort((a, b) => a.sortNodePosition(b)).indexOf(child);
-	const numChildren = children.size;
-	const maxStaggerDuration = (numChildren - 1) * staggerChildren;
-	return typeof delayChildren === "function" ? delayChildren(index, numChildren) : staggerDirection === 1 ? index * staggerChildren : maxStaggerDuration - index * staggerChildren;
-}
-//#endregion
-//#region node_modules/motion-dom/dist/es/animation/interfaces/visual-element-variant.mjs
-function animateVariant(visualElement, variant, options = {}) {
-	const resolved = resolveVariant(visualElement, variant, options.type === "exit" ? visualElement.presenceContext?.custom : void 0);
-	let { transition = visualElement.getDefaultTransition() || {} } = resolved || {};
-	if (options.transitionOverride) transition = options.transitionOverride;
-	/**
-	* If we have a variant, create a callback that runs it as an animation.
-	* Otherwise, we resolve a Promise immediately for a composable no-op.
-	*/
-	const getAnimation = resolved ? () => Promise.all(animateTarget(visualElement, resolved, options)) : () => Promise.resolve();
-	/**
-	* If we have children, create a callback that runs all their animations.
-	* Otherwise, we resolve a Promise immediately for a composable no-op.
-	*/
-	const getChildAnimations = visualElement.variantChildren && visualElement.variantChildren.size ? (forwardDelay = 0) => {
-		const { delayChildren = 0, staggerChildren, staggerDirection } = transition;
-		return animateChildren(visualElement, variant, forwardDelay, delayChildren, staggerChildren, staggerDirection, options);
-	} : () => Promise.resolve();
-	/**
-	* If the transition explicitly defines a "when" option, we need to resolve either
-	* this animation or all children animations before playing the other.
-	*/
-	const { when } = transition;
-	if (when) {
-		const [first, last] = when === "beforeChildren" ? [getAnimation, getChildAnimations] : [getChildAnimations, getAnimation];
-		return first().then(() => last());
-	} else return Promise.all([getAnimation(), getChildAnimations(options.delay)]);
-}
-function animateChildren(visualElement, variant, delay = 0, delayChildren = 0, staggerChildren = 0, staggerDirection = 1, options) {
-	const animations = [];
-	for (const child of visualElement.variantChildren) {
-		child.notify("AnimationStart", variant);
-		animations.push(animateVariant(child, variant, {
-			...options,
-			delay: delay + (typeof delayChildren === "function" ? 0 : delayChildren) + calcChildStagger(visualElement.variantChildren, child, delayChildren, staggerChildren, staggerDirection)
-		}).then(() => child.notify("AnimationComplete", variant)));
-	}
-	return Promise.all(animations);
-}
-//#endregion
-//#region node_modules/motion-dom/dist/es/animation/interfaces/visual-element.mjs
-function animateVisualElement(visualElement, definition, options = {}) {
-	visualElement.notify("AnimationStart", definition);
-	let animation;
-	if (Array.isArray(definition)) {
-		const animations = definition.map((variant) => animateVariant(visualElement, variant, options));
-		animation = Promise.all(animations);
-	} else if (typeof definition === "string") animation = animateVariant(visualElement, definition, options);
-	else {
-		const resolvedDefinition = typeof definition === "function" ? resolveVariant(visualElement, definition, options.custom) : definition;
-		animation = Promise.all(animateTarget(visualElement, resolvedDefinition, options));
-	}
-	return animation.then(() => {
-		visualElement.notify("AnimationComplete", definition);
-	});
-}
 //#endregion
 //#region node_modules/motion-dom/dist/es/render/utils/get-variant-context.mjs
 var numVariantProps = variantProps.length;
@@ -12644,6 +13143,37 @@ function createState() {
 	};
 }
 //#endregion
+//#region node_modules/motion-dom/dist/es/projection/geometry/copy.mjs
+/**
+* Reset an axis to the provided origin box.
+*
+* This is a mutative operation.
+*/
+function copyAxisInto(axis, originAxis) {
+	axis.min = originAxis.min;
+	axis.max = originAxis.max;
+}
+/**
+* Reset a box to the provided origin box.
+*
+* This is a mutative operation.
+*/
+function copyBoxInto(box, originBox) {
+	copyAxisInto(box.x, originBox.x);
+	copyAxisInto(box.y, originBox.y);
+}
+/**
+* Reset a delta to the provided origin box.
+*
+* This is a mutative operation.
+*/
+function copyAxisDeltaInto(delta, originDelta) {
+	delta.translate = originDelta.translate;
+	delta.scale = originDelta.scale;
+	delta.originPoint = originDelta.originPoint;
+	delta.origin = originDelta.origin;
+}
+//#endregion
 //#region node_modules/motion-dom/dist/es/projection/geometry/delta-calc.mjs
 var SCALE_MIN = .9999;
 var SCALE_MAX = 1.0001;
@@ -12683,143 +13213,6 @@ function calcRelativeAxisPosition(target, layout, parent, anchor = 0) {
 function calcRelativePosition(target, layout, parent, anchor) {
 	calcRelativeAxisPosition(target.x, layout.x, parent.x, anchor?.x);
 	calcRelativeAxisPosition(target.y, layout.y, parent.y, anchor?.y);
-}
-//#endregion
-//#region node_modules/motion-dom/dist/es/projection/utils/each-axis.mjs
-function eachAxis(callback) {
-	return [callback("x"), callback("y")];
-}
-//#endregion
-//#region node_modules/motion-dom/dist/es/events/add-dom-event.mjs
-function addDomEvent(target, eventName, handler, options = { passive: true }) {
-	target.addEventListener(eventName, handler, options);
-	return () => target.removeEventListener(eventName, handler, options);
-}
-//#endregion
-//#region node_modules/motion-dom/dist/es/value/utils/resolve-motion-value.mjs
-/**
-* If the provided value is a MotionValue, this returns the actual value, otherwise just the value itself
-*/
-function resolveMotionValue(value) {
-	return isMotionValue(value) ? value.get() : value;
-}
-//#endregion
-//#region node_modules/motion-dom/dist/es/animation/animate/single-value.mjs
-function animateSingleValue(value, keyframes, options) {
-	const motionValue$1 = isMotionValue(value) ? value : motionValue(value);
-	motionValue$1.start(animateMotionValue("", motionValue$1, keyframes, options));
-	return motionValue$1.animation;
-}
-//#endregion
-//#region node_modules/motion-dom/dist/es/stats/buffer.mjs
-var statsBuffer = {
-	value: null,
-	addProjectionMetrics: null
-};
-//#endregion
-//#region node_modules/motion-dom/dist/es/utils/delay.mjs
-/**
-* Timeout defined in ms
-*/
-function delay(callback, timeout) {
-	const start = time.now();
-	const checkElapsed = ({ timestamp }) => {
-		const elapsed = timestamp - start;
-		if (elapsed >= timeout) {
-			cancelFrame(checkElapsed);
-			callback(elapsed - timeout);
-		}
-	};
-	frame.setup(checkElapsed, true);
-	return () => cancelFrame(checkElapsed);
-}
-//#endregion
-//#region node_modules/motion-dom/dist/es/utils/is-svg-svg-element.mjs
-/**
-* Checks if an element is specifically an SVGSVGElement (the root SVG element)
-* in a way that works across iframes
-*/
-function isSVGSVGElement(element) {
-	return isSVGElement(element) && element.tagName === "svg";
-}
-//#endregion
-//#region node_modules/motion-dom/dist/es/projection/animation/mix-values.mjs
-var borderLabels = [
-	"borderTopLeftRadius",
-	"borderTopRightRadius",
-	"borderBottomLeftRadius",
-	"borderBottomRightRadius"
-];
-var numBorders = borderLabels.length;
-var asNumber = (value) => typeof value === "string" ? parseFloat(value) : value;
-var isPx = (value) => typeof value === "number" || px.test(value);
-function mixValues(target, follow, lead, progress, shouldCrossfadeOpacity, isOnlyMember) {
-	if (shouldCrossfadeOpacity) {
-		target.opacity = mixNumber$1(0, lead.opacity ?? 1, easeCrossfadeIn(progress));
-		target.opacityExit = mixNumber$1(follow.opacity ?? 1, 0, easeCrossfadeOut(progress));
-	} else if (isOnlyMember) target.opacity = mixNumber$1(follow.opacity ?? 1, lead.opacity ?? 1, progress);
-	/**
-	* Mix border radius
-	*/
-	for (let i = 0; i < numBorders; i++) {
-		const borderLabel = borderLabels[i];
-		let followRadius = getRadius(follow, borderLabel);
-		let leadRadius = getRadius(lead, borderLabel);
-		if (followRadius === void 0 && leadRadius === void 0) continue;
-		followRadius || (followRadius = 0);
-		leadRadius || (leadRadius = 0);
-		if (followRadius === 0 || leadRadius === 0 || isPx(followRadius) === isPx(leadRadius)) {
-			target[borderLabel] = Math.max(mixNumber$1(asNumber(followRadius), asNumber(leadRadius), progress), 0);
-			if (percent.test(leadRadius) || percent.test(followRadius)) target[borderLabel] += "%";
-		} else target[borderLabel] = leadRadius;
-	}
-	/**
-	* Mix rotation
-	*/
-	if (follow.rotate || lead.rotate) target.rotate = mixNumber$1(follow.rotate || 0, lead.rotate || 0, progress);
-}
-function getRadius(values, radiusName) {
-	return values[radiusName] !== void 0 ? values[radiusName] : values.borderRadius;
-}
-var easeCrossfadeIn = /*@__PURE__*/ compress(0, .5, circOut);
-var easeCrossfadeOut = /*@__PURE__*/ compress(.5, .95, noop);
-function compress(min, max, easing) {
-	return (p) => {
-		if (p < min) return 0;
-		if (p > max) return 1;
-		return easing(/* @__PURE__ */ progress(min, max, p));
-	};
-}
-//#endregion
-//#region node_modules/motion-dom/dist/es/projection/geometry/copy.mjs
-/**
-* Reset an axis to the provided origin box.
-*
-* This is a mutative operation.
-*/
-function copyAxisInto(axis, originAxis) {
-	axis.min = originAxis.min;
-	axis.max = originAxis.max;
-}
-/**
-* Reset a box to the provided origin box.
-*
-* This is a mutative operation.
-*/
-function copyBoxInto(box, originBox) {
-	copyAxisInto(box.x, originBox.x);
-	copyAxisInto(box.y, originBox.y);
-}
-/**
-* Reset a delta to the provided origin box.
-*
-* This is a mutative operation.
-*/
-function copyAxisDeltaInto(delta, originDelta) {
-	delta.translate = originDelta.translate;
-	delta.scale = originDelta.scale;
-	delta.originPoint = originDelta.originPoint;
-	delta.origin = originDelta.origin;
 }
 //#endregion
 //#region node_modules/motion-dom/dist/es/projection/geometry/delta-remove.mjs
@@ -12901,6 +13294,153 @@ function axisDeltaEquals(a, b) {
 	return a.translate === b.translate && a.scale === b.scale && a.originPoint === b.originPoint;
 }
 //#endregion
+//#region node_modules/motion-dom/dist/es/projection/utils/each-axis.mjs
+function eachAxis(callback) {
+	return [callback("x"), callback("y")];
+}
+//#endregion
+//#region node_modules/motion-dom/dist/es/projection/styles/transform.mjs
+function buildProjectionTransform(delta, treeScale, latestTransform) {
+	let transform = "";
+	/**
+	* The translations we use to calculate are always relative to the viewport coordinate space.
+	* But when we apply scales, we also scale the coordinate space of an element and its children.
+	* For instance if we have a treeScale (the culmination of all parent scales) of 0.5 and we need
+	* to move an element 100 pixels, we actually need to move it 200 in within that scaled space.
+	*/
+	const xTranslate = delta.x.translate / treeScale.x;
+	const yTranslate = delta.y.translate / treeScale.y;
+	const zTranslate = latestTransform?.z || 0;
+	if (xTranslate || yTranslate || zTranslate) transform = `translate3d(${xTranslate}px, ${yTranslate}px, ${zTranslate}px) `;
+	/**
+	* Apply scale correction for the tree transform.
+	* This will apply scale to the screen-orientated axes.
+	*/
+	if (treeScale.x !== 1 || treeScale.y !== 1) transform += `scale(${1 / treeScale.x}, ${1 / treeScale.y}) `;
+	if (latestTransform) {
+		const { transformPerspective, rotate, pathRotation, rotateX, rotateY, skewX, skewY } = latestTransform;
+		if (transformPerspective) transform = `perspective(${transformPerspective}px) ${transform}`;
+		if (rotate) transform += `rotate(${rotate}deg) `;
+		if (pathRotation) transform += `rotate(${pathRotation}deg) `;
+		if (rotateX) transform += `rotateX(${rotateX}deg) `;
+		if (rotateY) transform += `rotateY(${rotateY}deg) `;
+		if (skewX) transform += `skewX(${skewX}deg) `;
+		if (skewY) transform += `skewY(${skewY}deg) `;
+	}
+	/**
+	* Apply scale to match the size of the element to the size we want it.
+	* This will apply scale to the element-orientated axes.
+	*/
+	const elementScaleX = delta.x.scale * treeScale.x;
+	const elementScaleY = delta.y.scale * treeScale.y;
+	if (elementScaleX !== 1 || elementScaleY !== 1) transform += `scale(${elementScaleX}, ${elementScaleY})`;
+	return transform || "none";
+}
+//#endregion
+//#region node_modules/motion-dom/dist/es/projection/animation/mix-values.mjs
+var numBorders = cornerRadiusProps.length;
+var asNumber = (value) => typeof value === "string" ? parseFloat(value) : value;
+var isPx = (value) => typeof value === "number" || px.test(value);
+function mixValues(target, follow, lead, progress, shouldCrossfadeOpacity, isOnlyMember) {
+	if (shouldCrossfadeOpacity) {
+		target.opacity = mixNumber$1(0, lead.opacity ?? 1, easeCrossfadeIn(progress));
+		target.opacityExit = mixNumber$1(follow.opacity ?? 1, 0, easeCrossfadeOut(progress));
+	} else if (isOnlyMember) target.opacity = mixNumber$1(follow.opacity ?? 1, lead.opacity ?? 1, progress);
+	/**
+	* Mix border radius
+	*/
+	for (let i = 0; i < numBorders; i++) {
+		const borderLabel = cornerRadiusProps[i];
+		let followRadius = getRadius(follow, borderLabel);
+		let leadRadius = getRadius(lead, borderLabel);
+		if (followRadius === void 0 && leadRadius === void 0) continue;
+		followRadius || (followRadius = 0);
+		leadRadius || (leadRadius = 0);
+		if (followRadius === 0 || leadRadius === 0 || isPx(followRadius) === isPx(leadRadius)) {
+			target[borderLabel] = Math.max(mixNumber$1(asNumber(followRadius), asNumber(leadRadius), progress), 0);
+			if (percent.test(leadRadius) || percent.test(followRadius)) target[borderLabel] += "%";
+		} else target[borderLabel] = leadRadius;
+	}
+	/**
+	* Mix rotation
+	*/
+	if (follow.rotate || lead.rotate) target.rotate = mixNumber$1(follow.rotate || 0, lead.rotate || 0, progress);
+}
+function getRadius(values, radiusName) {
+	return values[radiusName] !== void 0 ? values[radiusName] : values.borderRadius;
+}
+var easeCrossfadeIn = /*@__PURE__*/ compress(0, .5, circOut);
+var easeCrossfadeOut = /*@__PURE__*/ compress(.5, .95, noop);
+function compress(min, max, easing) {
+	return (p) => {
+		if (p < min) return 0;
+		if (p > max) return 1;
+		return easing(/* @__PURE__ */ progress(min, max, p));
+	};
+}
+//#endregion
+//#region node_modules/motion-dom/dist/es/animation/animate/single-value.mjs
+function animateSingleValue(value, keyframes, options) {
+	const motionValue$1 = isMotionValue(value) ? value : motionValue(value);
+	motionValue$1.start(animateMotionValue("", motionValue$1, keyframes, options));
+	return motionValue$1.animation;
+}
+//#endregion
+//#region node_modules/motion-dom/dist/es/events/add-dom-event.mjs
+function addDomEvent(target, eventName, handler, options = { passive: true }) {
+	target.addEventListener(eventName, handler, options);
+	return () => target.removeEventListener(eventName, handler, options);
+}
+//#endregion
+//#region node_modules/motion-dom/dist/es/projection/utils/compare-by-depth.mjs
+var compareByDepth = (a, b) => a.depth - b.depth;
+//#endregion
+//#region node_modules/motion-dom/dist/es/projection/utils/flat-tree.mjs
+var FlatTree = class {
+	constructor() {
+		this.children = [];
+		this.isDirty = false;
+	}
+	add(child) {
+		addUniqueItem(this.children, child);
+		this.isDirty = true;
+	}
+	remove(child) {
+		removeItem(this.children, child);
+		this.isDirty = true;
+	}
+	forEach(callback) {
+		this.isDirty && this.children.sort(compareByDepth);
+		this.isDirty = false;
+		this.children.forEach(callback);
+	}
+};
+//#endregion
+//#region node_modules/motion-dom/dist/es/utils/delay.mjs
+/**
+* Timeout defined in ms
+*/
+function delay(callback, timeout) {
+	const start = time.now();
+	const checkElapsed = ({ timestamp }) => {
+		const elapsed = timestamp - start;
+		if (elapsed >= timeout) {
+			cancelFrame(checkElapsed);
+			callback(elapsed - timeout);
+		}
+	};
+	frame.setup(checkElapsed, true);
+	return () => cancelFrame(checkElapsed);
+}
+//#endregion
+//#region node_modules/motion-dom/dist/es/value/utils/resolve-motion-value.mjs
+/**
+* If the provided value is a MotionValue, this returns the actual value, otherwise just the value itself
+*/
+function resolveMotionValue(value) {
+	return isMotionValue(value) ? value.get() : value;
+}
+//#endregion
 //#region node_modules/motion-dom/dist/es/projection/shared/stack.mjs
 var NodeStack = class {
 	constructor() {
@@ -12971,68 +13511,6 @@ var NodeStack = class {
 	}
 	removeLeadSnapshot() {
 		if (this.lead?.snapshot) this.lead.snapshot = void 0;
-	}
-};
-//#endregion
-//#region node_modules/motion-dom/dist/es/projection/styles/transform.mjs
-function buildProjectionTransform(delta, treeScale, latestTransform) {
-	let transform = "";
-	/**
-	* The translations we use to calculate are always relative to the viewport coordinate space.
-	* But when we apply scales, we also scale the coordinate space of an element and its children.
-	* For instance if we have a treeScale (the culmination of all parent scales) of 0.5 and we need
-	* to move an element 100 pixels, we actually need to move it 200 in within that scaled space.
-	*/
-	const xTranslate = delta.x.translate / treeScale.x;
-	const yTranslate = delta.y.translate / treeScale.y;
-	const zTranslate = latestTransform?.z || 0;
-	if (xTranslate || yTranslate || zTranslate) transform = `translate3d(${xTranslate}px, ${yTranslate}px, ${zTranslate}px) `;
-	/**
-	* Apply scale correction for the tree transform.
-	* This will apply scale to the screen-orientated axes.
-	*/
-	if (treeScale.x !== 1 || treeScale.y !== 1) transform += `scale(${1 / treeScale.x}, ${1 / treeScale.y}) `;
-	if (latestTransform) {
-		const { transformPerspective, rotate, pathRotation, rotateX, rotateY, skewX, skewY } = latestTransform;
-		if (transformPerspective) transform = `perspective(${transformPerspective}px) ${transform}`;
-		if (rotate) transform += `rotate(${rotate}deg) `;
-		if (pathRotation) transform += `rotate(${pathRotation}deg) `;
-		if (rotateX) transform += `rotateX(${rotateX}deg) `;
-		if (rotateY) transform += `rotateY(${rotateY}deg) `;
-		if (skewX) transform += `skewX(${skewX}deg) `;
-		if (skewY) transform += `skewY(${skewY}deg) `;
-	}
-	/**
-	* Apply scale to match the size of the element to the size we want it.
-	* This will apply scale to the element-orientated axes.
-	*/
-	const elementScaleX = delta.x.scale * treeScale.x;
-	const elementScaleY = delta.y.scale * treeScale.y;
-	if (elementScaleX !== 1 || elementScaleY !== 1) transform += `scale(${elementScaleX}, ${elementScaleY})`;
-	return transform || "none";
-}
-//#endregion
-//#region node_modules/motion-dom/dist/es/projection/utils/compare-by-depth.mjs
-var compareByDepth = (a, b) => a.depth - b.depth;
-//#endregion
-//#region node_modules/motion-dom/dist/es/projection/utils/flat-tree.mjs
-var FlatTree = class {
-	constructor() {
-		this.children = [];
-		this.isDirty = false;
-	}
-	add(child) {
-		addUniqueItem(this.children, child);
-		this.isDirty = true;
-	}
-	remove(child) {
-		removeItem(this.children, child);
-		this.isDirty = true;
-	}
-	forEach(callback) {
-		this.isDirty && this.children.sort(compareByDepth);
-		this.isDirty = false;
-		this.children.forEach(callback);
 	}
 };
 //#endregion
@@ -14809,154 +15287,77 @@ var AnimatePresence = ({ children, custom, initial = true, onExitComplete, prese
 	}) });
 };
 //#endregion
-//#region node_modules/framer-motion/dist/es/render/svg/lowercase-elements.mjs
-/**
-* We keep these listed separately as we use the lowercase tag names as part
-* of the runtime bundle to detect SVG components
-*/
-var lowercaseSVGElements = [
-	"animate",
-	"circle",
-	"defs",
-	"desc",
-	"ellipse",
-	"g",
-	"image",
-	"line",
-	"filter",
-	"marker",
-	"mask",
-	"metadata",
-	"path",
-	"pattern",
-	"polygon",
-	"polyline",
-	"rect",
-	"stop",
-	"switch",
-	"symbol",
-	"svg",
-	"text",
-	"tspan",
-	"use",
-	"view"
-];
-//#endregion
-//#region node_modules/framer-motion/dist/es/render/dom/utils/is-svg-component.mjs
-function isSVGComponent(Component) {
-	if (typeof Component !== "string" || Component.includes("-")) return false;
-	else if (lowercaseSVGElements.indexOf(Component) > -1 || /[A-Z]/u.test(Component)) return true;
-	return false;
-}
-//#endregion
-//#region node_modules/framer-motion/dist/es/render/dom/create-visual-element.mjs
-var { Fragment: Fragment$1 } = await importShared("react");
-var createDomVisualElement = (Component, options) => {
-	return options.isSVG ?? isSVGComponent(Component) ? new SVGVisualElement(options) : new HTMLVisualElement(options, { allowProjection: Component !== Fragment$1 });
-};
-//#endregion
 //#region node_modules/framer-motion/dist/es/context/LazyContext.mjs
 var { createContext: createContext$3 } = await importShared("react");
 var LazyContext = createContext$3({ strict: false });
 //#endregion
-//#region node_modules/framer-motion/dist/es/context/MotionContext/index.mjs
-var { createContext: createContext$2 } = await importShared("react");
-var MotionContext = /* @__PURE__ */ createContext$2({});
-//#endregion
-//#region node_modules/framer-motion/dist/es/context/MotionContext/utils.mjs
-function getCurrentTreeVariants(props, context) {
-	if (isControllingVariants(props)) {
-		const { initial, animate } = props;
-		return {
-			initial: initial === false || isVariantLabel(initial) ? initial : void 0,
-			animate: isVariantLabel(animate) ? animate : void 0
-		};
-	}
-	return props.inherit !== false ? context : {};
+//#region node_modules/framer-motion/dist/es/motion/features/definitions.mjs
+var featureProps = {
+	animation: [
+		"animate",
+		"variants",
+		"whileHover",
+		"whileTap",
+		"exit",
+		"whileInView",
+		"whileFocus",
+		"whileDrag"
+	],
+	exit: ["exit"],
+	drag: ["drag", "dragControls"],
+	focus: ["whileFocus"],
+	hover: [
+		"whileHover",
+		"onHoverStart",
+		"onHoverEnd"
+	],
+	tap: [
+		"whileTap",
+		"onTap",
+		"onTapStart",
+		"onTapCancel"
+	],
+	pan: [
+		"onPan",
+		"onPanStart",
+		"onPanSessionStart",
+		"onPanEnd"
+	],
+	inView: [
+		"whileInView",
+		"onViewportEnter",
+		"onViewportLeave"
+	],
+	layout: ["layout", "layoutId"]
+};
+var isInitialized = false;
+/**
+* Initialize feature definitions with isEnabled checks.
+* This must be called before any motion components are rendered.
+*/
+function initFeatureDefinitions() {
+	if (isInitialized) return;
+	const initialFeatureDefinitions = {};
+	for (const key in featureProps) initialFeatureDefinitions[key] = { isEnabled: (props) => featureProps[key].some((name) => !!props[name]) };
+	setFeatureDefinitions(initialFeatureDefinitions);
+	isInitialized = true;
+}
+/**
+* Get the current feature definitions, initializing if needed.
+*/
+function getInitializedFeatureDefinitions() {
+	initFeatureDefinitions();
+	return getFeatureDefinitions();
 }
 //#endregion
-//#region node_modules/framer-motion/dist/es/context/MotionContext/create.mjs
-var { useContext: useContext$6, useMemo: useMemo$5 } = await importShared("react");
-function useCreateMotionContext(props) {
-	const { initial, animate } = getCurrentTreeVariants(props, useContext$6(MotionContext));
-	return useMemo$5(() => ({
-		initial,
-		animate
-	}), [variantLabelsAsDependency(initial), variantLabelsAsDependency(animate)]);
-}
-function variantLabelsAsDependency(prop) {
-	return Array.isArray(prop) ? prop.join(" ") : prop;
-}
-//#endregion
-//#region node_modules/framer-motion/dist/es/render/html/utils/create-render-state.mjs
-var createHtmlRenderState = () => ({
-	style: {},
-	transform: {},
-	transformOrigin: {},
-	vars: {}
-});
-//#endregion
-//#region node_modules/framer-motion/dist/es/render/html/use-props.mjs
-var { useMemo: useMemo$4 } = await importShared("react");
-function copyRawValuesOnly(target, source, props) {
-	for (const key in source) if (!isMotionValue(source[key]) && !isForcedMotionValue(key, props)) target[key] = source[key];
-}
-function useInitialMotionValues({ transformTemplate }, visualState) {
-	return useMemo$4(() => {
-		const state = createHtmlRenderState();
-		buildHTMLStyles(state, visualState, transformTemplate);
-		return Object.assign({}, state.vars, state.style);
-	}, [visualState]);
-}
-function useStyle(props, visualState) {
-	const styleProp = props.style || {};
-	const style = {};
-	/**
-	* Copy non-Motion Values straight into style
-	*/
-	copyRawValuesOnly(style, styleProp, props);
-	Object.assign(style, useInitialMotionValues(props, visualState));
-	return style;
-}
-function useHTMLProps(props, visualState) {
-	const htmlProps = {};
-	const style = useStyle(props, visualState);
-	if (props.drag && props.dragListener !== false) {
-		htmlProps.draggable = false;
-		style.userSelect = style.WebkitUserSelect = style.WebkitTouchCallout = "none";
-		style.touchAction = props.drag === true ? "none" : `pan-${props.drag === "x" ? "y" : "x"}`;
-	}
-	if (props.tabIndex === void 0 && (props.onTap || props.onTapStart || props.whileTap)) htmlProps.tabIndex = 0;
-	htmlProps.style = style;
-	return htmlProps;
-}
-//#endregion
-//#region node_modules/framer-motion/dist/es/render/svg/utils/create-render-state.mjs
-var createSvgRenderState = () => ({
-	...createHtmlRenderState(),
-	attrs: {}
-});
-//#endregion
-//#region node_modules/framer-motion/dist/es/render/svg/use-props.mjs
-var { useMemo: useMemo$3 } = await importShared("react");
-function useSVGProps(props, visualState, _isStatic, Component) {
-	const visualProps = useMemo$3(() => {
-		const state = createSvgRenderState();
-		buildSVGAttrs(state, visualState, isSVGTag(Component), props.transformTemplate, props.style);
-		return {
-			...state.attrs,
-			style: { ...state.style }
-		};
-	}, [visualState]);
-	if (props.style) {
-		const rawStyles = {};
-		copyRawValuesOnly(rawStyles, props.style, props);
-		visualProps.style = {
-			...rawStyles,
-			...visualProps.style
-		};
-	}
-	return visualProps;
+//#region node_modules/framer-motion/dist/es/motion/features/load-features.mjs
+function loadFeatures(features) {
+	const featureDefinitions = getInitializedFeatureDefinitions();
+	for (const key in features) featureDefinitions[key] = {
+		...featureDefinitions[key],
+		...features[key]
+	};
+	setFeatureDefinitions(featureDefinitions);
 }
 //#endregion
 //#region node_modules/framer-motion/dist/es/motion/utils/valid-prop.mjs
@@ -15058,12 +15459,152 @@ function filterProps(props, isDom, forwardMotionProps) {
 	return filteredProps;
 }
 //#endregion
+//#region node_modules/framer-motion/dist/es/context/MotionContext/index.mjs
+var { createContext: createContext$2 } = await importShared("react");
+var MotionContext = /* @__PURE__ */ createContext$2({});
+//#endregion
+//#region node_modules/framer-motion/dist/es/context/MotionContext/utils.mjs
+function getCurrentTreeVariants(props, context) {
+	if (isControllingVariants(props)) {
+		const { initial, animate } = props;
+		return {
+			initial: initial === false || isVariantLabel(initial) ? initial : void 0,
+			animate: isVariantLabel(animate) ? animate : void 0
+		};
+	}
+	return props.inherit !== false ? context : {};
+}
+//#endregion
+//#region node_modules/framer-motion/dist/es/context/MotionContext/create.mjs
+var { useContext: useContext$6, useMemo: useMemo$5 } = await importShared("react");
+function useCreateMotionContext(props) {
+	const { initial, animate } = getCurrentTreeVariants(props, useContext$6(MotionContext));
+	return useMemo$5(() => ({
+		initial,
+		animate
+	}), [variantLabelsAsDependency(initial), variantLabelsAsDependency(animate)]);
+}
+function variantLabelsAsDependency(prop) {
+	return Array.isArray(prop) ? prop.join(" ") : prop;
+}
+//#endregion
+//#region node_modules/framer-motion/dist/es/render/html/utils/create-render-state.mjs
+var createHtmlRenderState = () => ({
+	style: {},
+	transform: {},
+	transformOrigin: {},
+	vars: {}
+});
+//#endregion
+//#region node_modules/framer-motion/dist/es/render/html/use-props.mjs
+var { useMemo: useMemo$4 } = await importShared("react");
+function copyRawValuesOnly(target, source, props) {
+	for (const key in source) if (!isMotionValue(source[key]) && !isForcedMotionValue(key, props)) target[key] = source[key];
+}
+function useInitialMotionValues({ transformTemplate }, visualState) {
+	return useMemo$4(() => {
+		const state = createHtmlRenderState();
+		buildHTMLStyles(state, visualState, transformTemplate);
+		return Object.assign({}, state.vars, state.style);
+	}, [visualState]);
+}
+function useStyle(props, visualState) {
+	const styleProp = props.style || {};
+	const style = {};
+	/**
+	* Copy non-Motion Values straight into style
+	*/
+	copyRawValuesOnly(style, styleProp, props);
+	Object.assign(style, useInitialMotionValues(props, visualState));
+	return style;
+}
+function useHTMLProps(props, visualState) {
+	const htmlProps = {};
+	const style = useStyle(props, visualState);
+	if (props.drag && props.dragListener !== false) {
+		htmlProps.draggable = false;
+		style.userSelect = style.WebkitUserSelect = style.WebkitTouchCallout = "none";
+		style.touchAction = props.drag === true ? "none" : `pan-${props.drag === "x" ? "y" : "x"}`;
+	}
+	if (props.tabIndex === void 0 && (props.onTap || props.onTapStart || props.whileTap)) htmlProps.tabIndex = 0;
+	htmlProps.style = style;
+	return htmlProps;
+}
+//#endregion
+//#region node_modules/framer-motion/dist/es/render/svg/utils/create-render-state.mjs
+var createSvgRenderState = () => ({
+	...createHtmlRenderState(),
+	attrs: {}
+});
+//#endregion
+//#region node_modules/framer-motion/dist/es/render/svg/use-props.mjs
+var { useMemo: useMemo$3 } = await importShared("react");
+function useSVGProps(props, visualState, _isStatic, Component) {
+	const visualProps = useMemo$3(() => {
+		const state = createSvgRenderState();
+		buildSVGAttrs(state, visualState, isSVGTag(Component), props.transformTemplate, props.style);
+		return {
+			...state.attrs,
+			style: { ...state.style }
+		};
+	}, [visualState]);
+	if (props.style) {
+		const rawStyles = {};
+		copyRawValuesOnly(rawStyles, props.style, props);
+		visualProps.style = {
+			...rawStyles,
+			...visualProps.style
+		};
+	}
+	return visualProps;
+}
+//#endregion
+//#region node_modules/framer-motion/dist/es/render/svg/lowercase-elements.mjs
+/**
+* We keep these listed separately as we use the lowercase tag names as part
+* of the runtime bundle to detect SVG components
+*/
+var lowercaseSVGElements = [
+	"animate",
+	"circle",
+	"defs",
+	"desc",
+	"ellipse",
+	"g",
+	"image",
+	"line",
+	"filter",
+	"marker",
+	"mask",
+	"metadata",
+	"path",
+	"pattern",
+	"polygon",
+	"polyline",
+	"rect",
+	"stop",
+	"switch",
+	"symbol",
+	"svg",
+	"text",
+	"tspan",
+	"use",
+	"view"
+];
+//#endregion
+//#region node_modules/framer-motion/dist/es/render/dom/utils/is-svg-component.mjs
+function isSVGComponent(Component) {
+	if (typeof Component !== "string" || Component.includes("-")) return false;
+	else if (lowercaseSVGElements.indexOf(Component) > -1 || /[A-Z]/u.test(Component)) return true;
+	return false;
+}
+//#endregion
 //#region node_modules/framer-motion/dist/es/render/dom/use-render.mjs
-var { Fragment, useMemo: useMemo$2, createElement } = await importShared("react");
+var { Fragment: Fragment$1, useMemo: useMemo$2, createElement } = await importShared("react");
 function useRender(Component, props, ref, { latestValues }, isStatic, forwardMotionProps = false, isSVG) {
 	const visualProps = (isSVG ?? isSVGComponent(Component) ? useSVGProps : useHTMLProps)(props, latestValues, isStatic, Component);
 	const filteredProps = filterProps(props, typeof Component === "string", forwardMotionProps);
-	const elementProps = Component !== Fragment ? {
+	const elementProps = Component !== Fragment$1 ? {
 		...filteredProps,
 		...visualProps,
 		ref
@@ -15145,75 +15686,6 @@ var useSVGVisualState = /*@__PURE__*/ makeUseVisualState({
 	scrapeMotionValuesFromProps,
 	createRenderState: createSvgRenderState
 });
-//#endregion
-//#region node_modules/framer-motion/dist/es/motion/features/definitions.mjs
-var featureProps = {
-	animation: [
-		"animate",
-		"variants",
-		"whileHover",
-		"whileTap",
-		"exit",
-		"whileInView",
-		"whileFocus",
-		"whileDrag"
-	],
-	exit: ["exit"],
-	drag: ["drag", "dragControls"],
-	focus: ["whileFocus"],
-	hover: [
-		"whileHover",
-		"onHoverStart",
-		"onHoverEnd"
-	],
-	tap: [
-		"whileTap",
-		"onTap",
-		"onTapStart",
-		"onTapCancel"
-	],
-	pan: [
-		"onPan",
-		"onPanStart",
-		"onPanSessionStart",
-		"onPanEnd"
-	],
-	inView: [
-		"whileInView",
-		"onViewportEnter",
-		"onViewportLeave"
-	],
-	layout: ["layout", "layoutId"]
-};
-var isInitialized = false;
-/**
-* Initialize feature definitions with isEnabled checks.
-* This must be called before any motion components are rendered.
-*/
-function initFeatureDefinitions() {
-	if (isInitialized) return;
-	const initialFeatureDefinitions = {};
-	for (const key in featureProps) initialFeatureDefinitions[key] = { isEnabled: (props) => featureProps[key].some((name) => !!props[name]) };
-	setFeatureDefinitions(initialFeatureDefinitions);
-	isInitialized = true;
-}
-/**
-* Get the current feature definitions, initializing if needed.
-*/
-function getInitializedFeatureDefinitions() {
-	initFeatureDefinitions();
-	return getFeatureDefinitions();
-}
-//#endregion
-//#region node_modules/framer-motion/dist/es/motion/features/load-features.mjs
-function loadFeatures(features) {
-	const featureDefinitions = getInitializedFeatureDefinitions();
-	for (const key in features) featureDefinitions[key] = {
-		...featureDefinitions[key],
-		...features[key]
-	};
-	setFeatureDefinitions(featureDefinitions);
-}
 //#endregion
 //#region node_modules/framer-motion/dist/es/motion/utils/symbol.mjs
 var motionComponentSymbol = Symbol.for("motionComponentSymbol");
@@ -15506,6 +15978,12 @@ get: (_target, key) => {
 		return componentCache.get(key);
 	} });
 }
+//#endregion
+//#region node_modules/framer-motion/dist/es/render/dom/create-visual-element.mjs
+var { Fragment } = await importShared("react");
+var createDomVisualElement = (Component, options) => {
+	return options.isSVG ?? isSVGComponent(Component) ? new SVGVisualElement(options) : new HTMLVisualElement(options, { allowProjection: Component !== Fragment });
+};
 //#endregion
 //#region node_modules/framer-motion/dist/es/motion/features/animation/index.mjs
 var AnimationFeature = class extends Feature {
@@ -16853,95 +17331,8 @@ var motion = /*@__PURE__*/ createMotionProxy({
 	...layout
 }, createDomVisualElement);
 //#endregion
-//#region node_modules/framer-motion/dist/es/context/ReorderContext.mjs
-var { createContext } = await importShared("react");
-var ReorderContext = createContext(null);
-//#endregion
-//#region node_modules/framer-motion/dist/es/components/Reorder/utils/check-reorder.mjs
-function checkReorder(order, value, offset, velocity) {
-	if (!velocity) return order;
-	const index = order.findIndex((item) => item.value === value);
-	if (index === -1) return order;
-	const nextOffset = velocity > 0 ? 1 : -1;
-	const nextItem = order[index + nextOffset];
-	if (!nextItem) return order;
-	const item = order[index];
-	const nextLayout = nextItem.layout;
-	const nextItemCenter = mixNumber$1(nextLayout.min, nextLayout.max, .5);
-	if (nextOffset === 1 && item.layout.max + offset > nextItemCenter || nextOffset === -1 && item.layout.min + offset < nextItemCenter) return moveItem(order, index, index + nextOffset);
-	return order;
-}
-//#endregion
-//#region node_modules/framer-motion/dist/es/components/Reorder/Group.mjs
-var { forwardRef: forwardRef$1, useRef: useRef$1, useEffect: useEffect$2 } = await importShared("react");
-function ReorderGroupComponent({ children, as = "ul", axis = "y", onReorder, values, ...props }, externalRef) {
-	const Component = useConstant(() => motion[as]);
-	const order = [];
-	const isReordering = useRef$1(false);
-	const groupRef = useRef$1(null);
-	const context = {
-		axis,
-		groupRef,
-		registerItem: (value, layout) => {
-			const idx = order.findIndex((entry) => value === entry.value);
-			if (idx !== -1) order[idx].layout = layout[axis];
-			else order.push({
-				value,
-				layout: layout[axis]
-			});
-			order.sort(compareMin);
-		},
-		updateOrder: (item, offset, velocity) => {
-			if (isReordering.current) return;
-			const newOrder = checkReorder(order, item, offset, velocity);
-			if (order !== newOrder) {
-				isReordering.current = true;
-				const newValues = [...values];
-				for (let i = 0; i < newOrder.length; i++) if (order[i].value !== newOrder[i].value) {
-					const a = values.indexOf(order[i].value);
-					const b = values.indexOf(newOrder[i].value);
-					if (a !== -1 && b !== -1) [newValues[a], newValues[b]] = [newValues[b], newValues[a]];
-					break;
-				}
-				onReorder(newValues);
-			}
-		}
-	};
-	useEffect$2(() => {
-		isReordering.current = false;
-	});
-	const setRef = (element) => {
-		groupRef.current = element;
-		if (typeof externalRef === "function") externalRef(element);
-		else if (externalRef) externalRef.current = element;
-	};
-	/**
-	* Disable browser scroll anchoring on the group container.
-	* When items reorder, scroll anchoring can cause the browser to adjust
-	* the scroll position, which interferes with drag position calculations.
-	*/
-	const groupStyle = {
-		overflowAnchor: "none",
-		...props.style
-	};
-	return (0, import_jsx_runtime.jsx)(Component, {
-		...props,
-		style: groupStyle,
-		ref: setRef,
-		ignoreStrict: true,
-		children: (0, import_jsx_runtime.jsx)(ReorderContext.Provider, {
-			value: context,
-			children
-		})
-	});
-}
-var ReorderGroup = /*@__PURE__*/ forwardRef$1(ReorderGroupComponent);
-function compareMin(a, b) {
-	return a.layout.min - b.layout.min;
-}
-//#endregion
 //#region node_modules/framer-motion/dist/es/value/use-motion-value.mjs
-var { useContext: useContext$1, useState: useState$3, useEffect: useEffect$1 } = await importShared("react");
+var { useContext: useContext$1, useState: useState$3, useEffect: useEffect$2 } = await importShared("react");
 /**
 * Creates a `MotionValue` to track the state and velocity of a value.
 *
@@ -16969,7 +17360,7 @@ function useMotionValue(initial) {
 	const { isStatic } = useContext$1(MotionConfigContext);
 	if (isStatic) {
 		const [, setLatest] = useState$3(initial);
-		useEffect$1(() => value.on("change", setLatest), []);
+		useEffect$2(() => value.on("change", setLatest), []);
 	}
 	return value;
 }
@@ -17056,6 +17447,93 @@ function useMapTransform(inputValue, inputRange, outputMap, options) {
 	const output = useConstant(() => ({}));
 	for (const key of keys) output[key] = useTransform(inputValue, inputRange, outputMap[key], options);
 	return output;
+}
+//#endregion
+//#region node_modules/framer-motion/dist/es/context/ReorderContext.mjs
+var { createContext } = await importShared("react");
+var ReorderContext = createContext(null);
+//#endregion
+//#region node_modules/framer-motion/dist/es/components/Reorder/utils/check-reorder.mjs
+function checkReorder(order, value, offset, velocity) {
+	if (!velocity) return order;
+	const index = order.findIndex((item) => item.value === value);
+	if (index === -1) return order;
+	const nextOffset = velocity > 0 ? 1 : -1;
+	const nextItem = order[index + nextOffset];
+	if (!nextItem) return order;
+	const item = order[index];
+	const nextLayout = nextItem.layout;
+	const nextItemCenter = mixNumber$1(nextLayout.min, nextLayout.max, .5);
+	if (nextOffset === 1 && item.layout.max + offset > nextItemCenter || nextOffset === -1 && item.layout.min + offset < nextItemCenter) return moveItem(order, index, index + nextOffset);
+	return order;
+}
+//#endregion
+//#region node_modules/framer-motion/dist/es/components/Reorder/Group.mjs
+var { forwardRef: forwardRef$1, useRef: useRef$1, useEffect: useEffect$1 } = await importShared("react");
+function ReorderGroupComponent({ children, as = "ul", axis = "y", onReorder, values, ...props }, externalRef) {
+	const Component = useConstant(() => motion[as]);
+	const order = [];
+	const isReordering = useRef$1(false);
+	const groupRef = useRef$1(null);
+	const context = {
+		axis,
+		groupRef,
+		registerItem: (value, layout) => {
+			const idx = order.findIndex((entry) => value === entry.value);
+			if (idx !== -1) order[idx].layout = layout[axis];
+			else order.push({
+				value,
+				layout: layout[axis]
+			});
+			order.sort(compareMin);
+		},
+		updateOrder: (item, offset, velocity) => {
+			if (isReordering.current) return;
+			const newOrder = checkReorder(order, item, offset, velocity);
+			if (order !== newOrder) {
+				isReordering.current = true;
+				const newValues = [...values];
+				for (let i = 0; i < newOrder.length; i++) if (order[i].value !== newOrder[i].value) {
+					const a = values.indexOf(order[i].value);
+					const b = values.indexOf(newOrder[i].value);
+					if (a !== -1 && b !== -1) [newValues[a], newValues[b]] = [newValues[b], newValues[a]];
+					break;
+				}
+				onReorder(newValues);
+			}
+		}
+	};
+	useEffect$1(() => {
+		isReordering.current = false;
+	});
+	const setRef = (element) => {
+		groupRef.current = element;
+		if (typeof externalRef === "function") externalRef(element);
+		else if (externalRef) externalRef.current = element;
+	};
+	/**
+	* Disable browser scroll anchoring on the group container.
+	* When items reorder, scroll anchoring can cause the browser to adjust
+	* the scroll position, which interferes with drag position calculations.
+	*/
+	const groupStyle = {
+		overflowAnchor: "none",
+		...props.style
+	};
+	return (0, import_jsx_runtime.jsx)(Component, {
+		...props,
+		style: groupStyle,
+		ref: setRef,
+		ignoreStrict: true,
+		children: (0, import_jsx_runtime.jsx)(ReorderContext.Provider, {
+			value: context,
+			children
+		})
+	});
+}
+var ReorderGroup = /*@__PURE__*/ forwardRef$1(ReorderGroupComponent);
+function compareMin(a, b) {
+	return a.layout.min - b.layout.min;
 }
 //#endregion
 //#region node_modules/framer-motion/dist/es/components/Reorder/utils/auto-scroll.mjs
@@ -17174,7 +17652,8 @@ function ReorderItemComponent({ children, style = {}, value, as = "li", onDrag, 
 		layout,
 		onDrag: (event, gesturePoint) => {
 			const { velocity, point: pointerPoint } = gesturePoint;
-			updateOrder(value, point[axis].get(), velocity[axis]);
+			const offset = point[axis].get();
+			updateOrder(value, offset, velocity[axis]);
 			autoScrollIfNeeded(groupRef.current, pointerPoint[axis], axis, velocity[axis]);
 			onDrag && onDrag(event, gesturePoint);
 		},
@@ -17220,17 +17699,18 @@ function MetricVisibilitySettings() {
 	const selectedValues = useMemo$1(() => {
 		return Object.entries(metricVisibility).filter(([, isVisible]) => isVisible).map(([key]) => key);
 	}, [metricVisibility]);
+	const onValueChange = useCallback$1((values) => {
+		if (values.length < 1) return;
+		dispatch(hmonitorActions.updateMetricVisibility({
+			icon: values.includes("icon"),
+			label: values.includes("label"),
+			value: values.includes("value"),
+			progressBar: values.includes("progressBar")
+		}));
+	}, [dispatch]);
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(CheckboxGroup, {
 		value: selectedValues,
-		onChange: useCallback$1((values) => {
-			if (values.length < 1) return;
-			dispatch(hmonitorActions.updateMetricVisibility({
-				icon: values.includes("icon"),
-				label: values.includes("label"),
-				value: values.includes("value"),
-				progressBar: values.includes("progressBar")
-			}));
-		}, [dispatch]),
+		onChange: onValueChange,
 		isInvalid: selectedValues.length === 0,
 		isRequired: true,
 		children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Label$2, { children: "Metric Visibility" }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
@@ -17250,7 +17730,7 @@ function MetricVisibilitySettings() {
 //#endregion
 //#region node_modules/@solar-icons/react-perf/dist/icons/messages/Linear/Unread.mjs
 var { forwardRef: t } = await importShared("react");
-var r = t((t, r) => (0, import_jsx_runtime.jsx)(r$3, {
+var r = t((t, r) => (0, import_jsx_runtime.jsx)(r$5, {
 	ref: r,
 	...t,
 	children: (0, import_jsx_runtime.jsx)(`path`, {
@@ -18117,10 +18597,11 @@ var { useOverlayState } = await importShared("@heroui/react");
 * Renders a card on the LynxHub "Tools" page that allows users
 * to open the hardware monitor settings.
 */
-function ToolsPage() {
+function HardwareMonitorCard() {
 	const state = useOverlayState();
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(import_jsx_runtime.Fragment, { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(SettingsModal, { state }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ToolsCard, {
 		onPress: state.open,
+		id: "hardware-monitor",
 		title: "Hardware Monitor",
 		icon: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(i$1, { className: "size-full m-1 text-indigo-500" }),
 		description: "Configure real-time monitoring of CPU, GPU, and Memory usage in the status bar."
@@ -18139,7 +18620,14 @@ function InitialExtensions(lynxAPI) {
 	}]);
 	if (lynxAPI.toast) setToast(lynxAPI.toast);
 	lynxAPI.statusBar.replaceContainer(HardwareStatusBar_default);
-	lynxAPI.customizePages.tools.add.cardsContainer(ToolsPage);
+	lynxAPI.cards.registerToolsCard?.({
+		id: "hardware-monitor",
+		title: "Hardware Monitor",
+		description: "Configure real-time monitoring of CPU, GPU, and Memory usage in the status bar.",
+		component: HardwareMonitorCard,
+		where: "tools_page"
+	});
+	if (!lynxAPI.cards.registerToolsCard) lynxAPI.customizePages.tools.add.cardsContainer(HardwareMonitorCard);
 	ConfigProvider(lynxAPI);
 }
 //#endregion
