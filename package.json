@@ -4,6 +4,6 @@
   "repository": "https://github.com/TheLynxHub/Hardware-Monitor",
   "type": "module",
   "dependencies": {
-    "@lynxhub/hwmonitor": "^0.11.2"
+    "@lynxhub/hwmonitor": "^0.12.2"
   }
 }
