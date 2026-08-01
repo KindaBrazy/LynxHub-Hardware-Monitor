@@ -9,7 +9,7 @@ var exportSet = /* @__PURE__ */ new Set([
 ]);
 var moduleMap = { "Extension": () => {
 	dynamicLoadingCss(["style-C8HstsDv.css"], false, "Extension");
-	return __federation_import("./__federation_expose_Extension-Dg4QpsRM.js").then((module) => Object.keys(module).every((item) => exportSet.has(item)) ? () => module.default : () => module);
+	return __federation_import("./__federation_expose_Extension-zHYwgu6v.js").then((module) => Object.keys(module).every((item) => exportSet.has(item)) ? () => module.default : () => module);
 } };
 var seen = {};
 var dynamicLoadingCss = (cssFilePaths, dontAppendStylesToHead, exposeItemName) => {

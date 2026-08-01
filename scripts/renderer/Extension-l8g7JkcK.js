@@ -7233,7 +7233,7 @@ var package_default = {
 	name: "lynxhub",
 	productName: "LynxHub",
 	desktopName: "ai.kindabrazy.lynxhub.desktop",
-	version: "3.5.6",
+	version: "3.5.8",
 	type: "module",
 	description: "Cross-platform, extensible terminal/browser for AI management",
 	main: "./out/main/index.cjs",
@@ -7249,7 +7249,7 @@ var package_default = {
 	homepage: "https://github.com/KindaBrazy/LynxHub",
 	appDetails: {
 		"title": "LynxHub",
-		"buildNumber": 53,
+		"buildNumber": 55,
 		"detailedDescription": "Open-source, cross-platform terminal and browser, designed for managing AI. Highly modular and extensible, it's the all-in-one environment for AI power users.",
 		"moduleApiVersion": "2.1.0",
 		"extensionApiVersion": "2.2.0"
@@ -7371,6 +7371,7 @@ var package_default = {
 		"ogl": "^1.0.11",
 		"prettier": "^3.9.5",
 		"react": "^19.2.7",
+		"react-aria": "^3.50.0",
 		"react-dom": "^19.2.7",
 		"react-error-boundary": "^6.1.2",
 		"react-highlight-words": "^0.21.0",

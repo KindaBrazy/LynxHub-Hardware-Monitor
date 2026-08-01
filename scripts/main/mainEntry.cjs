@@ -51,30 +51,28 @@ let node_fs_promises = require("node:fs/promises");
 node_fs_promises = __toESM(node_fs_promises, 1);
 let node_fs = require("node:fs");
 node_fs = __toESM(node_fs, 1);
-let node_https = require("node:https");
-node_https = __toESM(node_https, 1);
 let electron = require("electron");
 //#region extension/node_modules/@lynxhub/hwmonitor/dist/utils.js
-var execAsync = (0, node_util.promisify)(node_child_process.exec);
+var execAsync$1 = (0, node_util.promisify)(node_child_process.exec);
 var DOTNET_LIST_RUNTIMES_COMMAND = "dotnet --list-runtimes";
-var DOTNET_9_RUNTIME_IDENTIFIER = "microsoft.netcore.app 10.0";
-function isDotNet9RuntimeInstalled(output) {
-	return output.toLowerCase().includes(DOTNET_9_RUNTIME_IDENTIFIER);
+var DOTNET_10_RUNTIME_PATTERN = /microsoft\.netcore\.app\s+10\./i;
+function isDotNet10RuntimeInstalled(output) {
+	return DOTNET_10_RUNTIME_PATTERN.test(output);
 }
 /**
-* Checks if .NET Runtime 9 is installed on the system.
+* Checks if .NET Runtime 10.0 is installed on the system.
 * This function executes a command to list installed .NET runtimes and verifies
-* if .NET Runtime 9 is included in the list.
+* if .NET Runtime 10.0 is included in the list.
 *
 * @param {Logger} [logger=console] - Optional logger for outputting warnings or errors.
 * @return {Promise<boolean>} A promise that resolves to `true`
-* if .NET Runtime 9 is installed otherwise resolves to `false`.
+* if .NET Runtime 10.0 is installed otherwise resolves to `false`.
 */
-async function checkDotNetRuntime9(logger = console) {
+async function checkDotNetRuntime10(logger = console) {
 	try {
-		const { stdout, stderr } = await execAsync(DOTNET_LIST_RUNTIMES_COMMAND);
+		const { stdout, stderr } = await execAsync$1(DOTNET_LIST_RUNTIMES_COMMAND);
 		if (stderr) logger.warn(`Stderr from 'dotnet --list-runtimes': ${stderr}`);
-		return isDotNet9RuntimeInstalled(stdout);
+		return isDotNet10RuntimeInstalled(stdout);
 	} catch (error) {
 		logger.error(`Error executing 'dotnet --list-runtimes': ${error.message}`);
 		return false;
@@ -10007,6 +10005,7 @@ var import_decompress = /* @__PURE__ */ __toESM((/* @__PURE__ */ __commonJSMin((
 		return (typeof input === "string" ? fsP.readFile(input) : Promise.resolve(input)).then((buf) => extractFile(buf, output, opts));
 	};
 })))(), 1);
+var execAsync = (0, node_util.promisify)(node_child_process.exec);
 var logLevels = [
 	"silent",
 	"error",
@@ -10022,88 +10021,110 @@ var createLogger = (logLevel) => (level, ...messages) => {
 	}
 };
 /**
-* Downloads a file from a given URL using Node.js https module.
-* Handles redirects.
-* @param url The URL to download from.
-* @param outputPath The path to save the downloaded file.
+* Attempts to terminate any running instances of the CLI tool process to unlock files on Windows/Unix.
+* @param cliName The base name of the CLI executable.
 * @param log The logger function.
-* @param redirectCount The current redirect count (internal use).
-* @returns A promise that resolves when the download is complete.
 */
-function downloadFile(url, outputPath, log, redirectCount = 0) {
-	return new Promise((resolve, reject) => {
-		if (redirectCount > 5) {
-			reject(/* @__PURE__ */ new Error("Too many redirects"));
-			return;
-		}
-		const request = node_https.default.get(url, (response) => {
-			if (response.statusCode === 301 || response.statusCode === 302 || response.statusCode === 307) {
-				if (!response.headers.location) {
-					reject(/* @__PURE__ */ new Error(`Redirect with no location header from ${url}`));
-					return;
-				}
-				log("debug", `Redirecting to ${response.headers.location}`);
-				response.resume();
-				downloadFile(response.headers.location, outputPath, log, redirectCount + 1).then(resolve).catch(reject);
-				return;
-			}
-			if (response.statusCode !== 200) {
-				response.resume();
-				reject(/* @__PURE__ */ new Error(`Failed to download file: ${response.statusCode} ${response.statusMessage} from ${url}`));
-				return;
-			}
-			const fileStream = node_fs.default.createWriteStream(outputPath);
-			response.pipe(fileStream);
-			fileStream.on("finish", () => {
-				fileStream.close(() => resolve());
-			});
-			fileStream.on("error", (err) => {
-				node_fs.default.unlink(outputPath, () => {});
-				reject(err);
-			});
-			response.on("error", (err) => {
-				node_fs.default.unlink(outputPath, () => {});
-				reject(err);
-			});
+async function killRunningCliProcesses(cliName, log) {
+	const platform = node_os.default.platform();
+	const exeName = platform === "win32" ? `${cliName}.exe` : cliName;
+	try {
+		if (platform === "win32") await execAsync(`taskkill /F /IM "${exeName}"`);
+		else await execAsync(`pkill -9 -f "${cliName}"`);
+		log("debug", `Terminated running instances of ${exeName}`);
+	} catch {}
+}
+/**
+* Safely removes a directory, attempting process termination and retries if files are locked (EPERM/EBUSY).
+* @param dirPath Path to the directory to remove.
+* @param cliName Name of the CLI for process termination if locked.
+* @param log Logger function.
+* @param maxRetries Maximum number of deletion attempts.
+*/
+async function safeRemoveDir(dirPath, cliName, log, maxRetries = 3) {
+	for (let attempt = 1; attempt <= maxRetries; attempt++) try {
+		await node_fs_promises.default.rm(dirPath, {
+			recursive: true,
+			force: true
 		});
-		request.on("error", (err) => {
-			reject(err);
-		});
-		request.end();
+		return;
+	} catch (error) {
+		if ([
+			"EPERM",
+			"EBUSY",
+			"EACCES"
+		].includes(error.code)) {
+			log("warn", `Attempt ${attempt}/${maxRetries} to remove ${dirPath} failed (${error.code}). Stopping running CLI process...`);
+			await killRunningCliProcesses(cliName, log);
+			await new Promise((resolve) => setTimeout(resolve, 200 * attempt));
+		} else throw error;
+	}
+	await node_fs_promises.default.rm(dirPath, {
+		recursive: true,
+		force: true
 	});
 }
 /**
-* Fetches JSON data from a URL using Node.js https module.
+* Downloads a file from a given URL using Node.js native fetch API.
+* Automatically handles redirects and validates file size.
+* @param url The URL to download from.
+* @param outputPath The path to save the downloaded file.
+* @param log The logger function.
+*/
+async function downloadFile(url, outputPath, log) {
+	const headers = {
+		"User-Agent": "Node.js-Downloader",
+		Accept: "application/octet-stream"
+	};
+	const token = process.env.GITHUB_TOKEN || process.env.GH_TOKEN;
+	if (token) headers.Authorization = `Bearer ${token}`;
+	log("debug", `Fetching download stream from ${url}`);
+	const response = await fetch(url, {
+		headers,
+		redirect: "follow"
+	});
+	if (!response.ok) throw new Error(`Failed to download file: ${response.status} ${response.statusText} from ${url}`);
+	const arrayBuffer = await response.arrayBuffer();
+	const buffer = Buffer.from(arrayBuffer);
+	const contentLengthHeader = response.headers.get("content-length");
+	if (contentLengthHeader) {
+		const expectedBytes = parseInt(contentLengthHeader, 10);
+		if (!isNaN(expectedBytes) && buffer.length !== expectedBytes) throw new Error(`Download truncated: expected ${expectedBytes} bytes, but received ${buffer.length} bytes.`);
+	}
+	await node_fs_promises.default.writeFile(outputPath, buffer);
+}
+/**
+* Fetches JSON data from a URL using Node.js native fetch API.
 * @param url The URL to fetch JSON from.
 * @returns A promise that resolves with the parsed JSON data.
 */
-function fetchJson(url) {
-	return new Promise((resolve, reject) => {
-		node_https.default.get(url, { headers: {
-			Accept: "application/vnd.github.v3+json",
-			"User-Agent": "Node.js-Downloader"
-		} }, (response) => {
-			if (response.statusCode !== 200) {
-				reject(/* @__PURE__ */ new Error(`Failed to fetch JSON: ${response.statusCode} ${response.statusMessage} from ${url}`));
-				response.resume();
-				return;
-			}
-			let rawData = "";
-			response.setEncoding("utf8");
-			response.on("data", (chunk) => {
-				rawData += chunk;
-			});
-			response.on("end", () => {
-				try {
-					resolve(JSON.parse(rawData));
-				} catch (e) {
-					reject(e);
-				}
-			});
-		}).on("error", (err) => {
-			reject(err);
-		});
+async function fetchJson(url) {
+	const headers = {
+		Accept: "application/vnd.github.v3+json",
+		"User-Agent": "Node.js-Downloader"
+	};
+	const token = process.env.GITHUB_TOKEN || process.env.GH_TOKEN;
+	if (token) headers.Authorization = `Bearer ${token}`;
+	const response = await fetch(url, {
+		headers,
+		redirect: "follow"
 	});
+	if (!response.ok) throw new Error(`Failed to fetch JSON: ${response.status} ${response.statusText} from ${url}`);
+	return await response.json();
+}
+/**
+* Verifies that a directory contains all required files for running the CLI tool (.exe, .runtimeconfig.json, and .dll).
+* @param dirPath The directory path to check.
+* @param cliName The base name of the CLI tool.
+* @param executableName The name of the executable file.
+*/
+async function verifyCliFiles(dirPath, cliName, executableName) {
+	const exePath = node_path.default.join(dirPath, executableName);
+	const runtimeConfigPath = node_path.default.join(dirPath, `${cliName}.runtimeconfig.json`);
+	const dllPath = node_path.default.join(dirPath, `${cliName}.dll`);
+	await node_fs_promises.default.access(exePath, node_fs.default.constants.F_OK);
+	await node_fs_promises.default.access(runtimeConfigPath, node_fs.default.constants.F_OK);
+	await node_fs_promises.default.access(dllPath, node_fs.default.constants.F_OK);
 }
 /**
 * Cleans up old versions of the CLI tool from the base directory.
@@ -10114,14 +10135,11 @@ function fetchJson(url) {
 */
 async function cleanupOldVersions(baseDir, currentVersion, cliName, log) {
 	try {
-		const oldVersionDirs = (await node_fs_promises.default.readdir(baseDir, { withFileTypes: true })).filter((dirent) => dirent.isDirectory() && dirent.name.startsWith(`${cliName}-`) && dirent.name !== currentVersion);
+		const oldVersionDirs = (await node_fs_promises.default.readdir(baseDir, { withFileTypes: true })).filter((dirent) => dirent.isDirectory() && dirent.name !== currentVersion);
 		for (const dirent of oldVersionDirs) {
 			const oldVersionPath = node_path.default.join(baseDir, dirent.name);
 			log("debug", `Removing old version directory: ${oldVersionPath}`);
-			await node_fs_promises.default.rm(oldVersionPath, {
-				recursive: true,
-				force: true
-			});
+			await safeRemoveDir(oldVersionPath, cliName, log);
 		}
 	} catch (error) {
 		log("warn", `Could not clean up old versions in ${baseDir}:`, error.message);
@@ -10142,6 +10160,7 @@ async function downloadAndExtractLatestCli(repoOwner, repoName, cliName, baseDes
 	const arch = node_os.default.arch();
 	const osIdentifier = platform === "win32" ? "win" : platform === "darwin" ? "osx" : "linux";
 	const archIdentifier = arch === "x64" ? "x64" : "arm64";
+	const executableName = platform === "win32" ? `${cliName}.exe` : cliName;
 	log("debug", `Detected system: ${osIdentifier}-${archIdentifier}`);
 	if (![
 		"win",
@@ -10149,24 +10168,38 @@ async function downloadAndExtractLatestCli(repoOwner, repoName, cliName, baseDes
 		"linux"
 	].includes(osIdentifier)) throw new Error(`Unsupported platform: ${platform}`);
 	if (!["x64", "arm64"].includes(archIdentifier)) throw new Error(`Unsupported architecture: ${arch}`);
-	const fallbackToLocalVersion = async () => {
+	const fallbackToLocalVersion = async (downloadErr) => {
 		try {
-			const versionDirs = (await node_fs_promises.default.readdir(baseDestinationDir, { withFileTypes: true })).filter((dirent) => dirent.isDirectory()).map((dirent) => dirent.name).sort((a, b) => b.localeCompare(a, void 0, {
+			const dirents = await node_fs_promises.default.readdir(baseDestinationDir, { withFileTypes: true });
+			const validVersionDirs = [];
+			for (const dirent of dirents) if (dirent.isDirectory()) {
+				const candidatePath = node_path.default.join(baseDestinationDir, dirent.name);
+				try {
+					await verifyCliFiles(candidatePath, cliName, executableName);
+					validVersionDirs.push(dirent.name);
+				} catch {
+					log("warn", `Removing invalid/incomplete local version directory: ${candidatePath}`);
+					await safeRemoveDir(candidatePath, cliName, log).catch(() => {});
+				}
+			}
+			validVersionDirs.sort((a, b) => b.localeCompare(a, void 0, {
 				numeric: true,
 				sensitivity: "base"
 			}));
-			if (versionDirs.length > 0) {
-				const latestLocalVersion = versionDirs[0];
+			if (validVersionDirs.length > 0) {
+				const latestLocalVersion = validVersionDirs[0];
 				const fallbackPath = node_path.default.join(baseDestinationDir, latestLocalVersion);
 				log("info", `Found existing local version. Using latest available '${latestLocalVersion}' as a fallback.`);
 				return fallbackPath;
 			}
 			log("error", `No local versions of ${cliName} found in ${baseDestinationDir}.`);
-			throw new Error(`No local versions of ${cliName} are available.`);
+			const reason = downloadErr ? ` (Download error: ${downloadErr.message})` : "";
+			throw new Error(`No local versions of ${cliName} are available.${reason}`);
 		} catch (fsError) {
 			if (fsError.code === "ENOENT") log("error", `Destination directory ${baseDestinationDir} does not exist.`);
 			else log("error", "An unexpected error occurred while finding a local fallback:", fsError.message);
-			throw new Error(`No local versions of ${cliName} are available.`, { cause: fsError });
+			const reason = downloadErr ? ` (Download error: ${downloadErr.message})` : "";
+			throw new Error(`No local versions of ${cliName} are available.${reason}`, { cause: fsError });
 		}
 	};
 	try {
@@ -10178,12 +10211,13 @@ async function downloadAndExtractLatestCli(repoOwner, repoName, cliName, baseDes
 		const versionString = releaseData.tag_name;
 		const finalExtractionPath = node_path.default.resolve(baseDestinationDir, versionString);
 		try {
-			await node_fs_promises.default.access(finalExtractionPath);
-			log("info", `Latest version '${versionString}' already exists. Skipping download.`);
+			await verifyCliFiles(finalExtractionPath, cliName, executableName);
+			log("info", `Latest version '${versionString}' already exists and is valid. Skipping download.`);
 			await cleanupOldVersions(baseDestinationDir, versionString, cliName, log);
 			return finalExtractionPath;
 		} catch {
-			log("info", `New version '${versionString}' not found locally. Proceeding with download.`);
+			log("info", `New version '${versionString}' not found or incomplete locally. Proceeding with download.`);
+			await safeRemoveDir(finalExtractionPath, cliName, log).catch(() => {});
 		}
 		const expectedAssetName = `${cliName}-${osIdentifier}-${archIdentifier}-${versionString}.zip`;
 		const targetAsset = releaseData.assets.find((asset) => asset.name.toLowerCase() === expectedAssetName.toLowerCase());
@@ -10191,25 +10225,39 @@ async function downloadAndExtractLatestCli(repoOwner, repoName, cliName, baseDes
 		log("debug", `Found asset: ${targetAsset.name}`);
 		const tempDownloadDir = await node_fs_promises.default.mkdtemp(node_path.default.join(node_os.default.tmpdir(), `${cliName}-download-`));
 		const zipFilePath = node_path.default.join(tempDownloadDir, targetAsset.name);
+		const tempExtractionPath = node_path.default.join(tempDownloadDir, "extracted");
 		try {
 			log("debug", `Downloading ${targetAsset.name} to ${zipFilePath}...`);
 			await downloadFile(targetAsset.browser_download_url, zipFilePath, log);
-			log("debug", `Extracting ${zipFilePath} to ${finalExtractionPath}...`);
-			await node_fs_promises.default.mkdir(finalExtractionPath, { recursive: true });
-			await (0, import_decompress.default)(zipFilePath, finalExtractionPath);
-			log("debug", "Extraction complete.");
+			log("debug", `Extracting ${zipFilePath}...`);
+			await node_fs_promises.default.mkdir(tempExtractionPath, { recursive: true });
+			await (0, import_decompress.default)(zipFilePath, tempExtractionPath);
+			await verifyCliFiles(tempExtractionPath, cliName, executableName);
+			log("debug", "Extraction and file verification complete.");
+			await node_fs_promises.default.mkdir(baseDestinationDir, { recursive: true });
+			await safeRemoveDir(finalExtractionPath, cliName, log);
+			try {
+				await node_fs_promises.default.rename(tempExtractionPath, finalExtractionPath);
+			} catch {
+				await node_fs_promises.default.mkdir(finalExtractionPath, { recursive: true });
+				await node_fs_promises.default.cp(tempExtractionPath, finalExtractionPath, {
+					recursive: true,
+					force: true
+				});
+			}
 			await cleanupOldVersions(baseDestinationDir, versionString, cliName, log);
+		} catch (extractionError) {
+			await safeRemoveDir(finalExtractionPath, cliName, log).catch(() => {});
+			throw extractionError;
 		} finally {
-			await node_fs_promises.default.rm(tempDownloadDir, {
-				recursive: true,
-				force: true
-			});
+			await safeRemoveDir(tempDownloadDir, cliName, log).catch(() => {});
 		}
 		log("info", `${cliName} is ready at ${finalExtractionPath}`);
 		return finalExtractionPath;
 	} catch (error) {
-		log("warn", "An error occurred during setup. Attempting to use a local version as fallback.", error.message);
-		return await fallbackToLocalVersion();
+		const err = error;
+		log("warn", "An error occurred during setup. Attempting to use a local version as fallback.", err.message);
+		return await fallbackToLocalVersion(err);
 	}
 }
 /**
@@ -10220,8 +10268,8 @@ async function downloadAndExtractLatestCli(repoOwner, repoName, cliName, baseDes
 */
 async function DownloadCli(targetDir, logLevel = "info") {
 	const log = createLogger(logLevel);
-	const repoOwner = "KindaBrazy";
-	const repoName = "LynxHardwareCLI";
+	const repoOwner = "TheLynxHub";
+	const repoName = "Lynx-HardwareCLI";
 	const cliName = "LynxHardwareCLI";
 	const cliBaseDir = node_path.default.join(targetDir, cliName);
 	try {
@@ -10230,8 +10278,8 @@ async function DownloadCli(targetDir, logLevel = "info") {
 		const executableName = node_os.default.platform() === "win32" ? `${cliName}.exe` : cliName;
 		const executablePath = node_path.default.join(extractedPath, executableName);
 		log("debug", `Executable should be at: ${executablePath}`);
-		await node_fs_promises.default.access(executablePath, node_fs.default.constants.F_OK);
-		log("debug", `Executable ${executablePath} verified.`);
+		await verifyCliFiles(extractedPath, cliName, executableName);
+		log("debug", `Executable and configuration files verified at: ${extractedPath}`);
 		return executablePath;
 	} catch (error) {
 		log("error", "An error occurred during CLI download and setup:", error.message);
@@ -10298,12 +10346,12 @@ var HardwareMonitor = class extends node_events.EventEmitter {
 		return args;
 	}
 	/**
-	* Checks for .NET 9 runtime and downloads the CLI tool.
+	* Checks for .NET 10.0 runtime and downloads the CLI tool.
 	* @param targetDir - Directory to download the CLI tool.
-	* @throws Error if .NET 9 is not found or download fails.
+	* @throws Error if .NET 10.0 is not found or download fails.
 	*/
 	async checkRequirements(targetDir) {
-		if (!await checkDotNetRuntime9({
+		if (!await checkDotNetRuntime10({
 			warn: (...args) => this.log("warn", ...args),
 			error: (...args) => this.log("error", ...args)
 		})) throw new Error(".NET 10.0 runtime not found. Please install it from https://dotnet.microsoft.com/download/dotnet/10.0");
@@ -10426,20 +10474,32 @@ var HardwareMonitor = class extends node_events.EventEmitter {
 		this.activeProcess.stdout?.on("data", (dataChunk) => {
 			this.buffer += dataChunk.toString();
 			if (!this.initialMessageSkipped) {
-				const newlineIndex = this.buffer.indexOf("\r\n");
+				const newlineIndex = this.buffer.indexOf("\n");
 				if (newlineIndex !== -1) {
-					if (!this.buffer.substring(0, newlineIndex).startsWith("{")) this.buffer = this.buffer.substring(newlineIndex + 2);
+					if (!this.buffer.substring(0, newlineIndex).trim().startsWith("{")) this.buffer = this.buffer.substring(newlineIndex + 1);
 					this.initialMessageSkipped = true;
-				} else if (this.buffer.length > 1024 && !this.buffer.includes("{")) this.initialMessageSkipped = true;
-				else return;
+				} else if (this.buffer.length > 1024 && !this.buffer.includes("{")) {
+					const nextJsonStartIndex = this.buffer.indexOf("{");
+					if (nextJsonStartIndex !== -1) this.buffer = this.buffer.substring(nextJsonStartIndex);
+					else this.buffer = "";
+					this.initialMessageSkipped = true;
+				} else return;
 			}
 			if (!this.initialMessageSkipped) return;
+			const MAX_BUFFER_SIZE = 10 * 1024 * 1024;
 			while (this.buffer.length > 0) {
+				if (this.buffer.length > MAX_BUFFER_SIZE) {
+					this.buffer = "";
+					const err = /* @__PURE__ */ new Error("Buffer overflow: exceeded maximum buffer size without a valid JSON object. Resetting buffer.");
+					err.type = "json_parse_error";
+					this.emit("error", err);
+					break;
+				}
 				if (!this.buffer.startsWith("{")) {
 					const nextJsonStartIndex = this.buffer.indexOf("{");
 					if (nextJsonStartIndex !== -1) this.buffer = this.buffer.substring(nextJsonStartIndex);
 					else {
-						if (this.buffer.trim() === "") this.buffer = "";
+						this.buffer = "";
 						break;
 					}
 				}
