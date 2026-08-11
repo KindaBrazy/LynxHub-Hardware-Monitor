@@ -1,5 +1,6 @@
 import {ExtensionMainApi, MainExtensionUtils} from '@lynx_main/plugins/extensions/types';
 
+import {SENTRY_DSN} from '../cross/constants';
 import {hardwareMonitorService} from './HardwareMonitorService';
 
 /**
@@ -7,6 +8,8 @@ import {hardwareMonitorService} from './HardwareMonitorService';
  * Hooks into the LynxHub application lifecycle.
  */
 export async function initialExtension(lynxApi: ExtensionMainApi, utils: MainExtensionUtils) {
+  lynxApi.initNodeSentry(SENTRY_DSN);
+
   // onAppReady is the first lifecycle event. It's the best place for initialization.
   lynxApi.onAppReady(() => hardwareMonitorService.initialize(utils));
 

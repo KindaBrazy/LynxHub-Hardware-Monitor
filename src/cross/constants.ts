@@ -62,3 +62,6 @@ export const initialSettings: MonitoringSettings = {
   sectionOrder: ['cpu', 'gpu', 'memory', 'network', 'uptime', 'ping'],
   uptimeOrder: ['uptimeSystem', 'uptimeApp'],
 };
+
+export const SENTRY_DSN =
+  'https://13d766c04f102d67c984dcbef9544512@o4509344104316928.ingest.us.sentry.io/4511891776405504';

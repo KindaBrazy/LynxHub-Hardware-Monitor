@@ -2,6 +2,7 @@ import './index.css';
 
 import {ExtensionRendererApi} from '@lynx/plugins/extensions/types/api';
 
+import {SENTRY_DSN} from '../cross/constants';
 import {setToast} from './classHolder';
 import HardwareStatusBar from './components/status-bar/HardwareStatusBar';
 import ConfigProvider from './integrations/ConfigProvider';
@@ -13,6 +14,8 @@ import hmonitorReducer from './state/hmonitorSlice';
  * This function is called by LynxHub to integrate the extension's UI components.
  */
 export function InitialExtensions(lynxAPI: ExtensionRendererApi) {
+  lynxAPI.initBrowserSentry(SENTRY_DSN);
+
   // Register the Redux slice for state management.
   lynxAPI.addReducer([{name: 'hmonitor', reducer: hmonitorReducer}]);
   if (lynxAPI.toast) setToast(lynxAPI.toast);
