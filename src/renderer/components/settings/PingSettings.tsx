@@ -11,7 +11,7 @@ import {
   TextField,
   ToggleButton,
 } from '@heroui/react';
-import {Unread} from '@solar-icons/react-perf/Linear';
+import {UnreadIcon} from '@solar-icons/react/linear';
 import {AnimatePresence, motion} from 'framer-motion';
 import {isEqual} from 'lodash-es';
 import {useEffect, useRef, useState} from 'react';
@@ -112,7 +112,7 @@ export default function PingSettings({dragHandle}: {dragHandle?: React.ReactNode
                       isSelected={enabledHosts.includes(host)}>
                       {({isSelected: selected}) => (
                         <>
-                          {selected && <Unread className="size-5" />}
+                          {selected && <UnreadIcon className="size-5" />}
                           {host}
                           {!selected && <CloseButton onPress={() => removeHost(host)} />}
                         </>

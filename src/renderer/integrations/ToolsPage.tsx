@@ -1,6 +1,6 @@
 import {useOverlayState} from '@heroui/react';
 import {ToolsCard} from '@lynx/components/ToolsCard';
-import {CpuBolt} from '@solar-icons/react-perf/BoldDuotone';
+import {CpuBoltIcon} from '@solar-icons/react/bold-duotone';
 
 import SettingsModal from '../components/settings/SettingsModal';
 
@@ -18,7 +18,7 @@ export function HardwareMonitorCard() {
         onPress={state.open}
         id="hardware-monitor"
         title="Hardware Monitor"
-        icon={<CpuBolt className="size-full m-1 text-indigo-500" />}
+        icon={<CpuBoltIcon className="size-full m-1 text-indigo-500" />}
         description="Configure real-time monitoring of CPU, GPU, and Memory usage in the status bar."
       />
     </>

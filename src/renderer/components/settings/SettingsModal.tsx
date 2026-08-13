@@ -18,7 +18,7 @@ import LynxSwitch from '@lynx/components/LynxSwitch';
 import TabModal from '@lynx/components/TabModal';
 import {AppDispatch} from '@lynx/redux/store';
 import storageIpc from '@lynx_shared/ipc/storage';
-import {Diskette} from '@solar-icons/react-perf/BoldDuotone';
+import {DisketteIcon} from '@solar-icons/react/bold-duotone';
 import {AnimatePresence, motion, Reorder} from 'framer-motion';
 import {
   ArrowDown,
@@ -623,7 +623,7 @@ export default function SettingsModal({state}: SettingsModalProps) {
           Reset to Default
         </Button>
         <Button isPending={isSaving} onPress={saveSettings}>
-          {isSaving ? <Spinner color="current" /> : <Diskette />}
+          {isSaving ? <Spinner color="current" /> : <DisketteIcon />}
           {!isSaving && 'Save Settings'}
         </Button>
       </Modal.Footer>
