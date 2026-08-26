@@ -1,34 +1,66 @@
-//#region node_modules/tailwind-variants/dist/chunk-LQJYWU4O.js
+//#region node_modules/tailwind-variants/dist/chunk-OYFAXDFZ.js
+(function() {
+	try {
+		var e = "undefined" != typeof window ? window : "undefined" != typeof global ? global : "undefined" != typeof globalThis ? globalThis : "undefined" != typeof self ? self : {};
+		e.SENTRY_RELEASE = { id: "17561bda7d32de6a59c60e7229a41d6eb183b31a" };
+		var n = new e.Error().stack;
+		n && (e._sentryDebugIds = e._sentryDebugIds || {}, e._sentryDebugIds[n] = "aca8401c-dc99-4b8e-8f16-f555730ced60", e._sentryDebugIdIdentifier = "sentry-dbid-aca8401c-dc99-4b8e-8f16-f555730ced60");
+	} catch (e) {}
+})();
+var isArray = Array.isArray;
+var joinClassValue = (value) => {
+	if (!value && value !== 0 && value !== 0n) return "";
+	if (typeof value === "string") return value;
+	if (typeof value === "number") {
+		if (value !== value) return "";
+		return "" + value;
+	}
+	if (typeof value === "bigint") return "" + value;
+	let result = "";
+	if (isArray(value)) {
+		const length = value.length;
+		for (let index = 0; index < length; index++) {
+			const item = value[index];
+			if (!item && item !== 0 && item !== 0n) continue;
+			const resolved = typeof item === "string" ? item : joinClassValue(item);
+			if (resolved) {
+				if (result) result += " ";
+				result += resolved;
+			}
+		}
+		return result;
+	}
+	if (typeof value === "object") {
+		for (const key in value) if (value[key]) {
+			if (result) result += " ";
+			result += key;
+		}
+	}
+	return result;
+};
 var SPACE_REGEX = /\s+/g;
+var isArray2 = Array.isArray;
 var removeExtraSpaces = (str) => {
 	if (typeof str !== "string" || !str) return str;
 	return str.replace(SPACE_REGEX, " ").trim();
 };
-var cx = (...classnames) => {
-	const classList = [];
-	const buildClassString = (input) => {
-		if (!input && input !== 0 && input !== 0n) return;
-		if (Array.isArray(input)) {
-			for (let i = 0, len = input.length; i < len; i++) buildClassString(input[i]);
-			return;
-		}
-		const type = typeof input;
-		if (type === "string" || type === "number" || type === "bigint") {
-			if (type === "number" && input !== input) return;
-			classList.push(String(input));
-		} else if (type === "object") {
-			const keys = Object.keys(input);
-			for (let i = 0, len = keys.length; i < len; i++) {
-				const key = keys[i];
-				if (input[key]) classList.push(key);
-			}
-		}
-	};
-	for (let i = 0, len = classnames.length; i < len; i++) {
-		const c = classnames[i];
-		if (c !== null && c !== void 0) buildClassString(c);
+var stringNeedsNormalize = (str) => {
+	const len = str.length;
+	if (len === 0) return false;
+	const first = str.charCodeAt(0);
+	const last = str.charCodeAt(len - 1);
+	if (first === 32 || last === 32 || first >= 9 && first <= 13 || first === 160 || last >= 9 && last <= 13 || last === 160) return true;
+	for (let i = 0; i < len; i++) {
+		const code = str.charCodeAt(i);
+		if (code >= 9 && code <= 13 || code === 160) return true;
+		if (code === 32 && i + 1 < len && str.charCodeAt(i + 1) === 32) return true;
 	}
-	return classList.length > 0 ? removeExtraSpaces(classList.join(" ")) : void 0;
+	return false;
+};
+var cx = (...classnames) => {
+	const result = joinClassValue(classnames);
+	if (!result) return void 0;
+	return stringNeedsNormalize(result) ? removeExtraSpaces(result) : result;
 };
 var falsyToString = (value) => value === false ? "false" : value === true ? "true" : value === 0 ? "0" : value;
 var isEmptyObject = (obj) => {
@@ -39,28 +71,31 @@ var isEmptyObject = (obj) => {
 var isEqual = (obj1, obj2) => {
 	if (obj1 === obj2) return true;
 	if (!obj1 || !obj2) return false;
-	const keys1 = Object.keys(obj1);
-	const keys2 = Object.keys(obj2);
+	const record1 = obj1;
+	const record2 = obj2;
+	const keys1 = Object.keys(record1);
+	const keys2 = Object.keys(record2);
 	if (keys1.length !== keys2.length) return false;
 	for (let i = 0; i < keys1.length; i++) {
 		const key = keys1[i];
 		if (!keys2.includes(key)) return false;
-		if (obj1[key] !== obj2[key]) return false;
+		if (record1[key] !== record2[key]) return false;
 	}
 	return true;
 };
 var joinObjects = (obj1, obj2) => {
-	for (const key in obj2) if (Object.prototype.hasOwnProperty.call(obj2, key)) {
+	const target = obj1;
+	for (const key in obj2) if (Object.hasOwn(obj2, key)) {
 		const val2 = obj2[key];
-		if (key in obj1) obj1[key] = cx(obj1[key], val2);
-		else obj1[key] = val2;
+		if (key in target) target[key] = cx(target[key], val2);
+		else target[key] = val2;
 	}
 	return obj1;
 };
 var flat = (arr, target) => {
 	for (let i = 0; i < arr.length; i++) {
 		const el = arr[i];
-		if (Array.isArray(el)) flat(el, target);
+		if (isArray2(el)) flat(el, target);
 		else if (el) target.push(el);
 	}
 };
@@ -72,24 +107,221 @@ var flatMergeArrays = (...arrays) => {
 	return filtered;
 };
 var mergeObjects = (obj1, obj2) => {
+	const record1 = obj1;
+	const record2 = obj2;
 	const result = {};
-	for (const key in obj1) {
-		const val1 = obj1[key];
-		if (key in obj2) {
-			const val2 = obj2[key];
-			if (Array.isArray(val1) || Array.isArray(val2)) result[key] = flatMergeArrays(val2, val1);
+	for (const key in record1) {
+		const val1 = record1[key];
+		if (key in record2) {
+			const val2 = record2[key];
+			if (isArray2(val1) || isArray2(val2)) result[key] = flatMergeArrays(val2, val1);
 			else if (typeof val1 === "object" && typeof val2 === "object" && val1 && val2) result[key] = mergeObjects(val1, val2);
 			else result[key] = val2 + " " + val1;
 		} else result[key] = val1;
 	}
-	for (const key in obj2) if (!(key in obj1)) result[key] = obj2[key];
+	for (const key in record2) if (!(key in record1)) result[key] = record2[key];
 	return result;
 };
 //#endregion
-//#region node_modules/tailwind-variants/dist/chunk-RZF76H2U.js
+//#region node_modules/tailwind-variants/dist/chunk-SUL6UUW2.js
 var defaultConfig = {
 	twMerge: true,
 	twMergeConfig: {}
+};
+var VARIANT_CACHE_LIMIT = 256;
+var OVERRIDE_CACHE_LIMIT = 128;
+var CACHE_MISS = /* @__PURE__ */ Symbol("tv-cache-miss");
+var hasClassOverride = (props) => (props == null ? void 0 : props.class) != null && props.class !== "" || (props == null ? void 0 : props.className) != null && props.className !== "";
+var serializeFingerprintValue = (value) => {
+	if (value === void 0) return "";
+	if (value === null) return "null";
+	if (typeof value === "string") return value;
+	if (typeof value === "boolean") return value ? "true" : "false";
+	if (typeof value === "number") return value === 0 ? "0" : String(value);
+	if (typeof value === "bigint") return String(value);
+	const mapped = falsyToString(value);
+	const mappedType = typeof mapped;
+	if (mappedType === "string" || mappedType === "number" || mappedType === "boolean" || mappedType === "bigint") return String(mapped);
+	if (mappedType === "object") try {
+		return JSON.stringify(mapped);
+	} catch {
+		return null;
+	}
+	return null;
+};
+var appendSignatureValue = (out, value) => {
+	if (value === void 0) return out;
+	if (value === null) return out + "null";
+	const type = typeof value;
+	if (type === "string" || type === "number" || type === "boolean" || type === "bigint") return out + String(value);
+	if (Array.isArray(value)) return out + value.join("\0");
+	try {
+		return out + JSON.stringify(value);
+	} catch {
+		return out + "?";
+	}
+};
+var buildPropsFingerprint = (variantKeys, defaultVariants, props, slotProps) => {
+	let fingerprint = "";
+	const seen = /* @__PURE__ */ Object.create(null);
+	for (let i = 0; i < variantKeys.length; i++) {
+		const key = variantKeys[i];
+		seen[key] = 1;
+		let value = defaultVariants[key];
+		if (props && props[key] !== void 0) value = props[key];
+		const serialized = serializeFingerprintValue(value);
+		if (serialized === null) return null;
+		fingerprint += key + ":" + serialized + ";";
+	}
+	const extras = [];
+	for (const key in defaultVariants) {
+		if (key === "class" || key === "className" || seen[key]) continue;
+		seen[key] = 1;
+		extras.push(key);
+	}
+	if (props) for (const key in props) {
+		if (key === "class" || key === "className" || seen[key] || props[key] === void 0) continue;
+		seen[key] = 1;
+		extras.push(key);
+	}
+	if (extras.length > 1) extras.sort();
+	for (let i = 0; i < extras.length; i++) {
+		const key = extras[i];
+		let value = defaultVariants[key];
+		if (props && props[key] !== void 0) value = props[key];
+		const serialized = serializeFingerprintValue(value);
+		if (serialized === null) return null;
+		fingerprint += key + ":" + serialized + ";";
+	}
+	return fingerprint;
+};
+var buildCompoundsSignature = (compoundVariants, compoundSlots) => {
+	let signature = "";
+	for (let i = 0; i < compoundVariants.length; i++) {
+		const { conditionKeys, source } = compoundVariants[i];
+		for (let j = 0; j < conditionKeys.length; j++) {
+			const key = conditionKeys[j];
+			signature += key + "=";
+			signature = appendSignatureValue(signature, source[key]);
+			signature += ",";
+		}
+		signature += "c=";
+		signature = appendSignatureValue(signature, source.class);
+		signature += "|cn=";
+		signature = appendSignatureValue(signature, source.className);
+		signature += ";";
+	}
+	for (let i = 0; i < compoundSlots.length; i++) {
+		const { conditionKeys, source } = compoundSlots[i];
+		for (let j = 0; j < conditionKeys.length; j++) {
+			const key = conditionKeys[j];
+			signature += key + "=";
+			signature = appendSignatureValue(signature, source[key]);
+			signature += ",";
+		}
+		if (Array.isArray(source.slots)) signature += "slots=" + source.slots.join(",") + ",";
+		signature += "c=";
+		signature = appendSignatureValue(signature, source.class);
+		signature += "|cn=";
+		signature = appendSignatureValue(signature, source.className);
+		signature += ";";
+	}
+	return signature;
+};
+var createBoundedCache = (limit = VARIANT_CACHE_LIMIT) => {
+	let primary = /* @__PURE__ */ new Map();
+	let secondary = null;
+	return {
+		get(key) {
+			if (primary.has(key)) return primary.get(key);
+			if (secondary == null ? void 0 : secondary.has(key)) {
+				const value = secondary.get(key);
+				primary.set(key, value);
+				return value;
+			}
+			return CACHE_MISS;
+		},
+		set(key, value) {
+			if (primary.size >= limit) {
+				secondary = primary;
+				primary = /* @__PURE__ */ new Map();
+			}
+			primary.set(key, value);
+		}
+	};
+};
+var createResultCache = (limit = VARIANT_CACHE_LIMIT) => {
+	const cache = createBoundedCache(limit);
+	return {
+		get(key) {
+			return cache.get(key);
+		},
+		set(key, value) {
+			cache.set(key, value);
+		}
+	};
+};
+var createNestedOverrideCache = (limit = OVERRIDE_CACHE_LIMIT) => {
+	let primary = /* @__PURE__ */ new Map();
+	let secondary = null;
+	let size = 0;
+	return {
+		get(coreKey, overrideKey) {
+			const primaryInner = primary.get(coreKey);
+			if (primaryInner) {
+				const value = primaryInner.get(overrideKey);
+				if (value !== void 0 || primaryInner.has(overrideKey)) return value;
+			}
+			if (secondary) {
+				const secondaryInner = secondary.get(coreKey);
+				if (secondaryInner) {
+					const value = secondaryInner.get(overrideKey);
+					if (value !== void 0 || secondaryInner.has(overrideKey)) {
+						let promoteInner = primary.get(coreKey);
+						if (!promoteInner) {
+							promoteInner = /* @__PURE__ */ new Map();
+							primary.set(coreKey, promoteInner);
+						}
+						if (!promoteInner.has(overrideKey)) size++;
+						promoteInner.set(overrideKey, value);
+						return value;
+					}
+				}
+			}
+			return CACHE_MISS;
+		},
+		set(coreKey, overrideKey, value) {
+			if (size >= limit) {
+				secondary = primary;
+				primary = /* @__PURE__ */ new Map();
+				size = 0;
+			}
+			let inner = primary.get(coreKey);
+			if (!inner) {
+				inner = /* @__PURE__ */ new Map();
+				primary.set(coreKey, inner);
+			}
+			if (!inner.has(overrideKey)) size++;
+			inner.set(overrideKey, value);
+		}
+	};
+};
+var createLazyOverrideMerge = (cn, config) => {
+	let cache = null;
+	return (core, props) => {
+		if (!hasClassOverride(props)) return core;
+		const classVal = props.class;
+		const classNameVal = props.className;
+		if (classVal != null && classVal !== "" && typeof classVal !== "string" || classNameVal != null && classNameVal !== "" && typeof classNameVal !== "string") return cn(config, core, classVal, classNameVal);
+		cache ??= createNestedOverrideCache();
+		const coreKey = core ?? "";
+		const overrideKey = (typeof classVal === "string" ? classVal : "") + "\0" + (typeof classNameVal === "string" ? classNameVal : "");
+		const cached = cache.get(coreKey, overrideKey);
+		if (cached !== CACHE_MISS) return cached;
+		const merged = cn(config, core, classVal, classNameVal);
+		cache.set(coreKey, overrideKey, merged);
+		return merged;
+	};
 };
 function createState() {
 	let cachedTwMerge = null;
@@ -122,172 +354,368 @@ function createState() {
 	};
 }
 var state = createState();
+var synchronizeTwMergeConfig = (config) => {
+	if (!isEmptyObject(config.twMergeConfig) && !isEqual(config.twMergeConfig, state.cachedTwMergeConfig)) {
+		state.didTwMergeConfigChange = true;
+		state.cachedTwMergeConfig = config.twMergeConfig;
+	}
+};
+var compileVariants = (variants, variantKeys) => {
+	const compiledVariants = [];
+	for (let i = 0; i < variantKeys.length; i++) {
+		const key = variantKeys[i];
+		const values = variants[key];
+		compiledVariants.push({
+			key,
+			values,
+			isEmpty: isEmptyObject(values)
+		});
+	}
+	return compiledVariants;
+};
+var compileCompoundVariants = (compoundVariants) => {
+	if (!Array.isArray(compoundVariants) || compoundVariants.length === 0) return [];
+	const result = [];
+	for (let i = 0; i < compoundVariants.length; i++) {
+		const compoundVariant = compoundVariants[i];
+		const conditionKeys = [];
+		for (const key in compoundVariant) if (key !== "class" && key !== "className") conditionKeys.push(key);
+		result.push({
+			conditionKeys,
+			source: compoundVariant
+		});
+	}
+	return result;
+};
+var compileCompoundSlots = (compoundSlots) => {
+	if (!Array.isArray(compoundSlots) || compoundSlots.length === 0) return [];
+	const result = [];
+	for (let i = 0; i < compoundSlots.length; i++) {
+		const compoundSlot = compoundSlots[i];
+		const conditionKeys = [];
+		for (const key in compoundSlot) if (key !== "slots" && key !== "class" && key !== "className") conditionKeys.push(key);
+		result.push({
+			conditionKeys,
+			source: compoundSlot
+		});
+	}
+	return result;
+};
+var indexCompoundSlotsBySlot = (compiledCompoundSlots) => {
+	const index = {};
+	for (let i = 0; i < compiledCompoundSlots.length; i++) {
+		const compoundSlot = compiledCompoundSlots[i];
+		const slots = compoundSlot.source.slots;
+		if (!Array.isArray(slots)) continue;
+		for (let j = 0; j < slots.length; j++) {
+			const slotKey = slots[j];
+			if (!index[slotKey]) index[slotKey] = [];
+			index[slotKey].push(compoundSlot);
+		}
+	}
+	return index;
+};
+var resolveOptions = (options, configProp) => {
+	const { extend = null, slots: slotProps = {}, variants: variantsProps = {}, compoundVariants: compoundVariantsProps = [], compoundSlots: compoundSlotsProps = [], defaultVariants: defaultVariantsProps = {} } = options;
+	const config = {
+		...defaultConfig,
+		...configProp
+	};
+	const hasSlots = options.slots !== void 0;
+	const base = (extend == null ? void 0 : extend.base) ? cx(extend.base, options == null ? void 0 : options.base) : options == null ? void 0 : options.base;
+	const variants = (extend == null ? void 0 : extend.variants) && !isEmptyObject(extend.variants) ? mergeObjects(variantsProps, extend.variants) : variantsProps;
+	const defaultVariants = (extend == null ? void 0 : extend.defaultVariants) && !isEmptyObject(extend.defaultVariants) ? {
+		...extend.defaultVariants,
+		...defaultVariantsProps
+	} : defaultVariantsProps;
+	synchronizeTwMergeConfig(config);
+	const isExtendedSlotsEmpty = !(extend == null ? void 0 : extend.slots) || isEmptyObject(extend.slots);
+	const componentBase = hasSlots ? isExtendedSlotsEmpty && (extend == null ? void 0 : extend.base) ? cx(options == null ? void 0 : options.base, extend.base) : typeof (options == null ? void 0 : options.base) === "string" || (options == null ? void 0 : options.base) == null ? options.base : cx(options.base) : void 0;
+	const componentSlots = hasSlots ? {
+		base: componentBase,
+		...slotProps
+	} : {};
+	const slots = isExtendedSlotsEmpty ? componentSlots : joinObjects({ ...extend == null ? void 0 : extend.slots }, isEmptyObject(componentSlots) ? { base: options == null ? void 0 : options.base } : componentSlots);
+	const compoundVariants = !(extend == null ? void 0 : extend.compoundVariants) || isEmptyObject(extend.compoundVariants) ? compoundVariantsProps : flatMergeArrays(extend == null ? void 0 : extend.compoundVariants, compoundVariantsProps);
+	const compoundSlots = !(extend == null ? void 0 : extend.compoundSlots) || isEmptyObject(extend.compoundSlots) ? compoundSlotsProps : flatMergeArrays(extend == null ? void 0 : extend.compoundSlots, compoundSlotsProps);
+	const variantKeys = Object.keys(variants);
+	return {
+		config,
+		extend,
+		base,
+		variants,
+		defaultVariants,
+		slots,
+		compoundVariants,
+		compoundSlots,
+		compiledVariants: null,
+		compiledCompoundVariants: null,
+		compiledCompoundSlots: null,
+		compiledCompoundSlotsBySlot: null,
+		deferredError: compoundVariants && !Array.isArray(compoundVariants) ? /* @__PURE__ */ new TypeError(`The "compoundVariants" prop must be an array. Received: ${typeof compoundVariants}`) : compoundSlots && !Array.isArray(compoundSlots) ? /* @__PURE__ */ new TypeError(`The "compoundSlots" prop must be an array. Received: ${typeof compoundSlots}`) : null,
+		mode: hasSlots || !isExtendedSlotsEmpty ? "slots" : variantKeys.length === 0 ? "plain" : "variants",
+		slotKeys: null,
+		variantKeys
+	};
+};
+var compileResolvedOptions = (resolved) => {
+	if (resolved.compiledVariants !== null) return resolved;
+	resolved.compiledVariants = compileVariants(resolved.variants, resolved.variantKeys);
+	resolved.compiledCompoundVariants = compileCompoundVariants(resolved.compoundVariants);
+	resolved.compiledCompoundSlots = compileCompoundSlots(resolved.compoundSlots);
+	resolved.compiledCompoundSlotsBySlot = indexCompoundSlotsBySlot(resolved.compiledCompoundSlots);
+	resolved.slotKeys = resolved.slots && typeof resolved.slots === "object" ? Object.keys(resolved.slots) : [];
+	return resolved;
+};
+var EMPTY_ARRAY = [];
+var variantClassesScratch = [];
+var compoundClassesScratch = [];
+var compoundVariantBySlotScratch = [];
+var compoundSlotClassesScratch = [];
+var getCompleteProps = (defaultVariants, props, slotProps) => {
+	const result = {};
+	for (const key in defaultVariants) result[key] = defaultVariants[key];
+	if (props) {
+		for (const key in props) if (props[key] !== void 0) result[key] = props[key];
+	}
+	if (slotProps) {
+		for (const key in slotProps) if (slotProps[key] !== void 0) result[key] = slotProps[key];
+	}
+	return result;
+};
+var isNullishOrFalse = (value) => value == null || value === false;
+var matchesCompoundValue = (expected, actual) => {
+	if (!Array.isArray(expected)) return expected === actual || isNullishOrFalse(expected) && isNullishOrFalse(actual);
+	for (let i = 0; i < expected.length; i++) {
+		const expectedValue = expected[i];
+		if (expectedValue === actual || isNullishOrFalse(expectedValue) && isNullishOrFalse(actual)) return true;
+	}
+	return false;
+};
+var getVariantValue = (variant, defaultVariants, props, slotProps) => {
+	if (variant.isEmpty) return null;
+	const variantProp = (slotProps == null ? void 0 : slotProps[variant.key]) ?? (props == null ? void 0 : props[variant.key]);
+	if (variantProp === null) return null;
+	const variantKey = falsyToString(variantProp);
+	if (typeof variantKey === "object") return null;
+	const defaultVariantProp = defaultVariants == null ? void 0 : defaultVariants[variant.key];
+	const key = variantKey != null ? variantKey : falsyToString(defaultVariantProp);
+	return variant.values[key || "false"];
+};
+var matchesConditions = (compound, completeProps) => {
+	const { conditionKeys, source } = compound;
+	for (let i = 0; i < conditionKeys.length; i++) {
+		const key = conditionKeys[i];
+		if (!matchesCompoundValue(source[key], completeProps[key])) return false;
+	}
+	return true;
+};
+var pushCompoundClassForSlot = (result, slotKey, classValue) => {
+	if (typeof classValue === "string") {
+		if (slotKey === "base") result.push(classValue);
+	} else if (classValue && typeof classValue === "object" && classValue[slotKey]) result.push(classValue[slotKey]);
+};
+var getVariantClassNames = (variants, defaultVariants, props) => {
+	const result = variantClassesScratch;
+	result.length = 0;
+	for (let i = 0; i < variants.length; i++) {
+		const value = getVariantValue(variants[i], defaultVariants, props);
+		if (value) result.push(value);
+	}
+	return result;
+};
+var getVariantClassNamesBySlot = (slotKey, variants, defaultVariants, props, slotProps) => {
+	const result = variantClassesScratch;
+	result.length = 0;
+	for (let i = 0; i < variants.length; i++) {
+		const variantValue = getVariantValue(variants[i], defaultVariants, props, slotProps);
+		const value = slotKey === "base" && typeof variantValue === "string" ? variantValue : variantValue && variantValue[slotKey];
+		if (value) result.push(value);
+	}
+	return result;
+};
+var getCompoundVariantClasses = (compoundVariants, completeProps) => {
+	const result = compoundClassesScratch;
+	result.length = 0;
+	for (let i = 0; i < compoundVariants.length; i++) {
+		const compoundVariant = compoundVariants[i];
+		if (!matchesConditions(compoundVariant, completeProps)) continue;
+		if (compoundVariant.source.class) result.push(compoundVariant.source.class);
+		if (compoundVariant.source.className) result.push(compoundVariant.source.className);
+	}
+	return result;
+};
+var getCompoundVariantClassesBySlot = (slotKey, compoundVariants, completeProps) => {
+	const result = compoundVariantBySlotScratch;
+	result.length = 0;
+	for (let i = 0; i < compoundVariants.length; i++) {
+		const compoundVariant = compoundVariants[i];
+		if (!matchesConditions(compoundVariant, completeProps)) continue;
+		pushCompoundClassForSlot(result, slotKey, compoundVariant.source.class);
+		pushCompoundClassForSlot(result, slotKey, compoundVariant.source.className);
+	}
+	return result;
+};
+var getCompoundSlotClasses = (compoundSlotsForKey, completeProps) => {
+	const result = compoundSlotClassesScratch;
+	result.length = 0;
+	for (let i = 0; i < compoundSlotsForKey.length; i++) {
+		const compoundSlot = compoundSlotsForKey[i];
+		if (!matchesConditions(compoundSlot, completeProps)) continue;
+		if (compoundSlot.source.class) result.push(compoundSlot.source.class);
+		if (compoundSlot.source.className) result.push(compoundSlot.source.className);
+	}
+	return result;
+};
+var createPlainResolver = (resolved, cn) => {
+	const { base, config } = resolved;
+	let core = CACHE_MISS;
+	const mergeOverride = createLazyOverrideMerge(cn, config);
+	return ((props) => {
+		if (core === CACHE_MISS) core = cn(config, base);
+		return mergeOverride(core, props);
+	});
+};
+var createVariantResolver = (resolved, cn) => {
+	const { base, config, defaultVariants, deferredError, variantKeys } = resolved;
+	let compiledCompoundVariants = resolved.compiledCompoundVariants;
+	let compiledVariants = resolved.compiledVariants;
+	let compiledCompoundSlots = EMPTY_ARRAY;
+	let cache = null;
+	const mergeOverride = createLazyOverrideMerge(cn, config);
+	let coldInvokesRemaining = 1;
+	const computeCore = (props) => {
+		const compoundClasses = compiledCompoundVariants.length > 0 ? getCompoundVariantClasses(compiledCompoundVariants, getCompleteProps(defaultVariants, props)) : void 0;
+		return cn(config, base, getVariantClassNames(compiledVariants, defaultVariants, props), compoundClasses);
+	};
+	return ((props) => {
+		if (deferredError) throw deferredError;
+		if (compiledVariants === null || compiledCompoundVariants === null) {
+			compileResolvedOptions(resolved);
+			compiledVariants = resolved.compiledVariants;
+			compiledCompoundVariants = resolved.compiledCompoundVariants;
+			compiledCompoundSlots = resolved.compiledCompoundSlots ?? EMPTY_ARRAY;
+		}
+		let core;
+		if (coldInvokesRemaining > 0) {
+			coldInvokesRemaining--;
+			core = computeCore(props);
+		} else {
+			cache ??= createResultCache();
+			const propsFingerprint = buildPropsFingerprint(variantKeys, defaultVariants, props);
+			if (propsFingerprint !== null) {
+				const compoundsSig = compiledCompoundVariants.length > 0 || compiledCompoundSlots.length > 0 ? buildCompoundsSignature(compiledCompoundVariants, compiledCompoundSlots) : "";
+				const cacheKey = propsFingerprint + "#" + compoundsSig;
+				const cached = cache.get(cacheKey);
+				if (cached !== CACHE_MISS) core = cached;
+				else {
+					core = computeCore(props);
+					cache.set(cacheKey, core);
+				}
+			} else core = computeCore(props);
+		}
+		return mergeOverride(core, props);
+	});
+};
+var createSlotsResolver = (resolved, cn) => {
+	const { config, defaultVariants, deferredError, slots, variantKeys } = resolved;
+	let compoundVariants = null;
+	let compoundSlots = null;
+	let keys = null;
+	let slotComputers = null;
+	let hasCompounds = false;
+	let mergeOverride = null;
+	let parentCache = null;
+	let coldParentInvokesRemaining = 1;
+	const ensureCompiled = () => {
+		if (keys !== null) return;
+		if (resolved.compiledVariants === null || resolved.compiledCompoundVariants === null || resolved.compiledCompoundSlots === null || resolved.compiledCompoundSlotsBySlot === null || resolved.slotKeys === null) compileResolvedOptions(resolved);
+		const variants = resolved.compiledVariants;
+		compoundVariants = resolved.compiledCompoundVariants;
+		compoundSlots = resolved.compiledCompoundSlots;
+		const compoundSlotsBySlot = resolved.compiledCompoundSlotsBySlot;
+		keys = resolved.slotKeys;
+		hasCompounds = compoundVariants.length > 0 || compoundSlots.length > 0;
+		mergeOverride = createLazyOverrideMerge(cn, config);
+		const computers = new Array(keys.length);
+		for (let i = 0; i < keys.length; i++) {
+			const slotKey = keys[i];
+			const compoundSlotsForKey = compoundSlotsBySlot[slotKey] ?? EMPTY_ARRAY;
+			computers[i] = (propsRef, slotProps) => {
+				const completeProps = hasCompounds ? getCompleteProps(defaultVariants, propsRef, slotProps) : void 0;
+				const compoundVariantClasses = completeProps ? getCompoundVariantClassesBySlot(slotKey, compoundVariants, completeProps) : void 0;
+				const compoundSlotClasses = completeProps ? getCompoundSlotClasses(compoundSlotsForKey, completeProps) : void 0;
+				return cn(config, slots[slotKey], getVariantClassNamesBySlot(slotKey, variants, defaultVariants, propsRef, slotProps), compoundVariantClasses, compoundSlotClasses);
+			};
+		}
+		slotComputers = computers;
+	};
+	const createSlotsResult = (props) => {
+		const slotKeys = keys;
+		const computers = slotComputers;
+		const overrideMerge = mergeOverride;
+		const result = {};
+		for (let i = 0; i < slotKeys.length; i++) {
+			const compute = computers[i];
+			const core = compute(props);
+			result[slotKeys[i]] = (slotProps) => {
+				if (slotProps == null) return core;
+				let hasVariantOverride = false;
+				for (const key in slotProps) {
+					if (key === "class" || key === "className") continue;
+					if (slotProps[key] !== void 0) {
+						hasVariantOverride = true;
+						break;
+					}
+				}
+				if (!hasVariantOverride) return overrideMerge(core, slotProps);
+				return overrideMerge(compute(props, slotProps), slotProps);
+			};
+		}
+		return result;
+	};
+	return ((props) => {
+		if (deferredError) throw deferredError;
+		ensureCompiled();
+		if (coldParentInvokesRemaining > 0) {
+			coldParentInvokesRemaining--;
+			return createSlotsResult(props);
+		}
+		const propsFingerprint = buildPropsFingerprint(variantKeys, defaultVariants, props);
+		if (propsFingerprint === null) return createSlotsResult(props);
+		const compoundsSig = hasCompounds ? buildCompoundsSignature(compoundVariants, compoundSlots) : "";
+		const cacheKey = propsFingerprint + "#" + compoundsSig;
+		parentCache ??= createBoundedCache();
+		const cached = parentCache.get(cacheKey);
+		if (cached !== CACHE_MISS) return cached;
+		const next = createSlotsResult(props);
+		parentCache.set(cacheKey, next);
+		return next;
+	});
+};
+var createClassResolver = (resolved, cn) => {
+	if (resolved.mode === "plain") return createPlainResolver(resolved, cn);
+	let resolver;
+	return ((props) => {
+		resolver ??= resolved.mode === "slots" ? createSlotsResolver(resolved, cn) : createVariantResolver(resolved, cn);
+		return resolver(props);
+	});
+};
+var attachComponentMetadata = (component, resolved) => {
+	component.variantKeys = resolved.variantKeys;
+	component.extend = resolved.extend;
+	component.base = resolved.base;
+	component.slots = resolved.slots;
+	component.variants = resolved.variants;
+	component.defaultVariants = resolved.defaultVariants;
+	component.compoundSlots = resolved.compoundSlots;
+	component.compoundVariants = resolved.compoundVariants;
+};
 var getTailwindVariants = (cn) => {
 	const tv = (options, configProp) => {
-		const { extend = null, slots: slotProps = {}, variants: variantsProps = {}, compoundVariants: compoundVariantsProps = [], compoundSlots = [], defaultVariants: defaultVariantsProps = {} } = options;
-		const config = {
-			...defaultConfig,
-			...configProp
-		};
-		const base = extend?.base ? cx(extend.base, options?.base) : options?.base;
-		const variants = extend?.variants && !isEmptyObject(extend.variants) ? mergeObjects(variantsProps, extend.variants) : variantsProps;
-		const defaultVariants = extend?.defaultVariants && !isEmptyObject(extend.defaultVariants) ? {
-			...extend.defaultVariants,
-			...defaultVariantsProps
-		} : defaultVariantsProps;
-		if (!isEmptyObject(config.twMergeConfig) && !isEqual(config.twMergeConfig, state.cachedTwMergeConfig)) {
-			state.didTwMergeConfigChange = true;
-			state.cachedTwMergeConfig = config.twMergeConfig;
-		}
-		const isExtendedSlotsEmpty = isEmptyObject(extend?.slots);
-		const componentSlots = !isEmptyObject(slotProps) ? {
-			base: cx(options?.base, isExtendedSlotsEmpty && extend?.base),
-			...slotProps
-		} : {};
-		const slots = isExtendedSlotsEmpty ? componentSlots : joinObjects({ ...extend?.slots }, isEmptyObject(componentSlots) ? { base: options?.base } : componentSlots);
-		const compoundVariants = isEmptyObject(extend?.compoundVariants) ? compoundVariantsProps : flatMergeArrays(extend?.compoundVariants, compoundVariantsProps);
-		const component = (props) => {
-			if (isEmptyObject(variants) && isEmptyObject(slotProps) && isExtendedSlotsEmpty) return cn(base, props?.class, props?.className)(config);
-			if (compoundVariants && !Array.isArray(compoundVariants)) throw new TypeError(`The "compoundVariants" prop must be an array. Received: ${typeof compoundVariants}`);
-			if (compoundSlots && !Array.isArray(compoundSlots)) throw new TypeError(`The "compoundSlots" prop must be an array. Received: ${typeof compoundSlots}`);
-			const getVariantValue = (variant, vrs = variants, _slotKey = null, slotProps2 = null) => {
-				const variantObj = vrs[variant];
-				if (!variantObj || isEmptyObject(variantObj)) return null;
-				const variantProp = slotProps2?.[variant] ?? props?.[variant];
-				if (variantProp === null) return null;
-				const variantKey = falsyToString(variantProp);
-				if (typeof variantKey === "object") return null;
-				const defaultVariantProp = defaultVariants?.[variant];
-				return variantObj[(variantKey != null ? variantKey : falsyToString(defaultVariantProp)) || "false"];
-			};
-			const getVariantClassNames = () => {
-				if (!variants) return null;
-				const keys = Object.keys(variants);
-				const result = [];
-				for (let i = 0; i < keys.length; i++) {
-					const value = getVariantValue(keys[i], variants);
-					if (value) result.push(value);
-				}
-				return result;
-			};
-			const getVariantClassNamesBySlotKey = (slotKey, slotProps2) => {
-				if (!variants || typeof variants !== "object") return null;
-				const result = [];
-				for (const variant in variants) {
-					const variantValue = getVariantValue(variant, variants, slotKey, slotProps2);
-					const value = slotKey === "base" && typeof variantValue === "string" ? variantValue : variantValue && variantValue[slotKey];
-					if (value) result.push(value);
-				}
-				return result;
-			};
-			const propsWithoutUndefined = {};
-			for (const prop in props) {
-				const value = props[prop];
-				if (value !== void 0) propsWithoutUndefined[prop] = value;
-			}
-			const getCompleteProps = (key, slotProps2) => {
-				const initialProp = typeof props?.[key] === "object" ? { [key]: props[key]?.initial } : {};
-				return {
-					...defaultVariants,
-					...propsWithoutUndefined,
-					...initialProp,
-					...slotProps2
-				};
-			};
-			const getCompoundVariantsValue = (cv = [], slotProps2) => {
-				const result = [];
-				const cvLength = cv.length;
-				for (let i = 0; i < cvLength; i++) {
-					const { class: tvClass, className: tvClassName, ...compoundVariantOptions } = cv[i];
-					let isValid = true;
-					const completeProps = getCompleteProps(null, slotProps2);
-					for (const key in compoundVariantOptions) {
-						const value = compoundVariantOptions[key];
-						const completePropsValue = completeProps[key];
-						if (Array.isArray(value)) {
-							if (!value.includes(completePropsValue)) {
-								isValid = false;
-								break;
-							}
-						} else {
-							if ((value == null || value === false) && (completePropsValue == null || completePropsValue === false)) continue;
-							if (completePropsValue !== value) {
-								isValid = false;
-								break;
-							}
-						}
-					}
-					if (isValid) {
-						if (tvClass) result.push(tvClass);
-						if (tvClassName) result.push(tvClassName);
-					}
-				}
-				return result;
-			};
-			const getCompoundVariantClassNamesBySlot = (slotProps2) => {
-				const compoundClassNames = getCompoundVariantsValue(compoundVariants, slotProps2);
-				if (!Array.isArray(compoundClassNames)) return compoundClassNames;
-				const result = {};
-				const cnFn = cn;
-				for (let i = 0; i < compoundClassNames.length; i++) {
-					const className = compoundClassNames[i];
-					if (typeof className === "string") result.base = cnFn(result.base, className)(config);
-					else if (typeof className === "object") for (const slot in className) result[slot] = cnFn(result[slot], className[slot])(config);
-				}
-				return result;
-			};
-			const getCompoundSlotClassNameBySlot = (slotProps2) => {
-				if (compoundSlots.length < 1) return null;
-				const result = {};
-				const completeProps = getCompleteProps(null, slotProps2);
-				for (let i = 0; i < compoundSlots.length; i++) {
-					const { slots: slots2 = [], class: slotClass, className: slotClassName, ...slotVariants } = compoundSlots[i];
-					if (!isEmptyObject(slotVariants)) {
-						let isValid = true;
-						for (const key in slotVariants) {
-							const completePropsValue = completeProps[key];
-							const slotVariantValue = slotVariants[key];
-							if (completePropsValue === void 0 || (Array.isArray(slotVariantValue) ? !slotVariantValue.includes(completePropsValue) : slotVariantValue !== completePropsValue)) {
-								isValid = false;
-								break;
-							}
-						}
-						if (!isValid) continue;
-					}
-					for (let j = 0; j < slots2.length; j++) {
-						const slotName = slots2[j];
-						if (!result[slotName]) result[slotName] = [];
-						result[slotName].push([slotClass, slotClassName]);
-					}
-				}
-				return result;
-			};
-			if (!isEmptyObject(slotProps) || !isExtendedSlotsEmpty) {
-				const slotsFns = {};
-				if (typeof slots === "object" && !isEmptyObject(slots)) {
-					const cnFn = cn;
-					for (const slotKey in slots) slotsFns[slotKey] = (slotProps2) => {
-						const compoundVariantClasses = getCompoundVariantClassNamesBySlot(slotProps2);
-						const compoundSlotClasses = getCompoundSlotClassNameBySlot(slotProps2);
-						return cnFn(slots[slotKey], getVariantClassNamesBySlotKey(slotKey, slotProps2), compoundVariantClasses ? compoundVariantClasses[slotKey] : void 0, compoundSlotClasses ? compoundSlotClasses[slotKey] : void 0, slotProps2?.class, slotProps2?.className)(config);
-					};
-				}
-				return slotsFns;
-			}
-			return cn(base, getVariantClassNames(), getCompoundVariantsValue(compoundVariants), props?.class, props?.className)(config);
-		};
-		const getVariantKeys = () => {
-			if (!variants || typeof variants !== "object") return;
-			return Object.keys(variants);
-		};
-		component.variantKeys = getVariantKeys();
-		component.extend = extend;
-		component.base = base;
-		component.slots = slots;
-		component.variants = variants;
-		component.defaultVariants = defaultVariants;
-		component.compoundSlots = compoundSlots;
-		component.compoundVariants = compoundVariants;
+		const resolved = resolveOptions(options, configProp);
+		const component = createClassResolver(resolved, cn);
+		attachComponentMetadata(component, resolved);
 		return component;
 	};
 	const createTV = (configProp) => {
@@ -299,15 +727,14 @@ var getTailwindVariants = (cn) => {
 	};
 };
 //#endregion
-//#region node_modules/tailwind-merge/dist/bundle-mjs.mjs
-/**
-* Concatenates two arrays faster than the array spread operator.
-*/
+//#region node_modules/tailwind-variants/dist/index.js
 var concatArrays = (array1, array2) => {
-	const combinedArray = new Array(array1.length + array2.length);
-	for (let i = 0; i < array1.length; i++) combinedArray[i] = array1[i];
-	for (let i = 0; i < array2.length; i++) combinedArray[array1.length + i] = array2[i];
-	return combinedArray;
+	const length1 = array1.length;
+	const length2 = array2.length;
+	const combined = new Array(length1 + length2);
+	for (let i = 0; i < length1; i++) combined[i] = array1[i];
+	for (let i = 0; i < length2; i++) combined[length1 + i] = array2[i];
+	return combined;
 };
 var createClassValidatorObject = (classGroupId, validator) => ({
 	classGroupId,
@@ -325,7 +752,7 @@ var createClassGroupUtils = (config) => {
 	const classMap = createClassMap(config);
 	const { conflictingClassGroups, conflictingClassGroupModifiers } = config;
 	const getClassGroupId = (className) => {
-		if (className.startsWith("[") && className.endsWith("]")) return getGroupIdForArbitraryProperty(className);
+		if (className[0] === "[" && className[className.length - 1] === "]") return getGroupIdForArbitraryProperty(className);
 		const classParts = className.split(CLASS_PART_SEPARATOR);
 		return getGroupRecursive(classParts, classParts[0] === "" && classParts.length > 1 ? 1 : 0, classMap);
 	};
@@ -358,25 +785,18 @@ var getGroupRecursive = (classParts, startIndex, classPartObject) => {
 	if (validators === null) return;
 	const classRest = startIndex === 0 ? classParts.join(CLASS_PART_SEPARATOR) : classParts.slice(startIndex).join(CLASS_PART_SEPARATOR);
 	const validatorsLength = validators.length;
-	for (let i = 0; i < validatorsLength; i++) {
-		const validatorObj = validators[i];
-		if (validatorObj.validator(classRest)) return validatorObj.classGroupId;
+	for (let index = 0; index < validatorsLength; index++) {
+		const validatorObject = validators[index];
+		if (validatorObject.validator(classRest)) return validatorObject.classGroupId;
 	}
 };
-/**
-* Get the class group ID for an arbitrary property.
-*
-* @param className - The class name to get the group ID for. Is expected to be string starting with `[` and ending with `]`.
-*/
-var getGroupIdForArbitraryProperty = (className) => className.slice(1, -1).indexOf(":") === -1 ? void 0 : (() => {
+var getGroupIdForArbitraryProperty = (className) => {
 	const content = className.slice(1, -1);
 	const colonIndex = content.indexOf(":");
+	if (colonIndex === -1) return;
 	const property = content.slice(0, colonIndex);
 	return property ? ARBITRARY_PROPERTY_PREFIX + property : void 0;
-})();
-/**
-* Exported for testing only
-*/
+};
 var createClassMap = (config) => {
 	const { theme, classGroups } = config;
 	return processClassGroups(classGroups, theme);
@@ -390,9 +810,9 @@ var processClassGroups = (classGroups, theme) => {
 	return classMap;
 };
 var processClassesRecursively = (classGroup, classPartObject, classGroupId, theme) => {
-	const len = classGroup.length;
-	for (let i = 0; i < len; i++) {
-		const classDefinition = classGroup[i];
+	const length = classGroup.length;
+	for (let index = 0; index < length; index++) {
+		const classDefinition = classGroup[index];
 		processClassDefinition(classDefinition, classPartObject, classGroupId, theme);
 	}
 };
@@ -421,18 +841,18 @@ var processFunctionDefinition = (classDefinition, classPartObject, classGroupId,
 };
 var processObjectDefinition = (classDefinition, classPartObject, classGroupId, theme) => {
 	const entries = Object.entries(classDefinition);
-	const len = entries.length;
-	for (let i = 0; i < len; i++) {
-		const [key, value] = entries[i];
+	const length = entries.length;
+	for (let index = 0; index < length; index++) {
+		const [key, value] = entries[index];
 		processClassesRecursively(value, getPart(classPartObject, key), classGroupId, theme);
 	}
 };
 var getPart = (classPartObject, path) => {
 	let current = classPartObject;
 	const parts = path.split(CLASS_PART_SEPARATOR);
-	const len = parts.length;
-	for (let i = 0; i < len; i++) {
-		const part = parts[i];
+	const length = parts.length;
+	for (let index = 0; index < length; index++) {
+		const part = parts[index];
 		let next = current.nextPart.get(part);
 		if (!next) {
 			next = createClassPartObject();
@@ -442,130 +862,74 @@ var getPart = (classPartObject, path) => {
 	}
 	return current;
 };
-var isThemeGetter = (func) => "isThemeGetter" in func && func.isThemeGetter === true;
-var createLruCache = (maxCacheSize) => {
-	if (maxCacheSize < 1) return {
-		get: () => void 0,
-		set: () => {}
-	};
-	let cacheSize = 0;
-	let cache = Object.create(null);
-	let previousCache = Object.create(null);
-	const update = (key, value) => {
-		cache[key] = value;
-		cacheSize++;
-		if (cacheSize > maxCacheSize) {
-			cacheSize = 0;
-			previousCache = cache;
-			cache = Object.create(null);
-		}
-	};
-	return {
-		get(key) {
-			let value = cache[key];
-			if (value !== void 0) return value;
-			if ((value = previousCache[key]) !== void 0) {
-				update(key, value);
-				return value;
-			}
-		},
-		set(key, value) {
-			if (key in cache) cache[key] = value;
-			else update(key, value);
-		}
-	};
-};
+var isThemeGetter = (classDefinition) => "isThemeGetter" in classDefinition && classDefinition.isThemeGetter === true;
 var IMPORTANT_MODIFIER = "!";
-var MODIFIER_SEPARATOR = ":";
-var EMPTY_MODIFIERS = [];
-var createResultObject = (modifiers, hasImportantModifier, baseClassName, maybePostfixModifierPosition, isExternal) => ({
+var CHAR_MODIFIER_SEPARATOR = 58;
+var CHAR_POSTFIX_SEPARATOR = 47;
+var CHAR_OPEN_BRACKET = 91;
+var CHAR_CLOSE_BRACKET = 93;
+var CHAR_OPEN_PAREN = 40;
+var CHAR_CLOSE_PAREN = 41;
+var CHAR_IMPORTANT = 33;
+var createResultObject = (modifiers, hasImportantModifier, baseClassName, maybePostfixModifierPosition) => ({
 	modifiers,
 	hasImportantModifier,
 	baseClassName,
 	maybePostfixModifierPosition,
-	isExternal
+	isExternal: void 0
 });
-var createParseClassName = (config) => {
-	const { prefix, experimentalParseClassName } = config;
-	/**
-	* Parse class name into parts.
-	*
-	* Inspired by `splitAtTopLevelOnly` used in Tailwind CSS
-	* @see https://github.com/tailwindlabs/tailwindcss/blob/v3.2.2/src/util/splitAtTopLevelOnly.js
-	*/
-	let parseClassName = (className) => {
-		const modifiers = [];
-		let bracketDepth = 0;
-		let parenDepth = 0;
-		let modifierStart = 0;
-		let postfixModifierPosition;
-		const len = className.length;
-		for (let index = 0; index < len; index++) {
-			const currentCharacter = className[index];
-			if (bracketDepth === 0 && parenDepth === 0) {
-				if (currentCharacter === MODIFIER_SEPARATOR) {
-					modifiers.push(className.slice(modifierStart, index));
-					modifierStart = index + 1;
-					continue;
-				}
-				if (currentCharacter === "/") {
-					postfixModifierPosition = index;
-					continue;
-				}
+var parseClassName = (className) => {
+	const modifiers = [];
+	let bracketDepth = 0;
+	let parenDepth = 0;
+	let modifierStart = 0;
+	let postfixModifierPosition;
+	const len = className.length;
+	for (let index = 0; index < len; index++) {
+		const charCode = className.charCodeAt(index);
+		if (bracketDepth === 0 && parenDepth === 0) {
+			if (charCode === CHAR_MODIFIER_SEPARATOR) {
+				modifiers.push(className.slice(modifierStart, index));
+				modifierStart = index + 1;
+				continue;
 			}
-			if (currentCharacter === "[") bracketDepth++;
-			else if (currentCharacter === "]") bracketDepth--;
-			else if (currentCharacter === "(") parenDepth++;
-			else if (currentCharacter === ")") parenDepth--;
+			if (charCode === CHAR_POSTFIX_SEPARATOR) {
+				postfixModifierPosition = index;
+				continue;
+			}
 		}
-		const baseClassNameWithImportantModifier = modifiers.length === 0 ? className : className.slice(modifierStart);
-		let baseClassName = baseClassNameWithImportantModifier;
-		let hasImportantModifier = false;
-		if (baseClassNameWithImportantModifier.endsWith(IMPORTANT_MODIFIER)) {
-			baseClassName = baseClassNameWithImportantModifier.slice(0, -1);
-			hasImportantModifier = true;
-		} else if (baseClassNameWithImportantModifier.startsWith(IMPORTANT_MODIFIER)) {
-			baseClassName = baseClassNameWithImportantModifier.slice(1);
-			hasImportantModifier = true;
-		}
-		const maybePostfixModifierPosition = postfixModifierPosition && postfixModifierPosition > modifierStart ? postfixModifierPosition - modifierStart : void 0;
-		return createResultObject(modifiers, hasImportantModifier, baseClassName, maybePostfixModifierPosition);
-	};
-	if (prefix) {
-		const fullPrefix = prefix + MODIFIER_SEPARATOR;
-		const parseClassNameOriginal = parseClassName;
-		parseClassName = (className) => className.startsWith(fullPrefix) ? parseClassNameOriginal(className.slice(fullPrefix.length)) : createResultObject(EMPTY_MODIFIERS, false, className, void 0, true);
+		if (charCode === CHAR_OPEN_BRACKET) bracketDepth++;
+		else if (charCode === CHAR_CLOSE_BRACKET) bracketDepth--;
+		else if (charCode === CHAR_OPEN_PAREN) parenDepth++;
+		else if (charCode === CHAR_CLOSE_PAREN) parenDepth--;
 	}
-	if (experimentalParseClassName) {
-		const parseClassNameOriginal = parseClassName;
-		parseClassName = (className) => experimentalParseClassName({
-			className,
-			parseClassName: parseClassNameOriginal
-		});
+	const baseClassNameWithImportantModifier = modifiers.length === 0 ? className : className.slice(modifierStart);
+	let baseClassName = baseClassNameWithImportantModifier;
+	let hasImportantModifier = false;
+	const lastIndex = baseClassNameWithImportantModifier.length - 1;
+	if (baseClassNameWithImportantModifier.charCodeAt(lastIndex) === CHAR_IMPORTANT) {
+		baseClassName = baseClassNameWithImportantModifier.slice(0, -1);
+		hasImportantModifier = true;
+	} else if (baseClassNameWithImportantModifier.charCodeAt(0) === CHAR_IMPORTANT) {
+		baseClassName = baseClassNameWithImportantModifier.slice(1);
+		hasImportantModifier = true;
 	}
-	return parseClassName;
+	const maybePostfixModifierPosition = postfixModifierPosition && postfixModifierPosition > modifierStart ? postfixModifierPosition - modifierStart : void 0;
+	return createResultObject(modifiers, hasImportantModifier, baseClassName, maybePostfixModifierPosition);
 };
-/**
-* Sorts modifiers according to following schema:
-* - Predefined modifiers are sorted alphabetically
-* - When an arbitrary variant appears, it must be preserved which modifiers are before and after it
-*/
 var createSortModifiers = (config) => {
-	const modifierWeights = /* @__PURE__ */ new Map();
-	config.orderSensitiveModifiers.forEach((mod, index) => {
-		modifierWeights.set(mod, 1e6 + index);
-	});
+	const orderSensitiveModifiers = new Set(config.orderSensitiveModifiers);
 	return (modifiers) => {
 		const result = [];
 		let currentSegment = [];
-		for (let i = 0; i < modifiers.length; i++) {
-			const modifier = modifiers[i];
+		for (let index = 0; index < modifiers.length; index++) {
+			const modifier = modifiers[index];
 			const isArbitrary = modifier[0] === "[";
-			const isOrderSensitive = modifierWeights.has(modifier);
+			const isOrderSensitive = orderSensitiveModifiers.has(modifier);
 			if (isArbitrary || isOrderSensitive) {
 				if (currentSegment.length > 0) {
 					currentSegment.sort();
-					result.push(...currentSegment);
+					for (let segmentIndex = 0; segmentIndex < currentSegment.length; segmentIndex++) result.push(currentSegment[segmentIndex]);
 					currentSegment = [];
 				}
 				result.push(modifier);
@@ -573,120 +937,204 @@ var createSortModifiers = (config) => {
 		}
 		if (currentSegment.length > 0) {
 			currentSegment.sort();
-			result.push(...currentSegment);
+			for (let segmentIndex = 0; segmentIndex < currentSegment.length; segmentIndex++) result.push(currentSegment[segmentIndex]);
 		}
 		return result;
 	};
 };
-var createConfigUtils = (config) => ({
-	cache: createLruCache(config.cacheSize),
-	parseClassName: createParseClassName(config),
-	sortModifiers: createSortModifiers(config),
-	...createClassGroupUtils(config)
-});
-var SPLIT_CLASSES_REGEX = /\s+/;
-var mergeClassList = (classList, configUtils) => {
-	const { parseClassName, getClassGroupId, getConflictingClassGroupIds, sortModifiers } = configUtils;
-	/**
-	* Set of classGroupIds in following format:
-	* `{importantModifier}{variantModifiers}{classGroupId}`
-	* @example 'float'
-	* @example 'hover:focus:bg-color'
-	* @example 'md:!pr'
-	*/
-	const classGroupsInConflict = [];
-	const classNames = classList.trim().split(SPLIT_CLASSES_REGEX);
-	let result = "";
-	for (let index = classNames.length - 1; index >= 0; index -= 1) {
-		const originalClassName = classNames[index];
-		const { isExternal, modifiers, hasImportantModifier, baseClassName, maybePostfixModifierPosition } = parseClassName(originalClassName);
-		if (isExternal) {
-			result = originalClassName + (result.length > 0 ? " " + result : result);
-			continue;
+var EXTERNAL_DESCRIPTOR = {
+	isExternal: true,
+	classId: -1,
+	conflictIds: []
+};
+var DESCRIPTOR_CACHE_SIZE = 4096;
+var MAX_CONFLICT_KEYS = 16384;
+var createConfigUtils = (config) => {
+	const sortModifiers = createSortModifiers(config);
+	const postfixLookupClassGroupIds = createPostfixLookupClassGroupIds(config);
+	const { getClassGroupId, getConflictingClassGroupIds } = createClassGroupUtils(config);
+	let descriptorCache = /* @__PURE__ */ Object.create(null);
+	let previousDescriptorCache = /* @__PURE__ */ Object.create(null);
+	let descriptorCacheSize = 0;
+	let claimedGeneration = /* @__PURE__ */ new Int32Array(256);
+	let currentGeneration = 0;
+	let keepFlags = /* @__PURE__ */ new Uint8Array(64);
+	let splitSawNonSpaceWhitespace = false;
+	const splitClassList = (classList) => {
+		const tokens = [];
+		const length = classList.length;
+		let tokenStart = -1;
+		splitSawNonSpaceWhitespace = false;
+		for (let index = 0; index < length; index++) {
+			const charCode = classList.charCodeAt(index);
+			if (charCode === 32) {
+				if (tokenStart !== -1) {
+					tokens.push(classList.slice(tokenStart, index));
+					tokenStart = -1;
+				}
+			} else if (charCode >= 9 && charCode <= 13) {
+				splitSawNonSpaceWhitespace = true;
+				if (tokenStart !== -1) {
+					tokens.push(classList.slice(tokenStart, index));
+					tokenStart = -1;
+				}
+			} else if (tokenStart === -1) tokenStart = index;
 		}
-		let hasPostfixModifier = !!maybePostfixModifierPosition;
-		let classGroupId = getClassGroupId(hasPostfixModifier ? baseClassName.substring(0, maybePostfixModifierPosition) : baseClassName);
+		if (tokenStart !== -1) tokens.push(classList.slice(tokenStart));
+		return tokens;
+	};
+	const conflictKeyIds = /* @__PURE__ */ new Map();
+	let nextConflictKeyId = 0;
+	const internConflictKey = (conflictKey) => {
+		let id = conflictKeyIds.get(conflictKey);
+		if (id === void 0) {
+			id = nextConflictKeyId++;
+			conflictKeyIds.set(conflictKey, id);
+			if (id >= claimedGeneration.length) {
+				const grown = new Int32Array(claimedGeneration.length * 2);
+				grown.set(claimedGeneration);
+				claimedGeneration = grown;
+			}
+		}
+		return id;
+	};
+	const computeClassDescriptor = (originalClassName) => {
+		const { isExternal, modifiers, hasImportantModifier, baseClassName, maybePostfixModifierPosition } = parseClassName(originalClassName);
+		if (isExternal) return EXTERNAL_DESCRIPTOR;
+		let hasPostfixModifier = Boolean(maybePostfixModifierPosition);
+		let classGroupId;
+		if (hasPostfixModifier) {
+			const baseClassNameWithoutPostfix = baseClassName.substring(0, maybePostfixModifierPosition);
+			classGroupId = getClassGroupId(baseClassNameWithoutPostfix);
+			const classGroupIdWithPostfix = classGroupId && postfixLookupClassGroupIds[classGroupId] ? getClassGroupId(baseClassName) : void 0;
+			if (classGroupIdWithPostfix && classGroupIdWithPostfix !== classGroupId) {
+				classGroupId = classGroupIdWithPostfix;
+				hasPostfixModifier = false;
+			}
+		} else classGroupId = getClassGroupId(baseClassName);
 		if (!classGroupId) {
-			if (!hasPostfixModifier) {
-				result = originalClassName + (result.length > 0 ? " " + result : result);
-				continue;
-			}
+			if (!hasPostfixModifier) return EXTERNAL_DESCRIPTOR;
 			classGroupId = getClassGroupId(baseClassName);
-			if (!classGroupId) {
-				result = originalClassName + (result.length > 0 ? " " + result : result);
-				continue;
-			}
+			if (!classGroupId) return EXTERNAL_DESCRIPTOR;
 			hasPostfixModifier = false;
 		}
 		const variantModifier = modifiers.length === 0 ? "" : modifiers.length === 1 ? modifiers[0] : sortModifiers(modifiers).join(":");
 		const modifierId = hasImportantModifier ? variantModifier + IMPORTANT_MODIFIER : variantModifier;
-		const classId = modifierId + classGroupId;
-		if (classGroupsInConflict.indexOf(classId) > -1) continue;
-		classGroupsInConflict.push(classId);
 		const conflictGroups = getConflictingClassGroupIds(classGroupId, hasPostfixModifier);
-		for (let i = 0; i < conflictGroups.length; ++i) {
-			const group = conflictGroups[i];
-			classGroupsInConflict.push(modifierId + group);
+		const conflictIds = [];
+		for (let index = 0; index < conflictGroups.length; index++) conflictIds.push(internConflictKey(modifierId + conflictGroups[index]));
+		return {
+			isExternal: false,
+			classId: internConflictKey(modifierId + classGroupId),
+			conflictIds
+		};
+	};
+	const getClassDescriptor = (originalClassName) => {
+		let descriptor = descriptorCache[originalClassName];
+		if (descriptor !== void 0) return descriptor;
+		descriptor = previousDescriptorCache[originalClassName];
+		if (descriptor === void 0) descriptor = computeClassDescriptor(originalClassName);
+		descriptorCache[originalClassName] = descriptor;
+		if (++descriptorCacheSize > DESCRIPTOR_CACHE_SIZE) {
+			descriptorCacheSize = 0;
+			previousDescriptorCache = descriptorCache;
+			descriptorCache = /* @__PURE__ */ Object.create(null);
 		}
-		result = originalClassName + (result.length > 0 ? " " + result : result);
-	}
-	return result;
-};
-/**
-* The code in this file is copied from https://github.com/lukeed/clsx and modified to suit the needs of tailwind-merge better.
-*
-* Specifically:
-* - Runtime code from https://github.com/lukeed/clsx/blob/v1.2.1/src/index.js
-* - TypeScript types from https://github.com/lukeed/clsx/blob/v1.2.1/clsx.d.ts
-*
-* Original code has MIT license: Copyright (c) Luke Edwards <luke.edwards05@gmail.com> (lukeed.com)
-*/
-var twJoin = (...classLists) => {
-	let index = 0;
-	let argument;
-	let resolvedValue;
-	let string = "";
-	while (index < classLists.length) if (argument = classLists[index++]) {
-		if (resolvedValue = toValue(argument)) {
-			string && (string += " ");
-			string += resolvedValue;
+		return descriptor;
+	};
+	const mergeClassList = (classList) => {
+		const classNames = splitClassList(classList);
+		const classCount = classNames.length;
+		if (classCount === 1) return classNames[0];
+		if (nextConflictKeyId > MAX_CONFLICT_KEYS) {
+			conflictKeyIds.clear();
+			nextConflictKeyId = 0;
+			descriptorCache = /* @__PURE__ */ Object.create(null);
+			previousDescriptorCache = /* @__PURE__ */ Object.create(null);
+			descriptorCacheSize = 0;
 		}
-	}
-	return string;
-};
-var toValue = (mix) => {
-	if (typeof mix === "string") return mix;
-	let resolvedValue;
-	let string = "";
-	for (let k = 0; k < mix.length; k++) if (mix[k]) {
-		if (resolvedValue = toValue(mix[k])) {
-			string && (string += " ");
-			string += resolvedValue;
+		currentGeneration = currentGeneration + 1 | 0;
+		if (currentGeneration === 0) currentGeneration = 1;
+		const generation = currentGeneration;
+		if (classCount > keepFlags.length) {
+			let capacity = keepFlags.length;
+			while (capacity < classCount) capacity *= 2;
+			keepFlags = new Uint8Array(capacity);
 		}
-	}
-	return string;
+		let didDrop = false;
+		let tokenCharCount = 0;
+		for (let index = classCount - 1; index >= 0; index -= 1) {
+			const className = classNames[index];
+			tokenCharCount += className.length;
+			const descriptor = getClassDescriptor(className);
+			if (descriptor.isExternal) {
+				keepFlags[index] = 1;
+				continue;
+			}
+			const classId = descriptor.classId;
+			if (claimedGeneration[classId] === generation) {
+				keepFlags[index] = 0;
+				didDrop = true;
+				continue;
+			}
+			claimedGeneration[classId] = generation;
+			const conflictIds = descriptor.conflictIds;
+			for (let conflictIndex = 0; conflictIndex < conflictIds.length; conflictIndex++) claimedGeneration[conflictIds[conflictIndex]] = generation;
+			keepFlags[index] = 1;
+		}
+		if (!didDrop && !splitSawNonSpaceWhitespace && classList.length === tokenCharCount + classCount - 1) return classList;
+		let result = "";
+		for (let index = 0; index < classCount; index++) if (keepFlags[index] === 1) {
+			if (result) result += " ";
+			result += classNames[index];
+		}
+		return result;
+	};
+	return {
+		parseClassName,
+		sortModifiers,
+		postfixLookupClassGroupIds,
+		getClassGroupId,
+		getConflictingClassGroupIds,
+		getClassDescriptor,
+		mergeClassList
+	};
 };
-var createTailwindMerge = (createConfigFirst, ...createConfigRest) => {
+var createPostfixLookupClassGroupIds = (config) => {
+	const lookup = /* @__PURE__ */ Object.create(null);
+	const classGroupIds = config.postfixLookupClassGroups;
+	if (classGroupIds) for (let index = 0; index < classGroupIds.length; index++) lookup[classGroupIds[index]] = true;
+	return lookup;
+};
+var MERGE_CACHE_SIZE = 500;
+var createTailwindMerge = (createConfig) => {
 	let configUtils;
-	let cacheGet;
-	let cacheSet;
-	let functionToCall;
+	let mergeClassList;
+	let cache = /* @__PURE__ */ Object.create(null);
+	let previousCache = /* @__PURE__ */ Object.create(null);
+	let cacheSize = 0;
 	const initTailwindMerge = (classList) => {
-		configUtils = createConfigUtils(createConfigRest.reduce((previousConfig, createConfigCurrent) => createConfigCurrent(previousConfig), createConfigFirst()));
-		cacheGet = configUtils.cache.get;
-		cacheSet = configUtils.cache.set;
-		functionToCall = tailwindMerge;
+		configUtils = createConfigUtils(createConfig());
+		mergeClassList = configUtils.mergeClassList;
+		merge.mergeString = tailwindMerge;
 		return tailwindMerge(classList);
 	};
 	const tailwindMerge = (classList) => {
-		const cachedResult = cacheGet(classList);
-		if (cachedResult) return cachedResult;
-		const result = mergeClassList(classList, configUtils);
-		cacheSet(classList, result);
+		let result = cache[classList];
+		if (result !== void 0) return result;
+		result = previousCache[classList];
+		if (result === void 0) result = mergeClassList(classList);
+		cache[classList] = result;
+		if (++cacheSize > MERGE_CACHE_SIZE) {
+			cacheSize = 0;
+			previousCache = cache;
+			cache = /* @__PURE__ */ Object.create(null);
+		}
 		return result;
 	};
-	functionToCall = initTailwindMerge;
-	return (...args) => functionToCall(twJoin(...args));
+	const merge = (...args) => merge.mergeString(joinClassValue(args));
+	merge.mergeString = initTailwindMerge;
+	return merge;
 };
 var fallbackThemeArr = [];
 var fromTheme = (key) => {
@@ -696,15 +1144,18 @@ var fromTheme = (key) => {
 };
 var arbitraryValueRegex = /^\[(?:(\w[\w-]*):)?(.+)\]$/i;
 var arbitraryVariableRegex = /^\((?:(\w[\w-]*):)?(.+)\)$/i;
-var fractionRegex = /^\d+\/\d+$/;
+var fractionRegex = /^\d+(?:\.\d+)?\/\d+(?:\.\d+)?$/;
 var tshirtUnitRegex = /^(\d+(\.\d+)?)?(xs|sm|md|lg|xl)$/;
 var lengthUnitRegex = /\d+(%|px|r?em|[sdl]?v([hwib]|min|max)|pt|pc|in|cm|mm|cap|ch|ex|r?lh|cq(w|h|i|b|min|max))|\b(calc|min|max|clamp)\(.+\)|^0$/;
 var colorFunctionRegex = /^(rgba?|hsla?|hwb|(ok)?(lab|lch)|color-mix)\(.+\)$/;
 var shadowRegex = /^(inset_)?-?((\d+)?\.?(\d+)[a-z]+|0)_-?((\d+)?\.?(\d+)[a-z]+|0)/;
 var imageRegex = /^(url|image|image-set|cross-fade|element|(repeating-)?(linear|radial|conic)-gradient)\(.+\)$/;
+var toNumber = Number;
+var numberIsNaN = Number.isNaN;
+var numberIsInteger = Number.isInteger;
 var isFraction = (value) => fractionRegex.test(value);
-var isNumber = (value) => !!value && !Number.isNaN(Number(value));
-var isInteger = (value) => !!value && Number.isInteger(Number(value));
+var isNumber = (value) => Boolean(value) && !numberIsNaN(toNumber(value));
+var isInteger = (value) => Boolean(value) && numberIsInteger(toNumber(value));
 var isPercent = (value) => value.endsWith("%") && isNumber(value.slice(0, -1));
 var isTshirtSize = (value) => tshirtUnitRegex.test(value);
 var isAny = () => true;
@@ -713,10 +1164,13 @@ var isNever = () => false;
 var isShadow = (value) => shadowRegex.test(value);
 var isImage = (value) => imageRegex.test(value);
 var isAnyNonArbitrary = (value) => !isArbitraryValue(value) && !isArbitraryVariable(value);
+var isNamedContainerQuery = (value) => value.startsWith("@container") && (value[10] === "/" && value[11] !== void 0 || value[11] === "s" && value[16] !== void 0 && value.startsWith("-size/", 10) || value[11] === "n" && value[18] !== void 0 && value.startsWith("-normal/", 10));
 var isArbitrarySize = (value) => getIsArbitraryValue(value, isLabelSize, isNever);
 var isArbitraryValue = (value) => arbitraryValueRegex.test(value);
 var isArbitraryLength = (value) => getIsArbitraryValue(value, isLabelLength, isLengthOnly);
 var isArbitraryNumber = (value) => getIsArbitraryValue(value, isLabelNumber, isNumber);
+var isArbitraryWeight = (value) => getIsArbitraryValue(value, isLabelWeight, isAny);
+var isArbitraryFamilyName = (value) => getIsArbitraryValue(value, isLabelFamilyName, isNever);
 var isArbitraryPosition = (value) => getIsArbitraryValue(value, isLabelPosition, isNever);
 var isArbitraryImage = (value) => getIsArbitraryValue(value, isLabelImage, isImage);
 var isArbitraryShadow = (value) => getIsArbitraryValue(value, isLabelShadow, isShadow);
@@ -727,6 +1181,7 @@ var isArbitraryVariablePosition = (value) => getIsArbitraryVariable(value, isLab
 var isArbitraryVariableSize = (value) => getIsArbitraryVariable(value, isLabelSize);
 var isArbitraryVariableImage = (value) => getIsArbitraryVariable(value, isLabelImage);
 var isArbitraryVariableShadow = (value) => getIsArbitraryVariable(value, isLabelShadow, true);
+var isArbitraryVariableWeight = (value) => getIsArbitraryVariable(value, isLabelWeight, true);
 var getIsArbitraryValue = (value, testLabel, testValue) => {
 	const result = arbitraryValueRegex.exec(value);
 	if (result) {
@@ -749,12 +1204,9 @@ var isLabelSize = (label) => label === "length" || label === "size" || label ===
 var isLabelLength = (label) => label === "length";
 var isLabelNumber = (label) => label === "number";
 var isLabelFamilyName = (label) => label === "family-name";
+var isLabelWeight = (label) => label === "number" || label === "weight";
 var isLabelShadow = (label) => label === "shadow";
 var getDefaultConfig = () => {
-	/**
-	* Theme getters for theme variable namespaces
-	* @see https://tailwindcss.com/docs/theme#theme-variable-namespaces
-	*/
 	const themeColor = fromTheme("color");
 	const themeFont = fromTheme("font");
 	const themeText = fromTheme("text");
@@ -774,12 +1226,6 @@ var getDefaultConfig = () => {
 	const themeAspect = fromTheme("aspect");
 	const themeEase = fromTheme("ease");
 	const themeAnimate = fromTheme("animate");
-	/**
-	* Helpers to avoid repeating the same scales
-	*
-	* We use functions that create a new array every time they're called instead of static arrays.
-	* This ensures that users who modify any scale by mutating the array (e.g. with `array.push(element)`) don't accidentally mutate arrays in other parts of the config.
-	*/
 	const scaleBreak = () => [
 		"auto",
 		"avoid",
@@ -902,6 +1348,31 @@ var getDefaultConfig = () => {
 		"fit",
 		...scaleUnambiguousSpacing()
 	];
+	const scaleSizingInline = () => [
+		isFraction,
+		"screen",
+		"full",
+		"dvw",
+		"lvw",
+		"svw",
+		"min",
+		"max",
+		"fit",
+		...scaleUnambiguousSpacing()
+	];
+	const scaleSizingBlock = () => [
+		isFraction,
+		"screen",
+		"full",
+		"lh",
+		"dvh",
+		"lvh",
+		"svh",
+		"min",
+		"max",
+		"fit",
+		...scaleUnambiguousSpacing()
+	];
 	const scaleColor = () => [
 		themeColor,
 		isArbitraryVariable,
@@ -1007,7 +1478,6 @@ var getDefaultConfig = () => {
 		...scaleUnambiguousSpacing()
 	];
 	return {
-		cacheSize: 500,
 		theme: {
 			animate: [
 				"spin",
@@ -1088,6 +1558,22 @@ var getDefaultConfig = () => {
 			* @deprecated since Tailwind CSS v4.0.0
 			*/
 			container: ["container"],
+			/**
+			* Container Type
+			* @see https://tailwindcss.com/docs/responsive-design#container-queries
+			*/
+			"container-type": [{ "@container": [
+				"",
+				"normal",
+				"size",
+				isArbitraryVariable,
+				isArbitraryValue
+			] }],
+			/**
+			* Container Name
+			* @see https://tailwindcss.com/docs/responsive-design#named-containers
+			*/
+			"container-named": [isNamedContainerQuery],
 			/**
 			* Columns
 			* @see https://tailwindcss.com/docs/columns
@@ -1246,30 +1732,56 @@ var getDefaultConfig = () => {
 				"sticky"
 			],
 			/**
-			* Top / Right / Bottom / Left
+			* Inset
 			* @see https://tailwindcss.com/docs/top-right-bottom-left
 			*/
 			inset: [{ inset: scaleInset() }],
 			/**
-			* Right / Left
+			* Inset Inline
 			* @see https://tailwindcss.com/docs/top-right-bottom-left
 			*/
 			"inset-x": [{ "inset-x": scaleInset() }],
 			/**
-			* Top / Bottom
+			* Inset Block
 			* @see https://tailwindcss.com/docs/top-right-bottom-left
 			*/
 			"inset-y": [{ "inset-y": scaleInset() }],
 			/**
-			* Start
+			* Inset Inline Start
 			* @see https://tailwindcss.com/docs/top-right-bottom-left
+			* @todo class group will be renamed to `inset-s` in next major release
 			*/
-			start: [{ start: scaleInset() }],
+			start: [{
+				"inset-s": scaleInset(),
+				/**
+				* @deprecated since Tailwind CSS v4.2.0 in favor of `inset-s-*` utilities.
+				* @see https://github.com/tailwindlabs/tailwindcss/pull/19613
+				*/
+				start: scaleInset()
+			}],
 			/**
-			* End
+			* Inset Inline End
+			* @see https://tailwindcss.com/docs/top-right-bottom-left
+			* @todo class group will be renamed to `inset-e` in next major release
+			*/
+			end: [{
+				"inset-e": scaleInset(),
+				/**
+				* @deprecated since Tailwind CSS v4.2.0 in favor of `inset-e-*` utilities.
+				* @see https://github.com/tailwindlabs/tailwindcss/pull/19613
+				*/
+				end: scaleInset()
+			}],
+			/**
+			* Inset Block Start
 			* @see https://tailwindcss.com/docs/top-right-bottom-left
 			*/
-			end: [{ end: scaleInset() }],
+			"inset-bs": [{ "inset-bs": scaleInset() }],
+			/**
+			* Inset Block End
+			* @see https://tailwindcss.com/docs/top-right-bottom-left
+			*/
+			"inset-be": [{ "inset-be": scaleInset() }],
 			/**
 			* Top
 			* @see https://tailwindcss.com/docs/top-right-bottom-left
@@ -1514,25 +2026,35 @@ var getDefaultConfig = () => {
 			*/
 			p: [{ p: scaleUnambiguousSpacing() }],
 			/**
-			* Padding X
+			* Padding Inline
 			* @see https://tailwindcss.com/docs/padding
 			*/
 			px: [{ px: scaleUnambiguousSpacing() }],
 			/**
-			* Padding Y
+			* Padding Block
 			* @see https://tailwindcss.com/docs/padding
 			*/
 			py: [{ py: scaleUnambiguousSpacing() }],
 			/**
-			* Padding Start
+			* Padding Inline Start
 			* @see https://tailwindcss.com/docs/padding
 			*/
 			ps: [{ ps: scaleUnambiguousSpacing() }],
 			/**
-			* Padding End
+			* Padding Inline End
 			* @see https://tailwindcss.com/docs/padding
 			*/
 			pe: [{ pe: scaleUnambiguousSpacing() }],
+			/**
+			* Padding Block Start
+			* @see https://tailwindcss.com/docs/padding
+			*/
+			pbs: [{ pbs: scaleUnambiguousSpacing() }],
+			/**
+			* Padding Block End
+			* @see https://tailwindcss.com/docs/padding
+			*/
+			pbe: [{ pbe: scaleUnambiguousSpacing() }],
 			/**
 			* Padding Top
 			* @see https://tailwindcss.com/docs/padding
@@ -1559,25 +2081,35 @@ var getDefaultConfig = () => {
 			*/
 			m: [{ m: scaleMargin() }],
 			/**
-			* Margin X
+			* Margin Inline
 			* @see https://tailwindcss.com/docs/margin
 			*/
 			mx: [{ mx: scaleMargin() }],
 			/**
-			* Margin Y
+			* Margin Block
 			* @see https://tailwindcss.com/docs/margin
 			*/
 			my: [{ my: scaleMargin() }],
 			/**
-			* Margin Start
+			* Margin Inline Start
 			* @see https://tailwindcss.com/docs/margin
 			*/
 			ms: [{ ms: scaleMargin() }],
 			/**
-			* Margin End
+			* Margin Inline End
 			* @see https://tailwindcss.com/docs/margin
 			*/
 			me: [{ me: scaleMargin() }],
+			/**
+			* Margin Block Start
+			* @see https://tailwindcss.com/docs/margin
+			*/
+			mbs: [{ mbs: scaleMargin() }],
+			/**
+			* Margin Block End
+			* @see https://tailwindcss.com/docs/margin
+			*/
+			mbe: [{ mbe: scaleMargin() }],
 			/**
 			* Margin Top
 			* @see https://tailwindcss.com/docs/margin
@@ -1624,6 +2156,36 @@ var getDefaultConfig = () => {
 			*/
 			size: [{ size: scaleSizing() }],
 			/**
+			* Inline Size
+			* @see https://tailwindcss.com/docs/width
+			*/
+			"inline-size": [{ inline: ["auto", ...scaleSizingInline()] }],
+			/**
+			* Min-Inline Size
+			* @see https://tailwindcss.com/docs/min-width
+			*/
+			"min-inline-size": [{ "min-inline": ["auto", ...scaleSizingInline()] }],
+			/**
+			* Max-Inline Size
+			* @see https://tailwindcss.com/docs/max-width
+			*/
+			"max-inline-size": [{ "max-inline": ["none", ...scaleSizingInline()] }],
+			/**
+			* Block Size
+			* @see https://tailwindcss.com/docs/height
+			*/
+			"block-size": [{ block: ["auto", ...scaleSizingBlock()] }],
+			/**
+			* Min-Block Size
+			* @see https://tailwindcss.com/docs/min-height
+			*/
+			"min-block-size": [{ "min-block": ["auto", ...scaleSizingBlock()] }],
+			/**
+			* Max-Block Size
+			* @see https://tailwindcss.com/docs/max-height
+			*/
+			"max-block-size": [{ "max-block": ["none", ...scaleSizingBlock()] }],
+			/**
 			* Width
 			* @see https://tailwindcss.com/docs/width
 			*/
@@ -1651,7 +2213,9 @@ var getDefaultConfig = () => {
 				"screen",
 				"none",
 				"prose",
-				{ screen: [themeBreakpoint] },
+				(
+				/** Deprecated since Tailwind CSS v4.0.0. @see https://github.com/tailwindlabs/tailwindcss.com/issues/2027#issuecomment-2620152757 */
+				{ screen: [themeBreakpoint] }),
 				...scaleSizing()
 			] }],
 			/**
@@ -1708,8 +2272,8 @@ var getDefaultConfig = () => {
 			*/
 			"font-weight": [{ font: [
 				themeFontWeight,
-				isArbitraryVariable,
-				isArbitraryNumber
+				isArbitraryVariableWeight,
+				isArbitraryWeight
 			] }],
 			/**
 			* Font Stretch
@@ -1734,9 +2298,14 @@ var getDefaultConfig = () => {
 			*/
 			"font-family": [{ font: [
 				isArbitraryVariableFamilyName,
-				isArbitraryValue,
+				isArbitraryFamilyName,
 				themeFont
 			] }],
+			/**
+			* Font Feature Settings
+			* @see https://tailwindcss.com/docs/font-feature-settings
+			*/
+			"font-features": [{ "font-features": [isArbitraryValue] }],
 			/**
 			* Font Variant Numeric
 			* @see https://tailwindcss.com/docs/font-variant-numeric
@@ -1914,6 +2483,15 @@ var getDefaultConfig = () => {
 			* @see https://tailwindcss.com/docs/text-indent
 			*/
 			indent: [{ indent: scaleUnambiguousSpacing() }],
+			/**
+			* Tab Size
+			* @see https://tailwindcss.com/docs/tab-size
+			*/
+			"tab-size": [{ tab: [
+				isInteger,
+				isArbitraryVariable,
+				isArbitraryValue
+			] }],
 			/**
 			* Vertical Alignment
 			* @see https://tailwindcss.com/docs/vertical-align
@@ -2174,25 +2752,35 @@ var getDefaultConfig = () => {
 			*/
 			"border-w": [{ border: scaleBorderWidth() }],
 			/**
-			* Border Width X
+			* Border Width Inline
 			* @see https://tailwindcss.com/docs/border-width
 			*/
 			"border-w-x": [{ "border-x": scaleBorderWidth() }],
 			/**
-			* Border Width Y
+			* Border Width Block
 			* @see https://tailwindcss.com/docs/border-width
 			*/
 			"border-w-y": [{ "border-y": scaleBorderWidth() }],
 			/**
-			* Border Width Start
+			* Border Width Inline Start
 			* @see https://tailwindcss.com/docs/border-width
 			*/
 			"border-w-s": [{ "border-s": scaleBorderWidth() }],
 			/**
-			* Border Width End
+			* Border Width Inline End
 			* @see https://tailwindcss.com/docs/border-width
 			*/
 			"border-w-e": [{ "border-e": scaleBorderWidth() }],
+			/**
+			* Border Width Block Start
+			* @see https://tailwindcss.com/docs/border-width
+			*/
+			"border-w-bs": [{ "border-bs": scaleBorderWidth() }],
+			/**
+			* Border Width Block End
+			* @see https://tailwindcss.com/docs/border-width
+			*/
+			"border-w-be": [{ "border-be": scaleBorderWidth() }],
 			/**
 			* Border Width Top
 			* @see https://tailwindcss.com/docs/border-width
@@ -2257,25 +2845,35 @@ var getDefaultConfig = () => {
 			*/
 			"border-color": [{ border: scaleColor() }],
 			/**
-			* Border Color X
+			* Border Color Inline
 			* @see https://tailwindcss.com/docs/border-color
 			*/
 			"border-color-x": [{ "border-x": scaleColor() }],
 			/**
-			* Border Color Y
+			* Border Color Block
 			* @see https://tailwindcss.com/docs/border-color
 			*/
 			"border-color-y": [{ "border-y": scaleColor() }],
 			/**
-			* Border Color S
+			* Border Color Inline Start
 			* @see https://tailwindcss.com/docs/border-color
 			*/
 			"border-color-s": [{ "border-s": scaleColor() }],
 			/**
-			* Border Color E
+			* Border Color Inline End
 			* @see https://tailwindcss.com/docs/border-color
 			*/
 			"border-color-e": [{ "border-e": scaleColor() }],
+			/**
+			* Border Color Block Start
+			* @see https://tailwindcss.com/docs/border-color
+			*/
+			"border-color-bs": [{ "border-bs": scaleColor() }],
+			/**
+			* Border Color Block End
+			* @see https://tailwindcss.com/docs/border-color
+			*/
+			"border-color-be": [{ "border-be": scaleColor() }],
 			/**
 			* Border Color Top
 			* @see https://tailwindcss.com/docs/border-color
@@ -2969,6 +3567,15 @@ var getDefaultConfig = () => {
 			*/
 			"translate-none": ["translate-none"],
 			/**
+			* Zoom
+			* @see https://tailwindcss.com/docs/zoom
+			*/
+			zoom: [{ zoom: [
+				isInteger,
+				isArbitraryVariable,
+				isArbitraryValue
+			] }],
+			/**
 			* Accent Color
 			* @see https://tailwindcss.com/docs/accent-color
 			*/
@@ -3065,30 +3672,68 @@ var getDefaultConfig = () => {
 			*/
 			"scroll-behavior": [{ scroll: ["auto", "smooth"] }],
 			/**
+			* Scrollbar Thumb Color
+			* @see https://tailwindcss.com/docs/scrollbar-color
+			*/
+			"scrollbar-thumb-color": [{ "scrollbar-thumb": scaleColor() }],
+			/**
+			* Scrollbar Track Color
+			* @see https://tailwindcss.com/docs/scrollbar-color
+			*/
+			"scrollbar-track-color": [{ "scrollbar-track": scaleColor() }],
+			/**
+			* Scrollbar Gutter
+			* @see https://tailwindcss.com/docs/scrollbar-gutter
+			*/
+			"scrollbar-gutter": [{ "scrollbar-gutter": [
+				"auto",
+				"stable",
+				"both"
+			] }],
+			/**
+			* Scrollbar Width
+			* @see https://tailwindcss.com/docs/scrollbar-width
+			*/
+			"scrollbar-w": [{ scrollbar: [
+				"auto",
+				"thin",
+				"none"
+			] }],
+			/**
 			* Scroll Margin
 			* @see https://tailwindcss.com/docs/scroll-margin
 			*/
 			"scroll-m": [{ "scroll-m": scaleUnambiguousSpacing() }],
 			/**
-			* Scroll Margin X
+			* Scroll Margin Inline
 			* @see https://tailwindcss.com/docs/scroll-margin
 			*/
 			"scroll-mx": [{ "scroll-mx": scaleUnambiguousSpacing() }],
 			/**
-			* Scroll Margin Y
+			* Scroll Margin Block
 			* @see https://tailwindcss.com/docs/scroll-margin
 			*/
 			"scroll-my": [{ "scroll-my": scaleUnambiguousSpacing() }],
 			/**
-			* Scroll Margin Start
+			* Scroll Margin Inline Start
 			* @see https://tailwindcss.com/docs/scroll-margin
 			*/
 			"scroll-ms": [{ "scroll-ms": scaleUnambiguousSpacing() }],
 			/**
-			* Scroll Margin End
+			* Scroll Margin Inline End
 			* @see https://tailwindcss.com/docs/scroll-margin
 			*/
 			"scroll-me": [{ "scroll-me": scaleUnambiguousSpacing() }],
+			/**
+			* Scroll Margin Block Start
+			* @see https://tailwindcss.com/docs/scroll-margin
+			*/
+			"scroll-mbs": [{ "scroll-mbs": scaleUnambiguousSpacing() }],
+			/**
+			* Scroll Margin Block End
+			* @see https://tailwindcss.com/docs/scroll-margin
+			*/
+			"scroll-mbe": [{ "scroll-mbe": scaleUnambiguousSpacing() }],
 			/**
 			* Scroll Margin Top
 			* @see https://tailwindcss.com/docs/scroll-margin
@@ -3115,25 +3760,35 @@ var getDefaultConfig = () => {
 			*/
 			"scroll-p": [{ "scroll-p": scaleUnambiguousSpacing() }],
 			/**
-			* Scroll Padding X
+			* Scroll Padding Inline
 			* @see https://tailwindcss.com/docs/scroll-padding
 			*/
 			"scroll-px": [{ "scroll-px": scaleUnambiguousSpacing() }],
 			/**
-			* Scroll Padding Y
+			* Scroll Padding Block
 			* @see https://tailwindcss.com/docs/scroll-padding
 			*/
 			"scroll-py": [{ "scroll-py": scaleUnambiguousSpacing() }],
 			/**
-			* Scroll Padding Start
+			* Scroll Padding Inline Start
 			* @see https://tailwindcss.com/docs/scroll-padding
 			*/
 			"scroll-ps": [{ "scroll-ps": scaleUnambiguousSpacing() }],
 			/**
-			* Scroll Padding End
+			* Scroll Padding Inline End
 			* @see https://tailwindcss.com/docs/scroll-padding
 			*/
 			"scroll-pe": [{ "scroll-pe": scaleUnambiguousSpacing() }],
+			/**
+			* Scroll Padding Block Start
+			* @see https://tailwindcss.com/docs/scroll-padding
+			*/
+			"scroll-pbs": [{ "scroll-pbs": scaleUnambiguousSpacing() }],
+			/**
+			* Scroll Padding Block End
+			* @see https://tailwindcss.com/docs/scroll-padding
+			*/
+			"scroll-pbe": [{ "scroll-pbe": scaleUnambiguousSpacing() }],
 			/**
 			* Scroll Padding Top
 			* @see https://tailwindcss.com/docs/scroll-padding
@@ -3265,11 +3920,14 @@ var getDefaultConfig = () => {
 			"forced-color-adjust": [{ "forced-color-adjust": ["auto", "none"] }]
 		},
 		conflictingClassGroups: {
+			"container-named": ["container-type"],
 			overflow: ["overflow-x", "overflow-y"],
 			overscroll: ["overscroll-x", "overscroll-y"],
 			inset: [
 				"inset-x",
 				"inset-y",
+				"inset-bs",
+				"inset-be",
 				"start",
 				"end",
 				"top",
@@ -3290,6 +3948,8 @@ var getDefaultConfig = () => {
 				"py",
 				"ps",
 				"pe",
+				"pbs",
+				"pbe",
 				"pt",
 				"pr",
 				"pb",
@@ -3302,6 +3962,8 @@ var getDefaultConfig = () => {
 				"my",
 				"ms",
 				"me",
+				"mbs",
+				"mbe",
 				"mt",
 				"mr",
 				"mb",
@@ -3352,6 +4014,8 @@ var getDefaultConfig = () => {
 				"border-w-y",
 				"border-w-s",
 				"border-w-e",
+				"border-w-bs",
+				"border-w-be",
 				"border-w-t",
 				"border-w-r",
 				"border-w-b",
@@ -3364,6 +4028,8 @@ var getDefaultConfig = () => {
 				"border-color-y",
 				"border-color-s",
 				"border-color-e",
+				"border-color-bs",
+				"border-color-be",
 				"border-color-t",
 				"border-color-r",
 				"border-color-b",
@@ -3387,6 +4053,8 @@ var getDefaultConfig = () => {
 				"scroll-my",
 				"scroll-ms",
 				"scroll-me",
+				"scroll-mbs",
+				"scroll-mbe",
 				"scroll-mt",
 				"scroll-mr",
 				"scroll-mb",
@@ -3399,6 +4067,8 @@ var getDefaultConfig = () => {
 				"scroll-py",
 				"scroll-ps",
 				"scroll-pe",
+				"scroll-pbs",
+				"scroll-pbe",
 				"scroll-pt",
 				"scroll-pr",
 				"scroll-pb",
@@ -3416,6 +4086,7 @@ var getDefaultConfig = () => {
 			"touch-pz": ["touch"]
 		},
 		conflictingClassGroupModifiers: { "font-size": ["leading"] },
+		postfixLookupClassGroups: ["container-type"],
 		orderSensitiveModifiers: [
 			"*",
 			"**",
@@ -3432,23 +4103,18 @@ var getDefaultConfig = () => {
 		]
 	};
 };
-/**
-* @param baseConfig Config where other config will be merged into. This object will be mutated.
-* @param configExtension Partial config to merge into the `baseConfig`.
-*/
-var mergeConfigs = (baseConfig, { cacheSize, prefix, experimentalParseClassName, extend = {}, override = {} }) => {
-	overrideProperty(baseConfig, "cacheSize", cacheSize);
-	overrideProperty(baseConfig, "prefix", prefix);
-	overrideProperty(baseConfig, "experimentalParseClassName", experimentalParseClassName);
+var mergeConfigs = (baseConfig, { extend = {}, override = {} }) => {
 	overrideConfigProperties(baseConfig.theme, override.theme);
 	overrideConfigProperties(baseConfig.classGroups, override.classGroups);
 	overrideConfigProperties(baseConfig.conflictingClassGroups, override.conflictingClassGroups);
 	overrideConfigProperties(baseConfig.conflictingClassGroupModifiers, override.conflictingClassGroupModifiers);
+	overrideProperty(baseConfig, "postfixLookupClassGroups", override.postfixLookupClassGroups);
 	overrideProperty(baseConfig, "orderSensitiveModifiers", override.orderSensitiveModifiers);
 	mergeConfigProperties(baseConfig.theme, extend.theme);
 	mergeConfigProperties(baseConfig.classGroups, extend.classGroups);
 	mergeConfigProperties(baseConfig.conflictingClassGroups, extend.conflictingClassGroups);
 	mergeConfigProperties(baseConfig.conflictingClassGroupModifiers, extend.conflictingClassGroupModifiers);
+	mergeArrayProperties(baseConfig, extend, "postfixLookupClassGroups");
 	mergeArrayProperties(baseConfig, extend, "orderSensitiveModifiers");
 	return baseConfig;
 };
@@ -3465,38 +4131,181 @@ var mergeArrayProperties = (baseObject, mergeObject, key) => {
 	const mergeValue = mergeObject[key];
 	if (mergeValue !== void 0) baseObject[key] = baseObject[key] ? baseObject[key].concat(mergeValue) : mergeValue;
 };
-var extendTailwindMerge = (configExtension, ...createConfig) => typeof configExtension === "function" ? createTailwindMerge(getDefaultConfig, configExtension, ...createConfig) : createTailwindMerge(() => mergeConfigs(getDefaultConfig(), configExtension), ...createConfig);
-var twMerge = /*#__PURE__*/ createTailwindMerge(getDefaultConfig);
-//#endregion
-//#region node_modules/tailwind-variants/dist/index.js
-var createTwMerge = (cachedTwMergeConfig) => {
-	return isEmptyObject(cachedTwMergeConfig) ? twMerge : extendTailwindMerge({
-		...cachedTwMergeConfig,
-		extend: {
-			theme: cachedTwMergeConfig.theme,
-			classGroups: cachedTwMergeConfig.classGroups,
-			conflictingClassGroupModifiers: cachedTwMergeConfig.conflictingClassGroupModifiers,
-			conflictingClassGroups: cachedTwMergeConfig.conflictingClassGroups,
-			...cachedTwMergeConfig.extend
-		}
-	});
+var createMerger = (config) => {
+	if (!config) return createTailwindMerge(getDefaultConfig);
+	return createTailwindMerge(typeof config === "function" ? () => config(getDefaultConfig()) : () => mergeConfigs(getDefaultConfig(), config));
 };
-var executeMerge = (classnames, config) => {
-	const base = cx(classnames);
-	if (!base || !(config?.twMerge ?? true)) return base;
+var toMergerConfig = (config) => {
+	if (isEmptyObject(config)) return void 0;
+	const source = config;
+	const extend = { ...source.extend ?? {} };
+	for (const key of [
+		"theme",
+		"classGroups",
+		"conflictingClassGroups",
+		"conflictingClassGroupModifiers",
+		"postfixLookupClassGroups",
+		"orderSensitiveModifiers",
+		"cacheSize",
+		"prefix",
+		"separator",
+		"experimentalParseClassName"
+	]) if (source[key] !== void 0 && extend[key] === void 0) extend[key] = source[key];
+	const result = {};
+	if (Object.keys(extend).length > 0) result.extend = extend;
+	if (source.override != null && !isEmptyObject(source.override)) result.override = source.override;
+	if (!result.extend && !result.override) return void 0;
+	return result;
+};
+var createTwMerge = (cachedTwMergeConfig) => {
+	const merger = createMerger(toMergerConfig(cachedTwMergeConfig));
+	return (classList) => merger.mergeString(classList);
+};
+var defaultMerger;
+var getDefaultMerger = () => {
+	if (!defaultMerger) defaultMerger = createMerger();
+	return defaultMerger;
+};
+var ensureConfiguredMerger = () => {
 	if (!state.cachedTwMerge || state.didTwMergeConfigChange) {
 		state.didTwMergeConfigChange = false;
 		state.cachedTwMerge = createTwMerge(state.cachedTwMergeConfig);
 	}
-	return state.cachedTwMerge(base) || void 0;
+	return state.cachedTwMerge;
 };
-var cn = (...classnames) => {
-	return executeMerge(classnames, {});
+var syncTwMergeConfig = (config) => {
+	const next = config == null ? void 0 : config.twMergeConfig;
+	if (!next || isEmptyObject(next)) return;
+	if (!isEqual(next, state.cachedTwMergeConfig)) {
+		state.cachedTwMergeConfig = next;
+		state.didTwMergeConfigChange = true;
+	}
 };
-var cnMerge = (...classnames) => {
-	return (config) => executeMerge(classnames, config);
+var joinArgs = (classnames) => joinClassValue(classnames);
+var IS_V8 = (() => {
+	const error = /* @__PURE__ */ new Error();
+	return !("line" in error) && !("lineNumber" in error);
+})();
+var ARG_CACHE_BUCKET_SIZE = 64;
+var ARG_CACHE_SIZE = 500;
+var argCache = /* @__PURE__ */ new Map();
+var previousArgCache = /* @__PURE__ */ new Map();
+var argCacheCount = 0;
+var clearArgCache = () => {
+	argCache = /* @__PURE__ */ new Map();
+	previousArgCache = /* @__PURE__ */ new Map();
+	argCacheCount = 0;
 };
-var { createTV, tv } = getTailwindVariants(cnMerge);
+var mergeStringDefault = (joined) => {
+	if (!joined) return void 0;
+	if (joined.indexOf(" ") === -1) return joined;
+	return getDefaultMerger().mergeString(joined) || void 0;
+};
+var storeArgCache = (firstKey, rest, result) => {
+	let target = argCache.get(firstKey);
+	if (target === void 0) {
+		target = [];
+		argCache.set(firstKey, target);
+	}
+	if (target.length >= ARG_CACHE_BUCKET_SIZE) target.shift();
+	target.push({
+		rest,
+		result
+	});
+	if (++argCacheCount > ARG_CACHE_SIZE) {
+		argCacheCount = 0;
+		previousArgCache = argCache;
+		argCache = /* @__PURE__ */ new Map();
+	}
+};
+var lookupArgCache = (firstKey, firstKeyIndex, truthyStringCount, length, getItem) => {
+	let bucket = argCache.get(firstKey);
+	if (bucket === void 0) bucket = previousArgCache.get(firstKey);
+	if (bucket === void 0) return void 0;
+	for (let entryIndex = 0; entryIndex < bucket.length; entryIndex++) {
+		const entry = bucket[entryIndex];
+		const rest = entry.rest;
+		if (rest.length !== truthyStringCount - 1) continue;
+		let restIndex = 0;
+		let isMatch = true;
+		for (let index = firstKeyIndex + 1; index < length; index++) {
+			const item = getItem(index);
+			if (!item) continue;
+			if (item !== rest[restIndex++]) {
+				isMatch = false;
+				break;
+			}
+		}
+		if (isMatch) return entry.result;
+	}
+};
+var mergeVariadicFromGetter = (length, getItem) => {
+	let firstKey = "";
+	let firstKeyIndex = -1;
+	let truthyStringCount = 0;
+	let everyTruthyIsString = true;
+	for (let index = 0; index < length; index++) {
+		const item = getItem(index);
+		if (!item) continue;
+		if (typeof item !== "string") {
+			everyTruthyIsString = false;
+			break;
+		}
+		if (firstKeyIndex === -1) {
+			firstKey = item;
+			firstKeyIndex = index;
+		}
+		truthyStringCount++;
+	}
+	if (!everyTruthyIsString) {
+		const inputs = new Array(length);
+		for (let index = 0; index < length; index++) inputs[index] = getItem(index);
+		return mergeStringDefault(joinArgs(inputs));
+	}
+	if (truthyStringCount === 0) return void 0;
+	if (truthyStringCount === 1) return mergeStringDefault(firstKey);
+	const cached = lookupArgCache(firstKey, firstKeyIndex, truthyStringCount, length, getItem);
+	if (cached !== void 0) return cached || void 0;
+	let joined = firstKey;
+	const rest = [];
+	for (let index = firstKeyIndex + 1; index < length; index++) {
+		const item = getItem(index);
+		if (!item) continue;
+		joined += " " + item;
+		rest.push(item);
+	}
+	const result = mergeStringDefault(joined) ?? "";
+	storeArgCache(firstKey, rest, result);
+	return result || void 0;
+};
+var originalStateReset = state.reset.bind(state);
+state.reset = () => {
+	defaultMerger = void 0;
+	clearArgCache();
+	originalStateReset();
+};
+var executeMerge = (classnames, config) => {
+	const base = joinArgs(classnames);
+	if (!base || !((config == null ? void 0 : config.twMerge) ?? true)) return base || void 0;
+	if (base.indexOf(" ") === -1) return base;
+	syncTwMergeConfig(config);
+	return (Boolean((config == null ? void 0 : config.twMergeConfig) && !isEmptyObject(config.twMergeConfig)) ? ensureConfiguredMerger() : getDefaultMerger().mergeString)(base) || void 0;
+};
+var cnAdapter = (config, ...classnames) => executeMerge(classnames, config);
+var cn = function cn2() {
+	const length = arguments.length;
+	if (length === 0) return void 0;
+	const first = arguments[0];
+	if (length === 1) return mergeStringDefault(typeof first === "string" ? first : joinArgs([first]));
+	if (IS_V8) return mergeVariadicFromGetter(length, (index) => arguments[index]);
+	const inputs = new Array(length);
+	for (let index = 0; index < length; index++) inputs[index] = arguments[index];
+	return mergeStringDefault(joinArgs(inputs));
+};
+var runtime = getTailwindVariants(cnAdapter);
+var tv = runtime.tv;
+runtime.createTV;
+var cx2 = cx;
 //#endregion
 //#region node_modules/@heroui/styles/dist/utils/index.js
 /**
@@ -3598,7 +4407,6 @@ var autocompleteVariants = tv({
 		filter: "autocomplete__filter",
 		indicator: "autocomplete__indicator",
 		popover: "autocomplete__popover",
-		popoverDialog: "autocomplete__popover-dialog",
 		trigger: "autocomplete__trigger",
 		value: "autocomplete__value"
 	},
@@ -4029,7 +4837,8 @@ var comboBoxVariants = tv({
 		base: "combo-box",
 		inputGroup: "combo-box__input-group",
 		popover: "combo-box__popover",
-		trigger: "combo-box__trigger"
+		trigger: "combo-box__trigger",
+		value: "combo-box__value"
 	},
 	variants: { fullWidth: {
 		false: {},
@@ -5007,4 +5816,6 @@ var tooltipVariants = tv({ slots: {
 	trigger: "tooltip__trigger"
 } });
 //#endregion
-export { drawerVariants as $, menuSectionVariants as A, ariaDisabledClasses as At, labelVariants as B, scrollShadowVariants as C, breadcrumbsVariants as Ct, paginationVariants as D, alertDialogVariants as Dt, popoverVariants as E, autocompleteVariants as Et, menuVariants as F, cx as Ft, headerVariants as G, inputOTPVariants as H, listboxSectionVariants as I, errorMessageVariants as J, fieldsetVariants as K, listboxItemVariants as L, progressCircleVariants as M, focusRingClasses as Mt, progressBarVariants as N, cn as Nt, numberFieldVariants as O, alertVariants as Ot, meterVariants as P, tv as Pt, disclosureVariants as Q, listboxVariants as R, searchFieldVariants as S, buttonVariants as St, radioVariants as T, avatarVariants as Tt, inputGroupVariants as U, kbdVariants as V, inputVariants as W, dropdownVariants as X, emptyStateVariants as Y, disclosureGroupVariants as Z, spinnerVariants as _, cardVariants as _t, toastVariants as a, comboBoxVariants as at, separatorVariants as b, calendarVariants as bt, textFieldVariants as c, colorSwatchVariants as ct, tagVariants as d, colorInputGroupVariants as dt, descriptionVariants as et, tabsVariants as f, colorFieldVariants as ft, surfaceVariants as g, checkboxVariants as gt, switchVariants as h, checkboxGroupVariants as ht, toggleButtonVariants as i, dateFieldVariants as it, menuItemVariants as j, disabledClasses as jt, modalVariants as k, accordionVariants as kt, typographyVariants as l, colorSliderVariants as lt, switchGroupVariants as m, chipVariants as mt, toolbarVariants as n, dateRangePickerVariants as nt, timeFieldVariants as o, colorSwatchPickerVariants as ot, tableVariants as p, colorAreaVariants as pt, fieldErrorVariants as q, toggleButtonGroupVariants as r, datePickerVariants as rt, textAreaVariants as s, closeButtonVariants as st, tooltipVariants as t, dateInputGroupVariants as tt, tagGroupVariants as u, colorPickerVariants as ut, sliderVariants as v, rangeCalendarVariants as vt, radioGroupVariants as w, badgeVariants as wt, selectVariants as x, buttonGroupVariants as xt, skeletonVariants as y, calendarYearPickerVariants as yt, linkVariants as z };
+export { drawerVariants as $, menuSectionVariants as A, ariaDisabledClasses as At, labelVariants as B, scrollShadowVariants as C, breadcrumbsVariants as Ct, paginationVariants as D, alertDialogVariants as Dt, popoverVariants as E, autocompleteVariants as Et, menuVariants as F, tv as Ft, headerVariants as G, inputOTPVariants as H, listboxSectionVariants as I, errorMessageVariants as J, fieldsetVariants as K, listboxItemVariants as L, progressCircleVariants as M, focusRingClasses as Mt, progressBarVariants as N, cn as Nt, numberFieldVariants as O, alertVariants as Ot, meterVariants as P, cx2 as Pt, disclosureVariants as Q, listboxVariants as R, searchFieldVariants as S, buttonVariants as St, radioVariants as T, avatarVariants as Tt, inputGroupVariants as U, kbdVariants as V, inputVariants as W, dropdownVariants as X, emptyStateVariants as Y, disclosureGroupVariants as Z, spinnerVariants as _, cardVariants as _t, toastVariants as a, comboBoxVariants as at, separatorVariants as b, calendarVariants as bt, textFieldVariants as c, colorSwatchVariants as ct, tagVariants as d, colorInputGroupVariants as dt, descriptionVariants as et, tabsVariants as f, colorFieldVariants as ft, surfaceVariants as g, checkboxVariants as gt, switchVariants as h, checkboxGroupVariants as ht, toggleButtonVariants as i, dateFieldVariants as it, menuItemVariants as j, disabledClasses as jt, modalVariants as k, accordionVariants as kt, typographyVariants as l, colorSliderVariants as lt, switchGroupVariants as m, chipVariants as mt, toolbarVariants as n, dateRangePickerVariants as nt, timeFieldVariants as o, colorSwatchPickerVariants as ot, tableVariants as p, colorAreaVariants as pt, fieldErrorVariants as q, toggleButtonGroupVariants as r, datePickerVariants as rt, textAreaVariants as s, closeButtonVariants as st, tooltipVariants as t, dateInputGroupVariants as tt, tagGroupVariants as u, colorPickerVariants as ut, sliderVariants as v, rangeCalendarVariants as vt, radioGroupVariants as w, badgeVariants as wt, selectVariants as x, buttonGroupVariants as xt, skeletonVariants as y, calendarYearPickerVariants as yt, linkVariants as z };
+
+//# sourceMappingURL=dist-Ce1jD3Wl.js.map

@@ -1,25 +1,94 @@
-import { a as __toCommonJS, i as __exportAll, n as __commonJSMin, o as __toESM, r as __esmMin, t as require_react } from "./react-G_MRPtAP.js";
-import { r as importShared } from "./_virtual___federation_fn_import-ChPcBYrR.js";
-import { t as require_jsx_runtime } from "./jsx-runtime-qEX3bJsW.js";
+(function() {
+	try {
+		var e = "undefined" != typeof window ? window : "undefined" != typeof global ? global : "undefined" != typeof globalThis ? globalThis : "undefined" != typeof self ? self : {};
+		e.SENTRY_RELEASE = { id: "17561bda7d32de6a59c60e7229a41d6eb183b31a" };
+		var n = new e.Error().stack;
+		n && (e._sentryDebugIds = e._sentryDebugIds || {}, e._sentryDebugIds[n] = "b6910a3c-c2c5-431f-914e-e818aee1f06b", e._sentryDebugIdIdentifier = "sentry-dbid-b6910a3c-c2c5-431f-914e-e818aee1f06b");
+	} catch (e) {}
+})();
+import { n as __commonJSMin, r as __toESM, t as require_react } from "./react-BIBsXxRu.js";
+import { r as importShared } from "./_virtual___federation_fn_import-BRUIZv03.js";
+import { t as require_jsx_runtime } from "./jsx-runtime-CmHXPGC5.js";
+//#region extension/src/cross/constants.ts
+var HMONITOR_STORAGE_ID = "hmonitor_storage";
+var HMONITOR_IPC_DATA_UPDATE = "hmonitor-data-update";
+var HMONITOR_IPC_CONFIG_UPDATE = "hmonitor-config-update";
+var HMONITOR_IPC_MONITORING_ERROR = "hmonitor-monitoring-error";
+var HMONITOR_IPC_SET_CONFIG = "hmonitor-set-config";
+var HMONITOR_IPC_RESET_CONFIG = "hmonitor-reset-config";
+var HMONITOR_IPC_UPDATE_PING = "hmonitor-update-ping";
+var HMONITOR_IPC_STOP_PING = "hmonitor-stop-ping";
+var initialSettings = {
+	configVersion: .6,
+	refreshInterval: 1,
+	enabled: true,
+	displayStyle: "default",
+	showSectionLabel: true,
+	metricVisibility: {
+		icon: true,
+		label: true,
+		value: true,
+		progressBar: true
+	},
+	enabledMetrics: {
+		cpu: [],
+		gpu: [],
+		memory: [],
+		network: [],
+		uptime: {
+			system: true,
+			app: true
+		}
+	},
+	availableHardware: {
+		gpu: [],
+		cpu: [],
+		memory: [],
+		network: []
+	},
+	pingState: {
+		isActive: false,
+		hosts: [],
+		enabledHosts: [],
+		interval: 1e3,
+		timeout: 2e3
+	},
+	showAliasCpu: true,
+	showAliasGpu: true,
+	showAliasMemory: true,
+	showAliasNetwork: true,
+	sectionOrder: [
+		"cpu",
+		"gpu",
+		"memory",
+		"network",
+		"uptime",
+		"ping"
+	],
+	uptimeOrder: ["uptimeSystem", "uptimeApp"]
+};
+var SENTRY_DSN = "https://13d766c04f102d67c984dcbef9544512@o4509344104316928.ingest.us.sentry.io/4511891776405504";
+//#endregion
 //#region extension/src/renderer/classHolder.ts
 var toastHolder;
 var setToast = (t) => toastHolder = t;
 //#endregion
 //#region src/renderer/mainWindow/components/ShinyText.tsx
 var import_jsx_runtime = require_jsx_runtime();
-var { useMemo: useMemo$17 } = await importShared("react");
+var { useMemo: useMemo$18 } = await importShared("react");
 /**
 * Renders text with a shiny animation effect.
 */
 function ShinyText({ text, disabled = false, speed = 5, className = "", darkMode = true }) {
 	const animationDuration = `${speed}s`;
+	const backgroundImage = useMemo$18(() => {
+		const color = darkMode ? "255" : "70";
+		const rgb = `${color}, ${color}, ${color}`;
+		return `linear-gradient(120deg, rgba(${rgb}, 0) 40%, rgba(${rgb}, 0.8) 50%, rgba(${rgb}, 0) 60%)`;
+	}, [darkMode]);
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
 		style: {
-			backgroundImage: useMemo$17(() => {
-				const color = darkMode ? "255" : "70";
-				const rgb = `${color}, ${color}, ${color}`;
-				return `linear-gradient(120deg, rgba(${rgb}, 0) 40%, rgba(${rgb}, 0.8) 50%, rgba(${rgb}, 0) 60%)`;
-			}, [darkMode]),
+			backgroundImage,
 			backgroundSize: "200% 100%",
 			WebkitBackgroundClip: "text",
 			animationDuration
@@ -362,7 +431,7 @@ var objectTraps = {
 		const value = source[prop];
 		if (state.finalized_ || !isDraftable(value)) return value;
 		if (isArrayWithStringProp && state.operationMethod && arrayPlugin?.isMutatingArrayMethod(state.operationMethod) && isArrayIndex(prop)) return value;
-		if (value === peek(state.base_, prop)) {
+		if (value === peek(state.base_, prop) || isRelocatedBaseRef(state, prop, value)) {
 			prepareCopy(state);
 			const childKey = state.type_ === 1 ? +prop : prop;
 			const childDraft = createProxy(state.scope_, value, state, childKey);
@@ -394,7 +463,7 @@ var objectTraps = {
 			prepareCopy(state);
 			markChanged(state);
 		}
-		if (state.copy_[prop] === value && (value !== void 0 || prop in state.copy_) || Number.isNaN(value) && Number.isNaN(state.copy_[prop])) return true;
+		if (state.copy_[prop] === value && (value !== void 0 || has(state.copy_, prop, state.type_)) || Number.isNaN(value) && Number.isNaN(state.copy_[prop])) return true;
 		state.copy_[prop] = value;
 		state.assigned_.set(prop, true);
 		handleCrossReference(state, prop, value);
@@ -448,6 +517,10 @@ arrayTraps.set = function(state, prop, value) {
 function peek(draft, prop) {
 	const state = draft[DRAFT_STATE];
 	return (state ? latest(state) : draft)[prop];
+}
+function isRelocatedBaseRef(state, prop, value) {
+	if (state.type_ !== 1 || !state.allIndicesReassigned_ || state.assigned_?.get(prop) || !isDraftable(value) || value[DRAFT_STATE]) return false;
+	return state.baseRefs_.has(value);
 }
 function readPropFromProto(state, source, prop) {
 	const desc = getDescriptorFromProto(source, prop);
@@ -737,20 +810,22 @@ function createReducer(initialState, mapOrBuilderCallback) {
 		let caseReducers = [actionsMap[action.type], ...finalActionMatchers.filter(({ matcher }) => matcher(action)).map(({ reducer: reducer2 }) => reducer2)];
 		if (caseReducers.filter((cr) => !!cr).length === 0) caseReducers = [finalDefaultCaseReducer];
 		return caseReducers.reduce((previousState, caseReducer) => {
-			if (caseReducer) if (isDraft(previousState)) {
-				const result = caseReducer(previousState, action);
-				if (result === void 0) return previousState;
-				return result;
-			} else if (!isDraftable(previousState)) {
-				const result = caseReducer(previousState, action);
-				if (result === void 0) {
-					if (previousState === null) return previousState;
-					throw Error("A case reducer on a non-draftable value must not return undefined");
-				}
-				return result;
-			} else return produce(previousState, (draft) => {
-				return caseReducer(draft, action);
-			});
+			if (caseReducer) {
+				if (isDraft(previousState)) {
+					const result = caseReducer(previousState, action);
+					if (result === void 0) return previousState;
+					return result;
+				} else if (!isDraftable(previousState)) {
+					const result = caseReducer(previousState, action);
+					if (result === void 0) {
+						if (previousState === null) return previousState;
+						throw Error("A case reducer on a non-draftable value must not return undefined");
+					}
+					return result;
+				} else return produce(previousState, (draft) => {
+					return caseReducer(draft, action);
+				});
+			}
 			return previousState;
 		}, state);
 	}
@@ -1008,7 +1083,7 @@ appSlice.reducer;
 //#endregion
 //#region node_modules/lucide-react/dist/esm/shared/src/utils/mergeClasses.mjs
 /**
-* @license lucide-react v1.24.0 - ISC
+* @license lucide-react v1.33.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -1019,7 +1094,7 @@ var mergeClasses = (...classes) => classes.filter((className, index, array) => {
 //#endregion
 //#region node_modules/lucide-react/dist/esm/shared/src/utils/toKebabCase.mjs
 /**
-* @license lucide-react v1.24.0 - ISC
+* @license lucide-react v1.33.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -1028,7 +1103,7 @@ var toKebabCase = (string) => string.replace(/([a-z0-9])([A-Z])/g, "$1-$2").toLo
 //#endregion
 //#region node_modules/lucide-react/dist/esm/shared/src/utils/toCamelCase.mjs
 /**
-* @license lucide-react v1.24.0 - ISC
+* @license lucide-react v1.33.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -1037,7 +1112,7 @@ var toCamelCase = (string) => string.replace(/^([A-Z])|[\s-_]+(\w)/g, (match, p1
 //#endregion
 //#region node_modules/lucide-react/dist/esm/shared/src/utils/toPascalCase.mjs
 /**
-* @license lucide-react v1.24.0 - ISC
+* @license lucide-react v1.33.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -1049,7 +1124,7 @@ var toPascalCase = (string) => {
 //#endregion
 //#region node_modules/lucide-react/dist/esm/defaultAttributes.mjs
 /**
-* @license lucide-react v1.24.0 - ISC
+* @license lucide-react v1.33.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -1068,7 +1143,7 @@ var defaultAttributes = {
 //#endregion
 //#region node_modules/lucide-react/dist/esm/shared/src/utils/hasA11yProp.mjs
 /**
-* @license lucide-react v1.24.0 - ISC
+* @license lucide-react v1.33.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -1080,18 +1155,18 @@ var hasA11yProp = (props) => {
 //#endregion
 //#region node_modules/lucide-react/dist/esm/context.mjs
 /**
-* @license lucide-react v1.24.0 - ISC
+* @license lucide-react v1.33.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
 */
-var { createContext: createContext$7, useContext: useContext$10, useMemo: useMemo$16, createElement: createElement$3 } = await importShared("react");
-var LucideContext = createContext$7({});
-var useLucideContext = () => useContext$10(LucideContext);
+var { createContext: createContext$8, useContext: useContext$11, useMemo: useMemo$17, createElement: createElement$3 } = await importShared("react");
+var LucideContext = createContext$8({});
+var useLucideContext = () => useContext$11(LucideContext);
 //#endregion
 //#region node_modules/lucide-react/dist/esm/Icon.mjs
 /**
-* @license lucide-react v1.24.0 - ISC
+* @license lucide-react v1.33.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -1115,7 +1190,7 @@ var Icon = forwardRef$4(({ color, size, strokeWidth, absoluteStrokeWidth, classN
 //#endregion
 //#region node_modules/lucide-react/dist/esm/createLucideIcon.mjs
 /**
-* @license lucide-react v1.24.0 - ISC
+* @license lucide-react v1.33.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -1132,7 +1207,7 @@ var createLucideIcon = (iconName, iconNode) => {
 	return Component;
 };
 /**
-* @license lucide-react v1.24.0 - ISC
+* @license lucide-react v1.33.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -1142,7 +1217,7 @@ var Activity = createLucideIcon("activity", [["path", {
 	key: "169zse"
 }]]);
 /**
-* @license lucide-react v1.24.0 - ISC
+* @license lucide-react v1.33.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -1155,7 +1230,7 @@ var ArrowDown = createLucideIcon("arrow-down", [["path", {
 	key: "1idqje"
 }]]);
 /**
-* @license lucide-react v1.24.0 - ISC
+* @license lucide-react v1.33.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -1168,17 +1243,7 @@ var ArrowUp = createLucideIcon("arrow-up", [["path", {
 	key: "x0mq9r"
 }]]);
 /**
-* @license lucide-react v1.24.0 - ISC
-*
-* This source code is licensed under the ISC license.
-* See the LICENSE file in the root directory of this source tree.
-*/
-var ChevronLeft = createLucideIcon("chevron-left", [["path", {
-	d: "m15 18-6-6 6-6",
-	key: "1wnfg3"
-}]]);
-/**
-* @license lucide-react v1.24.0 - ISC
+* @license lucide-react v1.33.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -1188,7 +1253,17 @@ var ChevronRight = createLucideIcon("chevron-right", [["path", {
 	key: "mthhwq"
 }]]);
 /**
-* @license lucide-react v1.24.0 - ISC
+* @license lucide-react v1.33.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var ChevronLeft = createLucideIcon("chevron-left", [["path", {
+	d: "m15 18-6-6 6-6",
+	key: "1wnfg3"
+}]]);
+/**
+* @license lucide-react v1.33.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -1203,7 +1278,7 @@ var Clock = createLucideIcon("clock", [["circle", {
 	key: "mmk7yg"
 }]]);
 /**
-* @license lucide-react v1.24.0 - ISC
+* @license lucide-react v1.33.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -1275,7 +1350,7 @@ var Cpu = createLucideIcon("cpu", [
 	}]
 ]);
 /**
-* @license lucide-react v1.24.0 - ISC
+* @license lucide-react v1.33.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -1298,7 +1373,7 @@ var Database = createLucideIcon("database", [
 	}]
 ]);
 /**
-* @license lucide-react v1.24.0 - ISC
+* @license lucide-react v1.33.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -1311,7 +1386,7 @@ var Gauge = createLucideIcon("gauge", [["path", {
 	key: "19p75a"
 }]]);
 /**
-* @license lucide-react v1.24.0 - ISC
+* @license lucide-react v1.33.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -1355,7 +1430,7 @@ var GripVertical = createLucideIcon("grip-vertical", [
 	}]
 ]);
 /**
-* @license lucide-react v1.24.0 - ISC
+* @license lucide-react v1.33.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -1379,7 +1454,7 @@ var HardDrive = createLucideIcon("hard-drive", [
 	}]
 ]);
 /**
-* @license lucide-react v1.24.0 - ISC
+* @license lucide-react v1.33.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -1435,7 +1510,7 @@ var MemoryStick = createLucideIcon("memory-stick", [
 	}]
 ]);
 /**
-* @license lucide-react v1.24.0 - ISC
+* @license lucide-react v1.33.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -1465,7 +1540,7 @@ var Monitor = createLucideIcon("monitor", [
 	}]
 ]);
 /**
-* @license lucide-react v1.24.0 - ISC
+* @license lucide-react v1.33.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -1478,7 +1553,7 @@ var Plus = createLucideIcon("plus", [["path", {
 	key: "s699le"
 }]]);
 /**
-* @license lucide-react v1.24.0 - ISC
+* @license lucide-react v1.33.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -1491,7 +1566,7 @@ var Power = createLucideIcon("power", [["path", {
 	key: "obofu9"
 }]]);
 /**
-* @license lucide-react v1.24.0 - ISC
+* @license lucide-react v1.33.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -1533,7 +1608,7 @@ var Radar = createLucideIcon("radar", [
 	}]
 ]);
 /**
-* @license lucide-react v1.24.0 - ISC
+* @license lucide-react v1.33.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -1546,7 +1621,7 @@ var RotateCcw = createLucideIcon("rotate-ccw", [["path", {
 	key: "1xhq8a"
 }]]);
 /**
-* @license lucide-react v1.24.0 - ISC
+* @license lucide-react v1.33.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -1556,7 +1631,7 @@ var Thermometer = createLucideIcon("thermometer", [["path", {
 	key: "17jzev"
 }]]);
 /**
-* @license lucide-react v1.24.0 - ISC
+* @license lucide-react v1.33.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -1584,7 +1659,7 @@ var Timer = createLucideIcon("timer", [
 	}]
 ]);
 /**
-* @license lucide-react v1.24.0 - ISC
+* @license lucide-react v1.33.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -1608,7 +1683,7 @@ var Wifi = createLucideIcon("wifi", [
 	}]
 ]);
 /**
-* @license lucide-react v1.24.0 - ISC
+* @license lucide-react v1.33.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
@@ -1621,77 +1696,18 @@ var X = createLucideIcon("x", [["path", {
 	key: "d8bk6v"
 }]]);
 /**
-* @license lucide-react v1.24.0 - ISC
+* @license lucide-react v1.33.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
 */
 var Zap = createLucideIcon("zap", [["path", {
-	d: "M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z",
-	key: "1xq2db"
+	d: "M15.914 4a1.5 1.5 0 00-2.474-1.561l-9 9A1.5 1.5 0 005.5 14h4.002a.5.5 0 01.471.666L8.086 20a1.5 1.5 0 002.475 1.56l9-9A1.5 1.5 0 0018.5 10h-3.997a.5.5 0 01-.472-.667z",
+	key: "1v7up4"
 }]]);
 //#endregion
-//#region extension/src/cross/constants.ts
-var HMONITOR_STORAGE_ID = "hmonitor_storage";
-var HMONITOR_IPC_DATA_UPDATE = "hmonitor-data-update";
-var HMONITOR_IPC_CONFIG_UPDATE = "hmonitor-config-update";
-var HMONITOR_IPC_MONITORING_ERROR = "hmonitor-monitoring-error";
-var HMONITOR_IPC_SET_CONFIG = "hmonitor-set-config";
-var HMONITOR_IPC_RESET_CONFIG = "hmonitor-reset-config";
-var HMONITOR_IPC_UPDATE_PING = "hmonitor-update-ping";
-var HMONITOR_IPC_STOP_PING = "hmonitor-stop-ping";
-var initialSettings = {
-	configVersion: .6,
-	refreshInterval: 1,
-	enabled: true,
-	displayStyle: "default",
-	showSectionLabel: true,
-	metricVisibility: {
-		icon: true,
-		label: true,
-		value: true,
-		progressBar: true
-	},
-	enabledMetrics: {
-		cpu: [],
-		gpu: [],
-		memory: [],
-		network: [],
-		uptime: {
-			system: true,
-			app: true
-		}
-	},
-	availableHardware: {
-		gpu: [],
-		cpu: [],
-		memory: [],
-		network: []
-	},
-	pingState: {
-		isActive: false,
-		hosts: [],
-		enabledHosts: [],
-		interval: 1e3,
-		timeout: 2e3
-	},
-	showAliasCpu: true,
-	showAliasGpu: true,
-	showAliasMemory: true,
-	showAliasNetwork: true,
-	sectionOrder: [
-		"cpu",
-		"gpu",
-		"memory",
-		"network",
-		"uptime",
-		"ping"
-	],
-	uptimeOrder: ["uptimeSystem", "uptimeApp"]
-};
-//#endregion
 //#region extension/src/renderer/hooks/useHardwareData.ts
-var { useEffect: useEffect$13, useState: useState$10 } = await importShared("react");
+var { useEffect: useEffect$13, useState: useState$11 } = await importShared("react");
 var convertMBtoGB = (mb) => Number((mb / 1024).toFixed(2));
 var initialData = {
 	gpu: [],
@@ -1709,9 +1725,9 @@ var initialData = {
 * It listens for IPC events from the main process and transforms the raw data.
 */
 function useHardwareData() {
-	const [hardwareData, setHardwareData] = useState$10(initialData);
-	const [isConnected, setIsConnected] = useState$10(false);
-	const [error, setError] = useState$10(null);
+	const [hardwareData, setHardwareData] = useState$11(initialData);
+	const [isConnected, setIsConnected] = useState$11(false);
+	const [error, setError] = useState$11(null);
 	useEffect$13(() => {
 		const handleHardwareUpdate = (_, data) => {
 			if (!data) return;
@@ -1775,23 +1791,23 @@ function useHardwareData() {
 }
 //#endregion
 //#region extension/src/renderer/hooks/useScrollManager.ts
-var { useCallback: useCallback$5, useEffect: useEffect$12, useRef: useRef$10, useState: useState$9 } = await importShared("react");
+var { useCallback: useCallback$6, useEffect: useEffect$12, useRef: useRef$9, useState: useState$10 } = await importShared("react");
 /**
 * A hook to manage the scrolling state and behavior of a container element.
 * @returns Functions and state to manage scrolling, including refs and scroll button visibility.
 */
 function useScrollManager() {
-	const [canScrollLeft, setCanScrollLeft] = useState$9(false);
-	const [canScrollRight, setCanScrollRight] = useState$9(false);
-	const ref = useRef$10(null);
-	const updateScrollState = useCallback$5(() => {
+	const [canScrollLeft, setCanScrollLeft] = useState$10(false);
+	const [canScrollRight, setCanScrollRight] = useState$10(false);
+	const ref = useRef$9(null);
+	const updateScrollState = useCallback$6(() => {
 		const element = ref.current;
 		if (!element) return;
 		const { scrollLeft, scrollWidth, clientWidth } = element;
 		setCanScrollLeft(scrollLeft > 0);
 		setCanScrollRight(scrollLeft < scrollWidth - clientWidth - 1);
 	}, []);
-	const scroll = useCallback$5((direction) => {
+	const scroll = useCallback$6((direction) => {
 		ref.current?.scrollBy({
 			left: direction === "left" ? -250 : 250,
 			behavior: "smooth"
@@ -1821,7 +1837,7 @@ function useScrollManager() {
 		return () => element.removeEventListener("wheel", handleWheel);
 	}, []);
 	return {
-		containerRef: useCallback$5((node) => {
+		containerRef: useCallback$6((node) => {
 			if (node) {
 				ref.current = node;
 				updateScrollState();
@@ -1874,8 +1890,10 @@ function getRawTag(value) {
 		var unmasked = true;
 	} catch (e) {}
 	var result = nativeObjectToString$1.call(value);
-	if (unmasked) if (isOwn) value[symToStringTag$1] = tag;
-	else delete value[symToStringTag$1];
+	if (unmasked) {
+		if (isOwn) value[symToStringTag$1] = tag;
+		else delete value[symToStringTag$1];
+	}
 	return result;
 }
 //#endregion
@@ -1899,7 +1917,8 @@ function objectToString(value) {
 //#endregion
 //#region node_modules/lodash-es/_baseGetTag.js
 /** `Object#toString` result references. */
-var nullTag = "[object Null]", undefinedTag = "[object Undefined]";
+var nullTag = "[object Null]";
+var undefinedTag = "[object Undefined]";
 /** Built-in value references. */
 var symToStringTag = Symbol$1 ? Symbol$1.toStringTag : void 0;
 /**
@@ -2011,9 +2030,10 @@ var isArray = Array.isArray;
 //#endregion
 //#region node_modules/lodash-es/_baseToString.js
 /** Used as references for various `Number` constants. */
-var INFINITY$1 = Infinity;
+var INFINITY$1 = 1 / 0;
 /** Used to convert symbols to primitives and strings. */
-var symbolProto$2 = Symbol$1 ? Symbol$1.prototype : void 0, symbolToString = symbolProto$2 ? symbolProto$2.toString : void 0;
+var symbolProto$2 = Symbol$1 ? Symbol$1.prototype : void 0;
+var symbolToString = symbolProto$2 ? symbolProto$2.toString : void 0;
 /**
 * The base implementation of `_.toString` which doesn't convert nullish
 * values to empty strings.
@@ -2084,7 +2104,10 @@ function identity(value) {
 //#endregion
 //#region node_modules/lodash-es/isFunction.js
 /** `Object#toString` result references. */
-var asyncTag = "[object AsyncFunction]", funcTag$2 = "[object Function]", genTag$1 = "[object GeneratorFunction]", proxyTag = "[object Proxy]";
+var asyncTag = "[object AsyncFunction]";
+var funcTag$2 = "[object Function]";
+var genTag$1 = "[object GeneratorFunction]";
+var proxyTag = "[object Proxy]";
 /**
 * Checks if `value` is classified as a `Function` object.
 *
@@ -2160,7 +2183,8 @@ var reRegExpChar = /[\\^$.*+?()[\]{}|]/g;
 /** Used to detect host constructors (Safari). */
 var reIsHostCtor = /^\[object .+?Constructor\]$/;
 /** Used for built-in method references. */
-var funcProto$1 = Function.prototype, objectProto$3 = Object.prototype;
+var funcProto$1 = Function.prototype;
+var objectProto$3 = Object.prototype;
 /** Used to resolve the decompiled source of functions. */
 var funcToString$1 = funcProto$1.toString;
 /** Used to check objects for own properties. */
@@ -2272,7 +2296,8 @@ function copyArray(source, array) {
 //#endregion
 //#region node_modules/lodash-es/_shortOut.js
 /** Used to detect hot functions by number of calls within a span of milliseconds. */
-var HOT_COUNT = 800, HOT_SPAN = 16;
+var HOT_COUNT = 800;
+var HOT_SPAN = 16;
 var nativeNow = Date.now;
 /**
 * Creates a function that'll short out and invoke `identity` instead
@@ -2692,8 +2717,30 @@ var isBuffer = (Buffer$1 ? Buffer$1.isBuffer : void 0) || stubFalse;
 //#endregion
 //#region node_modules/lodash-es/_baseIsTypedArray.js
 /** `Object#toString` result references. */
-var argsTag$2 = "[object Arguments]", arrayTag$2 = "[object Array]", boolTag$3 = "[object Boolean]", dateTag$3 = "[object Date]", errorTag$2 = "[object Error]", funcTag$1 = "[object Function]", mapTag$6 = "[object Map]", numberTag$3 = "[object Number]", objectTag$4 = "[object Object]", regexpTag$3 = "[object RegExp]", setTag$6 = "[object Set]", stringTag$3 = "[object String]", weakMapTag$2 = "[object WeakMap]";
-var arrayBufferTag$3 = "[object ArrayBuffer]", dataViewTag$4 = "[object DataView]", float32Tag$2 = "[object Float32Array]", float64Tag$2 = "[object Float64Array]", int8Tag$2 = "[object Int8Array]", int16Tag$2 = "[object Int16Array]", int32Tag$2 = "[object Int32Array]", uint8Tag$2 = "[object Uint8Array]", uint8ClampedTag$2 = "[object Uint8ClampedArray]", uint16Tag$2 = "[object Uint16Array]", uint32Tag$2 = "[object Uint32Array]";
+var argsTag$2 = "[object Arguments]";
+var arrayTag$2 = "[object Array]";
+var boolTag$3 = "[object Boolean]";
+var dateTag$3 = "[object Date]";
+var errorTag$2 = "[object Error]";
+var funcTag$1 = "[object Function]";
+var mapTag$6 = "[object Map]";
+var numberTag$3 = "[object Number]";
+var objectTag$4 = "[object Object]";
+var regexpTag$3 = "[object RegExp]";
+var setTag$6 = "[object Set]";
+var stringTag$3 = "[object String]";
+var weakMapTag$2 = "[object WeakMap]";
+var arrayBufferTag$3 = "[object ArrayBuffer]";
+var dataViewTag$4 = "[object DataView]";
+var float32Tag$2 = "[object Float32Array]";
+var float64Tag$2 = "[object Float64Array]";
+var int8Tag$2 = "[object Int8Array]";
+var int16Tag$2 = "[object Int16Array]";
+var int32Tag$2 = "[object Int32Array]";
+var uint8Tag$2 = "[object Uint8Array]";
+var uint8ClampedTag$2 = "[object Uint8ClampedArray]";
+var uint16Tag$2 = "[object Uint16Array]";
+var uint32Tag$2 = "[object Uint32Array]";
 /** Used to identify `toStringTag` values of typed arrays. */
 var typedArrayTags = {};
 typedArrayTags[float32Tag$2] = typedArrayTags[float64Tag$2] = typedArrayTags[int8Tag$2] = typedArrayTags[int16Tag$2] = typedArrayTags[int32Tag$2] = typedArrayTags[uint8Tag$2] = typedArrayTags[uint8ClampedTag$2] = typedArrayTags[uint16Tag$2] = typedArrayTags[uint32Tag$2] = true;
@@ -2908,7 +2955,8 @@ function keysIn(object) {
 //#endregion
 //#region node_modules/lodash-es/_isKey.js
 /** Used to match property names within property paths. */
-var reIsDeepProp = /\.|\[(?:[^[\]]*|(["'])(?:(?!\1)[^\\]|\\.)*?\1)\]/, reIsPlainProp = /^\w*$/;
+var reIsDeepProp = /\.|\[(?:[^[\]]*|(["'])(?:(?!\1)[^\\]|\\.)*?\1)\]/;
+var reIsPlainProp = /^\w*$/;
 /**
 * Checks if `value` is a property name and not a property path.
 *
@@ -3434,7 +3482,7 @@ function castPath(value, object) {
 //#endregion
 //#region node_modules/lodash-es/_toKey.js
 /** Used as references for various `Number` constants. */
-var INFINITY = Infinity;
+var INFINITY = 1 / 0;
 /**
 * Converts `value` to a string key if it's not a string or symbol.
 *
@@ -3511,9 +3559,10 @@ function baseFlatten(array, depth, predicate, isStrict, result) {
 	result || (result = []);
 	while (++index < length) {
 		var value = array[index];
-		if (depth > 0 && predicate(value)) if (depth > 1) baseFlatten(value, depth - 1, predicate, isStrict, result);
-		else arrayPush(result, value);
-		else if (!isStrict) result[result.length] = value;
+		if (depth > 0 && predicate(value)) {
+			if (depth > 1) baseFlatten(value, depth - 1, predicate, isStrict, result);
+			else arrayPush(result, value);
+		} else if (!isStrict) result[result.length] = value;
 	}
 	return result;
 }
@@ -3557,7 +3606,8 @@ var getPrototype = overArg(Object.getPrototypeOf, Object);
 /** `Object#toString` result references. */
 var objectTag$3 = "[object Object]";
 /** Used for built-in method references. */
-var funcProto = Function.prototype, objectProto = Object.prototype;
+var funcProto = Function.prototype;
+var objectProto = Object.prototype;
 /** Used to resolve the decompiled source of functions. */
 var funcToString = funcProto.toString;
 /** Used to check objects for own properties. */
@@ -3666,15 +3716,28 @@ function asciiToArray(string) {
 //#endregion
 //#region node_modules/lodash-es/_unicodeToArray.js
 /** Used to compose unicode character classes. */
-var rsAstralRange = "\\ud800-\\udfff", rsComboRange = "\\u0300-\\u036f\\ufe20-\\ufe2f\\u20d0-\\u20ff", rsVarRange = "\\ufe0e\\ufe0f";
+var rsAstralRange = "\\ud800-\\udfff";
+var rsComboRange = "\\u0300-\\u036f\\ufe20-\\ufe2f\\u20d0-\\u20ff";
+var rsVarRange = "\\ufe0e\\ufe0f";
 /** Used to compose unicode capture groups. */
-var rsAstral = "[" + rsAstralRange + "]", rsCombo = "[" + rsComboRange + "]", rsFitz = "\\ud83c[\\udffb-\\udfff]", rsModifier = "(?:" + rsCombo + "|" + rsFitz + ")", rsNonAstral = "[^" + rsAstralRange + "]", rsRegional = "(?:\\ud83c[\\udde6-\\uddff]){2}", rsSurrPair = "[\\ud800-\\udbff][\\udc00-\\udfff]", rsZWJ = "\\u200d";
+var rsAstral = "[" + rsAstralRange + "]";
+var rsCombo = "[" + rsComboRange + "]";
+var rsFitz = "\\ud83c[\\udffb-\\udfff]";
+var rsModifier = "(?:" + rsCombo + "|" + rsFitz + ")";
+var rsNonAstral = "[^" + rsAstralRange + "]";
+var rsRegional = "(?:\\ud83c[\\udde6-\\uddff]){2}";
+var rsSurrPair = "[\\ud800-\\udbff][\\udc00-\\udfff]";
+var rsZWJ = "\\u200d";
 /** Used to compose unicode regexes. */
-var reOptMod = rsModifier + "?", rsOptVar = "[" + rsVarRange + "]?", rsOptJoin = "(?:" + rsZWJ + "(?:" + [
+var reOptMod = rsModifier + "?";
+var rsOptVar = "[" + rsVarRange + "]?";
+var rsOptJoin = "(?:" + rsZWJ + "(?:" + [
 	rsNonAstral,
 	rsRegional,
 	rsSurrPair
-].join("|") + ")" + rsOptVar + reOptMod + ")*", rsSeq = rsOptVar + reOptMod + rsOptJoin, rsSymbol = "(?:" + [
+].join("|") + ")" + rsOptVar + reOptMod + ")*";
+var rsSeq = rsOptVar + reOptMod + rsOptJoin;
+var rsSymbol = "(?:" + [
 	rsNonAstral + rsCombo + "?",
 	rsCombo,
 	rsRegional,
@@ -3902,7 +3965,8 @@ var freeExports = typeof exports == "object" && exports && !exports.nodeType && 
 /** Detect free variable `module`. */
 var freeModule = freeExports && typeof module == "object" && module && !module.nodeType && module;
 /** Built-in value references. */
-var Buffer = freeModule && freeModule.exports === freeExports ? root.Buffer : void 0, allocUnsafe = Buffer ? Buffer.allocUnsafe : void 0;
+var Buffer = freeModule && freeModule.exports === freeExports ? root.Buffer : void 0;
+var allocUnsafe = Buffer ? Buffer.allocUnsafe : void 0;
 /**
 * Creates a clone of  `buffer`.
 *
@@ -4075,10 +4139,18 @@ var Set$1 = getNative(root, "Set");
 //#endregion
 //#region node_modules/lodash-es/_getTag.js
 /** `Object#toString` result references. */
-var mapTag$5 = "[object Map]", objectTag$2 = "[object Object]", promiseTag = "[object Promise]", setTag$5 = "[object Set]", weakMapTag$1 = "[object WeakMap]";
+var mapTag$5 = "[object Map]";
+var objectTag$2 = "[object Object]";
+var promiseTag = "[object Promise]";
+var setTag$5 = "[object Set]";
+var weakMapTag$1 = "[object WeakMap]";
 var dataViewTag$3 = "[object DataView]";
 /** Used to detect maps, sets, and weakmaps. */
-var dataViewCtorString = toSource(DataView), mapCtorString = toSource(Map$1), promiseCtorString = toSource(Promise$1), setCtorString = toSource(Set$1), weakMapCtorString = toSource(WeakMap$1);
+var dataViewCtorString = toSource(DataView);
+var mapCtorString = toSource(Map$1);
+var promiseCtorString = toSource(Promise$1);
+var setCtorString = toSource(Set$1);
+var weakMapCtorString = toSource(WeakMap$1);
 /**
 * Gets the `toStringTag` of `value`.
 *
@@ -4169,7 +4241,8 @@ function cloneRegExp(regexp) {
 //#endregion
 //#region node_modules/lodash-es/_cloneSymbol.js
 /** Used to convert symbols to primitives and strings. */
-var symbolProto$1 = Symbol$1 ? Symbol$1.prototype : void 0, symbolValueOf$1 = symbolProto$1 ? symbolProto$1.valueOf : void 0;
+var symbolProto$1 = Symbol$1 ? Symbol$1.prototype : void 0;
+var symbolValueOf$1 = symbolProto$1 ? symbolProto$1.valueOf : void 0;
 /**
 * Creates a clone of the `symbol` object.
 *
@@ -4197,8 +4270,25 @@ function cloneTypedArray(typedArray, isDeep) {
 //#endregion
 //#region node_modules/lodash-es/_initCloneByTag.js
 /** `Object#toString` result references. */
-var boolTag$2 = "[object Boolean]", dateTag$2 = "[object Date]", mapTag$4 = "[object Map]", numberTag$2 = "[object Number]", regexpTag$2 = "[object RegExp]", setTag$4 = "[object Set]", stringTag$2 = "[object String]", symbolTag$2 = "[object Symbol]";
-var arrayBufferTag$2 = "[object ArrayBuffer]", dataViewTag$2 = "[object DataView]", float32Tag$1 = "[object Float32Array]", float64Tag$1 = "[object Float64Array]", int8Tag$1 = "[object Int8Array]", int16Tag$1 = "[object Int16Array]", int32Tag$1 = "[object Int32Array]", uint8Tag$1 = "[object Uint8Array]", uint8ClampedTag$1 = "[object Uint8ClampedArray]", uint16Tag$1 = "[object Uint16Array]", uint32Tag$1 = "[object Uint32Array]";
+var boolTag$2 = "[object Boolean]";
+var dateTag$2 = "[object Date]";
+var mapTag$4 = "[object Map]";
+var numberTag$2 = "[object Number]";
+var regexpTag$2 = "[object RegExp]";
+var setTag$4 = "[object Set]";
+var stringTag$2 = "[object String]";
+var symbolTag$2 = "[object Symbol]";
+var arrayBufferTag$2 = "[object ArrayBuffer]";
+var dataViewTag$2 = "[object DataView]";
+var float32Tag$1 = "[object Float32Array]";
+var float64Tag$1 = "[object Float64Array]";
+var int8Tag$1 = "[object Int8Array]";
+var int16Tag$1 = "[object Int16Array]";
+var int32Tag$1 = "[object Int32Array]";
+var uint8Tag$1 = "[object Uint8Array]";
+var uint8ClampedTag$1 = "[object Uint8ClampedArray]";
+var uint16Tag$1 = "[object Uint16Array]";
+var uint32Tag$1 = "[object Uint32Array]";
 /**
 * Initializes an object clone based on its `toStringTag`.
 *
@@ -4320,10 +4410,36 @@ var isSet = nodeIsSet ? baseUnary(nodeIsSet) : baseIsSet;
 //#endregion
 //#region node_modules/lodash-es/_baseClone.js
 /** Used to compose bitmasks for cloning. */
-var CLONE_DEEP_FLAG$1 = 1, CLONE_FLAT_FLAG$1 = 2, CLONE_SYMBOLS_FLAG$1 = 4;
+var CLONE_DEEP_FLAG$1 = 1;
+var CLONE_FLAT_FLAG$1 = 2;
+var CLONE_SYMBOLS_FLAG$1 = 4;
 /** `Object#toString` result references. */
-var argsTag$1 = "[object Arguments]", arrayTag$1 = "[object Array]", boolTag$1 = "[object Boolean]", dateTag$1 = "[object Date]", errorTag$1 = "[object Error]", funcTag = "[object Function]", genTag = "[object GeneratorFunction]", mapTag$2 = "[object Map]", numberTag$1 = "[object Number]", objectTag$1 = "[object Object]", regexpTag$1 = "[object RegExp]", setTag$2 = "[object Set]", stringTag$1 = "[object String]", symbolTag$1 = "[object Symbol]", weakMapTag = "[object WeakMap]";
-var arrayBufferTag$1 = "[object ArrayBuffer]", dataViewTag$1 = "[object DataView]", float32Tag = "[object Float32Array]", float64Tag = "[object Float64Array]", int8Tag = "[object Int8Array]", int16Tag = "[object Int16Array]", int32Tag = "[object Int32Array]", uint8Tag = "[object Uint8Array]", uint8ClampedTag = "[object Uint8ClampedArray]", uint16Tag = "[object Uint16Array]", uint32Tag = "[object Uint32Array]";
+var argsTag$1 = "[object Arguments]";
+var arrayTag$1 = "[object Array]";
+var boolTag$1 = "[object Boolean]";
+var dateTag$1 = "[object Date]";
+var errorTag$1 = "[object Error]";
+var funcTag = "[object Function]";
+var genTag = "[object GeneratorFunction]";
+var mapTag$2 = "[object Map]";
+var numberTag$1 = "[object Number]";
+var objectTag$1 = "[object Object]";
+var regexpTag$1 = "[object RegExp]";
+var setTag$2 = "[object Set]";
+var stringTag$1 = "[object String]";
+var symbolTag$1 = "[object Symbol]";
+var weakMapTag = "[object WeakMap]";
+var arrayBufferTag$1 = "[object ArrayBuffer]";
+var dataViewTag$1 = "[object DataView]";
+var float32Tag = "[object Float32Array]";
+var float64Tag = "[object Float64Array]";
+var int8Tag = "[object Int8Array]";
+var int16Tag = "[object Int16Array]";
+var int32Tag = "[object Int32Array]";
+var uint8Tag = "[object Uint8Array]";
+var uint8ClampedTag = "[object Uint8ClampedArray]";
+var uint16Tag = "[object Uint16Array]";
+var uint32Tag = "[object Uint32Array]";
 /** Used to identify `toStringTag` values supported by `_.clone`. */
 var cloneableTags = {};
 cloneableTags[argsTag$1] = cloneableTags[arrayTag$1] = cloneableTags[arrayBufferTag$1] = cloneableTags[dataViewTag$1] = cloneableTags[boolTag$1] = cloneableTags[dateTag$1] = cloneableTags[float32Tag] = cloneableTags[float64Tag] = cloneableTags[int8Tag] = cloneableTags[int16Tag] = cloneableTags[int32Tag] = cloneableTags[mapTag$2] = cloneableTags[numberTag$1] = cloneableTags[objectTag$1] = cloneableTags[regexpTag$1] = cloneableTags[setTag$2] = cloneableTags[stringTag$1] = cloneableTags[symbolTag$1] = cloneableTags[uint8Tag] = cloneableTags[uint8ClampedTag] = cloneableTags[uint16Tag] = cloneableTags[uint32Tag] = true;
@@ -4466,7 +4582,8 @@ function cacheHas(cache, key) {
 //#endregion
 //#region node_modules/lodash-es/_equalArrays.js
 /** Used to compose bitmasks for value comparisons. */
-var COMPARE_PARTIAL_FLAG$3 = 1, COMPARE_UNORDERED_FLAG$1 = 2;
+var COMPARE_PARTIAL_FLAG$3 = 1;
+var COMPARE_UNORDERED_FLAG$1 = 2;
 /**
 * A specialized version of `baseIsEqualDeep` for arrays with support for
 * partial deep comparisons.
@@ -4548,12 +4665,23 @@ function setToArray(set) {
 //#endregion
 //#region node_modules/lodash-es/_equalByTag.js
 /** Used to compose bitmasks for value comparisons. */
-var COMPARE_PARTIAL_FLAG$2 = 1, COMPARE_UNORDERED_FLAG = 2;
+var COMPARE_PARTIAL_FLAG$2 = 1;
+var COMPARE_UNORDERED_FLAG = 2;
 /** `Object#toString` result references. */
-var boolTag = "[object Boolean]", dateTag = "[object Date]", errorTag = "[object Error]", mapTag$1 = "[object Map]", numberTag = "[object Number]", regexpTag = "[object RegExp]", setTag$1 = "[object Set]", stringTag = "[object String]", symbolTag = "[object Symbol]";
-var arrayBufferTag = "[object ArrayBuffer]", dataViewTag = "[object DataView]";
+var boolTag = "[object Boolean]";
+var dateTag = "[object Date]";
+var errorTag = "[object Error]";
+var mapTag$1 = "[object Map]";
+var numberTag = "[object Number]";
+var regexpTag = "[object RegExp]";
+var setTag$1 = "[object Set]";
+var stringTag = "[object String]";
+var symbolTag = "[object Symbol]";
+var arrayBufferTag = "[object ArrayBuffer]";
+var dataViewTag = "[object DataView]";
 /** Used to convert symbols to primitives and strings. */
-var symbolProto = Symbol$1 ? Symbol$1.prototype : void 0, symbolValueOf = symbolProto ? symbolProto.valueOf : void 0;
+var symbolProto = Symbol$1 ? Symbol$1.prototype : void 0;
+var symbolValueOf = symbolProto ? symbolProto.valueOf : void 0;
 /**
 * A specialized version of `baseIsEqualDeep` for comparing objects of
 * the same `toStringTag`.
@@ -4659,7 +4787,9 @@ function equalObjects(object, other, bitmask, customizer, equalFunc, stack) {
 /** Used to compose bitmasks for value comparisons. */
 var COMPARE_PARTIAL_FLAG = 1;
 /** `Object#toString` result references. */
-var argsTag = "[object Arguments]", arrayTag = "[object Array]", objectTag = "[object Object]";
+var argsTag = "[object Arguments]";
+var arrayTag = "[object Array]";
+var objectTag = "[object Object]";
 /** Used to check objects for own properties. */
 var hasOwnProperty$2 = Object.prototype.hasOwnProperty;
 /**
@@ -4759,7 +4889,8 @@ function parent(object, path) {
 //#endregion
 //#region node_modules/lodash-es/isEmpty.js
 /** `Object#toString` result references. */
-var mapTag = "[object Map]", setTag = "[object Set]";
+var mapTag = "[object Map]";
+var setTag = "[object Set]";
 /** Used to check objects for own properties. */
 var hasOwnProperty$1 = Object.prototype.hasOwnProperty;
 /**
@@ -4878,7 +5009,9 @@ function customOmitClone(value) {
 //#endregion
 //#region node_modules/lodash-es/omit.js
 /** Used to compose bitmasks for cloning. */
-var CLONE_DEEP_FLAG = 1, CLONE_FLAT_FLAG = 2, CLONE_SYMBOLS_FLAG = 4;
+var CLONE_DEEP_FLAG = 1;
+var CLONE_FLAT_FLAG = 2;
+var CLONE_SYMBOLS_FLAG = 4;
 /**
 * The opposite of `_.pick`; this method creates an object composed of the
 * own and inherited enumerable property paths of `object` that are not omitted.
@@ -5086,8 +5219,8 @@ var getProgressColor = (value, isTemp = false) => {
 };
 //#endregion
 //#region extension/src/renderer/components/common/MetricItem.tsx
-var { memo: memo$10, useMemo: useMemo$15 } = await importShared("react");
-var ProgressBar = memo$10(({ value, max = 100, isTemp = false }) => {
+var { memo: memo$11, useMemo: useMemo$16 } = await importShared("react");
+var ProgressBar = memo$11(({ value, max = 100, isTemp = false }) => {
 	const displayStyle = useHMonitorState("displayStyle");
 	const isTwoColumn = displayStyle === "two-column";
 	const isCompact = ["compact", "two-column"].includes(displayStyle);
@@ -5101,13 +5234,13 @@ var ProgressBar = memo$10(({ value, max = 100, isTemp = false }) => {
 	});
 });
 ProgressBar.displayName = "ProgressBar";
-var MetricItem = memo$10(({ icon: Icon, label, value, unit = "", progress, colorClass, children }) => {
+var MetricItem = memo$11(({ icon: Icon, label, value, unit = "", progress, colorClass, children }) => {
 	const displayStyle = useHMonitorState("displayStyle");
 	const metricVisibility = useHMonitorState("metricVisibility");
 	const isRaw = ["raw", "raw-two-column"].includes(displayStyle);
 	const isTwoColumn = displayStyle === "two-column";
 	const isCompact = ["compact", "two-column"].includes(displayStyle);
-	const renderProgress = useMemo$15(() => {
+	const renderProgress = useMemo$16(() => {
 		if (!progress || !metricVisibility.progressBar) return null;
 		const max = progress.max || 100;
 		const progressValue = Math.min(progress.value, max);
@@ -5151,8 +5284,8 @@ var MetricItem = memo$10(({ icon: Icon, label, value, unit = "", progress, color
 //#endregion
 //#region extension/src/renderer/components/common/Section.tsx
 var { Spinner: Spinner$1 } = await importShared("@heroui/react");
-var { Children: Children$1, Fragment: Fragment$5, memo: memo$9 } = await importShared("react");
-var Section = memo$9(({ title, icon: Icon, children }) => {
+var { Children: Children$1, Fragment: Fragment$5, memo: memo$10 } = await importShared("react");
+var Section = memo$10(({ title, icon: Icon, children }) => {
 	const displayStyle = useHMonitorState("displayStyle");
 	const showSectionLabel = useHMonitorState("showSectionLabel");
 	const isRaw = ["raw", "raw-two-column"].includes(displayStyle);
@@ -5191,7 +5324,7 @@ var Section = memo$9(({ title, icon: Icon, children }) => {
 });
 //#endregion
 //#region extension/src/renderer/components/status-bar/sections/CpuSection.tsx
-var { memo: memo$8, useMemo: useMemo$14 } = await importShared("react");
+var { memo: memo$9, useMemo: useMemo$15 } = await importShared("react");
 var getIconForSensorType$3 = (type) => {
 	switch (type) {
 		case "Temperature": return Thermometer;
@@ -5201,7 +5334,7 @@ var getIconForSensorType$3 = (type) => {
 		default: return Activity;
 	}
 };
-var CpuSection = memo$8(({ data, metrics, hardwareInfo, rawSensorValues }) => {
+var CpuSection = memo$9(({ data, metrics, hardwareInfo, rawSensorValues }) => {
 	const displayStyle = useHMonitorState("displayStyle");
 	const showAliasCpu = useHMonitorState("showAliasCpu");
 	const { temp, usage, name } = data || {
@@ -5209,93 +5342,95 @@ var CpuSection = memo$8(({ data, metrics, hardwareInfo, rawSensorValues }) => {
 		usage: 0,
 		name: ""
 	};
-	const sensorReadingMap = useMemo$14(() => {
+	const sensorReadingMap = useMemo$15(() => {
 		const map = /* @__PURE__ */ new Map();
 		rawSensorValues.forEach((val) => map.set(val.Identifier, val));
 		return map;
 	}, [rawSensorValues]);
-	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Section, {
-		title: showAliasCpu ? getCpuAlias(name) : name,
-		icon: Cpu,
-		children: useMemo$14(() => {
-			const list = [];
-			const processedIds = /* @__PURE__ */ new Set();
-			metrics.enabled.forEach((metricId) => {
-				processedIds.add(metricId);
-				if (metricId === "temp") list.push(temp > 0 ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)(MetricItem, {
-					unit: "°C",
-					label: "Temp",
+	const title = showAliasCpu ? getCpuAlias(name) : name;
+	const renderedMetrics = useMemo$15(() => {
+		const list = [];
+		const processedIds = /* @__PURE__ */ new Set();
+		metrics.enabled.forEach((metricId) => {
+			processedIds.add(metricId);
+			if (metricId === "temp") list.push(temp > 0 ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)(MetricItem, {
+				unit: "°C",
+				label: "Temp",
+				value: temp,
+				icon: Thermometer,
+				colorClass: getTemperatureColor(temp),
+				progress: {
 					value: temp,
-					icon: Thermometer,
-					colorClass: getTemperatureColor(temp),
-					progress: {
-						value: temp,
-						max: 100,
-						isTemp: true
-					}
-				}, "temp") : /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(MetricItem, {
-					label: "Temp",
-					icon: Thermometer,
-					value: "Admin Required",
-					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Thermometer, { className: `${["compact", "two-column"].includes(displayStyle) ? "size-3" : "size-4"} shrink-0 text-danger` }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-						className: "text-xs font-medium text-danger whitespace-nowrap",
-						children: "Admin Required"
-					})]
-				}, "temp"));
-				else if (metricId === "usage") list.push(/* @__PURE__ */ (0, import_jsx_runtime.jsx)(MetricItem, {
-					unit: "%",
-					label: "Usage",
-					value: usage,
-					icon: Activity,
-					progress: { value: usage },
-					colorClass: getUsageColor(usage)
-				}, "usage"));
-				else {
-					const customMetric = metrics.custom?.find((m) => m.id === metricId);
-					if (customMetric) {
-						const sensorInfo = hardwareInfo?.sensors.find((s) => s.Identifier === customMetric.sensorIdentifier);
-						const sensorReading = sensorReadingMap.get(customMetric.sensorIdentifier);
-						if (sensorInfo && sensorReading?.Value !== null && sensorReading?.Value !== void 0) {
-							const value = Number.isInteger(sensorReading.Value) ? sensorReading.Value : parseFloat(sensorReading.Value.toFixed(1));
-							list.push(/* @__PURE__ */ (0, import_jsx_runtime.jsx)(MetricItem, {
-								value,
-								unit: sensorInfo.Unit,
-								label: customMetric.label,
-								icon: getIconForSensorType$3(sensorInfo.Type)
-							}, customMetric.id));
-						}
+					max: 100,
+					isTemp: true
+				}
+			}, "temp") : /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(MetricItem, {
+				label: "Temp",
+				icon: Thermometer,
+				value: "Admin Required",
+				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Thermometer, { className: `${["compact", "two-column"].includes(displayStyle) ? "size-3" : "size-4"} shrink-0 text-danger` }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+					className: "text-xs font-medium text-danger whitespace-nowrap",
+					children: "Admin Required"
+				})]
+			}, "temp"));
+			else if (metricId === "usage") list.push(/* @__PURE__ */ (0, import_jsx_runtime.jsx)(MetricItem, {
+				unit: "%",
+				label: "Usage",
+				value: usage,
+				icon: Activity,
+				progress: { value: usage },
+				colorClass: getUsageColor(usage)
+			}, "usage"));
+			else {
+				const customMetric = metrics.custom?.find((m) => m.id === metricId);
+				if (customMetric) {
+					const sensorInfo = hardwareInfo?.sensors.find((s) => s.Identifier === customMetric.sensorIdentifier);
+					const sensorReading = sensorReadingMap.get(customMetric.sensorIdentifier);
+					if (sensorInfo && sensorReading?.Value !== null && sensorReading?.Value !== void 0) {
+						const value = Number.isInteger(sensorReading.Value) ? sensorReading.Value : parseFloat(sensorReading.Value.toFixed(1));
+						list.push(/* @__PURE__ */ (0, import_jsx_runtime.jsx)(MetricItem, {
+							value,
+							unit: sensorInfo.Unit,
+							label: customMetric.label,
+							icon: getIconForSensorType$3(sensorInfo.Type)
+						}, customMetric.id));
 					}
 				}
-			});
-			metrics.custom?.forEach((customMetric) => {
-				if (processedIds.has(customMetric.id)) return;
-				const sensorInfo = hardwareInfo?.sensors.find((s) => s.Identifier === customMetric.sensorIdentifier);
-				const sensorReading = sensorReadingMap.get(customMetric.sensorIdentifier);
-				if (sensorInfo && sensorReading?.Value !== null && sensorReading?.Value !== void 0) {
-					const value = Number.isInteger(sensorReading.Value) ? sensorReading.Value : parseFloat(sensorReading.Value.toFixed(1));
-					list.push(/* @__PURE__ */ (0, import_jsx_runtime.jsx)(MetricItem, {
-						value,
-						unit: sensorInfo.Unit,
-						label: customMetric.label,
-						icon: getIconForSensorType$3(sensorInfo.Type)
-					}, customMetric.id));
-				}
-			});
-			return list;
-		}, [
-			metrics.enabled,
-			metrics.custom,
-			temp,
-			usage,
-			displayStyle,
-			hardwareInfo,
-			sensorReadingMap
-		])
+			}
+		});
+		metrics.custom?.forEach((customMetric) => {
+			if (processedIds.has(customMetric.id)) return;
+			const sensorInfo = hardwareInfo?.sensors.find((s) => s.Identifier === customMetric.sensorIdentifier);
+			const sensorReading = sensorReadingMap.get(customMetric.sensorIdentifier);
+			if (sensorInfo && sensorReading?.Value !== null && sensorReading?.Value !== void 0) {
+				const value = Number.isInteger(sensorReading.Value) ? sensorReading.Value : parseFloat(sensorReading.Value.toFixed(1));
+				list.push(/* @__PURE__ */ (0, import_jsx_runtime.jsx)(MetricItem, {
+					value,
+					unit: sensorInfo.Unit,
+					label: customMetric.label,
+					icon: getIconForSensorType$3(sensorInfo.Type)
+				}, customMetric.id));
+			}
+		});
+		return list;
+	}, [
+		metrics.enabled,
+		metrics.custom,
+		temp,
+		usage,
+		displayStyle,
+		hardwareInfo,
+		sensorReadingMap
+	]);
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Section, {
+		title,
+		icon: Cpu,
+		children: renderedMetrics
 	});
 });
 //#endregion
 //#region extension/src/renderer/components/status-bar/sections/GpuSection.tsx
-var { memo: memo$7, useMemo: useMemo$13 } = await importShared("react");
+var { memo: memo$8, useMemo: useMemo$14 } = await importShared("react");
 var getIconForSensorType$2 = (type) => {
 	switch (type) {
 		case "Temperature": return Thermometer;
@@ -5307,7 +5442,7 @@ var getIconForSensorType$2 = (type) => {
 		default: return Activity;
 	}
 };
-var GpuSection = memo$7(({ data, metrics, hardwareInfo, rawSensorValues }) => {
+var GpuSection = memo$8(({ data, metrics, hardwareInfo, rawSensorValues }) => {
 	const showAliasGpu = useHMonitorState("showAliasGpu");
 	const { temp, usage, name, totalVram, usedVram } = data || {
 		temp: 0,
@@ -5316,95 +5451,97 @@ var GpuSection = memo$7(({ data, metrics, hardwareInfo, rawSensorValues }) => {
 		totalVram: 0,
 		usedVram: 0
 	};
-	const vramPercentage = useMemo$13(() => totalVram > 0 ? usedVram / totalVram * 100 : 0, [totalVram, usedVram]);
-	const sensorReadingMap = useMemo$13(() => {
+	const vramPercentage = useMemo$14(() => totalVram > 0 ? usedVram / totalVram * 100 : 0, [totalVram, usedVram]);
+	const sensorReadingMap = useMemo$14(() => {
 		const map = /* @__PURE__ */ new Map();
 		rawSensorValues.forEach((val) => map.set(val.Identifier, val));
 		return map;
 	}, [rawSensorValues]);
-	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Section, {
-		title: showAliasGpu ? getGpuAlias(name) : name,
-		icon: Monitor,
-		children: useMemo$13(() => {
-			const list = [];
-			const processedIds = /* @__PURE__ */ new Set();
-			metrics.enabled.forEach((metricId) => {
-				processedIds.add(metricId);
-				if (metricId === "temp") list.push(/* @__PURE__ */ (0, import_jsx_runtime.jsx)(MetricItem, {
-					unit: "°C",
-					label: "Temp",
+	const title = showAliasGpu ? getGpuAlias(name) : name;
+	const renderedMetrics = useMemo$14(() => {
+		const list = [];
+		const processedIds = /* @__PURE__ */ new Set();
+		metrics.enabled.forEach((metricId) => {
+			processedIds.add(metricId);
+			if (metricId === "temp") list.push(/* @__PURE__ */ (0, import_jsx_runtime.jsx)(MetricItem, {
+				unit: "°C",
+				label: "Temp",
+				value: temp,
+				icon: Thermometer,
+				colorClass: getTemperatureColor(temp),
+				progress: {
 					value: temp,
-					icon: Thermometer,
-					colorClass: getTemperatureColor(temp),
-					progress: {
-						value: temp,
-						max: 100,
-						isTemp: true
-					}
-				}, "temp"));
-				else if (metricId === "vram") list.push(/* @__PURE__ */ (0, import_jsx_runtime.jsx)(MetricItem, {
-					label: "VRAM",
-					icon: Database,
-					progress: { value: vramPercentage },
-					colorClass: getUsageColor(vramPercentage),
-					value: `${usedVram.toFixed(1)}/${Math.round(totalVram)}GB`
-				}, "vram"));
-				else if (metricId === "usage") list.push(/* @__PURE__ */ (0, import_jsx_runtime.jsx)(MetricItem, {
-					unit: "%",
-					icon: Zap,
-					label: "Usage",
-					value: Math.min(usage, 100),
-					colorClass: getUsageColor(usage),
-					progress: { value: Math.min(usage, 100) }
-				}, "usage"));
-				else {
-					const customMetric = metrics.custom?.find((m) => m.id === metricId);
-					if (customMetric) {
-						const sensorInfo = hardwareInfo?.sensors.find((s) => s.Identifier === customMetric.sensorIdentifier);
-						const sensorReading = sensorReadingMap.get(customMetric.sensorIdentifier);
-						if (sensorInfo && sensorReading?.Value !== null && sensorReading?.Value !== void 0) {
-							const value = Number.isInteger(sensorReading.Value) ? sensorReading.Value : parseFloat(sensorReading.Value.toFixed(1));
-							list.push(/* @__PURE__ */ (0, import_jsx_runtime.jsx)(MetricItem, {
-								value,
-								unit: sensorInfo.Unit,
-								label: customMetric.label,
-								icon: getIconForSensorType$2(sensorInfo.Type)
-							}, customMetric.id));
-						}
+					max: 100,
+					isTemp: true
+				}
+			}, "temp"));
+			else if (metricId === "vram") list.push(/* @__PURE__ */ (0, import_jsx_runtime.jsx)(MetricItem, {
+				label: "VRAM",
+				icon: Database,
+				progress: { value: vramPercentage },
+				colorClass: getUsageColor(vramPercentage),
+				value: `${usedVram.toFixed(1)}/${Math.round(totalVram)}GB`
+			}, "vram"));
+			else if (metricId === "usage") list.push(/* @__PURE__ */ (0, import_jsx_runtime.jsx)(MetricItem, {
+				unit: "%",
+				icon: Zap,
+				label: "Usage",
+				value: Math.min(usage, 100),
+				colorClass: getUsageColor(usage),
+				progress: { value: Math.min(usage, 100) }
+			}, "usage"));
+			else {
+				const customMetric = metrics.custom?.find((m) => m.id === metricId);
+				if (customMetric) {
+					const sensorInfo = hardwareInfo?.sensors.find((s) => s.Identifier === customMetric.sensorIdentifier);
+					const sensorReading = sensorReadingMap.get(customMetric.sensorIdentifier);
+					if (sensorInfo && sensorReading?.Value !== null && sensorReading?.Value !== void 0) {
+						const value = Number.isInteger(sensorReading.Value) ? sensorReading.Value : parseFloat(sensorReading.Value.toFixed(1));
+						list.push(/* @__PURE__ */ (0, import_jsx_runtime.jsx)(MetricItem, {
+							value,
+							unit: sensorInfo.Unit,
+							label: customMetric.label,
+							icon: getIconForSensorType$2(sensorInfo.Type)
+						}, customMetric.id));
 					}
 				}
-			});
-			metrics.custom?.forEach((customMetric) => {
-				if (processedIds.has(customMetric.id)) return;
-				const sensorInfo = hardwareInfo?.sensors.find((s) => s.Identifier === customMetric.sensorIdentifier);
-				const sensorReading = sensorReadingMap.get(customMetric.sensorIdentifier);
-				if (sensorInfo && sensorReading?.Value !== null && sensorReading?.Value !== void 0) {
-					const value = Number.isInteger(sensorReading.Value) ? sensorReading.Value : parseFloat(sensorReading.Value.toFixed(1));
-					list.push(/* @__PURE__ */ (0, import_jsx_runtime.jsx)(MetricItem, {
-						value,
-						unit: sensorInfo.Unit,
-						label: customMetric.label,
-						icon: getIconForSensorType$2(sensorInfo.Type)
-					}, customMetric.id));
-				}
-			});
-			return list;
-		}, [
-			metrics.enabled,
-			metrics.custom,
-			temp,
-			usage,
-			vramPercentage,
-			usedVram,
-			totalVram,
-			hardwareInfo,
-			sensorReadingMap
-		])
+			}
+		});
+		metrics.custom?.forEach((customMetric) => {
+			if (processedIds.has(customMetric.id)) return;
+			const sensorInfo = hardwareInfo?.sensors.find((s) => s.Identifier === customMetric.sensorIdentifier);
+			const sensorReading = sensorReadingMap.get(customMetric.sensorIdentifier);
+			if (sensorInfo && sensorReading?.Value !== null && sensorReading?.Value !== void 0) {
+				const value = Number.isInteger(sensorReading.Value) ? sensorReading.Value : parseFloat(sensorReading.Value.toFixed(1));
+				list.push(/* @__PURE__ */ (0, import_jsx_runtime.jsx)(MetricItem, {
+					value,
+					unit: sensorInfo.Unit,
+					label: customMetric.label,
+					icon: getIconForSensorType$2(sensorInfo.Type)
+				}, customMetric.id));
+			}
+		});
+		return list;
+	}, [
+		metrics.enabled,
+		metrics.custom,
+		temp,
+		usage,
+		vramPercentage,
+		usedVram,
+		totalVram,
+		hardwareInfo,
+		sensorReadingMap
+	]);
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Section, {
+		title,
+		icon: Monitor,
+		children: renderedMetrics
 	});
 });
 //#endregion
 //#region extension/src/renderer/components/status-bar/sections/MemorySection.tsx
-var { memo: memo$6, useMemo: useMemo$12 } = await importShared("react");
+var { memo: memo$7, useMemo: useMemo$13 } = await importShared("react");
 var getIconForSensorType$1 = (type) => {
 	switch (type) {
 		case "Temperature": return Thermometer;
@@ -5416,75 +5553,77 @@ var getIconForSensorType$1 = (type) => {
 		default: return Activity;
 	}
 };
-var MemorySection = memo$6(({ data, metrics, hardwareInfo, rawSensorValues }) => {
+var MemorySection = memo$7(({ data, metrics, hardwareInfo, rawSensorValues }) => {
 	const showAliasMemory = useHMonitorState("showAliasMemory");
 	const { name, used, total } = data || {
 		name: "",
 		used: 0,
 		total: 0
 	};
-	const memPercentage = useMemo$12(() => total > 0 ? used / total * 100 : 0, [total, used]);
-	const sensorReadingMap = useMemo$12(() => {
+	const memPercentage = useMemo$13(() => total > 0 ? used / total * 100 : 0, [total, used]);
+	const sensorReadingMap = useMemo$13(() => {
 		const map = /* @__PURE__ */ new Map();
 		rawSensorValues.forEach((val) => map.set(val.Identifier, val));
 		return map;
 	}, [rawSensorValues]);
-	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Section, {
-		title: showAliasMemory ? getMemoryAlias(name) : name,
-		icon: MemoryStick,
-		children: useMemo$12(() => {
-			const list = [];
-			const processedIds = /* @__PURE__ */ new Set();
-			metrics.enabled.forEach((metricId) => {
-				processedIds.add(metricId);
-				if (metricId === "memory") list.push(/* @__PURE__ */ (0, import_jsx_runtime.jsx)(MetricItem, {
-					label: "RAM",
-					icon: HardDrive,
-					progress: { value: memPercentage },
-					colorClass: getUsageColor(memPercentage),
-					value: `${used.toFixed(1)}/${total.toFixed(1)}GB`
-				}, "memory"));
-				else {
-					const customMetric = metrics.custom?.find((m) => m.id === metricId);
-					if (customMetric) {
-						const sensorInfo = hardwareInfo?.sensors.find((s) => s.Identifier === customMetric.sensorIdentifier);
-						const sensorReading = sensorReadingMap.get(customMetric.sensorIdentifier);
-						if (sensorInfo && sensorReading?.Value !== null && sensorReading?.Value !== void 0) {
-							const value = Number.isInteger(sensorReading.Value) ? sensorReading.Value : parseFloat(sensorReading.Value.toFixed(1));
-							list.push(/* @__PURE__ */ (0, import_jsx_runtime.jsx)(MetricItem, {
-								value,
-								unit: sensorInfo.Unit,
-								label: customMetric.label,
-								icon: getIconForSensorType$1(sensorInfo.Type)
-							}, customMetric.id));
-						}
+	const title = showAliasMemory ? getMemoryAlias(name) : name;
+	const renderedMetrics = useMemo$13(() => {
+		const list = [];
+		const processedIds = /* @__PURE__ */ new Set();
+		metrics.enabled.forEach((metricId) => {
+			processedIds.add(metricId);
+			if (metricId === "memory") list.push(/* @__PURE__ */ (0, import_jsx_runtime.jsx)(MetricItem, {
+				label: "RAM",
+				icon: HardDrive,
+				progress: { value: memPercentage },
+				colorClass: getUsageColor(memPercentage),
+				value: `${used.toFixed(1)}/${total.toFixed(1)}GB`
+			}, "memory"));
+			else {
+				const customMetric = metrics.custom?.find((m) => m.id === metricId);
+				if (customMetric) {
+					const sensorInfo = hardwareInfo?.sensors.find((s) => s.Identifier === customMetric.sensorIdentifier);
+					const sensorReading = sensorReadingMap.get(customMetric.sensorIdentifier);
+					if (sensorInfo && sensorReading?.Value !== null && sensorReading?.Value !== void 0) {
+						const value = Number.isInteger(sensorReading.Value) ? sensorReading.Value : parseFloat(sensorReading.Value.toFixed(1));
+						list.push(/* @__PURE__ */ (0, import_jsx_runtime.jsx)(MetricItem, {
+							value,
+							unit: sensorInfo.Unit,
+							label: customMetric.label,
+							icon: getIconForSensorType$1(sensorInfo.Type)
+						}, customMetric.id));
 					}
 				}
-			});
-			metrics.custom?.forEach((customMetric) => {
-				if (processedIds.has(customMetric.id)) return;
-				const sensorInfo = hardwareInfo?.sensors.find((s) => s.Identifier === customMetric.sensorIdentifier);
-				const sensorReading = sensorReadingMap.get(customMetric.sensorIdentifier);
-				if (sensorInfo && sensorReading?.Value !== null && sensorReading?.Value !== void 0) {
-					const value = Number.isInteger(sensorReading.Value) ? sensorReading.Value : parseFloat(sensorReading.Value.toFixed(1));
-					list.push(/* @__PURE__ */ (0, import_jsx_runtime.jsx)(MetricItem, {
-						value,
-						unit: sensorInfo.Unit,
-						label: customMetric.label,
-						icon: getIconForSensorType$1(sensorInfo.Type)
-					}, customMetric.id));
-				}
-			});
-			return list;
-		}, [
-			metrics.enabled,
-			metrics.custom,
-			memPercentage,
-			used,
-			total,
-			hardwareInfo,
-			sensorReadingMap
-		])
+			}
+		});
+		metrics.custom?.forEach((customMetric) => {
+			if (processedIds.has(customMetric.id)) return;
+			const sensorInfo = hardwareInfo?.sensors.find((s) => s.Identifier === customMetric.sensorIdentifier);
+			const sensorReading = sensorReadingMap.get(customMetric.sensorIdentifier);
+			if (sensorInfo && sensorReading?.Value !== null && sensorReading?.Value !== void 0) {
+				const value = Number.isInteger(sensorReading.Value) ? sensorReading.Value : parseFloat(sensorReading.Value.toFixed(1));
+				list.push(/* @__PURE__ */ (0, import_jsx_runtime.jsx)(MetricItem, {
+					value,
+					unit: sensorInfo.Unit,
+					label: customMetric.label,
+					icon: getIconForSensorType$1(sensorInfo.Type)
+				}, customMetric.id));
+			}
+		});
+		return list;
+	}, [
+		metrics.enabled,
+		metrics.custom,
+		memPercentage,
+		used,
+		total,
+		hardwareInfo,
+		sensorReadingMap
+	]);
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Section, {
+		title,
+		icon: MemoryStick,
+		children: renderedMetrics
 	});
 });
 //#endregion
@@ -5500,9 +5639,9 @@ var MemorySection = memo$6(({ data, metrics, hardwareInfo, rawSensorValues }) =>
 */
 function formatSize(size) {
 	if (!size) return "0KB";
-	if (size < 1024 * 1024) return `${(size / 1024).toFixed(2)} KB`;
-	else if (size < 1024 * 1024 * 1024) return `${(size / (1024 * 1024)).toFixed(2)} MB`;
-	else return `${(size / (1024 * 1024 * 1024)).toFixed(2)} GB`;
+	if (size < 1048576) return `${(size / 1024).toFixed(2)} KB`;
+	else if (size < 1073741824) return `${(size / 1048576).toFixed(2)} MB`;
+	else return `${(size / 1073741824).toFixed(2)} GB`;
 }
 /**
 * Gets a numerical value from a string, converts it based on the initial unit,
@@ -5517,10 +5656,10 @@ function convertStorageUnit(valueString, initialUnit, targetUnit) {
 	const UNIT_FACTORS = {
 		b: 1,
 		kb: 1024,
-		mb: 1024 * 1024,
-		gb: 1024 * 1024 * 1024,
-		tb: 1024 * 1024 * 1024 * 1024,
-		pb: 1024 * 1024 * 1024 * 1024 * 1024
+		mb: 1048576,
+		gb: 1073741824,
+		tb: 1099511627776,
+		pb: 0x4000000000000
 	};
 	const standardizeUnit = (unit) => unit.toLowerCase().trim();
 	const initialKey = standardizeUnit(initialUnit);
@@ -5548,7 +5687,7 @@ function getFallbackString(value) {
 }
 //#endregion
 //#region extension/src/renderer/components/status-bar/sections/NetworkSection.tsx
-var { memo: memo$5, useMemo: useMemo$11 } = await importShared("react");
+var { memo: memo$6, useMemo: useMemo$12 } = await importShared("react");
 var getIconForSensorType = (type) => {
 	switch (type) {
 		case "Temperature": return Thermometer;
@@ -5560,7 +5699,7 @@ var getIconForSensorType = (type) => {
 		default: return Activity;
 	}
 };
-var NetworkSection = memo$5(({ data, metrics, hardwareInfo, rawSensorValues }) => {
+var NetworkSection = memo$6(({ data, metrics, hardwareInfo, rawSensorValues }) => {
 	const showAliasNetwork = useHMonitorState("showAliasNetwork");
 	const { name, uploadSpeed, downloadSpeed, uploadData, downloadData } = data || {
 		name: "",
@@ -5569,17 +5708,17 @@ var NetworkSection = memo$5(({ data, metrics, hardwareInfo, rawSensorValues }) =
 		uploadData: 0,
 		downloadData: 0
 	};
-	const hasUploadSpeed = useMemo$11(() => metrics.enabled.includes("uploadSpeed"), [metrics.enabled]);
-	const hasDownloadSpeed = useMemo$11(() => metrics.enabled.includes("downloadSpeed"), [metrics.enabled]);
-	const hasUploadData = useMemo$11(() => metrics.enabled.includes("uploadData"), [metrics.enabled]);
-	const hasDownloadData = useMemo$11(() => metrics.enabled.includes("downloadData"), [metrics.enabled]);
-	const sensorReadingMap = useMemo$11(() => {
+	const hasUploadSpeed = useMemo$12(() => metrics.enabled.includes("uploadSpeed"), [metrics.enabled]);
+	const hasDownloadSpeed = useMemo$12(() => metrics.enabled.includes("downloadSpeed"), [metrics.enabled]);
+	const hasUploadData = useMemo$12(() => metrics.enabled.includes("uploadData"), [metrics.enabled]);
+	const hasDownloadData = useMemo$12(() => metrics.enabled.includes("downloadData"), [metrics.enabled]);
+	const sensorReadingMap = useMemo$12(() => {
 		const map = /* @__PURE__ */ new Map();
 		rawSensorValues.forEach((val) => map.set(val.Identifier, val));
 		return map;
 	}, [rawSensorValues]);
 	const title = showAliasNetwork ? getNetworkAlias(name) : name;
-	const renderedMetrics = useMemo$11(() => {
+	const renderedMetrics = useMemo$12(() => {
 		const list = [];
 		const processedIds = /* @__PURE__ */ new Set();
 		metrics.enabled.forEach((metricId) => {
@@ -5656,11 +5795,11 @@ var NetworkSection = memo$5(({ data, metrics, hardwareInfo, rawSensorValues }) =
 });
 //#endregion
 //#region extension/src/renderer/components/status-bar/sections/PingSection.tsx
-var { memo: memo$4, useEffect: useEffect$11, useMemo: useMemo$10, useState: useState$8 } = await importShared("react");
+var { memo: memo$5, useEffect: useEffect$11, useMemo: useMemo$11, useState: useState$9 } = await importShared("react");
 function PingSection() {
 	const pingState = useHMonitorState("pingState");
-	const [hostResults, setHostResults] = useState$8({});
-	const renderElements = useMemo$10(() => {
+	const [hostResults, setHostResults] = useState$9({});
+	const renderElements = useMemo$11(() => {
 		return Array.from(new Set(pingState.enabledHosts)).map((host) => {
 			const item = hostResults[host];
 			const value = !item || !item.latency ? "-1" : `${item.latency} ms`;
@@ -5703,7 +5842,7 @@ function PingSection() {
 		children: renderElements
 	});
 }
-var PingSection_default = memo$4(PingSection);
+var PingSection_default = memo$5(PingSection);
 //#endregion
 //#region extension/src/renderer/utils/formatUtils.ts
 /**
@@ -5722,43 +5861,44 @@ var formatUptime = (totalSeconds) => {
 };
 //#endregion
 //#region extension/src/renderer/components/status-bar/sections/UptimeSection.tsx
-var { memo: memo$3, useMemo: useMemo$9 } = await importShared("react");
+var { memo: memo$4, useMemo: useMemo$10 } = await importShared("react");
 function UpTimeSection({ data, metrics }) {
 	const uptimeOrder = useHMonitorState("uptimeOrder") || ["uptimeSystem", "uptimeApp"];
-	const { hasApp, hasSystem } = useMemo$9(() => ({
+	const { hasApp, hasSystem } = useMemo$10(() => ({
 		hasApp: metrics.app,
 		hasSystem: metrics.system
 	}), [metrics]);
+	const items = useMemo$10(() => {
+		return uptimeOrder.map((item) => {
+			if (item === "uptimeSystem" && hasSystem) return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(MetricItem, {
+				icon: Clock,
+				label: "System",
+				value: formatUptime(data.system || 0)
+			}, "system");
+			if (item === "uptimeApp" && hasApp) return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(MetricItem, {
+				label: "App",
+				icon: Activity,
+				value: formatUptime(data.app || 0)
+			}, "app");
+			return null;
+		});
+	}, [
+		uptimeOrder,
+		hasSystem,
+		hasApp,
+		data
+	]);
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Section, {
 		icon: Clock,
 		title: "Uptime",
-		children: useMemo$9(() => {
-			return uptimeOrder.map((item) => {
-				if (item === "uptimeSystem" && hasSystem) return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(MetricItem, {
-					icon: Clock,
-					label: "System",
-					value: formatUptime(data.system || 0)
-				}, "system");
-				if (item === "uptimeApp" && hasApp) return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(MetricItem, {
-					label: "App",
-					icon: Activity,
-					value: formatUptime(data.app || 0)
-				}, "app");
-				return null;
-			});
-		}, [
-			uptimeOrder,
-			hasSystem,
-			hasApp,
-			data
-		])
+		children: items
 	});
 }
-var UptimeSection_default = memo$3(UpTimeSection);
+var UptimeSection_default = memo$4(UpTimeSection);
 //#endregion
 //#region extension/src/renderer/components/status-bar/HardwareStatusBar.tsx
 var { Link, Separator: Separator$1 } = await importShared("@heroui/react");
-var { memo: memo$2, useMemo: useMemo$8 } = await importShared("react");
+var { memo: memo$3, useMemo: useMemo$9 } = await importShared("react");
 var SECTIONS_CONFIG = [
 	{
 		type: "cpu",
@@ -5794,7 +5934,7 @@ function HardwareStatusBar() {
 	const initRef = (node) => {
 		if (node) containerRef(node);
 	};
-	const hasMetricsEnabled = useMemo$8(() => {
+	const hasMetricsEnabled = useMemo$9(() => {
 		if (!enabledMetrics) return {
 			cpu: false,
 			gpu: false,
@@ -5810,7 +5950,7 @@ function HardwareStatusBar() {
 			uptime: !!(enabledMetrics.uptime?.system || enabledMetrics.uptime?.app)
 		};
 	}, [enabledMetrics]);
-	const errorElement = useMemo$8(() => {
+	const errorElement = useMemo$9(() => {
 		if (!error) return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ShinyText, {
 			speed: 2,
 			darkMode,
@@ -5832,7 +5972,7 @@ function HardwareStatusBar() {
 			children: "Couldn't load metrics. Please try restarting LynxHub."
 		});
 	}, [error, darkMode]);
-	const renderedElements = useMemo$8(() => {
+	const renderedElements = useMemo$9(() => {
 		if (!isConnected || !hardwareData) return [];
 		const elements = [];
 		(sectionOrder || [
@@ -5922,7 +6062,7 @@ function HardwareStatusBar() {
 		]
 	});
 }
-var HardwareStatusBar_default = memo$2(HardwareStatusBar);
+var HardwareStatusBar_default = memo$3(HardwareStatusBar);
 //#endregion
 //#region extension/src/renderer/integrations/ConfigProvider.tsx
 var { Fragment: Fragment$4, useEffect: useEffect$10 } = await importShared("react");
@@ -5960,6 +6100,7 @@ var browserChannels = {
 	openZoom: "browser:openZoom",
 	openVolume: "browser:openVolume",
 	onZoomChanged: "browser:on-zoom-changed",
+	onActiveWindowChange: "browser:on-active-window-change",
 	onLinkHover: "browser:on-link-hover",
 	resizeLinkPreview: "browser:resize-link-preview",
 	resizeBrowserView: "browser:resize-browser-view",
@@ -5994,7 +6135,8 @@ var browserChannels = {
 	updateTabMuted: "volume:updateTabMuted",
 	onTabVolumeUpdate: "volume:onTabVolumeUpdate",
 	onTabMutedUpdate: "volume:onTabMutedUpdate",
-	onAudioStateChange: "volume:onAudioStateChange"
+	onAudioStateChange: "volume:onAudioStateChange",
+	executeJavaScript: "browser:execute-javascript"
 };
 //#endregion
 //#region src/renderer/shared/ipc/ipcEvents.ts
@@ -6210,10 +6352,10 @@ var browserIpc = {
 	send: {
 		resizeLinkPreview: (width) => lynxIpc.send(browserChannels.resizeLinkPreview, width),
 		resizeBrowserView: (data) => lynxIpc.send(browserChannels.resizeBrowserView, data),
-		createBrowser: (id) => lynxIpc.send(browserChannels.createBrowser, id),
+		createBrowser: (id, options) => lynxIpc.send(browserChannels.createBrowser, id, options),
 		removeBrowser: (id) => lynxIpc.send(browserChannels.removeBrowser, id),
 		loadURL: (id, url) => lynxIpc.send(browserChannels.loadURL, id, url),
-		setVisible: (id, visible) => lynxIpc.send(browserChannels.setVisible, id, visible),
+		setVisible: (id, visible, hideMode) => lynxIpc.send(browserChannels.setVisible, id, visible, hideMode),
 		openFindInPage: (id, customPosition) => lynxIpc.send(browserChannels.openFindInPage, id, customPosition),
 		openZoom: (id, customPosition) => lynxIpc.send(browserChannels.openZoom, id, customPosition),
 		openVolume: (data, customPosition) => lynxIpc.send(browserChannels.openVolume, data, customPosition),
@@ -6246,14 +6388,16 @@ var browserIpc = {
 		onTabVolumeUpdate: (callback) => lynxIpc.on(browserChannels.onTabVolumeUpdate, callback),
 		onTabMutedUpdate: (callback) => lynxIpc.on(browserChannels.onTabMutedUpdate, callback),
 		foundInPage: (callback) => lynxIpc.on(browserChannels.onFoundInPage, callback),
-		onZoomChanged: (callback) => lynxIpc.on(browserChannels.onZoomChanged, callback)
+		onZoomChanged: (callback) => lynxIpc.on(browserChannels.onZoomChanged, callback),
+		activeWindowChanged: (callback) => lynxIpc.on(browserChannels.onActiveWindowChange, callback)
 	},
 	invoke: {
 		clearCache: () => lynxIpc.invoke(browserChannels.clearCache),
 		clearCookies: () => lynxIpc.invoke(browserChannels.clearCookies),
 		getUserAgent: (type) => lynxIpc.invoke(browserChannels.getUserAgent, type),
 		setVolume: (id, volume) => invokeWithSoftTimeout(browserChannels.setVolume, "Volume set operation timed out", id, volume),
-		setMuted: (id, muted) => invokeWithSoftTimeout(browserChannels.setMuted, "Mute set operation timed out", id, muted)
+		setMuted: (id, muted) => invokeWithSoftTimeout(browserChannels.setMuted, "Mute set operation timed out", id, muted),
+		executeJavaScript: (id, script) => lynxIpc.invoke(browserChannels.executeJavaScript, id, script)
 	}
 };
 //#endregion
@@ -6373,7 +6517,7 @@ var cardsSlice = createSlice({
 			if (!state.browserDomReadyIds.includes(action.payload)) state.browserDomReadyIds.push(action.payload);
 		},
 		addRunningEmpty: (state, action) => {
-			const { tabId, type } = action.payload;
+			const { tabId, type, dir } = action.payload;
 			const id = `${tabId}_${type}`;
 			const currentView = type === "browser" ? "browser" : "terminal";
 			state.runningCard.push({
@@ -6383,7 +6527,7 @@ var cardsSlice = createSlice({
 				isEmptyRunning: true
 			});
 			if (type !== "terminal") browserIpc.send.createBrowser(id);
-			if (type !== "browser") ptyIpc.emptyProcess(id);
+			if (type !== "browser") ptyIpc.emptyProcess(id, dir);
 		},
 		addRunningCard: (state, action) => {
 			const { tabId, id } = action.payload;
@@ -6467,6 +6611,7 @@ var settingsSlice = createSlice({
 		closeTabConfirm: true,
 		terminateAIConfirm: true,
 		exitSignalConfirm: true,
+		forceReloadConfirm: true,
 		openLastSize: false,
 		updatedModules: [],
 		newModules: [],
@@ -6488,7 +6633,7 @@ var settingsSlice = createSlice({
 		setSearchValue: (state, action) => {
 			const searchValue = action.payload;
 			state.searchValue = searchValue;
-			state.searchWords = searchValue ? searchValue.split(/\s+/) : [];
+			state.searchWords = searchValue ? searchValue.split(/\s+/).filter(Boolean) : [];
 		}
 	}
 });
@@ -6500,7 +6645,7 @@ settingsSlice.actions;
 settingsSlice.reducer;
 //#endregion
 //#region src/renderer/mainWindow/utils/hooks.tsx
-var { Fragment: Fragment$3, useEffect: useEffect$9, useRef: useRef$9, useState: useState$7 } = await importShared("react");
+var { Fragment: Fragment$3, useEffect: useEffect$9, useState: useState$8 } = await importShared("react");
 /**
 * Hook to check if a card is pinned.
 * @param cardId - The ID of the card to check
@@ -6647,52 +6792,71 @@ function AddBreadcrumb_Renderer(message) {
 	});
 }
 //#endregion
-//#region node_modules/@solar-icons/react-perf/dist/lib/IconBase.mjs
+//#region node_modules/@solar-icons/react/dist/lib/IconBase.mjs
 var { forwardRef: e } = await importShared("react");
-var r$5 = e((e, r) => {
-	let { alt: i, color: a = `currentColor`, size: o = `1em`, mirrored: s = !1, children: c, ...l } = e;
+var r$5 = `solar`;
+function i$3(e) {
+	return e[`aria-label`] !== void 0 || e.title !== void 0;
+}
+var a = e(({ alt: e, color: a, size: o, strokeWidth: s, secondaryColor: c, secondaryOpacity: l, iconName: u, isolated: d, children: f, ...p }, m) => {
+	let h = u ? `${r$5} solar-${u}` : r$5, g = p.className, _ = g ? `${h} ${g}` : h, v = !!e || i$3(p), y = { ...p.style ?? {} };
+	if (d && (y[`--solar-secondary-color`] = `initial`, y[`--solar-secondary-opacity`] = `initial`), a !== void 0 && (y.color = a), o !== void 0) {
+		let e = typeof o == `number` ? `${o}px` : o;
+		y.width = e, y.height = e;
+	}
+	s !== void 0 && (y.strokeWidth = String(s)), c && (y[`--solar-secondary-color`] = c), l != null && (y[`--solar-secondary-opacity`] = String(l));
+	let b = o === void 0 ? d ? `24px` : `1em` : void 0, x = o === void 0 ? d ? `24px` : `1em` : void 0;
+	o === void 0 && !d && (`fontSize` in y || (y.fontSize = `var(--solar-size, 24px)`));
+	let S = a === void 0 ? d ? `currentColor` : `var(--solar-color, currentColor)` : void 0, C = s === void 0 ? d ? `1.5` : `var(--solar-stroke-width, 1.5)` : void 0;
 	return (0, import_jsx_runtime.jsxs)(`svg`, {
-		ref: r,
+		ref: m,
 		xmlns: `http://www.w3.org/2000/svg`,
-		width: o,
-		height: o,
-		color: a,
 		fill: `none`,
 		viewBox: `0 0 24 24`,
-		transform: s ? `scale(-1, 1)` : void 0,
-		...l,
-		children: [!!i && (0, import_jsx_runtime.jsx)(`title`, { children: i }), c]
+		...p,
+		className: _,
+		style: Object.keys(y).length > 0 ? y : void 0,
+		width: b,
+		height: x,
+		color: S,
+		strokeWidth: C,
+		...!v && { "aria-hidden": `true` },
+		children: [!!e && (0, import_jsx_runtime.jsx)(`title`, { children: e }), f]
 	});
 });
-r$5.displayName = `IconBase`;
 //#endregion
-//#region node_modules/@solar-icons/react-perf/dist/icons/ui/Bold/Pin.mjs
+//#region node_modules/@solar-icons/react/dist/icons/bold/pin.mjs
 var { forwardRef: t$4 } = await importShared("react");
-var r$4 = t$4((t, r) => (0, import_jsx_runtime.jsx)(r$5, {
+var r$4 = t$4((t, r) => (0, import_jsx_runtime.jsx)(a, {
 	ref: r,
 	...t,
+	iconName: `pin-bold`,
 	children: (0, import_jsx_runtime.jsx)(`path`, {
 		d: `M19.1835 7.80516L16.2188 4.83755C14.1921 2.8089 13.1788 1.79457 12.0904 2.03468C11.0021 2.2748 10.5086 3.62155 9.5217 6.31506L8.85373 8.1381C8.59063 8.85617 8.45908 9.2152 8.22239 9.49292C8.11619 9.61754 7.99536 9.72887 7.86251 9.82451C7.56644 10.0377 7.19811 10.1392 6.46145 10.3423C4.80107 10.8 3.97088 11.0289 3.65804 11.5721C3.5228 11.8069 3.45242 12.0735 3.45413 12.3446C3.45809 12.9715 4.06698 13.581 5.28476 14.8L6.69935 16.2163L2.22345 20.6964C1.92552 20.9946 1.92552 21.4782 2.22345 21.7764C2.52138 22.0746 3.00443 22.0746 3.30236 21.7764L7.77841 17.2961L9.24441 18.7635C10.4699 19.9902 11.0827 20.6036 11.7134 20.6045C11.9792 20.6049 12.2404 20.5358 12.4713 20.4041C13.0192 20.0914 13.2493 19.2551 13.7095 17.5825C13.9119 16.8472 14.013 16.4795 14.2254 16.1835C14.3184 16.054 14.4262 15.9358 14.5468 15.8314C14.8221 15.593 15.1788 15.459 15.8922 15.191L17.7362 14.4981C20.4 13.4973 21.7319 12.9969 21.9667 11.9115C22.2014 10.826 21.1954 9.81905 19.1835 7.80516Z`,
 		fill: `currentColor`
 	})
 }));
-r$4.displayName = `Pin`;
 //#endregion
-//#region node_modules/@solar-icons/react-perf/dist/icons/ui/LineDuotone/Pin.mjs
+//#region node_modules/@solar-icons/react/dist/icons/line-duotone/pin.mjs
 var { forwardRef: t$3 } = await importShared("react");
-var i$2 = t$3((t, i) => (0, import_jsx_runtime.jsxs)(r$5, {
+var i$2 = t$3((t, i) => (0, import_jsx_runtime.jsxs)(a, {
 	ref: i,
 	...t,
+	iconName: `pin-line-duotone`,
 	children: [(0, import_jsx_runtime.jsx)(`path`, {
-		d: `M15.9894 4.9502L16.52 4.42014L16.52 4.42014L15.9894 4.9502ZM19.0717 8.03562L18.5411 8.56568L18.5411 8.56568L19.0717 8.03562ZM8.73845 19.429L8.20785 19.9591L8.73845 19.429ZM4.62176 15.3081L5.15236 14.7781L4.62176 15.3081ZM17.567 14.9943L17.3032 14.2922L17.567 14.9943ZM15.6499 15.7146L15.9137 16.4167L15.6499 15.7146ZM8.33227 8.38177L7.62805 8.12375H7.62805L8.33227 8.38177ZM9.02673 6.48636L9.73095 6.74438L9.02673 6.48636ZM5.84512 10.6735L6.04445 11.3965H6.04445L5.84512 10.6735ZM7.30174 10.1351L6.86354 9.52646L6.86354 9.52646L7.30174 10.1351ZM7.6759 9.79038L8.24673 10.2768H8.24673L7.6759 9.79038ZM14.2511 16.3805L14.7421 16.9475L14.7421 16.9475L14.2511 16.3805ZM13.3807 18.2012L12.6575 18.0022V18.0022L13.3807 18.2012ZM13.917 16.7466L13.3076 16.3094L13.3076 16.3094L13.917 16.7466ZM2.71854 12.7552L1.96855 12.76V12.76L2.71854 12.7552ZM2.93053 11.9521L2.28061 11.5778H2.28061L2.93053 11.9521ZM11.3053 21.3431L11.3064 20.5931H11.3064L11.3053 21.3431ZM12.0933 21.1347L11.7216 20.4833L11.7216 20.4833L12.0933 21.1347ZM11.6973 2.03606L11.8589 2.76845L11.6973 2.03606ZM15.4588 5.48026L18.5411 8.56568L19.6023 7.50556L16.52 4.42014L15.4588 5.48026ZM9.26905 18.8989L5.15236 14.7781L4.09116 15.8382L8.20785 19.9591L9.26905 18.8989ZM17.3032 14.2922L15.3861 15.0125L15.9137 16.4167L17.8308 15.6964L17.3032 14.2922ZM9.03649 8.63979L9.73095 6.74438L8.32251 6.22834L7.62805 8.12375L9.03649 8.63979ZM6.04445 11.3965C6.75591 11.2003 7.29726 11.0625 7.73995 10.7438L6.86354 9.52646C6.6906 9.65097 6.46608 9.72428 5.64578 9.95044L6.04445 11.3965ZM7.62805 8.12375C7.3351 8.92332 7.24345 9.14153 7.10507 9.30391L8.24673 10.2768C8.60048 9.86175 8.78237 9.33337 9.03649 8.63979L7.62805 8.12375ZM7.73995 10.7438C7.92704 10.6091 8.09719 10.4523 8.24673 10.2768L7.10507 9.30391C7.03377 9.38757 6.95268 9.46229 6.86354 9.52646L7.73995 10.7438ZM15.3861 15.0125C14.697 15.2714 14.1717 15.4571 13.7601 15.8135L14.7421 16.9475C14.9029 16.8082 15.1193 16.7152 15.9137 16.4167L15.3861 15.0125ZM14.1038 18.4001C14.3291 17.5813 14.4022 17.3569 14.5263 17.1838L13.3076 16.3094C12.9903 16.7517 12.853 17.2919 12.6575 18.0022L14.1038 18.4001ZM13.7601 15.8135C13.5904 15.9605 13.4385 16.1269 13.3076 16.3094L14.5263 17.1838C14.5888 17.0968 14.6612 17.0175 14.7421 16.9475L13.7601 15.8135ZM5.15236 14.7781C4.50623 14.1313 4.06806 13.691 3.78374 13.3338C3.49842 12.9753 3.46896 12.8201 3.46852 12.7505L1.96855 12.76C1.97223 13.3422 2.26135 13.8297 2.6101 14.2679C2.95984 14.7073 3.47123 15.2176 4.09116 15.8382L5.15236 14.7781ZM5.64578 9.95044C4.80056 10.1835 4.10403 10.3743 3.58304 10.5835C3.06349 10.792 2.57124 11.0732 2.28061 11.5778L3.58045 12.3264C3.61507 12.2663 3.717 12.146 4.14187 11.9755C4.56531 11.8055 5.16345 11.6394 6.04445 11.3965L5.64578 9.95044ZM3.46852 12.7505C3.46758 12.6016 3.50623 12.4553 3.58045 12.3264L2.28061 11.5778C2.07362 11.9372 1.96593 12.3452 1.96855 12.76L3.46852 12.7505ZM8.20785 19.9591C8.83172 20.5836 9.34472 21.0987 9.78654 21.4506C10.2271 21.8015 10.718 22.0922 11.3042 22.0931L11.3064 20.5931C11.237 20.593 11.0815 20.5644 10.7211 20.2773C10.3619 19.9912 9.91931 19.5499 9.26905 18.8989L8.20785 19.9591ZM12.6575 18.0022C12.4133 18.8897 12.2463 19.4924 12.0752 19.9188C11.9034 20.3467 11.7822 20.4487 11.7216 20.4833L12.4651 21.7861C12.9741 21.4956 13.2573 21.0004 13.4672 20.4775C13.6777 19.9532 13.8695 19.2516 14.1038 18.4001L12.6575 18.0022ZM11.3042 22.0931C11.7113 22.0937 12.1115 21.9879 12.4651 21.7861L11.7216 20.4833C11.5951 20.5555 11.452 20.5933 11.3064 20.5931L11.3042 22.0931ZM18.5411 8.56568C19.6046 9.63022 20.3403 10.3695 20.7918 10.9788C21.2353 11.5774 21.2864 11.8959 21.2322 12.1464L22.6983 12.4634C22.8882 11.5854 22.5383 10.8162 21.997 10.0857C21.4636 9.36592 20.6306 8.53486 19.6023 7.50556L18.5411 8.56568ZM17.8308 15.6964C19.1922 15.1849 20.2941 14.773 21.0771 14.3384C21.8719 13.8973 22.5084 13.3416 22.6983 12.4634L21.2322 12.1464C21.178 12.3968 21.0002 12.6655 20.3492 13.0268C19.6865 13.3946 18.7113 13.7632 17.3032 14.2922L17.8308 15.6964ZM16.52 4.42014C15.4841 3.3832 14.6481 2.54353 13.9246 2.00638C13.1909 1.46165 12.4175 1.10912 11.5357 1.30367L11.8589 2.76845C12.1086 2.71335 12.4278 2.7633 13.0305 3.21075C13.6434 3.66579 14.3877 4.40801 15.4588 5.48026L16.52 4.42014ZM9.73095 6.74438C10.2526 5.32075 10.6162 4.33403 10.9813 3.66315C11.3403 3.00338 11.6091 2.82357 11.8589 2.76845L11.5357 1.30367C10.6541 1.49819 10.1006 2.14332 9.6637 2.94618C9.23286 3.73793 8.82695 4.85154 8.32251 6.22834L9.73095 6.74438Z`,
-		fill: `currentColor`
+		d: `M2 21.9998L6.65323 17.3418`,
+		stroke: `currentColor`,
+		strokeLinecap: `round`,
+		style: {
+			color: `var(--solar-secondary-color, currentColor)`,
+			opacity: `var(--solar-secondary-opacity, 0.5)`
+		}
 	}), (0, import_jsx_runtime.jsx)(`path`, {
-		opacity: `0.5`,
-		d: `M1.4694 21.4697C1.17666 21.7627 1.1769 22.2376 1.46994 22.5304C1.76298 22.8231 2.23786 22.8229 2.5306 22.5298L1.4694 21.4697ZM7.18383 17.8719C7.47657 17.5788 7.47633 17.1039 7.18329 16.8112C6.89024 16.5185 6.41537 16.5187 6.12263 16.8117L7.18383 17.8719ZM2.5306 22.5298L7.18383 17.8719L6.12263 16.8117L1.4694 21.4697L2.5306 22.5298Z`,
-		fill: `currentColor`
+		d: `M19.0717 8.03562L15.9894 4.9502C13.8824 2.84101 12.8289 1.78641 11.6973 2.03606C10.5658 2.28571 10.0528 3.68593 9.02673 6.48636L8.33227 8.38177C8.05874 9.12835 7.92197 9.50164 7.6759 9.79038C7.56548 9.91994 7.43986 10.0357 7.30174 10.1351C6.99393 10.3567 6.61099 10.4623 5.84512 10.6735C4.11889 11.1494 3.25578 11.3873 2.93053 11.9521C2.78993 12.1962 2.71676 12.4734 2.71854 12.7552C2.72266 13.4071 3.35569 14.0408 4.62176 15.3081L8.73845 19.429C10.0126 20.7044 10.6496 21.3421 11.3053 21.3431C11.5816 21.3435 11.8533 21.2717 12.0933 21.1347C12.663 20.8096 12.9022 19.9401 13.3807 18.2012C13.591 17.4366 13.6962 17.0543 13.917 16.7466C14.0136 16.6119 14.1258 16.489 14.2511 16.3805C14.5373 16.1326 14.9082 15.9933 15.6499 15.7146L17.567 14.9943C20.3365 13.9537 21.7212 13.4335 21.9652 12.3049C22.2093 11.1764 21.1634 10.1295 19.0717 8.03562Z`,
+		stroke: `currentColor`,
+		strokeLinecap: `round`
 	})]
 }));
-i$2.displayName = `Pin`;
 //#endregion
 //#region src/renderer/mainWindow/components/ToolsCard.tsx
 var { Avatar, Button: Button$2, Card: Card$3, Description: Description$3, Label: Label$3 } = await importShared("@heroui/react");
@@ -6751,16 +6915,20 @@ function ToolsCard({ id, title, description, icon, onPress, footer, avatarClassN
 	});
 }
 //#endregion
-//#region node_modules/@solar-icons/react-perf/dist/icons/devices/BoldDuotone/CpuBolt.mjs
+//#region node_modules/@solar-icons/react/dist/icons/bold-duotone/cpu-bolt.mjs
 var { forwardRef: t$2 } = await importShared("react");
-var i$1 = t$2((t, i) => (0, import_jsx_runtime.jsxs)(r$5, {
+var i$1 = t$2((t, i) => (0, import_jsx_runtime.jsxs)(a, {
 	ref: i,
 	...t,
+	iconName: `cpu-bolt-bold-duotone`,
 	children: [
 		(0, import_jsx_runtime.jsx)(`path`, {
-			opacity: `0.5`,
 			d: `M9.18091 9.18091C9.23402 9.1278 9.32886 9.06211 9.63147 9.02143C9.95415 8.97804 10.3921 8.97656 11.0696 8.97656H12.9301C13.6075 8.97656 14.0455 8.97804 14.3682 9.02143C14.6708 9.06211 14.7656 9.1278 14.8187 9.18091C14.8718 9.23402 14.9375 9.32886 14.9782 9.63147C15.0216 9.95415 15.0231 10.3921 15.0231 11.0696V12.9301C15.0231 13.6075 15.0216 14.0455 14.9782 14.3682C14.9375 14.6708 14.8718 14.7656 14.8187 14.8187C14.7656 14.8718 14.6708 14.9375 14.3682 14.9782C14.0455 15.0216 13.6075 15.0231 12.9301 15.0231H11.0696C10.3921 15.0231 9.95415 15.0216 9.63147 14.9782C9.32886 14.9375 9.23402 14.8718 9.18091 14.8187C9.1278 14.7656 9.06211 14.6708 9.02143 14.3682C8.97804 14.0455 8.97656 13.6075 8.97656 12.9301V11.0696C8.97656 10.3921 8.97804 9.95415 9.02143 9.63147C9.06211 9.32886 9.1278 9.23402 9.18091 9.18091Z`,
-			fill: `currentColor`
+			fill: `currentColor`,
+			style: {
+				color: `var(--solar-secondary-color, currentColor)`,
+				opacity: `var(--solar-secondary-opacity, 0.5)`
+			}
 		}),
 		(0, import_jsx_runtime.jsx)(`path`, {
 			fillRule: `evenodd`,
@@ -6774,18 +6942,21 @@ var i$1 = t$2((t, i) => (0, import_jsx_runtime.jsxs)(r$5, {
 		})
 	]
 }));
-i$1.displayName = `CpuBolt`;
 //#endregion
-//#region node_modules/@solar-icons/react-perf/dist/icons/devices/BoldDuotone/Diskette.mjs
+//#region node_modules/@solar-icons/react/dist/icons/bold-duotone/diskette.mjs
 var { forwardRef: t$1 } = await importShared("react");
-var i = t$1((t, i) => (0, import_jsx_runtime.jsxs)(r$5, {
+var i = t$1((t, i) => (0, import_jsx_runtime.jsxs)(a, {
 	ref: i,
 	...t,
+	iconName: `diskette-bold-duotone`,
 	children: [
 		(0, import_jsx_runtime.jsx)(`path`, {
-			opacity: `0.5`,
 			d: `M20.5355 20.5355C22 19.0711 22 16.714 22 12C22 11.6585 22 11.4878 21.9848 11.3142C21.9142 10.5049 21.586 9.71257 21.0637 9.09034C20.9516 8.95687 20.828 8.83317 20.5806 8.58578L15.4142 3.41944C15.1668 3.17206 15.0431 3.04835 14.9097 2.93631C14.2874 2.414 13.4951 2.08581 12.6858 2.01515C12.5122 2 12.3415 2 12 2C7.28595 2 4.92893 2 3.46447 3.46447C2 4.92893 2 7.28595 2 12C2 16.714 2 19.0711 3.46447 20.5355C4.1485 21.2196 5.02727 21.5841 6.25 21.7784L7.75 21.9313C8.9058 22 10.2996 22 12 22C13.7004 22 15.0942 22 16.25 21.9313L17.75 21.7784C18.9727 21.5841 19.8515 21.2196 20.5355 20.5355Z`,
-			fill: `currentColor`
+			fill: `currentColor`,
+			style: {
+				color: `var(--solar-secondary-color, currentColor)`,
+				opacity: `var(--solar-secondary-opacity, 0.5)`
+			}
 		}),
 		(0, import_jsx_runtime.jsx)(`path`, {
 			d: `M7 7.25C6.58579 7.25 6.25 7.58579 6.25 8C6.25 8.41421 6.58579 8.75 7 8.75H13C13.4142 8.75 13.75 8.41421 13.75 8C13.75 7.58579 13.4142 7.25 13 7.25H7Z`,
@@ -6797,7 +6968,6 @@ var i = t$1((t, i) => (0, import_jsx_runtime.jsxs)(r$5, {
 		})
 	]
 }));
-i.displayName = `Diskette`;
 //#endregion
 //#region src/renderer/mainWindow/pages/settings/SettingsSearchHighlight.tsx
 var import_main = /* @__PURE__ */ __toESM((/* @__PURE__ */ __commonJSMin(((exports, module) => {
@@ -6942,11 +7112,12 @@ var import_main = /* @__PURE__ */ __toESM((/* @__PURE__ */ __commonJSMin(((expor
 					if (chunk.highlight) {
 						highlightIndex++;
 						var highlightClass = void 0;
-						if (typeof highlightClassName === "object") if (!caseSensitive) {
-							highlightClassName = memoizedLowercaseProps(highlightClassName);
-							highlightClass = highlightClassName[text.toLowerCase()];
-						} else highlightClass = highlightClassName[text];
-						else highlightClass = highlightClassName;
+						if (typeof highlightClassName === "object") {
+							if (!caseSensitive) {
+								highlightClassName = memoizedLowercaseProps(highlightClassName);
+								highlightClass = highlightClassName[text.toLowerCase()];
+							} else highlightClass = highlightClassName[text];
+						} else highlightClass = highlightClassName;
 						var isActive = highlightIndex === +activeIndex;
 						highlightClassNames = highlightClass + " " + (isActive ? activeClassName : "");
 						highlightStyles = isActive === true && activeStyle != null ? Object.assign({}, highlightStyle, activeStyle) : highlightStyle;
@@ -7156,6 +7327,7 @@ var import_main = /* @__PURE__ */ __toESM((/* @__PURE__ */ __commonJSMin(((expor
 		})
 	]);
 })))(), 1);
+var { memo: memo$2 } = await importShared("react");
 /**
 * Renders text matching the active settings search terminology with a highlight wrapper.
 * Will render text minimally without highlights if empty or no text provided.
@@ -7168,6 +7340,11 @@ var SettingsSearchHighlight = ({ text, children, className, highlightClassName }
 		className,
 		children: content
 	});
+	const lowerContent = content.toLowerCase();
+	if (!searchWords.some((word) => word && lowerContent.includes(word.toLowerCase()))) return /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+		className,
+		children: content
+	});
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(import_main.default, {
 		className,
 		searchWords,
@@ -7176,20 +7353,21 @@ var SettingsSearchHighlight = ({ text, children, className, highlightClassName }
 		autoEscape: true
 	});
 };
+var SettingsSearchHighlight_default = memo$2(SettingsSearchHighlight);
 //#endregion
 //#region src/renderer/mainWindow/components/LynxSwitch.tsx
 var { Description: Description$2, Surface, Switch: Switch$3 } = await importShared("@heroui/react");
-var { useCallback: useCallback$4, useEffect: useEffect$7, useState: useState$6 } = await importShared("react");
+var { useCallback: useCallback$5, useEffect: useEffect$7, useState: useState$7 } = await importShared("react");
 /**
 * Customizable switch component with title, description, and search highlighting.
 * Supports both controlled and uncontrolled modes.
 */
 function LynxSwitch({ enabled = false, onEnabledChange, title, description, isDisabled, className, size = "md", thumbIcon, icon, variant = "default" }) {
-	const [isSelected, setIsSelected] = useState$6(enabled);
+	const [isSelected, setIsSelected] = useState$7(enabled);
 	useEffect$7(() => {
 		setIsSelected(enabled);
 	}, [enabled]);
-	const onChange = useCallback$4((selected) => {
+	const onChange = useCallback$5((selected) => {
 		setIsSelected(selected);
 		onEnabledChange?.(selected);
 	}, [onEnabledChange]);
@@ -7213,11 +7391,11 @@ function LynxSwitch({ enabled = false, onEnabledChange, title, description, isDi
 					className: "flex flex-row items-center gap-x-2",
 					children: [icon, /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
 						className: "text-sm cursor-pointer",
-						children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(SettingsSearchHighlight, { text: title })
+						children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(SettingsSearchHighlight_default, { text: title })
 					})]
 				}), description && /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Description$2, {
 					className: "pointer-events-none p-0",
-					children: typeof description === "string" ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)(SettingsSearchHighlight, {
+					children: typeof description === "string" ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)(SettingsSearchHighlight_default, {
 						text: description,
 						className: "text-xs text-muted"
 					}) : /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
@@ -7229,27 +7407,32 @@ function LynxSwitch({ enabled = false, onEnabledChange, title, description, isDi
 		})
 	});
 }
+//#endregion
+//#region src/renderer/mainWindow/layouts/tabs/TabContext.tsx
+var { createContext: createContext$7, useContext: useContext$10 } = await importShared("react");
+var TabContext = createContext$7(void 0);
+var useCurrentTabId = () => useContext$10(TabContext);
 var package_default = {
 	name: "lynxhub",
 	productName: "LynxHub",
 	desktopName: "ai.kindabrazy.lynxhub.desktop",
-	version: "3.5.8",
+	version: "3.6.0",
 	type: "module",
 	description: "Cross-platform, extensible terminal/browser for AI management",
 	main: "./out/main/index.cjs",
 	author: {
-		"name": "KindaBrazy",
+		"name": "TheLynxHub",
 		"email": "kindofbrazy@gmail.com"
 	},
 	repository: {
 		"type": "git",
-		"url": "https://github.com/KindaBrazy/LynxHub"
+		"url": "https://github.com/TheLynxHub/LynxHub"
 	},
 	license: "AGPL-3.0",
-	homepage: "https://github.com/KindaBrazy/LynxHub",
+	homepage: "https://github.com/TheLynxHub/LynxHub",
 	appDetails: {
 		"title": "LynxHub",
-		"buildNumber": 55,
+		"buildNumber": 66,
 		"detailedDescription": "Open-source, cross-platform terminal and browser, designed for managing AI. Highly modular and extensible, it's the all-in-one environment for AI power users.",
 		"moduleApiVersion": "2.1.0",
 		"extensionApiVersion": "2.2.0"
@@ -7261,24 +7444,28 @@ var package_default = {
 		"fix-linter:web": "prettier --write src/renderer --list-different && eslint --fix src/renderer && tailwind-lint --auto --fix",
 		"fix-linter:node": "prettier --write src/main --list-different && eslint --fix src/main",
 		"fix-linter": "prettier --write src --list-different && eslint --fix src && tailwind-lint --auto --fix",
-		"fix-linter-ext": "prettier --write extension --list-different && eslint --fix extension && tailwind-lint --config ./extension/src/renderer/index.css --fix",
+		"fix-linter-ext": "prettier --write extension --list-different && eslint --fix extension",
+		"fix-linter-module": "prettier --write module --list-different && eslint --fix module",
 		"validate:web": "npm run fix-linter:web && npm run typecheck:web",
 		"validate:node": "npm run fix-linter:node && npm run typecheck:node",
 		"validate:ext": "npm run fix-linter-ext && npm run typecheck",
+		"validate:module": "npm run fix-linter-module && npm run typecheck",
 		"validate": "npm run fix-linter && npm run typecheck",
 		"preview": "electron-vite preview --noSandbox",
 		"preview:skip": "electron-vite preview --noSandbox --skipBuild",
 		"dev": "run-script-os",
 		"dev:win32": "electron-vite dev",
 		"dev:default": "electron-vite dev --noSandbox",
+		"dev:win:metrics": "electron-vite dev -- --log-metrics",
+		"dev:test": "electron-vite dev --remote-debugging-port=9222",
 		"prof": "electron-vite dev -w --noSandbox -- --js-flags=\"--prof\"",
 		"dev:srouce": "electron-vite dev -w --noSandbox --sourcemap",
 		"postinstall": "node node_modules/electron/install.js && electron-builder install-app-deps",
 		"build": "electron-vite build",
 		"rebuild": "electron-builder node-gyp-rebuild",
 		"removeDotExtension": "node fixExtension.js",
-		"build:extension": "rimraf extension_out && electron-vite build --config extension/electron.vite.config.ts && npm run removeDotExtension",
-		"build:module": "rimraf module_out && npx --prefix module rolldown --config module/rolldown.config.mjs",
+		"build:extension": "rimraf extension_out && electron-vite build --config extension/electron.vite.config.ts && npm run removeDotExtension && node zipScripts.js extension_out",
+		"build:module": "rimraf module_out && npx --prefix module rolldown --config module/rolldown.config.mjs && node zipScripts.js module_out",
 		"build:unpack": "npm run build && electron-builder --dir --config electron-builder_x64.config.cjs",
 		"build:win_x64": "npm run build && electron-builder --win --config electron-builder_x64.config.cjs --publish never",
 		"build:win_arm": "npm run build && electron-builder --win --config electron-builder_arm.config.cjs --publish never",
@@ -7297,46 +7484,53 @@ var package_default = {
 	dependencies: {
 		"@electron-toolkit/preload": "^3.0.2",
 		"@electron-toolkit/utils": "^4.0.0",
+		"@lynxhub/7zip": "^0.10.1",
 		"@originjs/vite-plugin-federation": "^1.4.1",
-		"@sentry/electron": "^7.15.0",
-		"@sentry/react": "^10.62.0",
-		"axios": "^1.18.1",
+		"@sentry/electron": "^7.17.0",
+		"@sentry/react": "^10.70.0",
+		"axios": "^1.19.0",
+		"better-sqlite3": "^13.0.3",
+		"drizzle-orm": "^0.45.2",
 		"fix-path": "^5.0.0",
-		"fuse.js": "^7.4.2",
+		"fuse.js": "^7.5.0",
 		"graceful-fs": "^4.2.11",
 		"lowdb": "^7.0.1",
-		"node-pty": "^1.2.0-beta.13",
+		"node-pty": "^1.2.0-beta.14",
 		"prism-react-renderer": "^2.4.1",
 		"react-syntax-highlighter": "^16.1.1",
 		"semver": "^7.8.5",
 		"tree-kill": "^1.2.2",
-		"zustand": "^5.0.14"
+		"zustand": "^5.0.15"
 	},
 	devDependencies: {
 		"@electron-toolkit/eslint-config-prettier": "^3.0.0",
 		"@electron-toolkit/tsconfig": "^2.0.0",
 		"@eslint/js": "^10.0.1",
-		"@heroui/react": "^3.2.2",
-		"@heroui/styles": "^3.2.2",
-		"@icons-pack/react-simple-icons": "^13.13.0",
-		"@number-flow/react": "^0.6.1",
+		"@heroui/react": "^3.2.4",
+		"@heroui/styles": "^3.2.4",
+		"@icons-pack/react-simple-icons": "^13.15.1",
+		"@number-flow/react": "^0.6.2",
+		"@react-aria/i18n": "^3.13.1",
+		"@react-aria/ssr": "^3.10.1",
+		"@react-aria/utils": "^3.34.1",
 		"@reduxjs/toolkit": "^2.12.0",
-		"@sentry/vite-plugin": "^5.3.0",
-		"@solar-icons/react-perf": "^2.1.1",
+		"@sentry/vite-plugin": "^5.4.0",
+		"@solar-icons/react": "^2.1.0",
 		"@tailwindcss/typography": "^0.5.20",
-		"@tailwindcss/vite": "^4.3.2",
-		"@types/decompress": "^4.2.7",
+		"@tailwindcss/vite": "^4.3.3",
+		"@types/better-sqlite3": "^9.6.0",
 		"@types/fontfaceobserver": "^2.1.3",
 		"@types/graceful-fs": "^4.1.9",
 		"@types/lodash-es": "^4.17.12",
 		"@types/node": "^24.13.2",
-		"@types/react": "^19.2.17",
-		"@types/react-dom": "^19.2.3",
+		"@types/react": "^19.2.18",
+		"@types/react-dom": "^19.2.4",
 		"@types/react-highlight-words": "^0.20.1",
 		"@types/react-syntax-highlighter": "^15.5.13",
-		"@types/semver": "^7.7.1",
+		"@types/semver": "^7.8.0",
 		"@types/serve-handler": "^6.1.4",
-		"@vitejs/plugin-react": "^6.0.3",
+		"@typescript/native": "npm:typescript@^7.0.2",
+		"@vitejs/plugin-react": "^6.1.0",
 		"@xterm/addon-canvas": "^0.7.0",
 		"@xterm/addon-clipboard": "^0.2.0",
 		"@xterm/addon-fit": "^0.11.0",
@@ -7349,53 +7543,58 @@ var package_default = {
 		"@xterm/addon-webgl": "^0.19.0",
 		"@xterm/xterm": "^6.0.0",
 		"chokidar": "^5.0.0",
-		"decompress": "^4.2.1",
-		"electron": "^43.1.0",
+		"drizzle-kit": "^0.31.10",
+		"electron": "^43.4.0",
 		"electron-builder": "^26.15.3",
 		"electron-dl": "^4.0.0",
 		"electron-log": "^5.4.4",
 		"electron-updater": "^6.8.9",
 		"electron-vite": "^6.0.0-beta.1",
-		"eslint": "^10.6.0",
+		"eslint": "^10.9.0",
 		"eslint-plugin-jsx-a11y": "^6.10.2",
-		"eslint-plugin-perfectionist": "^5.10.0",
+		"eslint-plugin-perfectionist": "^5.10.1",
 		"eslint-plugin-react": "^7.37.5",
 		"eslint-plugin-react-hooks": "^7.1.1",
-		"eslint-plugin-simple-import-sort": "^13.0.0",
+		"eslint-plugin-simple-import-sort": "^14.0.0",
 		"fontfaceobserver": "^2.3.0",
-		"framer-motion": "^12.42.2",
-		"globals": "^17.7.0",
+		"framer-motion": "^13.1.1",
+		"globals": "^17.11.0",
 		"lodash-es": "^4.18.1",
-		"lucide-react": "^1.24.0",
+		"lucide-react": "^1.33.0",
 		"normalize-url": "^9.0.1",
 		"ogl": "^1.0.11",
-		"prettier": "^3.9.5",
-		"react": "^19.2.7",
-		"react-aria": "^3.50.0",
-		"react-dom": "^19.2.7",
-		"react-error-boundary": "^6.1.2",
+		"prettier": "^3.9.6",
+		"react": "^19.2.8",
+		"react-aria": "^3.51.0",
+		"react-aria-components": "^1.20.0",
+		"react-dom": "^19.2.8",
+		"react-error-boundary": "^6.1.3",
 		"react-highlight-words": "^0.21.0",
-		"react-intersection-observer": "^10.0.3",
+		"react-intersection-observer": "^11.0.0",
 		"react-markdown": "^10.1.0",
 		"react-redux": "^9.3.0",
 		"rehype-highlight": "^7.0.2",
+		"rehype-katex": "^7.0.1",
 		"rehype-raw": "^7.0.0",
 		"rehype-slug": "^6.0.0",
 		"remark-gfm": "^4.0.1",
+		"remark-math": "^6.0.0",
+		"remark-supersub": "^1.0.0",
 		"run-script-os": "^1.1.6",
 		"simple-git": "^3.36.0",
-		"tailwind-lint": "^0.12.0",
-		"tailwindcss": "^4.3.2",
+		"tailwind-lint": "^0.12.1",
+		"tailwindcss": "^4.3.3",
 		"three": "^0.185.1",
-		"typescript": "^6.0.3",
-		"typescript-eslint": "^8.63.0",
-		"vite": "^8.1.4"
+		"typescript": "npm:@typescript/typescript6@^6.0.2",
+		"typescript-eslint": "^8.67.0",
+		"vite": "^8.2.2"
 	},
 	allowScripts: {
 		"electron": true,
 		"esbuild": true,
 		"node-pty": true,
-		"@sentry/cli": true
+		"@sentry/cli": true,
+		"better-sqlite3": true
 	}
 };
 //#endregion
@@ -7420,6 +7619,10 @@ var APP_VERSION_V = `V${APP_VERSION}`;
 `${APP_NAME}${APP_VERSION}`;
 `${APP_NAME}${APP_VERSION_V}`;
 APP_VERSION_V.split("-").map((v) => capitalize(v)).join(" ");
+var GITHUB_ORG = "https://github.com/TheLynxHub";
+`${GITHUB_ORG}`;
+`${GITHUB_ORG}`;
+`${GITHUB_ORG}`;
 /**
 * Page IDs used for navigation.
 */
@@ -7494,13 +7697,15 @@ var tabsSlice = createSlice({
 			const tabIdToRemove = action.payload;
 			const tabIndexToRemove = state.tabs.findIndex((tab) => tab.id === tabIdToRemove);
 			state.tabs = state.tabs.filter((tab) => tab.id !== tabIdToRemove);
-			if (state.activeTab === tabIdToRemove) if (state.tabs.length > 0) {
-				const newActiveTabIndex = Math.min(tabIndexToRemove, state.tabs.length - 1);
-				state.activeTab = state.tabs[newActiveTabIndex].id;
-				state.activePage = state.tabs[newActiveTabIndex].pageID;
-			} else {
-				state.activeTab = defaultTabItem.id;
-				state.activePage = defaultTabItem.pageID;
+			if (state.activeTab === tabIdToRemove) {
+				if (state.tabs.length > 0) {
+					const newActiveTabIndex = Math.min(tabIndexToRemove, state.tabs.length - 1);
+					state.activeTab = state.tabs[newActiveTabIndex].id;
+					state.activePage = state.tabs[newActiveTabIndex].pageID;
+				} else {
+					state.activeTab = defaultTabItem.id;
+					state.activePage = defaultTabItem.pageID;
+				}
 			}
 			if (state.tabs.length <= 0) state.tabs = [defaultTabItem];
 		},
@@ -7584,6 +7789,32 @@ var tabsSlice = createSlice({
 				};
 			}
 			state.activePage = action.payload.pageID;
+		},
+		togglePinTab: (state, action) => {
+			const tabId = action.payload;
+			const tabIndex = state.tabs.findIndex((t) => t.id === tabId);
+			if (tabIndex === -1) return;
+			const currentTab = state.tabs[tabIndex];
+			const nextPinned = !currentTab.isPinned;
+			state.tabs[tabIndex] = {
+				...currentTab,
+				isPinned: nextPinned
+			};
+			const pinned = state.tabs.filter((t) => t.isPinned);
+			const unpinned = state.tabs.filter((t) => !t.isPinned);
+			state.tabs = [...pinned, ...unpinned];
+		},
+		toggleTabIconOnly: (state, action) => {
+			const tabId = action.payload;
+			state.tabs = updateTabById(state.tabs, tabId, (tab) => ({
+				...tab,
+				showIconOnly: !tab.showIconOnly
+			}));
+		},
+		reorderTabs: (state, action) => {
+			const pinned = action.payload.filter((t) => t.isPinned);
+			const unpinned = action.payload.filter((t) => !t.isPinned);
+			state.tabs = [...pinned, ...unpinned];
 		}
 	}
 });
@@ -7596,23 +7827,51 @@ tabsSlice.reducer;
 //#endregion
 //#region src/renderer/mainWindow/components/TabModal.tsx
 var { Modal: Modal$1 } = await importShared("@heroui/react");
-var { useEffect: useEffect$6, useState: useState$5 } = await importShared("react");
+var { useCallback: useCallback$4, useEffect: useEffect$6, useMemo: useMemo$8, useState: useState$6 } = await importShared("react");
 var { UNSAFE_PortalProvider } = await importShared("react-aria");
-function TabModal({ isOpen, onOpenChange, children, size = "cover", isDismissable = false, backdropVariant, dialogClassName, containerClassName, isKeyboardDismissDisabled }) {
+function TabModal({ isOpen, onOpenChange, children, size = "cover", isDismissable = true, backdropVariant, dialogClassName, containerClassName, isKeyboardDismissDisabled, tabId: explicitTabId }) {
+	const contextTabId = useCurrentTabId();
 	const activeTab = useTabsState("activeTab");
-	const [targetContainer, setTargetContainer] = useState$5(null);
+	const runningCards = useCardsState("runningCard");
+	const resolvedTabId = explicitTabId ?? contextTabId;
+	const [targetContainer, setTargetContainer] = useState$6(() => {
+		if (typeof document === "undefined") return null;
+		return resolvedTabId ? document.getElementById(`${resolvedTabId}_wrapper`) : null;
+	});
+	const currentRunningCard = useMemo$8(() => runningCards.find((card) => card.tabId === (resolvedTabId ?? activeTab)), [
+		runningCards,
+		resolvedTabId,
+		activeTab
+	]);
 	useEffect$6(() => {
-		setTargetContainer(isOpen ? document.getElementById(`${activeTab}_wrapper`) : null);
-	}, [isOpen]);
+		if (!isOpen) {
+			setTargetContainer(null);
+			return;
+		}
+		if (resolvedTabId) setTargetContainer(document.getElementById(`${resolvedTabId}_wrapper`));
+		else setTargetContainer(null);
+	}, [isOpen, resolvedTabId]);
+	useEffect$6(() => {
+		if (isOpen && currentRunningCard && currentRunningCard.currentView === "browser") {
+			browserIpc.send.setVisible(currentRunningCard.id, false);
+			return () => {
+				browserIpc.send.setVisible(currentRunningCard.id, true);
+			};
+		}
+	}, [isOpen, currentRunningCard]);
+	const handleBackdropClick = useCallback$4((e) => {
+		if (isDismissable && e.target instanceof HTMLElement && e.target.closest(".modal__backdrop, .modal__container") && !e.target.closest(".modal__dialog")) onOpenChange?.(false);
+	}, [isDismissable, onOpenChange]);
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Modal$1, {
 		isOpen,
 		onOpenChange,
-		children: targetContainer && /* @__PURE__ */ (0, import_jsx_runtime.jsx)(UNSAFE_PortalProvider, {
+		children: targetContainer ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)(UNSAFE_PortalProvider, {
 			getContainer: () => targetContainer,
 			children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Modal$1.Backdrop, {
 				className: "h-full",
+				isDismissable: false,
 				variant: backdropVariant,
-				isDismissable,
+				onClick: handleBackdropClick,
 				isKeyboardDismissDisabled,
 				children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Modal$1.Container, {
 					size,
@@ -7625,6 +7884,21 @@ function TabModal({ isOpen, onOpenChange, children, size = "cover", isDismissabl
 							children
 						})
 					})
+				})
+			})
+		}) : /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Modal$1.Backdrop, {
+			className: "h-full",
+			isDismissable: false,
+			variant: backdropVariant,
+			onClick: handleBackdropClick,
+			isKeyboardDismissDisabled,
+			children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Modal$1.Container, {
+				size,
+				scroll: "inside",
+				className: `h-full max-h-full ${containerClassName}`,
+				children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Modal$1.Dialog, {
+					className: size === "cover" ? `h-full max-h-full ${dialogClassName}` : dialogClassName,
+					children
 				})
 			})
 		})
@@ -7651,11 +7925,11 @@ function useConstant(init) {
 }
 //#endregion
 //#region node_modules/framer-motion/dist/es/utils/is-browser.mjs
-var isBrowser$1 = typeof window !== "undefined";
+var isBrowser$2 = typeof window !== "undefined";
 //#endregion
 //#region node_modules/framer-motion/dist/es/utils/use-isomorphic-effect.mjs
 var { useLayoutEffect, useEffect: useEffect$5 } = await importShared("react");
-var useIsomorphicLayoutEffect = isBrowser$1 ? useLayoutEffect : useEffect$5;
+var useIsomorphicLayoutEffect = isBrowser$2 ? useLayoutEffect : useEffect$5;
 //#endregion
 //#region node_modules/framer-motion/dist/es/context/PresenceContext.mjs
 var { createContext: createContext$5 } = await importShared("react");
@@ -8429,7 +8703,8 @@ function matchOrder(origin, target) {
 	for (let i = 0; i < target.values.length; i++) {
 		const type = target.types[i];
 		const originIndex = origin.indexes[type][pointers[type]];
-		orderedOrigin[i] = origin.values[originIndex] ?? 0;
+		const originValue = origin.values[originIndex] ?? 0;
+		orderedOrigin[i] = originValue;
 		pointers[type]++;
 	}
 	return orderedOrigin;
@@ -9958,7 +10233,8 @@ var acceleratedValues = /* @__PURE__ */ new Set([
 	"opacity",
 	"clipPath",
 	"filter",
-	"transform"
+	"transform",
+	"backgroundColor"
 ]);
 //#endregion
 //#region node_modules/motion-dom/dist/es/animation/waapi/utils/is-browser-color.mjs
@@ -9984,13 +10260,15 @@ var colorProperties = /* @__PURE__ */ new Set([
 var supportsWaapi = /*@__PURE__*/ memo$1(() => Object.hasOwnProperty.call(Element.prototype, "animate"));
 function supportsBrowserAnimation(options) {
 	const { motionValue, name, repeatDelay, repeatType, damping, type, keyframes } = options;
+	const subject = motionValue?.owner?.current;
 	/**
-	* We use this check instead of isHTMLElement() because we explicitly
-	* **don't** want elements in different timing contexts (i.e. popups)
-	* to be accelerated, as it's not possible to sync these animations
-	* properly with those driven from the main window frameloop.
+	* We use instanceof checks instead of isHTMLElement()/isSVGElement()
+	* because we explicitly **don't** want elements in different timing
+	* contexts (i.e. popups) to be accelerated, as it's not possible to sync
+	* these animations properly with those driven from the main window
+	* frameloop.
 	*/
-	if (!(motionValue?.owner?.current instanceof HTMLElement)) return false;
+	if (!(subject instanceof HTMLElement) && !(subject instanceof SVGElement)) return false;
 	const { onUpdate, transformTemplate } = motionValue.owner.getProps();
 	return supportsWaapi() && name && (acceleratedValues.has(name) || colorProperties.has(name) && hasBrowserOnlyColors(keyframes)) && (name !== "transform" || !transformTemplate) && !onUpdate && !repeatDelay && repeatType !== "mirror" && damping !== 0 && type !== "inertia";
 }
@@ -10731,6 +11009,7 @@ function getOptimisedAppearId(visualElement) {
 }
 //#endregion
 //#region node_modules/motion-dom/dist/es/animation/interfaces/visual-element-target.mjs
+var isBrowser$1 = typeof window !== "undefined";
 /**
 * Decide whether we should block this animation. Previously, we achieved this
 * just by checking whether the key was listed in protectedKeys, but this
@@ -10777,7 +11056,7 @@ function animateTarget(visualElement, targetAndTransition, { delay = 0, transiti
 		* to see if we're handling off from an existing animation.
 		*/
 		let isHandoff = false;
-		if (window.MotionHandoffAnimation) {
+		if (isBrowser$1 && window.MotionHandoffAnimation) {
 			const appearId = getOptimisedAppearId(visualElement);
 			if (appearId) {
 				const startTime = window.MotionHandoffAnimation(appearId, key, frame);
@@ -11242,14 +11521,15 @@ function isDragActive() {
 //#endregion
 //#region node_modules/motion-dom/dist/es/gestures/drag/state/set-active.mjs
 function setDragLock(axis) {
-	if (axis === "x" || axis === "y") if (isDragging[axis]) return null;
-	else {
-		isDragging[axis] = true;
-		return () => {
-			isDragging[axis] = false;
-		};
-	}
-	else if (isDragging.x || isDragging.y) return null;
+	if (axis === "x" || axis === "y") {
+		if (isDragging[axis]) return null;
+		else {
+			isDragging[axis] = true;
+			return () => {
+				isDragging[axis] = false;
+			};
+		}
+	} else if (isDragging.x || isDragging.y) return null;
 	else {
 		isDragging.x = isDragging.y = true;
 		return () => {
@@ -11725,19 +12005,20 @@ function updateMotionValuesFromProps(element, next, prev) {
 		* create a new motion value from that
 		*/
 		element.addValue(key, motionValue(nextValue, { owner: element }));
-		else if (prevValue !== nextValue)
- /**
-		* If this is a flat value that has changed, update the motion value
-		* or create one if it doesn't exist. We only want to do this if we're
-		* not handling the value with our animation state.
-		*/
-		if (element.hasValue(key)) {
-			const existingValue = element.getValue(key);
-			if (existingValue.liveStyle === true) existingValue.jump(nextValue);
-			else if (!existingValue.hasAnimated) existingValue.set(nextValue);
-		} else {
-			const latestValue = element.getStaticValue(key);
-			element.addValue(key, motionValue(latestValue !== void 0 ? latestValue : nextValue, { owner: element }));
+		else if (prevValue !== nextValue) {
+			/**
+			* If this is a flat value that has changed, update the motion value
+			* or create one if it doesn't exist. We only want to do this if we're
+			* not handling the value with our animation state.
+			*/
+			if (element.hasValue(key)) {
+				const existingValue = element.getValue(key);
+				if (existingValue.liveStyle === true) existingValue.jump(nextValue);
+				else if (!existingValue.hasAnimated) existingValue.set(nextValue);
+			} else {
+				const latestValue = element.getStaticValue(key);
+				element.addValue(key, motionValue(latestValue !== void 0 ? latestValue : nextValue, { owner: element }));
+			}
 		}
 	}
 	for (const key in prev) if (next[key] === void 0) element.removeValue(key);
@@ -12560,8 +12841,10 @@ var correctBorderRadius = { correct: (latest, node) => {
 	* If latest is a string, if it's a percentage we can return immediately as it's
 	* going to be stretched appropriately. Otherwise, if it's a pixel, convert it to a number.
 	*/
-	if (typeof latest === "string") if (px.test(latest)) latest = parseFloat(latest);
-	else return latest;
+	if (typeof latest === "string") {
+		if (px.test(latest)) latest = parseFloat(latest);
+		else return latest;
+	}
 	return `${pixelsToPercent(latest, node.target.x)}% ${pixelsToPercent(latest, node.target.y)}%`;
 } };
 //#endregion
@@ -12626,6 +12909,15 @@ var HTMLVisualElement = class extends DOMVisualElement {
 		this.type = "html";
 		this.renderInstance = renderHTML;
 	}
+	mount(instance) {
+		/**
+		* If a custom component forwards its ref to something other than a
+		* HTML/SVG element (a class instance, an imperative handle) there's
+		* nothing for Motion to style, measure or attach gestures to. #2777
+		*/
+		Boolean(instance.style);
+		super.mount(instance);
+	}
 	readValueFromInstance(instance, key) {
 		if (transformProps.has(key)) return this.projection?.isProjecting ? defaultTransformValue(key) : readTransformValue(instance, key);
 		else {
@@ -12672,10 +12964,9 @@ function buildSVGPath(attrs, length, spacing = 1, offset = 0, useDashCase = true
 }
 //#endregion
 //#region node_modules/motion-dom/dist/es/render/svg/utils/build-attrs.mjs
-/**
-* CSS Motion Path properties that should remain as CSS styles on SVG elements.
-*/
-var cssMotionPathProperties = [
+var cssStyleProperties = [
+	"transform",
+	"opacity",
 	"offsetDistance",
 	"offsetPath",
 	"offsetRotate",
@@ -12697,13 +12988,9 @@ function buildSVGAttrs(state, { attrX, attrY, attrScale, pathLength, pathSpacing
 	state.attrs = state.style;
 	state.style = {};
 	const { attrs, style } = state;
-	/**
-	* However, we apply transforms as CSS transforms.
-	* So if we detect a transform, transformOrigin we take it from attrs and copy it into style.
-	*/
-	if (attrs.transform) {
-		style.transform = attrs.transform;
-		delete attrs.transform;
+	for (const key of cssStyleProperties) if (attrs[key] !== void 0) {
+		style[key] = attrs[key];
+		delete attrs[key];
 	}
 	if (style.transform || attrs.transformOrigin) {
 		style.transformOrigin = attrs.transformOrigin ?? "50% 50%";
@@ -12716,10 +13003,6 @@ function buildSVGAttrs(state, { attrX, attrY, attrScale, pathLength, pathSpacing
 		*/
 		style.transformBox = styleProp?.transformBox ?? "fill-box";
 		delete attrs.transformBox;
-	}
-	for (const key of cssMotionPathProperties) if (attrs[key] !== void 0) {
-		style[key] = attrs[key];
-		delete attrs[key];
 	}
 	if (attrX !== void 0) attrs.x = attrX;
 	if (attrY !== void 0) attrs.y = attrY;
@@ -12791,6 +13074,10 @@ var SVGVisualElement = class extends DOMVisualElement {
 		if (transformProps.has(key)) {
 			const defaultType = getDefaultValueType(key);
 			return defaultType ? defaultType.default || 0 : 0;
+		}
+		if (cssStyleProperties.includes(key)) {
+			const value = getComputedStyle(instance)[key];
+			if (typeof value === "string" && value) return value.trim();
 		}
 		key = !camelCaseAttributes.has(key) ? camelToDash(key) : key;
 		return instance.getAttribute(key);
@@ -13016,9 +13303,10 @@ function createAnimationState(visualElement) {
 				let valueHasChanged = false;
 				if (isKeyframesTarget(next) && isKeyframesTarget(prev)) valueHasChanged = !shallowCompare(next, prev) || variantDidChange;
 				else valueHasChanged = next !== prev;
-				if (valueHasChanged) if (next !== void 0 && next !== null) markToAnimate(key);
-				else removedKeys.add(key);
-				else if (next !== void 0 && removedKeys.has(key))
+				if (valueHasChanged) {
+					if (next !== void 0 && next !== null) markToAnimate(key);
+					else removedKeys.add(key);
+				} else if (next !== void 0 && removedKeys.has(key))
  /**
 				* If next hasn't changed and it isn't undefined, we want to check if it's
 				* been removed by a higher priority
@@ -14174,8 +14462,10 @@ function createProjectionNode$1({ attachResizeListener, defaultParent, measureSc
 			* a relativeParent. This will allow a component to perform scale correction
 			* even if no animation has started.
 			*/
-			if (!this.targetDelta && !this.relativeTarget) if (this.options.layoutAnchor !== false && relativeParent && relativeParent.layout) this.createRelativeTarget(relativeParent, this.layout.layoutBox, relativeParent.layout.layoutBox);
-			else this.removeRelativeTarget();
+			if (!this.targetDelta && !this.relativeTarget) {
+				if (this.options.layoutAnchor !== false && relativeParent && relativeParent.layout) this.createRelativeTarget(relativeParent, this.layout.layoutBox, relativeParent.layout.layoutBox);
+				else this.removeRelativeTarget();
+			}
 			/**
 			* If we have no relative target or no target delta our target isn't valid
 			* for this frame.
@@ -14961,7 +15251,7 @@ function PopChild({ children, isPresent, anchorX, anchorY, root, pop }) {
 		direction: "ltr"
 	});
 	const { nonce } = useContext$9(MotionConfigContext);
-	const composedRef = useComposedRefs(ref, children.props?.ref ?? children?.ref);
+	const composedRef = useComposedRefs(ref, pop !== false ? children.props?.ref ?? children?.ref : void 0);
 	/**
 	* We create and inject a style block so we can apply this explicit
 	* sizing in a non-destructive manner by just deleting the style block.
@@ -15129,7 +15419,7 @@ function onlyElements(children) {
 }
 //#endregion
 //#region node_modules/framer-motion/dist/es/components/AnimatePresence/index.mjs
-var { useMemo: useMemo$6, useRef: useRef$4, useState: useState$4, useContext: useContext$7 } = await importShared("react");
+var { useMemo: useMemo$6, useRef: useRef$4, useState: useState$5, useContext: useContext$7 } = await importShared("react");
 /**
 * `AnimatePresence` enables the animation of components that have been removed from the tree.
 *
@@ -15197,8 +15487,16 @@ var AnimatePresence = ({ children, custom, initial = true, onExitComplete, prese
 	* Save children to render as React state. To ensure this component is concurrent-safe,
 	* we check for exiting children via an effect.
 	*/
-	const [diffedChildren, setDiffedChildren] = useState$4(presentChildren);
-	const [renderedChildren, setRenderedChildren] = useState$4(presentChildren);
+	const [diffedChildren, setDiffedChildren] = useState$5(presentChildren);
+	const [renderedChildren, setRenderedChildren] = useState$5(presentChildren);
+	useIsomorphicLayoutEffect(() => {
+		if (propagate && !isParentPresent && !renderedChildren.length) safeToRemove?.();
+	}, [
+		isParentPresent,
+		propagate,
+		renderedChildren.length,
+		safeToRemove
+	]);
 	useIsomorphicLayoutEffect(() => {
 		isInitialRender.current = false;
 		pendingPresentChildren.current = presentChildren;
@@ -15225,14 +15523,20 @@ var AnimatePresence = ({ children, custom, initial = true, onExitComplete, prese
 		/**
 		* Loop through all the currently rendered components and decide which
 		* are exiting.
+		*
+		* Exiting children are reinserted directly after the child they
+		* previously followed. Splicing at their index within the previously
+		* rendered children, as we used to, indexes into the wrong list: it
+		* can interleave them with entering children and push present children
+		* to new positions, remounting them (#3746).
 		*/
-		for (let i = 0; i < renderedChildren.length; i++) {
-			const child = renderedChildren[i];
-			const key = getChildKey(child);
-			if (!presentKeys.includes(key)) {
-				nextChildren.splice(i, 0, child);
+		let insertionIndex = 0;
+		for (const child of renderedChildren) {
+			const presentIndex = presentKeys.indexOf(getChildKey(child));
+			if (presentIndex === -1) {
+				nextChildren.splice(insertionIndex++, 0, child);
 				exitingChildren.push(child);
-			}
+			} else insertionIndex = presentIndex + exitingChildren.length + 1;
 		}
 		/**
 		* If we're in "wait" mode, and we have exiting children, we want to
@@ -15361,105 +15665,6 @@ function loadFeatures(features) {
 	setFeatureDefinitions(featureDefinitions);
 }
 //#endregion
-//#region node_modules/framer-motion/dist/es/motion/utils/valid-prop.mjs
-/**
-* A list of all valid MotionProps.
-*
-* @privateRemarks
-* This doesn't throw if a `MotionProp` name is missing - it should.
-*/
-var validMotionProps = /* @__PURE__ */ new Set([
-	"animate",
-	"exit",
-	"variants",
-	"initial",
-	"style",
-	"values",
-	"variants",
-	"transition",
-	"transformTemplate",
-	"custom",
-	"inherit",
-	"onBeforeLayoutMeasure",
-	"onAnimationStart",
-	"onAnimationComplete",
-	"onUpdate",
-	"onDragStart",
-	"onDrag",
-	"onDragEnd",
-	"onMeasureDragConstraints",
-	"onDirectionLock",
-	"onDragTransitionEnd",
-	"_dragX",
-	"_dragY",
-	"onHoverStart",
-	"onHoverEnd",
-	"onViewportEnter",
-	"onViewportLeave",
-	"globalTapTarget",
-	"propagate",
-	"ignoreStrict",
-	"viewport"
-]);
-/**
-* Check whether a prop name is a valid `MotionProp` key.
-*
-* @param key - Name of the property to check
-* @returns `true` is key is a valid `MotionProp`.
-*
-* @public
-*/
-function isValidMotionProp(key) {
-	return key.startsWith("while") || key.startsWith("drag") && key !== "draggable" || key.startsWith("layout") || key.startsWith("onTap") || key.startsWith("onPan") || key.startsWith("onLayout") || validMotionProps.has(key);
-}
-//#endregion
-//#region __vite-optional-peer-dep:@emotion/is-prop-valid:framer-motion
-var is_prop_valid_framer_motion_exports = /* @__PURE__ */ __exportAll({ default: () => is_prop_valid_framer_motion_default });
-var is_prop_valid_framer_motion_default;
-var init_is_prop_valid_framer_motion = __esmMin((() => {
-	is_prop_valid_framer_motion_default = {};
-	throw new Error(`Could not resolve "@emotion/is-prop-valid" imported by "framer-motion". Is it installed?`);
-}));
-//#endregion
-//#region node_modules/framer-motion/dist/es/render/dom/utils/filter-props.mjs
-var shouldForward = (key) => !isValidMotionProp(key);
-function loadExternalIsValidProp(isValidProp) {
-	if (typeof isValidProp !== "function") return;
-	shouldForward = (key) => key.startsWith("on") ? !isValidMotionProp(key) : isValidProp(key);
-}
-/**
-* Emotion and Styled Components both allow users to pass through arbitrary props to their components
-* to dynamically generate CSS. They both use the `@emotion/is-prop-valid` package to determine which
-* of these should be passed to the underlying DOM node.
-*
-* However, when styling a Motion component `styled(motion.div)`, both packages pass through *all* props
-* as it's seen as an arbitrary component rather than a DOM node. Motion only allows arbitrary props
-* passed through the `custom` prop so it doesn't *need* the payload or computational overhead of
-* `@emotion/is-prop-valid`, however to fix this problem we need to use it.
-*
-* By making it an optionalDependency we can offer this functionality only in the situations where it's
-* actually required.
-*/
-try {
-	loadExternalIsValidProp((init_is_prop_valid_framer_motion(), __toCommonJS(is_prop_valid_framer_motion_exports)).default);
-} catch {}
-function filterProps(props, isDom, forwardMotionProps) {
-	const filteredProps = {};
-	for (const key in props) {
-		/**
-		* values is considered a valid prop by Emotion, so if it's present
-		* this will be rendered out to the DOM unless explicitly filtered.
-		*
-		* We check the type as it could be used with the `feColorMatrix`
-		* element, which we support.
-		*/
-		if (key === "values" && typeof props.values === "object") continue;
-		if (isMotionValue(props[key])) continue;
-		if (shouldForward(key) || forwardMotionProps === true && isValidMotionProp(key) || !isDom && !isValidMotionProp(key) || props["draggable"] && key.startsWith("onDrag")) filteredProps[key] = props[key];
-	}
-	return filteredProps;
-}
-//#endregion
 //#region node_modules/framer-motion/dist/es/context/MotionContext/index.mjs
 var { createContext: createContext$2 } = await importShared("react");
 var MotionContext = /* @__PURE__ */ createContext$2({});
@@ -15560,6 +15765,79 @@ function useSVGProps(props, visualState, _isStatic, Component) {
 	return visualProps;
 }
 //#endregion
+//#region node_modules/framer-motion/dist/es/motion/utils/valid-prop.mjs
+/**
+* A list of all valid MotionProps.
+*
+* @privateRemarks
+* This doesn't throw if a `MotionProp` name is missing - it should.
+*/
+var validMotionProps = /* @__PURE__ */ new Set([
+	"animate",
+	"exit",
+	"variants",
+	"initial",
+	"style",
+	"values",
+	"variants",
+	"transition",
+	"transformTemplate",
+	"custom",
+	"inherit",
+	"onBeforeLayoutMeasure",
+	"onAnimationStart",
+	"onAnimationComplete",
+	"onUpdate",
+	"onDragStart",
+	"onDrag",
+	"onDragEnd",
+	"onMeasureDragConstraints",
+	"onDirectionLock",
+	"onDragTransitionEnd",
+	"_dragX",
+	"_dragY",
+	"onHoverStart",
+	"onHoverEnd",
+	"onViewportEnter",
+	"onViewportLeave",
+	"globalTapTarget",
+	"propagate",
+	"ignoreStrict",
+	"viewport"
+]);
+/**
+* Check whether a prop name is a valid `MotionProp` key.
+*
+* @param key - Name of the property to check
+* @returns `true` is key is a valid `MotionProp`.
+*
+* @public
+*/
+function isValidMotionProp(key) {
+	return key.startsWith("while") || key.startsWith("drag") && key !== "draggable" || key.startsWith("layout") || key.startsWith("onTap") || key.startsWith("onPan") || key.startsWith("onLayout") || validMotionProps.has(key);
+}
+//#endregion
+//#region node_modules/framer-motion/dist/es/render/dom/utils/filter-props.mjs
+function shouldForward(key, isValidProp) {
+	return key.startsWith("on") ? !isValidMotionProp(key) : isValidProp?.(key) ?? !isValidMotionProp(key);
+}
+function filterProps(props, isDom, forwardMotionProps, isValidProp) {
+	const filteredProps = {};
+	for (const key in props) {
+		/**
+		* values is considered a valid prop by Emotion, so if it's present
+		* this will be rendered out to the DOM unless explicitly filtered.
+		*
+		* We check the type as it could be used with the `feColorMatrix`
+		* element, which we support.
+		*/
+		if (key === "values" && typeof props.values === "object") continue;
+		if (isMotionValue(props[key])) continue;
+		if (shouldForward(key, isValidProp) || forwardMotionProps === true && isValidMotionProp(key) || !isDom && !isValidMotionProp(key) || props["draggable"] && key.startsWith("onDrag")) filteredProps[key] = props[key];
+	}
+	return filteredProps;
+}
+//#endregion
 //#region node_modules/framer-motion/dist/es/render/svg/lowercase-elements.mjs
 /**
 * We keep these listed separately as we use the lowercase tag names as part
@@ -15602,9 +15880,9 @@ function isSVGComponent(Component) {
 //#endregion
 //#region node_modules/framer-motion/dist/es/render/dom/use-render.mjs
 var { Fragment: Fragment$1, useMemo: useMemo$2, createElement } = await importShared("react");
-function useRender(Component, props, ref, { latestValues }, isStatic, forwardMotionProps = false, isSVG) {
+function useRender(Component, props, ref, { latestValues }, isStatic, forwardMotionProps = false, isSVG, isValidProp) {
 	const visualProps = (isSVG ?? isSVGComponent(Component) ? useSVGProps : useHTMLProps)(props, latestValues, isStatic, Component);
-	const filteredProps = filterProps(props, typeof Component === "string", forwardMotionProps);
+	const filteredProps = filterProps(props, typeof Component === "string", forwardMotionProps, isValidProp);
 	const elementProps = Component !== Fragment$1 ? {
 		...filteredProps,
 		...visualProps,
@@ -15714,14 +15992,15 @@ function useMotionRef(visualState, visualElement, externalRef) {
 		if (instance) visualState.onMount?.(instance);
 		if (visualElement) instance ? visualElement.mount(instance) : visualElement.unmount();
 		const ref = externalRefContainer.current;
-		if (typeof ref === "function") if (instance) {
-			const cleanup = ref(instance);
-			if (typeof cleanup === "function") refCleanup.current = cleanup;
-		} else if (refCleanup.current) {
-			refCleanup.current();
-			refCleanup.current = null;
-		} else ref(instance);
-		else if (ref) ref.current = instance;
+		if (typeof ref === "function") {
+			if (instance) {
+				const cleanup = ref(instance);
+				if (typeof cleanup === "function") refCleanup.current = cleanup;
+			} else if (refCleanup.current) {
+				refCleanup.current();
+				refCleanup.current = null;
+			} else ref(instance);
+		} else if (ref) ref.current = instance;
 	}, [visualElement]);
 }
 //#endregion
@@ -15895,7 +16174,7 @@ function createMotionComponent(Component, { forwardMotionProps = false, type } =
 			...props,
 			layoutId: useLayoutId(props)
 		};
-		const { isStatic } = configAndProps;
+		const { isStatic, isValidProp } = configAndProps;
 		const context = useCreateMotionContext(props);
 		const visualState = useVisualState(props, isStatic);
 		if (!isStatic && typeof window !== "undefined") {
@@ -15919,7 +16198,7 @@ function createMotionComponent(Component, { forwardMotionProps = false, type } =
 			children: [MeasureLayout && context.visualElement ? (0, import_jsx_runtime.jsx)(MeasureLayout, {
 				visualElement: context.visualElement,
 				...configAndProps
-			}) : null, useRender(Component, props, useMotionRef(visualState, context.visualElement, externalRef), visualState, isStatic, forwardMotionProps, isSVG)]
+			}) : null, useRender(Component, props, useMotionRef(visualState, context.visualElement, externalRef), visualState, isStatic, forwardMotionProps, isSVG, isValidProp)]
 		});
 	}
 	MotionDOMComponent.displayName = `motion.${typeof Component === "string" ? Component : `create(${Component.displayName ?? Component.name ?? ""})`}`;
@@ -17333,7 +17612,7 @@ var motion = /*@__PURE__*/ createMotionProxy({
 }, createDomVisualElement);
 //#endregion
 //#region node_modules/framer-motion/dist/es/value/use-motion-value.mjs
-var { useContext: useContext$1, useState: useState$3, useEffect: useEffect$2 } = await importShared("react");
+var { useContext: useContext$1, useState: useState$4, useEffect: useEffect$2 } = await importShared("react");
 /**
 * Creates a `MotionValue` to track the state and velocity of a value.
 *
@@ -17360,7 +17639,7 @@ function useMotionValue(initial) {
 	*/
 	const { isStatic } = useContext$1(MotionConfigContext);
 	if (isStatic) {
-		const [, setLatest] = useState$3(initial);
+		const [, setLatest] = useState$4(initial);
 		useEffect$2(() => value.on("change", setLatest), []);
 	}
 	return value;
@@ -17455,51 +17734,137 @@ var { createContext } = await importShared("react");
 var ReorderContext = createContext(null);
 //#endregion
 //#region node_modules/framer-motion/dist/es/components/Reorder/utils/check-reorder.mjs
-function checkReorder(order, value, offset, velocity) {
-	if (!velocity) return order;
+function checkReorder(order, value, offset, velocity, axis, direction = "ltr") {
 	const index = order.findIndex((item) => item.value === value);
 	if (index === -1) return order;
-	const nextOffset = velocity > 0 ? 1 : -1;
+	if (axis === "xy") {
+		const { layout } = order[index];
+		const center = {
+			x: mixNumber$1(layout.x.min, layout.x.max, .5) + offset.x,
+			y: mixNumber$1(layout.y.min, layout.y.max, .5) + offset.y
+		};
+		const lines = getLines(order);
+		const sourceLine = lines.find((line) => line.items.includes(order[index]));
+		const targetLine = lines.reduce((closest, line) => distanceToLine(center.y, line) < distanceToLine(center.y, closest) ? line : closest);
+		if (targetLine !== sourceLine) return moveToLine(order, index, center.x, targetLine, direction);
+		const currentDistance = distanceToBox(center, layout);
+		let target = -1;
+		let targetDistance = currentDistance;
+		order.forEach((item, targetIndex) => {
+			if (targetIndex === index) return;
+			const distance = distanceToBox(center, item.layout);
+			if (distance < targetDistance) {
+				target = targetIndex;
+				targetDistance = distance;
+			}
+		});
+		return target === -1 ? order : moveItem(order, index, index + Math.sign(target - index));
+	}
+	if (!velocity[axis]) return order;
+	const nextOffset = velocity[axis] > 0 ? 1 : -1;
 	const nextItem = order[index + nextOffset];
 	if (!nextItem) return order;
-	const item = order[index];
-	const nextLayout = nextItem.layout;
+	const itemLayout = order[index].layout[axis];
+	const nextLayout = nextItem.layout[axis];
 	const nextItemCenter = mixNumber$1(nextLayout.min, nextLayout.max, .5);
-	if (nextOffset === 1 && item.layout.max + offset > nextItemCenter || nextOffset === -1 && item.layout.min + offset < nextItemCenter) return moveItem(order, index, index + nextOffset);
+	if (nextOffset === 1 && itemLayout.max + offset[axis] > nextItemCenter || nextOffset === -1 && itemLayout.min + offset[axis] < nextItemCenter) return moveItem(order, index, index + nextOffset);
 	return order;
+}
+function getLines(order) {
+	const lines = [];
+	order.forEach((item) => {
+		const { min, max } = item.layout.y;
+		const line = lines[lines.length - 1];
+		if (!line || min >= line.max || max <= line.min) lines.push({
+			items: [item],
+			min,
+			max
+		});
+		else {
+			line.items.push(item);
+			line.min = Math.min(line.min, min);
+			line.max = Math.max(line.max, max);
+		}
+	});
+	return lines;
+}
+function distanceToLine(y, line) {
+	return y < line.min ? line.min - y : y > line.max ? y - line.max : 0;
+}
+function moveToLine(order, index, x, line, direction) {
+	const remaining = order.filter((_, itemIndex) => itemIndex !== index);
+	const before = line.items.find((item) => {
+		const center = mixNumber$1(item.layout.x.min, item.layout.x.max, .5);
+		return direction === "ltr" ? x < center : x > center;
+	});
+	const targetIndex = before ? remaining.indexOf(before) : remaining.indexOf(line.items[line.items.length - 1]) + 1;
+	const nextOrder = [...remaining];
+	nextOrder.splice(targetIndex, 0, order[index]);
+	return nextOrder.every((item, itemIndex) => item === order[itemIndex]) ? order : nextOrder;
+}
+function distanceToBox(point, box) {
+	const x = Math.max(box.x.min - point.x, 0, point.x - box.x.max);
+	const y = Math.max(box.y.min - point.y, 0, point.y - box.y.max);
+	return x * x + y * y;
+}
+//#endregion
+//#region node_modules/framer-motion/dist/es/components/Reorder/utils/detect-axis.mjs
+var isSeparated = (a, b) => a.max <= b.min || b.max <= a.min;
+function detectAxis(layouts) {
+	let x = false;
+	let y = false;
+	for (let i = 0; i < layouts.length; i++) for (let j = i + 1; j < layouts.length; j++) {
+		x || (x = isSeparated(layouts[i].x, layouts[j].x));
+		y || (y = isSeparated(layouts[i].y, layouts[j].y));
+		if (x && y) return "xy";
+	}
+	return x ? "x" : "y";
 }
 //#endregion
 //#region node_modules/framer-motion/dist/es/components/Reorder/Group.mjs
-var { forwardRef: forwardRef$1, useRef: useRef$1, useEffect: useEffect$1 } = await importShared("react");
-function ReorderGroupComponent({ children, as = "ul", axis = "y", onReorder, values, ...props }, externalRef) {
+var { forwardRef: forwardRef$1, useRef: useRef$1, useState: useState$3, useEffect: useEffect$1 } = await importShared("react");
+function ReorderGroupComponent({ children, as = "ul", axis: axisOverride, onReorder, values, ...props }, externalRef) {
 	const Component = useConstant(() => motion[as]);
-	const order = [];
+	const itemLayouts = useRef$1(/* @__PURE__ */ new Map());
+	const [detectedAxis, setDetectedAxis] = useState$3("y");
 	const isReordering = useRef$1(false);
 	const groupRef = useRef$1(null);
+	const axis = axisOverride || detectedAxis;
+	const valuesSet = new Set(values);
+	itemLayouts.current.forEach((_, value) => {
+		if (!valuesSet.has(value)) itemLayouts.current.delete(value);
+	});
 	const context = {
 		axis,
 		groupRef,
 		registerItem: (value, layout) => {
-			const idx = order.findIndex((entry) => value === entry.value);
-			if (idx !== -1) order[idx].layout = layout[axis];
-			else order.push({
-				value,
-				layout: layout[axis]
-			});
-			order.sort(compareMin);
+			itemLayouts.current.set(value, layout);
+			if (!axisOverride) {
+				const nextAxis = detectAxis(values.flatMap((itemValue) => {
+					const itemLayout = itemLayouts.current.get(itemValue);
+					return itemLayout ? [itemLayout] : [];
+				}));
+				if (nextAxis !== detectedAxis) setDetectedAxis(nextAxis);
+			}
 		},
 		updateOrder: (item, offset, velocity) => {
 			if (isReordering.current) return;
-			const newOrder = checkReorder(order, item, offset, velocity);
+			const order = values.flatMap((value) => {
+				const layout = itemLayouts.current.get(value);
+				return layout ? [{
+					value,
+					layout
+				}] : [];
+			});
+			const direction = groupRef.current?.ownerDocument.defaultView?.getComputedStyle(groupRef.current).direction === "rtl" ? "rtl" : "ltr";
+			const newOrder = checkReorder(order, item, offset, velocity, axis, direction);
 			if (order !== newOrder) {
 				isReordering.current = true;
 				const newValues = [...values];
-				for (let i = 0; i < newOrder.length; i++) if (order[i].value !== newOrder[i].value) {
-					const a = values.indexOf(order[i].value);
-					const b = values.indexOf(newOrder[i].value);
-					if (a !== -1 && b !== -1) [newValues[a], newValues[b]] = [newValues[b], newValues[a]];
-					break;
-				}
+				const measuredIndexes = order.map(({ value }) => values.indexOf(value));
+				newOrder.forEach(({ value }, index) => {
+					newValues[measuredIndexes[index]] = value;
+				});
 				onReorder(newValues);
 			}
 		}
@@ -17533,9 +17898,6 @@ function ReorderGroupComponent({ children, as = "ul", axis = "y", onReorder, val
 	});
 }
 var ReorderGroup = /*@__PURE__*/ forwardRef$1(ReorderGroupComponent);
-function compareMin(a, b) {
-	return a.layout.min - b.layout.min;
-}
 //#endregion
 //#region node_modules/framer-motion/dist/es/components/Reorder/utils/auto-scroll.mjs
 var threshold = 50;
@@ -17620,9 +17982,10 @@ function autoScrollIfNeeded(groupElement, pointerPosition, axis, velocity) {
 		const initialLimit = initialScrollLimits.get(scrollableAncestor);
 		if ((axis === "x" ? isDocumentScroll ? window.scrollX : scrollableAncestor.scrollLeft : isDocumentScroll ? window.scrollY : scrollableAncestor.scrollTop) >= initialLimit) return;
 	}
-	if (axis === "x") if (isDocumentScroll) window.scrollBy({ left: scrollAmount });
-	else scrollableAncestor.scrollLeft += scrollAmount;
-	else if (isDocumentScroll) window.scrollBy({ top: scrollAmount });
+	if (axis === "x") {
+		if (isDocumentScroll) window.scrollBy({ left: scrollAmount });
+		else scrollableAncestor.scrollLeft += scrollAmount;
+	} else if (isDocumentScroll) window.scrollBy({ top: scrollAmount });
 	else scrollableAncestor.scrollTop += scrollAmount;
 }
 //#endregion
@@ -17641,7 +18004,7 @@ function ReorderItemComponent({ children, style = {}, value, as = "li", onDrag, 
 	const zIndex = useTransform([point.x, point.y], ([latestX, latestY]) => latestX || latestY ? 1 : "unset");
 	const { axis, registerItem, updateOrder, groupRef } = context;
 	return (0, import_jsx_runtime.jsx)(Component, {
-		drag: axis,
+		drag: axis === "xy" ? true : axis,
 		...props,
 		dragSnapToOrigin: true,
 		style: {
@@ -17653,9 +18016,13 @@ function ReorderItemComponent({ children, style = {}, value, as = "li", onDrag, 
 		layout,
 		onDrag: (event, gesturePoint) => {
 			const { velocity, point: pointerPoint } = gesturePoint;
-			const offset = point[axis].get();
-			updateOrder(value, offset, velocity[axis]);
-			autoScrollIfNeeded(groupRef.current, pointerPoint[axis], axis, velocity[axis]);
+			const offset = {
+				x: point.x.get(),
+				y: point.y.get()
+			};
+			updateOrder(value, offset, velocity);
+			const scrollAxis = axis === "xy" ? Math.abs(velocity.x) > Math.abs(velocity.y) ? "x" : "y" : axis;
+			autoScrollIfNeeded(groupRef.current, pointerPoint[scrollAxis], scrollAxis, velocity[scrollAxis]);
 			onDrag && onDrag(event, gesturePoint);
 		},
 		onDragEnd: (event, gesturePoint) => {
@@ -17729,20 +18096,19 @@ function MetricVisibilitySettings() {
 	});
 }
 //#endregion
-//#region node_modules/@solar-icons/react-perf/dist/icons/messages/Linear/Unread.mjs
+//#region node_modules/@solar-icons/react/dist/icons/linear/unread.mjs
 var { forwardRef: t } = await importShared("react");
-var r = t((t, r) => (0, import_jsx_runtime.jsx)(r$5, {
+var r = t((t, r) => (0, import_jsx_runtime.jsx)(a, {
 	ref: r,
 	...t,
+	iconName: `unread-linear`,
 	children: (0, import_jsx_runtime.jsx)(`path`, {
 		d: `M7 12.9L10.1429 16.5L18 7.5`,
 		stroke: `currentColor`,
-		strokeWidth: `1.5`,
 		strokeLinecap: `round`,
 		strokeLinejoin: `round`
 	})
 }));
-r.displayName = `Unread`;
 //#endregion
 //#region extension/src/renderer/components/settings/PingSettings.tsx
 var { Card: Card$2, CloseButton, Description: Description$1, Input: Input$1, Kbd, Label: Label$1, NumberField: NumberField$1, Switch: Switch$2, TextField, ToggleButton } = await importShared("@heroui/react");
@@ -18615,6 +18981,7 @@ function HardwareMonitorCard() {
 * This function is called by LynxHub to integrate the extension's UI components.
 */
 function InitialExtensions(lynxAPI) {
+	lynxAPI.initBrowserSentry(SENTRY_DSN);
 	lynxAPI.addReducer([{
 		name: "hmonitor",
 		reducer: hmonitorSlice_default
@@ -18633,3 +19000,5 @@ function InitialExtensions(lynxAPI) {
 }
 //#endregion
 export { InitialExtensions as t };
+
+//# sourceMappingURL=Extension-DV-4Kn6B.js.map

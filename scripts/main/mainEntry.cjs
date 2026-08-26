@@ -1,3 +1,11 @@
+(function() {
+	try {
+		var e = "undefined" != typeof window ? window : "undefined" != typeof global ? global : "undefined" != typeof globalThis ? globalThis : "undefined" != typeof self ? self : {};
+		e.SENTRY_RELEASE = { id: "17561bda7d32de6a59c60e7229a41d6eb183b31a" };
+		var n = new e.Error().stack;
+		n && (e._sentryDebugIds = e._sentryDebugIds || {}, e._sentryDebugIds[n] = "3418677b-a57d-48ba-923c-afa2529b7e3d", e._sentryDebugIdIdentifier = "sentry-dbid-3418677b-a57d-48ba-923c-afa2529b7e3d");
+	} catch (e) {}
+})();
 Object.defineProperty(exports, Symbol.toStringTag, { value: "Module" });
 //#region \0rolldown/runtime.js
 var __create = Object.create;
@@ -34,7 +42,7 @@ var __copyProps = (to, from, except, desc) => {
 	}
 	return to;
 };
-var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", {
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule || !__hasOwnProp.call(mod, "default") ? __defProp(target, "default", {
 	value: mod,
 	enumerable: true
 }) : target, mod));
@@ -52,6 +60,66 @@ node_fs_promises = __toESM(node_fs_promises, 1);
 let node_fs = require("node:fs");
 node_fs = __toESM(node_fs, 1);
 let electron = require("electron");
+//#region extension/src/cross/constants.ts
+var HMONITOR_STORAGE_ID = "hmonitor_storage";
+var HMONITOR_IPC_DATA_UPDATE = "hmonitor-data-update";
+var HMONITOR_IPC_CONFIG_UPDATE = "hmonitor-config-update";
+var HMONITOR_IPC_MONITORING_ERROR = "hmonitor-monitoring-error";
+var HMONITOR_IPC_SET_CONFIG = "hmonitor-set-config";
+var HMONITOR_IPC_RESET_CONFIG = "hmonitor-reset-config";
+var HMONITOR_IPC_UPDATE_PING = "hmonitor-update-ping";
+var HMONITOR_IPC_STOP_PING = "hmonitor-stop-ping";
+var initialSettings = {
+	configVersion: .6,
+	refreshInterval: 1,
+	enabled: true,
+	displayStyle: "default",
+	showSectionLabel: true,
+	metricVisibility: {
+		icon: true,
+		label: true,
+		value: true,
+		progressBar: true
+	},
+	enabledMetrics: {
+		cpu: [],
+		gpu: [],
+		memory: [],
+		network: [],
+		uptime: {
+			system: true,
+			app: true
+		}
+	},
+	availableHardware: {
+		gpu: [],
+		cpu: [],
+		memory: [],
+		network: []
+	},
+	pingState: {
+		isActive: false,
+		hosts: [],
+		enabledHosts: [],
+		interval: 1e3,
+		timeout: 2e3
+	},
+	showAliasCpu: true,
+	showAliasGpu: true,
+	showAliasMemory: true,
+	showAliasNetwork: true,
+	sectionOrder: [
+		"cpu",
+		"gpu",
+		"memory",
+		"network",
+		"uptime",
+		"ping"
+	],
+	uptimeOrder: ["uptimeSystem", "uptimeApp"]
+};
+var SENTRY_DSN = "https://13d766c04f102d67c984dcbef9544512@o4509344104316928.ingest.us.sentry.io/4511891776405504";
+//#endregion
 //#region extension/node_modules/@lynxhub/hwmonitor/dist/utils.js
 var execAsync$1 = (0, node_util.promisify)(node_child_process.exec);
 var DOTNET_LIST_RUNTIMES_COMMAND = "dotnet --list-runtimes";
@@ -350,7 +418,7 @@ var require_legacy_streams = /* @__PURE__ */ __commonJSMin(((exports, module) =>
 			this.paused = false;
 			this.flags = "r";
 			this.mode = 438;
-			this.bufferSize = 64 * 1024;
+			this.bufferSize = 65536;
 			options = options || {};
 			var keys = Object.keys(options);
 			for (var index = 0, length = keys.length; index < length; index++) {
@@ -1693,9 +1761,10 @@ var require_safe_buffer$2 = /* @__PURE__ */ __commonJSMin(((exports, module) => 
 	SafeBuffer.alloc = function(size, fill, encoding) {
 		if (typeof size !== "number") throw new TypeError("Argument must be a number");
 		var buf = Buffer(size);
-		if (fill !== void 0) if (typeof encoding === "string") buf.fill(fill, encoding);
-		else buf.fill(fill);
-		else buf.fill(0);
+		if (fill !== void 0) {
+			if (typeof encoding === "string") buf.fill(fill, encoding);
+			else buf.fill(fill);
+		} else buf.fill(0);
 		return buf;
 	};
 	SafeBuffer.allocUnsafe = function(size) {
@@ -1988,7 +2057,7 @@ var require__stream_writable = /* @__PURE__ */ __commonJSMin(((exports, module) 
 		if (isDuplex) this.objectMode = this.objectMode || !!options.writableObjectMode;
 		var hwm = options.highWaterMark;
 		var writableHwm = options.writableHighWaterMark;
-		var defaultHwm = this.objectMode ? 16 : 16 * 1024;
+		var defaultHwm = this.objectMode ? 16 : 16384;
 		if (hwm || hwm === 0) this.highWaterMark = hwm;
 		else if (isDuplex && (writableHwm || writableHwm === 0)) this.highWaterMark = writableHwm;
 		else this.highWaterMark = defaultHwm;
@@ -2294,13 +2363,15 @@ var require__stream_writable = /* @__PURE__ */ __commonJSMin(((exports, module) 
 		});
 	}
 	function prefinish(stream, state) {
-		if (!state.prefinished && !state.finalCalled) if (typeof stream._final === "function") {
-			state.pendingcb++;
-			state.finalCalled = true;
-			pna.nextTick(callFinal, stream, state);
-		} else {
-			state.prefinished = true;
-			stream.emit("prefinish");
+		if (!state.prefinished && !state.finalCalled) {
+			if (typeof stream._final === "function") {
+				state.pendingcb++;
+				state.finalCalled = true;
+				pna.nextTick(callFinal, stream, state);
+			} else {
+				state.prefinished = true;
+				stream.emit("prefinish");
+			}
 		}
 	}
 	function finishMaybe(stream, state) {
@@ -2317,8 +2388,10 @@ var require__stream_writable = /* @__PURE__ */ __commonJSMin(((exports, module) 
 	function endWritable(stream, state, cb) {
 		state.ending = true;
 		finishMaybe(stream, state);
-		if (cb) if (state.finished) pna.nextTick(cb);
-		else stream.once("finish", cb);
+		if (cb) {
+			if (state.finished) pna.nextTick(cb);
+			else stream.once("finish", cb);
+		}
 		state.ended = true;
 		stream.writable = false;
 	}
@@ -2434,9 +2507,10 @@ var require_safe_buffer$1 = /* @__PURE__ */ __commonJSMin(((exports, module) => 
 	SafeBuffer.alloc = function(size, fill, encoding) {
 		if (typeof size !== "number") throw new TypeError("Argument must be a number");
 		var buf = Buffer(size);
-		if (fill !== void 0) if (typeof encoding === "string") buf.fill(fill, encoding);
-		else buf.fill(fill);
-		else buf.fill(0);
+		if (fill !== void 0) {
+			if (typeof encoding === "string") buf.fill(fill, encoding);
+			else buf.fill(fill);
+		} else buf.fill(0);
 		return buf;
 	};
 	SafeBuffer.allocUnsafe = function(size) {
@@ -2570,8 +2644,10 @@ var require_string_decoder = /* @__PURE__ */ __commonJSMin(((exports) => {
 		if (--j < i || nb === -2) return 0;
 		nb = utf8CheckByte(buf[j]);
 		if (nb >= 0) {
-			if (nb > 0) if (nb === 2) nb = 0;
-			else self.lastNeed = nb - 3;
+			if (nb > 0) {
+				if (nb === 2) nb = 0;
+				else self.lastNeed = nb - 3;
+			}
 			return nb;
 		}
 		return 0;
@@ -2722,7 +2798,7 @@ var require__stream_readable = /* @__PURE__ */ __commonJSMin(((exports, module) 
 		if (isDuplex) this.objectMode = this.objectMode || !!options.readableObjectMode;
 		var hwm = options.highWaterMark;
 		var readableHwm = options.readableHighWaterMark;
-		var defaultHwm = this.objectMode ? 16 : 16 * 1024;
+		var defaultHwm = this.objectMode ? 16 : 16384;
 		if (hwm || hwm === 0) this.highWaterMark = hwm;
 		else if (isDuplex && (readableHwm || readableHwm === 0)) this.highWaterMark = readableHwm;
 		else this.highWaterMark = defaultHwm;
@@ -2808,9 +2884,10 @@ var require__stream_readable = /* @__PURE__ */ __commonJSMin(((exports, module) 
 			if (er) stream.emit("error", er);
 			else if (state.objectMode || chunk && chunk.length > 0) {
 				if (typeof chunk !== "string" && !state.objectMode && Object.getPrototypeOf(chunk) !== Buffer.prototype) chunk = _uint8ArrayToBuffer(chunk);
-				if (addToFront) if (state.endEmitted) stream.emit("error", /* @__PURE__ */ new Error("stream.unshift() after end event"));
-				else addChunk(stream, state, chunk, true);
-				else if (state.ended) stream.emit("error", /* @__PURE__ */ new Error("stream.push() after EOF"));
+				if (addToFront) {
+					if (state.endEmitted) stream.emit("error", /* @__PURE__ */ new Error("stream.unshift() after end event"));
+					else addChunk(stream, state, chunk, true);
+				} else if (state.ended) stream.emit("error", /* @__PURE__ */ new Error("stream.push() after EOF"));
 				else {
 					state.reading = false;
 					if (state.decoder && !encoding) {
@@ -2869,8 +2946,10 @@ var require__stream_readable = /* @__PURE__ */ __commonJSMin(((exports, module) 
 	function howMuchToRead(n, state) {
 		if (n <= 0 || state.length === 0 && state.ended) return 0;
 		if (state.objectMode) return 1;
-		if (n !== n) if (state.flowing && state.length) return state.buffer.head.data.length;
-		else return state.length;
+		if (n !== n) {
+			if (state.flowing && state.length) return state.buffer.head.data.length;
+			else return state.length;
+		}
 		if (n > state.highWaterMark) state.highWaterMark = computeNewHighWaterMark(n);
 		if (n <= state.length) return n;
 		if (!state.ended) {
@@ -2984,9 +3063,7 @@ var require__stream_readable = /* @__PURE__ */ __commonJSMin(((exports, module) 
 			case 1:
 				state.pipes = [state.pipes, dest];
 				break;
-			default:
-				state.pipes.push(dest);
-				break;
+			default: state.pipes.push(dest);
 		}
 		state.pipesCount += 1;
 		debug("pipe count=%d opts=%j", state.pipesCount, pipeOpts);
@@ -3462,9 +3539,10 @@ var require_safe_buffer = /* @__PURE__ */ __commonJSMin(((exports, module) => {
 	SafeBuffer.alloc = function(size, fill, encoding) {
 		if (typeof size !== "number") throw new TypeError("Argument must be a number");
 		var buf = Buffer(size);
-		if (fill !== void 0) if (typeof encoding === "string") buf.fill(fill, encoding);
-		else buf.fill(fill);
-		else buf.fill(0);
+		if (fill !== void 0) {
+			if (typeof encoding === "string") buf.fill(fill, encoding);
+			else buf.fill(fill);
+		} else buf.fill(0);
 		return buf;
 	};
 	SafeBuffer.allocUnsafe = function(size) {
@@ -3479,7 +3557,9 @@ var require_safe_buffer = /* @__PURE__ */ __commonJSMin(((exports, module) => {
 //#endregion
 //#region extension/node_modules/bl/bl.js
 var require_bl = /* @__PURE__ */ __commonJSMin(((exports, module) => {
-	var DuplexStream = require_duplex(), util$5 = require("util"), Buffer$3 = require_safe_buffer().Buffer;
+	var DuplexStream = require_duplex();
+	var util$5 = require("util");
+	var Buffer = require_safe_buffer().Buffer;
 	function BufferList(callback) {
 		if (!(this instanceof BufferList)) return new BufferList(callback);
 		this._bufs = [];
@@ -3513,12 +3593,12 @@ var require_bl = /* @__PURE__ */ __commonJSMin(((exports, module) => {
 	};
 	BufferList.prototype.append = function append(buf) {
 		var i = 0;
-		if (Buffer$3.isBuffer(buf)) this._appendBuffer(buf);
+		if (Buffer.isBuffer(buf)) this._appendBuffer(buf);
 		else if (Array.isArray(buf)) for (; i < buf.length; i++) this.append(buf[i]);
 		else if (buf instanceof BufferList) for (; i < buf._bufs.length; i++) this.append(buf._bufs[i]);
 		else if (buf != null) {
 			if (typeof buf == "number") buf = buf.toString();
-			this._appendBuffer(Buffer$3.from(buf));
+			this._appendBuffer(Buffer.from(buf));
 		}
 		return this;
 	};
@@ -3554,11 +3634,11 @@ var require_bl = /* @__PURE__ */ __commonJSMin(((exports, module) => {
 	BufferList.prototype.copy = function copy(dst, dstStart, srcStart, srcEnd) {
 		if (typeof srcStart != "number" || srcStart < 0) srcStart = 0;
 		if (typeof srcEnd != "number" || srcEnd > this.length) srcEnd = this.length;
-		if (srcStart >= this.length) return dst || Buffer$3.alloc(0);
-		if (srcEnd <= 0) return dst || Buffer$3.alloc(0);
+		if (srcStart >= this.length) return dst || Buffer.alloc(0);
+		if (srcEnd <= 0) return dst || Buffer.alloc(0);
 		var copy = !!dst, off = this._offset(srcStart), len = srcEnd - srcStart, bytes = len, bufoff = copy && dstStart || 0, start = off[1], l, i;
 		if (srcStart === 0 && srcEnd == this.length) {
-			if (!copy) return this._bufs.length === 1 ? this._bufs[0] : Buffer$3.concat(this._bufs, this.length);
+			if (!copy) return this._bufs.length === 1 ? this._bufs[0] : Buffer.concat(this._bufs, this.length);
 			for (i = 0; i < this._bufs.length; i++) {
 				this._bufs[i].copy(dst, bufoff);
 				bufoff += this._bufs[i].length;
@@ -3566,7 +3646,7 @@ var require_bl = /* @__PURE__ */ __commonJSMin(((exports, module) => {
 			return dst;
 		}
 		if (bytes <= this._bufs[off[0]].length - start) return copy ? this._bufs[off[0]].copy(dst, dstStart, start, start + bytes) : this._bufs[off[0]].slice(start, start + bytes);
-		if (!copy) dst = Buffer$3.allocUnsafe(len);
+		if (!copy) dst = Buffer.allocUnsafe(len);
 		for (i = off[0]; i < this._bufs.length; i++) {
 			l = this._bufs[i].length - start;
 			if (bytes > l) {
@@ -4424,8 +4504,10 @@ var require_for_each = /* @__PURE__ */ __commonJSMin(((exports, module) => {
 	var hasOwnProperty = Object.prototype.hasOwnProperty;
 	/** @type {<This, A extends readonly unknown[]>(arr: A, iterator: (this: This | void, value: A[number], index: number, arr: A) => void, receiver: This | undefined) => void} */
 	var forEachArray = function forEachArray(array, iterator, receiver) {
-		for (var i = 0, len = array.length; i < len; i++) if (hasOwnProperty.call(array, i)) if (receiver == null) iterator(array[i], i, array);
-		else iterator.call(receiver, array[i], i, array);
+		for (var i = 0, len = array.length; i < len; i++) if (hasOwnProperty.call(array, i)) {
+			if (receiver == null) iterator(array[i], i, array);
+			else iterator.call(receiver, array[i], i, array);
+		}
 	};
 	/** @type {<This, S extends string>(string: S, iterator: (this: This | void, value: S[number], index: number, string: S) => void, receiver: This | undefined) => void} */
 	var forEachString = function forEachString(string, iterator, receiver) {
@@ -4434,8 +4516,10 @@ var require_for_each = /* @__PURE__ */ __commonJSMin(((exports, module) => {
 	};
 	/** @type {<This, O>(obj: O, iterator: (this: This | void, value: O[keyof O], index: keyof O, obj: O) => void, receiver: This | undefined) => void} */
 	var forEachObject = function forEachObject(object, iterator, receiver) {
-		for (var k in object) if (hasOwnProperty.call(object, k)) if (receiver == null) iterator(object[k], k, object);
-		else iterator.call(receiver, object[k], k, object);
+		for (var k in object) if (hasOwnProperty.call(object, k)) {
+			if (receiver == null) iterator(object[k], k, object);
+			else iterator.call(receiver, object[k], k, object);
+		}
 	};
 	/** @type {(x: unknown) => x is readonly unknown[]} */
 	function isArray(x) {
@@ -4550,8 +4634,10 @@ var require_set_function_length = /* @__PURE__ */ __commonJSMin(((exports, modul
 			if (desc && !desc.configurable) functionLengthIsConfigurable = false;
 			if (desc && !desc.writable) functionLengthIsWritable = false;
 		}
-		if (functionLengthIsConfigurable || functionLengthIsWritable || !loose) if (hasDescriptors) define(fn, "length", length, true, true);
-		else define(fn, "length", length);
+		if (functionLengthIsConfigurable || functionLengthIsWritable || !loose) {
+			if (hasDescriptors) define(fn, "length", length, true, true);
+			else define(fn, "length", length);
+		}
 		return fn;
 	};
 }));
@@ -7143,15 +7229,16 @@ var require_lib = /* @__PURE__ */ __commonJSMin(((exports, module) => {
 	var coerceOutputStream = function(output) {
 		var outputStream = new Stream();
 		var resizeOk = true;
-		if (output) if (typeof output === "number") {
-			outputStream.buffer = new Buffer(output);
-			resizeOk = false;
-		} else if ("writeByte" in output) return output;
-		else {
-			outputStream.buffer = output;
-			resizeOk = false;
-		}
-		else outputStream.buffer = new Buffer(16384);
+		if (output) {
+			if (typeof output === "number") {
+				outputStream.buffer = new Buffer(output);
+				resizeOk = false;
+			} else if ("writeByte" in output) return output;
+			else {
+				outputStream.buffer = output;
+				resizeOk = false;
+			}
+		} else outputStream.buffer = new Buffer(16384);
 		outputStream.pos = 0;
 		outputStream.writeByte = function(_byte) {
 			if (resizeOk && this.pos >= this.buffer.length) {
@@ -10308,9 +10395,11 @@ var HardwareMonitor = class extends node_events.EventEmitter {
 			"info",
 			"debug"
 		];
-		if (levels.indexOf(this.logLevel) >= levels.indexOf(level) && level !== "silent") if (level === "error") console.error(...args);
-		else if (level === "warn") console.warn(...args);
-		else console.log(...args);
+		if (levels.indexOf(this.logLevel) >= levels.indexOf(level) && level !== "silent") {
+			if (level === "error") console.error(...args);
+			else if (level === "warn") console.warn(...args);
+			else console.log(...args);
+		}
 	}
 	/**
 	* Formats seconds into a human-readable string (e.g., "1d, 2h, 3m, 4s").
@@ -10318,8 +10407,8 @@ var HardwareMonitor = class extends node_events.EventEmitter {
 	* @returns Formatted string.
 	*/
 	formatSeconds(totalSeconds) {
-		const days = Math.floor(totalSeconds / (3600 * 24));
-		totalSeconds %= 3600 * 24;
+		const days = Math.floor(totalSeconds / 86400);
+		totalSeconds %= 86400;
 		const hours = Math.floor(totalSeconds / 3600);
 		totalSeconds %= 3600;
 		const minutes = Math.floor(totalSeconds / 60);
@@ -10486,7 +10575,7 @@ var HardwareMonitor = class extends node_events.EventEmitter {
 				} else return;
 			}
 			if (!this.initialMessageSkipped) return;
-			const MAX_BUFFER_SIZE = 10 * 1024 * 1024;
+			const MAX_BUFFER_SIZE = 10485760;
 			while (this.buffer.length > 0) {
 				if (this.buffer.length > MAX_BUFFER_SIZE) {
 					this.buffer = "";
@@ -10661,8 +10750,10 @@ function getRawTag(value) {
 		var unmasked = true;
 	} catch (e) {}
 	var result = nativeObjectToString$1.call(value);
-	if (unmasked) if (isOwn) value[symToStringTag$1] = tag;
-	else delete value[symToStringTag$1];
+	if (unmasked) {
+		if (isOwn) value[symToStringTag$1] = tag;
+		else delete value[symToStringTag$1];
+	}
 	return result;
 }
 //#endregion
@@ -10686,7 +10777,8 @@ function objectToString(value) {
 //#endregion
 //#region node_modules/lodash-es/_baseGetTag.js
 /** `Object#toString` result references. */
-var nullTag = "[object Null]", undefinedTag = "[object Undefined]";
+var nullTag = "[object Null]";
+var undefinedTag = "[object Undefined]";
 /** Built-in value references. */
 var symToStringTag = Symbol$1 ? Symbol$1.toStringTag : void 0;
 /**
@@ -10789,7 +10881,10 @@ function isObject(value) {
 //#endregion
 //#region node_modules/lodash-es/isFunction.js
 /** `Object#toString` result references. */
-var asyncTag = "[object AsyncFunction]", funcTag$1 = "[object Function]", genTag = "[object GeneratorFunction]", proxyTag = "[object Proxy]";
+var asyncTag = "[object AsyncFunction]";
+var funcTag$1 = "[object Function]";
+var genTag = "[object GeneratorFunction]";
+var proxyTag = "[object Proxy]";
 /**
 * Checks if `value` is classified as a `Function` object.
 *
@@ -10865,7 +10960,8 @@ var reRegExpChar = /[\\^$.*+?()[\]{}|]/g;
 /** Used to detect host constructors (Safari). */
 var reIsHostCtor = /^\[object .+?Constructor\]$/;
 /** Used for built-in method references. */
-var funcProto = Function.prototype, objectProto$2 = Object.prototype;
+var funcProto = Function.prototype;
+var objectProto$2 = Object.prototype;
 /** Used to resolve the decompiled source of functions. */
 var funcToString = funcProto.toString;
 /** Used to check objects for own properties. */
@@ -11156,8 +11252,30 @@ var isBuffer = (Buffer$1 ? Buffer$1.isBuffer : void 0) || stubFalse;
 //#endregion
 //#region node_modules/lodash-es/_baseIsTypedArray.js
 /** `Object#toString` result references. */
-var argsTag$1 = "[object Arguments]", arrayTag$1 = "[object Array]", boolTag$1 = "[object Boolean]", dateTag$1 = "[object Date]", errorTag$1 = "[object Error]", funcTag = "[object Function]", mapTag$2 = "[object Map]", numberTag$1 = "[object Number]", objectTag$2 = "[object Object]", regexpTag$1 = "[object RegExp]", setTag$2 = "[object Set]", stringTag$1 = "[object String]", weakMapTag$1 = "[object WeakMap]";
-var arrayBufferTag$1 = "[object ArrayBuffer]", dataViewTag$2 = "[object DataView]", float32Tag = "[object Float32Array]", float64Tag = "[object Float64Array]", int8Tag = "[object Int8Array]", int16Tag = "[object Int16Array]", int32Tag = "[object Int32Array]", uint8Tag = "[object Uint8Array]", uint8ClampedTag = "[object Uint8ClampedArray]", uint16Tag = "[object Uint16Array]", uint32Tag = "[object Uint32Array]";
+var argsTag$1 = "[object Arguments]";
+var arrayTag$1 = "[object Array]";
+var boolTag$1 = "[object Boolean]";
+var dateTag$1 = "[object Date]";
+var errorTag$1 = "[object Error]";
+var funcTag = "[object Function]";
+var mapTag$2 = "[object Map]";
+var numberTag$1 = "[object Number]";
+var objectTag$2 = "[object Object]";
+var regexpTag$1 = "[object RegExp]";
+var setTag$2 = "[object Set]";
+var stringTag$1 = "[object String]";
+var weakMapTag$1 = "[object WeakMap]";
+var arrayBufferTag$1 = "[object ArrayBuffer]";
+var dataViewTag$2 = "[object DataView]";
+var float32Tag = "[object Float32Array]";
+var float64Tag = "[object Float64Array]";
+var int8Tag = "[object Int8Array]";
+var int16Tag = "[object Int16Array]";
+var int32Tag = "[object Int32Array]";
+var uint8Tag = "[object Uint8Array]";
+var uint8ClampedTag = "[object Uint8ClampedArray]";
+var uint16Tag = "[object Uint16Array]";
+var uint32Tag = "[object Uint32Array]";
 /** Used to identify `toStringTag` values of typed arrays. */
 var typedArrayTags = {};
 typedArrayTags[float32Tag] = typedArrayTags[float64Tag] = typedArrayTags[int8Tag] = typedArrayTags[int16Tag] = typedArrayTags[int32Tag] = typedArrayTags[uint8Tag] = typedArrayTags[uint8ClampedTag] = typedArrayTags[uint16Tag] = typedArrayTags[uint32Tag] = true;
@@ -11895,10 +12013,18 @@ var Set$1 = getNative(root, "Set");
 //#endregion
 //#region node_modules/lodash-es/_getTag.js
 /** `Object#toString` result references. */
-var mapTag$1 = "[object Map]", objectTag$1 = "[object Object]", promiseTag = "[object Promise]", setTag$1 = "[object Set]", weakMapTag = "[object WeakMap]";
+var mapTag$1 = "[object Map]";
+var objectTag$1 = "[object Object]";
+var promiseTag = "[object Promise]";
+var setTag$1 = "[object Set]";
+var weakMapTag = "[object WeakMap]";
 var dataViewTag$1 = "[object DataView]";
 /** Used to detect maps, sets, and weakmaps. */
-var dataViewCtorString = toSource(DataView$1), mapCtorString = toSource(Map$1), promiseCtorString = toSource(Promise$1), setCtorString = toSource(Set$1), weakMapCtorString = toSource(WeakMap$1);
+var dataViewCtorString = toSource(DataView$1);
+var mapCtorString = toSource(Map$1);
+var promiseCtorString = toSource(Promise$1);
+var setCtorString = toSource(Set$1);
+var weakMapCtorString = toSource(WeakMap$1);
 /**
 * Gets the `toStringTag` of `value`.
 *
@@ -12005,7 +12131,8 @@ function cacheHas(cache, key) {
 //#endregion
 //#region node_modules/lodash-es/_equalArrays.js
 /** Used to compose bitmasks for value comparisons. */
-var COMPARE_PARTIAL_FLAG$3 = 1, COMPARE_UNORDERED_FLAG$1 = 2;
+var COMPARE_PARTIAL_FLAG$3 = 1;
+var COMPARE_UNORDERED_FLAG$1 = 2;
 /**
 * A specialized version of `baseIsEqualDeep` for arrays with support for
 * partial deep comparisons.
@@ -12087,12 +12214,23 @@ function setToArray(set) {
 //#endregion
 //#region node_modules/lodash-es/_equalByTag.js
 /** Used to compose bitmasks for value comparisons. */
-var COMPARE_PARTIAL_FLAG$2 = 1, COMPARE_UNORDERED_FLAG = 2;
+var COMPARE_PARTIAL_FLAG$2 = 1;
+var COMPARE_UNORDERED_FLAG = 2;
 /** `Object#toString` result references. */
-var boolTag = "[object Boolean]", dateTag = "[object Date]", errorTag = "[object Error]", mapTag = "[object Map]", numberTag = "[object Number]", regexpTag = "[object RegExp]", setTag = "[object Set]", stringTag = "[object String]", symbolTag = "[object Symbol]";
-var arrayBufferTag = "[object ArrayBuffer]", dataViewTag = "[object DataView]";
+var boolTag = "[object Boolean]";
+var dateTag = "[object Date]";
+var errorTag = "[object Error]";
+var mapTag = "[object Map]";
+var numberTag = "[object Number]";
+var regexpTag = "[object RegExp]";
+var setTag = "[object Set]";
+var stringTag = "[object String]";
+var symbolTag = "[object Symbol]";
+var arrayBufferTag = "[object ArrayBuffer]";
+var dataViewTag = "[object DataView]";
 /** Used to convert symbols to primitives and strings. */
-var symbolProto = Symbol$1 ? Symbol$1.prototype : void 0, symbolValueOf = symbolProto ? symbolProto.valueOf : void 0;
+var symbolProto = Symbol$1 ? Symbol$1.prototype : void 0;
+var symbolValueOf = symbolProto ? symbolProto.valueOf : void 0;
 /**
 * A specialized version of `baseIsEqualDeep` for comparing objects of
 * the same `toStringTag`.
@@ -12198,7 +12336,9 @@ function equalObjects(object, other, bitmask, customizer, equalFunc, stack) {
 /** Used to compose bitmasks for value comparisons. */
 var COMPARE_PARTIAL_FLAG = 1;
 /** `Object#toString` result references. */
-var argsTag = "[object Arguments]", arrayTag = "[object Array]", objectTag = "[object Object]";
+var argsTag = "[object Arguments]";
+var arrayTag = "[object Array]";
+var objectTag = "[object Object]";
 /** Used to check objects for own properties. */
 var hasOwnProperty = Object.prototype.hasOwnProperty;
 /**
@@ -12320,65 +12460,6 @@ function isEqual(value, other) {
 function isNil(value) {
 	return value == null;
 }
-//#endregion
-//#region extension/src/cross/constants.ts
-var HMONITOR_STORAGE_ID = "hmonitor_storage";
-var HMONITOR_IPC_DATA_UPDATE = "hmonitor-data-update";
-var HMONITOR_IPC_CONFIG_UPDATE = "hmonitor-config-update";
-var HMONITOR_IPC_MONITORING_ERROR = "hmonitor-monitoring-error";
-var HMONITOR_IPC_SET_CONFIG = "hmonitor-set-config";
-var HMONITOR_IPC_RESET_CONFIG = "hmonitor-reset-config";
-var HMONITOR_IPC_UPDATE_PING = "hmonitor-update-ping";
-var HMONITOR_IPC_STOP_PING = "hmonitor-stop-ping";
-var initialSettings = {
-	configVersion: .6,
-	refreshInterval: 1,
-	enabled: true,
-	displayStyle: "default",
-	showSectionLabel: true,
-	metricVisibility: {
-		icon: true,
-		label: true,
-		value: true,
-		progressBar: true
-	},
-	enabledMetrics: {
-		cpu: [],
-		gpu: [],
-		memory: [],
-		network: [],
-		uptime: {
-			system: true,
-			app: true
-		}
-	},
-	availableHardware: {
-		gpu: [],
-		cpu: [],
-		memory: [],
-		network: []
-	},
-	pingState: {
-		isActive: false,
-		hosts: [],
-		enabledHosts: [],
-		interval: 1e3,
-		timeout: 2e3
-	},
-	showAliasCpu: true,
-	showAliasGpu: true,
-	showAliasMemory: true,
-	showAliasNetwork: true,
-	sectionOrder: [
-		"cpu",
-		"gpu",
-		"memory",
-		"network",
-		"uptime",
-		"ping"
-	],
-	uptimeOrder: ["uptimeSystem", "uptimeApp"]
-};
 //#endregion
 //#region extension/src/main/pinger.ts
 var Pinger = class {
@@ -12702,7 +12783,7 @@ var hardwareMonitorService = class HardwareMonitorService {
 			return;
 		} catch (error) {
 			console.warn(`Hardware discovery attempt ${i + 1} failed:`, error);
-			if (i === HARDWARE_CHECK_MAX_RETRIES - 1) {
+			if (i === 4) {
 				console.error("All hardware discovery attempts failed.");
 				this.lastError = error;
 				this.sendToRenderer(HMONITOR_IPC_MONITORING_ERROR, error);
@@ -12813,8 +12894,11 @@ var hardwareMonitorService = class HardwareMonitorService {
 * Hooks into the LynxHub application lifecycle.
 */
 async function initialExtension(lynxApi, utils) {
+	lynxApi.initNodeSentry(SENTRY_DSN);
 	lynxApi.onAppReady(() => hardwareMonitorService.initialize(utils));
 	lynxApi.onReadyToShow(() => hardwareMonitorService.onMainWindowReady(utils));
 }
 //#endregion
 exports.initialExtension = initialExtension;
+
+//# sourceMappingURL=mainEntry.cjs.map

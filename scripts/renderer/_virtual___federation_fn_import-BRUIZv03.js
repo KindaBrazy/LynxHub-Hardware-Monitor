@@ -1,4 +1,12 @@
 //#region node_modules/@originjs/vite-plugin-federation/dist/satisfy.mjs
+(function() {
+	try {
+		var e = "undefined" != typeof window ? window : "undefined" != typeof global ? global : "undefined" != typeof globalThis ? globalThis : "undefined" != typeof self ? self : {};
+		e.SENTRY_RELEASE = { id: "17561bda7d32de6a59c60e7229a41d6eb183b31a" };
+		var n = new e.Error().stack;
+		n && (e._sentryDebugIds = e._sentryDebugIds || {}, e._sentryDebugIds[n] = "3f43c65d-cd2f-45c2-9490-e284555c9545", e._sentryDebugIdIdentifier = "sentry-dbid-3f43c65d-cd2f-45c2-9490-e284555c9545");
+	} catch (e) {}
+})();
 var buildIdentifier = "[0-9A-Za-z-]+";
 var build = `(?:\\+(${buildIdentifier}(?:\\.${buildIdentifier})*))`;
 var numericIdentifier = "0|[1-9]\\d*";
@@ -72,14 +80,19 @@ function parseCarets(range) {
 		return rangeVersion.replace(parseRegex(caret), (_, major, minor, patch, preRelease2) => {
 			if (isXVersion(major)) return "";
 			else if (isXVersion(minor)) return `>=${major}.0.0 <${+major + 1}.0.0-0`;
-			else if (isXVersion(patch)) if (major === "0") return `>=${major}.${minor}.0 <${major}.${+minor + 1}.0-0`;
-			else return `>=${major}.${minor}.0 <${+major + 1}.0.0-0`;
-			else if (preRelease2) if (major === "0") if (minor === "0") return `>=${major}.${minor}.${patch}-${preRelease2} <${major}.${minor}.${+patch + 1}-0`;
-			else return `>=${major}.${minor}.${patch}-${preRelease2} <${major}.${+minor + 1}.0-0`;
-			else return `>=${major}.${minor}.${patch}-${preRelease2} <${+major + 1}.0.0-0`;
-			else {
-				if (major === "0") if (minor === "0") return `>=${major}.${minor}.${patch} <${major}.${minor}.${+patch + 1}-0`;
-				else return `>=${major}.${minor}.${patch} <${major}.${+minor + 1}.0-0`;
+			else if (isXVersion(patch)) {
+				if (major === "0") return `>=${major}.${minor}.0 <${major}.${+minor + 1}.0-0`;
+				else return `>=${major}.${minor}.0 <${+major + 1}.0.0-0`;
+			} else if (preRelease2) {
+				if (major === "0") {
+					if (minor === "0") return `>=${major}.${minor}.${patch}-${preRelease2} <${major}.${minor}.${+patch + 1}-0`;
+					else return `>=${major}.${minor}.${patch}-${preRelease2} <${major}.${+minor + 1}.0-0`;
+				} else return `>=${major}.${minor}.${patch}-${preRelease2} <${+major + 1}.0.0-0`;
+			} else {
+				if (major === "0") {
+					if (minor === "0") return `>=${major}.${minor}.${patch} <${major}.${minor}.${+patch + 1}-0`;
+					else return `>=${major}.${minor}.${patch} <${major}.${+minor + 1}.0-0`;
+				}
 				return `>=${major}.${minor}.${patch} <${+major + 1}.0.0-0`;
 			}
 		});
@@ -104,9 +117,10 @@ function parseXRanges(range) {
 			const isXPatch = isXMinor || isXVersion(patch);
 			if (gtlt2 === "=" && isXPatch) gtlt2 = "";
 			preRelease2 = "";
-			if (isXMajor) if (gtlt2 === ">" || gtlt2 === "<") return "<0.0.0-0";
-			else return "*";
-			else if (gtlt2 && isXPatch) {
+			if (isXMajor) {
+				if (gtlt2 === ">" || gtlt2 === "<") return "<0.0.0-0";
+				else return "*";
+			} else if (gtlt2 && isXPatch) {
 				if (isXMinor) minor = 0;
 				patch = 0;
 				if (gtlt2 === ">") {
@@ -253,3 +267,5 @@ function flattenModule(module, name) {
 }
 //#endregion
 export { getSharedFromRuntime as n, importShared as r, getSharedFromLocal as t };
+
+//# sourceMappingURL=_virtual___federation_fn_import-BRUIZv03.js.map
