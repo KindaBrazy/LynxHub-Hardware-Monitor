@@ -95,7 +95,7 @@
           ]
         },
         {
-          "📌 Improvements": [
+          "⚡ Improvements": [
             "Update downloading cli to support redirects, and preserve fallback error",
             "Improved .NET 10 detection."
           ]
@@ -107,7 +107,7 @@
       "date": "2026-07-13",
       "items": [
         {
-          "📌 Improvements": ["Cards can now be pinned and displayed within home categories."]
+          "⚡ Improvements": ["Cards can now be pinned and displayed within home categories."]
         }
       ]
     },
@@ -119,7 +119,7 @@
           "🐛 Bug Fixes": ["Resolved an issue where toast notifications failed to display."]
         },
         {
-          "📌 Improvements": [
+          "⚡ Improvements": [
             "Refined scrollbar styling for a cleaner UI.",
             "Added official support for LynxHub v3.5.5"
           ]
