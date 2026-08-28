@@ -76,7 +76,7 @@
   "changes": [
     {
       "version": "0.15.4",
-      "date": "2026-08-26",
+      "date": "2026-08-28",
       "items": [
         {
           "📌 Minor Changes": ["Support LynxHub v3.6"]
