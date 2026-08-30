@@ -1,14 +1,14 @@
 (function() {
 	try {
 		var e = "undefined" != typeof window ? window : "undefined" != typeof global ? global : "undefined" != typeof globalThis ? globalThis : "undefined" != typeof self ? self : {};
-		e.SENTRY_RELEASE = { id: "17561bda7d32de6a59c60e7229a41d6eb183b31a" };
+		e.SENTRY_RELEASE = { id: "f9f2e045fae8353a4c8417903eeca14e9c7534d6" };
 		var n = new e.Error().stack;
-		n && (e._sentryDebugIds = e._sentryDebugIds || {}, e._sentryDebugIds[n] = "b6910a3c-c2c5-431f-914e-e818aee1f06b", e._sentryDebugIdIdentifier = "sentry-dbid-b6910a3c-c2c5-431f-914e-e818aee1f06b");
+		n && (e._sentryDebugIds = e._sentryDebugIds || {}, e._sentryDebugIds[n] = "e49341a5-8668-400e-ac34-4f8baa768dea", e._sentryDebugIdIdentifier = "sentry-dbid-e49341a5-8668-400e-ac34-4f8baa768dea");
 	} catch (e) {}
 })();
-import { n as __commonJSMin, r as __toESM, t as require_react } from "./react-BIBsXxRu.js";
-import { r as importShared } from "./_virtual___federation_fn_import-BRUIZv03.js";
-import { t as require_jsx_runtime } from "./jsx-runtime-CmHXPGC5.js";
+import { n as __commonJSMin, r as __toESM, t as require_react } from "./react-CAs43U7w.js";
+import { r as importShared } from "./_virtual___federation_fn_import-DeyyGZp8.js";
+import { t as require_jsx_runtime } from "./jsx-runtime-Cm1I7RBM.js";
 //#region extension/src/cross/constants.ts
 var HMONITOR_STORAGE_ID = "hmonitor_storage";
 var HMONITOR_IPC_DATA_UPDATE = "hmonitor-data-update";
@@ -1041,7 +1041,7 @@ function formatProdErrorMessage(code) {
 }
 //#endregion
 //#region src/renderer/mainWindow/redux/reducers/app.ts
-var { useSelector: useSelector$4 } = await importShared("react-redux");
+var { useSelector: useSelector$3 } = await importShared("react-redux");
 var appSlice = createSlice({
 	name: "app",
 	initialState: {
@@ -1077,7 +1077,7 @@ var appSlice = createSlice({
 * @param key - The key of the app state to retrieve
 * @returns The value of the specified app state
 */
-var useAppState = (key) => useSelector$4((state) => state.app[key]);
+var useAppState = (key) => useSelector$3((state) => state.app[key]);
 appSlice.actions;
 appSlice.reducer;
 //#endregion
@@ -1791,7 +1791,7 @@ function useHardwareData() {
 }
 //#endregion
 //#region extension/src/renderer/hooks/useScrollManager.ts
-var { useCallback: useCallback$6, useEffect: useEffect$12, useRef: useRef$9, useState: useState$10 } = await importShared("react");
+var { useCallback: useCallback$6, useEffect: useEffect$12, useRef: useRef$10, useState: useState$10 } = await importShared("react");
 /**
 * A hook to manage the scrolling state and behavior of a container element.
 * @returns Functions and state to manage scrolling, including refs and scroll button visibility.
@@ -1799,7 +1799,7 @@ var { useCallback: useCallback$6, useEffect: useEffect$12, useRef: useRef$9, use
 function useScrollManager() {
 	const [canScrollLeft, setCanScrollLeft] = useState$10(false);
 	const [canScrollRight, setCanScrollRight] = useState$10(false);
-	const ref = useRef$9(null);
+	const ref = useRef$10(null);
 	const updateScrollState = useCallback$6(() => {
 		const element = ref.current;
 		if (!element) return;
@@ -3672,161 +3672,6 @@ function baseSlice(array, start, end) {
 	return result;
 }
 //#endregion
-//#region node_modules/lodash-es/_castSlice.js
-/**
-* Casts `array` to a slice if it's needed.
-*
-* @private
-* @param {Array} array The array to inspect.
-* @param {number} start The start position.
-* @param {number} [end=array.length] The end position.
-* @returns {Array} Returns the cast slice.
-*/
-function castSlice(array, start, end) {
-	var length = array.length;
-	end = end === void 0 ? length : end;
-	return !start && end >= length ? array : baseSlice(array, start, end);
-}
-//#endregion
-//#region node_modules/lodash-es/_hasUnicode.js
-/** Used to detect strings with [zero-width joiners or code points from the astral planes](http://eev.ee/blog/2015/09/12/dark-corners-of-unicode/). */
-var reHasUnicode = RegExp("[\\u200d\\ud800-\\udfff\\u0300-\\u036f\\ufe20-\\ufe2f\\u20d0-\\u20ff\\ufe0e\\ufe0f]");
-/**
-* Checks if `string` contains Unicode symbols.
-*
-* @private
-* @param {string} string The string to inspect.
-* @returns {boolean} Returns `true` if a symbol is found, else `false`.
-*/
-function hasUnicode(string) {
-	return reHasUnicode.test(string);
-}
-//#endregion
-//#region node_modules/lodash-es/_asciiToArray.js
-/**
-* Converts an ASCII `string` to an array.
-*
-* @private
-* @param {string} string The string to convert.
-* @returns {Array} Returns the converted array.
-*/
-function asciiToArray(string) {
-	return string.split("");
-}
-//#endregion
-//#region node_modules/lodash-es/_unicodeToArray.js
-/** Used to compose unicode character classes. */
-var rsAstralRange = "\\ud800-\\udfff";
-var rsComboRange = "\\u0300-\\u036f\\ufe20-\\ufe2f\\u20d0-\\u20ff";
-var rsVarRange = "\\ufe0e\\ufe0f";
-/** Used to compose unicode capture groups. */
-var rsAstral = "[" + rsAstralRange + "]";
-var rsCombo = "[" + rsComboRange + "]";
-var rsFitz = "\\ud83c[\\udffb-\\udfff]";
-var rsModifier = "(?:" + rsCombo + "|" + rsFitz + ")";
-var rsNonAstral = "[^" + rsAstralRange + "]";
-var rsRegional = "(?:\\ud83c[\\udde6-\\uddff]){2}";
-var rsSurrPair = "[\\ud800-\\udbff][\\udc00-\\udfff]";
-var rsZWJ = "\\u200d";
-/** Used to compose unicode regexes. */
-var reOptMod = rsModifier + "?";
-var rsOptVar = "[" + rsVarRange + "]?";
-var rsOptJoin = "(?:" + rsZWJ + "(?:" + [
-	rsNonAstral,
-	rsRegional,
-	rsSurrPair
-].join("|") + ")" + rsOptVar + reOptMod + ")*";
-var rsSeq = rsOptVar + reOptMod + rsOptJoin;
-var rsSymbol = "(?:" + [
-	rsNonAstral + rsCombo + "?",
-	rsCombo,
-	rsRegional,
-	rsSurrPair,
-	rsAstral
-].join("|") + ")";
-/** Used to match [string symbols](https://mathiasbynens.be/notes/javascript-unicode). */
-var reUnicode = RegExp(rsFitz + "(?=" + rsFitz + ")|" + rsSymbol + rsSeq, "g");
-/**
-* Converts a Unicode `string` to an array.
-*
-* @private
-* @param {string} string The string to convert.
-* @returns {Array} Returns the converted array.
-*/
-function unicodeToArray(string) {
-	return string.match(reUnicode) || [];
-}
-//#endregion
-//#region node_modules/lodash-es/_stringToArray.js
-/**
-* Converts `string` to an array.
-*
-* @private
-* @param {string} string The string to convert.
-* @returns {Array} Returns the converted array.
-*/
-function stringToArray(string) {
-	return hasUnicode(string) ? unicodeToArray(string) : asciiToArray(string);
-}
-//#endregion
-//#region node_modules/lodash-es/_createCaseFirst.js
-/**
-* Creates a function like `_.lowerFirst`.
-*
-* @private
-* @param {string} methodName The name of the `String` case method to use.
-* @returns {Function} Returns the new case function.
-*/
-function createCaseFirst(methodName) {
-	return function(string) {
-		string = toString(string);
-		var strSymbols = hasUnicode(string) ? stringToArray(string) : void 0;
-		var chr = strSymbols ? strSymbols[0] : string.charAt(0);
-		var trailing = strSymbols ? castSlice(strSymbols, 1).join("") : string.slice(1);
-		return chr[methodName]() + trailing;
-	};
-}
-//#endregion
-//#region node_modules/lodash-es/upperFirst.js
-/**
-* Converts the first character of `string` to upper case.
-*
-* @static
-* @memberOf _
-* @since 4.0.0
-* @category String
-* @param {string} [string=''] The string to convert.
-* @returns {string} Returns the converted string.
-* @example
-*
-* _.upperFirst('fred');
-* // => 'Fred'
-*
-* _.upperFirst('FRED');
-* // => 'FRED'
-*/
-var upperFirst = createCaseFirst("toUpperCase");
-//#endregion
-//#region node_modules/lodash-es/capitalize.js
-/**
-* Converts the first character of `string` to upper case and the remaining
-* to lower case.
-*
-* @static
-* @memberOf _
-* @since 3.0.0
-* @category String
-* @param {string} [string=''] The string to capitalize.
-* @returns {string} Returns the capitalized string.
-* @example
-*
-* _.capitalize('FRED');
-* // => 'Fred'
-*/
-function capitalize(string) {
-	return upperFirst(toString(string).toLowerCase());
-}
-//#endregion
 //#region node_modules/lodash-es/_stackClear.js
 /**
 * Removes all key-value entries from the stack.
@@ -5049,7 +4894,7 @@ var omit = flatRest(function(object, paths) {
 });
 //#endregion
 //#region extension/src/renderer/state/hmonitorSlice.ts
-var { useSelector: useSelector$3 } = await importShared("react-redux");
+var { useSelector: useSelector$2 } = await importShared("react-redux");
 var hmonitorSlice = createSlice({
 	initialState: { ...initialSettings },
 	name: "hmonitor",
@@ -5114,8 +4959,8 @@ var hmonitorSlice = createSlice({
 		}
 	}
 });
-var useHMonitorSelector = useSelector$3;
-var useHMonitorState = (propertyName) => useSelector$3((state) => state.hmonitor[propertyName]);
+var useHMonitorSelector = useSelector$2;
+var useHMonitorState = (propertyName) => useSelector$2((state) => state.hmonitor[propertyName]);
 var hmonitorActions = hmonitorSlice.actions;
 var hmonitorSlice_default = hmonitorSlice.reducer;
 //#endregion
@@ -6437,7 +6282,7 @@ var ptyIpc = {
 };
 //#endregion
 //#region src/renderer/mainWindow/redux/reducers/cards.ts
-var { useSelector: useSelector$2 } = await importShared("react-redux");
+var { useSelector: useSelector$1 } = await importShared("react-redux");
 var buildRunningCardBase = (tabId, id) => ({
 	tabId,
 	id,
@@ -6598,12 +6443,12 @@ var cardsSlice = createSlice({
 /**
 * Hook to access a single cards state field with key-safe typing.
 */
-var useCardsState = (name) => useSelector$2((state) => state.cards[name]);
+var useCardsState = (name) => useSelector$1((state) => state.cards[name]);
 cardsSlice.actions;
 cardsSlice.reducer;
 //#endregion
 //#region src/renderer/mainWindow/redux/reducers/settings.ts
-var { useSelector: useSelector$1 } = await importShared("react-redux");
+var { useSelector } = await importShared("react-redux");
 var settingsSlice = createSlice({
 	initialState: {
 		tooltipLevel: "essential",
@@ -6640,7 +6485,7 @@ var settingsSlice = createSlice({
 /**
 * Hook to access a single settings state field with key-safe typing.
 */
-var useSettingsState = (name) => useSelector$1((state) => state.settings[name]);
+var useSettingsState = (name) => useSelector((state) => state.settings[name]);
 settingsSlice.actions;
 settingsSlice.reducer;
 //#endregion
@@ -6779,7 +6624,7 @@ var actionChannels = { logAction: "actions:logAction" };
 var actionsIpc = { logAction: (payload) => lynxIpc.send(actionChannels.logAction, payload) };
 //#endregion
 //#region src/renderer/shared/sentry/Breadcrumbs.tsx
-var { useEffect: useEffect$8, useRef: useRef$8 } = await importShared("react");
+var { useEffect: useEffect$8, useRef: useRef$9 } = await importShared("react");
 var isEnabled = true;
 /**
 * Adds an informational renderer breadcrumb when breadcrumb collection is enabled.
@@ -7412,444 +7257,38 @@ function LynxSwitch({ enabled = false, onEnabledChange, title, description, isDi
 var { createContext: createContext$7, useContext: useContext$10 } = await importShared("react");
 var TabContext = createContext$7(void 0);
 var useCurrentTabId = () => useContext$10(TabContext);
-var package_default = {
-	name: "lynxhub",
-	productName: "LynxHub",
-	desktopName: "ai.kindabrazy.lynxhub.desktop",
-	version: "3.6.0",
-	type: "module",
-	description: "Cross-platform, extensible terminal/browser for AI management",
-	main: "./out/main/index.cjs",
-	author: {
-		"name": "TheLynxHub",
-		"email": "kindofbrazy@gmail.com"
-	},
-	repository: {
-		"type": "git",
-		"url": "https://github.com/TheLynxHub/LynxHub"
-	},
-	license: "AGPL-3.0",
-	homepage: "https://github.com/TheLynxHub/LynxHub",
-	appDetails: {
-		"title": "LynxHub",
-		"buildNumber": 66,
-		"detailedDescription": "Open-source, cross-platform terminal and browser, designed for managing AI. Highly modular and extensible, it's the all-in-one environment for AI power users.",
-		"moduleApiVersion": "2.1.0",
-		"extensionApiVersion": "2.2.0"
-	},
-	scripts: {
-		"typecheck:node": "tsc --noEmit -p tsconfig.node.json --composite false",
-		"typecheck:web": "tsc --noEmit -p tsconfig.web.json --composite false",
-		"typecheck": "npm run typecheck:node && npm run typecheck:web",
-		"fix-linter:web": "prettier --write src/renderer --list-different && eslint --fix src/renderer && tailwind-lint --auto --fix",
-		"fix-linter:node": "prettier --write src/main --list-different && eslint --fix src/main",
-		"fix-linter": "prettier --write src --list-different && eslint --fix src && tailwind-lint --auto --fix",
-		"fix-linter-ext": "prettier --write extension --list-different && eslint --fix extension",
-		"fix-linter-module": "prettier --write module --list-different && eslint --fix module",
-		"validate:web": "npm run fix-linter:web && npm run typecheck:web",
-		"validate:node": "npm run fix-linter:node && npm run typecheck:node",
-		"validate:ext": "npm run fix-linter-ext && npm run typecheck",
-		"validate:module": "npm run fix-linter-module && npm run typecheck",
-		"validate": "npm run fix-linter && npm run typecheck",
-		"preview": "electron-vite preview --noSandbox",
-		"preview:skip": "electron-vite preview --noSandbox --skipBuild",
-		"dev": "run-script-os",
-		"dev:win32": "electron-vite dev",
-		"dev:default": "electron-vite dev --noSandbox",
-		"dev:win:metrics": "electron-vite dev -- --log-metrics",
-		"dev:test": "electron-vite dev --remote-debugging-port=9222",
-		"prof": "electron-vite dev -w --noSandbox -- --js-flags=\"--prof\"",
-		"dev:srouce": "electron-vite dev -w --noSandbox --sourcemap",
-		"postinstall": "node node_modules/electron/install.js && electron-builder install-app-deps",
-		"build": "electron-vite build",
-		"rebuild": "electron-builder node-gyp-rebuild",
-		"removeDotExtension": "node fixExtension.js",
-		"build:extension": "rimraf extension_out && electron-vite build --config extension/electron.vite.config.ts && npm run removeDotExtension && node zipScripts.js extension_out",
-		"build:module": "rimraf module_out && npx --prefix module rolldown --config module/rolldown.config.mjs && node zipScripts.js module_out",
-		"build:unpack": "npm run build && electron-builder --dir --config electron-builder_x64.config.cjs",
-		"build:win_x64": "npm run build && electron-builder --win --config electron-builder_x64.config.cjs --publish never",
-		"build:win_arm": "npm run build && electron-builder --win --config electron-builder_arm.config.cjs --publish never",
-		"build:win_portable_x64": "npm run build && electron-builder --win --config electron-builder-portable_x64.config.cjs --publish never",
-		"build:win_portable_arm": "npm run build && electron-builder --win --config electron-builder-portable_arm.config.cjs --publish never",
-		"build:linux_x64": "npm run build && electron-builder --linux --config electron-builder_x64.config.cjs --publish never",
-		"build:linux_arm": "npm run build && electron-builder --linux --config electron-builder_arm.config.cjs --publish never",
-		"build:linux_portable_x64": "npm run build && electron-builder --linux --config electron-builder-portable_x64.config.cjs --publish never",
-		"build:linux_portable_arm": "npm run build && electron-builder --linux --config electron-builder-portable_arm.config.cjs --publish never",
-		"build:mac_x64": "npm run build && electron-builder --mac --config electron-builder_x64.config.cjs --publish never",
-		"build:mac_arm": "npm run build && electron-builder --mac --config electron-builder_arm.config.cjs --publish never",
-		"build:linux-test": "npm run build && electron-builder --linux --config electron-builder-test.config.cjs --publish never",
-		"release": "electron-builder",
-		"publish": "electron-builder -p always --config electron-builder_x64.config.cjs"
-	},
-	dependencies: {
-		"@electron-toolkit/preload": "^3.0.2",
-		"@electron-toolkit/utils": "^4.0.0",
-		"@lynxhub/7zip": "^0.10.1",
-		"@originjs/vite-plugin-federation": "^1.4.1",
-		"@sentry/electron": "^7.17.0",
-		"@sentry/react": "^10.70.0",
-		"axios": "^1.19.0",
-		"better-sqlite3": "^13.0.3",
-		"drizzle-orm": "^0.45.2",
-		"fix-path": "^5.0.0",
-		"fuse.js": "^7.5.0",
-		"graceful-fs": "^4.2.11",
-		"lowdb": "^7.0.1",
-		"node-pty": "^1.2.0-beta.14",
-		"prism-react-renderer": "^2.4.1",
-		"react-syntax-highlighter": "^16.1.1",
-		"semver": "^7.8.5",
-		"tree-kill": "^1.2.2",
-		"zustand": "^5.0.15"
-	},
-	devDependencies: {
-		"@electron-toolkit/eslint-config-prettier": "^3.0.0",
-		"@electron-toolkit/tsconfig": "^2.0.0",
-		"@eslint/js": "^10.0.1",
-		"@heroui/react": "^3.2.4",
-		"@heroui/styles": "^3.2.4",
-		"@icons-pack/react-simple-icons": "^13.15.1",
-		"@number-flow/react": "^0.6.2",
-		"@react-aria/i18n": "^3.13.1",
-		"@react-aria/ssr": "^3.10.1",
-		"@react-aria/utils": "^3.34.1",
-		"@reduxjs/toolkit": "^2.12.0",
-		"@sentry/vite-plugin": "^5.4.0",
-		"@solar-icons/react": "^2.1.0",
-		"@tailwindcss/typography": "^0.5.20",
-		"@tailwindcss/vite": "^4.3.3",
-		"@types/better-sqlite3": "^9.6.0",
-		"@types/fontfaceobserver": "^2.1.3",
-		"@types/graceful-fs": "^4.1.9",
-		"@types/lodash-es": "^4.17.12",
-		"@types/node": "^24.13.2",
-		"@types/react": "^19.2.18",
-		"@types/react-dom": "^19.2.4",
-		"@types/react-highlight-words": "^0.20.1",
-		"@types/react-syntax-highlighter": "^15.5.13",
-		"@types/semver": "^7.8.0",
-		"@types/serve-handler": "^6.1.4",
-		"@typescript/native": "npm:typescript@^7.0.2",
-		"@vitejs/plugin-react": "^6.1.0",
-		"@xterm/addon-canvas": "^0.7.0",
-		"@xterm/addon-clipboard": "^0.2.0",
-		"@xterm/addon-fit": "^0.11.0",
-		"@xterm/addon-ligatures": "^0.10.0",
-		"@xterm/addon-progress": "^0.2.0",
-		"@xterm/addon-search": "^0.16.0",
-		"@xterm/addon-serialize": "^0.14.0",
-		"@xterm/addon-unicode11": "^0.9.0",
-		"@xterm/addon-web-links": "^0.12.0",
-		"@xterm/addon-webgl": "^0.19.0",
-		"@xterm/xterm": "^6.0.0",
-		"chokidar": "^5.0.0",
-		"drizzle-kit": "^0.31.10",
-		"electron": "^43.4.0",
-		"electron-builder": "^26.15.3",
-		"electron-dl": "^4.0.0",
-		"electron-log": "^5.4.4",
-		"electron-updater": "^6.8.9",
-		"electron-vite": "^6.0.0-beta.1",
-		"eslint": "^10.9.0",
-		"eslint-plugin-jsx-a11y": "^6.10.2",
-		"eslint-plugin-perfectionist": "^5.10.1",
-		"eslint-plugin-react": "^7.37.5",
-		"eslint-plugin-react-hooks": "^7.1.1",
-		"eslint-plugin-simple-import-sort": "^14.0.0",
-		"fontfaceobserver": "^2.3.0",
-		"framer-motion": "^13.1.1",
-		"globals": "^17.11.0",
-		"lodash-es": "^4.18.1",
-		"lucide-react": "^1.33.0",
-		"normalize-url": "^9.0.1",
-		"ogl": "^1.0.11",
-		"prettier": "^3.9.6",
-		"react": "^19.2.8",
-		"react-aria": "^3.51.0",
-		"react-aria-components": "^1.20.0",
-		"react-dom": "^19.2.8",
-		"react-error-boundary": "^6.1.3",
-		"react-highlight-words": "^0.21.0",
-		"react-intersection-observer": "^11.0.0",
-		"react-markdown": "^10.1.0",
-		"react-redux": "^9.3.0",
-		"rehype-highlight": "^7.0.2",
-		"rehype-katex": "^7.0.1",
-		"rehype-raw": "^7.0.0",
-		"rehype-slug": "^6.0.0",
-		"remark-gfm": "^4.0.1",
-		"remark-math": "^6.0.0",
-		"remark-supersub": "^1.0.0",
-		"run-script-os": "^1.1.6",
-		"simple-git": "^3.36.0",
-		"tailwind-lint": "^0.12.1",
-		"tailwindcss": "^4.3.3",
-		"three": "^0.185.1",
-		"typescript": "npm:@typescript/typescript6@^6.0.2",
-		"typescript-eslint": "^8.67.0",
-		"vite": "^8.2.2"
-	},
-	allowScripts: {
-		"electron": true,
-		"esbuild": true,
-		"node-pty": true,
-		"@sentry/cli": true,
-		"better-sqlite3": true
-	}
-};
-//#endregion
-//#region src/common/consts/index.ts
-/** Application name from package.json */
-var APP_NAME = package_default.appDetails.title;
-/** Application version from package.json */
-var APP_VERSION = package_default.version;
-package_default.appDetails.buildNumber;
-package_default.description;
-package_default.author.name;
-package_default.appDetails.detailedDescription;
-`${package_default.homepage}`;
-package_default.author.email;
-`${package_default.repository.url}`;
-`${package_default.repository.url}`;
-package_default.license;
-package_default.appDetails.moduleApiVersion;
-package_default.appDetails.extensionApiVersion;
-/** Application version with 'V' prefix */
-var APP_VERSION_V = `V${APP_VERSION}`;
-`${APP_NAME}${APP_VERSION}`;
-`${APP_NAME}${APP_VERSION_V}`;
-APP_VERSION_V.split("-").map((v) => capitalize(v)).join(" ");
-var GITHUB_ORG = "https://github.com/TheLynxHub";
-`${GITHUB_ORG}`;
-`${GITHUB_ORG}`;
-`${GITHUB_ORG}`;
-/**
-* Page IDs used for navigation.
-*/
-var PageID = {
-	home: "home_page",
-	imageGen: "imageGen_page",
-	textGen: "textGen_page",
-	audioGen: "audioGen_page",
-	tools: "tools_page",
-	games: "games_page",
-	others: "others_page",
-	agents: "agents_page",
-	dashboard: "dashboard_page",
-	plugins: "plugins_page",
-	settings: "settings_page"
-};
-PageID.home, PageID.imageGen, PageID.textGen, PageID.audioGen, PageID.tools, PageID.games, PageID.others, PageID.agents, PageID.dashboard, PageID.plugins, PageID.settings;
-//#endregion
-//#region src/renderer/mainWindow/utils/constants.tsx
-/**
-* Default tab descriptor used when creating or resetting tabs.
-*/
-var defaultTabItem = {
-	id: "tab",
-	title: "Home",
-	isLoading: false,
-	isTerminal: false,
-	pageID: PageID.home,
-	favIcon: {
-		show: false,
-		url: ""
-	}
-};
-//#endregion
-//#region src/renderer/mainWindow/redux/reducers/tabs.ts
-var { useSelector } = await importShared("react-redux");
-var findUniqueTabId = (baseId, tabs) => {
-	let idNumber = 1;
-	let candidateId = baseId;
-	while (tabs.some((tab) => tab.id === candidateId)) {
-		candidateId = `${baseId}_${idNumber}`;
-		idNumber += 1;
-	}
-	return candidateId;
-};
-var updateTabById = (tabs, tabID, updater) => tabs.map((tab) => tab.id === tabID ? updater(tab) : tab);
-var tabsSlice = createSlice({
-	name: "tabs",
-	initialState: {
-		tabs: [defaultTabItem],
-		activeTab: defaultTabItem.id,
-		activePage: defaultTabItem.pageID,
-		prevTab: ""
-	},
-	reducers: {
-		setTabState: (state, action) => {
-			state[action.payload.key] = action.payload.value;
-		},
-		addTab: (state, action) => {
-			const { background, ...nextTabPayload } = action.payload;
-			const newID = findUniqueTabId(nextTabPayload.id, state.tabs);
-			state.tabs.push({
-				...nextTabPayload,
-				id: newID
-			});
-			if (!background) {
-				state.activeTab = newID;
-				state.activePage = nextTabPayload.pageID;
-			}
-		},
-		removeTab: (state, action) => {
-			const tabIdToRemove = action.payload;
-			const tabIndexToRemove = state.tabs.findIndex((tab) => tab.id === tabIdToRemove);
-			state.tabs = state.tabs.filter((tab) => tab.id !== tabIdToRemove);
-			if (state.activeTab === tabIdToRemove) {
-				if (state.tabs.length > 0) {
-					const newActiveTabIndex = Math.min(tabIndexToRemove, state.tabs.length - 1);
-					state.activeTab = state.tabs[newActiveTabIndex].id;
-					state.activePage = state.tabs[newActiveTabIndex].pageID;
-				} else {
-					state.activeTab = defaultTabItem.id;
-					state.activePage = defaultTabItem.pageID;
-				}
-			}
-			if (state.tabs.length <= 0) state.tabs = [defaultTabItem];
-		},
-		setActiveTab: (state, action) => {
-			state.prevTab = state.activeTab;
-			state.activeTab = action.payload;
-			state.activePage = state.tabs.find((tab) => tab.id === action.payload)?.pageID || defaultTabItem.pageID;
-		},
-		switchTab: (state, action) => {
-			if (state.tabs.length <= 1) return;
-			const currentIndex = state.tabs.findIndex((tab) => tab.id === state.activeTab);
-			if (currentIndex === -1) return;
-			const direction = action.payload?.direction || "next";
-			let nextIndex;
-			if (direction === "next") nextIndex = (currentIndex + 1) % state.tabs.length;
-			else nextIndex = (currentIndex - 1 + state.tabs.length) % state.tabs.length;
-			state.prevTab = state.activeTab;
-			state.activeTab = state.tabs[nextIndex].id;
-			state.activePage = state.tabs[nextIndex].pageID;
-		},
-		setTabLoading: (state, action) => {
-			const { tabID, isLoading } = action.payload;
-			state.tabs = updateTabById(state.tabs, tabID, (tab) => ({
-				...tab,
-				isLoading
-			}));
-		},
-		setActiveTabLoading: (state, action) => {
-			state.tabs = updateTabById(state.tabs, state.activeTab, (tab) => ({
-				...tab,
-				isLoading: action.payload
-			}));
-		},
-		setTabTitle: (state, action) => {
-			const { tabID, title } = action.payload;
-			state.tabs = updateTabById(state.tabs, tabID, (tab) => ({
-				...tab,
-				title
-			}));
-		},
-		setTabIsTerminal: (state, action) => {
-			const { tabID, isTerminal } = action.payload;
-			state.tabs = updateTabById(state.tabs, tabID, (tab) => ({
-				...tab,
-				isTerminal
-			}));
-		},
-		setActiveTabTitle: (state, action) => {
-			state.tabs = updateTabById(state.tabs, state.activeTab, (tab) => ({
-				...tab,
-				title: action.payload
-			}));
-		},
-		setTabFavIcon: (state, action) => {
-			const { tabID, ...favIcon } = action.payload;
-			state.tabs = updateTabById(state.tabs, tabID, (tab) => ({
-				...tab,
-				favIcon
-			}));
-		},
-		setTabProgress: (state, action) => {
-			const { tabID, progress } = action.payload;
-			state.tabs = updateTabById(state.tabs, tabID, (tab) => ({
-				...tab,
-				progress
-			}));
-		},
-		setActivePage: (state, action) => {
-			const index = state.tabs.findIndex((tab) => tab.id === state.activeTab);
-			if (index !== -1) {
-				const { pageID, title, isTerminal } = action.payload;
-				state.tabs[index] = {
-					...state.tabs[index],
-					pageID,
-					title,
-					isTerminal: isTerminal ?? false,
-					favIcon: {
-						show: false,
-						url: ""
-					}
-				};
-			}
-			state.activePage = action.payload.pageID;
-		},
-		togglePinTab: (state, action) => {
-			const tabId = action.payload;
-			const tabIndex = state.tabs.findIndex((t) => t.id === tabId);
-			if (tabIndex === -1) return;
-			const currentTab = state.tabs[tabIndex];
-			const nextPinned = !currentTab.isPinned;
-			state.tabs[tabIndex] = {
-				...currentTab,
-				isPinned: nextPinned
-			};
-			const pinned = state.tabs.filter((t) => t.isPinned);
-			const unpinned = state.tabs.filter((t) => !t.isPinned);
-			state.tabs = [...pinned, ...unpinned];
-		},
-		toggleTabIconOnly: (state, action) => {
-			const tabId = action.payload;
-			state.tabs = updateTabById(state.tabs, tabId, (tab) => ({
-				...tab,
-				showIconOnly: !tab.showIconOnly
-			}));
-		},
-		reorderTabs: (state, action) => {
-			const pinned = action.payload.filter((t) => t.isPinned);
-			const unpinned = action.payload.filter((t) => !t.isPinned);
-			state.tabs = [...pinned, ...unpinned];
-		}
-	}
-});
-/**
-* Hook to access tabs reducer state by key with inferred return type.
-*/
-var useTabsState = (key) => useSelector((state) => state.tabs[key]);
-tabsSlice.actions;
-tabsSlice.reducer;
 //#endregion
 //#region src/renderer/mainWindow/components/TabModal.tsx
 var { Modal: Modal$1 } = await importShared("@heroui/react");
-var { useCallback: useCallback$4, useEffect: useEffect$6, useMemo: useMemo$8, useState: useState$6 } = await importShared("react");
+var { useCallback: useCallback$4, useEffect: useEffect$6, useLayoutEffect: useLayoutEffect$1, useMemo: useMemo$8, useRef: useRef$8, useState: useState$6 } = await importShared("react");
 var { UNSAFE_PortalProvider } = await importShared("react-aria");
 function TabModal({ isOpen, onOpenChange, children, size = "cover", isDismissable = true, backdropVariant, dialogClassName, containerClassName, isKeyboardDismissDisabled, tabId: explicitTabId }) {
+	const anchorRef = useRef$8(null);
 	const contextTabId = useCurrentTabId();
-	const activeTab = useTabsState("activeTab");
+	const [domTabId, setDomTabId] = useState$6(void 0);
 	const runningCards = useCardsState("runningCard");
-	const resolvedTabId = explicitTabId ?? contextTabId;
+	useLayoutEffect$1(() => {
+		if (anchorRef.current) {
+			const wrapper = anchorRef.current.closest("[id$=\"_wrapper\"]");
+			if (wrapper?.id) setDomTabId(wrapper.id.replace(/_wrapper$/, ""));
+		}
+	}, []);
+	const resolvedTabId = explicitTabId ?? contextTabId ?? domTabId;
 	const [targetContainer, setTargetContainer] = useState$6(() => {
 		if (typeof document === "undefined") return null;
 		return resolvedTabId ? document.getElementById(`${resolvedTabId}_wrapper`) : null;
 	});
-	const currentRunningCard = useMemo$8(() => runningCards.find((card) => card.tabId === (resolvedTabId ?? activeTab)), [
-		runningCards,
-		resolvedTabId,
-		activeTab
-	]);
+	const currentRunningCard = useMemo$8(() => resolvedTabId ? runningCards.find((card) => card.tabId === resolvedTabId) : void 0, [runningCards, resolvedTabId]);
 	useEffect$6(() => {
 		if (!isOpen) {
 			setTargetContainer(null);
 			return;
 		}
 		if (resolvedTabId) setTargetContainer(document.getElementById(`${resolvedTabId}_wrapper`));
-		else setTargetContainer(null);
+		else if (anchorRef.current) {
+			const wrapper = anchorRef.current.closest("[id$=\"_wrapper\"]");
+			setTargetContainer(wrapper ?? null);
+		} else setTargetContainer(null);
 	}, [isOpen, resolvedTabId]);
 	useEffect$6(() => {
 		if (isOpen && currentRunningCard && currentRunningCard.currentView === "browser") {
@@ -7862,7 +7301,11 @@ function TabModal({ isOpen, onOpenChange, children, size = "cover", isDismissabl
 	const handleBackdropClick = useCallback$4((e) => {
 		if (isDismissable && e.target instanceof HTMLElement && e.target.closest(".modal__backdrop, .modal__container") && !e.target.closest(".modal__dialog")) onOpenChange?.(false);
 	}, [isDismissable, onOpenChange]);
-	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Modal$1, {
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(import_jsx_runtime.Fragment, { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+		ref: anchorRef,
+		className: "hidden",
+		"aria-hidden": "true"
+	}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Modal$1, {
 		isOpen,
 		onOpenChange,
 		children: targetContainer ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)(UNSAFE_PortalProvider, {
@@ -7902,7 +7345,7 @@ function TabModal({ isOpen, onOpenChange, children, size = "cover", isDismissabl
 				})
 			})
 		})
-	});
+	})] });
 }
 //#endregion
 //#region node_modules/framer-motion/dist/es/context/LayoutGroupContext.mjs
@@ -19001,4 +18444,4 @@ function InitialExtensions(lynxAPI) {
 //#endregion
 export { InitialExtensions as t };
 
-//# sourceMappingURL=Extension-DV-4Kn6B.js.map
+//# sourceMappingURL=Extension-B-pqUdlM.js.map
