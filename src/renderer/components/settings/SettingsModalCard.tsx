@@ -200,9 +200,7 @@ const SettingsModalCard = memo(({onToggle, config, hardware, type, children, dra
           </div>
           <div className="flex flex-col">
             <div className="flex items-center gap-x-2">
-              <span
-                onClick={onToggle}
-                className="font-semibold text-foreground text-sm cursor-pointer hover:text-accent transition-colors">
+              <span className="font-semibold text-LynxOrange hover:text-LynxOrange/80 transition duration-200 text-sm">
                 {hardware.name}
               </span>
             </div>

@@ -1,4 +1,4 @@
-import {Card, Checkbox, Key, Label, ListBox, Select, Switch} from '@heroui/react';
+import {Card, Checkbox, Key, Label, ListBox, Select, Separator, Switch} from '@heroui/react';
 import {CheckCircleIcon} from '@solar-icons/react/bold-duotone';
 import {Reorder} from 'framer-motion';
 import {
@@ -352,17 +352,12 @@ export const MetricsTab = memo(
                       <Network className="size-4.5" />
                     </div>
                     <div className="flex flex-col">
-                      <div className="flex items-center gap-x-2">
-                        <span className="font-semibold text-foreground text-sm">Network Interface</span>
-                        <span
-                          className={`text-[10px] font-semibold px-2 py-0.5 rounded-full ${
-                            selectedNetworkConfig?.active
-                              ? 'bg-accent/20 text-accent'
-                              : 'bg-surface-tertiary text-muted'
-                          }`}>
-                          {selectedNetworkConfig?.active ? 'Active' : 'Disabled'}
-                        </span>
-                      </div>
+                      <span
+                        className={
+                          'font-semibold text-LynxOrange hover:text-LynxOrange/80 transition duration-200 text-sm'
+                        }>
+                        Network Interface
+                      </span>
                       <span className="text-[11px] text-muted">Upload / Download throughput & data telemetry</span>
                     </div>
                   </div>
@@ -464,7 +459,12 @@ export const MetricsTab = memo(
                   <Clock className="size-4.5" />
                 </div>
                 <div className="flex flex-col">
-                  <span className="font-semibold text-foreground text-sm">System & Application Uptime</span>
+                  <span
+                    className={
+                      'font-semibold text-LynxOrange hover:text-LynxOrange/80 transition duration-200 text-sm'
+                    }>
+                    System & Application Uptime
+                  </span>
                   <span className="text-[11px] text-muted">Elapsed run duration for OS and LynxHub</span>
                 </div>
               </Card.Header>
@@ -561,9 +561,13 @@ export const MetricsTab = memo(
             );
 
             return (
-              <Reorder.Item key={type} value={type} className="relative select-none">
-                {renderSectionSetting(type, dragHandle)}
-              </Reorder.Item>
+              <>
+                <Reorder.Item key={type} value={type} className="relative select-none">
+                  {renderSectionSetting(type, dragHandle)}
+                </Reorder.Item>
+
+                {index !== sectionsToRender.length - 1 && <Separator className="my-2" />}
+              </>
             );
           })}
         </Reorder.Group>

@@ -108,17 +108,9 @@ export const PingSettings = memo(({dragHandle}: PingSettingsProps) => {
             <Radio className="size-4" />
           </div>
           <div>
-            <div className="flex items-center gap-x-2">
-              <span onClick={onToggleActivate} className="font-semibold text-foreground text-sm cursor-pointer">
-                Network Latency & Ping
-              </span>
-              <span
-                className={`text-[10px] font-semibold px-2 py-0.5 rounded-full ${
-                  isActive ? 'bg-accent/20 text-accent' : 'bg-surface-tertiary text-muted'
-                }`}>
-                {isActive ? 'Enabled' : 'Disabled'}
-              </span>
-            </div>
+            <span className="font-semibold text-LynxOrange hover:text-LynxOrange/80 transition duration-200 text-sm">
+              Network Latency & Ping
+            </span>
             <p className="text-xs text-muted">Monitor real-time network response latency to designated servers</p>
           </div>
         </div>
