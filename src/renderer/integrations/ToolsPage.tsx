@@ -18,8 +18,8 @@ export function HardwareMonitorCard() {
         onPress={state.open}
         id="hardware-monitor"
         title="Hardware Monitor"
-        icon={<CpuBoltIcon className="size-full m-1 text-indigo-500" />}
-        description="Configure real-time monitoring of CPU, GPU, and Memory usage in the status bar."
+        icon={<CpuBoltIcon className="size-full m-1 text-accent" />}
+        description="Configure real-time monitoring of CPU, GPU, Memory, Network, and Ping latency in the status bar."
       />
     </>
   );
