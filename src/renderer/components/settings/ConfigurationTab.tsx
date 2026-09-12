@@ -10,8 +10,6 @@ import MetricVisibilitySettings from './MetricVisibilitySettings';
 const DISPLAY_STYLES: Array<{
   value: DisplayStyle;
   label: string;
-  badge: string;
-  description: string;
   preview: {
     type: 'default' | 'compact' | 'two-column' | 'raw' | 'raw-two-column';
   };
@@ -19,36 +17,26 @@ const DISPLAY_STYLES: Array<{
   {
     value: 'default',
     label: 'Standard',
-    badge: 'Recommended',
-    description: 'Full rich display with icons, labels, values, and animated progress bars.',
     preview: {type: 'default'},
   },
   {
     value: 'compact',
     label: 'Compact',
-    badge: 'Space Saver',
-    description: 'Reduced padding and smaller indicators for maximum space efficiency.',
     preview: {type: 'compact'},
   },
   {
     value: 'two-column',
     label: 'Two-Column Stack',
-    badge: 'Multi-Row',
-    description: 'Sensors are stacked in two rows to fit twice as many metrics on screen.',
     preview: {type: 'two-column'},
   },
   {
     value: 'raw',
     label: 'Raw Text',
-    badge: 'Minimal',
-    description: 'Ultra-clean text readouts without bars or extra visual chrome.',
     preview: {type: 'raw'},
   },
   {
     value: 'raw-two-column',
     label: 'Raw (Two-Column)',
-    badge: 'Compact Text',
-    description: 'Minimal text readouts stacked in two rows for power users.',
     preview: {type: 'raw-two-column'},
   },
 ];
@@ -180,7 +168,7 @@ export const ConfigurationTab = memo(
                 </div>
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
+              <div className="grid grid-cols-5 gap-3">
                 {DISPLAY_STYLES.map(style => {
                   const isSelected = displayStyle === style.value;
                   return (
@@ -197,17 +185,9 @@ export const ConfigurationTab = memo(
                       role="button"
                       key={style.value}
                       onClick={() => handleDisplayStyleChange(style.value)}>
-                      <div className="flex items-start justify-between gap-2 mb-2">
-                        <span className="text-sm font-semibold text-foreground flex items-center gap-1.5">
-                          {style.label}
-                        </span>
-                        <span
-                          className={`text-[10px] px-1.5 py-0.5 rounded-full font-medium ${
-                            isSelected ? 'bg-accent text-accent-foreground' : 'bg-surface-tertiary text-muted'
-                          }`}>
-                          {style.badge}
-                        </span>
-                      </div>
+                      <span className="text-sm font-semibold text-foreground flex items-center gap-1.5">
+                        {style.label}
+                      </span>
 
                       {/* Mini visual mockup of style */}
                       <div
