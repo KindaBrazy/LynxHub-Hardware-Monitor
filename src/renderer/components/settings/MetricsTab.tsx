@@ -16,7 +16,7 @@ import {
   Thermometer,
   Timer,
 } from 'lucide-react';
-import {ForwardRefExoticComponent, memo, ReactNode, useEffect, useMemo, useRef, useState} from 'react';
+import {ForwardRefExoticComponent, memo, ReactNode, RefObject, useEffect, useMemo, useRef, useState} from 'react';
 import {useDispatch} from 'react-redux';
 
 import {HardwareMetricsConfig, MetricType, MonitoringSettings, SystemMetric} from '../../../cross/types';
@@ -45,10 +45,11 @@ type MetricReorderItemProps = {
   onDragEnd?: () => void;
   labelText: string;
   IconComp: ForwardRefExoticComponent<Omit<LucideProps, 'ref'>> | any;
+  containerRef?: RefObject<HTMLDivElement | null>;
 };
 
 const MetricReorderItem = memo(
-  ({metricId, isSelected, onToggle, onDragEnd, labelText, IconComp}: MetricReorderItemProps) => {
+  ({metricId, isSelected, onToggle, onDragEnd, labelText, IconComp, containerRef}: MetricReorderItemProps) => {
     const dragControls = useDragControls();
 
     return (
@@ -70,7 +71,8 @@ const MetricReorderItem = memo(
         dragListener={false}
         dragMomentum={false}
         onDragEnd={onDragEnd}
-        dragControls={dragControls}>
+        dragControls={dragControls}
+        dragConstraints={containerRef}>
         <div
           onPointerDown={e => {
             e.stopPropagation();
@@ -126,6 +128,7 @@ const HardwareMetricsReorderGroup = memo(({type, hardwareName, config}: Hardware
 
   const [items, setItems] = useState<string[]>(initialOrderedIds);
   const isDraggingRef = useRef(false);
+  const containerRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     if (!isDraggingRef.current) {
@@ -153,51 +156,56 @@ const HardwareMetricsReorderGroup = memo(({type, hardwareName, config}: Hardware
 
   return (
     <div className="flex flex-col gap-y-2 w-full">
-      <Reorder.Group
-        axis="x"
-        values={items}
-        onReorder={handleReorder}
-        className="flex flex-row items-center gap-2 w-full overflow-x-auto scrollbar-hide py-1">
-        {items.map(metricId => {
-          const isCustom = !nativeMetrics.includes(metricId as any);
-          const isSelected = config.enabled.includes(metricId);
+      <div ref={containerRef} className="w-full">
+        <Reorder.Group
+          axis="x"
+          values={items}
+          onReorder={handleReorder}
+          className="flex flex-row items-center gap-2 w-full overflow-x-auto scrollbar-hide py-1">
+          {items.map(metricId => {
+            const isCustom = !nativeMetrics.includes(metricId as any);
+            const isSelected = config.enabled.includes(metricId);
 
-          const onToggle = () => {
-            let newEnabled: string[];
-            if (isSelected) {
-              newEnabled = config.enabled.filter(id => id !== metricId);
+            const onToggle = () => {
+              let newEnabled: string[];
+              if (isSelected) {
+                newEnabled = config.enabled.filter(id => id !== metricId);
+              } else {
+                newEnabled = items.filter(id => id === metricId || config.enabled.includes(id));
+              }
+              dispatch(
+                hmonitorActions.updateHardwareMetrics({type, name: hardwareName as string, enabled: newEnabled}),
+              );
+            };
+
+            let labelText: string;
+            let IconComp: any;
+
+            if (isCustom) {
+              const customConfig = config.custom.find(c => c.id === metricId);
+              labelText = customConfig?.label || 'Custom Metric';
+              IconComp = Database;
             } else {
-              newEnabled = items.filter(id => id === metricId || config.enabled.includes(id));
+              const metConfig = METRIC_CONFIG[metricId];
+              labelText = metConfig?.label || metricId;
+              IconComp = metConfig?.Icon || Cpu;
             }
-            dispatch(hmonitorActions.updateHardwareMetrics({type, name: hardwareName as string, enabled: newEnabled}));
-          };
 
-          let labelText: string;
-          let IconComp: any;
-
-          if (isCustom) {
-            const customConfig = config.custom.find(c => c.id === metricId);
-            labelText = customConfig?.label || 'Custom Metric';
-            IconComp = Database;
-          } else {
-            const metConfig = METRIC_CONFIG[metricId];
-            labelText = metConfig?.label || metricId;
-            IconComp = metConfig?.Icon || Cpu;
-          }
-
-          return (
-            <MetricReorderItem
-              key={metricId}
-              metricId={metricId}
-              onToggle={onToggle}
-              IconComp={IconComp}
-              labelText={labelText}
-              isSelected={isSelected}
-              onDragEnd={handleDragEnd}
-            />
-          );
-        })}
-      </Reorder.Group>
+            return (
+              <MetricReorderItem
+                key={metricId}
+                metricId={metricId}
+                onToggle={onToggle}
+                IconComp={IconComp}
+                labelText={labelText}
+                isSelected={isSelected}
+                onDragEnd={handleDragEnd}
+                containerRef={containerRef}
+              />
+            );
+          })}
+        </Reorder.Group>
+      </div>
     </div>
   );
 });
@@ -216,6 +224,7 @@ const UptimeMetricsReorderGroup = memo(({uptimeOrder, uptimeEnabled}: UptimeMetr
 
   const [items, setItems] = useState<string[]>(currentOrder);
   const isDraggingRef = useRef(false);
+  const containerRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     if (!isDraggingRef.current) {
@@ -239,37 +248,40 @@ const UptimeMetricsReorderGroup = memo(({uptimeOrder, uptimeEnabled}: UptimeMetr
   };
 
   return (
-    <Reorder.Group
-      axis="x"
-      values={items}
-      onReorder={handleReorder}
-      className="flex flex-row items-center gap-2 w-full overflow-x-auto scrollbar-hide py-1">
-      {items.map(metricId => {
-        const isSelected = metricId === 'uptimeApp' ? uptimeEnabled.app : uptimeEnabled.system;
-        const labelText = metricId === 'uptimeApp' ? 'Application Uptime' : 'System Uptime';
-        const IconComp = metricId === 'uptimeApp' ? Timer : Clock;
+    <div ref={containerRef} className="w-full">
+      <Reorder.Group
+        axis="x"
+        values={items}
+        onReorder={handleReorder}
+        className="flex flex-row items-center gap-2 w-full overflow-x-auto scrollbar-hide py-1">
+        {items.map(metricId => {
+          const isSelected = metricId === 'uptimeApp' ? uptimeEnabled.app : uptimeEnabled.system;
+          const labelText = metricId === 'uptimeApp' ? 'Application Uptime' : 'System Uptime';
+          const IconComp = metricId === 'uptimeApp' ? Timer : Clock;
 
-        const onToggle = () => {
-          if (metricId === 'uptimeApp') {
-            dispatch(hmonitorActions.updateUptime({...uptimeEnabled, app: !isSelected}));
-          } else {
-            dispatch(hmonitorActions.updateUptime({...uptimeEnabled, system: !isSelected}));
-          }
-        };
+          const onToggle = () => {
+            if (metricId === 'uptimeApp') {
+              dispatch(hmonitorActions.updateUptime({...uptimeEnabled, app: !isSelected}));
+            } else {
+              dispatch(hmonitorActions.updateUptime({...uptimeEnabled, system: !isSelected}));
+            }
+          };
 
-        return (
-          <MetricReorderItem
-            key={metricId}
-            metricId={metricId}
-            onToggle={onToggle}
-            IconComp={IconComp}
-            labelText={labelText}
-            isSelected={isSelected}
-            onDragEnd={handleDragEnd}
-          />
-        );
-      })}
-    </Reorder.Group>
+          return (
+            <MetricReorderItem
+              key={metricId}
+              metricId={metricId}
+              onToggle={onToggle}
+              IconComp={IconComp}
+              labelText={labelText}
+              isSelected={isSelected}
+              onDragEnd={handleDragEnd}
+              containerRef={containerRef}
+            />
+          );
+        })}
+      </Reorder.Group>
+    </div>
   );
 });
 
@@ -281,69 +293,73 @@ type SectionReorderItemProps = {
   totalSections: number;
   moveSection: (index: number, direction: 'up' | 'down') => void;
   children: (dragHandle: ReactNode) => ReactNode;
+  containerRef?: RefObject<HTMLDivElement | null>;
 };
 
-const SectionReorderItem = memo(({type, index, totalSections, moveSection, children}: SectionReorderItemProps) => {
-  const dragControls = useDragControls();
+const SectionReorderItem = memo(
+  ({type, index, totalSections, moveSection, children, containerRef}: SectionReorderItemProps) => {
+    const dragControls = useDragControls();
 
-  const dragHandle = (
-    <div className="flex items-center gap-0.5 shrink-0">
-      <div
-        onPointerDown={e => {
-          e.stopPropagation();
-          dragControls.start(e);
+    const dragHandle = (
+      <div className="flex items-center gap-0.5 shrink-0">
+        <div
+          onPointerDown={e => {
+            e.stopPropagation();
+            dragControls.start(e);
+          }}
+          className={
+            'cursor-grab active:cursor-grabbing p-1.5 rounded-md text-muted' +
+            ' hover:text-foreground hover:bg-surface-secondary transition-colors'
+          }
+          title="Drag to reorder section">
+          <GripVertical className="size-4" />
+        </div>
+        <div className="flex flex-col -space-y-1">
+          <button
+            className={
+              'p-0.5 text-muted hover:text-foreground disabled:opacity-20' +
+              ' disabled:pointer-events-none cursor-pointer'
+            }
+            type="button"
+            disabled={index === 0}
+            title="Move section up"
+            onClick={() => moveSection(index, 'up')}>
+            <ChevronUp className="size-3" />
+          </button>
+          <button
+            className={
+              'p-0.5 text-muted hover:text-foreground disabled:opacity-20' +
+              ' disabled:pointer-events-none cursor-pointer'
+            }
+            type="button"
+            title="Move section down"
+            disabled={index === totalSections - 1}
+            onClick={() => moveSection(index, 'down')}>
+            <ChevronDown className="size-3" />
+          </button>
+        </div>
+      </div>
+    );
+
+    return (
+      <Reorder.Item
+        whileDrag={{
+          zIndex: 40,
+          scale: 1.01,
+          boxShadow: '0 10px 25px -5px rgba(0, 0, 0, 0.35)',
         }}
-        className={
-          'cursor-grab active:cursor-grabbing p-1.5 rounded-md text-muted' +
-          ' hover:text-foreground hover:bg-surface-secondary transition-colors'
-        }
-        title="Drag to reorder section">
-        <GripVertical className="size-4" />
-      </div>
-      <div className="flex flex-col -space-y-1">
-        <button
-          className={
-            'p-0.5 text-muted hover:text-foreground disabled:opacity-20' +
-            ' disabled:pointer-events-none cursor-pointer'
-          }
-          type="button"
-          disabled={index === 0}
-          title="Move section up"
-          onClick={() => moveSection(index, 'up')}>
-          <ChevronUp className="size-3" />
-        </button>
-        <button
-          className={
-            'p-0.5 text-muted hover:text-foreground disabled:opacity-20' +
-            ' disabled:pointer-events-none cursor-pointer'
-          }
-          type="button"
-          title="Move section down"
-          disabled={index === totalSections - 1}
-          onClick={() => moveSection(index, 'down')}>
-          <ChevronDown className="size-3" />
-        </button>
-      </div>
-    </div>
-  );
-
-  return (
-    <Reorder.Item
-      whileDrag={{
-        zIndex: 40,
-        scale: 1.01,
-        boxShadow: '0 10px 25px -5px rgba(0, 0, 0, 0.35)',
-      }}
-      value={type}
-      dragElastic={0}
-      dragListener={false}
-      dragMomentum={false}
-      dragControls={dragControls}
-      className="relative select-none">
-      {children(dragHandle)}
-    </Reorder.Item>
-  );
-});
+        value={type}
+        dragElastic={0}
+        dragListener={false}
+        dragMomentum={false}
+        dragControls={dragControls}
+        dragConstraints={containerRef}
+        className="relative select-none">
+        {children(dragHandle)}
+      </Reorder.Item>
+    );
+  },
+);
 
 SectionReorderItem.displayName = 'SectionReorderItem';
 
@@ -366,6 +382,7 @@ export const MetricsTab = memo(
     setSelectedNetworkName,
   }: MetricsTabProps) => {
     const {enabledMetrics, availableHardware} = settings;
+    const cardsContainerRef = useRef<HTMLDivElement | null>(null);
 
     const sectionsToRender = useMemo(() => {
       const defaultOrder = ['cpu', 'gpu', 'memory', 'network', 'uptime', 'ping'];
@@ -643,22 +660,25 @@ export const MetricsTab = memo(
         </div>
 
         {/* Reorderable Section List */}
-        <Reorder.Group
-          axis="y"
-          values={sectionsToRender}
-          onReorder={handleSectionReorder}
-          className="flex flex-col gap-y-4">
-          {sectionsToRender.map((type, index) => (
-            <SectionReorderItem
-              key={type}
-              type={type}
-              index={index}
-              moveSection={moveSection}
-              totalSections={sectionsToRender.length}>
-              {dragHandle => renderSectionSetting(type, dragHandle)}
-            </SectionReorderItem>
-          ))}
-        </Reorder.Group>
+        <div className="w-full" ref={cardsContainerRef}>
+          <Reorder.Group
+            axis="y"
+            values={sectionsToRender}
+            onReorder={handleSectionReorder}
+            className="flex flex-col gap-y-4">
+            {sectionsToRender.map((type, index) => (
+              <SectionReorderItem
+                key={type}
+                type={type}
+                index={index}
+                moveSection={moveSection}
+                containerRef={cardsContainerRef}
+                totalSections={sectionsToRender.length}>
+                {dragHandle => renderSectionSetting(type, dragHandle)}
+              </SectionReorderItem>
+            ))}
+          </Reorder.Group>
+        </div>
       </div>
     );
   },
