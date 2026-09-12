@@ -63,6 +63,7 @@ class HardwareMonitorService {
     this.startPinging();
 
     this.registerIpcHandlers();
+    this.registerLifecycleHandlers();
     this.isInitialized = true;
 
     // Hardware probing can call .NET, GitHub, and the external CLI. Keep it off
@@ -70,9 +71,7 @@ class HardwareMonitorService {
     void this.discoverHardware();
   }
 
-  private startPinging() {
-    const pingState = this.config.pingState;
-
+  private stopPinging(): void {
     const stopPinger = (pinger: Pinger) => {
       pinger.stop();
       this.sendToRenderer(HMONITOR_IPC_STOP_PING, pinger.host);
@@ -80,6 +79,12 @@ class HardwareMonitorService {
 
     this.pingers.forEach(stopPinger);
     this.pingers = [];
+  }
+
+  private startPinging(): void {
+    const pingState = this.config.pingState;
+
+    this.stopPinging();
 
     if (pingState.isActive) {
       Array.from(new Set(pingState.enabledHosts)).forEach(host => {
@@ -99,8 +104,6 @@ class HardwareMonitorService {
           pinger.onError = () => {
             this.sendToRenderer(HMONITOR_IPC_UPDATE_PING, host);
           };
-
-          app.on('window-all-closed', () => pinger.stop());
 
           pinger.start();
           this.pingers.push(pinger);
@@ -414,15 +417,16 @@ class HardwareMonitorService {
     this.saveConfig();
 
     this.stopMonitoring();
-
-    const stopPinger = (pinger: Pinger) => {
-      pinger.stop();
-      this.sendToRenderer(HMONITOR_IPC_STOP_PING, pinger.host);
-    };
-    this.pingers.forEach(stopPinger);
-    this.pingers = [];
+    this.stopPinging();
 
     await this.discoverHardware();
+  }
+
+  private registerLifecycleHandlers(): void {
+    app.on('window-all-closed', () => {
+      this.stopPinging();
+      this.stopMonitoring();
+    });
   }
 
   private registerIpcHandlers(): void {
