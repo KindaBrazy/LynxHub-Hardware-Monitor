@@ -52,6 +52,7 @@ export const initialSettings: MonitoringSettings = {
   enabled: true,
   displayStyle: 'default',
   showSectionLabel: true,
+  enableHoverDetails: true,
   metricVisibility: initialMetricVisibility,
   enabledMetrics: initialEnabledMetrics,
   availableHardware: initialAvailableHardware,

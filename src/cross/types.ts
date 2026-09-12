@@ -125,6 +125,7 @@ export type MonitoringSettings = {
   refreshInterval: number;
   displayStyle: DisplayStyle;
   showSectionLabel: boolean;
+  enableHoverDetails: boolean;
   metricVisibility: MetricVisibility;
   enabledMetrics: EnabledMetrics;
   availableHardware: AvailableHardware;

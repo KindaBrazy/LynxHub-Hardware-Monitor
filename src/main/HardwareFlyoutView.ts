@@ -103,10 +103,25 @@ export class HardwareFlyoutView {
     });
   }
 
+  private listeningWindow?: BrowserWindow;
+  private onWindowHideOrBlur = () => this.hide();
+
   private setupWindowListeners(window: BrowserWindow): void {
-    window.on('blur', () => this.hide());
-    window.on('hide', () => this.hide());
-    window.on('minimize', () => this.hide());
+    if (this.listeningWindow === window) return;
+    this.cleanupWindowListeners();
+    this.listeningWindow = window;
+    window.on('blur', this.onWindowHideOrBlur);
+    window.on('hide', this.onWindowHideOrBlur);
+    window.on('minimize', this.onWindowHideOrBlur);
+  }
+
+  private cleanupWindowListeners(): void {
+    if (this.listeningWindow && !this.listeningWindow.isDestroyed()) {
+      this.listeningWindow.removeListener('blur', this.onWindowHideOrBlur);
+      this.listeningWindow.removeListener('hide', this.onWindowHideOrBlur);
+      this.listeningWindow.removeListener('minimize', this.onWindowHideOrBlur);
+    }
+    this.listeningWindow = undefined;
   }
 
   private loadFlyoutHtml(): void {
@@ -1359,6 +1374,35 @@ export class HardwareFlyoutView {
     if (this.flyoutView && !this.flyoutView.webContents.isDestroyed()) {
       this.flyoutView.setBounds({x: -5000, y: -5000, width: 0, height: 0});
     }
+  }
+
+  public destroy(): void {
+    this.hide();
+    this.cleanupWindowListeners();
+
+    if (this.mainWindow && !this.mainWindow.isDestroyed() && this.flyoutView) {
+      try {
+        this.mainWindow.contentView.removeChildView(this.flyoutView);
+      } catch {
+        // Ignored
+      }
+    }
+
+    if (this.flyoutView) {
+      const webContents = this.flyoutView.webContents;
+      if (webContents && !webContents.isDestroyed()) {
+        webContents.removeAllListeners();
+        try {
+          (webContents as any).close?.();
+        } catch {
+          // Ignored
+        }
+      }
+      this.flyoutView = undefined;
+    }
+
+    this.isViewLoaded = false;
+    this.pendingShowData = undefined;
   }
 }
 

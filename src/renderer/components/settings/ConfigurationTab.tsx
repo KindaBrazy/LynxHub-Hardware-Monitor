@@ -1,6 +1,6 @@
 import {Button, Description, Label, NumberField, Switch} from '@heroui/react';
 import LynxSwitch from '@lynx/components/LynxSwitch';
-import {MonitorIcon, RefreshCircleIcon, Widget2Icon} from '@solar-icons/react/bold-duotone';
+import {MonitorIcon, RefreshCircleIcon, Widget2Icon, WindowFrameIcon} from '@solar-icons/react/bold-duotone';
 import {Check, Sparkles} from 'lucide-react';
 import {memo} from 'react';
 
@@ -57,7 +57,7 @@ type ConfigurationTabProps = {
 
 export const ConfigurationTab = memo(
   ({settings, updateState, handleDisplayStyleChange, isRawStyle}: ConfigurationTabProps) => {
-    const {enabled, refreshInterval, displayStyle, showSectionLabel} = settings;
+    const {enabled, refreshInterval, displayStyle, showSectionLabel, enableHoverDetails = true} = settings;
 
     return (
       <div className="flex flex-col gap-y-5 pb-4">
@@ -257,6 +257,32 @@ export const ConfigurationTab = memo(
                     </div>
                   );
                 })}
+              </div>
+            </div>
+
+            {/* Hover Details Panel Section */}
+            <div className={'p-5 bg-surface-secondary rounded-3xl flex flex-col gap-y-4'}>
+              <div className="flex items-center gap-x-2.5">
+                <WindowFrameIcon className="size-5 text-accent" />
+                <div>
+                  <h3 className="text-sm font-semibold text-foreground">Hover Details Panel</h3>
+                  <p className="text-xs text-muted">
+                    Configure telemetry popover charts and detailed breakdown on hover
+                  </p>
+                </div>
+              </div>
+
+              <div className="pt-1">
+                <LynxSwitch
+                  description={
+                    'Displays an interactive telemetry popover with historical charts when hovering metrics in the' +
+                    ' status bar. Disabling completely closes and removes the background view.'
+                  }
+                  className="p-1"
+                  enabled={enableHoverDetails}
+                  title="Enable Hover Details Panel"
+                  onEnabledChange={value => updateState('enableHoverDetails', value)}
+                />
               </div>
             </div>
 

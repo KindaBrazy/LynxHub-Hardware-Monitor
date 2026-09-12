@@ -6,7 +6,7 @@ import {join} from 'node:path';
 import {MainExtensionUtils} from '@lynx_main/plugins/extensions/types';
 import StorageManager from '@lynx_main/storageSqlite/storageOperations';
 import HardwareMonitor, {HardwareReport, MonitorError} from '@lynxhub/hwmonitor';
-import {app, ipcMain, WebContents} from 'electron';
+import {app, BrowserWindow, ipcMain, WebContents} from 'electron';
 import {isEqual, isNil} from 'lodash-es';
 
 import {
@@ -49,6 +49,7 @@ class HardwareMonitorService {
   private static instance: HardwareMonitorService;
 
   private storeManager?: StorageManager;
+  private mainWindow?: BrowserWindow;
   private hwMonitor?: HardwareMonitor;
   private config: MonitoringSettings = initialSettings;
   private webContents?: WebContents;
@@ -170,7 +171,9 @@ class HardwareMonitorService {
 
           pinger.onResult = result => {
             const timeString = result.timestamp.toLocaleTimeString();
-            hardwareTelemetryHistory.recordPing(host, result.latency, result.alive);
+            if (this.config.enableHoverDetails) {
+              hardwareTelemetryHistory.recordPing(host, result.latency, result.alive);
+            }
             if (result.alive) {
               const data: PingData = {host, timeString, latency: result.latency};
               this.sendToRenderer(HMONITOR_IPC_UPDATE_PING, data);
@@ -180,7 +183,9 @@ class HardwareMonitorService {
           };
 
           pinger.onError = () => {
-            hardwareTelemetryHistory.recordPing(host, undefined, false);
+            if (this.config.enableHoverDetails) {
+              hardwareTelemetryHistory.recordPing(host, undefined, false);
+            }
             this.sendToRenderer(HMONITOR_IPC_UPDATE_PING, host);
           };
 
@@ -199,7 +204,10 @@ class HardwareMonitorService {
       this.webContents = appManager.getWebContent();
       const mainWindow = appManager.getMainWindow();
       if (mainWindow) {
-        hardwareFlyoutView.attach(mainWindow);
+        this.mainWindow = mainWindow;
+        if (this.config.enableHoverDetails) {
+          hardwareFlyoutView.attach(mainWindow);
+        }
       }
 
       // Send any captured discovery errors that happened during early app launch
@@ -243,6 +251,7 @@ class HardwareMonitorService {
           showAliasGpu: storedConfig.showAliasGpu ?? initialSettings.showAliasGpu,
           showAliasMemory: storedConfig.showAliasMemory ?? initialSettings.showAliasMemory,
           showAliasNetwork: storedConfig.showAliasNetwork ?? initialSettings.showAliasNetwork,
+          enableHoverDetails: storedConfig.enableHoverDetails ?? initialSettings.enableHoverDetails,
         }),
         configVersion: initialSettings.configVersion, // Ensure version is updated
       };
@@ -272,6 +281,7 @@ class HardwareMonitorService {
       showAliasNetwork: storedConfig.showAliasNetwork ?? initialSettings.showAliasNetwork,
       sectionOrder: storedConfig.sectionOrder ?? initialSettings.sectionOrder,
       uptimeOrder: storedConfig.uptimeOrder ?? initialSettings.uptimeOrder,
+      enableHoverDetails: storedConfig.enableHoverDetails ?? initialSettings.enableHoverDetails,
     };
   }
 
@@ -428,7 +438,9 @@ class HardwareMonitorService {
       await this.hwMonitor.checkRequirements(targetDir);
 
       this.hwMonitor.on('data', (data: HardwareReport) => {
-        hardwareTelemetryHistory.recordHardwareReport(data);
+        if (this.config.enableHoverDetails) {
+          hardwareTelemetryHistory.recordHardwareReport(data);
+        }
         // Flatten all sensor values for easy lookup on the renderer side
         const rawSensors = [
           ...(data.CPU ?? []),
@@ -474,8 +486,21 @@ class HardwareMonitorService {
       !isEqual(newConfig.enabledMetrics, oldConfig.enabledMetrics) ||
       !isEqual(newConfig.refreshInterval, oldConfig.refreshInterval);
 
+    const hoverDetailsChanged = newConfig.enableHoverDetails !== oldConfig.enableHoverDetails;
+
     this.config = newConfig;
     this.saveConfig();
+
+    if (hoverDetailsChanged) {
+      if (newConfig.enableHoverDetails) {
+        if (this.mainWindow) {
+          hardwareFlyoutView.attach(this.mainWindow);
+        }
+      } else {
+        hardwareFlyoutView.destroy();
+        hardwareTelemetryHistory.clear();
+      }
+    }
 
     if (newConfig.enabled && shouldRestart) {
       this.stopMonitoring();
@@ -505,6 +530,15 @@ class HardwareMonitorService {
     };
     this.saveConfig();
 
+    if (this.config.enableHoverDetails) {
+      if (this.mainWindow) {
+        hardwareFlyoutView.attach(this.mainWindow);
+      }
+    } else {
+      hardwareFlyoutView.destroy();
+      hardwareTelemetryHistory.clear();
+    }
+
     this.stopMonitoring();
     this.stopPinging();
 
@@ -513,7 +547,8 @@ class HardwareMonitorService {
 
   private registerLifecycleHandlers(): void {
     app.on('window-all-closed', () => {
-      hardwareFlyoutView.hide();
+      hardwareFlyoutView.destroy();
+      hardwareTelemetryHistory.clear();
       this.stopPinging();
       this.stopMonitoring();
     });
@@ -530,6 +565,7 @@ class HardwareMonitorService {
     });
 
     ipcMain.on(HMONITOR_IPC_SHOW_FLYOUT, (_, data) => {
+      if (!this.config.enableHoverDetails) return;
       let key: string | undefined;
       if (data.section === 'cpu') key = data.payload?.cpu?.data?.name;
       else if (data.section === 'gpu') key = data.payload?.gpu?.data?.name;
@@ -541,6 +577,7 @@ class HardwareMonitorService {
       void hardwareFlyoutView.show(data);
     });
     ipcMain.on(HMONITOR_IPC_UPDATE_FLYOUT, (_, data) => {
+      if (!this.config.enableHoverDetails) return;
       let key: string | undefined;
       if (data.section === 'cpu') key = data.payload?.cpu?.data?.name;
       else if (data.section === 'gpu') key = data.payload?.gpu?.data?.name;
