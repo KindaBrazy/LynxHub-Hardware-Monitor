@@ -3,6 +3,21 @@ import {useEffect, useState} from 'react';
 
 import {HMONITOR_IPC_DATA_UPDATE, HMONITOR_IPC_MONITORING_ERROR} from '../../cross/constants';
 import {HardwareDataReport} from '../../cross/types';
+import {
+  CPU_LOAD_CANDIDATES,
+  CPU_TEMP_CANDIDATES,
+  findGpuLoad,
+  findSensorValue,
+  GPU_TEMP_CANDIDATES,
+  GPU_VRAM_TOTAL_CANDIDATES,
+  GPU_VRAM_USED_CANDIDATES,
+  MEMORY_AVAILABLE_CANDIDATES,
+  MEMORY_USED_CANDIDATES,
+  NETWORK_DOWNLOAD_DATA_CANDIDATES,
+  NETWORK_DOWNLOAD_SPEED_CANDIDATES,
+  NETWORK_UPLOAD_DATA_CANDIDATES,
+  NETWORK_UPLOAD_SPEED_CANDIDATES,
+} from '../utils/sensorUtils';
 
 const convertMBtoGB = (mb: number): number => Number((mb / 1024).toFixed(2));
 
@@ -29,29 +44,38 @@ export default function useHardwareData() {
       if (!data) return;
 
       const transformedData: HardwareDataReport = {
-        cpu: data.CPU.map(item => ({
-          name: item.Name,
-          temp: item.Sensors.find(s => s.Name === 'CPU Package' && s.Type === 'Temperature')?.Value || 0,
-          usage: Math.round(item.Sensors.find(s => s.Name === 'CPU Total' && s.Type === 'Load')?.Value || 0),
-        })),
-        gpu: data.GPU.map(item => ({
-          name: item.Name,
-          temp: item.Sensors.find(s => s.Name === 'GPU Core' && s.Type === 'Temperature')?.Value || 0,
-          usage: Math.round(item.Sensors.find(s => s.Name === 'D3D 3D' && s.Type === 'Load')?.Value || 0),
-          totalVram: convertMBtoGB(item.Sensors.find(s => s.Name === 'GPU Memory Total')?.Value || 0),
-          usedVram: convertMBtoGB(item.Sensors.find(s => s.Name === 'GPU Memory Used')?.Value || 0),
-        })),
+        cpu: data.CPU.map(item => {
+          const rawTemp = findSensorValue(item.Sensors, CPU_TEMP_CANDIDATES, 'Temperature', {requirePositive: true});
+          const rawUsage = findSensorValue(item.Sensors, CPU_LOAD_CANDIDATES, 'Load');
+          return {
+            name: item.Name,
+            temp: rawTemp != null ? Math.round(rawTemp) : 0,
+            usage: rawUsage != null ? Math.round(rawUsage) : 0,
+          };
+        }),
+        gpu: data.GPU.map(item => {
+          const rawTemp = findSensorValue(item.Sensors, GPU_TEMP_CANDIDATES, 'Temperature', {requirePositive: true});
+          const rawTotalVram = findSensorValue(item.Sensors, GPU_VRAM_TOTAL_CANDIDATES);
+          const rawUsedVram = findSensorValue(item.Sensors, GPU_VRAM_USED_CANDIDATES);
+          return {
+            name: item.Name,
+            temp: rawTemp != null ? Math.round(rawTemp) : 0,
+            usage: findGpuLoad(item.Sensors),
+            totalVram: convertMBtoGB(rawTotalVram ?? 0),
+            usedVram: convertMBtoGB(rawUsedVram ?? 0),
+          };
+        }),
         memory: data.Memory.map(item => {
-          const used = item.Sensors.find(s => s.Name === 'Memory Used' && s.Type === 'Data')?.Value || 0;
-          const available = item.Sensors.find(s => s.Name === 'Memory Available' && s.Type === 'Data')?.Value || 0;
+          const used = findSensorValue(item.Sensors, MEMORY_USED_CANDIDATES, 'Data') ?? 0;
+          const available = findSensorValue(item.Sensors, MEMORY_AVAILABLE_CANDIDATES, 'Data') ?? 0;
           return {name: item.Name, used, available, total: used + available};
         }),
         network: (data.Network ?? []).map(item => ({
           name: item.Name,
-          uploadSpeed: item.Sensors.find(s => s.Name === 'Upload Speed')?.Value || 0,
-          downloadSpeed: item.Sensors.find(s => s.Name === 'Download Speed')?.Value || 0,
-          uploadData: item.Sensors.find(s => s.Name === 'Data Uploaded')?.Value || 0,
-          downloadData: item.Sensors.find(s => s.Name === 'Data Downloaded')?.Value || 0,
+          uploadSpeed: findSensorValue(item.Sensors, NETWORK_UPLOAD_SPEED_CANDIDATES) ?? 0,
+          downloadSpeed: findSensorValue(item.Sensors, NETWORK_DOWNLOAD_SPEED_CANDIDATES) ?? 0,
+          uploadData: findSensorValue(item.Sensors, NETWORK_UPLOAD_DATA_CANDIDATES) ?? 0,
+          downloadData: findSensorValue(item.Sensors, NETWORK_DOWNLOAD_DATA_CANDIDATES) ?? 0,
         })),
         uptime: {
           system: data.Uptime?.rawSeconds || 0,
