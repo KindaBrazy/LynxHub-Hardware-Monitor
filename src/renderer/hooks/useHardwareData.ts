@@ -51,6 +51,7 @@ export default function useHardwareData() {
             name: item.Name,
             temp: rawTemp != null ? Math.round(rawTemp) : 0,
             usage: rawUsage != null ? Math.round(rawUsage) : 0,
+            sensors: item.Sensors,
           };
         }),
         gpu: data.GPU.map(item => {
@@ -63,12 +64,13 @@ export default function useHardwareData() {
             usage: findGpuLoad(item.Sensors),
             totalVram: convertMBtoGB(rawTotalVram ?? 0),
             usedVram: convertMBtoGB(rawUsedVram ?? 0),
+            sensors: item.Sensors,
           };
         }),
         memory: data.Memory.map(item => {
           const used = findSensorValue(item.Sensors, MEMORY_USED_CANDIDATES, 'Data') ?? 0;
           const available = findSensorValue(item.Sensors, MEMORY_AVAILABLE_CANDIDATES, 'Data') ?? 0;
-          return {name: item.Name, used, available, total: used + available};
+          return {name: item.Name, used, available, total: used + available, sensors: item.Sensors};
         }),
         network: (data.Network ?? []).map(item => ({
           name: item.Name,
@@ -76,12 +78,14 @@ export default function useHardwareData() {
           downloadSpeed: findSensorValue(item.Sensors, NETWORK_DOWNLOAD_SPEED_CANDIDATES) ?? 0,
           uploadData: findSensorValue(item.Sensors, NETWORK_UPLOAD_DATA_CANDIDATES) ?? 0,
           downloadData: findSensorValue(item.Sensors, NETWORK_DOWNLOAD_DATA_CANDIDATES) ?? 0,
+          sensors: item.Sensors,
         })),
         uptime: {
           system: data.Uptime?.rawSeconds || 0,
           app: data.ElapsedTime?.rawSeconds || 0,
         },
         rawSensors: data.rawSensors || [],
+        networkDetails: data.networkDetails,
       };
 
       setHardwareData(transformedData);

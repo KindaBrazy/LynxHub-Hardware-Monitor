@@ -122,6 +122,7 @@ function HardwareStatusBar() {
               metrics={metric}
               hardwareInfo={hardwareInfo}
               rawSensorValues={hardwareData.rawSensors}
+              networkDetails={hardwareData.networkDetails}
               key={`${sectionType}_${metric.name}_${index}`}
             />,
           );

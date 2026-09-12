@@ -1,10 +1,17 @@
 import {Activity, Database, Gauge, Monitor, Power, Thermometer, Zap} from 'lucide-react';
 import {ElementType, memo, ReactNode, useMemo} from 'react';
 
-import {GpuData, HardwareInfo, HardwareMetricsConfig, RawSensorValue} from '../../../../cross/types';
+import {
+  GpuData,
+  HardwareFlyoutPayload,
+  HardwareInfo,
+  HardwareMetricsConfig,
+  RawSensorValue,
+} from '../../../../cross/types';
 import {useHMonitorState} from '../../../state/hmonitorSlice';
 import {getGpuAlias} from '../../../utils/aliasUtils';
 import {getTemperatureColor, getUsageColor} from '../../../utils/colorUtils';
+import HardwareFlyoutTrigger from '../../common/HardwareFlyoutTrigger';
 import MetricItem from '../../common/MetricItem';
 import Section from '../../common/Section';
 
@@ -144,10 +151,23 @@ const GpuSection = memo(({data, metrics, hardwareInfo, rawSensorValues}: Props) 
     sensorReadingMap,
   ]);
 
+  const flyoutPayload = useMemo<HardwareFlyoutPayload>(
+    () => ({
+      section: 'gpu',
+      gpu: {
+        data,
+        rawSensorValues,
+      },
+    }),
+    [data, rawSensorValues],
+  );
+
   return (
-    <Section title={title} icon={Monitor}>
-      {renderedMetrics}
-    </Section>
+    <HardwareFlyoutTrigger section="gpu" payload={flyoutPayload}>
+      <Section title={title} icon={Monitor}>
+        {renderedMetrics}
+      </Section>
+    </HardwareFlyoutTrigger>
   );
 });
 

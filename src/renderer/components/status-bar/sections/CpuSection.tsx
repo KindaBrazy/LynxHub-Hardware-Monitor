@@ -1,10 +1,17 @@
 import {Activity, Cpu as CpuIcon, Gauge, Power, Thermometer} from 'lucide-react';
 import {ElementType, memo, ReactNode, useMemo} from 'react';
 
-import {CpuData, HardwareInfo, HardwareMetricsConfig, RawSensorValue} from '../../../../cross/types';
+import {
+  CpuData,
+  HardwareFlyoutPayload,
+  HardwareInfo,
+  HardwareMetricsConfig,
+  RawSensorValue,
+} from '../../../../cross/types';
 import {useHMonitorState} from '../../../state/hmonitorSlice';
 import {getCpuAlias} from '../../../utils/aliasUtils';
 import {getTemperatureColor, getUsageColor} from '../../../utils/colorUtils';
+import HardwareFlyoutTrigger from '../../common/HardwareFlyoutTrigger';
 import MetricItem from '../../common/MetricItem';
 import Section from '../../common/Section';
 
@@ -130,10 +137,23 @@ const CpuSection = memo(({data, metrics, hardwareInfo, rawSensorValues}: Props) 
     return list;
   }, [metrics.enabled, metrics.custom, temp, usage, displayStyle, hardwareInfo, sensorReadingMap]);
 
+  const flyoutPayload = useMemo<HardwareFlyoutPayload>(
+    () => ({
+      section: 'cpu',
+      cpu: {
+        data,
+        rawSensorValues,
+      },
+    }),
+    [data, rawSensorValues],
+  );
+
   return (
-    <Section title={title} icon={CpuIcon}>
-      {renderedMetrics}
-    </Section>
+    <HardwareFlyoutTrigger section="cpu" payload={flyoutPayload}>
+      <Section title={title} icon={CpuIcon}>
+        {renderedMetrics}
+      </Section>
+    </HardwareFlyoutTrigger>
   );
 });
 

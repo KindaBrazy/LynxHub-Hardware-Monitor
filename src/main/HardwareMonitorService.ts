@@ -1,3 +1,6 @@
+import {exec} from 'node:child_process';
+import {getServers} from 'node:dns';
+import {networkInterfaces, platform} from 'node:os';
 import {join} from 'node:path';
 
 import {MainExtensionUtils} from '@lynx_main/plugins/extensions/types';
@@ -9,15 +12,20 @@ import {isEqual, isNil} from 'lodash-es';
 import {
   HMONITOR_IPC_CONFIG_UPDATE,
   HMONITOR_IPC_DATA_UPDATE,
+  HMONITOR_IPC_FLYOUT_MOUSE_EVENT,
+  HMONITOR_IPC_HIDE_FLYOUT,
   HMONITOR_IPC_MONITORING_ERROR,
   HMONITOR_IPC_RESET_CONFIG,
   HMONITOR_IPC_SET_CONFIG,
+  HMONITOR_IPC_SHOW_FLYOUT,
   HMONITOR_IPC_STOP_PING,
+  HMONITOR_IPC_UPDATE_FLYOUT,
   HMONITOR_IPC_UPDATE_PING,
   HMONITOR_STORAGE_ID,
   initialSettings,
 } from '../cross/constants';
-import {HardwareDataReport, HardwareInfo, MonitoringSettings, PingData} from '../cross/types';
+import {HardwareDataReport, HardwareInfo, MonitoringSettings, NetworkInterfaceDetails, PingData} from '../cross/types';
+import {hardwareFlyoutView} from './HardwareFlyoutView';
 import {Pinger} from './pinger';
 import {getActiveComponentTypes} from './utils';
 
@@ -39,8 +47,65 @@ class HardwareMonitorService {
   private pingers: Pinger[] = [];
   private rediscoveryTimer?: ReturnType<typeof setTimeout>;
   private discoveryPromise?: Promise<void>;
+  private cachedNetworkDetails: NetworkInterfaceDetails[] = [];
+  private lastNetworkDetailsTime = 0;
 
   private constructor() {}
+
+  private async getNetworkDetails(): Promise<NetworkInterfaceDetails[]> {
+    const now = Date.now();
+    if (this.cachedNetworkDetails.length > 0 && now - this.lastNetworkDetailsTime < 30_000) {
+      return this.cachedNetworkDetails;
+    }
+
+    try {
+      const interfaces = networkInterfaces();
+      const dnsServers = getServers();
+
+      let defaultGateway = '';
+      if (platform() === 'win32') {
+        try {
+          const stdout = await new Promise<string>(resolve => {
+            exec('route print 0.0.0.0', {windowsHide: true}, (_, out) => {
+              resolve(out || '');
+            });
+          });
+          const match = stdout.match(/0\.0\.0\.0\s+0\.0\.0\.0\s+([\d.]+)/);
+          if (match && match[1]) {
+            defaultGateway = match[1];
+          }
+        } catch {
+          // ignore error
+        }
+      }
+
+      const details: NetworkInterfaceDetails[] = [];
+      for (const [name, addrs] of Object.entries(interfaces)) {
+        if (!addrs || addrs.length === 0) continue;
+        const nonInternal = addrs.filter(a => !a.internal);
+        if (nonInternal.length === 0) continue;
+
+        const ipv4 = nonInternal.find(a => a.family === 'IPv4')?.address;
+        const ipv6 = nonInternal.find(a => a.family === 'IPv6')?.address;
+        const mac = nonInternal.find(a => a.mac && a.mac !== '00:00:00:00:00:00')?.mac;
+
+        details.push({
+          name,
+          ipv4,
+          ipv6,
+          gateway: defaultGateway || undefined,
+          dns: dnsServers.length > 0 ? dnsServers : undefined,
+          mac,
+        });
+      }
+
+      this.cachedNetworkDetails = details;
+      this.lastNetworkDetailsTime = now;
+      return details;
+    } catch {
+      return this.cachedNetworkDetails;
+    }
+  }
 
   public static getInstance(): HardwareMonitorService {
     if (!HardwareMonitorService.instance) {
@@ -65,6 +130,8 @@ class HardwareMonitorService {
     this.registerIpcHandlers();
     this.registerLifecycleHandlers();
     this.isInitialized = true;
+
+    void this.getNetworkDetails();
 
     // Hardware probing can call .NET, GitHub, and the external CLI. Keep it off
     // LynxHub's app-ready path so installing this extension does not delay window startup.
@@ -118,6 +185,10 @@ class HardwareMonitorService {
   public onMainWindowReady(utils: MainExtensionUtils): void {
     utils.getAppManager().then(appManager => {
       this.webContents = appManager.getWebContent();
+      const mainWindow = appManager.getMainWindow();
+      if (mainWindow) {
+        hardwareFlyoutView.attach(mainWindow);
+      }
 
       // Send any captured discovery errors that happened during early app launch
       if (this.lastError) {
@@ -352,8 +423,13 @@ class HardwareMonitorService {
           ...(data.Memory ?? []),
           ...(data.Network ?? []),
         ].flatMap(h => h.Sensors?.map(s => ({Identifier: s.Identifier, Value: s.Value})) ?? []);
-        const reportWithRawSensors: Partial<HardwareDataReport> & HardwareReport = {...data, rawSensors};
+        const reportWithRawSensors: Partial<HardwareDataReport> & HardwareReport = {
+          ...data,
+          rawSensors,
+          networkDetails: this.cachedNetworkDetails,
+        };
         this.sendToRenderer(HMONITOR_IPC_DATA_UPDATE, reportWithRawSensors);
+        void this.getNetworkDetails();
       });
 
       this.hwMonitor.on('error', (error: MonitorError) => {
@@ -424,6 +500,7 @@ class HardwareMonitorService {
 
   private registerLifecycleHandlers(): void {
     app.on('window-all-closed', () => {
+      hardwareFlyoutView.hide();
       this.stopPinging();
       this.stopMonitoring();
     });
@@ -437,6 +514,19 @@ class HardwareMonitorService {
     });
     ipcMain.on(HMONITOR_IPC_RESET_CONFIG, () => {
       void this.resetConfig();
+    });
+
+    ipcMain.on(HMONITOR_IPC_SHOW_FLYOUT, (_, data) => {
+      hardwareFlyoutView.show(data);
+    });
+    ipcMain.on(HMONITOR_IPC_UPDATE_FLYOUT, (_, data) => {
+      hardwareFlyoutView.update(data);
+    });
+    ipcMain.on(HMONITOR_IPC_HIDE_FLYOUT, () => {
+      hardwareFlyoutView.onTriggerLeave();
+    });
+    ipcMain.on(HMONITOR_IPC_FLYOUT_MOUSE_EVENT, (_, eventType: 'enter' | 'leave') => {
+      hardwareFlyoutView.onFlyoutMouseEvent(eventType);
     });
   }
 }

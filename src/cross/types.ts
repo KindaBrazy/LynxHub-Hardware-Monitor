@@ -4,6 +4,7 @@ export type SensorInfo = {
   Type: string;
   Unit: string;
   Identifier: string;
+  Value?: number | null;
 };
 
 // Represents a piece of hardware and all its available sensors
@@ -27,12 +28,14 @@ export type GpuData = {
   usage: number;
   totalVram: number;
   usedVram: number;
+  sensors?: SensorInfo[];
 };
 
 export type CpuData = {
   name: string;
   temp: number;
   usage: number;
+  sensors?: SensorInfo[];
 };
 
 export type MemoryData = {
@@ -40,6 +43,7 @@ export type MemoryData = {
   used: number;
   available: number;
   total: number;
+  sensors?: SensorInfo[];
 };
 
 export type NetworkData = {
@@ -48,6 +52,21 @@ export type NetworkData = {
   downloadSpeed: number;
   uploadData: number;
   downloadData: number;
+  sensors?: SensorInfo[];
+};
+
+export type NetworkInterfaceDetails = {
+  name: string;
+  ipv4?: string;
+  ipv6?: string;
+  gateway?: string;
+  dns?: string[];
+  mac?: string;
+};
+
+export type PingHistorySample = {
+  timestamp: number;
+  latency: number | null;
 };
 
 export type UptimeData = {
@@ -66,6 +85,7 @@ export type HardwareDataReport = {
   network: NetworkData[];
   uptime: UptimeData;
   rawSensors: RawSensorValue[]; // A flat list of all sensor values for easy lookup
+  networkDetails?: NetworkInterfaceDetails[];
 };
 
 // Configuration for which parts of a metric are visible (e.g., icon, label)
@@ -160,4 +180,56 @@ export type PingData = {
   host: string;
   timeString: string;
   latency: number | undefined;
+};
+
+export type HardwareFlyoutSection = 'cpu' | 'gpu' | 'memory' | 'network' | 'ping';
+
+export type CpuFlyoutPayload = {
+  data: CpuData | undefined;
+  rawSensorValues: RawSensorValue[];
+};
+
+export type GpuFlyoutPayload = {
+  data: GpuData | undefined;
+  rawSensorValues: RawSensorValue[];
+};
+
+export type MemoryFlyoutPayload = {
+  data: MemoryData | undefined;
+  rawSensorValues: RawSensorValue[];
+};
+
+export type NetworkFlyoutPayload = {
+  data: NetworkData | undefined;
+  networkDetails?: NetworkInterfaceDetails[];
+  rawSensorValues: RawSensorValue[];
+};
+
+export type PingFlyoutPayload = {
+  host: string;
+  data: PingData | null;
+  history: PingHistorySample[];
+};
+
+export type HardwareFlyoutPayload = {
+  section: HardwareFlyoutSection;
+  cpu?: CpuFlyoutPayload;
+  gpu?: GpuFlyoutPayload;
+  memory?: MemoryFlyoutPayload;
+  network?: NetworkFlyoutPayload;
+  ping?: PingFlyoutPayload;
+};
+
+export type HardwareFlyoutAnchor = {
+  x: number;
+  y: number;
+  width: number;
+  height: number;
+};
+
+export type HardwareFlyoutShowData = {
+  section: HardwareFlyoutSection;
+  anchor: HardwareFlyoutAnchor;
+  payload: HardwareFlyoutPayload;
+  darkMode?: boolean;
 };

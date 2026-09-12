@@ -1,10 +1,17 @@
 import {Activity, Database, Gauge, HardDrive, MemoryStick, Power, Thermometer} from 'lucide-react';
 import {ElementType, memo, ReactNode, useMemo} from 'react';
 
-import {HardwareInfo, HardwareMetricsConfig, MemoryData, RawSensorValue} from '../../../../cross/types';
+import {
+  HardwareFlyoutPayload,
+  HardwareInfo,
+  HardwareMetricsConfig,
+  MemoryData,
+  RawSensorValue,
+} from '../../../../cross/types';
 import {useHMonitorState} from '../../../state/hmonitorSlice';
 import {getMemoryAlias} from '../../../utils/aliasUtils';
 import {getUsageColor} from '../../../utils/colorUtils';
+import HardwareFlyoutTrigger from '../../common/HardwareFlyoutTrigger';
 import MetricItem from '../../common/MetricItem';
 import Section from '../../common/Section';
 
@@ -108,10 +115,23 @@ const MemorySection = memo(({data, metrics, hardwareInfo, rawSensorValues}: Prop
     return list;
   }, [metrics.enabled, metrics.custom, memPercentage, used, total, hardwareInfo, sensorReadingMap]);
 
+  const flyoutPayload = useMemo<HardwareFlyoutPayload>(
+    () => ({
+      section: 'memory',
+      memory: {
+        data,
+        rawSensorValues,
+      },
+    }),
+    [data, rawSensorValues],
+  );
+
   return (
-    <Section title={title} icon={MemoryStick}>
-      {renderedMetrics}
-    </Section>
+    <HardwareFlyoutTrigger section="memory" payload={flyoutPayload}>
+      <Section title={title} icon={MemoryStick}>
+        {renderedMetrics}
+      </Section>
+    </HardwareFlyoutTrigger>
   );
 });
 

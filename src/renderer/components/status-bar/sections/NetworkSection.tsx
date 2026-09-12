@@ -2,9 +2,17 @@ import {convertStorageUnit, formatSize} from '@lynx_common/utils';
 import {Activity, ArrowDown, ArrowUp, Database, Gauge, Power, Thermometer, Wifi} from 'lucide-react';
 import {ElementType, memo, ReactNode, useMemo} from 'react';
 
-import {HardwareInfo, HardwareMetricsConfig, NetworkData, RawSensorValue} from '../../../../cross/types';
+import {
+  HardwareFlyoutPayload,
+  HardwareInfo,
+  HardwareMetricsConfig,
+  NetworkData,
+  NetworkInterfaceDetails,
+  RawSensorValue,
+} from '../../../../cross/types';
 import {useHMonitorState} from '../../../state/hmonitorSlice';
 import {getNetworkAlias} from '../../../utils/aliasUtils';
+import HardwareFlyoutTrigger from '../../common/HardwareFlyoutTrigger';
 import MetricItem from '../../common/MetricItem';
 import Section from '../../common/Section';
 
@@ -31,9 +39,10 @@ type Props = {
   metrics: HardwareMetricsConfig;
   hardwareInfo: HardwareInfo | undefined;
   rawSensorValues: RawSensorValue[];
+  networkDetails?: NetworkInterfaceDetails[];
 };
 
-const NetworkSection = memo(({data, metrics, hardwareInfo, rawSensorValues}: Props) => {
+const NetworkSection = memo(({data, metrics, hardwareInfo, rawSensorValues, networkDetails}: Props) => {
   const showAliasNetwork = useHMonitorState('showAliasNetwork');
   const {name, uploadSpeed, downloadSpeed, uploadData, downloadData} = data || {
     name: '',
@@ -141,12 +150,26 @@ const NetworkSection = memo(({data, metrics, hardwareInfo, rawSensorValues}: Pro
     sensorReadingMap,
   ]);
 
+  const flyoutPayload = useMemo<HardwareFlyoutPayload>(
+    () => ({
+      section: 'network',
+      network: {
+        data,
+        networkDetails,
+        rawSensorValues,
+      },
+    }),
+    [data, networkDetails, rawSensorValues],
+  );
+
   if (renderedMetrics?.length === 0) return null;
 
   return (
-    <Section icon={Wifi} title={title}>
-      {renderedMetrics}
-    </Section>
+    <HardwareFlyoutTrigger section="network" payload={flyoutPayload}>
+      <Section icon={Wifi} title={title}>
+        {renderedMetrics}
+      </Section>
+    </HardwareFlyoutTrigger>
   );
 });
 
