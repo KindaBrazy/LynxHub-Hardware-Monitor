@@ -17,6 +17,7 @@ export const HMONITOR_IPC_SHOW_FLYOUT: string = 'hmonitor-show-flyout';
 export const HMONITOR_IPC_UPDATE_FLYOUT: string = 'hmonitor-update-flyout';
 export const HMONITOR_IPC_HIDE_FLYOUT: string = 'hmonitor-hide-flyout';
 export const HMONITOR_IPC_FLYOUT_MOUSE_EVENT: string = 'hmonitor-flyout-mouse-event';
+export const HMONITOR_IPC_FLYOUT_RESIZE: string = 'hmonitor-flyout-resize';
 
 // Initial state for available hardware (populated at runtime)
 export const initialAvailableHardware: AvailableHardware = {

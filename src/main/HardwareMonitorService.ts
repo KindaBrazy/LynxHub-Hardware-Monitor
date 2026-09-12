@@ -13,6 +13,7 @@ import {
   HMONITOR_IPC_CONFIG_UPDATE,
   HMONITOR_IPC_DATA_UPDATE,
   HMONITOR_IPC_FLYOUT_MOUSE_EVENT,
+  HMONITOR_IPC_FLYOUT_RESIZE,
   HMONITOR_IPC_HIDE_FLYOUT,
   HMONITOR_IPC_MONITORING_ERROR,
   HMONITOR_IPC_RESET_CONFIG,
@@ -527,6 +528,9 @@ class HardwareMonitorService {
     });
     ipcMain.on(HMONITOR_IPC_FLYOUT_MOUSE_EVENT, (_, eventType: 'enter' | 'leave') => {
       hardwareFlyoutView.onFlyoutMouseEvent(eventType);
+    });
+    ipcMain.on(HMONITOR_IPC_FLYOUT_RESIZE, (_, data: {width?: number; height: number}) => {
+      hardwareFlyoutView.onResize(data);
     });
   }
 }

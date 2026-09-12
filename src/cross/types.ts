@@ -187,22 +187,26 @@ export type HardwareFlyoutSection = 'cpu' | 'gpu' | 'memory' | 'network' | 'ping
 export type CpuFlyoutPayload = {
   data: CpuData | undefined;
   rawSensorValues: RawSensorValue[];
+  metrics?: HardwareMetricsConfig;
 };
 
 export type GpuFlyoutPayload = {
   data: GpuData | undefined;
   rawSensorValues: RawSensorValue[];
+  metrics?: HardwareMetricsConfig;
 };
 
 export type MemoryFlyoutPayload = {
   data: MemoryData | undefined;
   rawSensorValues: RawSensorValue[];
+  metrics?: HardwareMetricsConfig;
 };
 
 export type NetworkFlyoutPayload = {
   data: NetworkData | undefined;
   networkDetails?: NetworkInterfaceDetails[];
   rawSensorValues: RawSensorValue[];
+  metrics?: HardwareMetricsConfig;
 };
 
 export type PingFlyoutPayload = {

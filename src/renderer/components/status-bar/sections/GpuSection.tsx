@@ -157,9 +157,10 @@ const GpuSection = memo(({data, metrics, hardwareInfo, rawSensorValues}: Props) 
       gpu: {
         data,
         rawSensorValues,
+        metrics,
       },
     }),
-    [data, rawSensorValues],
+    [data, rawSensorValues, metrics],
   );
 
   return (

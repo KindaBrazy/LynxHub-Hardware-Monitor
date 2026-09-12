@@ -121,9 +121,10 @@ const MemorySection = memo(({data, metrics, hardwareInfo, rawSensorValues}: Prop
       memory: {
         data,
         rawSensorValues,
+        metrics,
       },
     }),
-    [data, rawSensorValues],
+    [data, rawSensorValues, metrics],
   );
 
   return (

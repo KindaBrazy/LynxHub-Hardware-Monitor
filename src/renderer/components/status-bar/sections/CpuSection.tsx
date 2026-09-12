@@ -143,9 +143,10 @@ const CpuSection = memo(({data, metrics, hardwareInfo, rawSensorValues}: Props) 
       cpu: {
         data,
         rawSensorValues,
+        metrics,
       },
     }),
-    [data, rawSensorValues],
+    [data, rawSensorValues, metrics],
   );
 
   return (

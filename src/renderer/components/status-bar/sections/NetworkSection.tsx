@@ -157,9 +157,10 @@ const NetworkSection = memo(({data, metrics, hardwareInfo, rawSensorValues, netw
         data,
         networkDetails,
         rawSensorValues,
+        metrics,
       },
     }),
-    [data, networkDetails, rawSensorValues],
+    [data, networkDetails, rawSensorValues, metrics],
   );
 
   if (renderedMetrics?.length === 0) return null;
