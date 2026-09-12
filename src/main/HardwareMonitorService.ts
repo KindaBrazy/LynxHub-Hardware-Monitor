@@ -14,6 +14,7 @@ import {
   HMONITOR_IPC_DATA_UPDATE,
   HMONITOR_IPC_FLYOUT_MOUSE_EVENT,
   HMONITOR_IPC_FLYOUT_RESIZE,
+  HMONITOR_IPC_FLYOUT_SET_RANGE,
   HMONITOR_IPC_HIDE_FLYOUT,
   HMONITOR_IPC_MONITORING_ERROR,
   HMONITOR_IPC_RESET_CONFIG,
@@ -25,8 +26,16 @@ import {
   HMONITOR_STORAGE_ID,
   initialSettings,
 } from '../cross/constants';
-import {HardwareDataReport, HardwareInfo, MonitoringSettings, NetworkInterfaceDetails, PingData} from '../cross/types';
+import {
+  HardwareDataReport,
+  HardwareInfo,
+  MonitoringSettings,
+  NetworkInterfaceDetails,
+  PingData,
+  TimeRangeOption,
+} from '../cross/types';
 import {hardwareFlyoutView} from './HardwareFlyoutView';
+import {hardwareTelemetryHistory} from './HardwareTelemetryHistory';
 import {Pinger} from './pinger';
 import {getActiveComponentTypes} from './utils';
 
@@ -161,6 +170,7 @@ class HardwareMonitorService {
 
           pinger.onResult = result => {
             const timeString = result.timestamp.toLocaleTimeString();
+            hardwareTelemetryHistory.recordPing(host, result.latency, result.alive);
             if (result.alive) {
               const data: PingData = {host, timeString, latency: result.latency};
               this.sendToRenderer(HMONITOR_IPC_UPDATE_PING, data);
@@ -170,6 +180,7 @@ class HardwareMonitorService {
           };
 
           pinger.onError = () => {
+            hardwareTelemetryHistory.recordPing(host, undefined, false);
             this.sendToRenderer(HMONITOR_IPC_UPDATE_PING, host);
           };
 
@@ -417,6 +428,7 @@ class HardwareMonitorService {
       await this.hwMonitor.checkRequirements(targetDir);
 
       this.hwMonitor.on('data', (data: HardwareReport) => {
+        hardwareTelemetryHistory.recordHardwareReport(data);
         // Flatten all sensor values for easy lookup on the renderer side
         const rawSensors = [
           ...(data.CPU ?? []),
@@ -518,11 +530,28 @@ class HardwareMonitorService {
     });
 
     ipcMain.on(HMONITOR_IPC_SHOW_FLYOUT, (_, data) => {
-      hardwareFlyoutView.show(data);
+      let key: string | undefined;
+      if (data.section === 'cpu') key = data.payload?.cpu?.data?.name;
+      else if (data.section === 'gpu') key = data.payload?.gpu?.data?.name;
+      else if (data.section === 'memory') key = data.payload?.memory?.data?.name;
+      else if (data.section === 'network') key = data.payload?.network?.data?.name;
+      else if (data.section === 'ping') key = data.payload?.ping?.host;
+
+      data.history = hardwareTelemetryHistory.getHistory(data.section, key);
+      void hardwareFlyoutView.show(data);
     });
     ipcMain.on(HMONITOR_IPC_UPDATE_FLYOUT, (_, data) => {
+      let key: string | undefined;
+      if (data.section === 'cpu') key = data.payload?.cpu?.data?.name;
+      else if (data.section === 'gpu') key = data.payload?.gpu?.data?.name;
+      else if (data.section === 'memory') key = data.payload?.memory?.data?.name;
+      else if (data.section === 'network') key = data.payload?.network?.data?.name;
+      else if (data.section === 'ping') key = data.payload?.ping?.host;
+
+      data.history = hardwareTelemetryHistory.getHistory(data.section, key);
       hardwareFlyoutView.update(data);
     });
+
     ipcMain.on(HMONITOR_IPC_HIDE_FLYOUT, () => {
       hardwareFlyoutView.onTriggerLeave();
     });
@@ -531,6 +560,9 @@ class HardwareMonitorService {
     });
     ipcMain.on(HMONITOR_IPC_FLYOUT_RESIZE, (_, data: {width?: number; height: number}) => {
       hardwareFlyoutView.onResize(data);
+    });
+    ipcMain.on(HMONITOR_IPC_FLYOUT_SET_RANGE, (_, range: TimeRangeOption) => {
+      hardwareFlyoutView.setActiveRange(range);
     });
   }
 }

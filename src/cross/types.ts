@@ -182,24 +182,75 @@ export type PingData = {
   latency: number | undefined;
 };
 
+export type TimeRangeOption = 'minutes' | 'hour' | 'overall';
+
+export type MetricStats = {
+  current: number;
+  min: number;
+  avg: number;
+  max: number;
+};
+
+export type CpuTelemetrySample = {
+  timestamp: number;
+  usage: number;
+  temp: number;
+};
+
+export type GpuTelemetrySample = {
+  timestamp: number;
+  usage: number;
+  temp: number;
+  usedVram: number;
+};
+
+export type MemoryTelemetrySample = {
+  timestamp: number;
+  used: number; // GB
+  total: number; // GB
+  pct: number;
+};
+
+export type NetworkTelemetrySample = {
+  timestamp: number;
+  downloadSpeed: number; // bytes/sec
+  uploadSpeed: number; // bytes/sec
+};
+
+export type PingTelemetrySample = {
+  timestamp: number;
+  latency: number | null;
+};
+
+export type TelemetryHistoryMap = {
+  cpu?: CpuTelemetrySample[];
+  gpu?: GpuTelemetrySample[];
+  memory?: MemoryTelemetrySample[];
+  network?: NetworkTelemetrySample[];
+  ping?: PingTelemetrySample[];
+};
+
 export type HardwareFlyoutSection = 'cpu' | 'gpu' | 'memory' | 'network' | 'ping';
 
 export type CpuFlyoutPayload = {
   data: CpuData | undefined;
   rawSensorValues: RawSensorValue[];
   metrics?: HardwareMetricsConfig;
+  history?: CpuTelemetrySample[];
 };
 
 export type GpuFlyoutPayload = {
   data: GpuData | undefined;
   rawSensorValues: RawSensorValue[];
   metrics?: HardwareMetricsConfig;
+  history?: GpuTelemetrySample[];
 };
 
 export type MemoryFlyoutPayload = {
   data: MemoryData | undefined;
   rawSensorValues: RawSensorValue[];
   metrics?: HardwareMetricsConfig;
+  history?: MemoryTelemetrySample[];
 };
 
 export type NetworkFlyoutPayload = {
@@ -207,12 +258,13 @@ export type NetworkFlyoutPayload = {
   networkDetails?: NetworkInterfaceDetails[];
   rawSensorValues: RawSensorValue[];
   metrics?: HardwareMetricsConfig;
+  history?: NetworkTelemetrySample[];
 };
 
 export type PingFlyoutPayload = {
   host: string;
   data: PingData | null;
-  history: PingHistorySample[];
+  history: (PingHistorySample | PingTelemetrySample)[];
 };
 
 export type HardwareFlyoutPayload = {
@@ -236,4 +288,6 @@ export type HardwareFlyoutShowData = {
   anchor: HardwareFlyoutAnchor;
   payload: HardwareFlyoutPayload;
   darkMode?: boolean;
+  history?: any[];
+  range?: TimeRangeOption;
 };
