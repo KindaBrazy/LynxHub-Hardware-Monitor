@@ -1,12 +1,12 @@
-import {Button, Card, Chip, Input, ListBox, Select, Switch} from '@heroui/react';
-import {CpuBoltIcon} from '@solar-icons/react/bold-duotone';
+import {Button, Chip, Input, ListBox, Select} from '@heroui/react';
 import {AnimatePresence, motion} from 'framer-motion';
-import {Activity, Database, HardDrive, Plus, X} from 'lucide-react';
+import {Plus, X} from 'lucide-react';
 import {memo, ReactNode, useState} from 'react';
 import {useDispatch} from 'react-redux';
 
 import {HardwareInfo, HardwareMetricsConfig, MetricType} from '../../../cross/types';
 import {hmonitorActions} from '../../state/hmonitorSlice';
+import SettingsCategoryCard from './SettingsCategoryCard';
 
 type AddMetricFormState = {
   sensorIdentifier: string;
@@ -17,29 +17,6 @@ type CustomMetricsProps = {
   config: HardwareMetricsConfig;
   hardware: HardwareInfo;
   type: MetricType;
-};
-
-const CATEGORY_META: Record<string, {badge: string; badgeClass: string; iconBgClass: string}> = {
-  cpu: {
-    badge: 'CPU',
-    badgeClass: 'bg-cyan-500/15 text-cyan-400 border-cyan-500/30',
-    iconBgClass: 'bg-cyan-500/15 text-cyan-400',
-  },
-  gpu: {
-    badge: 'GPU',
-    badgeClass: 'bg-purple-500/15 text-purple-400 border-purple-500/30',
-    iconBgClass: 'bg-purple-500/15 text-purple-400',
-  },
-  memory: {
-    badge: 'RAM',
-    badgeClass: 'bg-emerald-500/15 text-emerald-400 border-emerald-500/30',
-    iconBgClass: 'bg-emerald-500/15 text-emerald-400',
-  },
-  network: {
-    badge: 'NET',
-    badgeClass: 'bg-amber-500/15 text-amber-400 border-amber-500/30',
-    iconBgClass: 'bg-amber-500/15 text-amber-400',
-  },
 };
 
 /**
@@ -202,81 +179,28 @@ type Props = {
 const SettingsModalCard = memo(({onToggle, config, hardware, type, children, dragHandle, headerExtra}: Props) => {
   if (!config) return null;
   const {active} = config;
-  const meta = CATEGORY_META[type] || {
-    badge: type.toUpperCase(),
-    badgeClass: 'bg-accent/15 text-accent border-accent/30',
-    iconBgClass: 'bg-accent/15 text-accent',
-  };
 
   return (
-    <Card className="rounded-3xl bg-surface-secondary/70 border border-border overflow-hidden shadow-xs">
-      <Card.Header
-        className={
-          'flex flex-row justify-between items-center bg-surface/80 rounded-3xl' +
-          ' py-3 px-4 border-b border-surface-tertiary/60'
-        }>
-        <div className="flex flex-row items-center gap-x-3">
-          {dragHandle}
-          <div className={`size-8 rounded-full flex items-center justify-center shrink-0 ${meta.iconBgClass}`}>
-            {type === 'cpu' && <CpuBoltIcon className="size-4.5" />}
-            {type === 'gpu' && <Activity className="size-4.5" />}
-            {type === 'memory' && <Database className="size-4.5" />}
-            {type === 'network' && <HardDrive className="size-4.5" />}
-          </div>
-          <div className="flex items-center gap-x-2">
-            <span
-              className={
-                'px-1.5 py-0.5 rounded-md text-[10px] font-bold ' + `tracking-wide uppercase border ${meta.badgeClass}`
-              }>
-              {meta.badge}
-            </span>
-            <span className="font-semibold text-foreground text-sm hover:text-foreground/90 transition-colors">
-              {hardware.name}
-            </span>
-          </div>
+    <SettingsCategoryCard
+      category={type}
+      isActive={active}
+      onToggle={onToggle}
+      isDisabled={!active}
+      title={hardware.name}
+      dragHandle={dragHandle}
+      headerExtra={headerExtra?.(active)}
+      toggleAriaLabel={`Toggle active state for ${hardware.name}`}
+      disabledMessage="This hardware component is currently disabled. Toggle the switch to activate.">
+      <div className="flex flex-col gap-y-1.5 w-full">
+        <div className="flex items-center justify-between">
+          <span className="text-xs font-semibold text-foreground/80">Available Metrics</span>
+          <span className="text-[11px] text-muted">Drag to reorder • Check to toggle</span>
         </div>
+        <div className="flex flex-row items-center gap-x-2 w-full">{children}</div>
+      </div>
 
-        <div className="flex flex-row items-center gap-x-3">
-          {headerExtra?.(active)}
-          <Switch isSelected={active} onChange={onToggle} aria-label={`Toggle active state for ${hardware.name}`}>
-            <Switch.Content>
-              <Switch.Control>
-                <Switch.Thumb />
-              </Switch.Control>
-            </Switch.Content>
-          </Switch>
-        </div>
-      </Card.Header>
-
-      <Card.Content className="flex flex-col gap-y-3 p-3.5 relative bg-surface/80 rounded-3xl">
-        {/* Overlay when component is disabled */}
-        {!active && (
-          <div
-            className={
-              'absolute inset-0 bg-surface/75 backdrop-blur-[1px] z-20' +
-              ' flex items-center justify-center rounded-b-xl'
-            }>
-            <p
-              className={
-                'text-xs text-muted font-medium bg-surface-secondary px-3' +
-                ' py-1.5 rounded-lg border border-surface-tertiary shadow-xs'
-              }>
-              This hardware component is currently disabled. Toggle the switch to activate.
-            </p>
-          </div>
-        )}
-
-        <div className="flex flex-col gap-y-1.5 w-full">
-          <div className="flex items-center justify-between">
-            <span className="text-xs font-semibold text-foreground/80">Available Metrics</span>
-            <span className="text-[11px] text-muted">Drag to reorder • Check to toggle</span>
-          </div>
-          <div className="flex flex-row items-center gap-x-2 w-full">{children}</div>
-        </div>
-
-        <CustomMetricsSection type={type} config={config} hardware={hardware} />
-      </Card.Content>
-    </Card>
+      <CustomMetricsSection type={type} config={config} hardware={hardware} />
+    </SettingsCategoryCard>
   );
 });
 

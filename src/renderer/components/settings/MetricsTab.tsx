@@ -1,4 +1,4 @@
-import {Card, Checkbox, Key, Label, ListBox, Select, Switch} from '@heroui/react';
+import {Checkbox, Key, Label, ListBox, Select} from '@heroui/react';
 import {CheckCircleIcon} from '@solar-icons/react/bold-duotone';
 import {Reorder, useDragControls} from 'framer-motion';
 import {isEqual} from 'lodash-es';
@@ -13,7 +13,6 @@ import {
   Database,
   GripVertical,
   LucideProps,
-  Network,
   Thermometer,
   Timer,
 } from 'lucide-react';
@@ -23,6 +22,7 @@ import {useDispatch} from 'react-redux';
 import {HardwareMetricsConfig, MetricType, MonitoringSettings, SystemMetric} from '../../../cross/types';
 import {hmonitorActions} from '../../state/hmonitorSlice';
 import PingSettings from './PingSettings';
+import SettingsCategoryCard from './SettingsCategoryCard';
 import SettingsModalCard from './SettingsModalCard';
 
 const METRIC_CONFIG: Record<string, {label: string; Icon: ForwardRefExoticComponent<Omit<LucideProps, 'ref'>>}> = {
@@ -509,164 +509,99 @@ export const MetricsTab = memo(
         case 'network':
           return (
             availableHardware.network.length > 0 && (
-              <Card
-                className={'rounded-3xl bg-surface-secondary/70 border ' + 'border-border overflow-hidden shadow-xs'}>
-                <Card.Header
-                  className={
-                    'flex flex-row justify-between items-center bg-surface/80' +
-                    ' py-3 px-4 border-b border-surface-tertiary/60 rounded-3xl'
-                  }>
-                  <div className="flex flex-row items-center gap-x-3">
-                    {dragHandle}
-                    <div
-                      className={
-                        'size-8 rounded-full bg-amber-500/15 text-amber-400 ' +
-                        'flex items-center justify-center shrink-0'
-                      }>
-                      <Network className="size-4.5" />
-                    </div>
-                    <div className="flex items-center gap-x-2">
-                      <span
-                        className={
-                          'px-1.5 py-0.5 rounded-md text-[10px] font-bold ' +
-                          'tracking-wide uppercase border bg-amber-500/15 text-amber-400 border-amber-500/30'
-                        }>
-                        NET
-                      </span>
-                      <span
-                        className={'font-semibold text-foreground hover:text-foreground/90 transition-colors text-sm'}>
-                        Network Interface
-                      </span>
-                    </div>
-                  </div>
-
-                  <div className="flex flex-row items-center gap-x-3">
-                    {selectedNetworkConfig && (
-                      <Checkbox
-                        variant="secondary"
-                        isSelected={settings.showAliasNetwork}
-                        isDisabled={!selectedNetworkConfig.active}
-                        onChange={val => updateState('showAliasNetwork', val)}>
-                        <Checkbox.Content className="text-xs">
-                          <Checkbox.Control className="size-4 rounded-md">
-                            <Checkbox.Indicator />
-                          </Checkbox.Control>
-                          Friendly Alias
-                        </Checkbox.Content>
-                      </Checkbox>
-                    )}
-                    {selectedNetworkConfig && (
-                      <Switch
-                        aria-label="Toggle network monitoring"
-                        isSelected={selectedNetworkConfig.active}
-                        onChange={() => toggleHardwareActive(selectedNetworkName, 'network')}>
-                        <Switch.Content>
-                          <Switch.Control>
-                            <Switch.Thumb />
-                          </Switch.Control>
-                        </Switch.Content>
-                      </Switch>
-                    )}
-                  </div>
-                </Card.Header>
-
-                <Card.Content className="flex flex-col items-start relative bg-surface/70 gap-y-3 p-3.5 rounded-3xl">
-                  <div className="w-full flex items-center justify-between gap-4">
-                    <Select
-                      onChange={value => {
-                        if (value) setSelectedNetworkName(value);
-                      }}
+              <SettingsCategoryCard
+                onToggle={
+                  selectedNetworkConfig ? () => toggleHardwareActive(selectedNetworkName, 'network') : undefined
+                }
+                headerExtra={
+                  selectedNetworkConfig && (
+                    <Checkbox
                       variant="secondary"
-                      selectionMode="single"
-                      value={selectedNetworkName}
-                      placeholder="Select a network interface to configure"
-                      fullWidth>
-                      <Select.Trigger className="text-xs h-9">
-                        <Select.Value />
-                        <Select.Indicator />
-                      </Select.Trigger>
-                      <Select.Popover>
-                        <ListBox items={availableHardware.network}>
-                          {item => (
-                            <ListBox.Item id={item.name} key={item.name}>
-                              <Label className="text-xs">{item.name}</Label>
-                              <ListBox.ItemIndicator />
-                            </ListBox.Item>
-                          )}
-                        </ListBox>
-                      </Select.Popover>
-                    </Select>
-                  </div>
+                      isSelected={settings.showAliasNetwork}
+                      isDisabled={!selectedNetworkConfig.active}
+                      onChange={val => updateState('showAliasNetwork', val)}>
+                      <Checkbox.Content className="text-xs">
+                        <Checkbox.Control className="size-4 rounded-md">
+                          <Checkbox.Indicator />
+                        </Checkbox.Control>
+                        Friendly Alias
+                      </Checkbox.Content>
+                    </Checkbox>
+                  )
+                }
+                category="network"
+                dragHandle={dragHandle}
+                title="Network Interface"
+                isActive={selectedNetworkConfig?.active}
+                toggleAriaLabel="Toggle network monitoring">
+                <div className="w-full flex items-center justify-between gap-4">
+                  <Select
+                    onChange={value => {
+                      if (value) setSelectedNetworkName(value);
+                    }}
+                    variant="secondary"
+                    selectionMode="single"
+                    value={selectedNetworkName}
+                    placeholder="Select a network interface to configure"
+                    fullWidth>
+                    <Select.Trigger className="text-xs h-9">
+                      <Select.Value />
+                      <Select.Indicator />
+                    </Select.Trigger>
+                    <Select.Popover>
+                      <ListBox items={availableHardware.network}>
+                        {item => (
+                          <ListBox.Item id={item.name} key={item.name}>
+                            <Label className="text-xs">{item.name}</Label>
+                            <ListBox.ItemIndicator />
+                          </ListBox.Item>
+                        )}
+                      </ListBox>
+                    </Select.Popover>
+                  </Select>
+                </div>
 
-                  {selectedNetworkConfig && selectedNetworkHardware && (
-                    <div className="w-full relative flex flex-col gap-y-1.5 pt-2 border-t border-surface-tertiary/40">
-                      {!selectedNetworkConfig.active && (
-                        <div
+                {selectedNetworkConfig && selectedNetworkHardware && (
+                  <div className="w-full relative flex flex-col gap-y-1.5 pt-2 border-t border-surface-tertiary/40">
+                    {!selectedNetworkConfig.active && (
+                      <div
+                        className={
+                          'absolute inset-0 bg-surface/75 backdrop-blur-[1px] z-20' +
+                          ' flex items-center justify-center rounded-xl'
+                        }>
+                        <p
                           className={
-                            'absolute inset-0 bg-surface/75 backdrop-blur-[1px] z-20' +
-                            ' flex items-center justify-center rounded-xl'
+                            'text-xs text-muted font-medium bg-surface-secondary' +
+                            ' px-3 py-1.5 rounded-full border border-border'
                           }>
-                          <p
-                            className={
-                              'text-xs text-muted font-medium bg-surface-secondary' +
-                              ' px-3 py-1.5 rounded-full border border-border'
-                            }>
-                            Selected network interface is disabled. Toggle above to activate.
-                          </p>
-                        </div>
-                      )}
-                      <div className="flex items-center justify-between">
-                        <span className="text-xs font-semibold text-foreground/80">Interface Metrics</span>
-                        <span className="text-[11px] text-muted">Drag to reorder • Check to toggle</span>
+                          Selected network interface is disabled. Toggle above to activate.
+                        </p>
                       </div>
-                      <HardwareMetricsReorderGroup
-                        type="network"
-                        config={selectedNetworkConfig}
-                        hardwareName={selectedNetworkName}
-                      />
+                    )}
+                    <div className="flex items-center justify-between">
+                      <span className="text-xs font-semibold text-foreground/80">Interface Metrics</span>
+                      <span className="text-[11px] text-muted">Drag to reorder • Check to toggle</span>
                     </div>
-                  )}
-                </Card.Content>
-              </Card>
+                    <HardwareMetricsReorderGroup
+                      type="network"
+                      config={selectedNetworkConfig}
+                      hardwareName={selectedNetworkName}
+                    />
+                  </div>
+                )}
+              </SettingsCategoryCard>
             )
           );
 
         case 'uptime':
           return (
-            <Card className={'bg-surface-secondary/70 border border-border ' + 'rounded-3xl overflow-hidden shadow-xs'}>
-              <Card.Header
-                className={
-                  'flex flex-row items-center gap-x-3 bg-surface/80 py-3 px-4' +
-                  ' border-b border-surface-tertiary/60 rounded-3xl'
-                }>
-                {dragHandle}
-                <div
-                  className={
-                    'size-8 rounded-full bg-sky-500/15 text-sky-400 flex items-center justify-center shrink-0'
-                  }>
-                  <Clock className="size-4.5" />
-                </div>
-                <div className="flex items-center gap-x-2">
-                  <span
-                    className={
-                      'px-1.5 py-0.5 rounded-md text-[10px] font-bold ' +
-                      'tracking-wide uppercase border bg-sky-500/15 text-sky-400 border-sky-500/30'
-                    }>
-                    UPTIME
-                  </span>
-                  <span className={'font-semibold text-foreground hover:text-foreground/90 transition-colors text-sm'}>
-                    System & Application Uptime
-                  </span>
-                </div>
-              </Card.Header>
-              <Card.Content className="flex flex-col gap-y-1.5 p-3.5 bg-surface/70 rounded-3xl">
-                <div className="flex items-center justify-between">
-                  <span className="text-xs font-semibold text-foreground/80">Uptime Indicators</span>
-                  <span className="text-[11px] text-muted">Drag to reorder</span>
-                </div>
-                <UptimeMetricsReorderGroup uptimeOrder={settings.uptimeOrder} uptimeEnabled={enabledMetrics.uptime} />
-              </Card.Content>
-            </Card>
+            <SettingsCategoryCard category="uptime" dragHandle={dragHandle} title="System & Application Uptime">
+              <div className="flex items-center justify-between">
+                <span className="text-xs font-semibold text-foreground/80">Uptime Indicators</span>
+                <span className="text-[11px] text-muted">Drag to reorder</span>
+              </div>
+              <UptimeMetricsReorderGroup uptimeOrder={settings.uptimeOrder} uptimeEnabled={enabledMetrics.uptime} />
+            </SettingsCategoryCard>
           );
 
         case 'ping':
