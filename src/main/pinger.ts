@@ -1,4 +1,4 @@
-import {exec} from 'node:child_process';
+import {ChildProcess, execFile} from 'node:child_process';
 import {platform} from 'node:os';
 
 import {PingConfig, PingResult} from '../cross/types';
@@ -8,6 +8,7 @@ export class Pinger {
   private readonly isWindows: boolean;
   private running: boolean = false;
   private timer: NodeJS.Timeout | null = null;
+  private activeProcess: ChildProcess | null = null;
 
   public host: string;
 
@@ -43,6 +44,14 @@ export class Pinger {
       clearTimeout(this.timer);
       this.timer = null;
     }
+    if (this.activeProcess) {
+      try {
+        this.activeProcess.kill();
+      } catch {
+        // Ignore kill errors if the process has already terminated
+      }
+      this.activeProcess = null;
+    }
   }
 
   /**
@@ -77,10 +86,13 @@ export class Pinger {
    */
   private ping(): Promise<PingResult> {
     return new Promise(resolve => {
-      const command = this.buildCommand();
       const timestamp = new Date();
+      const host = this.config.host.trim();
+      const args = this.buildArgs(host);
 
-      exec(command, (error, stdout, stderr) => {
+      const child = execFile('ping', args, {windowsHide: true}, (error, stdout, stderr) => {
+        this.activeProcess = null;
+
         const result: PingResult = {
           host: this.config.host,
           alive: false,
@@ -104,24 +116,26 @@ export class Pinger {
 
         resolve(result);
       });
+
+      this.activeProcess = child;
     });
   }
 
   /**
-   * Generates the appropriate OS-specific ping command.
+   * Generates the appropriate OS-specific ping arguments.
    */
-  private buildCommand(): string {
-    const {host, timeoutMs} = this.config;
+  private buildArgs(host: string): string[] {
+    const {timeoutMs} = this.config;
 
     if (this.isWindows) {
       // -n 1: send 1 packet
       // -w: timeout in milliseconds
-      return `ping -n 1 -w ${timeoutMs} ${host}`;
+      return ['-n', '1', '-w', String(timeoutMs), host];
     } else {
       // -c 1: send 1 packet
       // -W: timeout in seconds (rounded up to avoid 0)
       const timeoutSec = Math.max(1, Math.ceil(timeoutMs / 1000));
-      return `ping -c 1 -W ${timeoutSec} ${host}`;
+      return ['-c', '1', '-W', String(timeoutSec), host];
     }
   }
 
