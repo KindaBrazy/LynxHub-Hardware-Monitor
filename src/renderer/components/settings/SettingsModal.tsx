@@ -19,7 +19,7 @@ type SettingsModalProps = {state: UseOverlayStateReturn};
 export default function SettingsModal({state}: SettingsModalProps) {
   const dispatch = useDispatch<AppDispatch>();
   const settings = useHMonitorSelector(state => state.hmonitor);
-  const {enabled, displayStyle, availableHardware} = settings;
+  const {displayStyle, availableHardware} = settings;
 
   const [activeTab, setActiveTab] = useState<Key>('config');
   const [isSaving, setIsSaving] = useState<boolean>(false);

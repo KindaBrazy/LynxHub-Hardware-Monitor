@@ -1,6 +1,7 @@
 import {Card, Checkbox, Key, Label, ListBox, Select, Separator, Switch} from '@heroui/react';
 import {CheckCircleIcon} from '@solar-icons/react/bold-duotone';
-import {Reorder} from 'framer-motion';
+import {Reorder, useDragControls} from 'framer-motion';
+import {isEqual} from 'lodash-es';
 import {
   Activity,
   ArrowDown,
@@ -16,10 +17,10 @@ import {
   Thermometer,
   Timer,
 } from 'lucide-react';
-import {ForwardRefExoticComponent, memo, ReactNode, useMemo} from 'react';
+import {ForwardRefExoticComponent, memo, ReactNode, useEffect, useMemo, useRef, useState} from 'react';
 import {useDispatch} from 'react-redux';
 
-import {MetricType, MonitoringSettings, SystemMetric} from '../../../cross/types';
+import {HardwareMetricsConfig, MetricType, MonitoringSettings, SystemMetric} from '../../../cross/types';
 import {hmonitorActions} from '../../state/hmonitorSlice';
 import PingSettings from './PingSettings';
 import SettingsModalCard from './SettingsModalCard';
@@ -36,6 +37,316 @@ const METRIC_CONFIG: Record<string, {label: string; Icon: ForwardRefExoticCompon
   uptimeSystem: {label: 'System Uptime', Icon: Clock},
   uptimeApp: {label: 'App Uptime', Icon: Timer},
 };
+
+type MetricReorderItemProps = {
+  metricId: string;
+  isSelected: boolean;
+  onToggle: () => void;
+  onDragEnd?: () => void;
+  labelText: string;
+  IconComp: ForwardRefExoticComponent<Omit<LucideProps, 'ref'>> | any;
+};
+
+const MetricReorderItem = memo(
+  ({metricId, isSelected, onToggle, onDragEnd, labelText, IconComp}: MetricReorderItemProps) => {
+    const dragControls = useDragControls();
+
+    return (
+      <Reorder.Item
+        whileDrag={{
+          zIndex: 50,
+          scale: 1.03,
+          boxShadow: '0 8px 20px -4px rgba(0, 0, 0, 0.3)',
+        }}
+        className={
+          'flex flex-row items-center gap-x-1.5 px-2 py-1.5 shrink-0 ' +
+          ' rounded-xl border select-none transition-colors duration-150 ' +
+          (isSelected
+            ? 'border-accent/30 bg-accent/10 shadow-2xs text-foreground font-medium'
+            : 'border-border opacity-60 text-muted bg-surface-secondary')
+        }
+        dragElastic={0}
+        value={metricId}
+        dragListener={false}
+        dragMomentum={false}
+        onDragEnd={onDragEnd}
+        dragControls={dragControls}>
+        <div
+          onPointerDown={e => {
+            e.stopPropagation();
+            dragControls.start(e);
+          }}
+          title="Drag to reorder metric"
+          className="cursor-grab active:cursor-grabbing p-0.5 -m-0.5 flex items-center justify-center shrink-0">
+          <GripVertical className="size-3.5 text-muted hover:text-foreground active:cursor-grabbing shrink-0" />
+        </div>
+        <Checkbox onChange={onToggle} isSelected={isSelected}>
+          <Checkbox.Content className="flex flex-row items-center gap-x-1.5 text-xs">
+            <Checkbox.Control className="size-4 rounded-md">
+              <Checkbox.Indicator />
+            </Checkbox.Control>
+            <IconComp className={`size-3.5 shrink-0 ${isSelected ? 'text-accent' : 'text-muted'}`} />
+            <span className="whitespace-nowrap">{labelText}</span>
+          </Checkbox.Content>
+        </Checkbox>
+      </Reorder.Item>
+    );
+  },
+);
+
+MetricReorderItem.displayName = 'MetricReorderItem';
+
+type HardwareMetricsReorderGroupProps = {
+  type: MetricType;
+  hardwareName: string | Key;
+  config: HardwareMetricsConfig | undefined;
+};
+
+const HardwareMetricsReorderGroup = memo(({type, hardwareName, config}: HardwareMetricsReorderGroupProps) => {
+  const dispatch = useDispatch();
+
+  const nativeMetrics: SystemMetric[] = useMemo(() => {
+    if (type === 'cpu') return ['temp', 'usage'];
+    if (type === 'gpu') return ['temp', 'usage', 'vram'];
+    if (type === 'memory') return ['memory'];
+    if (type === 'network') return ['uploadSpeed', 'downloadSpeed', 'uploadData', 'downloadData'];
+    return [];
+  }, [type]);
+
+  const customIds = useMemo(() => config?.custom?.map(m => m.id) ?? [], [config?.custom]);
+  const allAvailableMetricIds = useMemo(() => [...nativeMetrics, ...customIds], [nativeMetrics, customIds]);
+
+  const initialOrderedIds = useMemo(() => {
+    const currentEnabled = config?.enabled ?? [];
+    return [
+      ...currentEnabled.filter(id => allAvailableMetricIds.includes(id as any)),
+      ...allAvailableMetricIds.filter(id => !currentEnabled.includes(id)),
+    ];
+  }, [config?.enabled, allAvailableMetricIds]);
+
+  const [items, setItems] = useState<string[]>(initialOrderedIds);
+  const isDraggingRef = useRef(false);
+
+  useEffect(() => {
+    if (!isDraggingRef.current) {
+      setItems(initialOrderedIds);
+    }
+  }, [initialOrderedIds]);
+
+  if (!config) return null;
+
+  const handleReorder = (newOrder: string[]) => {
+    isDraggingRef.current = true;
+    setItems(newOrder);
+  };
+
+  const handleDragEnd = () => {
+    setTimeout(() => {
+      isDraggingRef.current = false;
+    }, 100);
+
+    const newEnabled = items.filter(id => config.enabled.includes(id));
+    if (!isEqual(newEnabled, config.enabled)) {
+      dispatch(hmonitorActions.updateHardwareMetrics({type, name: hardwareName as string, enabled: newEnabled}));
+    }
+  };
+
+  return (
+    <div className="flex flex-col gap-y-2 w-full">
+      <Reorder.Group
+        axis="x"
+        values={items}
+        onReorder={handleReorder}
+        className="flex flex-row items-center gap-2 w-full overflow-x-auto scrollbar-hide py-1">
+        {items.map(metricId => {
+          const isCustom = !nativeMetrics.includes(metricId as any);
+          const isSelected = config.enabled.includes(metricId);
+
+          const onToggle = () => {
+            let newEnabled: string[];
+            if (isSelected) {
+              newEnabled = config.enabled.filter(id => id !== metricId);
+            } else {
+              newEnabled = items.filter(id => id === metricId || config.enabled.includes(id));
+            }
+            dispatch(hmonitorActions.updateHardwareMetrics({type, name: hardwareName as string, enabled: newEnabled}));
+          };
+
+          let labelText: string;
+          let IconComp: any;
+
+          if (isCustom) {
+            const customConfig = config.custom.find(c => c.id === metricId);
+            labelText = customConfig?.label || 'Custom Metric';
+            IconComp = Database;
+          } else {
+            const metConfig = METRIC_CONFIG[metricId];
+            labelText = metConfig?.label || metricId;
+            IconComp = metConfig?.Icon || Cpu;
+          }
+
+          return (
+            <MetricReorderItem
+              key={metricId}
+              metricId={metricId}
+              onToggle={onToggle}
+              IconComp={IconComp}
+              labelText={labelText}
+              isSelected={isSelected}
+              onDragEnd={handleDragEnd}
+            />
+          );
+        })}
+      </Reorder.Group>
+    </div>
+  );
+});
+
+HardwareMetricsReorderGroup.displayName = 'HardwareMetricsReorderGroup';
+
+type UptimeMetricsReorderGroupProps = {
+  uptimeOrder?: string[];
+  uptimeEnabled: {system: boolean; app: boolean};
+};
+
+const UptimeMetricsReorderGroup = memo(({uptimeOrder, uptimeEnabled}: UptimeMetricsReorderGroupProps) => {
+  const dispatch = useDispatch();
+  const defaultUptimeOrder = useMemo(() => ['uptimeSystem', 'uptimeApp'], []);
+  const currentOrder = useMemo(() => uptimeOrder || defaultUptimeOrder, [uptimeOrder, defaultUptimeOrder]);
+
+  const [items, setItems] = useState<string[]>(currentOrder);
+  const isDraggingRef = useRef(false);
+
+  useEffect(() => {
+    if (!isDraggingRef.current) {
+      setItems(currentOrder);
+    }
+  }, [currentOrder]);
+
+  const handleReorder = (newOrder: string[]) => {
+    isDraggingRef.current = true;
+    setItems(newOrder);
+  };
+
+  const handleDragEnd = () => {
+    setTimeout(() => {
+      isDraggingRef.current = false;
+    }, 100);
+
+    if (!isEqual(items, currentOrder)) {
+      dispatch(hmonitorActions.updateUptimeOrder(items));
+    }
+  };
+
+  return (
+    <Reorder.Group
+      axis="x"
+      values={items}
+      onReorder={handleReorder}
+      className="flex flex-row items-center gap-2 w-full overflow-x-auto scrollbar-hide py-1">
+      {items.map(metricId => {
+        const isSelected = metricId === 'uptimeApp' ? uptimeEnabled.app : uptimeEnabled.system;
+        const labelText = metricId === 'uptimeApp' ? 'Application Uptime' : 'System Uptime';
+        const IconComp = metricId === 'uptimeApp' ? Timer : Clock;
+
+        const onToggle = () => {
+          if (metricId === 'uptimeApp') {
+            dispatch(hmonitorActions.updateUptime({...uptimeEnabled, app: !isSelected}));
+          } else {
+            dispatch(hmonitorActions.updateUptime({...uptimeEnabled, system: !isSelected}));
+          }
+        };
+
+        return (
+          <MetricReorderItem
+            key={metricId}
+            metricId={metricId}
+            onToggle={onToggle}
+            IconComp={IconComp}
+            labelText={labelText}
+            isSelected={isSelected}
+            onDragEnd={handleDragEnd}
+          />
+        );
+      })}
+    </Reorder.Group>
+  );
+});
+
+UptimeMetricsReorderGroup.displayName = 'UptimeMetricsReorderGroup';
+
+type SectionReorderItemProps = {
+  type: string;
+  index: number;
+  totalSections: number;
+  moveSection: (index: number, direction: 'up' | 'down') => void;
+  children: (dragHandle: ReactNode) => ReactNode;
+};
+
+const SectionReorderItem = memo(({type, index, totalSections, moveSection, children}: SectionReorderItemProps) => {
+  const dragControls = useDragControls();
+
+  const dragHandle = (
+    <div className="flex items-center gap-0.5 shrink-0">
+      <div
+        onPointerDown={e => {
+          e.stopPropagation();
+          dragControls.start(e);
+        }}
+        className={
+          'cursor-grab active:cursor-grabbing p-1.5 rounded-md text-muted' +
+          ' hover:text-foreground hover:bg-surface-secondary transition-colors'
+        }
+        title="Drag to reorder section">
+        <GripVertical className="size-4" />
+      </div>
+      <div className="flex flex-col -space-y-1">
+        <button
+          className={
+            'p-0.5 text-muted hover:text-foreground disabled:opacity-20' +
+            ' disabled:pointer-events-none cursor-pointer'
+          }
+          type="button"
+          disabled={index === 0}
+          title="Move section up"
+          onClick={() => moveSection(index, 'up')}>
+          <ChevronUp className="size-3" />
+        </button>
+        <button
+          className={
+            'p-0.5 text-muted hover:text-foreground disabled:opacity-20' +
+            ' disabled:pointer-events-none cursor-pointer'
+          }
+          type="button"
+          title="Move section down"
+          disabled={index === totalSections - 1}
+          onClick={() => moveSection(index, 'down')}>
+          <ChevronDown className="size-3" />
+        </button>
+      </div>
+    </div>
+  );
+
+  return (
+    <Reorder.Item
+      whileDrag={{
+        zIndex: 40,
+        scale: 1.01,
+        boxShadow: '0 10px 25px -5px rgba(0, 0, 0, 0.35)',
+      }}
+      value={type}
+      dragElastic={0}
+      dragListener={false}
+      dragMomentum={false}
+      dragControls={dragControls}
+      className="relative select-none">
+      {children(dragHandle)}
+      {index !== totalSections - 1 && <Separator className="my-2" />}
+    </Reorder.Item>
+  );
+});
+
+SectionReorderItem.displayName = 'SectionReorderItem';
 
 type MetricsTabProps = {
   settings: MonitoringSettings;
@@ -55,7 +366,6 @@ export const MetricsTab = memo(
     selectedNetworkName,
     setSelectedNetworkName,
   }: MetricsTabProps) => {
-    const dispatch = useDispatch();
     const {enabledMetrics, availableHardware} = settings;
 
     const sectionsToRender = useMemo(() => {
@@ -90,155 +400,6 @@ export const MetricsTab = memo(
       [selectedNetworkName, availableHardware.network],
     );
 
-    const renderMetricsReorderGroup = (type: MetricType, hardwareName: string | Key) => {
-      const config = enabledMetrics[type].find(m => m.name === hardwareName);
-      if (!config) return null;
-
-      let nativeMetrics: SystemMetric[] = [];
-      if (type === 'cpu') nativeMetrics = ['temp', 'usage'];
-      else if (type === 'gpu') nativeMetrics = ['temp', 'usage', 'vram'];
-      else if (type === 'memory') nativeMetrics = ['memory'];
-      else if (type === 'network') nativeMetrics = ['uploadSpeed', 'downloadSpeed', 'uploadData', 'downloadData'];
-
-      const customIds = config.custom.map(m => m.id);
-      const allAvailableMetricIds = [...nativeMetrics, ...customIds];
-
-      const currentEnabled = config.enabled;
-      const orderedMetricIds = [
-        ...currentEnabled.filter(id => allAvailableMetricIds.includes(id as any)),
-        ...allAvailableMetricIds.filter(id => !currentEnabled.includes(id)),
-      ];
-
-      const handleReorder = (newOrder: string[]) => {
-        const newEnabled = newOrder.filter(id => currentEnabled.includes(id));
-        dispatch(hmonitorActions.updateHardwareMetrics({type, name: hardwareName as string, enabled: newEnabled}));
-      };
-
-      return (
-        <div className="flex flex-col gap-y-2 w-full">
-          <Reorder.Group
-            axis="x"
-            values={orderedMetricIds}
-            onReorder={handleReorder}
-            className="flex flex-row flex-wrap items-center gap-2 w-full">
-            {orderedMetricIds.map(metricId => {
-              const isCustom = !nativeMetrics.includes(metricId as any);
-              const isSelected = currentEnabled.includes(metricId);
-
-              const onToggle = () => {
-                const newEnabled = isSelected
-                  ? currentEnabled.filter(id => id !== metricId)
-                  : [...currentEnabled, metricId];
-                dispatch(
-                  hmonitorActions.updateHardwareMetrics({type, name: hardwareName as string, enabled: newEnabled}),
-                );
-              };
-
-              let labelText: string;
-              let IconComp: any;
-
-              if (isCustom) {
-                const customConfig = config.custom.find(c => c.id === metricId);
-                labelText = customConfig?.label || 'Custom Metric';
-                IconComp = Database;
-              } else {
-                const metConfig = METRIC_CONFIG[metricId];
-                labelText = metConfig?.label || metricId;
-                IconComp = metConfig?.Icon || Cpu;
-              }
-
-              return (
-                <Reorder.Item
-                  className={
-                    'flex flex-row items-center gap-x-1.5 px-2 py-1.5 ' +
-                    ' rounded-xl border select-none transition-all duration-150 ' +
-                    (isSelected
-                      ? 'border-accent/30 bg-accent/10 shadow-2xs text-foreground font-medium'
-                      : 'border-border opacity-60 text-muted bg-surface-secondary')
-                  }
-                  key={metricId}
-                  value={metricId}>
-                  <GripVertical
-                    className={
-                      'size-3.5 cursor-grab text-muted hover:text-foreground' + ' active:cursor-grabbing shrink-0'
-                    }
-                  />
-                  <Checkbox onChange={onToggle} isSelected={isSelected}>
-                    <Checkbox.Content className="flex flex-row items-center gap-x-1.5 text-xs">
-                      <Checkbox.Control className="size-4 rounded-md">
-                        <Checkbox.Indicator />
-                      </Checkbox.Control>
-                      <IconComp className={`size-3.5 shrink-0 ${isSelected ? 'text-accent' : 'text-muted'}`} />
-                      <span>{labelText}</span>
-                    </Checkbox.Content>
-                  </Checkbox>
-                </Reorder.Item>
-              );
-            })}
-          </Reorder.Group>
-        </div>
-      );
-    };
-
-    const renderUptimeMetricsReorderGroup = () => {
-      const defaultUptimeOrder = ['uptimeSystem', 'uptimeApp'];
-      const currentOrder = settings.uptimeOrder || defaultUptimeOrder;
-
-      const handleReorder = (newOrder: string[]) => {
-        dispatch(hmonitorActions.updateUptimeOrder(newOrder));
-      };
-
-      return (
-        <Reorder.Group
-          axis="x"
-          values={currentOrder}
-          onReorder={handleReorder}
-          className="flex flex-row items-center gap-2 w-full flex-wrap">
-          {currentOrder.map(metricId => {
-            const isSelected = metricId === 'uptimeApp' ? enabledMetrics.uptime.app : enabledMetrics.uptime.system;
-            const labelText = metricId === 'uptimeApp' ? 'Application Uptime' : 'System Uptime';
-            const IconComp = metricId === 'uptimeApp' ? Timer : Clock;
-
-            const onToggle = () => {
-              if (metricId === 'uptimeApp') {
-                dispatch(hmonitorActions.updateUptime({...enabledMetrics.uptime, app: !isSelected}));
-              } else {
-                dispatch(hmonitorActions.updateUptime({...enabledMetrics.uptime, system: !isSelected}));
-              }
-            };
-
-            return (
-              <Reorder.Item
-                className={
-                  'flex flex-row items-center gap-x-1.5 px-2 py-1.5 ' +
-                  ' rounded-xl border select-none transition-all duration-150 ' +
-                  (isSelected
-                    ? 'border-accent/30 bg-accent/10 shadow-2xs text-foreground font-medium'
-                    : 'border-border opacity-60 text-muted bg-surface-secondary')
-                }
-                key={metricId}
-                value={metricId}>
-                <GripVertical
-                  className={
-                    'size-3.5 cursor-grab text-muted hover:text-foreground' + ' active:cursor-grabbing shrink-0'
-                  }
-                />
-                <Checkbox onChange={onToggle} isSelected={isSelected}>
-                  <Checkbox.Content className="flex flex-row items-center gap-x-1.5 text-xs">
-                    <Checkbox.Control className="size-4 rounded-md">
-                      <Checkbox.Indicator />
-                    </Checkbox.Control>
-                    <IconComp className={`size-3.5 shrink-0 ${isSelected ? 'text-accent' : 'text-muted'}`} />
-                    <span>{labelText}</span>
-                  </Checkbox.Content>
-                </Checkbox>
-              </Reorder.Item>
-            );
-          })}
-        </Reorder.Group>
-      );
-    };
-
     const renderSectionSetting = (type: string, dragHandle: ReactNode) => {
       switch (type) {
         case 'gpu':
@@ -266,7 +427,11 @@ export const MetricsTab = memo(
                   key={`gpu-settings-${hw.name}`}
                   onToggle={() => toggleHardwareActive(hw.name, 'gpu')}
                   config={enabledMetrics.gpu.find(m => m.name === hw.name)}>
-                  {renderMetricsReorderGroup('gpu', hw.name)}
+                  <HardwareMetricsReorderGroup
+                    type="gpu"
+                    hardwareName={hw.name}
+                    config={enabledMetrics.gpu.find(m => m.name === hw.name)}
+                  />
                 </SettingsModalCard>
               ))}
             </div>
@@ -297,7 +462,11 @@ export const MetricsTab = memo(
                   key={`cpu-settings-${hw.name}`}
                   onToggle={() => toggleHardwareActive(hw.name, 'cpu')}
                   config={enabledMetrics.cpu.find(m => m.name === hw.name)}>
-                  {renderMetricsReorderGroup('cpu', hw.name)}
+                  <HardwareMetricsReorderGroup
+                    type="cpu"
+                    hardwareName={hw.name}
+                    config={enabledMetrics.cpu.find(m => m.name === hw.name)}
+                  />
                 </SettingsModalCard>
               ))}
             </div>
@@ -328,7 +497,11 @@ export const MetricsTab = memo(
                   key={`memory-settings-${hw.name}`}
                   onToggle={() => toggleHardwareActive(hw.name, 'memory')}
                   config={enabledMetrics.memory.find(m => m.name === hw.name)}>
-                  {renderMetricsReorderGroup('memory', hw.name)}
+                  <HardwareMetricsReorderGroup
+                    type="memory"
+                    hardwareName={hw.name}
+                    config={enabledMetrics.memory.find(m => m.name === hw.name)}
+                  />
                 </SettingsModalCard>
               ))}
             </div>
@@ -441,7 +614,11 @@ export const MetricsTab = memo(
                         <span className="text-xs font-semibold text-foreground/80">Interface Metrics</span>
                         <span className="text-[11px] text-muted">Drag to reorder • Check to toggle</span>
                       </div>
-                      {renderMetricsReorderGroup('network', selectedNetworkName)}
+                      <HardwareMetricsReorderGroup
+                        type="network"
+                        config={selectedNetworkConfig}
+                        hardwareName={selectedNetworkName}
+                      />
                     </div>
                   )}
                 </Card.Content>
@@ -473,7 +650,7 @@ export const MetricsTab = memo(
                   <span className="text-xs font-semibold text-foreground/80">Uptime Indicators</span>
                   <span className="text-[11px] text-muted">Drag to reorder</span>
                 </div>
-                {renderUptimeMetricsReorderGroup()}
+                <UptimeMetricsReorderGroup uptimeOrder={settings.uptimeOrder} uptimeEnabled={enabledMetrics.uptime} />
               </Card.Content>
             </Card>
           );
@@ -522,54 +699,16 @@ export const MetricsTab = memo(
           values={sectionsToRender}
           onReorder={handleSectionReorder}
           className="flex flex-col gap-y-3.5">
-          {sectionsToRender.map((type, index) => {
-            const dragHandle = (
-              <div className="flex items-center gap-0.5 shrink-0">
-                <div
-                  className={
-                    'cursor-grab active:cursor-grabbing p-1.5 rounded-md text-muted' +
-                    ' hover:text-foreground hover:bg-surface-secondary transition-colors'
-                  }
-                  title="Drag to reorder section">
-                  <GripVertical className="size-4" />
-                </div>
-                <div className="flex flex-col -space-y-1">
-                  <button
-                    className={
-                      'p-0.5 text-muted hover:text-foreground disabled:opacity-20' +
-                      ' disabled:pointer-events-none cursor-pointer'
-                    }
-                    type="button"
-                    disabled={index === 0}
-                    title="Move section up"
-                    onClick={() => moveSection(index, 'up')}>
-                    <ChevronUp className="size-3" />
-                  </button>
-                  <button
-                    className={
-                      'p-0.5 text-muted hover:text-foreground disabled:opacity-20' +
-                      ' disabled:pointer-events-none cursor-pointer'
-                    }
-                    type="button"
-                    title="Move section down"
-                    onClick={() => moveSection(index, 'down')}
-                    disabled={index === sectionsToRender.length - 1}>
-                    <ChevronDown className="size-3" />
-                  </button>
-                </div>
-              </div>
-            );
-
-            return (
-              <>
-                <Reorder.Item key={type} value={type} className="relative select-none">
-                  {renderSectionSetting(type, dragHandle)}
-                </Reorder.Item>
-
-                {index !== sectionsToRender.length - 1 && <Separator className="my-2" />}
-              </>
-            );
-          })}
+          {sectionsToRender.map((type, index) => (
+            <SectionReorderItem
+              key={type}
+              type={type}
+              index={index}
+              moveSection={moveSection}
+              totalSections={sectionsToRender.length}>
+              {dragHandle => renderSectionSetting(type, dragHandle)}
+            </SectionReorderItem>
+          ))}
         </Reorder.Group>
       </div>
     );

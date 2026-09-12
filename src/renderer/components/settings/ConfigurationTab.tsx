@@ -1,6 +1,6 @@
 import {Button, Description, Label, NumberField, Switch} from '@heroui/react';
 import LynxSwitch from '@lynx/components/LynxSwitch';
-import {CheckReadIcon, MonitorIcon, RefreshCircleIcon, Widget2Icon} from '@solar-icons/react/bold-duotone';
+import {MonitorIcon, RefreshCircleIcon, Widget2Icon} from '@solar-icons/react/bold-duotone';
 import {Check, Sparkles} from 'lucide-react';
 import {memo} from 'react';
 
