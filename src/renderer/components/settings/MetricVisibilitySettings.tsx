@@ -66,7 +66,7 @@ export const MetricVisibilitySettings = memo(() => {
         <p className="text-xs text-muted">Select which components appear inside each individual metric badge</p>
       </div>
 
-      <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
+      <div className="grid grid-cols-4 gap-2.5">
         {VISIBILITY_OPTIONS.map(({value, label, description, Icon}) => {
           const isSelected = selectedValues.includes(value);
           return (

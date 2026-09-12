@@ -94,7 +94,7 @@ export function CustomMetricsSection({config, hardware, type}: CustomMetricsProp
       {isAdding && (
         <div
           className={
-            'flex flex-col sm:flex-row items-stretch sm:items-center gap-2 p-3' +
+            'flex flex-row items-stretch sm:items-center gap-2 p-3' +
             ' bg-surface rounded-xl border border-surface-tertiary shadow-xs'
           }>
           <Select
@@ -134,10 +134,10 @@ export function CustomMetricsSection({config, hardware, type}: CustomMetricsProp
           </Select>
 
           <Input
+            className="w-44"
             variant="secondary"
             value={formState.label}
             placeholder="Display label"
-            className="text-xs sm:w-44"
             onChange={e => setFormState(prev => ({...prev, label: e.target.value}))}
           />
 

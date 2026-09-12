@@ -202,7 +202,7 @@ export const PingSettings = memo(({dragHandle}: PingSettingsProps) => {
       </div>
 
       {/* Interval and Timeout Controls */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
+      <div className="grid grid-cols-2 gap-3 pt-1">
         <NumberField minValue={100} value={interval} variant="secondary" onChange={setInterval} fullWidth>
           <div className="flex items-center justify-between mb-1">
             <Label className="text-xs font-semibold text-foreground/90">Ping Interval</Label>
