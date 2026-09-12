@@ -104,7 +104,7 @@ export const SettingsCategoryCard = memo(
         }>
         <Card.Header
           className={
-            'flex flex-row justify-between items-center bg-surface/80 rounded-3xl ' +
+            'flex flex-row justify-between items-center bg-surface/80 rounded-2xl ' +
             'py-3 px-4 border-b border-surface-tertiary/60 ' +
             (headerClassName ?? '')
           }>
