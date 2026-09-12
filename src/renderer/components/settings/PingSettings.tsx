@@ -96,22 +96,28 @@ export const PingSettings = memo(({dragHandle}: PingSettingsProps) => {
   };
 
   return (
-    <Card className="bg-surface-secondary rounded-3xl overflow-hidden">
+    <Card className="rounded-3xl bg-surface-secondary/70 border border-border overflow-hidden shadow-xs">
       <Card.Header
         className={
-          'flex flex-row justify-between items-center bg-surface ' +
-          'rounded-3xl py-3.5 px-4 border-b border-surface-tertiary/50'
+          'flex flex-row justify-between items-center bg-surface/80 rounded-3xl ' +
+          'py-3 px-4 border-b border-surface-tertiary/60'
         }>
         <div className="flex flex-row items-center gap-x-2.5">
           {dragHandle}
-          <div className="size-8 rounded-full bg-accent/15 text-accent flex items-center justify-center">
+          <div className="size-8 rounded-full bg-rose-500/15 text-rose-400 flex items-center justify-center shrink-0">
             <Radio className="size-4" />
           </div>
-          <div>
-            <span className="font-semibold text-LynxOrange hover:text-LynxOrange/80 transition duration-200 text-sm">
+          <div className="flex items-center gap-x-2">
+            <span
+              className={
+                'px-1.5 py-0.5 rounded-md text-[10px] font-bold ' +
+                'tracking-wide uppercase border bg-rose-500/15 text-rose-400 border-rose-500/30'
+              }>
+              PING
+            </span>
+            <span className="font-semibold text-foreground hover:text-foreground/90 transition-colors text-sm">
               Network Latency & Ping
             </span>
-            <p className="text-xs text-muted">Monitor real-time network response latency to designated servers</p>
           </div>
         </div>
 
@@ -124,7 +130,7 @@ export const PingSettings = memo(({dragHandle}: PingSettingsProps) => {
         </Switch>
       </Card.Header>
 
-      <Card.Content className="flex flex-col gap-y-4 p-4 relative bg-surface rounded-3xl">
+      <Card.Content className="flex flex-col gap-y-3.5 p-3.5 relative bg-surface/80 rounded-3xl">
         {/* Overlay when disabled */}
         {!isActive && (
           <div

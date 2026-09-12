@@ -1,4 +1,4 @@
-import {Card, Checkbox, Key, Label, ListBox, Select, Separator, Switch} from '@heroui/react';
+import {Card, Checkbox, Key, Label, ListBox, Select, Switch} from '@heroui/react';
 import {CheckCircleIcon} from '@solar-icons/react/bold-duotone';
 import {Reorder, useDragControls} from 'framer-motion';
 import {isEqual} from 'lodash-es';
@@ -341,7 +341,6 @@ const SectionReorderItem = memo(({type, index, totalSections, moveSection, child
       dragControls={dragControls}
       className="relative select-none">
       {children(dragHandle)}
-      {index !== totalSections - 1 && <Separator className="my-2" />}
     </Reorder.Item>
   );
 });
@@ -404,7 +403,7 @@ export const MetricsTab = memo(
       switch (type) {
         case 'gpu':
           return (
-            <div className="flex flex-col gap-y-2">
+            <div className="flex flex-col gap-y-4">
               {availableHardware.gpu.map(hw => (
                 <SettingsModalCard
                   headerExtra={active => (
@@ -439,7 +438,7 @@ export const MetricsTab = memo(
 
         case 'cpu':
           return (
-            <div className="flex flex-col gap-y-2">
+            <div className="flex flex-col gap-y-4">
               {availableHardware.cpu.map(hw => (
                 <SettingsModalCard
                   headerExtra={active => (
@@ -474,7 +473,7 @@ export const MetricsTab = memo(
 
         case 'memory':
           return (
-            <div className="flex flex-col gap-y-2">
+            <div className="flex flex-col gap-y-4">
               {availableHardware.memory.map(hw => (
                 <SettingsModalCard
                   headerExtra={active => (
@@ -510,28 +509,34 @@ export const MetricsTab = memo(
         case 'network':
           return (
             availableHardware.network.length > 0 && (
-              <Card className="rounded-3xl bg-surface-secondary overflow-hidden shadow-xs">
+              <Card
+                className={'rounded-3xl bg-surface-secondary/70 border ' + 'border-border overflow-hidden shadow-xs'}>
                 <Card.Header
                   className={
-                    'flex flex-row justify-between items-center bg-surface rounded-3xl ' +
-                    ' py-3.5 px-4 border-b border-surface-tertiary/50'
+                    'flex flex-row justify-between items-center bg-surface/80' +
+                    ' py-3 px-4 border-b border-surface-tertiary/60 rounded-3xl'
                   }>
                   <div className="flex flex-row items-center gap-x-3">
                     {dragHandle}
                     <div
                       className={
-                        'size-8 rounded-full bg-accent/15 text-accent flex items-center justify-center shrink-0'
+                        'size-8 rounded-full bg-amber-500/15 text-amber-400 ' +
+                        'flex items-center justify-center shrink-0'
                       }>
                       <Network className="size-4.5" />
                     </div>
-                    <div className="flex flex-col">
+                    <div className="flex items-center gap-x-2">
                       <span
                         className={
-                          'font-semibold text-LynxOrange hover:text-LynxOrange/80 transition duration-200 text-sm'
+                          'px-1.5 py-0.5 rounded-md text-[10px] font-bold ' +
+                          'tracking-wide uppercase border bg-amber-500/15 text-amber-400 border-amber-500/30'
                         }>
+                        NET
+                      </span>
+                      <span
+                        className={'font-semibold text-foreground hover:text-foreground/90 transition-colors text-sm'}>
                         Network Interface
                       </span>
-                      <span className="text-[11px] text-muted">Upload / Download throughput & data telemetry</span>
                     </div>
                   </div>
 
@@ -565,7 +570,7 @@ export const MetricsTab = memo(
                   </div>
                 </Card.Header>
 
-                <Card.Content className="flex flex-col items-start relative bg-surface rounded-3xl gap-y-4 p-4">
+                <Card.Content className="flex flex-col items-start relative bg-surface/70 gap-y-3 p-3.5 rounded-3xl">
                   <div className="w-full flex items-center justify-between gap-4">
                     <Select
                       onChange={value => {
@@ -594,11 +599,11 @@ export const MetricsTab = memo(
                   </div>
 
                   {selectedNetworkConfig && selectedNetworkHardware && (
-                    <div className="w-full relative">
+                    <div className="w-full relative flex flex-col gap-y-1.5 pt-2 border-t border-surface-tertiary/40">
                       {!selectedNetworkConfig.active && (
                         <div
                           className={
-                            'absolute -inset-1 bg-surface/75 backdrop-blur-[1px] z-20' +
+                            'absolute inset-0 bg-surface/75 backdrop-blur-[1px] z-20' +
                             ' flex items-center justify-center rounded-xl'
                           }>
                           <p
@@ -610,7 +615,7 @@ export const MetricsTab = memo(
                           </p>
                         </div>
                       )}
-                      <div className="flex items-center justify-between mb-2">
+                      <div className="flex items-center justify-between">
                         <span className="text-xs font-semibold text-foreground/80">Interface Metrics</span>
                         <span className="text-[11px] text-muted">Drag to reorder • Check to toggle</span>
                       </div>
@@ -628,25 +633,34 @@ export const MetricsTab = memo(
 
         case 'uptime':
           return (
-            <Card className="bg-surface-secondary rounded-3xl overflow-hidden shadow-xs">
-              <Card.Header className={'flex flex-row items-center gap-x-3 bg-surface rounded-3xl py-3.5 px-4'}>
+            <Card className={'bg-surface-secondary/70 border border-border ' + 'rounded-3xl overflow-hidden shadow-xs'}>
+              <Card.Header
+                className={
+                  'flex flex-row items-center gap-x-3 bg-surface/80 py-3 px-4' +
+                  ' border-b border-surface-tertiary/60 rounded-3xl'
+                }>
                 {dragHandle}
                 <div
-                  className={'size-8 rounded-full bg-accent/15 text-accent flex items-center justify-center shrink-0'}>
+                  className={
+                    'size-8 rounded-full bg-sky-500/15 text-sky-400 flex items-center justify-center shrink-0'
+                  }>
                   <Clock className="size-4.5" />
                 </div>
-                <div className="flex flex-col">
+                <div className="flex items-center gap-x-2">
                   <span
                     className={
-                      'font-semibold text-LynxOrange hover:text-LynxOrange/80 transition duration-200 text-sm'
+                      'px-1.5 py-0.5 rounded-md text-[10px] font-bold ' +
+                      'tracking-wide uppercase border bg-sky-500/15 text-sky-400 border-sky-500/30'
                     }>
+                    UPTIME
+                  </span>
+                  <span className={'font-semibold text-foreground hover:text-foreground/90 transition-colors text-sm'}>
                     System & Application Uptime
                   </span>
-                  <span className="text-[11px] text-muted">Elapsed run duration for OS and LynxHub</span>
                 </div>
               </Card.Header>
-              <Card.Content className="flex flex-col gap-2 p-4 bg-surface rounded-3xl">
-                <div className="flex items-center justify-between mb-1">
+              <Card.Content className="flex flex-col gap-y-1.5 p-3.5 bg-surface/70 rounded-3xl">
+                <div className="flex items-center justify-between">
                   <span className="text-xs font-semibold text-foreground/80">Uptime Indicators</span>
                   <span className="text-[11px] text-muted">Drag to reorder</span>
                 </div>
@@ -698,7 +712,7 @@ export const MetricsTab = memo(
           axis="y"
           values={sectionsToRender}
           onReorder={handleSectionReorder}
-          className="flex flex-col gap-y-3.5">
+          className="flex flex-col gap-y-4">
           {sectionsToRender.map((type, index) => (
             <SectionReorderItem
               key={type}
